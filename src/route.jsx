@@ -2,7 +2,7 @@
 
 var routes = [
     {
-        path: '/',
+        path: '/views/Home.jsx',
         component: Home,
         rtlName: "خانه",
         icon: "",
