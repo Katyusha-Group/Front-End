@@ -3,8 +3,10 @@ import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import routes from "../route.jsx";
 import logo from "../assets/img/react-logo.png";
-
+import { useInfo } from "../contexts/InfoContext.jsx";
+import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 export default function Home() {
+    const {info} = useInfo()
     const [sidebarOpened, setsidebarOpened] = React.useState(
         document.documentElement.className.indexOf("nav-open") !== -1
       );
@@ -23,17 +25,36 @@ export default function Home() {
     head.appendChild(link);
   return (
     <>
-      <Sidebar
-        routes={routes}
-        rtlActive
-        logo={{
-          outterLink: "https://www.creative-tim.com/",
-          text: "کاتیوشا",
-          imgSrc: logo,
-        }}
-        toggleSidebar={toggleSidebar}
-      />
-      <AdminNavbar />
+      <div className="wrapper">
+        <Sidebar
+          routes={routes}
+          rtlActive
+          logo={{
+            outterLink: "https://www.creative-tim.com/",
+            text: "کاتیوشا",
+            imgSrc: logo,
+          }}
+          toggleSidebar={toggleSidebar}
+        />
+        <div className="main-panel">
+          <AdminNavbar />
+          <div className="content">
+            <Row>
+              <Col xs="12">
+                <Card className="card-chart">
+                  <CardHeader>
+                    <Row>
+                      <Col className="text-right" sm="6">
+                        <CardTitle tag="h2">{info.name}</CardTitle>
+                      </Col>
+                    </Row>
+                  </CardHeader>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
