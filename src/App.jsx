@@ -4,6 +4,7 @@ import * as Router from "react-router-dom";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper.jsx";
 import Home from "./views/Home.jsx"
+import Login from "./views/Login.jsx"
 import "./assets/css/black-dashboard-react.css";
 import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";

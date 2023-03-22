@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import routes from "../route.jsx";
 import logo from "../assets/img/react-logo.png";
 import { useInfo } from "../contexts/InfoContext.jsx";
+import Login from "./Login.jsx"
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 export default function Home() {
     const {info} = useInfo()
@@ -26,7 +27,7 @@ export default function Home() {
   return (
     <>
       <div className="wrapper">
-        <Sidebar
+        {/* <Sidebar
           routes={routes}
           rtlActive
           logo={{
@@ -35,23 +36,11 @@ export default function Home() {
             imgSrc: logo,
           }}
           toggleSidebar={toggleSidebar}
-        />
+        /> */}
         <div className="main-panel">
           <AdminNavbar />
           <div className="content">
-            <Row>
-              <Col xs="12">
-                <Card className="card-chart">
-                  <CardHeader>
-                    <Row>
-                      <Col className="text-right" sm="6">
-                        <CardTitle tag="h2">{info.name}</CardTitle>
-                      </Col>
-                    </Row>
-                  </CardHeader>
-                </Card>
-              </Col>
-            </Row>
+            <Login/>
           </div>
         </div>
       </div>
