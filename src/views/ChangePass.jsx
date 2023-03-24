@@ -1,5 +1,7 @@
 import React from "react";
-
+import routes from "../route.jsx";
+import { useInfo } from "../contexts/InfoContext.jsx";
+//import "../assets/css/LoginLms.css";
 import {
   Button,
   Card,
@@ -13,11 +15,10 @@ import {
   Col
 } from "reactstrap";
 
-export default function ChangePassword() {
+function ChangePassword() {
   return (
     <>
-      {/* <div className="content" >
-        <Row>
+        <Row className="ChangePass">
           <Col md="8">
             <Card>
               <CardHeader>
@@ -68,14 +69,14 @@ export default function ChangePassword() {
             </Card>
           </Col>
         </Row>
-      </div> */}
-      <div>
+      {/* <div>
         <h1>
           Hello
         </h1>
-      </div>
+      </div> */}
     </>
   );
 }
+export default ChangePassword;
 
 

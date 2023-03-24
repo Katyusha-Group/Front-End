@@ -3,7 +3,7 @@ import React from 'react';
 import * as Router from "react-router-dom";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper.jsx";
-import Home from "./views/Home.jsx"
+//import Home from "./views/Home.jsx"
 import Admin from "./views/Admin.jsx"
 import ChangePassword from './views/ChangePass.jsx';
 import "./assets/css/black-dashboard-react.css";
@@ -21,8 +21,8 @@ function App() {
           <ContextInfo>
             <Router.BrowserRouter>
               <Router.Routes>  
-                <Router.Route path="/" element={<Home />}></Router.Route>
-                <Router.Route path="/" element={<Admin />}></Router.Route>
+                {/* <Router.Route path="/" element={<Home />}></Router.Route>
+                <Router.Route path="/" element={<Admin />}></Router.Route> */}
                 <Router.Route path="/" element={<ChangePassword />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
