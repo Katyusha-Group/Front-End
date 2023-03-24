@@ -1,7 +1,7 @@
 import React from "react";
 import routes from "../route.jsx";
 import { useInfo } from "../contexts/InfoContext.jsx";
-//import "../assets/css/LoginLms.css";
+import "../assets/css/ChangePass.css";
 import {
   Button,
   Card,
@@ -18,29 +18,29 @@ import {
 function ChangePassword() {
   return (
     <>
-        <Row className="ChangePass">
-          <Col md="8">
+        <Row className="ChangePassRow">
+          <Col>
             <Card>
               <CardHeader>
-                <h5 className="title">Change Password</h5>
+                <h5 className="title text-right">تغییر گذرواژه</h5>
               </CardHeader>
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="pr-md-1" md="6">
+                    <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>Current Password</label>
+                        <label>رمز عبور فعلی</label>
                         <Input
-                          placeholder="Password"
+                          placeholder="Old Password"
                           type="password"
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row >
-                    <Col className="pr-md-1" md="6">
+                    <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>New Password</label>
+                        <label>گذرواژه جدید</label>
                         <Input
                           placeholder="New Password"
                           type="password"
@@ -49,9 +49,9 @@ function ChangePassword() {
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-md-1" md="6">
+                    <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>Confirm new Password</label>
+                        <label>تکرار گذرواژه جدید</label>
                         <Input
                           placeholder="Confirm new Password"
                           type="password"
@@ -63,7 +63,7 @@ function ChangePassword() {
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" type="submit">
-                  Change Password
+                  تغییر گذرواژه
                 </Button>
               </CardFooter>
             </Card>
