@@ -8247,6 +8247,9 @@ button.bg-darker:focus {
 .text-center {
   text-align: center !important; }
 
+.just-center{
+  justify-content: center;
+}
 @media (min-width: 576px) {
   .text-sm-left {
     text-align: left !important; }

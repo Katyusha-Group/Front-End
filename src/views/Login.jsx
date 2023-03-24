@@ -1,6 +1,6 @@
 
-
 import React from "react";
+import * as log from "../assets/img/Login.jpg";
 // reactstrap components
 import {
   Button,
@@ -20,20 +20,20 @@ function Login() {
   return (
     <>
       <div className="content" >
-        <Row>
-          <Col className="text-right" md="8">
+        <Row className="just-center">
+          <Col className="text-right" md="4">
             <Card>
               <CardHeader>
-                <h5 className="title">ورود به سایت</h5>
+                <h5 className="title text-center">ورود به سایت</h5>
               </CardHeader>
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="pr-md-1" md="6">
+                    <Col className="pr-md-1" md="12">
                     {/* <img
                       alt="..."
-                      className="avatar"
-                      src={require("assets/img/Login.jpg")}
+                      className=""
+                      src={log.default}
                     /> */}
                       <FormGroup>
                         <label htmlFor="exampleInputEmail1">
@@ -44,7 +44,7 @@ function Login() {
                     </Col>
                   </Row>
                   <Row >
-                    <Col className="pr-md-1 " md="6">
+                    <Col className="pr-md-1 " md="12">
                       <FormGroup>
                         <label>رمز عبور</label>
                         <Input
@@ -58,7 +58,7 @@ function Login() {
                   </Row>
                 </Form>
               </CardBody>
-              <CardFooter>
+              <CardFooter className="text-center">
                 <Button className="btn-fill" color="primary" type="submit">
                   ورود
                 </Button>
@@ -72,5 +72,3 @@ function Login() {
 }
 
 export default Login;
-
-
