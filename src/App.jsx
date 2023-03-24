@@ -20,8 +20,8 @@ function App() {
           <ContextInfo>
             <Router.BrowserRouter>
               <Router.Routes>
-                {/* <Router.Route path="/" element={<Home />}></Router.Route> */}
-                <Router.Route path="/" element={<ChangePassword />}></Router.Route>
+                <Router.Route path="/" element={<Home />}></Router.Route>
+                {/* <Router.Route path="/" element={<ChangePassword />}></Router.Route> */}
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
