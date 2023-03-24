@@ -16,7 +16,7 @@ import {
 export default function ChangePassword() {
   return (
     <>
-      {/* <div className="content" >
+      <div className="content" >
         <Row>
           <Col md="8">
             <Card>
@@ -68,11 +68,6 @@ export default function ChangePassword() {
             </Card>
           </Col>
         </Row>
-      </div> */}
-      <div>
-        <h1>
-          Hello
-        </h1>
       </div>
     </>
   );

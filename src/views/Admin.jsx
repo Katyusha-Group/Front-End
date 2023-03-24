@@ -1,11 +1,12 @@
 import React from "react";
-import { Route , Redirect} from "react-router-dom";
 import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import routes from "../route.jsx";
 import logo from "../assets/img/react-logo.png";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
+import * as Router from 'react-router-dom';
+import ChangePassword from "./ChangePass.jsx";
 export default function Admin() {
     const {info} = useInfo()
     const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -14,21 +15,6 @@ export default function Admin() {
     const toggleSidebar = () => {
         document.documentElement.classList.toggle("nav-open");
         setsidebarOpened(!sidebarOpened);
-      };
-      const getRoutes = (routes) => {
-        return routes.map((prop, key) => {
-          if (prop.layout === "/admin") {
-            return (
-              <Route
-                path={prop.layout + prop.path}
-                component={prop.component}
-                //key={key}
-              />
-            );
-          } else {
-            return null;
-          }
-        });
       };
      document.body.classList.add("rtl", "menu-on-right");
      let head = document.head;
@@ -39,6 +25,23 @@ export default function Admin() {
      link.href =
       "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css";
     head.appendChild(link);
+    const getRoutes = (routes) => {
+      return routes.map((prop, key) => {
+        if (prop.layout === "/admin") {
+          console.log(prop.component)
+          return (
+            <Router.Route
+              path={prop.path}
+              element={<prop.component />}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+      // return <Router.Route path="/admin/change" element={<ChangePassword/>}></Router.Route>
+    };
   return (
     <>
       <div className="wrapper">
@@ -46,36 +49,18 @@ export default function Admin() {
           routes={routes}
           rtlActive
           logo={{
-            outterLink: "https://lms.iust.ac.ir/",
+            outterLink: "https://www.creative-tim.com/",
             text: "کاتیوشا",
             imgSrc: logo,
           }}
           toggleSidebar={toggleSidebar}
         />
-        
         <div className="main-panel">
-          <AdminNavbar
-            toggleSidebar={toggleSidebar}
-            sidebarOpened={sidebarOpened} 
-          />
-          {/* <Switch>
-            {getRoutes(routes)}
-            <Redirect from="*" to="/admin/dashboard" />
-          </Switch> */}
+          <AdminNavbar />
           <div className="content">
-            <Row>
-              <Col xs="12">
-                <Card className="card-chart">
-                  <CardHeader>
-                    <Row>
-                      <Col className="text-right" sm="6">
-                        <CardTitle tag="h2">{info.name}</CardTitle>
-                      </Col>
-                    </Row>
-                  </CardHeader>
-                </Card>
-              </Col>
-            </Row>
+            <Router.Routes>
+            {getRoutes(routes)}
+            </Router.Routes>
           </div>
         </div>
       </div>
