@@ -12501,7 +12501,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 80px 280px 30px 30px; }
+  padding: 80px 80px 30px 30px; }
 
 .rtl .footer {
   padding: 24px 300px 24px 0; }
@@ -13293,7 +13293,7 @@ textarea.form-control {
   .card .card-title {
     margin-bottom: .75rem; }
   .card .card-body {
-    padding: 15px; }
+    padding: 24px; }
     .card .card-body.table-full-width {
       padding-left: 0;
       padding-right: 0; }
