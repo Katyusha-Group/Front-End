@@ -19,7 +19,7 @@ function App() {
           <ContextInfo>
             <Router.BrowserRouter>
               <Router.Routes>
-                <Router.Route path="/" element={<Home />}></Router.Route>
+                {/* <Router.Route path="/" element={<Home />}></Router.Route> */}
 
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
 

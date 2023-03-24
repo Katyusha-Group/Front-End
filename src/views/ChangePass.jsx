@@ -29,7 +29,7 @@ function ChangePassword() {
                   <Row>
                     <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>رمز عبور فعلی</label>
+                        <label>گذرواژه فعلی</label>
                         <Input
                           placeholder="Old Password"
                           type="password"
@@ -69,12 +69,6 @@ function ChangePassword() {
             </Card>
           </Col>
         </Row>
-      </div> 
-      <div>
-        <h1>
-          Hello
-        </h1>
-      </div>
     </>
   );
 }
