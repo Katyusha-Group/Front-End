@@ -152,6 +152,15 @@ function SignUp() {
                         </Col>
                       </Row>
                     </Form>
+                    <Container>
+                      <Row>
+                        <Col className="text-center pt-md-2" md="12">
+                          <Link href="#" color="primary">
+                            ورود به حساب کابری
+                          </Link>
+                        </Col>
+                      </Row>
+                    </Container>
                   </CardBody>
                   <CardFooter className="text-center">
                     <Button className="btn-fill" color="primary" type="submit">
