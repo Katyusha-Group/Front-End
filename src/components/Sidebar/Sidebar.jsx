@@ -105,14 +105,15 @@ function Sidebar(props) {
             ) : null}
             <Nav>
               {routes.map((prop, key) => {
-                if (prop.redirect) return null;
+                // if (prop.redirect) return null;
+                console.log(prop.layout + prop.path)
                 return (
-                  <li
-                    className={
-                      activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
-                    }
-                    key={key}
-                  >
+                  // <li
+                  //   className={
+                  //     activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
+                  //   }
+                  //   key={key}
+                  // >
                     <NavLink
                       to={prop.layout + prop.path}
                       className="nav-link"
@@ -122,15 +123,9 @@ function Sidebar(props) {
                       <i className={prop.icon} />
                       <p>{rtlActive ? prop.rtlName : prop.name}</p>
                     </NavLink>
-                  </li>
+                  // </li>
                 );
               })}
-              {/* <li className="active-pro">
-                <ReactstrapNavLink href="https://www.creative-tim.com/product/black-dashboard-pro-react?ref=bdr-user-archive-sidebar-upgrade-pro">
-                  <i className="tim-icons icon-spaceship" />
-                  <p>login</p>
-                </ReactstrapNavLink>
-              </li> */}
             </Nav>
           </div>
         </div>

@@ -38,21 +38,7 @@ export default function Home() {
         />
         <div className="main-panel">
           <AdminNavbar />
-          <div className="content">
-            <Row>
-              <Col xs="12">
-                <Card className="card-chart">
-                  <CardHeader>
-                    <Row>
-                      <Col className="text-right" sm="6">
-                        <CardTitle tag="h2">{info.name}</CardTitle>
-                      </Col>
-                    </Row>
-                  </CardHeader>
-                </Card>
-              </Col>
-            </Row>
-          </div>
+          <div className="content"></div>
         </div>
       </div>
     </>

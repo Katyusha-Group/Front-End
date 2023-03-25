@@ -1,27 +1,16 @@
-import Home from "./views/Home";
-
+import Home from "./views/Home.jsx";
+import Admin from "./views/Admin.jsx";
+import ChangePassword from './views/ChangePass.jsx';
 var routes = [
+    
     {
-        path: '/views/Home.jsx',
-        component: Home,
-        rtlName: "داشبورد",
+        path: '/change',
+        name:"ChangePassword",
+        component: ChangePassword,
+        rtlName: "تغییر رمز",
         icon: "",
-        layout: "/"
+        layout: "/admin"
     },
-    {
-        path: '/views/Home.jsx',
-        component: Home,
-        rtlName: "پیام ها",
-        icon: "",
-        layout: "/"
-    },
-    {
-        path: '/views/Home.jsx',
-        component: Home,
-        rtlName: "مدیریت کاربران",
-        icon: "",
-        layout: "/"
-    }
 ]
 
 export default routes;
