@@ -27,7 +27,7 @@ function App() {
                 <Router.Route path="/signup" element={<SignUp />}></Router.Route>
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
-
+                <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
