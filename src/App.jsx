@@ -11,6 +11,10 @@ import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from './contexts/InfoContext.jsx';
+
+import LoginLms from './views/LoginLms.jsx';
+
+
 function App() {
 
   return (
