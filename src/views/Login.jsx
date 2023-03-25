@@ -32,7 +32,7 @@ function Login() {
                   <CardBody>
                     <Form>
                       <Row>
-                        <Col className="pr-md-1" md="12">
+                        <Col md="12">
                           {/* <img
                       alt="..."
                       className=""
@@ -49,7 +49,7 @@ function Login() {
                         </Col>
                       </Row>
                       <Row>
-                        <Col className="pr-md-1 " md="12">
+                        <Col md="12">
                           <FormGroup>
                             <label>رمز عبور</label>
                             <Input
@@ -68,6 +68,17 @@ function Login() {
                           <Link href="#" color="primary">
                             فراموشی رمز عبور
                           </Link>
+                        </Col>
+                      </Row>
+                    </Container>
+                    <Container>
+                      <Row>
+                        <Col className="text-center pt-md-2" md="12">
+                          در صورت نداشتن حساب کاربری
+                          <Link href="#" color="primary">
+                            &nbsp;ثبت‌نام&nbsp;
+                          </Link>
+                          کنید
                         </Col>
                       </Row>
                     </Container>
