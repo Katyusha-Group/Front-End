@@ -8247,6 +8247,9 @@ button.bg-darker:focus {
 .text-center {
   text-align: center !important; }
 
+.just-center{
+  justify-content: center;
+}
 @media (min-width: 576px) {
   .text-sm-left {
     text-align: left !important; }
@@ -12030,6 +12033,10 @@ hr {
   .main-panel > .content {
     padding: 78px 30px 30px 280px;
     min-height: calc(100vh - 70px); }
+  .main-panel > .contentLogin{
+      padding: 78px 80px 30px 80px;
+  }
+  
   .main-panel > .navbar {
     margin-bottom: 0; }
   .main-panel .header {
@@ -12502,6 +12509,7 @@ code {
 
 .rtl .main-panel .content {
   padding: 80px 280px 30px 30px; }
+
 
 .rtl .footer {
   padding: 24px 300px 24px 0; }
