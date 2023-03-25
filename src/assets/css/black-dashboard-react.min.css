@@ -18103,6 +18103,11 @@ hr {
     padding: 78px 30px 30px 280px;
     min-height: calc(100vh - 70px)
 }
+.main-panel > .contentLogin{
+    padding: 78px 80px 30px 80px;
+    min-height: calc(100vh - 70px);
+}
+
 
 .main-panel>.navbar {
     margin-bottom: 0
