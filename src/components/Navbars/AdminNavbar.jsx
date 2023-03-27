@@ -1,5 +1,6 @@
 
-import React from "react";
+import React, {useState} from "react";
+//import Modal from "react-modal";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 
@@ -21,13 +22,19 @@ import {
   Modal,
   ModalHeader,
   NavbarToggler,
-  NavItem
+  NavItem,
+  Card,
+  CardHeader,
+  CardBody,
+  Row,
+  FormGroup
 } from "reactstrap";
 
 function AdminNavbar(props) {
   const [collapseOpen, setcollapseOpen] = React.useState(false);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
+  const [modalOpen, setModalOpen] = useState(false);
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     // Specify how to clean up after this effect:
@@ -84,9 +91,31 @@ function AdminNavbar(props) {
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
             <NavItem>
-                <NavLink href="#">
+                {/* <NavLink href="#">
                   خانه
-                </NavLink>
+                </NavLink> */}
+                <button onClick={setModalOpen}>LMS</button>
+                <Modal
+                  isOpen={modalOpen}
+                  onRequestClose={() => setModalOpen(false)}
+                  //style
+                >
+                  <div>ورود به سامانه LMS</div>
+                  <card>
+                    <CardHeader>ورود به سامانه LMS</CardHeader>
+                    <CardBody>
+                      <form>
+                        <Row>
+                          <col>
+                          
+                          </col>
+                        </Row>
+                      </form>
+                    </CardBody>
+                  </card>
+                  <button onClick={() => setModalOpen(false)}>Close</button>
+                </Modal>
+
               </NavItem>
               <NavItem>
                 <NavLink href="#">
