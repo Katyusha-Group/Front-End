@@ -1,9 +1,12 @@
 
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 //import Modal from "react-modal";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-
+//import { Modal } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { setLoginModalShow } from "./commonLogin";
+import LoginModal from "../../views/LoginLms";
 // reactstrap components
 import {
   Button,
@@ -34,7 +37,8 @@ function AdminNavbar(props) {
   const [collapseOpen, setcollapseOpen] = React.useState(false);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
-  const [modalOpen, setModalOpen] = useState(false);
+  //const [modalOpen, setModalOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     // Specify how to clean up after this effect:
@@ -94,29 +98,10 @@ function AdminNavbar(props) {
                 {/* <NavLink href="#">
                   خانه
                 </NavLink> */}
-                <button onClick={setModalOpen}>LMS</button>
-                <Modal
-                  isOpen={modalOpen}
-                  onRequestClose={() => setModalOpen(false)}
-                  //style
-                >
-                  <div>ورود به سامانه LMS</div>
-                  <card>
-                    <CardHeader>ورود به سامانه LMS</CardHeader>
-                    <CardBody>
-                      <form>
-                        <Row>
-                          <col>
-                          
-                          </col>
-                        </Row>
-                      </form>
-                    </CardBody>
-                  </card>
-                  <button onClick={() => setModalOpen(false)}>Close</button>
-                </Modal>
-
-              </NavItem>
+                <button onClick={() => setShowLogin(true)}>LMS</button>
+                <LoginModal show={showLogin} close={() => setShowLogin(false)} />
+              </NavItem> 
+              
               <NavItem>
                 <NavLink href="#">
                   درباره 
