@@ -14,6 +14,14 @@ Created using IcoMoon - icomoon.io
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'IRANSans';
+  src: url('../fonts/IRANSans.eot');
+  src: url('../fonts/IRANSans.eot') format('embedded-opentype'), url('../fonts/IRANSans.woff2') format('woff2'), url('../fonts/IRANSans.woff') format('woff'), url('../fonts/IRAN-Sans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*------------------------
 	base class definition
 -------------------------*/
