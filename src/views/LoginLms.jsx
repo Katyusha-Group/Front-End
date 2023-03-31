@@ -74,7 +74,8 @@ const LoginModal = (props) => {
         {/*  */}
         <div className="loginLmsModal">
           <Modal.Header className="ModalHeader"> 
-            <CloseButton className="closeButton" onClick={props.close}> </CloseButton>
+            {/* <CloseButton className="closeButton" onClick={props.close}> </CloseButton> */}
+            <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span class="" aria-hidden="true" onClick={props.close}>&times;</span></button>
           </Modal.Header>
           <Modal.Body className="loginLmsModalBody">
             {/* <div className="ModalBody"> */}

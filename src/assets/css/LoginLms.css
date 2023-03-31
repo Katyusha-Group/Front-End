@@ -11,3 +11,10 @@
 .loginLmsModalBody{
     padding: 0 !important;
 }
+.close-btn
+{
+  display:inline-block;
+  padding:4px;
+  /* border:1px solid pink; */
+  z-index:500;
+}
