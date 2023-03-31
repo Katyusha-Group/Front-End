@@ -14,13 +14,22 @@ Created using IcoMoon - icomoon.io
   font-style: normal;
 }
 
+
 @font-face {
   font-family: 'IRANSans';
-  src: url('../fonts/IRANSans.eot');
-  src: url('../fonts/IRANSans.eot') format('embedded-opentype'), url('../fonts/IRANSans.woff2') format('woff2'), url('../fonts/IRANSans.woff') format('woff'), url('../fonts/IRAN-Sans.ttf') format('truetype');
+  src: url('../fonts/IRANSansWeb(FaNum).eot');
+  src: url('../fonts/IRANSansWeb(FaNum).eot') format('embedded-opentype'), url('../fonts/IRANSansWeb(FaNum).woff2') format('woff2'), url('../fonts/IRANSansWeb(FaNum).woff') format('woff'), url('../fonts/IRAN-SansWeb(FaNum).ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
+/* @font-face {
+  font-family: 'IRANSans';
+  src: url('../fonts/Shabnam.ttf');
+  src: url('../fonts/Shabnam.ttf') format('truetype'), url('../fonts/Shabnam-Bold.ttf') format('truetype'), url('../fonts/Shabnam-Medium.ttf') format('truetype'), url('../fonts/Shabnam-Light.ttf') format('truetype'), url('../fonts/Shabnam-Thin.ttf') format('truetype'),;
+  font-weight: normal;
+  font-style: normal;
+} */
 
 /*------------------------
 	base class definition
