@@ -17,6 +17,20 @@ import {
   Col,
 } from "reactstrap";
 
+// function LandingFrame()
+// {
+//   const style = {
+//     "background-image": `url("/src/assets/img/stadium.jpg")`,
+//     "background-repeat": "no-repeat",
+//     "background-size": "cover",
+//     position: "absolute",
+//     height: "100%",
+//     width: "100%",
+//     padding: 0
+//   }
+//   return <div style={style}></div>
+// }
+
 function LandingPage() {
   const style = {
     margin: "auto",
@@ -25,9 +39,12 @@ function LandingPage() {
   }
   return (
     <>
+    {/* <LandingFrame/> */}
     <div className="div-1">
+    
+    <span >
       <div className="div-2">
-        به کاتیوشا خوش آمدید!
+        به کاتیوشا خوش اومدین!😎
       </div>
       <div className="div-3">
         این سایت به شما کمک می کنه که:
@@ -57,6 +74,8 @@ function LandingPage() {
           </Link>
         </Col>
       </Row>
+    </span>
+      
     </div>
     
     </>
