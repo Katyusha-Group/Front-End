@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Select from "react-Select";
 // reactstrap components
 import {
   Button,
@@ -22,17 +23,89 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  // const [dropdownOpen, setDropdownOpen] = useState(false);
-
   // const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const [frequency, setFrequency] = useState({ frequency: "xyz" });
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  //   passwordConfirm: "",
+  // });
+  // const [error, setError] = useState({
+  //   email: "",
+  //   password: "",
+  //   passwordConfirm: "",
+  // });
+  ////////////////////////////// Select ///////////////////
+  const genderOptions = [
+    { value: "زن", label: "زن" },
+    { value: "مرد", label: "مرد" },
+  ];
+  const subjectOptions = [
+    { value: "1", label: "مهندسی کامپیوتر" },
+    { value: "2", label: "مهندسی برق" },
+    { value: "3", label: "مهندسی مکانیک" },
+    { value: "4", label: "مهندسی شیمی" },
+    { value: "5", label: "مهندسی صنایع" },
+    { value: "6", label: "مهندسی راه‌آهن" },
+    { value: "7", label: "مهندسی معماری" },
+    { value: "8", label: "مهندسی مواد" },
+    { value: "9", label: "مهندسی عمران" },
+    { value: "10", label: "علوم کامپیوتر" },
+    { value: "11", label: "ریاضی" },
+    { value: "12", label: "فیزیک" },
+  ];
 
+  const [selected, setSelected] = useState(null);
+
+  const handleChange = (selectedOption) => {
+    setSelected(selectedOption);
+  };
+  const customStyles = {
+    input: (defaultStyles) => ({
+      ...defaultStyles,
+      color: "transparent",
+    }),
+    option: (defaultStyles, state) => ({
+      ...defaultStyles,
+      color: "#9A9A9A",
+      backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
+      "&:hover": {
+        backgroundColor: "rgba(222, 222, 222, 0.3)",
+      },
+      transition: "all 150ms linear",
+      marginTop: "5px",
+      padding: "0.6rem 24px",
+      fontSize: "0.75rem",
+      fontWeight: "400",
+    }),
+
+    control: (defaultStyles, state) => ({
+      ...defaultStyles,
+
+      "&:hover": {
+        borderColor: "#e14eca",
+      },
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      color: "rgba(255, 255, 255, 0.8)",
+      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
+      borderRadius: "0.4285rem",
+      fontSize: "0.75rem",
+      marginTop: "5px",
+      fontWeight: "400",
+      transition:
+        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
+    }),
+    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
+  };
+
+  const [frequency, setFrequency] = useState({ frequency: "xyz" });
   function handleSelect(e) {
     setFrequency((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   }
+  /////////////////////////////// End of Select //////////////////////
   return (
     <>
       <div className="wrapper">
@@ -51,9 +124,13 @@ function SignUp() {
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             <Input
-                              className="text-left"
-                              placeholder="JohnDoe@gmail.com"
+                              className="text-right"
+                              placeholder="ایمیل خود را وارد کنید"
                               type="email"
+                              name="email"
+                              // onChange={onInputChange}
+                              // value={formData.email}
+                              // onBlur={validateInput}
                             />
                           </FormGroup>
                         </Col>
@@ -63,10 +140,13 @@ function SignUp() {
                           <FormGroup>
                             <label>رمز عبور</label>
                             <Input
-                              className="text-left"
-                              //   defaultValue="Mike"
-                              placeholder="Password"
+                              className="text-right"
+                              placeholder="رمز عبور را وارد کنید"
                               type="password"
+                              name="password"
+                              // onChange={onInputChange}
+                              // value={formData.password}
+                              // onBlur={validateInput}
                             />
                           </FormGroup>
                         </Col>
@@ -76,78 +156,43 @@ function SignUp() {
                           <FormGroup>
                             <label>تکرار رمز عبور</label>
                             <Input
-                              className="text-left"
-                              //   defaultValue="Mike"
-                              placeholder="Confirm Password"
+                              className="text-right"
+                              placeholder="تکرار رمز عبور را وارد کنید"
                               type="password"
+                              name="passwordConfirm"
+                              // onChange={onInputChange}
+                              // value={formData.passwordConfirm}
+                              // onBlur={validateInput}
                             />
                           </FormGroup>
                         </Col>
                       </Row>
 
                       <Row>
-                        <Col md="6">
+                        <Col lg="6">
                           <FormGroup>
                             <label>رشته</label>
                             <br />
 
-                            <Input
-                              type="select"
-                              name="frequency"
-                              id="frequency"
-                              value={frequency.frequency}
-                              onChange={handleSelect}
-                            >
-                              <option>انتخاب کنید</option>
-                              <option>مهندسی کامپیوتر</option>
-                              <option>مهندسی برق</option>
-                              <option>مهندسی مکانیک</option>
-                              <option>مهندسی شیمی</option>
-                              <option>مهندسی عمران</option>
-                              <option>مهندسی راه آهن</option>
-                              <option>مهندسی صنایع</option>
-                              <option>مهندسی معماری</option>
-                              <option>مهندسی مواد</option>
-                              <option>علوم کامپیوتر</option>
-                              <option>ریاضی</option>
-                              <option>فیزیک</option>
-                            </Input>
-                            {/* <Input
-                              className="text-left"
-                              placeholder="Select Options"
-                              type="password"
-                            /> */}
-                            {/* <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                              <DropdownToggle caret> llm</DropdownToggle>
-                              <DropdownMenu>
-                                <DropdownItem>Option 1</DropdownItem>
-                                <DropdownItem>Option 2</DropdownItem>
-                                <DropdownItem>Option 3</DropdownItem>
-                              </DropdownMenu>
-                            </Dropdown> */}
+                            <Select
+                              options={subjectOptions}
+                              styles={customStyles}
+                              isRtl
+                              placeholder="انتخاب کنید "
+                            />
                           </FormGroup>
                         </Col>
-                        <Col md="6">
+                        <Col lg="5" className="offset-lg-1">
                           <FormGroup>
                             <label>جنسیت</label>
-                            {/* <Input
-                              className="text-left"
-                              //   defaultValue="Mike"
-                              placeholder="ُSelect Options"
-                              type="password"
-                            /> */}
                             <br />
 
-                            <Input
-                              type="select"
-                              name="frequency"
-                              id="frequency"
-                              value={frequency.frequency}
-                              onChange={handleSelect}
-                            >
-                              <option>زن</option>
-                              <option>مرد</option>
-                            </Input>
+                            <Select
+                              options={genderOptions}
+                              styles={customStyles}
+                              isRtl
+                              placeholder="انتخاب کنید "
+                            />
                           </FormGroup>
                         </Col>
                       </Row>
