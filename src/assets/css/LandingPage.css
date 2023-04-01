@@ -1,26 +1,48 @@
-/* .LandingPageFirstDiv{
-    margin: "auto";
-    padding: "10% 35% 10% 15%";
-    color: "Red";
+.LandingPageRow{
+    text-align: center;
 }
-.bigblue {
-    color: DodgerBlue;
-    padding: 90px;
-    font-family: Arial;
-    text-align: center;
-  } */
-
-/* body {
-    background-color: #282c34;
-    color: red;
-    padding: 40px;
-    font-family: Arial;
-    text-align: left;
-} */
-/* header{
-    text-align: center;
+.div-1 {
+    margin: auto;
+    padding-top: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    padding-left: 10%;
+    color: white;
+    direction: rtl;
 
 }
-body{
+.div-2 {
+    font-size: 80px;
     text-align: center;
-} */
+}
+.div-3{
+    font-size: 36px;
+    text-align: right;
+}
+
+@media only screen and (max-width: 890px ){
+    .div-2{
+        font-size: 60px;
+    }
+    .div-3{
+        font-size: 38px;
+    }
+
+}
+@media only screen and (max-width: 600px ){
+    .div-2{
+        font-size: 40px;
+    }
+    .div-3{
+        font-size: 25px;
+    }
+}
+@media only screen and (max-width: 450px ) {
+    .div-2{
+        font-size: 30px
+    }
+    .div-3{
+        font-size: 20px;
+    }
+
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import routes from "../route.jsx";
+import {Link} from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import styles from "../assets/css/LandingPage.css";
 import {
@@ -13,7 +14,7 @@ import {
   Form,
   Input,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 function LandingPage() {
@@ -24,38 +25,39 @@ function LandingPage() {
   }
   return (
     <>
-    {/* <div className={styles.LandingPageFirstDiv}>
-        
-      <div className={styles.bigblue}>
-          Hello World!!
+    <div className="div-1">
+      <div className="div-2">
+        به کاتیوشا خوش آمدید!
       </div>
-      
-      <div style={{"font-size": "36px"}}>
-          This is the landing page and here's some content.
-          How much wood would a woodchuck chuck 
-          if a woodchuck would chuck wood?
+      <div className="div-3">
+        این سایت به شما کمک می کنه که:
+        <li>
+          برنامه هفتگی و لیست ددلاین هاتون رو ببینین
+        </li>
+        <li>
+          به آرشیوها دسترسی داشته باشین
+        </li>
+        <li>
+          برای ترم آینده برنامه ریزی کنین
+        </li>
+        <li>
+
+        </li>
       </div>
-      <br />
-    </div> */}
-    <header>به سایت ما خوش آمدید!</header>
-    <Row>
-      
-    </Row>
-    <Row>
-      <Card>
-        <CardHeader>کاتیوشا</CardHeader>
-        <CardBody>
-          Hello
-        </CardBody>
-        <CardBody>
-          <Button>ثبت نام</Button>
-          <Button>ورود</Button>
-        </CardBody>
-        <CardFooter>
-          Contact
-        </CardFooter>
-      </Card>
-    </Row>
+      <br/>
+      <Row className="LandingPageRow">
+        <Col>
+          <Link to="../Signup">
+            <Button className="btn-fill" color="primary"> ثبت نام</Button>
+          </Link>
+        </Col>
+        <Col>
+        <Link to="../Login">
+            <Button className="btn-fill" color="primary">ورود</Button>
+          </Link>
+        </Col>
+      </Row>
+    </div>
     
     </>
   );
