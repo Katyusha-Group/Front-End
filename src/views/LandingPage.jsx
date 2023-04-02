@@ -6,13 +6,6 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import styles from "../assets/css/LandingPage.css";
 import {
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col,
 } from "reactstrap";
@@ -49,7 +42,7 @@ function LandingPage() {
       <div className="div-3">
         این سایت به شما کمک می کنه که:
         <li>
-          برنامه هفتگی و لیست ددلاین هاتون رو ببینین
+          برنامه هفتگی و لیست ددلاین هاتون رو ببینین 
         </li>
         <li>
           به آرشیوها دسترسی داشته باشین
@@ -74,8 +67,15 @@ function LandingPage() {
           </Link>
         </Col>
       </Row>
+      <br/>
+      <br/>
+      <br/>
+      <Row>
+        در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
+        Katyusha@example.com
+
+      </Row>
     </span>
-      
     </div>
     
     </>
