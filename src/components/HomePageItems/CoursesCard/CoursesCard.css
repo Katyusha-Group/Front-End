@@ -1,0 +1,23 @@
+.coursesCard{
+    width: 30% !important;
+}
+
+.coursesCardHeader{
+    display: flex;
+    justify-content: space-between; 
+}
+
+.coursesCardBody{
+    padding: 12px;
+}
+
+.inputBox{
+    display: flex;
+    flex-direction: row;
+}
+.hidden{
+    display: none;
+}
+.addCourse{
+    display: block;
+}

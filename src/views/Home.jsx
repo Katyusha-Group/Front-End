@@ -5,6 +5,10 @@ import routes from "../route.jsx";
 import logo from "../assets/img/react-logo.png";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
+// import CoursesCard from "../components/HomePageItems/CoursesCard/CoursesCard";
+import CoursesCard from "../components/HomePageItems/CoursesCard/CoursesCard.jsx";
+import ExamsCard from "../components/HomePageItems/ExamsCard/ExamsCard.jsx";
+
 export default function Home() {
   const { info } = useInfo();
   const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -38,7 +42,10 @@ export default function Home() {
         />
         <div className="main-panel">
           <AdminNavbar />
-          <div className="content"></div>
+          <div className="content">
+            <CoursesCard/>
+            <ExamsCard/>
+          </div>
         </div>
       </div>
     </>

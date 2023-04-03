@@ -1,0 +1,26 @@
+.examsCard{
+    width: 30% !important;
+}
+
+.examsCardHeader{
+    display: flex;
+    justify-content: space-between; 
+}
+
+.examsCardBody{
+    padding: 12px;
+}
+
+.inputBox{
+    display: flex;
+    flex-direction: row;
+}
+.hidden{
+    display: none;
+}
+.addExam{
+    display: block;
+}
+td{
+    color: white !important;
+}
