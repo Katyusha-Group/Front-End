@@ -7,6 +7,7 @@ import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { setLoginModalShow } from "./commonLogin";
 import LoginModal from "../../views/LoginLms";
+import LoginModalGolestan from "../../views/LoginGolestan";
 // reactstrap components
 import {
   Button,
@@ -39,6 +40,7 @@ function AdminNavbar(props) {
   const [color, setcolor] = React.useState("navbar-transparent");
   //const [modalOpen, setModalOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showLoginG, setShowLoginG] = useState(false);
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     // Specify how to clean up after this effect:
@@ -94,14 +96,22 @@ function AdminNavbar(props) {
           </NavbarToggler>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="mr-auto" navbar>
-            <NavItem>
-                {/* <NavLink href="#">
-                  خانه
-                </NavLink> */}
-                <button onClick={() => setShowLogin(true)}>LMS</button>
+              <NavItem>
+                <Button 
+                 style={{ width: "60px", height: "40px",}}
+                 className="btn-fill" color="primary"
+                 onClick={() => setShowLogin(true)}>LMS</Button>
                 <LoginModal show={showLogin} close={() => setShowLogin(false)} />
               </NavItem> 
               
+              <NavItem>
+                <Button 
+                 style={{ width: "60px", height: "40px",}}
+                 className="btn-fill" color="primary"
+                 onClick={() => setShowLoginG(true)}>گلستان</Button>
+                <LoginModalGolestan show={showLoginG} close={() => setShowLoginG(false)} />
+              </NavItem> 
+
               <NavItem>
                 <NavLink href="#">
                   درباره 

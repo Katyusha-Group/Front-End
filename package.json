@@ -18,6 +18,9 @@
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
+    "react-native-elements": "^3.4.3",
+    "react-native-linear-gradient": "^2.6.2",
+    "react-native-vector-icons": "^9.2.0",
     "react-router-dom": "^6.9.0",
     "reactstrap": "^9.1.6"
   },

@@ -1,9 +1,10 @@
 .loginLmsModal{
     background: #27293d;
-
+    
 }
 .card-header{
     background-color: transparent!important;
+    direction: ltr;
 }
 .card-footer{
     background-color: transparent!important;
