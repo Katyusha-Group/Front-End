@@ -2,7 +2,7 @@ import {useState} from 'react';
 import React from "react";
 // import routes from "../route.jsx";
 import { useInfo } from "../../../contexts/InfoContext";
-import '../ExamsCard/ExamsCard.css'
+import '../EventsCard/EventsCard.css'
 
 // reactstrap components
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col, Table} from "reactstrap";
@@ -11,20 +11,20 @@ import {DateTimePicker} from "react-advance-jalaali-datepicker";
 
 
 
-const exams = [{name:"ساختمان داده",date:"1402.2.2",time:"10:30"},{name:" فیزیک ۱",date:"1402.2.8",time:"9:00"}];
-const examsItems=exams.map(exam => 
+const events = [{name:"تمرین ساختمان داده",date:"1402.2.2",time:"23:59"},{name:"  کوییز مدار منطقی",date:"1402.2.8",time:"11:00"}];
+const eventsItems=events.map(event => 
 <tr>
-    <td >{exam.name}</td>
-    <td>{exam.time}</td>
-    <td>{exam.date}</td>
+    <td >{event.name}</td>
+    <td>{event.time}</td>
+    <td>{event.date}</td>
     
 </tr>
 )
 
-function ExamsCard() {
+function EventsCard() {
   const [addPartIsShown, setAddPartIsShown] = useState(false);
   const hideAddPart=()=>{
-    //exam has to be added here
+    //event has to be added here
     setAddPartIsShown(false);
   }
   const changeAddPartState=()=>{
@@ -32,15 +32,15 @@ function ExamsCard() {
   }
   return (
     <>
-      <Card className="examsCard">
-        <CardHeader className="examsCardHeader">
-          <h4 className="title text-right">امتحانات</h4>
+      <Card className="eventsCard">
+        <CardHeader className="eventsCardHeader">
+          <h4 className="title text-right">کار های پیش رو</h4>
           <Button variant="success"size="sm" style={{color:"darkslategrey",fontSize:"medium"}} onClick={changeAddPartState}>+</Button>
         </CardHeader>
-        <CardBody className="examsCardBody text-right"  >
-              <div className={addPartIsShown ? "addExam" : "hidden"} md="12" style={{marginBottom:"10px",}} >
+        <CardBody className="eventsCardBody text-right"  >
+              <div className={addPartIsShown ? "addevent" : "hidden"} md="12" style={{marginBottom:"10px",}} >
                   <label>
-                     درس  امتحان جدید را وارد کنید:
+                     درس  کار جدید را وارد کنید:
                   </label>
                   <div className="inputBox">
                   <Input placeholder="ریاضی ۱" />
@@ -63,7 +63,7 @@ function ExamsCard() {
               <div style={{color:"white"}} className={addPartIsShown ? "hidden": "text-right"} md="12">
                 <Table borderless size="sm">
                 <tbody>
-                    {examsItems}
+                    {eventsItems}
                 </tbody>
                 </Table>
               </div>
@@ -74,4 +74,4 @@ function ExamsCard() {
   );
 }
 
-export default ExamsCard;
+export default EventsCard;

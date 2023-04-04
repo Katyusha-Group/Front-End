@@ -1,5 +1,6 @@
 .coursesCard{
-    width: 30% !important;
+    width: 260px !important;
+    height: 230px;
 }
 
 .coursesCardHeader{

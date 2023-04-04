@@ -39,7 +39,7 @@ function CoursesCard() {
                   <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}} onClick={hideAddPart} >+</Button>
                   </div>
               </div>
-              <div style={{color:"white"}} className="text-right" md="12">
+              <div style={{color:"white"}} className={addPartIsShown ? "hidden": "text-right"} md="12">
             {coursesItems}
               </div>
         </CardBody>

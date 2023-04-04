@@ -1,0 +1,22 @@
+.cardBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 870px ){
+    .cardBar{
+        flex-wrap: wrap;
+        flex-direction: column;   
+        align-items: center;  
+    }
+
+}
+
+@media only screen and (max-width: 530px ){
+    .cardBar{
+        flex-direction: column;   
+        align-items: center;  
+    }
+
+}

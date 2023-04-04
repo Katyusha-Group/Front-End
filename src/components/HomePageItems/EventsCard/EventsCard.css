@@ -1,14 +1,14 @@
-.examsCard{
+.eventsCard{
     width: 260px !important;
     height: 230px;
 }
 
-.examsCardHeader{
+.eventsCardHeader{
     display: flex;
     justify-content: space-between; 
 }
 
-.examsCardBody{
+.eventsCardBody{
     padding: 12px;
 }
 
@@ -20,7 +20,7 @@
 .hidden{
     display: none;
 }
-.addExam{
+.addEvent{
     display: block;
 }
 td{
