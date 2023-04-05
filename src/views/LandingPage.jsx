@@ -10,29 +10,9 @@ import {
   Col,
 } from "reactstrap";
 
-// function LandingFrame()
-// {
-//   const style = {
-//     "background-image": `url("/src/assets/img/stadium.jpg")`,
-//     "background-repeat": "no-repeat",
-//     "background-size": "cover",
-//     position: "absolute",
-//     height: "100%",
-//     width: "100%",
-//     padding: 0
-//   }
-//   return <div style={style}></div>
-// }
-
 function LandingPage() {
-  const style = {
-    margin: "auto",
-    padding: "10% 35% 10% 15%",
-    color: "white"
-  }
   return (
     <>
-    {/* <LandingFrame/> */}
     <div className="div-1">
     
     <span >
@@ -42,16 +22,19 @@ function LandingPage() {
       <div className="div-3">
         این سایت به شما کمک می کنه که:
         <li>
-          برنامه هفتگی و لیست ددلاین هاتون رو ببینین 
+          برنامه هفتگی و لیست ددلاین ها و امتحاناتون رو ببینین 📆
         </li>
         <li>
-          به آرشیوها دسترسی داشته باشین
+          برای طول ترم و تکالیف برنامه ریزی کنین 📒
         </li>
         <li>
-          برای ترم آینده برنامه ریزی کنین
+          به آرشیو کلاس های ضبط شده دسترسی داشته باشین 📺
         </li>
         <li>
-
+          برای ترم آینده برنامه ریزی کنین 🎒
+        </li>
+        <li>
+            انتخاب واحد بهتری داشته باشین 🏫
         </li>
       </div>
       <br/>
@@ -67,17 +50,16 @@ function LandingPage() {
           </Link>
         </Col>
       </Row>
-      <br/>
-      <br/>
-      <br/>
-      <Row>
-        در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
-        Katyusha@example.com
-
-      </Row>
     </span>
     </div>
-    
+    <span>
+      <div className="div-4">
+        <Row>
+          در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
+          Katyusha@example.com
+        </Row>
+      </div>
+    </span>
     </>
   );
 }
