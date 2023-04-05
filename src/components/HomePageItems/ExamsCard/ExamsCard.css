@@ -91,3 +91,17 @@ td{
     background: inherit !important;
     color: inherit !important;
 }
+.JDatePicker .JDheader select {
+    background: inherit;
+    color: inherit;
+}
+option{
+    background:#2b3553!important;
+}
+/* warning !! style effects all scrolls in project */
+::-webkit-scrollbar {
+   background-color: #2b3553;
+}
+  ::-webkit-scrollbar-thumb {
+    background:    #414d70;
+}
