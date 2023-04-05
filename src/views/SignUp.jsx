@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Select from "react-Select";
+import Select from "react-select";
+import "../assets/css/SignUp.css";
 // reactstrap components
 import {
   Button,
@@ -36,8 +37,8 @@ function SignUp() {
   // });
   ////////////////////////////// Select ///////////////////
   const genderOptions = [
-    { value: "زن", label: "زن" },
-    { value: "مرد", label: "مرد" },
+    { value: "F", label: "زن" },
+    { value: "M", label: "مرد" },
   ];
   const subjectOptions = [
     { value: "1", label: "مهندسی کامپیوتر" },
@@ -97,15 +98,45 @@ function SignUp() {
     }),
     singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
   };
-
-  const [frequency, setFrequency] = useState({ frequency: "xyz" });
-  function handleSelect(e) {
-    setFrequency((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  }
   /////////////////////////////// End of Select //////////////////////
+
+  /////////////////////////////// Close eye Icon /////////////////////
+
+  function PasCloseEyeIcon() {
+    // toggle the type attribute
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordV = document.querySelector("#password_field");
+    const type =
+      passwordV.getAttribute("type") === "password" ? "text" : "password";
+
+    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
+      ? (document.getElementById("togglePassword").className =
+          "fa fa-eye-slash viewpass mr-4 text-muted")
+      : (document.getElementById("togglePassword").className =
+          "fa fa-eye viewpass mr-4 text-muted");
+    passwordV.setAttribute("type", type);
+  }
+
+  function ConfirmPasCloseEyeIcon() {
+    // toggle the type attribute
+    const toggleConfirmPassword = document.querySelector(
+      "#toggleConfirmPassword"
+    );
+    const confirmPasswordV = document.querySelector("#confirm_password_field");
+    const type =
+      confirmPasswordV.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+
+    toggleConfirmPassword.className === "fa fa-eye viewpass mr-4 text-muted"
+      ? (document.getElementById("toggleConfirmPassword").className =
+          "fa fa-eye-slash viewpass mr-4 text-muted")
+      : (document.getElementById("toggleConfirmPassword").className =
+          "fa fa-eye viewpass mr-4 text-muted");
+    confirmPasswordV.setAttribute("type", type);
+  }
+  //////////////////////////// End of Close eye Icon //////////////////
+
   return (
     <>
       <div className="wrapper">
@@ -144,10 +175,17 @@ function SignUp() {
                               placeholder="رمز عبور را وارد کنید"
                               type="password"
                               name="password"
+                              id="password_field"
                               // onChange={onInputChange}
                               // value={formData.password}
                               // onBlur={validateInput}
-                            />
+                            ></Input>
+
+                            <i
+                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                              onClick={PasCloseEyeIcon}
+                              id="togglePassword"
+                            ></i>
                           </FormGroup>
                         </Col>
                       </Row>
@@ -160,10 +198,16 @@ function SignUp() {
                               placeholder="تکرار رمز عبور را وارد کنید"
                               type="password"
                               name="passwordConfirm"
+                              id="confirm_password_field"
                               // onChange={onInputChange}
                               // value={formData.passwordConfirm}
                               // onBlur={validateInput}
                             />
+                            <i
+                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                              onClick={ConfirmPasCloseEyeIcon}
+                              id="toggleConfirmPassword"
+                            ></i>
                           </FormGroup>
                         </Col>
                       </Row>
@@ -200,7 +244,7 @@ function SignUp() {
                     <Container>
                       <Row>
                         <Col className="text-center pt-md-2" md="12">
-                          <Link href="#" color="primary">
+                          <Link to="/login" color="primary">
                             ورود به حساب کابری
                           </Link>
                         </Col>
