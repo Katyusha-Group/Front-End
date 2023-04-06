@@ -1,6 +1,11 @@
 .LandingPageRow{
     text-align: center;
 }
+.btn-fill {
+    height: 70px;
+    width: 200px;
+    font-size: 20px;
+}
 .div-1 {
     margin: auto;
     padding-top: 10px;
@@ -38,6 +43,11 @@
     .div-3{
         font-size: 31px;
     }
+    .btn-fill{
+        height: 60px;
+        width: 170px;
+        font-size: 17px;
+    }
 
 }
 @media only screen and (max-width: 600px ){
@@ -47,6 +57,11 @@
     .div-3{
         font-size: 25px;
     }
+    .btn-fill{
+        height: 40px;
+        width: 114px;
+        font-size: 11px;
+    }
 }
 @media only screen and (max-width: 450px ) {
     .div-2{
@@ -54,6 +69,11 @@
     }
     .div-3{
         font-size: 17px;
+    }
+    .btn-fill{
+        height: 40px;
+        width: 110px;
+        font-size: 9px;
     }
 
 }
