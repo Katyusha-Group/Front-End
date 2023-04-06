@@ -7,6 +7,8 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 import * as Router from 'react-router-dom';
 import ChangePassword from "./ChangePass.jsx";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 export default function Admin() {
     const {info} = useInfo()
     const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -57,11 +59,15 @@ export default function Admin() {
         />
         <div className="main-panel">
           <AdminNavbar />
-          <div className="content">
+
+          <div className="content custom-scrollbars__container">
+
+            
             <Router.Routes>
             {getRoutes(routes)}
             </Router.Routes>
           </div>
+
         </div>
       </div>
     </>
