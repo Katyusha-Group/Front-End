@@ -41,12 +41,12 @@ function LandingPage() {
       <Row className="LandingPageRow">
         <Col>
           <Link to="../Signup">
-            <Button className="btn-fill" color="primary"> ثبت نام</Button>
+            <Button className="btn-fill-landingPage" color="primary"> ثبت نام</Button>
           </Link>
         </Col>
         <Col>
         <Link to="../Login">
-            <Button className="btn-fill" color="primary">ورود</Button>
+            <Button className="btn-fill-landingPage" color="primary">ورود</Button>
           </Link>
         </Col>
       </Row>
