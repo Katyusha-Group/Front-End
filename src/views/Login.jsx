@@ -1,5 +1,6 @@
 import React from "react";
-import * as log from "../assets/img/Login.jpg";
+import "../assets/css/Login.css";
+import * as log from "../assets/img/LoginRocket.svg";
 // reactstrap components
 import {
   Button,
@@ -18,6 +19,24 @@ import {
 import { Link } from "react-router-dom";
 
 function Login() {
+  ////////////////////////////// Close eye Icon //////////////////////
+  function PasCloseEyeIcon() {
+    // toggle the type attribute
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordV = document.querySelector("#password_field");
+    const type =
+      passwordV.getAttribute("type") === "password" ? "text" : "password";
+
+    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
+      ? (document.getElementById("togglePassword").className =
+          "fa fa-eye-slash viewpass mr-4 text-muted")
+      : (document.getElementById("togglePassword").className =
+          "fa fa-eye viewpass mr-4 text-muted");
+    passwordV.setAttribute("type", type);
+  }
+
+  //////////////////////////// End of Close eye Icon //////////////////
+
   return (
     <>
       <div className="wrapper">
@@ -28,21 +47,26 @@ function Login() {
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center">ورود به سایت</h5>
+                    <Row>
+                      <Col md="12">
+                        {/* <img
+                          alt="LoginImage"
+                          className="pl-5 pr-5"
+                          src={log.default}
+                        /> */}
+                      </Col>
+                    </Row>
                   </CardHeader>
+                  <br></br>
                   <CardBody>
                     <Form>
                       <Row>
                         <Col md="12">
-                          {/* <img
-                      alt="..."
-                      className=""
-                      src={log.default}
-                    /> */}
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             <Input
-                              className="text-left"
-                              placeholder="JohnDoe@gmail.com"
+                              className="text-right"
+                              placeholder="ایمیل خود را وارد کنید"
                               type="email"
                             />
                           </FormGroup>
@@ -53,15 +77,21 @@ function Login() {
                           <FormGroup>
                             <label>رمز عبور</label>
                             <Input
-                              className="text-left"
-                              //   defaultValue="Mike"
-                              placeholder="Password"
+                              className="text-right"
+                              placeholder="رمز عبور خود را وارد کنید"
                               type="password"
-                            />
+                              id="password_field"
+                            ></Input>
+                            <i
+                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                              onClick={PasCloseEyeIcon}
+                              id="togglePassword"
+                            ></i>
                           </FormGroup>
                         </Col>
                       </Row>
                     </Form>
+                    <br></br>
                     <Container>
                       <Row>
                         <Col className="text-center" md="12">
@@ -75,7 +105,7 @@ function Login() {
                       <Row>
                         <Col className="text-center pt-md-2" md="12">
                           در صورت نداشتن حساب کاربری
-                          <Link href="#" color="primary">
+                          <Link to="../signup" color="primary">
                             &nbsp;ثبت‌نام&nbsp;
                           </Link>
                           کنید
@@ -83,11 +113,13 @@ function Login() {
                       </Row>
                     </Container>
                   </CardBody>
+                  <br></br>
                   <CardFooter className="text-center">
                     <Button className="btn-fill" color="primary" type="submit">
                       ورود
                     </Button>
                   </CardFooter>
+                  <br></br>
                 </Card>
               </Col>
             </Row>

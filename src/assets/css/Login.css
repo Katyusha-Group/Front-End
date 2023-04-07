@@ -1,0 +1,12 @@
+.viewpass{
+    float: left;
+    margin-left: 18px;
+    margin-top: -47px;
+    position: relative;
+    z-index: 2;
+  }
+
+#togglePassword:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
