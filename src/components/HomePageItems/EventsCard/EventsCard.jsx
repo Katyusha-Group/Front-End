@@ -8,11 +8,11 @@ import '../EventsCard/EventsCard.css'
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col, Table} from "reactstrap";
 import Button from 'react-bootstrap/Button';
 import {DateTimePicker} from "react-advance-jalaali-datepicker";
+import d from "../events.json"
 
 
-
-const events = [{name:"تمرین ساختمان داده",date:"1402.2.2",time:"23:59"},{name:"  کوییز مدار منطقی",date:"1402.2.8",time:"11:00"}];
-const eventsItems=events.map(event => 
+//const events = [{name:"تمرین ساختمان داده",date:"1402.2.2",time:"23:59"},{name:"  کوییز مدار منطقی",date:"1402.2.8",time:"11:00"}];
+const eventsItems=d.map(event => 
 <tr>
     <td >{event.name}</td>
     <td>{event.time}</td>
