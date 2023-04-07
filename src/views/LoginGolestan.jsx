@@ -30,7 +30,7 @@ const LoginModalGolestan = (props) => {
                           <Col className="text-right" md="12">
                             <FormGroup>
                               <label htmlFor="exampleInputEmail1">
-                                نام کاربری
+                                نام کاربری (شماره دانشجویی)
                               </label>
                               <Input placeholder="username" type="username" />
                             </FormGroup>
