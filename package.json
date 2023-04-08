@@ -26,7 +26,10 @@
     "react-native-linear-gradient": "^2.6.2",
     "react-native-vector-icons": "^9.2.0",
     "react-router-dom": "^6.9.0",
-    "reactstrap": "^9.1.6"
+    "reactstrap": "^9.1.6",
+    "sass": "^1.60.0",
+    "simplebar": "^6.2.4",
+    "simplebar-react": "^3.2.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
