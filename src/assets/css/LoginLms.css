@@ -1,34 +1,21 @@
-.loginLmsRow{
-    margin-top: 10%;
-    width: 30%;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-.loginLmsCard{
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-@media only screen and (max-width: 890px ){
-    .loginLmsRow{
-        width: 45%;
-    }
-
-}
-@media only screen and (max-width: 600px ){
-    .loginLmsRow{
-        width: 65%;
-    }
-    .loginLmsCard{
-        padding-left: 2%;
-        padding-right: 2%;
-    }
+.loginLmsModal{
+    background: #27293d;
     
-
 }
-@media only screen and (max-width: 450px ) {
-    .loginLmsRow{
-        width: 90%;
-    }
-
+.card-header{
+    background-color: transparent!important;
+    direction: ltr;
+}
+.card-footer{
+    background-color: transparent!important;
+}
+.loginLmsModalBody{
+    padding: 0 !important;
+}
+.close-btn
+{
+  display:inline-block;
+  padding:4px;
+  /* border:1px solid pink; */
+  z-index:500;
 }
