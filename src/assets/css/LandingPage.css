@@ -1,0 +1,79 @@
+.LandingPageRow{
+    text-align: center;
+}
+.btn-fill-landingPage {
+    height: 70px;
+    width: 200px;
+    font-size: 20px;
+}
+.div-1 {
+    margin: auto;
+    padding-top: 10px;
+    padding-right: 10%;
+    padding-bottom: 30px;
+    padding-left: 10%;
+    color: white;
+    direction: rtl;
+}
+.div-2 {
+    font-size: 70px;
+    text-align: center;
+}
+.div-3{
+    font-size: 44px;
+    text-align: justify;
+}
+.div-4{
+    margin-bottom: 40px;
+    position: relative;
+    bottom: 0;
+    margin: auto;
+    padding-top: 10px;
+    padding-right: 10%;
+    padding-bottom: 30px;
+    padding-left: 10%;
+    color: white;
+    direction: rtl;
+}
+
+@media only screen and (max-width: 890px ){
+    .div-2{
+        font-size: 60px;
+    }
+    .div-3{
+        font-size: 31px;
+    }
+    .btn-fill-landingPage{
+        height: 60px;
+        width: 170px;
+        font-size: 17px;
+    }
+
+}
+@media only screen and (max-width: 600px ){
+    .div-2{
+        font-size: 40px;
+    }
+    .div-3{
+        font-size: 25px;
+    }
+    .btn-fill-landingPage{
+        height: 40px;
+        width: 114px;
+        font-size: 11px;
+    }
+}
+@media only screen and (max-width: 450px ) {
+    .div-2{
+        font-size: 30px
+    }
+    .div-3{
+        font-size: 17px;
+    }
+    .btn-fill-landingPage{
+        height: 40px;
+        width: 110px;
+        font-size: 9px;
+    }
+
+}

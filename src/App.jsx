@@ -14,9 +14,8 @@ import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
-// import "./assets/scss/black-dashboard-react.scss";
-// import SimpleBar from 'simplebar-react';
-// import 'simplebar/dist/simplebar.min.css';
+import LandingPage from "./views/LandingPage.jsx"; 
+
 
 function App() {
   return (
@@ -33,6 +32,7 @@ function App() {
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
+                <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
             {/* </SimpleBar> */}

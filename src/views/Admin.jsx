@@ -15,8 +15,16 @@ export default function Admin() {
         document.documentElement.className.indexOf("nav-open") !== -1
       );
     const toggleSidebar = () => {
+        console.log("toggle")
         document.documentElement.classList.toggle("nav-open");
         setsidebarOpened(!sidebarOpened);
+      };
+      const getBrandText = (path) => {
+        for (let i = 0; i < routes.length; i++) {
+          if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+            return routes[i].name;
+          }
+        }
       };
      document.body.classList.add("rtl", "menu-on-right");
      let head = document.head;
@@ -58,11 +66,12 @@ export default function Admin() {
           toggleSidebar={toggleSidebar}
         />
         <div className="main-panel">
-          <AdminNavbar />
-
-          <div className="content custom-scrollbars__container">
-
-            
+          <AdminNavbar 
+          brandText={getBrandText(location.pathname)}
+          toggleSidebar={toggleSidebar}
+          sidebarOpened={sidebarOpened}
+          />
+          <div className="content">
             <Router.Routes>
             {getRoutes(routes)}
             </Router.Routes>
