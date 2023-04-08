@@ -1,3 +1,4 @@
+@import url("../../assets/css/black-dashboard-react.css");
 .UserPage_first_column{
     border: none;
 }
@@ -18,7 +19,7 @@
 
 }
 
-.cors{
+.course{
     position: absolute;
     height: 2.3rem;
     width: 5rem;
@@ -27,10 +28,20 @@
     right:13%;/* 10.7 */
     border-radius: 5%;
     color: white;
-    opacity: 0.85;
+    opacity: 0.75;
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
 }
 
- 
+.course:hover{
+    cursor: pointer;
+}
+
+.select{
+    background-color: #344675;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.2rem 1rem;
+    color: white;
+}

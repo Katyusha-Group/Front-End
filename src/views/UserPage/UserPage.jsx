@@ -14,6 +14,7 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   Label,
+  Form,
   FormGroup,
   Input,
   Table,
@@ -24,9 +25,11 @@ import {
 import "./UserPage.css"
 // import * as chart from "../../assets/img/schedule_table.png"
 import * as chart from "../../assets/img/chart.png"
-
+import dataJson from "../../assets/data/week.json"
 
 export default function UserPage() {
+  let [data, setData] = React.useState(dataJson)
+  console.log(data)
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -36,22 +39,46 @@ export default function UserPage() {
   let top_right = 10.8;
   let top_defu = 13;
   function lessons(){
-    let lessons = [0,1,2,3,4,5,6];
-    return lessons.map((lesson, key) => {
+    return data.map((lesson) => {
       return (
-        <div key={key} className="cors text-center" style={{top:`${defu+length*lesson}%`, right:`${top_defu+top_right*lesson}%`}}>ریاضی</div>
-      )
+        <div key={lesson.id} >
+          <div 
+            id = {lesson.id}
+            className="course text-center"
+            style={{
+              top: `${defu + length * lesson.day}%`,
+              right: `${top_defu + top_right * lesson.time}%`,
+              width: `${lesson.long == 1 ? 5 : 7.5}rem`,
+            }}
+          >
+            {lesson.name}
+          </div>
+          {/* <UncontrolledTooltip
+            delay={0}
+            target={lesson.id}
+            placement="right"
+          >
+            Edit Task
+          </UncontrolledTooltip> */}
+        </div>
+      );
     })
   }
   return (
     <>
-      <div className="chart">
-        {
-          lessons()
-        }
-      </div>
-          
-        {/* <Row>
+      <div className="chart">{lessons()}</div>
+      {/* <Form>
+        <FormGroup>
+          <Label for="exampleSelect"></Label>
+          <Input className="select" type="select" name="select" id="exampleSelect">
+            <option>ریاضی</option>
+            <option>کامپایلر</option>
+            <option>فیزیک</option>
+            <option>ریزپر</option>
+          </Input>
+        </FormGroup>
+      </Form> */}
+      {/* <Row>
           
           <Col lg="12" sm="10">
             <Card>
