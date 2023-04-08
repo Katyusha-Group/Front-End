@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/Login.css";
+import { useState } from "react";
 import * as log from "../assets/img/LoginRocket.svg";
 // reactstrap components
 import {
@@ -37,6 +38,43 @@ function Login() {
 
   //////////////////////////// End of Close eye Icon //////////////////
 
+  ////////////////////////////// Input errors ///////////////////////
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (formData.email.trim().length === 0) {
+      console.log("وارد کردن ایمیل الزامی می‌باشد");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      console.log("قالب ایمیل قابل قبول نیست");
+      return;
+    }
+    if (formData.password.trim().length === 0) {
+      console.log("وارد کردن پسوورد الزامی می‌باشد");
+      return;
+    }
+    console.log("خوش آمدید");
+  }
+
+  //////////////////////////// End of input errors //////////////////
   return (
     <>
       <div className="wrapper">
@@ -68,6 +106,9 @@ function Login() {
                               className="text-right"
                               placeholder="ایمیل خود را وارد کنید"
                               type="email"
+                              name="email"
+                              onChange={handleChange}
+                              value={formData.email}
                             />
                           </FormGroup>
                         </Col>
@@ -81,6 +122,10 @@ function Login() {
                               placeholder="رمز عبور خود را وارد کنید"
                               type="password"
                               id="password_field"
+                              //id="message"
+                              name="password"
+                              onChange={handleChange}
+                              value={formData.password}
                             ></Input>
                             <i
                               className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
@@ -115,7 +160,13 @@ function Login() {
                   </CardBody>
                   <br></br>
                   <CardFooter className="text-center">
-                    <Button className="btn-fill" color="primary" type="submit">
+                    <Button
+                      onClick={handleSubmit}
+                      //onChange={handleClick}
+                      className="btn-fill"
+                      color="primary"
+                      type="submit"
+                    >
                       ورود
                     </Button>
                   </CardFooter>
