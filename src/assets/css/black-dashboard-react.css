@@ -41,7 +41,7 @@
   box-sizing: border-box; }
 
 html {
-  font-family: sans-serif;
+  font-family: 'IRANSans',sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(34, 42, 66, 0); }
@@ -51,7 +51,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'IRANSans', sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -149,7 +149,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'IRANSans',SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1em; }
 
 pre {
@@ -4659,7 +4659,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'IRANSans', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4744,7 +4744,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'IRANSans',"Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -8222,7 +8222,7 @@ button.bg-darker:focus {
   background-color: rgba(0, 0, 0, 0); }
 
 .text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; }
+  font-family: 'IRANSans',SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; }
 
 .text-justify {
   text-align: justify !important; }
@@ -11042,7 +11042,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Poppins", sans-serif; }
+  font-family: 'IRANSans', sans-serif; }
 
 .card h1, .card h2, .card h3, .card h4, .card h5, .card h6, .card p {
   color: rgba(255, 255, 255, 0.8); }
@@ -11911,7 +11911,7 @@ hr {
       margin: 10px 10px;
       color: #ffffff;
       line-height: 20px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+      font-family: 'IRANSans',"Helvetica Neue", Helvetica, Arial, sans-serif; }
     .sidebar .logo .simple-text,
     .off-canvas-sidebar .logo .simple-text {
       text-transform: uppercase;
