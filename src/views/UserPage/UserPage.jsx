@@ -26,6 +26,8 @@ import "./UserPage.css"
 // import * as chart from "../../assets/img/schedule_table.png"
 import * as chart from "../../assets/img/chart.png"
 import dataJson from "../../assets/data/week.json"
+import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
+
 
 export default function UserPage() {
   let [data, setData] = React.useState(dataJson)
@@ -53,13 +55,6 @@ export default function UserPage() {
           >
             {lesson.name}
           </div>
-          {/* <UncontrolledTooltip
-            delay={0}
-            target={lesson.id}
-            placement="right"
-          >
-            Edit Task
-          </UncontrolledTooltip> */}
         </div>
       );
     })
@@ -67,6 +62,7 @@ export default function UserPage() {
   return (
     <>
       <div className="chart">{lessons()}</div>
+      <HomeCardBar/>
       {/* <Form>
         <FormGroup>
           <Label for="exampleSelect"></Label>
