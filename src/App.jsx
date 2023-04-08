@@ -15,17 +15,17 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
 // import "./assets/scss/black-dashboard-react.scss";
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+// import SimpleBar from 'simplebar-react';
+// import 'simplebar/dist/simplebar.min.css';
 
 function App() {
   return (
     <>
-      <SimpleBar style={{ maxHeight: '300px' }}>
+      {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
       <ThemeContextWrapper>
         <BackgroundColorWrapper>
           <ContextInfo>
-          <SimpleBar style={{ maxHeight: '300px' }}>
+          {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
             <Router.BrowserRouter>
               <Router.Routes>
                 <Router.Route path="/" element={<Home />}></Router.Route>
@@ -35,11 +35,11 @@ function App() {
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
-            </SimpleBar>
+            {/* </SimpleBar> */}
           </ContextInfo>
         </BackgroundColorWrapper>
       </ThemeContextWrapper>
-      </SimpleBar>
+      {/* </SimpleBar> */}
     </>
   );
 }
