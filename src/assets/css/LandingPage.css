@@ -16,11 +16,11 @@
     direction: rtl;
 }
 .div-2 {
-    font-size: 70px;
+    font-size: 60px;
     text-align: center;
 }
 .div-3{
-    font-size: 44px;
+    font-size: 42px;
     text-align: justify;
 }
 .div-4{
@@ -36,9 +36,9 @@
     direction: rtl;
 }
 
-@media only screen and (max-width: 890px ){
+@media only screen and (max-width: 1000px ){
     .div-2{
-        font-size: 60px;
+        font-size:50px;
     }
     .div-3{
         font-size: 31px;
@@ -48,8 +48,36 @@
         width: 170px;
         font-size: 17px;
     }
-
 }
+
+@media only screen and ((max-width: 890px ) or (max-height: 400px )){
+    .div-2{
+        font-size: 45px;
+    }
+    .div-3{
+        font-size: 27px;
+    }
+    .btn-fill-landingPage{
+        height: 60px;
+        width: 170px;
+        font-size: 17px;
+    }
+}
+
+@media only screen and ((max-width: 800px ) or (max-height: 600px )){
+    .div-2{
+        font-size: 50px;
+    }
+    .div-3{
+        font-size: 31px;
+    }
+    .btn-fill-landingPage{
+        height: 60px;
+        width: 170px;
+        font-size: 17px;
+    }
+}
+
 @media only screen and (max-width: 600px ){
     .div-2{
         font-size: 40px;
