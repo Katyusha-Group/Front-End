@@ -15,3 +15,6 @@
     cursor: pointer;
     opacity: 80%;
 }
+.card {
+    border-radius: 1.5rem !important;
+}
