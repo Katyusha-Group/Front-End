@@ -7,14 +7,24 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 import * as Router from 'react-router-dom';
 import ChangePassword from "./ChangePass.jsx";
+// import SimpleBar from 'simplebar-react';
+// import 'simplebar/dist/simplebar.min.css';
 export default function Admin() {
     const {info} = useInfo()
     const [sidebarOpened, setsidebarOpened] = React.useState(
         document.documentElement.className.indexOf("nav-open") !== -1
       );
     const toggleSidebar = () => {
+        console.log("toggle")
         document.documentElement.classList.toggle("nav-open");
         setsidebarOpened(!sidebarOpened);
+      };
+      const getBrandText = (path) => {
+        for (let i = 0; i < routes.length; i++) {
+          if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+            return routes[i].name;
+          }
+        }
       };
      document.body.classList.add("rtl", "menu-on-right");
      let head = document.head;
@@ -56,12 +66,17 @@ export default function Admin() {
           toggleSidebar={toggleSidebar}
         />
         <div className="main-panel">
-          <AdminNavbar />
+          <AdminNavbar 
+          brandText={getBrandText(location.pathname)}
+          toggleSidebar={toggleSidebar}
+          sidebarOpened={sidebarOpened}
+          />
           <div className="content">
             <Router.Routes>
             {getRoutes(routes)}
             </Router.Routes>
           </div>
+
         </div>
       </div>
     </>

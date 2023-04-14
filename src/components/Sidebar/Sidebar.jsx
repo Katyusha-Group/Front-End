@@ -119,6 +119,7 @@ function Sidebar(props) {
                       className="nav-link"
                       activeClassName="active"
                       onClick={props.toggleSidebar}
+                      key = {key}
                     >
                       <i className={prop.icon} />
                       <p>{rtlActive ? prop.rtlName : prop.name}</p>
