@@ -14,6 +14,7 @@
     "ag-grid-react": "^29.2.0",
     "bootstrap": "^5.2.3",
 
+    "axios": "^1.3.5",
     "classnames": "^2.3.2",
     "fortawesome": "^0.0.1-security",
     "perfect-scrollbar": "^1.5.5",
@@ -26,6 +27,7 @@
     "react-native-linear-gradient": "^2.6.2",
     "react-native-vector-icons": "^9.2.0",
     "react-router-dom": "^6.9.0",
+    "react-select": "^5.7.2",
     "reactstrap": "^9.1.6",
     "sass": "^1.60.0",
     "simplebar": "^6.2.4",

@@ -4,6 +4,11 @@ import path from 'path';
 // const path1 = require('path');
 // https://vitejs.dev/config/
 export default defineConfig({
+  // server:{
+  //   proxy:{
+  //     "/accounts/" : "http://127.0.0.1:8000/",
+  //   }
+  // },
   plugins: [react()],
   css: {
     preprocessorOptions: {
