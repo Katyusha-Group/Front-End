@@ -264,8 +264,8 @@ function SignUp() {
         email: formData.email,
         password1: formData.password,
         password2: formData.passwordConfirm,
-        department: "Mathematics",
-        gender: "M",
+        department: subject,
+        gender: gender,
       }),
     });
     const data = await response.json();
@@ -390,7 +390,7 @@ function SignUp() {
                               isRtl
                               placeholder="انتخاب کنید "
                               name="subject"
-                              onChange={handleGender}
+                              onChange={handleSubject}
                             />
                           </FormGroup>
                         </Col>
@@ -405,7 +405,7 @@ function SignUp() {
                               isRtl
                               placeholder="انتخاب کنید "
                               name="gender"
-                              onChange={handleSubject}
+                              onChange={handleGender}
                             />
                           </FormGroup>
                         </Col>
