@@ -12,5 +12,5 @@
 }
 
 .card {
-  border-radius: 1.3rem;
+  border-radius: 1.3rem !important;
 }
