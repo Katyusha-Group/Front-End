@@ -61,8 +61,8 @@ export default function UserPage() {
   }
   return (
     <>
-      <div className="chart">{lessons()}</div>
-      <HomeCardBar/>
+      {/* <div className="chart">{lessons()}</div> */}
+      {/* <HomeCardBar/> */}
       {/* <Form>
         <FormGroup>
           <Label for="exampleSelect"></Label>
@@ -182,6 +182,123 @@ export default function UserPage() {
             </Card>
           </Col>
         </Row> */}
+      <Row>
+        <Col lg="12" sm="10">
+          <Card>
+            <CardBody style={{'overflow': "auto"}}>
+              {/* <Table className="tablesorter" responsive>
+                <thead className="text-primary">
+                  <tr>
+                    <th className="text-center "></th>
+                    <th className="text-center ">۷:۳۰ تا ۹</th>
+                    <th className="text-center ">۹ تا ۱۰:۳۰</th>
+                    <th className="text-center ">۱۰:۳۰ تا ۱۲</th>
+                    <th className="text-center ">۱۲ تا ۱:۳۰</th>
+                    <th className="text-center ">۱:۳۰ تا ۳</th>
+                    <th className="text-center ">۳ تا ۴:۳۰ </th>
+                    <th className="text-center ">۴:۳۰ تا ۶ </th>
+                    <th className="text-center ">۶ تا ۷:۳۰ </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="UserPage_first_column text-center  ">
+                      شنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">
+                      یکشنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">
+                      دوشنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">
+                      سه‌شنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">
+                      چهارشنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">
+                      پنج‌شنبه
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                  <tr>
+                    <td className="UserPage_first_column text-center ">جمعه</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="text-center"></td>
+                  </tr>
+                </tbody>
+              </Table> */}
+              <Table className="tablesorter" responsive >
+                <div className="chart">{lessons()}</div>
+              </Table>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }

@@ -10,12 +10,13 @@
 
 .chart{
     background: url(../../assets/img/chart.png);
-    background-size: contain;
+    background-size: 100% 100%;
     width: 55em;
+    min-width: 60rem;
     height: 30em;
     position: relative;
     background-repeat: no-repeat;
-
+    resize: both;
 
 }
 
