@@ -1,0 +1,21 @@
+.fieldsCard{
+    width: 260px !important;
+    height: 230px;
+}
+
+.fieldsCardHeader{
+    display: flex;
+    justify-content: space-between; 
+}
+
+.fieldsCardBody{
+    padding: 12px;
+}
+
+.card label{
+    font-size: inherit !important;
+}
+.form-select {
+    background-color: transparent;
+    color: white;
+}
