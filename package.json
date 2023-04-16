@@ -13,7 +13,6 @@
     "ag-grid-community": "^29.2.0",
     "ag-grid-react": "^29.2.0",
     "bootstrap": "^5.2.3",
-
     "classnames": "^2.3.2",
     "fortawesome": "^0.0.1-security",
     "perfect-scrollbar": "^1.5.5",
@@ -29,7 +28,8 @@
     "reactstrap": "^9.1.6",
     "sass": "^1.60.0",
     "simplebar": "^6.2.4",
-    "simplebar-react": "^3.2.3"
+    "simplebar-react": "^3.2.3",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
