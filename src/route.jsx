@@ -20,6 +20,14 @@ var routes = [
         icon: "",
         layout: "/admin"
     },
+    {
+        path: '/aboutUs',
+        name:"AboutUs",
+        component: UserPage,
+        rtlName: "درباره ما",
+        icon: "",
+        layout: ""
+    },
 ]
 
 export default routes;
