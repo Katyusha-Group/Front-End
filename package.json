@@ -12,11 +12,11 @@
     "@fortawesome/fontawesome-free": "^6.3.0",
     "ag-grid-community": "^29.2.0",
     "ag-grid-react": "^29.2.0",
-    "bootstrap": "^5.2.3",
-
     "axios": "^1.3.5",
+    "bootstrap": "^5.2.3",
     "classnames": "^2.3.2",
     "fortawesome": "^0.0.1-security",
+    "jwt-decode": "^3.1.2",
     "perfect-scrollbar": "^1.5.5",
     "react": "^18.2.0",
     "react-advance-jalaali-datepicker": "^1.4.0",

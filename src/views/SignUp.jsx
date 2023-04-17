@@ -254,7 +254,7 @@ function SignUp() {
   }
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await fetch("http://katyushaiust.ir/accounts/signup/", {
+    const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
