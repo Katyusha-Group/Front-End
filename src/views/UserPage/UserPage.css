@@ -9,9 +9,8 @@
 }
 
 .chart{
-    background: url(../../assets/img/chart.png);
+    background: url(../../assets/img/chart3.png);
     background-size: 100% 100%;
-    width: 55em;
     min-width: 60rem;
     height: 30em;
     position: relative;
