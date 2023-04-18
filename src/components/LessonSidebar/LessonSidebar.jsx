@@ -104,7 +104,7 @@ function Sidebar(props) {
   return (
     <BackgroundColorContext.Consumer>
       {({ color }) => (
-        <div className="sidebar" data={color}>
+        <div className="sidebar" data={"normal"}>
           <div className="sidebar-wrapper" ref={sidebarRef}>
             {logoImg !== null || logoText !== null ? (
               <div className="logo">
@@ -141,6 +141,7 @@ function Sidebar(props) {
               </div>
             </Nav>
           </div>
+          
         </div>
       )}
     </BackgroundColorContext.Consumer>
