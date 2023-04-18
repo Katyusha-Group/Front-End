@@ -62,19 +62,21 @@ function CoursesPanel() {
 
 
   const readUploadFile = (e) => {
-    e.preventDefault();
-    if (e.target.files) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const data = e.target.result;
-            const workbook = xlsx.read(data, { type: "array" });
-            const sheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[sheetName];
-            const json = xlsx.utils.sheet_to_json(worksheet);
-            console.log(json);
-        };
-        reader.readAsArrayBuffer(e.target.files[0]);
-    }
+    // e.preventDefault();
+    // //var e = document.getElementById('upload');
+    // if (e.target.files) {
+    //     const reader = new FileReader();
+    //     reader.onload = (e) => {
+    //         const data = e.target.result;
+    //         const workbook = xlsx.read(data, { type: "array" });
+    //         const sheetName = workbook.SheetNames[0];
+    //         const worksheet = workbook.Sheets[sheetName];
+    //         const json = xlsx.utils.sheet_to_json(worksheet);
+    //         console.log(json);
+    //     };
+    //     reader.readAsArrayBuffer(e.target.files[0]);
+    // }
+    console.log(e);
   }
   return (
     <>
@@ -114,9 +116,9 @@ function CoursesPanel() {
             type="file"
             name="upload"
             id="upload"
-            //onChange={readUploadFile}
+            onChange={readUploadFile}
         />
-        <Button id="upload" name="upload" onClick={readUploadFile}>Upload</Button>
+        {/* <Button id="upload" name="upload" onClick={readUploadFile}>Upload</Button> */}
       </Form>
     </div>
     </>
