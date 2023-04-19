@@ -264,7 +264,7 @@ function SignUp() {
         email: formData.email,
         password1: formData.password,
         password2: formData.passwordConfirm,
-        department: subject,
+        department: 13,
         gender: gender,
       }),
     });
