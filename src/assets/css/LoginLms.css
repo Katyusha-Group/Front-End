@@ -19,3 +19,7 @@
   /* border:1px solid pink; */
   z-index:500;
 }
+
+.modal-content{
+    background-color: #27293d!important;
+}

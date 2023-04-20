@@ -1,4 +1,3 @@
-
 import React from "react";
 import classNames from "classnames";
 // import { Line, Bar } from "react-chartjs-2";
@@ -20,58 +19,82 @@ import {
   Table,
   Row,
   Col,
-  UncontrolledTooltip
+  UncontrolledTooltip,
 } from "reactstrap";
-import "./UserPage.css"
+import "./UserPage.css";
 // import * as chart from "../../assets/img/schedule_table.png"
-import * as chart from "../../assets/img/chart.png"
-import dataJson from "../../assets/data/week.json"
+import * as chart from "../../assets/img/chart.png";
+import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
-
-
+import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 export default function UserPage() {
-  let [data, setData] = React.useState(dataJson)
-  console.log(data)
+  const [data, setData] = React.useState(dataJson);
+  const [lesson, setLesson] = React.useState({
+    name: "",
+    day: 0,
+    time: 0,
+    long: 0,
+  });
+  const [showLesson, setShowLesson] = React.useState(false);
+  console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  const [showX, setShowX] = React.useState("none");
   let defu = 20;
   let length = 9.3;
   let top_right = 10.8;
   let top_defu = 13;
-  function lessons(){
+  function closeLesson(open) {
+    setShowLesson(false);
+  }
+  function lessons() {
     return data.map((lesson) => {
       return (
-        <div key={lesson.id} >
-          <div 
-            id = {lesson.id}
-            className="course text-center"
-            style={{
-              top: `${defu + length * lesson.day}%`,
-              right: `${top_defu + top_right * lesson.time}%`,
-              width: `${lesson.long == 1 ? 5 : 7.5}rem`,
-            }}
-          >
-            {lesson.name}
+        <div key={lesson.id}>
+          <div>
+            <div
+              id={lesson.id}
+              className="course text-center"
+              style={{
+                top: `${defu + length * lesson.day}%`,
+                right: `${top_defu + top_right * lesson.time}%`,
+                width: `${lesson.long == 1 ? 11.5 : 16}%`,
+              }}
+              onMouseOver={() => document.getElementById(lesson.id + "x").style.display = 'block'} 
+              onMouseOut={() => document.getElementById(lesson.id + "x").style.display = 'none'}
+            >
+              <button
+                className="lesson_button"
+                onClick={() => {
+                  setData(data.filter((item) => item.name !== lesson.name));
+                  setShowLesson(false);
+                  console.log("false");
+                }}
+                id={lesson.id + "x"}
+              >
+                x
+              </button>
+              <div style={{height: "100%"}} onClick={() => setShowLesson(true)}>{lesson.name}</div>
+            </div>
           </div>
         </div>
       );
-    })
+    });
   }
   return (
     <>
-
       <Row>
         <Col lg="12" sm="10">
           <Card>
             <CardBody>
-              
-
               <div className="overflow-auto">
-                {/* <Table className="tablesorter" responsive> */}
                 <div className="chart">{lessons()}</div>
-                {/* </Table> */}
+                <ModalLessons
+                  show={showLesson}
+                  close={() => setShowLesson(false)}
+                />
               </div>
             </CardBody>
           </Card>
@@ -79,7 +102,6 @@ export default function UserPage() {
         <Col lg="12" sm="10">
           <Card>
             <CardBody>
-
               <div className="overflow-auto">
                 <div></div>
               </div>
@@ -90,4 +112,3 @@ export default function UserPage() {
     </>
   );
 }
-

@@ -19,7 +19,7 @@
 
 }
 
-.course{
+.course, i .course{
     position: absolute;
     height: 2.3rem;
     width: 5rem;
@@ -44,4 +44,15 @@
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     color: white;
+}
+
+.lesson_button{
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    top:0;
+    z-index: 1;
+    display: none;
 }
