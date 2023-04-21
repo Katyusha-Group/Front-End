@@ -1,0 +1,21 @@
+.table{
+    table-layout: fixed
+    ;
+}
+
+.Table_first_column{
+    border-right: none !important;
+}
+
+.Table_first_row > td{
+border-top: none !important;
+}
+
+.Table_last_row > td{
+border-bottom: none !important;
+}
+
+/* .table td{
+    border-top: none;
+    border-right: 0.0625rem solid #e3e3e3;
+}  */

@@ -27,6 +27,7 @@ import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
+import ExamChart from "../../components/Charts/ExamChart.jsx";
 export default function UserPage() {
   const [data, setData] = React.useState(dataJson);
   const [lesson, setLesson] = React.useState({
@@ -62,8 +63,14 @@ export default function UserPage() {
                 right: `${top_defu + top_right * lesson.time}%`,
                 width: `${lesson.long == 1 ? 11.5 : 16}%`,
               }}
-              onMouseOver={() => document.getElementById(lesson.id + "x").style.display = 'block'} 
-              onMouseOut={() => document.getElementById(lesson.id + "x").style.display = 'none'}
+              onMouseOver={() =>
+                (document.getElementById(lesson.id + "x").style.display =
+                  "block")
+              }
+              onMouseOut={() =>
+                (document.getElementById(lesson.id + "x").style.display =
+                  "none")
+              }
             >
               <button
                 className="lesson_button"
@@ -76,7 +83,12 @@ export default function UserPage() {
               >
                 x
               </button>
-              <div style={{height: "100%"}} onClick={() => setShowLesson(true)}>{lesson.name}</div>
+              <div
+                style={{ height: "100%" }}
+                onClick={() => setShowLesson(true)}
+              >
+                {lesson.name}
+              </div>
             </div>
           </div>
         </div>
@@ -86,6 +98,9 @@ export default function UserPage() {
   return (
     <>
       <Row>
+        <Col lg="12">
+          <ExamChart />
+        </Col>
         <Col lg="12" sm="10">
           <Card>
             <CardBody>
