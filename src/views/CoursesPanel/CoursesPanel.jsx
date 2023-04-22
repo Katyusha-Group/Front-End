@@ -30,36 +30,6 @@ import dataJson from "./Classes"
 
 
 export default function CoursesPanel() {
-  // const timetable = [
-  //   {
-  //   "id" : 7,
-  //   "day" : "2",
-  //   "time" : "6",
-  //   "name" : "آهنگ",
-  //   "teacher" : "ملکی",
-  //   "room" : "A-1",
-  //   "long" : "1"
-  //   },
-  //   {
-  //       "id" : 8,
-  //       "day" : "3",
-  //       "time" : "7",
-  //       "name" : "دینی",
-  //       "teacher" : "رحمانی",
-  //       "room" : "B-2",
-  //       "long" : "1"
-  //   }
-  // ]
-  // console.log(timetable)
-  // let timetable = require('../../assets/data/week.json');
-  // let timetable = require('../../assets/data/week.json');
-  //const timetable = JSON.parse('../../assets/data/week.json');
-  // let [data, setData] = React.useState(dataJson)
-  // console.log(data)
-  //console.log(timetable[0].day);
-  // let [timetable, setTimetable] = React.useState(dataJson)
-  // const timetable = JSON.parse('./Classes.json'); 
-  // console.log(timetable)
   const timetable = dataJson;
   const keyedTimetable = useMemo(() => {
     const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
@@ -86,16 +56,20 @@ export default function CoursesPanel() {
         return (
           <td key={time}>
             {entry !== null && (
+              // <div>
+              //   <div className="Course">
+              //     {entry.name}
+              //   </div>
+              //   <div className="Course">
+              //     {entry.name}
+              //   </div>
+              //   <div className="Course">
+              //     {entry.name}
+              //   </div>
+              // </div>
               <div className="Course">
                 {entry.name}
-                {/* <br />
-                {entry.teacher}
-                <br />
-                {entry.room} */}
               </div>
-              // <Card>
-              //   {entry.name}
-              // </Card>
             )}
           </td>
         )
@@ -105,7 +79,7 @@ export default function CoursesPanel() {
   return (
     <>
       <Row>   
-          <Col lg="12" sm="10">
+          <Col>
             <Card>
               <CardHeader className="text-right">
                 <CardTitle tag="h4">برنامه هفتگی</CardTitle>
