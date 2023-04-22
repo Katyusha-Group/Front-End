@@ -1,6 +1,8 @@
-
 import React from "react";
 import classNames from "classnames";
+import profImage from "./image1.png";
+
+
 // import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
@@ -27,10 +29,16 @@ import "./UserPage.css"
 import * as chart from "../../assets/img/chart.png"
 import dataJson from "../../assets/data/week.json"
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
+import courseState from "../../components/LessonSidebar/LessonSidebar.jsx";
+import { useInfo } from "../../contexts/InfoContext";
+import courseGroups from"./courseGroups.json";
 
 
 export default function UserPage() {
   let [data, setData] = React.useState(dataJson)
+  let { info } = useInfo();
+  // const [info, dispatch] = useReducer(r, useInfo());
+  //const[info,setInfo]=React.useState(useInfo());
   console.log(data)
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -61,127 +69,32 @@ export default function UserPage() {
   }
   return (
     <>
-      <div className="chart">{lessons()}</div>
-      <HomeCardBar/>
-      {/* <Form>
-        <FormGroup>
-          <Label for="exampleSelect"></Label>
-          <Input className="select" type="select" name="select" id="exampleSelect">
-            <option>ریاضی</option>
-            <option>کامپایلر</option>
-            <option>فیزیک</option>
-            <option>ریزپر</option>
-          </Input>
-        </FormGroup>
-      </Form> */}
-      {/* <Row>
-          
-          <Col lg="12" sm="10">
-            <Card>
-              <CardHeader className="text-right">
-                <CardTitle tag="h4">برنامه هفتگی</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th className="text-center "></th>
-                      <th className="text-center ">۷:۳۰ تا ۹</th>
-                      <th className="text-center ">۹ تا ۱۰:۳۰</th>
-                      <th className="text-center ">۱۰:۳۰ تا ۱۲</th>
-                      <th className="text-center ">۱۲ تا ۱:۳۰</th>
-                      <th className="text-center ">۱:۳۰ تا ۳</th>
-                      <th className="text-center ">۳ تا ۴:۳۰  </th>
-                      <th className="text-center ">۴:۳۰ تا ۶  </th>
-                      <th className="text-center ">۶ تا ۷:۳۰  </th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="UserPage_first_column text-center  ">شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">یکشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">دوشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">سه‌شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">چهارشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">پنج‌شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">جمعه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row> */}
+
+      <Row>
+        <Col lg="12" sm="10">
+          <Card>
+            <CardBody>
+              
+
+              <div className="overflow-auto">
+                {/* <Table className="tablesorter" responsive> */}
+                <div className="chart">{lessons()}</div>
+                {/* </Table> */}
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="12" sm="10">
+          <Card>
+            <CardBody>
+
+              <div className="overflow-auto">
+                <div></div>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }

@@ -12,7 +12,13 @@ export default function ContextInfo(props) {
         age: 30,
         email: 'JohnDeo@gmail.com',
         phone: '1234567890',
-        address: '1234 Main St, Anytown, USA'
+
+        // address: '1234 Main St, Anytown, USA'
+        departments:[],
+        choosenDepartment:'',
+        courseGroups:[],
+        courseGroupID:'1',
+        coures:[]
     })
     function changeInfo(name, value) {
         setInfo(info => ({...info, [name]: value}))
