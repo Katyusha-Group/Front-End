@@ -56,3 +56,39 @@
     z-index: 1;
     display: none;
 }
+
+
+.courseCard{
+    background-color: transparent !important;
+    border: solid !important;
+    border-color: rgba(227, 49, 243, 0.527) !important;
+    color: rgb(199, 193, 193) !important;
+    width: 25% !important;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.courseGroupCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-content: space-between; */
+    flex-wrap: wrap;
+
+}
+div{
+    text-align: center;
+}
+
+.professorImage{
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    border-radius: 75px;
+    overflow: "hidden";
+    border-width: 3px;
+    border-color: "red";
+}

@@ -27,6 +27,8 @@ import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
+import courseGroups from "./courseGroups.json";
+import sampleProfile from "./image1.png";
 export default function UserPage() {
   const [data, setData] = React.useState(dataJson);
   const [lesson, setLesson] = React.useState({
@@ -101,10 +103,26 @@ export default function UserPage() {
         </Col>
         <Col lg="12" sm="10">
           <Card>
-            <CardBody>
-              <div className="overflow-auto">
-                <div></div>
-              </div>
+            <CardBody className="courseGroupCard">
+              {
+                courseGroups.map(x=>
+                <Card >
+                  <CardBody className="courseCard">
+                    <img className="professorImage" src={sampleProfile} alt="professorImage"/>
+                    <div>
+                    <p>{x.name}</p>  
+                    <p>{x.professor}</p>  
+                    <p>{x.days}</p>  
+                    <p>{x.endTime} - {x.startTime}</p>  
+                    </div>
+                  </CardBody>
+                </Card>
+                  )
+              }
+              {/* <div className="overflow-auto"> */}
+                
+                {/* <div></div> */}
+              {/* </div> */}
             </CardBody>
           </Card>
         </Col>
