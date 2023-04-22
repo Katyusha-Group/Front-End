@@ -135,7 +135,7 @@ function Sidebar(props) {
                     activeClassName="active"
                   >
                     <i />
-                    <p>{prop.course_name}</p>
+                    <p onClick={console.log(prop.course_ID)}>{prop.course_name}</p>
                   </NavLink>
                 ))}
               </div>
