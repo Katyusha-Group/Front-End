@@ -26,34 +26,47 @@ import {
 import "./CoursesPanel.css"
 // import * as chart from "../../assets/img/schedule_table.png"
 import * as chart from "../../assets/img/chart.png"
-import dataJson from "../../assets/data/week.json"
+import dataJson from "./Classes"
 
 
 export default function CoursesPanel() {
-  const timetable = [ // You did not show where you define this as you did not post your whole component, but you can leave it wherever it is currently.
-    {
-        "id" : 1,
-        "day" : "0",
-        "time" : "3",
-        "name" : "Math",
-        "teacher" : "X",
-        "room" : "A-1",
-    },
-    {
-        "id" : 1,
-        "day" : "0",
-        "time" : "1",
-        "name" : "Art",
-        "teacher" : "Y",
-        "room" : "B-3"
-    }
-  ]
-
+  // const timetable = [
+  //   {
+  //   "id" : 7,
+  //   "day" : "2",
+  //   "time" : "6",
+  //   "name" : "آهنگ",
+  //   "teacher" : "ملکی",
+  //   "room" : "A-1",
+  //   "long" : "1"
+  //   },
+  //   {
+  //       "id" : 8,
+  //       "day" : "3",
+  //       "time" : "7",
+  //       "name" : "دینی",
+  //       "teacher" : "رحمانی",
+  //       "room" : "B-2",
+  //       "long" : "1"
+  //   }
+  // ]
+  // console.log(timetable)
+  // let timetable = require('../../assets/data/week.json');
+  // let timetable = require('../../assets/data/week.json');
+  //const timetable = JSON.parse('../../assets/data/week.json');
+  // let [data, setData] = React.useState(dataJson)
+  // console.log(data)
+  //console.log(timetable[0].day);
+  // let [timetable, setTimetable] = React.useState(dataJson)
+  // const timetable = JSON.parse('./Classes.json'); 
+  // console.log(timetable)
+  const timetable = dataJson;
   const keyedTimetable = useMemo(() => {
     const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time] = currentPeriod
+        console.log(lessonsKeyedByDayAndPeriod)
         return lessonsKeyedByDayAndPeriod
       },
       {
@@ -73,13 +86,16 @@ export default function CoursesPanel() {
         return (
           <td key={time}>
             {entry !== null && (
-              <div>
+              <div className="Course">
                 {entry.name}
-                <br />
+                {/* <br />
                 {entry.teacher}
                 <br />
-                {entry.room}
+                {entry.room} */}
               </div>
+              // <Card>
+              //   {entry.name}
+              // </Card>
             )}
           </td>
         )
@@ -109,7 +125,14 @@ export default function CoursesPanel() {
                       <th className="text-center ">۶ تا ۷:۳۰  </th>
                     </tr>
                   </thead>
-                  
+                  <tbody>
+                    <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
+                    <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
+                    <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
+                    <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
+                    <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
+                    <DayRow dayName="پنجشنبه" periods={keyedTimetable[5]} />
+                  </tbody>
                 </Table>
               </CardBody>
             </Card>
