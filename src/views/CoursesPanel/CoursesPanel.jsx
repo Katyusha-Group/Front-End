@@ -1,8 +1,6 @@
 
 import React from "react";
-//import classNames from "classnames";
 import { useMemo } from 'react';
-// import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
   ButtonGroup,
@@ -24,19 +22,38 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 import "./CoursesPanel.css"
-// import * as chart from "../../assets/img/schedule_table.png"
-import * as chart from "../../assets/img/chart.png"
 import dataJson from "./Classes"
 
 
 export default function CoursesPanel() {
   const timetable = dataJson;
+  // const keyedTimetable = useMemo(() => {
+  //   const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
+  //   const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
+  //   return timetable.reduce(
+  //     (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+  //       lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time] = currentPeriod
+  //       console.log(lessonsKeyedByDayAndPeriod)
+  //       return lessonsKeyedByDayAndPeriod
+  //     },
+  //     {
+  //       0: emptyDay(),
+  //       1: emptyDay(),
+  //       2: emptyDay(),
+  //       3: emptyDay(),
+  //       4: emptyDay(),
+  //       5: emptyDay(),
+  //     }
+  //   )
+  // }, [timetable])
   const keyedTimetable = useMemo(() => {
-    const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
+    const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
+    //const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
+    const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() })
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time] = currentPeriod
-        console.log(lessonsKeyedByDayAndPeriod)
+        lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time][currentPeriod.count] = currentPeriod
+        //console.log(lessonsKeyedByDayAndPeriod)
         return lessonsKeyedByDayAndPeriod
       },
       {
@@ -49,13 +66,36 @@ export default function CoursesPanel() {
       }
     )
   }, [timetable])
+  const DayPeriod = (Section) => (
+    <div>
+      {/* {console.log("+++++++++++++++++++++++++++++++")} */}
+      {Object.entries(Section).map(([count, entry]) => {
+          return (
+            <div>
+              {entry !== null && (
+                // {console.log(entry.name)}
+                <div className="Course" color="primary">
+                  {entry.name}
+                </div>     
+              )}     
+            </div>
+          )
+      })}
+    </div>
+  )
   const DayRow = ({ periods, dayName }) => (
+    //console.log("===================")
+    //console.log(typeof periods)
+    //console.log(periods)
+    //console.log(periods[5])
+    //console.log(periods[0])
+    //console.log(periods[0][0] === null)
     <tr>
-      <td className="CoursesPanel_first_column text-center ">{dayName}</td>
+      <td className="CoursesPanel_first_column text-center">{dayName}</td>
       {Object.entries(periods).map(([time, entry]) => {
         return (
           <td key={time}>
-            {entry !== null && (
+            {/* {entry !== null && (
               // <div>
               //   <div className="Course">
               //     {entry.name}
@@ -70,12 +110,18 @@ export default function CoursesPanel() {
               <div className="Course">
                 {entry.name}
               </div>
-            )}
+            )} */}
+            {/* {console.log("+++++++++++++++++++")}
+            {console.log(entry === null)} */}
+            {/* {console.log("222222222222222222222222222222222222")}
+            {console.log(entry)} */}
+            {DayPeriod(entry)}
           </td>
         )
       })}
     </tr>
   )
+
   return (
     <>
       <Row>   
