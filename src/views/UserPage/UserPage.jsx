@@ -31,7 +31,7 @@ import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
-
+import colorpaletHey from "./colors.json"
 
 export default function UserPage() {
   const [data, setData] = React.useState(dataJson);
@@ -127,11 +127,19 @@ export default function UserPage() {
               } */}
               
               {/* <div className="overflow-auto"> */}
-              <div className="color" >
+              {
+                colorpaletHey.map(c=>
+                  <div className="color" style={{backgroundColor: `${c.value}`}}>
+                <p></p>
+                <p>{c.id}</p>
+              </div>
+                )
+              }
+              {/* <div className="color" >
                 <p>گروه ۲</p>
                 <p>درس الگوریتم</p>
               
-              </div>
+              </div> */}
                 {/* <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(10)}%)`}}> 10 </div>
                 <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(20)}%)`}}> 20 </div>
                 <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(30)}%)`}}> 30 </div>

@@ -99,7 +99,8 @@ div{
     justify-content: center;
     align-items: center;
     color :inherit;
-    background-color:hsl(266, 55%, 54%)
+    margin-top: 5px;
+    /* background-color:hsl(266, 55%, 54%) */
     
 }
 p{
