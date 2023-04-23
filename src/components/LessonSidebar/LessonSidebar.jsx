@@ -22,12 +22,15 @@ import "./LessonSidebar.css"
 
 import classData from "../../assets/data/data.json"
 
+import { useInfo } from "../../contexts/InfoContext";
+
 var ps;
 
 function Sidebar(props) {
   const location = useLocation();
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState()
+  const {info,changeInfo}=useInfo()
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
@@ -135,7 +138,7 @@ function Sidebar(props) {
                     activeClassName="active"
                   >
                     <i />
-                    <p onClick={console.log(prop.course_ID)}>{prop.course_name}</p>
+                    <p onClick={()=>{changeInfo("courseGroupID",prop.course_ID);}}>{prop.course_name}</p>
                   </NavLink>
                 ))}
               </div>

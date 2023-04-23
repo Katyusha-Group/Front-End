@@ -29,6 +29,8 @@ import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
+import { useInfo } from "../../contexts/InfoContext";
+
 export default function UserPage() {
   const [data, setData] = React.useState(dataJson);
   const [lesson, setLesson] = React.useState({
@@ -48,6 +50,7 @@ export default function UserPage() {
   let length = 9.3;
   let top_right = 10.8;
   let top_defu = 13;
+  const {info,changeInfo}=useInfo()
   function closeLesson(open) {
     setShowLesson(false);
   }
@@ -104,7 +107,7 @@ export default function UserPage() {
         <Col lg="12" sm="10">
           <Card>
             <CardBody className="courseGroupCard">
-              {
+              {/* {
                 courseGroups.map(x=>
                 <Card >
                   <CardBody className="courseCard">
@@ -118,10 +121,10 @@ export default function UserPage() {
                   </CardBody>
                 </Card>
                   )
-              }
+              } */}
               {/* <div className="overflow-auto"> */}
                 
-                {/* <div></div> */}
+                <div>{info.courseGroupID}</div>
               {/* </div> */}
             </CardBody>
           </Card>
