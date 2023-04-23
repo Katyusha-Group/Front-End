@@ -30,9 +30,12 @@ import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
 import { useInfo } from "../../contexts/InfoContext";
+import { convertPercentagetoLigtness } from "../../global/functions";
+
 
 export default function UserPage() {
   const [data, setData] = React.useState(dataJson);
+  //let ligtness=
   const [lesson, setLesson] = React.useState({
     name: "",
     day: 0,
@@ -122,9 +125,22 @@ export default function UserPage() {
                 </Card>
                   )
               } */}
+              
               {/* <div className="overflow-auto"> */}
-                
-                <div>{info.courseGroupID}</div>
+              <div className="color" >
+                <p>گروه ۲</p>
+                <p>درس الگوریتم</p>
+              
+              </div>
+                {/* <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(10)}%)`}}> 10 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(20)}%)`}}> 20 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(30)}%)`}}> 30 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(40)}%)`}}> 40 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(50)}%)`}}> 50 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(60)}%)`}}> 60 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(70)}%)`}}> 70 </div>
+                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(80)}%)`}}> 80 </div>
+                <div>{info.courseGroupID}</div> */}
               {/* </div> */}
             </CardBody>
           </Card>

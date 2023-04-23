@@ -92,3 +92,16 @@ div{
     border-width: 3px;
     border-color: "red";
 }
+.color{
+    width: 23%;
+    height: 80px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color :inherit;
+    background-color:hsl(266, 55%, 54%)
+    
+}
+p{
+    color: inherit;
+}
