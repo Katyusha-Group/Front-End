@@ -35,6 +35,12 @@ export default function UserPage() {
     time: 0,
     long: 0,
   });
+  //getting token
+  
+  const token = localStorage.getItem("authTokens");
+
+  console.log(token);
+
   const [showLesson, setShowLesson] = React.useState(false);
   console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");

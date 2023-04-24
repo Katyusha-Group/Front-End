@@ -77,7 +77,7 @@ function Login() {
   // localStorage.clear();
   async function handleSubmit(event) {
     event.preventDefault();
-    const { info } = useInfo();
+    // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
@@ -99,8 +99,8 @@ function Login() {
       //   setUser(jwt_decode(authTokens));
       //   console.log(user);
       // }
-      info.token = authTokens;
-      console.log(info);
+      // info.token = authTokens;
+      // console.log(info);
       localStorage.setItem("authTokens", JSON.stringify(data));
       Navigate("/");
     } else {
