@@ -1,24 +1,142 @@
 [
     {
-        "name":"گروه ۱",
-        "professor":"استاد:صالح اعتمادی",
-        "days":"شنبه - دوشنبه",
-        "startTime":"20:59",
-        "endTime":"22:00"
+        "complete_course_number" : "1211029_05",
+        "name": "كارگاه برق",
+        "base_course_id": 1211029,
+        "group_number": "05",
+        "capacity": 20,
+        "registered_count": 2,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-17",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "4",
+                "course_start_time": "13:00:00",
+                "course_end_time": "16:00:00",
+                "place": "دانشكده برق (كارگاه برق) كارگاه برق" 
+            }
+        ],
+        "teacher": {
+            "id": 7,
+            "name": "چوپانكاره سيدمحمدعلي" 
+        }
     },
     {
-        "name":"گروه 2",
-        "professor":"استاد: مرضیه ملکی",
-        "days":"شنبه - دوشنبه",
-        "startTime":"20:59",
-        "endTime":"22:00"
+        "complete_course_number" : "1211029_04",
+        "name": "كارگاه برق",
+        "base_course_id": 1211029,
+        "group_number": "04",
+        "capacity": 20,
+        "registered_count": 20,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-17",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "4",
+                "course_start_time": "09:00:00",
+                "course_end_time": "12:00:00",
+                "place": "دانشكده برق (كارگاه برق) كارگاه برق"
+            }
+        ],
+        "teacher": {
+            "id": 7,
+            "name": "سید محمد موسوی نژاد" 
+        }
     },
     {
-        "name":"گروه 2",
-        "professor":"استاد: مرضیه ملکی",
-        "days":"شنبه - دوشنبه",
-        "startTime":"20:59",
-        "endTime":"22:00"
+        "complete_course_number" : "1211029_03",
+        "name": "كارگاه برق",
+        "base_course_id": 1211029,
+        "group_number": "03",
+        "capacity": 20,
+        "registered_count": 20,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-17",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "09:00:00",
+                "course_end_time": "12:00:00",
+                "place": "دانشكده برق (كارگاه برق) كارگاه برق"
+            }
+        ],
+        "teacher": {
+            "id": 7,
+            "name": "چوپانكاره سيدمحمدعلي" 
+        }
+    },
+    {
+        "complete_course_number" : "1211029_02",
+        "name": "كارگاه برق",
+        "base_course_id": 1211029,
+        "group_number": "02",
+        "capacity": 20,
+        "registered_count": 16,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-17",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "13:00:00",
+                "course_end_time": "16:00:00",
+                "place": "دانشكده برق (كارگاه برق) كارگاه برق"
+            }
+        ],
+        "teacher": {
+            "id": 7,
+            "name": "چوپانكاره سيدمحمدعلي" 
+        }
+    },
+    {
+        "complete_course_number" : "1211029_01",
+        "name": "كارگاه برق",
+        "base_course_id": 1211029,
+        "group_number": "01",
+        "capacity": 20,
+        "registered_count": 20,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-17",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "0",
+                "course_start_time": "13:00:00",
+                "course_end_time": "16:00:00",
+                "place": "دانشكده برق (كارگاه برق) كارگاه برق"
+            }
+        ],
+        "teacher": {
+            "id": 7,
+            "name": "چوپانكاره سيدمحمدعلي" 
+        }
     }
-    
 ]

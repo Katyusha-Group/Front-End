@@ -59,14 +59,18 @@
 
 
 .courseCard{
-    background-color: transparent !important;
-    border: solid !important;
-    border-color: rgba(227, 49, 243, 0.527) !important;
+    background-color: hsl(256, 45%, 50%)!important;
+    /* border: none !important; */
+    /* border-color: rgba(227, 49, 243, 0.527) !important; */
     color: rgb(199, 193, 193) !important;
-    width: 25% !important;
-    justify-content: center;
+    width: 26% !important;
+    height: 95px;
+    
+}
+.courseCardBody{
+    justify-items: center;
     align-items: center;
-    padding: 10px;
+    padding: 0px ;
     display: flex;
     flex-direction: row;
 }
@@ -84,8 +88,8 @@ div{
 }
 
 .professorImage{
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     margin-left: 10px;
     border-radius: 75px;
     overflow: "hidden";

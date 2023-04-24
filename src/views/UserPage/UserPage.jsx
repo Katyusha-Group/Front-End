@@ -110,46 +110,31 @@ export default function UserPage() {
         <Col lg="12" sm="10">
           <Card>
             <CardBody className="courseGroupCard">
-              {/* {
+              {
                 courseGroups.map(x=>
-                <Card >
-                  <CardBody className="courseCard">
+                <Card className="courseCard">
+                  <CardBody className="courseCardBody">
                     <img className="professorImage" src={sampleProfile} alt="professorImage"/>
                     <div>
-                    <p>{x.name}</p>  
-                    <p>{x.professor}</p>  
-                    <p>{x.days}</p>  
-                    <p>{x.endTime} - {x.startTime}</p>  
+                    <p>{x.name} (گروه {x.group_number})</p>  
+                    <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>  
+                    <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p>  
+                    {/* <p> شنبه - دوشنبه 9.30 تا 11.00 </p>   */}
                     </div>
                   </CardBody>
                 </Card>
                   )
-              } */}
-              
+              }
+               
               {/* <div className="overflow-auto"> */}
-              {
+              {/* {
                 colorpaletHey.map(c=>
                   <div className="color" style={{backgroundColor: `${c.value}`}}>
                 <p></p>
                 <p>{c.id}</p>
               </div>
                 )
-              }
-              {/* <div className="color" >
-                <p>گروه ۲</p>
-                <p>درس الگوریتم</p>
-              
-              </div> */}
-                {/* <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(10)}%)`}}> 10 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(20)}%)`}}> 20 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(30)}%)`}}> 30 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(40)}%)`}}> 40 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(50)}%)`}}> 50 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(60)}%)`}}> 60 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(70)}%)`}}> 70 </div>
-                <div className="color" style={{backgroundColor: `hsl(180, 30%, ${convertPercentagetoLigtness(80)}%)`}}> 80 </div>
-                <div>{info.courseGroupID}</div> */}
-              {/* </div> */}
+              } */}
             </CardBody>
           </Card>
         </Col>
