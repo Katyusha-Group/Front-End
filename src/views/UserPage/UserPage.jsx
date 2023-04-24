@@ -119,7 +119,7 @@ export default function UserPage() {
                     <p>{x.name} (گروه {x.group_number})</p>  
                     <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>  
                     <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p>  
-                    {/* <p> شنبه - دوشنبه 9.30 تا 11.00 </p>   */}
+                    <p style={{ fontSize: 12 }}> شنبه - دوشنبه 9.30 تا 11.00 </p>  
                     </div>
                   </CardBody>
                 </Card>
