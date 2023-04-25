@@ -24,40 +24,59 @@ import {
 } from "reactstrap";
 // import * as chart from "../../assets/img/schedule_table.png"
 //import * as chart from "../../assets/img/ExamChart.png"
-// import dataJson from "../../assets/data/week.json";
+import dataJson from "../../assets/data/exams.json";
 
 import "./ExamChart.css";
 
 function ExamChart() {
-  //   let [data, setData] = React.useState(dataJson);
-  //   console.log(data);
-  //   const [bigChartData, setbigChartData] = React.useState("data1");
-  //   const setBgChartData = (name) => {
-  //     setbigChartData(name);
-  //   };
-  //   let defu = 20;
-  //   let length = 9.3;
-  //   let top_right = 10.8;
-  //   let top_defu = 13;
-  //   function lessons() {
-  //     return data.map((lesson) => {
-  //       return (
-  //         <div key={lesson.id}>
-  //           <div
-  //             id={lesson.id}
-  //             className="course text-center"
-  //             style={{
-  //               top: `${defu + length * lesson.day}%`,
-  //               right: `${top_defu + top_right * lesson.time}%`,
-  //               width: `${lesson.long == 1 ? 5 : 7.5}rem`,
-  //             }}
-  //           >
-  //             {lesson.name}
-  //           </div>
-  //         </div>
-  //       );
-  //     });
-  //   }
+  const [data, setData] = React.useState(dataJson);
+  const [lesson, setLesson] = React.useState({
+    name: "",
+    day: 0,
+    time: 0,
+    long: 0,
+  });
+  const [showLesson, setShowLesson] = React.useState(false);
+  console.log(data);
+  const [bigChartData, setbigChartData] = React.useState("data1");
+  const setBgChartData = (name) => {
+    setbigChartData(name);
+  };
+  const [showX, setShowX] = React.useState("none");
+  let defu = 15;
+  let length = 12.7;
+  let top_right = 4.9;
+  let top_defu = 5.8;
+  function closeLesson(open) {
+    setShowLesson(false);
+  }
+  function lessons() {
+    return data.map((lesson) => {
+      return (
+        <div key={lesson.id}>
+          <div>
+            <div
+              id={lesson.id}
+              className="course text-center"
+              style={{
+                top: `${defu + length * lesson.day}%`,
+                right: `${top_defu + top_right * lesson.time}%`,
+                //width: `${lesson.long == 1 ? 4.8 : 16}%`,
+                height: `${lesson.long == 1 ? 12.3 : 16}%`,
+              }}
+            >
+              <div
+                style={{ height: "100%" }}
+                onClick={() => setShowLesson(true)}
+              >
+                {lesson.name}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
   return (
     <>
       {/* <div className="chart">{lessons()}</div> */}
@@ -79,7 +98,10 @@ function ExamChart() {
               <CardTitle tag="h4">برنامه هفتگی</CardTitle>
             </CardHeader> */}
             <CardBody>
-              <Table>
+              <div className="overflow-auto">
+                <div className="chart1">{lessons()}</div>
+              </div>
+              {/* <Table>
                 <thead className="text-primary">
                   <tr>
                     <th className="text-center "></th>
@@ -238,7 +260,7 @@ function ExamChart() {
                     <td className="text-center"></td>
                   </tr>
                 </tbody>
-              </Table>
+              </Table> */}
             </CardBody>
           </Card>
         </Col>
