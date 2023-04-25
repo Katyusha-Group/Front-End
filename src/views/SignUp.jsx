@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
@@ -23,6 +23,7 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+// import { react } from "@babel/types";
 
 // const costomA = axios.create({
 //   baseURL: "http://127.0.0.1:8000",
@@ -116,21 +117,18 @@ function SignUp() {
     { value: "F", label: "زن" },
     { value: "M", label: "مرد" },
   ];
-  const subjectOptions = [
-    { value: "Computer Engineering", label: "مهندسی کامپیوتر" },
-    { value: "Electrical Engineering", label: "مهندسی برق" },
-    { value: "Mechanical Engineering", label: "مهندسی مکانیک" },
-    { value: "Chemical Engineering", label: "مهندسی شیمی" },
-    { value: "Industrial Engineering", label: "مهندسی صنایع" },
-    { value: "Railway Engineering", label: "مهندسی راه‌آهن" },
-    //{ value: "7", label: "مهندسی معماری" },
-    //{ value: "7", label: "طراحی صنعتی" },
-    { value: "Material Engineering", label: "مهندسی مواد" },
-    { value: "Civil Engineering", label: "مهندسی عمران" },
-    { value: "Computer Science", label: "علوم کامپیوتر" },
-    { value: "Mathematics", label: "ریاضی" },
-    { value: "Physics", label: "فیزیک" },
-  ];
+
+  const [subject, setSubject] = useState();
+  // const subjects = [];
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/departments/names")
+      .then((response) => response.json())
+      .then((subject) => {
+        console.log(subject);
+        setSubject(subject);
+      });
+  }, []);
+  // const subjectOptions = JSON.parse(this.state.subject);
   // const [handleChange1] = useState(() => {
   //   console.log(selectedOption);
   //   return () => {
@@ -243,7 +241,6 @@ function SignUp() {
     }));
   }
 
-  const [subject, setSubject] = useState();
   const [gender, setGender] = useState();
 
   function handleSubject(selectedOption) {
@@ -385,7 +382,7 @@ function SignUp() {
                             <br />
 
                             <Select
-                              options={subjectOptions}
+                              options={subject}
                               styles={customStyles}
                               isRtl
                               placeholder="انتخاب کنید "
