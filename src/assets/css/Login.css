@@ -14,3 +14,7 @@
 .card {
   border-radius: 1.3rem !important;
 }
+.error{
+  color: red;
+  font-size: small;
+}

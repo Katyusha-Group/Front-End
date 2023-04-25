@@ -55,6 +55,7 @@ function Login() {
   }
 
   function handleChange(event) {
+    setErrorMessage("");
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -75,10 +76,40 @@ function Login() {
 
   const Navigate = useNavigate();
   // localStorage.clear();
+  const [errorMessage, setErrorMessage] = useState({
+    emailError: "",
+    passError: "",
+  });
+
   async function handleSubmit(event) {
     event.preventDefault();
-    const { info } = useInfo();
+    // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
+
+    if (formData.email.trim().length === 0) {
+      setErrorMessage({
+        ...errorMessage,
+        emailError: "!وارد کردن ایمیل الزامی است",
+      });
+      // setErrorMessage((prev) => ({...prev, { emailError: "!وارد کردن ایمیل الزامی است" });
+    }
+
+    // if (!isValidEmail(formData.email)) {
+    //   setErrorMessage({ emailError: "!قالب ایمیل قابل قبول نیست" });
+    // }
+    if (formData.password.trim().length === 0) {
+      setErrorMessage({
+        ...errorMessage,
+        passError: "!وارد کردن رمز عبور الزامی است",
+      });
+    }
+    if (errorMessage.emailError !== 0 || errorMessage.passError !== 0) {
+      console.log(errorMessage.emailError);
+      return;
+    }
+    console.log("No error in front");
+    console.log(errorMessage.passError);
+
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
       headers: {
@@ -114,20 +145,6 @@ function Login() {
       //   //show pop up with  check your mailbox for verification
       // }
     }
-    if (formData.email.trim().length === 0) {
-      console.log("وارد کردن ایمیل الزامی می‌باشد");
-      return;
-    }
-
-    if (!isValidEmail(formData.email)) {
-      console.log("قالب ایمیل قابل قبول نیست");
-      return;
-    }
-    if (formData.password.trim().length === 0) {
-      console.log("وارد کردن پسوورد الزامی می‌باشد");
-      return;
-    }
-    console.log("No error in front");
   }
   //////////////////////////// End of input errors //////////////////
   return (
@@ -166,6 +183,11 @@ function Login() {
                               onChange={handleChange}
                               value={formData.email}
                             />
+                            {errorMessage.emailError && (
+                              <div className="error">
+                                {errorMessage.emailError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -183,6 +205,12 @@ function Login() {
                               onChange={handleChange}
                               value={formData.password}
                             ></Input>
+
+                            {errorMessage.passError && (
+                              <div className="error">
+                                {errorMessage.passError}
+                              </div>
+                            )}
                             <i
                               className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
                               onClick={PasCloseEyeIcon}
