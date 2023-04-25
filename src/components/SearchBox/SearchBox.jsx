@@ -5,9 +5,9 @@ import { useInfo } from '../../contexts/InfoContext';
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
-  const {info,changeInfo}=useInfo()
-  // console.log("nameList", data)
-  let nameList = data.data?.map((item) => item.name)
+  // const {info,changeInfo}=useInfo()
+  console.log("nameList", data)
+  let nameList = data.data?.map((item) => item)
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
@@ -20,15 +20,18 @@ const SearchBox = ( data ) => {
         value={query}
         onChange={handleQueryChange}
       />
-        {nameList?.filter((item) => item.toLowerCase().includes(query.toLowerCase())).map((item, index) => (
-          <NavLink
+        {nameList?.filter((item, index) => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => (
+          <a
           className="nav-link"
           activeClassName="active"
-          onClick={()=>{changeInfo("courseGroupID",prop.course_ID);}}
+          onClick={()=>{
+            // changeInfo("courseGroupID",prop.course_ID);
+          console.log('prop.course_ID',item.course_number)}}
+          key={index}
         >
             <i />
-            <p >{item}</p>
-        </NavLink>
+            <p >{item.name}</p>
+        </a>
         ))}
     </>
   );

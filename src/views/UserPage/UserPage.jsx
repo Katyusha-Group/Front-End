@@ -51,7 +51,7 @@ export default function UserPage() {
 
   const token = localStorage.getItem("authTokens");
 
-  // console.log(token);
+  console.log("context" , useInfo);
 
   const [showLesson, setShowLesson] = React.useState(false);
   // console.log(data);
@@ -126,7 +126,6 @@ export default function UserPage() {
           //   </div>
           // </div>
           <div key= {lessonBoxId} >
-            <div>
               <div
                 id={lessonBoxId}
                 className="course text-center"
@@ -162,7 +161,7 @@ export default function UserPage() {
                   {lessons.name}
                 </div>
               </div>
-            </div>
+
           </div>
         );
       }));
@@ -188,8 +187,8 @@ export default function UserPage() {
           <Card>
             <CardBody className="courseGroupCard">
               {
-                courseGroups.map(x=>
-                <Card className="courseCard">
+                courseGroups.map((x, index)=>
+                <Card className="courseCard" key={index}>
                   <CardBody className="courseCardBody">
                     <img className="professorImage" src={sampleProfile} alt="professorImage"/>
                     <div>

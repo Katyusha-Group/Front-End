@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
@@ -17,23 +17,18 @@ import {
   backgroundColors,
 } from "../../contexts/BackgroundColorContext";
 
-import "./LessonSidebar.css"
+import "./LessonSidebar.css";
 
-import classData from "../../assets/data/data.json"
+import classData from "../../assets/data/data.json";
 
-import { useInfo } from "../../contexts/InfoContext";
-
-import SearchBox from "../SearchBox/SearchBox.jsx"
-
+import SearchBox from "../SearchBox/SearchBox.jsx";
 
 var ps;
 
 function Sidebar(props) {
-  const location = useLocation();
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
-  const {info,changeInfo}=useInfo()
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
 
@@ -142,12 +137,13 @@ function Sidebar(props) {
             ) : null}
             <Nav>
               <div className="lessonSidebar_component">
-                {departeman.map((prop) => (
+                {departeman.map((prop,index) => (
                   <NavLink
                     className="nav-link"
                     activeClassName="active"
                     onClick={() => setLessonState(prop
                       )}
+                      key={index}
                   >
                     <i />
                     <p>{prop.name}</p>
@@ -168,7 +164,7 @@ function Sidebar(props) {
                     activeClassName="active"
                   >
                     <i />
-                    <p onClick={()=>{changeInfo("courseGroupID",prop.course_ID);}}>{prop.course_name}</p>
+                    <p>{prop.course_name}</p>
                   </NavLink>
                 ))} */}
               </div>
