@@ -35,20 +35,18 @@ function Sidebar(props) {
 
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-  console.log(tokenClass);
+  // console.log(tokenClass);
 
   const token = tokenClass.token.access;
   // myHeaders.append("Authorization", `Bearer ${token}` );
   // console.log(myHeaders)
-  console.log({ Authorization: `Bearer ${token}` });
-  // console.log(util.inspect( {Authorization: `Bearer ${token}`}))
   React.useEffect(() => {
     fetch("https://www.katyushaiust.ir/departments/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setDeparteman(data);
       })
       .catch((error) => console.error(error));
@@ -158,7 +156,7 @@ function Sidebar(props) {
                     <SearchBox data={lessonState?.base_courses
                     } />
                     ) : null}
-                    {console.log("props", lessonState.base_courses)}
+                    {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
                 {/* {lessonState?.base_course.map((prop) => (
                   <NavLink

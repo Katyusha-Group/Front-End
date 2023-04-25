@@ -4,7 +4,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
-  console.log("nameList", data)
+  // console.log("nameList", data)
   let nameList = data.data?.map((item) => item.name)
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
