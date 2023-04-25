@@ -10,7 +10,6 @@ import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 // import ExamsCard from "../components/HomePageItems/ExamsCard/ExamsCard.jsx";
 // import EventsCard from "../components/HomePageItems/EventsCard/EventsCard.jsx";
 import HomeCardBar from "../components/HomePageItems/HomeCardBar.jsx";
-
 export default function Home() {
   const { info } = useInfo();
   const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -45,7 +44,7 @@ export default function Home() {
         <div className="main-panel">
           <AdminNavbar />
           <div className="content">
-            <HomeCardBar/>
+            <HomeCardBar />
           </div>
         </div>
       </div>

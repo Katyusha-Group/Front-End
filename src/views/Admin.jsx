@@ -7,8 +7,8 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
 import * as Router from 'react-router-dom';
 import ChangePassword from "./ChangePass.jsx";
-// import SimpleBar from 'simplebar-react';
-// import 'simplebar/dist/simplebar.min.css';
+import LessonSidebar from "../components/LessonSidebar/LessonSidebar.jsx"
+
 export default function Admin() {
     const {info} = useInfo()
     const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -55,7 +55,7 @@ export default function Admin() {
   return (
     <>
       <div className="wrapper">
-        <Sidebar
+        <LessonSidebar
           routes={routes}
           rtlActive
           logo={{

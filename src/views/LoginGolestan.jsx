@@ -15,6 +15,8 @@ const LoginModalGolestan = (props) => {
       <Modal 
         show={props.show}cancel={props.close}
         // centered
+        className="loginLmsModal"
+        style={{ background: "#27293d" }}
         >
         <div className="loginLmsModal">
           <Modal.Header className="ModalHeader"> 

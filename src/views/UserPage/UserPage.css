@@ -9,17 +9,17 @@
 }
 
 .chart{
-    background: url(../../assets/img/chart.png);
-    background-size: contain;
-    width: 55em;
+    background: url(../../assets/img/chart3.png);
+    background-size: 100% 100%;
+    min-width: 60rem;
     height: 30em;
     position: relative;
     background-repeat: no-repeat;
-
+    resize: both;
 
 }
 
-.course{
+.course, i .course{
     position: absolute;
     height: 2.3rem;
     width: 5rem;
@@ -32,6 +32,7 @@
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
+    height: 3rem;
 }
 
 .course:hover{
@@ -44,4 +45,15 @@
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     color: white;
+}
+
+.lesson_button{
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    top:0;
+    z-index: 1;
+    display: none;
 }

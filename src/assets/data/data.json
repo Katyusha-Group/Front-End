@@ -1,0 +1,36 @@
+[
+    {
+        "departeman":{
+            "id":1,
+            "name" : "کامپیوتر" ,
+            "base_course" : [
+                {
+                    "course_name" : "شبکه"
+                },
+                {
+                    "course_name" : "تحلیل"
+                },
+                {
+                    "course_name" : "فیزیک"
+                }
+            ]
+        }
+    },
+    {
+        "departeman":{
+            "id":2,
+            "name" : "معماری",
+            "base_course" : [
+                {
+                    "course_name" : "فیزیک"
+                },
+                {
+                    "course_name" : "اندازه گیری"
+                },
+                {
+                    "course_name" : "ربات"
+                }
+            ]
+        }
+    }
+]

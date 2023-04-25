@@ -1,4 +1,3 @@
-
 import React from "react";
 import classNames from "classnames";
 // import { Line, Bar } from "react-chartjs-2";
@@ -20,169 +19,174 @@ import {
   Table,
   Row,
   Col,
-  UncontrolledTooltip
+  UncontrolledTooltip,
 } from "reactstrap";
-import "./UserPage.css"
+import "./UserPage.css";
 // import * as chart from "../../assets/img/schedule_table.png"
-import * as chart from "../../assets/img/chart.png"
-import dataJson from "../../assets/data/week.json"
+import * as chart from "../../assets/img/chart.png";
+import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
-
-
+import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
+function timeStringToFloat(time) {
+  var hoursMinutes = time.split(/[.:]/);
+  var hours = parseInt(hoursMinutes[0], 10);
+  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+  return hours + minutes / 60;
+}
 export default function UserPage() {
-  let [data, setData] = React.useState(dataJson)
-  console.log(data)
+  const [data, setData] = React.useState([]);
+  const [lesson, setLesson] = React.useState({
+    name: "",
+    day: 0,
+    time: 0,
+    long: 0,
+  });
+  //getting token
+
+  const token = localStorage.getItem("authTokens");
+
+  // console.log(token);
+
+  const [showLesson, setShowLesson] = React.useState(false);
+  // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  let defu = 20;
-  let length = 9.3;
-  let top_right = 10.8;
+  const [showX, setShowX] = React.useState("none");
+  let defu = 16;
+  let length = 8.9;
+  let top_right = 11;
   let top_defu = 13;
-  function lessons(){
-    return data.map((lesson) => {
-      return (
-        <div key={lesson.id} >
-          <div 
-            id = {lesson.id}
-            className="course text-center"
-            style={{
-              top: `${defu + length * lesson.day}%`,
-              right: `${top_defu + top_right * lesson.time}%`,
-              width: `${lesson.long == 1 ? 5 : 7.5}rem`,
-            }}
-          >
-            {lesson.name}
+  function closeLesson(open) {
+    setShowLesson(false);
+  }
+  function lessons() {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    // console.log(tokenClass);
+    const token = tokenClass.token.access;
+
+    React.useEffect(() => {
+      fetch("https://www.katyushaiust.ir/courses/my_courses", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("get data1", data);
+          setData(data);
+        })
+        .catch((error) => console.error(error));
+      console.log(data);
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    }, []);
+
+    return data.map((lessons) => {
+      return(
+      lessons.course_times.map((lesson, index) => {
+        let lessonBoxId = `${lesson.complete_course_number}, ${index}`
+        let time = timeStringToFloat(lesson.course_start_time)-7.5
+        console.log("time",time)
+        return (
+          // <div key={lesson.id}>
+          //   <div>
+          //     <div
+          //       id={lesson.id}
+          //       className="course text-center"
+          //       style={{
+          //         top: `${defu + length * lesson.day}%`,
+          //         right: `${top_defu + top_right * lesson.time}%`,
+          //         width: `${lesson.long == 1 ? 11.5 : 16}%`,
+          //       }}
+          //       onMouseOver={() => document.getElementById(lesson.id + "x").style.display = 'block'}
+          //       onMouseOut={() => document.getElementById(lesson.id + "x").style.display = 'none'}
+          //     >
+          //       <button
+          //         className="lesson_button"
+          //         onClick={() => {
+          //           setData(data.filter((item) => item.name !== lesson.name));
+          //           setShowLesson(false);
+          //           console.log("false");
+          //         }}
+          //         id={lesson.id + "x"}
+          //       >
+          //         x
+          //       </button>
+          //       <div style={{height: "100%"}} onClick={() => setShowLesson(true)}>{lesson.name}</div>
+          //     </div>
+          //   </div>
+          // </div>
+          <div key= {lessonBoxId} >
+            <div>
+              <div
+                id={lessonBoxId}
+                className="course text-center"
+                style={{
+                  top: `${defu + length * lesson.course_day}%`,//TODO
+                  right: `${top_defu + top_right * time}%`,
+                  width: `${lesson.long == 1 ? 11.5 : 16}%`,
+                }}
+                onMouseOver={() =>
+                  (document.getElementById(lessonBoxId + "x").style.display =
+                    "block")
+                }
+                onMouseOut={() =>
+                  (document.getElementById(lessonBoxId + "x").style.display =
+                    "none")
+                }
+              >
+                <button
+                  className="lesson_button"
+                  onClick={() => {
+                    setData(data.filter((item) => item.name !== lesson.name));
+                    setShowLesson(false);
+                    // console.log("false");
+                  }}
+                  id={lessonBoxId + "x"}
+                >
+                  x
+                </button>
+                <div
+                  style={{ height: "100%" }}
+                  onClick={() => setShowLesson(true)}
+                >
+                  {lessons.name}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      );
-    })
+        );
+      }));
+    });
   }
   return (
     <>
-      <div className="chart">{lessons()}</div>
-      <HomeCardBar/>
-      {/* <Form>
-        <FormGroup>
-          <Label for="exampleSelect"></Label>
-          <Input className="select" type="select" name="select" id="exampleSelect">
-            <option>ریاضی</option>
-            <option>کامپایلر</option>
-            <option>فیزیک</option>
-            <option>ریزپر</option>
-          </Input>
-        </FormGroup>
-      </Form> */}
-      {/* <Row>
-          
-          <Col lg="12" sm="10">
-            <Card>
-              <CardHeader className="text-right">
-                <CardTitle tag="h4">برنامه هفتگی</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th className="text-center "></th>
-                      <th className="text-center ">۷:۳۰ تا ۹</th>
-                      <th className="text-center ">۹ تا ۱۰:۳۰</th>
-                      <th className="text-center ">۱۰:۳۰ تا ۱۲</th>
-                      <th className="text-center ">۱۲ تا ۱:۳۰</th>
-                      <th className="text-center ">۱:۳۰ تا ۳</th>
-                      <th className="text-center ">۳ تا ۴:۳۰  </th>
-                      <th className="text-center ">۴:۳۰ تا ۶  </th>
-                      <th className="text-center ">۶ تا ۷:۳۰  </th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="UserPage_first_column text-center  ">شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">یکشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">دوشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">سه‌شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">چهارشنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">پنج‌شنبه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td className="UserPage_first_column text-center ">جمعه</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row> */}
+      <Row>
+        <Col lg="12" sm="10">
+          <Card>
+            <CardBody>
+              <div className="overflow-auto">
+                <div className="chart">{lessons()}</div>
+                <ModalLessons
+                  show={showLesson}
+                  close={() => setShowLesson(false)}
+                />
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="12" sm="10">
+          <Card>
+            <CardBody>
+              <div className="overflow-auto">
+                <div></div>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }
-
