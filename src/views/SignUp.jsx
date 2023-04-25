@@ -160,12 +160,12 @@ function SignUp() {
     option: (defaultStyles, state) => ({
       ...defaultStyles,
       color: "#9A9A9A",
-      backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
+      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
       "&:hover": {
         backgroundColor: "rgba(222, 222, 222, 0.3)",
       },
       transition: "all 150ms linear",
-      marginTop: "5px",
+      margin: "-4px 0px",
       padding: "0.6rem 24px",
       fontSize: "0.75rem",
       fontWeight: "400",
