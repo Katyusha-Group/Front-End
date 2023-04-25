@@ -23,6 +23,9 @@ import classData from "../../assets/data/data.json"
 
 import { useInfo } from "../../contexts/InfoContext";
 
+import SearchBox from "../SearchBox/SearchBox.jsx"
+
+
 var ps;
 
 function Sidebar(props) {
