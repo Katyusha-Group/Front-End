@@ -27,6 +27,7 @@ import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
+import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
@@ -181,7 +182,7 @@ export default function UserPage() {
           <Card>
             <CardBody>
               <div className="overflow-auto">
-                <div></div>
+                <SummaryChart></SummaryChart>
               </div>
             </CardBody>
           </Card>
