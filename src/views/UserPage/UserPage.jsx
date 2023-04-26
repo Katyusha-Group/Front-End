@@ -85,11 +85,11 @@ export default function UserPage() {
     }, []);
 
     return data.map((lessons) => {
+      console.log("time",lessons)
       return(
       lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lesson.complete_course_number}, ${index}`
         let time = timeStringToFloat(lesson.course_start_time)-7.5
-        console.log("time",time)
         return (
           // <div key={lesson.id}>
           //   <div>
@@ -182,7 +182,7 @@ export default function UserPage() {
           <Card>
             <CardBody>
               <div className="overflow-auto">
-                <SummaryChart></SummaryChart>
+                <SummaryChart props={data}/>
               </div>
             </CardBody>
           </Card>
