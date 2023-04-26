@@ -1,5 +1,6 @@
 .Course{
     text-align: center;
-    /* background-color: rgb(37, 120, 246); */
-    border: 1px solid rgb(255, 255, 255)
+    background-color: hsl(235, 22%, 30%);
+    border: 1px solid rgb(67, 59, 99);
+    margin-top: 3px;
 }
