@@ -35,81 +35,104 @@
     color: white;
     direction: rtl;
 }
-
-/* @media only screen and (max-width: 1000px ){
-    .div-2{
-        font-size:50px;
-    }
-    .div-3{
-        font-size: 31px;
-    }
-    .btn-fill-landingPage{
-        height: 60px;
-        width: 170px;
-        font-size: 17px;
-    }
-}
-
-@media only screen and ((max-width: 890px ) or (max-height: 400px )){
-    .div-2{
-        font-size: 45px;
-    }
-    .div-3{
-        font-size: 27px;
-    }
-    .btn-fill-landingPage{
-        height: 60px;
-        width: 170px;
-        font-size: 17px;
-    }
-}
-
-@media only screen and ((max-width: 800px ) or (max-height: 600px )){
-    .div-2{
-        font-size: 50px;
-    }
-    .div-3{
-        font-size: 31px;
-    }
-    .btn-fill-landingPage{
-        height: 60px;
-        width: 170px;
-        font-size: 17px;
-    }
-}
-
-@media only screen and (max-width: 600px ){
-    .div-2{
-        font-size: 40px;
-    }
-    .div-3{
-        font-size: 25px;
-    }
-    .btn-fill-landingPage{
-        height: 40px;
-        width: 114px;
-        font-size: 11px;
-    }
-}
-@media only screen and (max-width: 450px ) {
-    .div-2{
-        font-size: 30px
-    }
-    .div-3{
-        font-size: 17px;
-    }
-    .btn-fill-landingPage{
-        height: 40px;
-        width: 110px;
-        font-size: 9px;
-    }
-
-} */
 .LandingPageCard
 {
     width: 40%;
     height: auto;
     margin: auto;
-    margin-top: 10%;
-    
+    margin-top: 8%;   
 }
+
+@media only screen and (max-width: 1300px ) {
+    .LandingPageCard
+    {
+        width: 50%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+}
+
+@media only screen and (max-width: 1200px ) {
+    .LandingPageCard
+    {
+        width: 60%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+    }
+}
+
+@media only screen and (max-width: 1000px ) {
+    .LandingPageCard
+    {
+        width: 65%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+    }
+}
+
+@media only screen and (max-width: 800px ) {
+    .LandingPageCard
+    {
+        width: 80%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+    }
+}
+
+@media only screen and (max-width: 700px ) {
+    .LandingPageCard
+    {
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px ) {
+    .LandingPageCard
+    {
+        width: 95%;
+        height: auto;
+        margin: auto;
+        margin-top: 8%;
+    }
+}
+
+@media only screen and (max-width: 500px ) {
+    .LandingPageCard
+    {
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+}
+
+@media only screen and (max-width: 400px ) {
+    .LandingPageCard
+    {
+        width: 90%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+}
+
+/* @media only screen and (max-width: 400px ) {
+    .LandingPageCard
+    {
+        width: 80%;
+        height: auto;
+        margin: auto;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+} */
