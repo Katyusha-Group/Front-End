@@ -49,26 +49,18 @@ export default function CoursesPanel() {
   // }, [timetable])
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-  // console.log(tokenClass);
 
   const token = tokenClass.token.access;
-  // myHeaders.append("Authorization", `Bearer ${token}` );
-  // console.log(myHeaders)
   React.useEffect(() => {
     fetch("http://katyushaiust.ir/allcoursesdepartment/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        //setDeparteman(data);
+        console.log(data);
         timetable = data;
       })
       .catch((error) => console.error(error));
-    // console.log(data);
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
   }, []);
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
