@@ -51,7 +51,7 @@ export default function UserPage() {
 
   const token = localStorage.getItem("authTokens");
 
-  console.log("context" , useInfo);
+  // console.log("context" , useInfo);
 
   const [showLesson, setShowLesson] = React.useState(false);
   // console.log(data);
@@ -65,6 +65,7 @@ export default function UserPage() {
   let top_right = 11;
   let top_defu = 13;
   const {info,changeInfo}=useInfo()
+  console.log("info",info)
   function closeLesson(open) {
     setShowLesson(false);
   }

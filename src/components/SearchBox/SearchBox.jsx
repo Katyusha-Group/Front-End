@@ -5,7 +5,7 @@ import { useInfo } from '../../contexts/InfoContext';
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
-  // const {info,changeInfo}=useInfo()
+  const {info,changeInfo}=useInfo()
   console.log("nameList", data)
   let nameList = data.data?.map((item) => item)
   const handleQueryChange = (event) => {
@@ -25,7 +25,7 @@ const SearchBox = ( data ) => {
           className="nav-link"
           activeClassName="active"
           onClick={()=>{
-            // changeInfo("courseGroupID",prop.course_ID);
+            changeInfo("courseGroupID",item.course_number);
           console.log('prop.course_ID',item.course_number)}}
           key={index}
         >
