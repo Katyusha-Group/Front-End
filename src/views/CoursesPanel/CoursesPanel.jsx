@@ -55,7 +55,7 @@ export default function CoursesPanel() {
   // myHeaders.append("Authorization", `Bearer ${token}` );
   // console.log(myHeaders)
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/departments/", {
+    fetch("http://katyushaiust.ir/allcoursesdepartment/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
