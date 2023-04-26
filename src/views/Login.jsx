@@ -79,37 +79,38 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
     passError: "",
+    backError: "",
   });
-
   async function handleSubmit(event) {
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
 
+    const errors = [
+      {
+        emailError: "",
+        passError: "",
+        backError: "",
+      },
+    ];
     if (formData.email.trim().length === 0) {
-      setErrorMessage({
-        ...errorMessage,
-        emailError: "!وارد کردن ایمیل الزامی است",
-      });
-      // setErrorMessage((prev) => ({...prev, { emailError: "!وارد کردن ایمیل الزامی است" });
+      errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-
-    // if (!isValidEmail(formData.email)) {
-    //   setErrorMessage({ emailError: "!قالب ایمیل قابل قبول نیست" });
-    // }
+    if (!isValidEmail(formData.email) && !errors.emailError) {
+      errors.emailError = "!قالب ایمیل قابل قبول نیست";
+    }
     if (formData.password.trim().length === 0) {
-      setErrorMessage({
-        ...errorMessage,
-        passError: "!وارد کردن رمز عبور الزامی است",
-      });
+      errors.passError = "!وارد کردن رمز عبور الزامی است";
     }
-    if (errorMessage.emailError !== 0 || errorMessage.passError !== 0) {
-      console.log(errorMessage.emailError);
+    setErrorMessage({
+      emailError: errors.emailError,
+      passError: errors.passError,
+    });
+    if (errors.emailError || errors.passError) {
       return;
     }
-    console.log("No error in front");
-    console.log(errorMessage.passError);
-
+    // alert("Erfan Googooli!");
+    // console.log("No error in front");
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
       headers: {
@@ -130,12 +131,17 @@ function Login() {
       //   setUser(jwt_decode(authTokens));
       //   console.log(user);
       // }
-      info.token = authTokens;
-      console.log(info);
+      // info.token = authTokens;
+      // console.log(info);
       localStorage.setItem("authTokens", JSON.stringify(data));
       Navigate("/");
     } else {
       console.log(data.error);
+      errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
       // if (data.error === "Invalid credentials") {
       //   //show pop up
       //   swal("Error!", "Invalid credentials!", "error");
@@ -154,6 +160,9 @@ function Login() {
           <div className="content contentLogin">
             <Row className="just-center">
               <Col className="text-right" md="4">
+                {errorMessage.backError && (
+                  <div className="back-error">{errorMessage.backError}</div>
+                )}
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center">ورود به سایت</h5>
@@ -205,17 +214,16 @@ function Login() {
                               onChange={handleChange}
                               value={formData.password}
                             ></Input>
-
-                            {errorMessage.passError && (
-                              <div className="error">
-                                {errorMessage.passError}
-                              </div>
-                            )}
                             <i
                               className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
                               onClick={PasCloseEyeIcon}
                               id="togglePassword"
                             ></i>
+                            {errorMessage.passError && (
+                              <div className="error">
+                                {errorMessage.passError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
