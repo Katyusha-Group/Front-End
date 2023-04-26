@@ -86,38 +86,10 @@ export default function UserPage() {
     return data.map((lessons) => {
       return(
       lessons.course_times.map((lesson, index) => {
-        let lessonBoxId = `${lesson.complete_course_number}, ${index}`
+        let lessonBoxId = `${lessons.complete_course_number}, ${index}`
         let time = timeStringToFloat(lesson.course_start_time)-7.5
         console.log("time",time)
         return (
-          // <div key={lesson.id}>
-          //   <div>
-          //     <div
-          //       id={lesson.id}
-          //       className="course text-center"
-          //       style={{
-          //         top: `${defu + length * lesson.day}%`,
-          //         right: `${top_defu + top_right * lesson.time}%`,
-          //         width: `${lesson.long == 1 ? 11.5 : 16}%`,
-          //       }}
-          //       onMouseOver={() => document.getElementById(lesson.id + "x").style.display = 'block'}
-          //       onMouseOut={() => document.getElementById(lesson.id + "x").style.display = 'none'}
-          //     >
-          //       <button
-          //         className="lesson_button"
-          //         onClick={() => {
-          //           setData(data.filter((item) => item.name !== lesson.name));
-          //           setShowLesson(false);
-          //           console.log("false");
-          //         }}
-          //         id={lesson.id + "x"}
-          //       >
-          //         x
-          //       </button>
-          //       <div style={{height: "100%"}} onClick={() => setShowLesson(true)}>{lesson.name}</div>
-          //     </div>
-          //   </div>
-          // </div>
           <div key= {lessonBoxId} >
             <div>
               <div
@@ -140,9 +112,9 @@ export default function UserPage() {
                 <button
                   className="lesson_button"
                   onClick={() => {
-                    setData(data.filter((item) => item.name !== lesson.name));
+                    setData(data.filter((item) => item.complete_course_number !== lessons.complete_course_number));
                     setShowLesson(false);
-                    // console.log("false");
+                    console.log(lessons);
                   }}
                   id={lessonBoxId + "x"}
                 >
