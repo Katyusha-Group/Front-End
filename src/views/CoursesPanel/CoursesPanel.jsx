@@ -1,6 +1,7 @@
 
 import React from "react";
 import { useMemo } from 'react';
+
 import {
   Button,
   ButtonGroup,
@@ -46,6 +47,29 @@ export default function CoursesPanel() {
   //     }
   //   )
   // }, [timetable])
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  // console.log(tokenClass);
+
+  const token = tokenClass.token.access;
+  // myHeaders.append("Authorization", `Bearer ${token}` );
+  // console.log(myHeaders)
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/departments/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        //setDeparteman(data);
+        timetable = data;
+      })
+      .catch((error) => console.error(error));
+    // console.log(data);
+    // const activeRoute = (routeName) => {
+    //   return location.pathname === routeName ? "active" : "";
+    // };
+  }, []);
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
     //const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
