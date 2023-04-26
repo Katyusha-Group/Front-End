@@ -32,6 +32,7 @@ import sampleProfile from "./image1.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json"
+import { dayOfWeek } from "../../global/functions";
 
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
@@ -64,6 +65,8 @@ export default function UserPage() {
   let length = 8.9;
   let top_right = 11;
   let top_defu = 13;
+  let initial=useInfo();
+  //const[info,changeInfo]=React.useEffect(initial);
   const {info,changeInfo}=useInfo()
   console.log("info",info)
   function closeLesson(open) {
@@ -168,6 +171,30 @@ export default function UserPage() {
       }));
     });
   }
+
+  // function takeLessonsGroups(){
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = JSON.parse(tokenJson);
+  //   const token = tokenClass.token.access;
+
+  //   React.useEffect(() => {
+  //     fetch(`https://www.katyushaiust.ir/coursegroups/${info.courseGroupID}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("heyy it was done!", data);
+  //         //setData(data);
+  //       })
+  //       .catch((error) => console.error(error));
+  //     console.log(data);
+  //     const activeRoute = (routeName) => {
+  //       return location.pathname === routeName ? "active" : "";
+  //     };
+  //   }, []);
+
+  // }
+
   return (
     <>
       <Row>
@@ -187,16 +214,18 @@ export default function UserPage() {
         <Col lg="12" sm="10">
           <Card>
             <CardBody className="courseGroupCard">
-              {
-                courseGroups.map((x, index)=>
+              {info.courseGroupsListInContext.length &&
+                info.courseGroupsListInContext.map((x, index)=>
                 <Card className="courseCard" key={index}>
                   <CardBody className="courseCardBody">
                     <img className="professorImage" src={sampleProfile} alt="professorImage"/>
                     <div>
                     <p>{x.name} (گروه {x.group_number})</p>  
                     <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>  
-                    <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p>  
-                    <p style={{ fontSize: 12 }}> شنبه - دوشنبه 9.30 تا 11.00 </p>  
+                    <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p> 
+                    <div></div>
+                    
+                    <p style={{ fontSize: 12 }}> {x.course_times.reverse().map(x=><text>{dayOfWeek(x.course_day)} </text>)}<text>{timeStringToFloat(x.course_times[0].course_start_time)}</text> تا <text>{timeStringToFloat(x.course_times[0].course_end_time)}</text></p>  
                     </div>
                   </CardBody>
                 </Card>
