@@ -2,8 +2,8 @@
     text-align: center;
 }
 .btn-fill-landingPage {
-    height: 70px;
-    width: 200px;
+    height: 50px;
+    width: 150px;
     font-size: 20px;
 }
 .div-1 {
@@ -16,11 +16,11 @@
     direction: rtl;
 }
 .div-2 {
-    font-size: 60px;
+    font-size: 40px;
     text-align: center;
 }
 .div-3{
-    font-size: 42px;
+    font-size: 20px;
     text-align: justify;
 }
 .div-4{
@@ -36,7 +36,7 @@
     direction: rtl;
 }
 
-@media only screen and (max-width: 1000px ){
+/* @media only screen and (max-width: 1000px ){
     .div-2{
         font-size:50px;
     }
@@ -104,4 +104,12 @@
         font-size: 9px;
     }
 
+} */
+.LandingPageCard
+{
+    width: 40%;
+    height: auto;
+    margin: auto;
+    margin-top: 10%;
+    
 }
