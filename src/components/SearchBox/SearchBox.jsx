@@ -18,7 +18,7 @@ const SearchBox = ( data ) => {
 
   const token = tokenClass.token.access;
 
-  function takeLessonsGroups(token){
+  function takeLessonsGroups(token,num){
     // const tokenJson = localStorage.getItem("authTokens");
     // const tokenClass = JSON.parse(tokenJson);
     // const token = tokenClass.token.access;
@@ -26,9 +26,9 @@ const SearchBox = ( data ) => {
     // let courseData = [];
 
     console.log(`token is : ${token}`)
-    console.log(`course ID is: ${info.courseGroupID}`);
+    console.log(`course ID is: ${num}`);
    
-      fetch(`https://www.katyushaiust.ir/coursegroups/${info.courseGroupID}`, {
+      fetch(`https://www.katyushaiust.ir/coursegroups/${num}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
@@ -60,10 +60,10 @@ const SearchBox = ( data ) => {
           activeClassName="active"
           onClick={()=>{
             // console.log("I'm called 111");
-            changeInfo("courseGroupID",item.course_number);
+            changeInfo("courseGroupID",item.course_number)
             // console.log("new info")
             // console.log({info})
-            takeLessonsGroups(token);
+            takeLessonsGroups(token,item.course_number);
             
           // console.log('prop.course_ID',item.course_number)
         }}

@@ -225,7 +225,7 @@ export default function UserPage() {
                     <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p> 
                     <div></div>
                     
-                    <p style={{ fontSize: 12 }}> {x.course_times.reverse().map(x=><text>{dayOfWeek(x.course_day)} </text>)}<text>{timeStringToFloat(x.course_times[0].course_start_time)}</text> تا <text>{timeStringToFloat(x.course_times[0].course_end_time)}</text></p>  
+                    <p style={{ fontSize: 12 }}> {x.course_times.map(x=><text>{dayOfWeek(x.course_day)} </text>)}<text>{timeStringToFloat(x.course_times[0].course_start_time)}</text> تا <text>{timeStringToFloat(x.course_times[0].course_end_time)}</text></p>  
                     </div>
                   </CardBody>
                 </Card>
