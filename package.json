@@ -31,7 +31,8 @@
     "reactstrap": "^9.1.6",
     "sass": "^1.60.0",
     "simplebar": "^6.2.4",
-    "simplebar-react": "^3.2.3"
+    "simplebar-react": "^3.2.3",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
