@@ -33,6 +33,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json"
 import { dayOfWeek } from "../../global/functions";
+import { json } from "react-router-dom";
 
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
@@ -73,6 +74,7 @@ export default function UserPage() {
     setShowLesson(false);
   }
   function lessons() {
+
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     // console.log(tokenClass);
@@ -172,6 +174,45 @@ export default function UserPage() {
     });
   }
 
+  function addNewLesson(num) {
+
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    // console.log(tokenClass);
+    const token = tokenClass.token.access;
+    // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     username: formData.email,
+    //     password: formData.password,
+    //   }),
+    // });
+    // const data = await response.json();
+console.log(`num is : ${num}`)
+console.log(`token is ${token}`)
+   
+      fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+        method: 'PUT',
+        headers: { "Authorization": `Bearer ${token}` },
+        body: JSON.stringify({
+          complete_course_number: num,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("gjgjhdsfffffhs post successfully")
+          console.log("get data1", data);
+        })
+        .catch((error) => console.error(error));
+      console.log(data);
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+  }
+
   // function takeLessonsGroups(){
   //   const tokenJson = localStorage.getItem("authTokens");
   //   const tokenClass = JSON.parse(tokenJson);
@@ -212,11 +253,11 @@ export default function UserPage() {
           </Card>
         </Col>
         <Col lg="12" sm="10">
-          <Card>
+          <Card >
             <CardBody className="courseGroupCard">
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index)=>
-                <Card className="courseCard" key={index}>
+                <Card onClick={()=>{addNewLesson(x.complete_course_number)}} className="courseCard" key={index}>
                   <CardBody className="courseCardBody">
                     <img className="professorImage" src={sampleProfile} alt="professorImage"/>
                     <div>

@@ -13,7 +13,7 @@ export function takeLessonsGroups(token){
     console.log(`token is : ${token}`)
     // console.log(`course ID is: ${info.courseGroupID}`);${info.courseGroupID}
    
-      fetch(`https://www.katyushaiust.ir/coursegroups/1311028`, {
+      fetch(`https://www.katyushaiust.ir/coursegroups/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
