@@ -42,7 +42,7 @@ function timeStringToFloat(time) {
   return hours + minutes / 60;
 }
 export default function UserPage() {
-  const [data, setData] = React.useState([]);
+  const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
     name: "",
     day: 0,
@@ -73,111 +73,11 @@ export default function UserPage() {
   function closeLesson(open) {
     setShowLesson(false);
   }
-  function lessons() {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    // console.log(tokenClass);
-    const token = tokenClass.token.access;
-
-    React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/courses/my_courses", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data);
-          changeInfo("courseChoosed",data)
-          console.log("get data1", info);
-          
-        })
-        .catch((error) => console.error(error));
-      // console.log(data);
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    }, []);
-
-    return info.courseChoosed.map((lessons) => {
-      return lessons.course_times.map((lesson, index) => {
-        let lessonBoxId = `${lesson.complete_course_number}, ${index}`;
-        let time = (timeStringToFloat(lesson.course_start_time) - 7.5)/1.5;
-        console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
-        console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
-        return (
-          // <div key={lesson.id}>
-          //   <div>
-          //     <div
-          //       id={lesson.id}
-          //       className="course text-center"
-          //       style={{
-          //         top: `${defu + length * lesson.day}%`,
-          //         right: `${top_defu + top_right * lesson.time}%`,
-          //         width: `${lesson.long == 1 ? 11.5 : 16}%`,
-          //       }}
-          //       onMouseOver={() => document.getElementById(lesson.id + "x").style.display = 'block'}
-          //       onMouseOut={() => document.getElementById(lesson.id + "x").style.display = 'none'}
-          //     >
-          //       <button
-          //         className="lesson_button"
-          //         onClick={() => {
-          //           setData(data.filter((item) => item.name !== lesson.name));
-          //           setShowLesson(false);
-          //           console.log("false");
-          //         }}
-          //         id={lesson.id + "x"}
-          //       >
-          //         x
-          //       </button>
-          //       <div style={{height: "100%"}} onClick={() => setShowLesson(true)}>{lesson.name}</div>
-          //     </div>
-          //   </div>
-          // </div>
-          <div key={lessonBoxId}>
-            <div
-              id={lessonBoxId}
-              className="course text-center"
-              style={{
-                top: `${defu + length * lesson.course_day}%`, //TODO
-                right: `${top_defu + top_right * time}%`,
-                width: `${  timeStringToFloat(lesson.course_end_time ) - timeStringToFloat(lesson.course_start_time )== 1.5 ? 10.8 : 16}%`,
-              }}
-              onMouseOver={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "block")
-              }
-              onMouseOut={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "none")
-              }
-            >
-              <button
-                className="lesson_button"
-                onClick={() => {
-                  setData(data.filter((item) => item.name !== lesson.name));
-                  setShowLesson(false);
-                  // console.log("false");
-                }}
-                id={lessonBoxId + "x"}
-              >
-                x
-              </button>
-              <div
-                style={{ height: "100%" }}
-                onClick={() => setShowLesson(true)}
-              >
-                {lessons.name}
-              </div>
-            </div>
-          </div>
-        );
-      });
-    });
-  }
 
   function addNewLesson(num) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    console.log("tokenClass", tokenClass);
+    // console.log("tokenClass", tokenClass);
     const token = tokenClass.token.access;
     // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
     //   method: "POST",
@@ -216,6 +116,86 @@ export default function UserPage() {
       return location.pathname === routeName ? "active" : "";
     };
   }
+
+  function lessons() {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    // console.log(tokenClass);
+    const token = tokenClass.token.access;
+
+    React.useEffect(() => {
+      fetch("https://www.katyushaiust.ir/courses/my_courses", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setData(data);
+          changeInfo("courseChoosed",data)
+          console.log("get data after reload", data);
+          
+        })
+        .catch((error) => console.error(error));
+      // console.log(data);
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    }, []);
+
+    return info.courseChoosed.map((lessons) => {
+      return lessons.course_times.map((lesson, index) => {
+        let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
+        let time = (timeStringToFloat(lesson.course_start_time) - 7.5)/1.5;
+        // console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
+        // console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
+        return (
+          <div key={lessonBoxId}>
+            <div
+              id={lessonBoxId}
+              className="course text-center"
+              style={{
+                top: `${defu + length * lesson.course_day}%`, //TODO
+                right: `${top_defu + top_right * time}%`,
+                width: `${  timeStringToFloat(lesson.course_end_time ) - timeStringToFloat(lesson.course_start_time )== 1.5 ? 10.8 : 16}%`,
+              }}
+              onMouseOver={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "block")
+              }
+              onMouseOut={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "none")
+              }
+            >
+              {
+                //delete button
+              }
+              <button
+                className="lesson_button"
+                onClick={() => {
+                  addNewLesson(lessons.complete_course_number)
+                  console.log("delete lesson", lessons.complete_course_number);
+                  changeInfo("courseChoosed",info.courseChoosed.filter((item) => item.complete_course_number !== lessons.complete_course_number));
+                  setShowLesson(false);
+                  console.log("delete info" , info);
+                }}
+                id={lessonBoxId + "x"}
+              >
+                x
+              </button>
+              <div
+                style={{ height: "100%" }}
+                onClick={() => setShowLesson(true)}
+              >
+                {lessons.name}
+              </div>
+            </div>
+          </div>
+        );
+      });
+    });
+  }
+
+ 
 
   // function takeLessonsGroups(){
   //   const tokenJson = localStorage.getItem("authTokens");
