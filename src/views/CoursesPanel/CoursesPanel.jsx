@@ -3,27 +3,16 @@ import React from "react";
 import { useMemo } from 'react';
 
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardHeader,
   CardBody,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Form,
-  FormGroup,
-  Input,
   Table,
   Row,
   Col,
-  UncontrolledTooltip
 } from "reactstrap";
 import "./CoursesPanel.css"
-import dataJson from "./Classes"
+// import dataJson from "./Classes"
 
 
 export default function CoursesPanel() {
@@ -49,7 +38,7 @@ export default function CoursesPanel() {
   //   )
   // }, [timetable])
   let [timetable, settimetable] = React.useState([]);
-  timetable = dataJson;
+  //timetable = dataJson;
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   //const timetable;
