@@ -42,6 +42,7 @@ function timeStringToFloat(time) {
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
+import ExamChart from "../../components/Charts/ExamChart.jsx";
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
@@ -93,7 +94,7 @@ export default function UserPage() {
     // const data = await response.json();
     // console.log(`num is : ${num}`);
     // console.log(`type :`, typeof num);
-      
+
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
       headers: {
@@ -131,9 +132,8 @@ export default function UserPage() {
         .then((response) => response.json())
         .then((data) => {
           setData(data);
-          changeInfo("courseChoosed",data)
+          changeInfo("courseChoosed", data);
           console.log("get data after reload", data);
-          
         })
         .catch((error) => console.error(error));
       // console.log(data);
@@ -145,7 +145,7 @@ export default function UserPage() {
     return info.courseChoosed.map((lessons) => {
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
-        let time = (timeStringToFloat(lesson.course_start_time) - 7.5)/1.5;
+        let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
         // console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
         // console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
         return (
@@ -156,7 +156,13 @@ export default function UserPage() {
               style={{
                 top: `${defu + length * lesson.course_day}%`, //TODO
                 right: `${top_defu + top_right * time}%`,
-                width: `${  timeStringToFloat(lesson.course_end_time ) - timeStringToFloat(lesson.course_start_time )== 1.5 ? 10.8 : 16}%`,
+                width: `${
+                  timeStringToFloat(lesson.course_end_time) -
+                    timeStringToFloat(lesson.course_start_time) ==
+                  1.5
+                    ? 10.8
+                    : 16
+                }%`,
               }}
               onMouseOver={() =>
                 (document.getElementById(lessonBoxId + "x").style.display =
@@ -173,11 +179,18 @@ export default function UserPage() {
               <button
                 className="lesson_button"
                 onClick={() => {
-                  addNewLesson(lessons.complete_course_number)
+                  addNewLesson(lessons.complete_course_number);
                   console.log("delete lesson", lessons.complete_course_number);
-                  changeInfo("courseChoosed",info.courseChoosed.filter((item) => item.complete_course_number !== lessons.complete_course_number));
+                  changeInfo(
+                    "courseChoosed",
+                    info.courseChoosed.filter(
+                      (item) =>
+                        item.complete_course_number !==
+                        lessons.complete_course_number
+                    )
+                  );
                   setShowLesson(false);
-                  console.log("delete info" , info);
+                  console.log("delete info", info);
                 }}
                 id={lessonBoxId + "x"}
               >
@@ -195,8 +208,6 @@ export default function UserPage() {
       });
     });
   }
-
- 
 
   // function takeLessonsGroups(){
   //   const tokenJson = localStorage.getItem("authTokens");
@@ -224,6 +235,9 @@ export default function UserPage() {
   return (
     <>
       <Row>
+        <Col lg="12">
+          <ExamChart />
+        </Col>
         <Col lg="12" sm="10">
           <Card>
             <CardBody><CardHeader>
@@ -306,8 +320,8 @@ export default function UserPage() {
                     onClick={() => {
                       console.log("x", x);
                       addNewLesson(x.complete_course_number);
-                      changeInfo("courseChoosed",[...info.courseChoosed, x]);
-                      console.log("info",info)
+                      changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                      console.log("info", info);
                     }}
                     className="courseCard"
                     key={index}

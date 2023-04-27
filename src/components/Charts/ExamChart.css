@@ -1,0 +1,69 @@
+.table{
+    table-layout: fixed
+    ;
+}
+
+.Table_first_column{
+    border-right: none !important;
+}
+
+.Table_first_row > td{
+border-top: none !important;
+}
+
+.Table_last_row > td{
+border-bottom: none !important;
+}
+
+/* .table td{
+    border-top: none;
+    border-right: 0.0625rem solid #e3e3e3;
+}  */
+
+.chart1{
+    background: url(../../assets/img/ExamChartBack.png);
+    background-size: 100% 100%;
+    min-width: 60rem;
+    height: 30em;
+    position: relative;
+    background-repeat: no-repeat;
+    resize: both;
+}
+
+.course, i .course{
+    position: absolute;
+    height: 16%;
+    width: 4.8%;
+    background-color:#1d8cf8 ;
+    top:20%;
+    right:13%;/* 10.7 */
+    border-radius: 5%;
+    color: white;
+    opacity: 0.75;
+    justify-content: center;
+    font-size: 0.66rem;
+    padding-top: 0.4rem;
+}
+
+.course:hover{
+    cursor: pointer;
+}
+
+.select{
+    background-color: #344675;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.2rem 1rem;
+    color: white;
+}
+
+.lesson_button{
+    background: none;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 0;
+    top:0;
+    z-index: 1;
+    display: none;
+}
