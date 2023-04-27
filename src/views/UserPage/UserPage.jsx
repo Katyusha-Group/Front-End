@@ -31,7 +31,7 @@ import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
-import colorpaletHey from "./colors.json"
+import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
 
@@ -62,19 +62,18 @@ export default function UserPage() {
     setbigChartData(name);
   };
   const [showX, setShowX] = React.useState("none");
-  let defu = 16;
-  let length = 8.9;
+  let defu = 14;
+  let length = 16;
   let top_right = 11;
-  let top_defu = 13;
-  let initial=useInfo();
+  let top_defu = 12.5;
+  // let initial = useInfo();
   //const[info,changeInfo]=React.useEffect(initial);
-  const {info,changeInfo}=useInfo()
-  console.log("info",info)
+  const { info, changeInfo } = useInfo();
+  console.log("info", info);
   function closeLesson(open) {
     setShowLesson(false);
   }
   function lessons() {
-
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     // console.log(tokenClass);
@@ -86,22 +85,24 @@ export default function UserPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log("get data1", data);
           setData(data);
+          changeInfo("courseChoosed",data)
+          console.log("get data1", info);
+          
         })
         .catch((error) => console.error(error));
-      console.log(data);
+      // console.log(data);
       const activeRoute = (routeName) => {
         return location.pathname === routeName ? "active" : "";
       };
     }, []);
 
-    return data.map((lessons) => {
-      return(
-      lessons.course_times.map((lesson, index) => {
-        let lessonBoxId = `${lesson.complete_course_number}, ${index}`
-        let time = timeStringToFloat(lesson.course_start_time)-7.5
-        console.log("time",time)
+    return info.courseChoosed.map((lessons) => {
+      return lessons.course_times.map((lesson, index) => {
+        let lessonBoxId = `${lesson.complete_course_number}, ${index}`;
+        let time = (timeStringToFloat(lesson.course_start_time) - 7.5)/1.5;
+        console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
+        console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
         return (
           // <div key={lesson.id}>
           //   <div>
@@ -131,54 +132,52 @@ export default function UserPage() {
           //     </div>
           //   </div>
           // </div>
-          <div key= {lessonBoxId} >
-              <div
-                id={lessonBoxId}
-                className="course text-center"
-                style={{
-                  top: `${defu + length * lesson.course_day}%`,//TODO
-                  right: `${top_defu + top_right * time}%`,
-                  width: `${lesson.long == 1 ? 11.5 : 16}%`,
+          <div key={lessonBoxId}>
+            <div
+              id={lessonBoxId}
+              className="course text-center"
+              style={{
+                top: `${defu + length * lesson.course_day}%`, //TODO
+                right: `${top_defu + top_right * time}%`,
+                width: `${  timeStringToFloat(lesson.course_end_time ) - timeStringToFloat(lesson.course_start_time )== 1.5 ? 10.8 : 16}%`,
+              }}
+              onMouseOver={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "block")
+              }
+              onMouseOut={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "none")
+              }
+            >
+              <button
+                className="lesson_button"
+                onClick={() => {
+                  setData(data.filter((item) => item.name !== lesson.name));
+                  setShowLesson(false);
+                  // console.log("false");
                 }}
-                onMouseOver={() =>
-                  (document.getElementById(lessonBoxId + "x").style.display =
-                    "block")
-                }
-                onMouseOut={() =>
-                  (document.getElementById(lessonBoxId + "x").style.display =
-                    "none")
-                }
+                id={lessonBoxId + "x"}
               >
-                <button
-                  className="lesson_button"
-                  onClick={() => {
-                    setData(data.filter((item) => item.name !== lesson.name));
-                    setShowLesson(false);
-                    // console.log("false");
-                  }}
-                  id={lessonBoxId + "x"}
-                >
-                  x
-                </button>
-                <div
-                  style={{ height: "100%" }}
-                  onClick={() => setShowLesson(true)}
-                >
-                  {lessons.name}
-                </div>
+                x
+              </button>
+              <div
+                style={{ height: "100%" }}
+                onClick={() => setShowLesson(true)}
+              >
+                {lessons.name}
               </div>
-
+            </div>
           </div>
         );
-      }));
+      });
     });
   }
 
   function addNewLesson(num) {
-
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    console.log("tokenClass",tokenClass);
+    console.log("tokenClass", tokenClass);
     const token = tokenClass.token.access;
     // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
     //   method: "POST",
@@ -191,35 +190,31 @@ export default function UserPage() {
     //   }),
     // });
     // const data = await response.json();
-console.log(`num is : ${num}`)
-console.log(`type :`, typeof(num))
-console.log(`json :`, JSON.stringify({
-  complete_course_number: num,
-}))
-console.log(`token is ${token}`)
-   
-      fetch("https://www.katyushaiust.ir/courses/my_courses/", {
-        method: 'PUT',
-        headers: {
-           "Authorization": `Bearer ${token}` ,
-           'Accept': 'application/json',
-           'Content-Type': 'application/json'
-          },
-        body: JSON.stringify({
-          complete_course_number: num,
-          
-        }),
+    // console.log(`num is : ${num}`);
+    // console.log(`type :`, typeof num);
+      
+    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("gjgjhdsfffffhs post successfully");
+        console.log("put data", data);
+        // setData(data);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("gjgjhdsfffffhs post successfully")
-          console.log("get data1", data);
-        })
-        .catch((error) => console.error(error));
-      console.log(data);
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
+      .catch((error) => console.error(error));
+    // console.log(data);
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
   }
 
   // function takeLessonsGroups(){
@@ -262,26 +257,58 @@ console.log(`token is ${token}`)
           </Card>
         </Col>
         <Col lg="12" sm="10">
-          <Card >
+          <Card>
             <CardBody className="courseGroupCard">
               {info.courseGroupsListInContext.length &&
-                info.courseGroupsListInContext.map((x, index)=>
-                <Card onClick={()=>{addNewLesson(x.complete_course_number)}} className="courseCard" key={index}>
-                  <CardBody className="courseCardBody">
-                    <img className="professorImage" src={sampleProfile} alt="professorImage"/>
-                    <div>
-                    <p>{x.name} (گروه {x.group_number})</p>  
-                    <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>  
-                    <p>ثبت نام شده: {x.capacity}/{x.registered_count} </p> 
-                    <div></div>
-                    
-                    <p style={{ fontSize: 12 }}> {x.course_times.map(x=><text>{dayOfWeek(x.course_day)} </text>)}<text>{timeStringToFloat(x.course_times[0].course_start_time)}</text> تا <text>{timeStringToFloat(x.course_times[0].course_end_time)}</text></p>  
-                    </div>
-                  </CardBody>
-                </Card>
-                  )
-              }
-               
+                info.courseGroupsListInContext.map((x, index) => (
+                  <Card
+                    onClick={() => {
+                      console.log("x", x);
+                      addNewLesson(x.complete_course_number);
+                      changeInfo("courseChoosed",[...info.courseChoosed, x]);
+                      console.log("info",info)
+                    }}
+                    className="courseCard"
+                    key={index}
+                  >
+                    <CardBody className="courseCardBody">
+                      <img
+                        className="professorImage"
+                        src={sampleProfile}
+                        alt="professorImage"
+                      />
+                      <div>
+                        <p>
+                          {x.name} (گروه {x.group_number})
+                        </p>
+                        <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
+                        <p>
+                          ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                        </p>
+                        <div></div>
+
+                        <p style={{ fontSize: 12 }}>
+                          {" "}
+                          {x.course_times.map((x) => (
+                            <text>{dayOfWeek(x.course_day)} </text>
+                          ))}
+                          <text>
+                            {timeStringToFloat(
+                              x.course_times[0].course_start_time
+                            )}
+                          </text>{" "}
+                          تا{" "}
+                          <text>
+                            {timeStringToFloat(
+                              x.course_times[0].course_end_time
+                            )}
+                          </text>
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
+                ))}
+
               {/* <div className="overflow-auto"> */}
               {/* {
                 colorpaletHey.map(c=>

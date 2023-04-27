@@ -15,7 +15,8 @@ export default function ContextInfo(props) {
     address: "1234 Main St, Anytown, USA",
     token: "",
     courseGroupID:"0",
-    courseGroupsListInContext:[]
+    courseGroupsListInContext:[],
+    courseChoosed:[]
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
