@@ -36,15 +36,9 @@ export default function SummaryChart(props) {
   }
   return (
     <>
-      <Row>
-        <Col lg="12" sm="10">
-          <Card>
-            <CardHeader className="text-right">
-              <CardTitle tag="h4">برنامه هفتگی</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <Table className="tablesorter" responsive>
-                <thead className="text-primary">
+
+              <Table  className="tablesorter  "    >
+                <thead className="text-primary ">
                   <tr>
                     <th className="text-center ">درس</th>
                     <th className="text-center ">استاد</th>
@@ -57,10 +51,7 @@ export default function SummaryChart(props) {
                   {summar(props.props)}
                 </tbody>
               </Table>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+            
     </>
   );
 }
