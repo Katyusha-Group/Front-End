@@ -250,6 +250,7 @@ export default function UserPage() {
                     }}
                     className="courseCard"
                     key={index}
+                    style={{backgroundColor: `hsl(256, 45%, ${convertPercentagetoLigtness(x.color_intensity_percentage)}%)`}} 
                   >
                     <CardBody className="courseCardBody">
                       <img

@@ -60,7 +60,7 @@
 
 
 .courseCard{
-    background-color: hsl(256, 45%, 50%)!important;
+    /* background-color: hsl(256, 45%, 50%)!important; */
     /* border: none !important; */
     /* border-color: rgba(227, 49, 243, 0.527) !important; */
     color: rgb(199, 193, 193) !important;
