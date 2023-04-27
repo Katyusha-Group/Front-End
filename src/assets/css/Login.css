@@ -14,3 +14,27 @@
 .card {
   border-radius: 1.3rem !important;
 }
+.error{
+  color: red;
+  font-size: small;
+}
+.back-error{
+  background-color: #e14eca;
+  border-radius: 1.3rem;
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.2857rem;
+  text-align: center !important;
+  
+} 
+
+@keyframes signup-response{
+  from {opacity :1;}
+  to {opacity :0;}
+}
+
+@-webkit-keyframes signup-response{
+  from {opacity :1;}
+  to {opacity :0;}
+}

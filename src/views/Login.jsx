@@ -55,6 +55,7 @@ function Login() {
   }
 
   function handleChange(event) {
+    setErrorMessage("");
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -75,10 +76,41 @@ function Login() {
 
   const Navigate = useNavigate();
   // localStorage.clear();
+  const [errorMessage, setErrorMessage] = useState({
+    emailError: "",
+    passError: "",
+    backError: "",
+  });
   async function handleSubmit(event) {
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
+
+    const errors = [
+      {
+        emailError: "",
+        passError: "",
+        backError: "",
+      },
+    ];
+    if (formData.email.trim().length === 0) {
+      errors.emailError = "!وارد کردن ایمیل الزامی است";
+    }
+    if (!isValidEmail(formData.email) && !errors.emailError) {
+      errors.emailError = "!قالب ایمیل قابل قبول نیست";
+    }
+    if (formData.password.trim().length === 0) {
+      errors.passError = "!وارد کردن رمز عبور الزامی است";
+    }
+    setErrorMessage({
+      emailError: errors.emailError,
+      passError: errors.passError,
+    });
+    if (errors.emailError || errors.passError) {
+      return;
+    }
+    // alert("Erfan Googooli!");
+    // console.log("No error in front");
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
       headers: {
@@ -105,6 +137,11 @@ function Login() {
       Navigate("/");
     } else {
       console.log(data.error);
+      errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
       // if (data.error === "Invalid credentials") {
       //   //show pop up
       //   swal("Error!", "Invalid credentials!", "error");
@@ -114,20 +151,6 @@ function Login() {
       //   //show pop up with  check your mailbox for verification
       // }
     }
-    if (formData.email.trim().length === 0) {
-      console.log("وارد کردن ایمیل الزامی می‌باشد");
-      return;
-    }
-
-    if (!isValidEmail(formData.email)) {
-      console.log("قالب ایمیل قابل قبول نیست");
-      return;
-    }
-    if (formData.password.trim().length === 0) {
-      console.log("وارد کردن پسوورد الزامی می‌باشد");
-      return;
-    }
-    console.log("No error in front");
   }
   //////////////////////////// End of input errors //////////////////
   return (
@@ -137,6 +160,9 @@ function Login() {
           <div className="content contentLogin">
             <Row className="just-center">
               <Col className="text-right" md="4">
+                {errorMessage.backError && (
+                  <div className="back-error">{errorMessage.backError}</div>
+                )}
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center">ورود به سایت</h5>
@@ -166,6 +192,11 @@ function Login() {
                               onChange={handleChange}
                               value={formData.email}
                             />
+                            {errorMessage.emailError && (
+                              <div className="error">
+                                {errorMessage.emailError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -188,6 +219,11 @@ function Login() {
                               onClick={PasCloseEyeIcon}
                               id="togglePassword"
                             ></i>
+                            {errorMessage.passError && (
+                              <div className="error">
+                                {errorMessage.passError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
