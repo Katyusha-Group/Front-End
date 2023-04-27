@@ -26,8 +26,16 @@ import {
 //import * as chart from "../../assets/img/ExamChart.png"
 import dataJson from "../../assets/data/exams.json";
 
+import { useInfo } from "../../contexts/InfoContext";
+
 import "./ExamChart.css";
 
+function timeStringToFloat(time) {
+  var hoursMinutes = time.split(/[.:]/);
+  var hours = parseInt(hoursMinutes[0], 10);
+  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+  return hours + minutes / 60;
+}
 function ExamChart() {
   const [data, setData] = React.useState(dataJson);
   const [lesson, setLesson] = React.useState({
@@ -36,8 +44,9 @@ function ExamChart() {
     time: 0,
     long: 0,
   });
+
+  const { info, changeInfo } = useInfo();
   const [showLesson, setShowLesson] = React.useState(false);
-  console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -50,8 +59,13 @@ function ExamChart() {
   function closeLesson(open) {
     setShowLesson(false);
   }
+  console.log(info.courseChoosed);
   function lessons() {
-    return data.map((lesson) => {
+    return info.courseChoosed.map((lesson) => {
+      let day = lesson.exam_times[0].date.split("-")[2] - 17;
+      if (day < 0) day = day + 31;
+      let time =
+        (timeStringToFloat(lesson.exam_times[0].exam_start_time) - 8) / 2;
       return (
         <div key={lesson.id}>
           <div>
@@ -59,10 +73,8 @@ function ExamChart() {
               id={lesson.id}
               className="course text-center"
               style={{
-                top: `${defu + length * lesson.day}%`,
-                right: `${top_defu + top_right * lesson.time}%`,
-                //width: `${lesson.long == 1 ? 4.8 : 16}%`,
-                height: `${lesson.long == 1 ? 12.3 : 16}%`,
+                top: `${defu + length * time}%`,
+                right: `${top_defu + top_right * day}%`,
               }}
             >
               <div
