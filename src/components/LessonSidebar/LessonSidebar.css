@@ -1,6 +1,7 @@
 .lessonSidebar_component{
     height: 36vh;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: #27293d;
     margin-top: 1rem;
     border-radius: .3rem;
