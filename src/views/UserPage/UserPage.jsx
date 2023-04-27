@@ -236,7 +236,7 @@ export default function UserPage() {
     <>
       <Row>
         <Col lg="12">
-          <ExamChart />
+          {/* <ExamChart /> */}
         </Col>
         <Col lg="12" sm="10">
           <Card>
@@ -259,7 +259,7 @@ export default function UserPage() {
                         onClick={() => setBgChartData("data1")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          خلاصه
+                          برنامه هفتگی
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-single-02" />
@@ -276,7 +276,7 @@ export default function UserPage() {
                         onClick={() => setBgChartData("data2")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          برنامه هفتگی
+                          خلاصه وضعیت
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-gift-2" />
@@ -304,8 +304,9 @@ export default function UserPage() {
                 </Row>
               </CardHeader>
               <div className="overflow-auto">
-                <div className="chart" style={{display: bigChartData == "data1" ? "none" : "block"}}>{lessons()}</div>
-                <div style={{display: bigChartData == "data2" ? "none" : "block"}}>  <SummaryChart props={info.courseChoosed}/></div>
+                <div className="chart" style={{display: bigChartData == "data1" ? "block" : "none"}}>{lessons()}</div>
+                <div style={{display: bigChartData == "data2" ? "block" : "none"}}>  <SummaryChart props={info.courseChoosed}/></div>
+                <div style={{display: bigChartData == "data3" ? "block" : "none"}}>  <ExamChart /></div>
               </div>
             </CardBody>
           </Card>
