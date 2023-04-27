@@ -27,7 +27,8 @@ import dataJson from "./Classes"
 
 
 export default function CoursesPanel() {
-  const timetable = dataJson;
+  // let timetable = dataJson;
+  // console.log(timetable);
   // const keyedTimetable = useMemo(() => {
   //   const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
   //   const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
@@ -47,9 +48,11 @@ export default function CoursesPanel() {
   //     }
   //   )
   // }, [timetable])
+  let [timetable, settimetable] = React.useState([]);
+  timetable = dataJson;
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-
+  //const timetable;
   const token = tokenClass.token.access;
   React.useEffect(() => {
     fetch("http://katyushaiust.ir/allcoursesdepartment/", {
@@ -58,10 +61,12 @@ export default function CoursesPanel() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        timetable = data;
+        // window.timetable = data;
+        settimetable(data);
       })
       .catch((error) => console.error(error));
   }, []);
+  
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
     //const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
