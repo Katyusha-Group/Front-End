@@ -35,6 +35,7 @@ import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
 
+import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
@@ -225,16 +226,76 @@ export default function UserPage() {
       <Row>
         <Col lg="12" sm="10">
           <Card>
-            <CardBody>
+            <CardBody><CardHeader>
+                <Row>
+                  
+                  <Col sm="6">
+                    <ButtonGroup
+                      className="btn-group-toggle float-right"
+                      data-toggle="buttons"
+                    >
+                      <Button
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data1"
+                        })}
+                        color="info"
+                        id="0"
+                        size="sm"
+                        onClick={() => setBgChartData("data1")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          خلاصه
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-single-02" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="1"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data2"
+                        })}
+                        onClick={() => setBgChartData("data2")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          برنامه هفتگی
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-gift-2" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="2"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data3"
+                        })}
+                        onClick={() => setBgChartData("data3")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          برنامه امتحانات
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-tap-02" />
+                        </span>
+                      </Button>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+              </CardHeader>
               <div className="overflow-auto">
-                <div className="chart">{lessons()}</div>
-                <ModalLessons
-                  show={showLesson}
-                  close={() => setShowLesson(false)}
-                />
+                <div className="chart" style={{display: bigChartData == "data1" ? "none" : "block"}}>{lessons()}</div>
+                <div style={{display: bigChartData == "data2" ? "none" : "block"}}>  <SummaryChart props={info.courseChoosed}/></div>
               </div>
             </CardBody>
           </Card>
+
         </Col>
         <Col lg="12" sm="10">
           <Card>
