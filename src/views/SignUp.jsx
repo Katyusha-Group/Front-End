@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
@@ -24,134 +24,31 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-// const costomA = axios.create({
-//   baseURL: "http://127.0.0.1:8000",
-//   timeout: 15000,
-// });
-
 function SignUp() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
-    subject: "",
-    gender: "",
   });
-  // const loginUser = async (e) => {
-  //   e.preventDefault();
-
-  //   costomA.post("account/signup", {
-  //     username: "Erfan",
-  //     email: formData.email,
-  //     password1: formData.password1,
-  //     password2: formData.password2,
-  //     gender: "M",
-  //   });
-
-  //console.log("form submitted")
-  // await axios.post(
-  //   session_url,
-  //   {},
-  //   {
-  //     auth: {
-  //       username: "Erfan",
-  //       email: formData.email,
-  //       password1: formData.password1,
-  //       password2: formData.password2,
-  //       //Subject: formData.subject,
-  //       gender: "M",
-  //       //subject: formData.subject,
-  //     },
-  //   }
-  // );
-  // const response = await axios.post(
-  //   REGISTER_URL,
-  //   JSON.stringify({
-  //     username: "Erfan",
-  //     email: formData.email,
-  //     password1: formData.password1,
-  //     password2: formData.password2,
-  //     //Subject: formData.subject,
-  //     gender: "M",
-  //   }),
-  //   {
-  //     headers: { "Content-Type": "application/json" },
-  //     withCredentials: true,
-  //   }
-  // );
-  // const response = await fetch("/accounts/signup/", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     Email: e.target.formData.email,
-  //     Password1: e.target.formData.password1,
-  //     Password2: e.target.formData.password2,
-  //     Subject: e.target.formData.subject,
-  //     Gender: e.target.formData.gender,
-  //   }),
-  // });
-  // const data = await response.json();
-  // console.log(data);
-  // if (response.status === 200) {
-  //   setAuthTokens(data);
-  //   setUser(jwt_decode(data.access));
-  //   localStorage.setItem("authTokens", JSON.stringify(data));
-  //   Navigate("/");
-  // } else {
-  //   console.log(data.error);
-  //   if (data.error === "Invalid credentials") {
-  //     //show pop up
-  //     swal("Error!", "Invalid credentials!", "error");
-  //   }
-  //   if (data.error === "email is not verified") {
-  //     swal("Error!", "check your mailbox for verification", "error");
-  //     //show pop up with  check your mailbox for verification
-  //   }
-  // }
-  // };
-  ////////////////////////////// Select ///////////////////
   const genderOptions = [
     { value: "F", label: "زن" },
     { value: "M", label: "مرد" },
   ];
-  const subjectOptions = [
-    { value: "Computer Engineering", label: "مهندسی کامپیوتر" },
-    { value: "Electrical Engineering", label: "مهندسی برق" },
-    { value: "Mechanical Engineering", label: "مهندسی مکانیک" },
-    { value: "Chemical Engineering", label: "مهندسی شیمی" },
-    { value: "Industrial Engineering", label: "مهندسی صنایع" },
-    { value: "Railway Engineering", label: "مهندسی راه‌آهن" },
-    //{ value: "7", label: "مهندسی معماری" },
-    //{ value: "7", label: "طراحی صنعتی" },
-    { value: "Material Engineering", label: "مهندسی مواد" },
-    { value: "Civil Engineering", label: "مهندسی عمران" },
-    { value: "Computer Science", label: "علوم کامپیوتر" },
-    { value: "Mathematics", label: "ریاضی" },
-    { value: "Physics", label: "فیزیک" },
-  ];
-  // const [handleChange1] = useState(() => {
-  //   console.log(selectedOption);
-  //   return () => {
-  //     setSelectedOption(selectedOption);
-  //   };
-  // });
-  // const [selectHandleChange] = useState(() => {
-  //   console.log(formData)
-  //   return () => {
-  //     setFormData(formData);
-  //   };
-  // });
-  // selectHandleChange = (selectedOption) => {
-  //   this.setState({ selectedOption }, () =>
-  //     console.log(`Option selected:`, this.state.selectedOption)
-  //   );
-  // };
-  // const selectHandleChange = (event) => {
-  //   setFormData(event.value);
-  //   console.log(formData);
-  // };
+
+  const [subjectOptions, setSubjectOptions] = useState();
+  // const subjects = [];
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/departments/names")
+      .then((response) => response.json())
+      .then((subjectOptions) => {
+        console.log(subjectOptions);
+        setSubjectOptions(subjectOptions);
+      });
+  }, []);
+
+  // this.setState({selectOptions: options})
+  // const subs = {};
+  // subs = subject.map()
   const customStyles = {
     input: (defaultStyles) => ({
       ...defaultStyles,
@@ -160,12 +57,12 @@ function SignUp() {
     option: (defaultStyles, state) => ({
       ...defaultStyles,
       color: "#9A9A9A",
-      backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
+      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
       "&:hover": {
         backgroundColor: "rgba(222, 222, 222, 0.3)",
       },
       transition: "all 150ms linear",
-      marginTop: "5px",
+      margin: "-4px 0px",
       padding: "0.6rem 24px",
       fontSize: "0.75rem",
       fontWeight: "400",
@@ -234,26 +131,111 @@ function SignUp() {
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
+  function isValidPassword(pass) {
+    console.log(/[a-zA-Z]/.test(pass));
+    return /[a-zA-Z]/.test(pass);
+  }
 
   function handleChange(event) {
+    setErrorMessage("");
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   }
+  // function handleError(event) {
+  //   console.log(event);
+  //   console.log(event.target);
+  //   // const { name, value } = event.target;
+  //   // setFormData((prevFormData) => ({
+  //   //   ...prevFormData,
+  //   //   [name]: value,
+  //   // }));
+  // }
 
-  const [subject, setSubject] = useState();
   const [gender, setGender] = useState();
+  const [subject, setSubject] = useState();
 
   function handleSubject(selectedOption) {
+    setErrorMessage("");
     setSubject(selectedOption.value);
   }
   function handleGender(selectedOption) {
+    setErrorMessage("");
     setGender(selectedOption.value);
   }
+  const [errorMessage, setErrorMessage] = useState({
+    emailError: "",
+    passError: "",
+    passErrorRep: "",
+    genderError: "",
+    subjectError: "",
+    backError: "",
+  });
   async function handleSubmit(event) {
+    // console.log(subject);
     event.preventDefault();
+
+    const errors = [
+      {
+        emailError: "",
+        passError: "",
+        passErrorRep: "",
+        genderError: "",
+        subjectError: "",
+        backError: "",
+      },
+    ];
+    if (formData.email.trim().length === 0) {
+      errors.emailError = "!وارد کردن ایمیل الزامی است";
+    }
+    if (!isValidEmail(formData.email) && !errors.emailError) {
+      errors.emailError = "!قالب ایمیل قابل قبول نیست";
+    }
+    if (formData.password.trim().length === 0) {
+      errors.passError = "!وارد کردن رمز عبور الزامی است";
+    }
+    if (formData.password.length < 8 && formData.password) {
+      errors.passError = "!رمز عبور باید حداقل شامل هشت کاراکتر باشد";
+    }
+    if (formData.passwordConfirm.trim().length === 0) {
+      errors.passErrorRep = "!وارد کردن تکرار رمز عبور الزامی است";
+    }
+    if (
+      formData.password !== formData.passwordConfirm &&
+      !errors.passError &&
+      !errors.passErrorRep
+    ) {
+      errors.passErrorRep = "!تکرار رمز عبور و رمز عبور یکسان نیست";
+    }
+
+    // if (formData.subject.trim().length === 0) {
+    //   console.log("وارد کردن رشته الزامی می‌باشد");
+    //   return;
+    // }
+    if (!gender) {
+      errors.genderError = "!وارد کردن جنسیت الزامی است";
+    }
+    if (!subject) {
+      errors.subjectError = "!وارد کردن رشته الزامی است";
+    }
+    setErrorMessage({
+      emailError: errors.emailError,
+      passError: errors.passError,
+      passErrorRep: errors.passErrorRep,
+      genderError: errors.genderError,
+      subjectError: errors.subjectError,
+    });
+    if (
+      errors.emailError ||
+      errors.passError ||
+      errors.passErrorRep ||
+      errors.genderError ||
+      errors.subjectError
+    ) {
+      return;
+    }
     const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
       method: "POST",
       headers: {
@@ -270,39 +252,17 @@ function SignUp() {
     });
     const data = await response.json();
     console.log(data);
+    if (response.status === 200) {
+      console.log("خوش آمدید");
+    } else {
+      if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
+      if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
+    }
     // console.log(formData);
-    if (formData.email.trim().length === 0) {
-      console.log("وارد کردن ایمیل الزامی می‌باشد");
-      return;
-    }
-
-    if (!isValidEmail(formData.email)) {
-      console.log("قالب ایمیل قابل قبول نیست");
-      return;
-    }
-    if (formData.password.trim().length === 0) {
-      console.log("وارد کردن رمز عبور الزامی می‌باشد");
-      return;
-    }
-    if (formData.passwordConfirm.trim().length === 0) {
-      console.log("وارد کردن تکرار رمز عبور الزامی می‌باشد");
-      return;
-    }
-    if (formData.password.trim().length === 0) {
-      console.log("وارد کردن رمز عبور الزامی می‌باشد");
-      return;
-    }
-    // if (formData.subject.trim().length === 0) {
-    //   console.log("وارد کردن رشته الزامی می‌باشد");
-    //   return;
-    // }
-
-    // if (formData.gender === "") {
-    //   console.log("وارد کردن جنسیت الزامی می‌باشد");
-    //   return;
-    // }
-
-    console.log("خوش آمدید");
   }
   //////////////////////////// End of input errors //////////////////
 
@@ -313,6 +273,9 @@ function SignUp() {
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4">
+                {errorMessage.backError && (
+                  <div className="back-error">{errorMessage.backError}</div>
+                )}
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center">ثبت نام</h5>
@@ -331,6 +294,11 @@ function SignUp() {
                               onChange={handleChange}
                               value={formData.email}
                             />
+                            {errorMessage.emailError && (
+                              <div className="error">
+                                {errorMessage.emailError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -347,12 +315,16 @@ function SignUp() {
                               onChange={handleChange}
                               value={formData.password}
                             ></Input>
-
                             <i
                               className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
                               onClick={PasCloseEyeIcon}
                               id="togglePassword"
                             ></i>
+                            {errorMessage.passError && (
+                              <div className="error">
+                                {errorMessage.passError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -374,6 +346,11 @@ function SignUp() {
                               onClick={ConfirmPasCloseEyeIcon}
                               id="toggleConfirmPassword"
                             ></i>
+                            {errorMessage.passErrorRep && (
+                              <div className="error">
+                                {errorMessage.passErrorRep}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -392,6 +369,12 @@ function SignUp() {
                               name="subject"
                               onChange={handleSubject}
                             />
+
+                            {errorMessage.subjectError && (
+                              <div className="select-error">
+                                {errorMessage.subjectError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                         <Col lg="5" className="offset-lg-1">
@@ -407,6 +390,12 @@ function SignUp() {
                               name="gender"
                               onChange={handleGender}
                             />
+
+                            {errorMessage.genderError && (
+                              <div className="select-error">
+                                {errorMessage.genderError}
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>

@@ -5,12 +5,7 @@ import routes from "../route.jsx";
 import logo from "../assets/img/react-logo.png";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import { Card, CardHeader, CardTitle, Col, Row } from "reactstrap";
-// import CoursesCard from "../components/HomePageItems/CoursesCard/CoursesCard";
-// import CoursesCard from "../components/HomePageItems/CoursesCard/CoursesCard.jsx";
-// import ExamsCard from "../components/HomePageItems/ExamsCard/ExamsCard.jsx";
-// import EventsCard from "../components/HomePageItems/EventsCard/EventsCard.jsx";
 import HomeCardBar from "../components/HomePageItems/HomeCardBar.jsx";
-
 export default function Home() {
   const { info } = useInfo();
   const [sidebarOpened, setsidebarOpened] = React.useState(
@@ -43,9 +38,18 @@ export default function Home() {
           toggleSidebar={toggleSidebar}
         />
         <div className="main-panel">
-          <AdminNavbar />
+          <AdminNavbar
+          routes={routes}
+          rtlActive
+          logo={{
+            outterLink: "https://www.creative-tim.com/",
+            text: "کاتیوشا",
+            imgSrc: logo,
+          }}
+          toggleSidebar={toggleSidebar}
+          />
           <div className="content">
-            <HomeCardBar/>
+            <HomeCardBar />
           </div>
         </div>
       </div>

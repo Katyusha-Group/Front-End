@@ -2,6 +2,7 @@ import Home from "./views/Home.jsx";
 import Admin from "./views/Admin.jsx";
 import ChangePassword from './views/ChangePass.jsx';
 import UserPage from "./views/UserPage/UserPage.jsx";
+import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
 var routes = [
     
     {
@@ -19,6 +20,22 @@ var routes = [
         rtlName: "صفحه کاربری",
         icon: "",
         layout: "/admin"
+    },
+    {
+        path: '/Courses',
+        name:"CoursesPanel",
+        component: CoursesPanel,
+        rtlName: "پنل دروس",
+        icon: "",
+        layout: "/admin"
+    },
+    {
+        path: '/aboutUs',
+        name:"AboutUs",
+        component: UserPage,
+        rtlName: "درباره ما",
+        icon: "",
+        layout: ""
     },
 ]
 

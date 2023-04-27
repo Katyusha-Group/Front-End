@@ -1,0 +1,16 @@
+.lessonSidebar_component{
+    height: 36vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #27293d;
+    margin-top: 1rem;
+    border-radius: .3rem;
+    padding-top: .8rem;
+}
+
+.sidebar[data="normal"],
+  .off-canvas-sidebar[data="normal"] {
+    background: none;
+    box-shadow: none;
+
+     }
