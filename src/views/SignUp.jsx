@@ -281,10 +281,10 @@ function SignUp() {
                     <h5 className="title text-center">ثبت نام</h5>
                   </CardHeader>
                   <CardBody>
-                    <Form>
+                    <Form >
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             <Input
                               className="text-right"
@@ -304,7 +304,7 @@ function SignUp() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label>رمز عبور</label>
                             <Input
                               className="text-right"
@@ -330,7 +330,7 @@ function SignUp() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label>تکرار رمز عبور</label>
                             <Input
                               className="text-right"
@@ -357,7 +357,7 @@ function SignUp() {
 
                       <Row>
                         <Col lg="6">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label>رشته</label>
                             <br />
 
@@ -378,7 +378,7 @@ function SignUp() {
                           </FormGroup>
                         </Col>
                         <Col lg="5" className="offset-lg-1">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label>جنسیت</label>
                             <br />
 

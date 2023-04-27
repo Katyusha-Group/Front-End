@@ -181,7 +181,7 @@ function Login() {
                     <Form>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             <Input
                               className="text-right"
@@ -202,7 +202,7 @@ function Login() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
+                          <FormGroup className="text-right">
                             <label>رمز عبور</label>
                             <Input
                               className="text-right"
