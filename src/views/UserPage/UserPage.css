@@ -32,6 +32,7 @@
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
+    height: 3rem;
 }
 
 .course:hover{
@@ -55,4 +56,58 @@
     top:0;
     z-index: 1;
     display: none;
+}
+
+
+.courseCard{
+    background-color: hsl(256, 45%, 50%)!important;
+    /* border: none !important; */
+    /* border-color: rgba(227, 49, 243, 0.527) !important; */
+    color: rgb(199, 193, 193) !important;
+    width: 20rem !important;
+    height: 6.5625rem;
+    margin-left: 50px;
+}
+.courseCardBody{
+    justify-items: center;
+    align-items: center;
+    padding: 0px ;
+    display: flex;
+    flex-direction: row;
+}
+
+.courseGroupCard{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    /* align-content: space-between; */
+    flex-wrap: wrap;
+}
+div{
+    text-align: center;
+}
+
+.professorImage{
+    width: 3.4375rem;
+    height: 3.4375rem;
+    margin-left: 0.625rem;
+    border-radius: 4.6875rem;
+    overflow: "hidden";
+    border-width: 0.1875rem;
+    border-color: "red";
+}
+.color{
+    width: 23%;
+    height: 5rem;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color :inherit;
+    margin-top: 0.3125rem;
+    /* background-color:hsl(266, 55%, 54%) */
+    
+}
+p{
+    color: inherit;
 }
