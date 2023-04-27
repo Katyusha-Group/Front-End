@@ -5,13 +5,16 @@
             "name" : "کامپیوتر" ,
             "base_course" : [
                 {
-                    "course_name" : "شبکه"
+                    "course_name" : "شبکه",
+                    "course_ID" : "1"
                 },
                 {
-                    "course_name" : "تحلیل"
+                    "course_name" : "تحلیل",
+                    "course_ID" : "2"
                 },
                 {
-                    "course_name" : "فیزیک"
+                    "course_name" : "فیزیک",
+                    "course_ID" : "3"
                 }
             ]
         }
@@ -22,13 +25,16 @@
             "name" : "معماری",
             "base_course" : [
                 {
-                    "course_name" : "فیزیک"
+                    "course_name" : "فیزیک",
+                    "course_ID" : "11"
                 },
                 {
-                    "course_name" : "اندازه گیری"
+                    "course_name" : "اندازه گیری",
+                    "course_ID" : "12"
                 },
                 {
-                    "course_name" : "ربات"
+                    "course_name" : "ربات",
+                    "course_ID" : "13"
                 }
             ]
         }

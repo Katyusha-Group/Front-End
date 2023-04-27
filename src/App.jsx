@@ -15,7 +15,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
 import LandingPage from "./views/LandingPage.jsx"; 
-
+import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
+                <Router.Route path="/CoursesPanel" element={<CoursesPanel />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
             {/* </SimpleBar> */}
