@@ -178,7 +178,7 @@ export default function UserPage() {
 
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    // console.log(tokenClass);
+    console.log("tokenClass",tokenClass);
     const token = tokenClass.token.access;
     // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
     //   method: "POST",
@@ -192,13 +192,22 @@ export default function UserPage() {
     // });
     // const data = await response.json();
 console.log(`num is : ${num}`)
+console.log(`type :`, typeof(num))
+console.log(`json :`, JSON.stringify({
+  complete_course_number: num,
+}))
 console.log(`token is ${token}`)
    
       fetch("https://www.katyushaiust.ir/courses/my_courses/", {
         method: 'PUT',
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: {
+           "Authorization": `Bearer ${token}` ,
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+          },
         body: JSON.stringify({
           complete_course_number: num,
+          
         }),
       })
         .then((response) => response.json())
