@@ -3,6 +3,7 @@ import Admin from "./views/Admin.jsx";
 import ChangePassword from './views/ChangePass.jsx';
 import UserPage from "./views/UserPage/UserPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
+import aboutUs from "./views/aboutUs/AboutUs.jsx";
 var routes = [
     
     {
@@ -32,10 +33,10 @@ var routes = [
     {
         path: '/aboutUs',
         name:"AboutUs",
-        component: UserPage,
+        component: aboutUs,
         rtlName: "درباره ما",
         icon: "",
-        layout: ""
+        layout: "/admin"
     },
 ]
 

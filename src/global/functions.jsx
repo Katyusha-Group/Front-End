@@ -1,7 +1,7 @@
 
 export function convertPercentagetoLigtness(num){
     console.log(`percentage is ${num}`)
-    return( 35+ num*40/100) ///frist was  60 - num*55/100)
+    return( 30+ num*55/100) ///frist was  60 - num*55/100)
 }
 
 export function dayOfWeek(num){
