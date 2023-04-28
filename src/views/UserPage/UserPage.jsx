@@ -214,36 +214,13 @@ export default function UserPage() {
     });
   }
 
-  // function takeLessonsGroups(){
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = JSON.parse(tokenJson);
-  //   const token = tokenClass.token.access;
-
-  //   React.useEffect(() => {
-  //     fetch(`https://www.katyushaiust.ir/coursegroups/${info.courseGroupID}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("heyy it was done!", data);
-  //         //setData(data);
-  //       })
-  //       .catch((error) => console.error(error));
-  //     console.log(data);
-  //     const activeRoute = (routeName) => {
-  //       return location.pathname === routeName ? "active" : "";
-  //     };
-  //   }, []);
-
-  // }
-
   return (
     <>
       <Row>
         <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">
           <Card>
-            <CardBody>
+            <CardBody >
               <CardHeader>
                 <Row>
                   <Col sm="6">
@@ -334,6 +311,8 @@ export default function UserPage() {
                   {lessons()}
                 </div>
                 <div
+                  
+
                   style={{
                     display: bigChartData == "data2" ? "block" : "none",
                   }}
@@ -342,6 +321,7 @@ export default function UserPage() {
                   <SummaryChart props={info.courseChoosed} />
                 </div>
                 <div
+                  
                   style={{
                     display: bigChartData == "data3" ? "block" : "none",
                   }}

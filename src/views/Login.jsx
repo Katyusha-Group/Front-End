@@ -134,7 +134,7 @@ function Login() {
       // info.token = authTokens;
       // console.log(info);
       localStorage.setItem("authTokens", JSON.stringify(data));
-      Navigate("/");
+      Navigate("/admin/page");
     } else {
       console.log(data.error);
       errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";

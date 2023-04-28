@@ -27,7 +27,7 @@ function App() {
           {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
             <Router.BrowserRouter>
               <Router.Routes>
-                <Router.Route path="/" element={<Home />}></Router.Route>
+                <Router.Route path="/" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/signup" element={<SignUp />}></Router.Route>
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
