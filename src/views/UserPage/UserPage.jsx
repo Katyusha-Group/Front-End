@@ -43,6 +43,7 @@ function timeStringToFloat(time) {
   return hours + minutes / 60;
 }
 import ExamChart from "../../components/Charts/ExamChart.jsx";
+import { sum } from "lodash";
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
@@ -124,7 +125,6 @@ export default function UserPage() {
     const tokenClass = JSON.parse(tokenJson);
     // console.log(tokenClass);
     const token = tokenClass.token.access;
-
     React.useEffect(() => {
       fetch("https://www.katyushaiust.ir/courses/my_courses", {
         headers: { Authorization: `Bearer ${token}` },
@@ -133,10 +133,13 @@ export default function UserPage() {
         .then((data) => {
           setData(data);
           changeInfo("courseChoosed", data);
+          // for (let i = 0; i < data.length; i++) {
+          //   untiSum += data[i].total_unit;
+          // }
+          // console.log(untiSum);
           console.log("get data after reload", data);
         })
         .catch((error) => console.error(error));
-      // console.log(data);
       const activeRoute = (routeName) => {
         return location.pathname === routeName ? "active" : "";
       };
@@ -146,6 +149,8 @@ export default function UserPage() {
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
+
+        // console.log(unitsCount);
         // console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
         // console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
         return (
@@ -235,14 +240,12 @@ export default function UserPage() {
   return (
     <>
       <Row>
-        <Col lg="12">
-          {/* <ExamChart /> */}
-        </Col>
+        <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">
           <Card>
-            <CardBody><CardHeader>
+            <CardBody>
+              <CardHeader>
                 <Row>
-                  
                   <Col sm="6">
                     <ButtonGroup
                       className="btn-group-toggle float-right"
@@ -251,7 +254,7 @@ export default function UserPage() {
                       <Button
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data1"
+                          active: bigChartData === "data1",
                         })}
                         color="info"
                         id="0"
@@ -271,7 +274,7 @@ export default function UserPage() {
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data2"
+                          active: bigChartData === "data2",
                         })}
                         onClick={() => setBgChartData("data2")}
                       >
@@ -288,7 +291,7 @@ export default function UserPage() {
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data3"
+                          active: bigChartData === "data3",
                         })}
                         onClick={() => setBgChartData("data3")}
                       >
@@ -301,16 +304,54 @@ export default function UserPage() {
                       </Button>
                     </ButtonGroup>
                   </Col>
+
+                  <Col
+                    sm="6"
+                    className="d-none d-sm-block d-md-block d-lg-block d-xl-block text-right pr-sm-5 pt-sm-2"
+                  >
+                    <span
+                      style={{
+                        display: bigChartData == "data2" ? "block" : "none",
+                      }}
+                    >
+                      {info.courseChoosed.reduce(
+                        (accumulator, currentValue) =>
+                          accumulator + currentValue.total_unit,
+                        0
+                      )}{" "}
+                      : تعداد واحد
+                    </span>
+                  </Col>
                 </Row>
               </CardHeader>
               <div className="overflow-auto">
-                <div className="chart" style={{display: bigChartData == "data1" ? "block" : "none"}}>{lessons()}</div>
-                <div style={{display: bigChartData == "data2" ? "block" : "none"}}>  <SummaryChart props={info.courseChoosed}/></div>
-                <div style={{display: bigChartData == "data3" ? "block" : "none"}}>  <ExamChart /></div>
+                <div
+                  className="chart"
+                  style={{
+                    display: bigChartData == "data1" ? "block" : "none",
+                  }}
+                >
+                  {lessons()}
+                </div>
+                <div
+                  style={{
+                    display: bigChartData == "data2" ? "block" : "none",
+                  }}
+                >
+                  {" "}
+                  <SummaryChart props={info.courseChoosed} />
+                </div>
+                <div
+                  style={{
+                    display: bigChartData == "data3" ? "block" : "none",
+                  }}
+                >
+                  {" "}
+                  <ExamChart />
+                </div>
               </div>
             </CardBody>
           </Card>
-
         </Col>
         <Col lg="12" sm="10">
           <Card>
@@ -326,7 +367,11 @@ export default function UserPage() {
                     }}
                     className="courseCard"
                     key={index}
-                    style={{backgroundColor: `hsl(256, 45%, ${convertPercentagetoLigtness(x.color_intensity_percentage)}%)`}} 
+                    style={{
+                      backgroundColor: `hsl(256, 45%, ${convertPercentagetoLigtness(
+                        x.color_intensity_percentage
+                      )}%)`,
+                    }}
                   >
                     <CardBody className="courseCardBody">
                       <img
