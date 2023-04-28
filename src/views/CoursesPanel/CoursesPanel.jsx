@@ -85,7 +85,7 @@ export default function CoursesPanel() {
               {entry !== null && (
                 // {console.log(entry.name)}
                 <div className="Course" color="primary">
-                  {entry.name}
+                  {entry.name} ({entry.class_gp})
                 </div>     
               )}     
             </div>

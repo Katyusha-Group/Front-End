@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@esbuild/win32-x64": "^0.17.18",
     "@fortawesome/fontawesome-free": "^6.3.0",
     "ag-grid-community": "^29.2.0",
     "ag-grid-react": "^29.2.0",
