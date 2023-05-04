@@ -9,3 +9,12 @@
 .TopRow {
     text-align: left;
 }
+
+.CoursesPanel_column {
+    border: 1px solid;
+}
+
+tbody{
+    border: 1px solid hsl(235, 22%, 30%);
+}
+
