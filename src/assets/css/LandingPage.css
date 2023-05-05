@@ -16,11 +16,12 @@
     direction: rtl;
 }
 .div-2 {
+    padding: 3%;
     font-size: 40px;
     text-align: center;
 }
 .div-3{
-    font-size: 20px;
+    font-size: 19px;
     text-align: justify;
 }
 .div-4{
