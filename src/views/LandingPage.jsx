@@ -59,7 +59,7 @@ function LandingPage() {
         <div className="div-4">
           <Row>
             در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
-            Katyusha@example.com
+            katyushaiust@gmail.com
           </Row>
         </div>
       </span>
