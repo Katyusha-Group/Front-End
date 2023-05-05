@@ -29,6 +29,7 @@ import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
+import fullLogo from "./full.png"
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json";
@@ -348,9 +349,9 @@ export default function UserPage() {
                     className="courseCard"
                     key={index}
                     style={{
-                      backgroundColor: `hsl(256, 45%, ${convertPercentagetoLigtness(
-                        x.color_intensity_percentage
-                      )}%)`,
+                      backgroundColor: x.color_intensity_percentage>10 ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                        x.color_intensity_percentage 
+                      )}%)`:"dimgray"
                     }}
                   >
                     <CardBody className="courseCardBody">
@@ -359,17 +360,17 @@ export default function UserPage() {
                         src={sampleProfile}
                         alt="professorImage"
                       />
-                      <div>
+                      <div className="infoPart">
                         <p>
                           {x.name} (گروه {x.group_number})
                         </p>
                         <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <p>
-                          ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
-                        </p>
-                        <div></div>
-
-                        <p style={{ fontSize: 12 }}>
+                        <div className="courseCardDownSide">
+                          <div>
+                          <p>
+                            ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                          </p>
+                          <p style={{ fontSize: 12 }}>
                           {" "}
                           {x.course_times.map((x) => (
                             <text>{dayOfWeek(x.course_day)} </text>
@@ -384,9 +385,18 @@ export default function UserPage() {
                             {timeStringToFloat(
                               x.course_times[0].course_end_time
                             )}
+                            
                           </text>
-                        </p>
+                          </p>
+                          </div>
+                          <img className="fullLogo"
+                          src={fullLogo}
+                          alt="fullLogo"
+                          style={{display: x.color_intensity_percentage<11 ? 'block' : 'none' }}></img>
+                        </div>
+                        
                       </div>
+                      
                     </CardBody>
                   </Card>
                 ))}

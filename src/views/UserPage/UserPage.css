@@ -61,12 +61,14 @@
 
 .courseCard{
     /* background-color: hsl(256, 45%, 50%)!important; */
-    /* border: none !important; */
-    /* border-color: rgba(227, 49, 243, 0.527) !important; */
+    /* border-width: 5px; */
+    /* background-color: transparent; */
+    /* border: solid !important; */
+    border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
     width: 20rem !important;
     height: 6.5625rem;
-    margin-left: 0.9375rem;
+    margin-left: 15px;
 }
 .courseCardBody{
     justify-items: center;
@@ -77,15 +79,16 @@
 }
 
 .courseGroupCard{
-    align-items: flex-start;
+    /* align-items: flex-start ; */
     display: flex;
     flex-direction: row;
     /* justify-content: space-around; */
     /* align-content: space-between; */
     flex-wrap: wrap;
-    height: 30vh;
+    height: 45vh;
     overflow: auto;
-    justify-content: center;
+    /* justify-content: center; */
+    padding-left: 0 !important;
 
 }
 div{
@@ -119,4 +122,18 @@ p{
 
 .userpageFirstComponent{
     height: 50%;
+}
+.fullLogo{
+    /* width: 20px; */
+    height: 40px;
+    margin-right: auto;
+}
+.courseCardDownSide{
+    display: flex;
+    direction: row;
+    padding-right: 15px;
+    justify-content: right;
+}
+.infoPart{
+    width: 100%;
 }
