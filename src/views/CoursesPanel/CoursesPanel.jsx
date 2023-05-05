@@ -10,6 +10,7 @@ import {
   Table,
   Row,
   Col,
+  Button,
 } from "reactstrap";
 import "./CoursesPanel.css"
 
@@ -57,6 +58,8 @@ export default function CoursesPanel() {
               {entry !== null && (
                 <div className="Course" color="primary">
                   {entry.name} ({entry.class_gp})
+                  <br/>
+                  <button className="btn-fill-AddCourseButton">+</button>
                 </div>     
               )}     
             </div>
