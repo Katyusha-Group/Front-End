@@ -3,6 +3,7 @@ import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -254,6 +255,7 @@ function SignUp() {
     console.log(data);
     if (response.status === 200) {
       console.log("خوش آمدید");
+      Navigate("/verification");
     } else {
       if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
       if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
