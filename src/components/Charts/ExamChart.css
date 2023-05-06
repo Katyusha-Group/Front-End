@@ -1,3 +1,6 @@
+.row{
+    margin: 0 0px !important;
+}
 .table{
     table-layout: fixed
     ;
@@ -19,18 +22,21 @@ border-bottom: none !important;
     border-top: none;
     border-right: 0.0625rem solid #e3e3e3;
 }  */
-
+.exam-card-body{
+    padding: 0px 0 !important;
+}
 .chart1{
-    background: url(../../assets/img/ExamChartBack.png);
+    background: url(../../assets/img/ExamChartBack3.png);
     background-size: 100% 100%;
     min-width: 60rem;
-    height: 30em;
+    height: 28em;
     position: relative;
     background-repeat: no-repeat;
     resize: both;
+    overflow: visible !important;
 }
 
-.course, i .course{
+.exam, i .exam{
     position: absolute;
     height: 16%;
     width: 4.8%;
@@ -45,7 +51,7 @@ border-bottom: none !important;
     padding-top: 0.4rem;
 }
 
-.course:hover{
+.exam:hover{
     cursor: pointer;
 }
 
