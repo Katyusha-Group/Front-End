@@ -129,12 +129,12 @@ function Sidebar(props) {
       {({ color }) => (
         <div className="sidebar" data={"normal"}>
           <div className="sidebar-wrapper" ref={sidebarRef}>
-            {logoImg !== null || logoText !== null ? (
+            {/* {logoImg !== null || logoText !== null ? (
               <div className="logo">
                 {logoImg}
                 {logoText}
               </div>
-            ) : null}
+            ) : null} */}
             <Nav>
               <div className="lessonSidebar_component">
                 {departeman.map((prop,index) => (
@@ -145,7 +145,7 @@ function Sidebar(props) {
                       )}
                       key={index}
                   >
-                    <i />
+                    <i className="tim-icons icon-chart-bar-32"/>
                     <p>{prop.name}</p>
                   </NavLink>
                 ))}

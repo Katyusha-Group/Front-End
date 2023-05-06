@@ -3,6 +3,10 @@ import { Input } from 'reactstrap';
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useInfo } from '../../contexts/InfoContext';
 // import { takeLessonsGroups } from '../LessonSidebar/ApiCalls';
+import "./SearchBox.css" 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
@@ -53,7 +57,9 @@ const SearchBox = ( data ) => {
         placeholder="Search"
         value={query}
         onChange={handleQueryChange}
+        className='search_box'
       />
+      <div className='lessons_in_searchBox'>
         {nameList?.filter((item, index) => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => (
           <a
           className="nav-link"
@@ -69,10 +75,11 @@ const SearchBox = ( data ) => {
         }}
           key={index}
         >
-            <i />
-            <p >{item.name}</p>
+            <i className="tim-icons icon-credit-card"/>
+            <p className='button_lessons'>{item.name}</p>
         </a>
         ))}
+        </div>
     </>
   );
 };

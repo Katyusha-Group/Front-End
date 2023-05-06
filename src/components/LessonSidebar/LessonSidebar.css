@@ -1,16 +1,23 @@
-.lessonSidebar_component{
-    height: 36vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #27293d;
-    margin-top: 1rem;
-    border-radius: .3rem;
-    padding-top: .8rem;
+.lessonSidebar_component {
+  height: 30vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .3rem;
+  padding-top: .8rem;
 }
 
 .sidebar[data="normal"],
-  .off-canvas-sidebar[data="normal"] {
-    background: none;
-    box-shadow: none;
+.off-canvas-sidebar[data="normal"] {
+  background: none;
+  box-shadow: none;
 
-     }
+}
+
+.lessonSidebar_component-lessons 
+{
+  overflow-y: hidden;
+  margin-top: 1rem;
+  height:56vh;
+}

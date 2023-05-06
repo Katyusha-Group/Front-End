@@ -11755,7 +11755,7 @@ hr {
       height: 60px; }
   .sidebar .nav,
   .off-canvas-sidebar .nav {
-    margin-top: 20px;
+    margin-top: 5px;
     display: block; }
     .sidebar .nav .caret,
     .off-canvas-sidebar .nav .caret {
@@ -12467,6 +12467,7 @@ code {
 
 .rtl .sidebar,
 .rtl .bootstrap-navbar {
+  width: 20rem;
   right: 0;
   left: auto;
   margin-right: 20px;
@@ -12510,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 80px 280px 30px 30px; }
+  padding: 80px 356px 30px 30px; }
 
 
 .rtl .footer {
