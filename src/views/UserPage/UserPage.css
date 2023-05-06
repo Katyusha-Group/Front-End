@@ -67,7 +67,7 @@
     border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
     width: 20rem !important;
-    height: 6.5625rem;
+    height: 120px;
     margin-left: 15px;
 }
 .courseCardBody{
@@ -136,4 +136,17 @@ p{
 }
 .infoPart{
     width: 100%;
+}
+.addToPlanButton{
+    width: 20px !important;
+    color: red;
+}
+.cart{
+    margin: 0px;
+    width: 25px;
+    height: 25px;
+    /* margin-left: 10px; */
+    /* border-radius: 20px; */
+    /* border-width: 0.1875rem;
+    border-color: "red"; */
 }

@@ -35,6 +35,7 @@ import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
+import cartlogo from"./cart.png";
 
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
@@ -340,12 +341,7 @@ export default function UserPage() {
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
                   <Card
-                    onClick={() => {
-                      console.log("x", x);
-                      addNewLesson(x.complete_course_number);
-                      changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      console.log("info", info);
-                    }}
+                    
                     className="courseCard"
                     key={index}
                     style={{
@@ -370,7 +366,7 @@ export default function UserPage() {
                           <p>
                             ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
                           </p>
-                          <p style={{ fontSize: 12 }}>
+                          {/* <p style={{ fontSize: 12 }}>
                           {" "}
                           {x.course_times.map((x) => (
                             <text>{dayOfWeek(x.course_day)} </text>
@@ -387,7 +383,21 @@ export default function UserPage() {
                             )}
                             
                           </text>
-                          </p>
+                          </p> */}
+                          {/* <Button className="addToPlanButton">+</Button> */}
+                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
+                          onClick={() => {
+                            console.log("x", x);
+                            addNewLesson(x.complete_course_number);
+                            changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                            console.log("info", info);
+                          }}
+                          >+</Button>
+                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}>
+                          <img className="cart"
+                          src={cartlogo}
+                          alt="cartlogo"></img>
+                          </Button>
                           </div>
                           <img className="fullLogo"
                           src={fullLogo}
