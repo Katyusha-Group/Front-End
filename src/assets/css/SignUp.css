@@ -16,7 +16,7 @@
     opacity: 80%;
 }
 .card {
-    border-radius: 1.3rem !important;
+    border-radius: 0.3rem !important;
 }
 .error{
     color: red;

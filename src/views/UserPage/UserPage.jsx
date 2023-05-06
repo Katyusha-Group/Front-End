@@ -58,7 +58,10 @@ export default function UserPage() {
 
   // console.log("context" , useInfo);
 
-  const [showLesson, setShowLesson] = React.useState(false);
+  const [showLesson, setShowLesson] = React.useState({
+    flag: false,
+    data: {},
+  });
   // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -73,8 +76,9 @@ export default function UserPage() {
   //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
   console.log("info", info);
-  function closeLesson(open) {
-    setShowLesson(false);
+  function closeLesson(flag, data) {
+    setShowLesson({flag: flag ,data: data});
+    console.log("closeLesson", flag, data, showLesson);
   }
 
   function addNewLesson(num) {
@@ -146,6 +150,7 @@ export default function UserPage() {
     }, []);
 
     return info.courseChoosed.map((lessons) => {
+      console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
@@ -194,7 +199,7 @@ export default function UserPage() {
                         lessons.complete_course_number
                     )
                   );
-                  setShowLesson(false);
+                  closeLesson(false,lessons);
                   console.log("delete info", info);
                 }}
                 id={lessonBoxId + "x"}
@@ -203,7 +208,7 @@ export default function UserPage() {
               </button>
               <div
                 style={{ height: "100%" }}
-                onClick={() => setShowLesson(true)}
+                onClick={() => closeLesson(true, lessons)}
               >
                 {lessons.name}
               </div>
@@ -309,6 +314,10 @@ export default function UserPage() {
                   }}
                 >
                   {lessons()}
+                  <ModalLessons
+                    show={showLesson}
+                    close = {()=>setShowLesson(() => ({...showLesson,flag:false}))}
+                  />
                 </div>
                 <div
                   

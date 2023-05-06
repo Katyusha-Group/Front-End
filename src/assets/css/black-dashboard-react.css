@@ -13633,3 +13633,26 @@ select.form-control option {
   color: #888; }
 
 /*# sourceMappingURL=black-dashboard-react.css.map */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  background: #27293d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: #344675;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

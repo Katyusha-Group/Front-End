@@ -62,7 +62,7 @@ const SearchBox = ( data ) => {
       <div className='lessons_in_searchBox'>
         {nameList?.filter((item, index) => item.name.toLowerCase().includes(query.toLowerCase())).map((item, index) => (
           <a
-          className="nav-link"
+          className="nav-link button_lessons"
           activeClassName="active"
           onClick={()=>{
             // console.log("I'm called 111");
@@ -76,7 +76,7 @@ const SearchBox = ( data ) => {
           key={index}
         >
             <i className="tim-icons icon-credit-card"/>
-            <p className='button_lessons'>{item.name}</p>
+            <p >{item.name}</p>
         </a>
         ))}
         </div>
