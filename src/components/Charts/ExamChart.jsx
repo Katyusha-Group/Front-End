@@ -71,7 +71,7 @@ function ExamChart() {
           <div>
             <div
               id={lesson.id}
-              className="course text-center"
+              className="exam text-center"
               style={{
                 top: `${defu + length * time}%`,
                 right: `${top_defu + top_right * day}%`,
@@ -109,7 +109,7 @@ function ExamChart() {
             {/* <CardHeader className="text-right">
               <CardTitle tag="h4">برنامه هفتگی</CardTitle>
             </CardHeader> */}
-            <CardBody>
+            <CardBody className="exam-card-body">
               <div className="overflow-auto">
                 <div className="chart1">{lessons()}</div>
               </div>
