@@ -129,34 +129,35 @@ function Sidebar(props) {
       {({ color }) => (
         <div className="sidebar" data={"normal"}>
           <div className="sidebar-wrapper" ref={sidebarRef}>
-            {logoImg !== null || logoText !== null ? (
+            {/* {logoImg !== null || logoText !== null ? (
               <div className="logo">
                 {logoImg}
                 {logoText}
               </div>
-            ) : null}
+            ) : null} */}
             <Nav>
               <div className="lessonSidebar_component">
-                {departeman.map((prop,index) => (
-                  <NavLink
-                    className="nav-link"
-                    activeClassName="active"
-                    onClick={() => setLessonState(prop
-                      )}
-                      key={index}
-                  >
-                    <i />
-                    <p>{prop.name}</p>
-                  </NavLink>
-                ))}
+                {departeman.map((prop, index) => {
+                  if (prop.base_courses.length > 0) {
+                    return (
+                      <NavLink
+                        className="nav-link nav-link-lessonSidebar"
+                        activeClassName="active"
+                        onClick={() => setLessonState(prop)}
+                        key={index}
+                      >
+                        <i className="tim-icons icon-chart-bar-32" />
+                        <p>{prop.name}</p>
+                      </NavLink>
+                    );
+                  }
+                })}
               </div>
               <div className="lessonSidebar_component lessonSidebar_component-lessons">
-                {
-                  lessonState ? (
-                    <SearchBox data={lessonState?.base_courses
-                    } />
-                    ) : null}
-                    {/* {console.log("props", lessonState.base_courses)} */}
+                {lessonState ? (
+                  <SearchBox data={lessonState?.base_courses} />
+                ) : null}
+                {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
                 {/* {lessonState?.base_course.map((prop) => (
                   <NavLink
