@@ -65,10 +65,10 @@ export default function UserPage() {
     setbigChartData(name);
   };
   const [showX, setShowX] = React.useState("none");
-  let defu = 14;
-  let length = 16;
-  let top_right = 11;
-  let top_defu = 12.5;
+  let defu = 12.3;
+  let length = 13.6;
+  let top_right = 9.8;
+  let top_defu = 10.4;
   // let initial = useInfo();
   //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
@@ -165,8 +165,8 @@ export default function UserPage() {
                   timeStringToFloat(lesson.course_end_time) -
                     timeStringToFloat(lesson.course_start_time) ==
                   1.5
-                    ? 10.8
-                    : 16
+                    ? 9.8
+                    : 15
                 }%`,
               }}
               onMouseOver={() =>
@@ -207,6 +207,10 @@ export default function UserPage() {
               >
                 {lessons.name}
               </div>
+              {/* <div className="course_hover" id={lessonBoxId + "x"}>
+                <div className="dir-left">{lessons.complete_course_number}</div>
+                <div>{lessons.teacher.name}</div>
+              </div> */}
             </div>
           </div>
         );
@@ -220,7 +224,8 @@ export default function UserPage() {
         <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">
           <Card>
-            <CardBody>
+
+            <CardBody className="week-card-body">
               <CardHeader>
                 <Row>
                   <Col sm="6">
@@ -238,10 +243,10 @@ export default function UserPage() {
                         size="sm"
                         onClick={() => setBgChartData("data1")}
                       >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                        <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                           برنامه هفتگی
                         </span>
-                        <span className="d-block d-sm-none">
+                        <span className="d-block d-sm-block d-md-none">
                           <i className="tim-icons icon-single-02" />
                         </span>
                       </Button>
@@ -255,10 +260,10 @@ export default function UserPage() {
                         })}
                         onClick={() => setBgChartData("data2")}
                       >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                        <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                           خلاصه وضعیت
                         </span>
-                        <span className="d-block d-sm-none">
+                        <span className="d-block d-sm-block d-md-none">
                           <i className="tim-icons icon-gift-2" />
                         </span>
                       </Button>
@@ -272,10 +277,10 @@ export default function UserPage() {
                         })}
                         onClick={() => setBgChartData("data3")}
                       >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                        <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                           برنامه امتحانات
                         </span>
-                        <span className="d-block d-sm-none">
+                        <span className="d-block d-sm-block d-md-none">
                           <i className="tim-icons icon-tap-02" />
                         </span>
                       </Button>
@@ -309,6 +314,148 @@ export default function UserPage() {
                   }}
                 >
                   {lessons()}
+                  {/* <Row>
+                    <Col lg="12" sm="10">
+                      <Card>
+                        <CardBody>
+                          <Table className="week_table" responsive>
+                            <thead className="text-primary">
+                              <tr className="mamad">
+                                <th className="text-center"></th>
+                                <th className="text-center">
+                                  <span className="backBlue">۷:۳۰</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۹</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۱۰:۳۰</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۱۲</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۱:۳۰</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۳</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۴:۳۰</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۶</span>
+                                </th>
+                                <th className="text-center ">
+                                  <span className="backBlue">۷:۳۰</span>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr className="UserPage_first_row">
+                                <td className="UserPage_first_column text-center">
+                                  شنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  یکشنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  دوشنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  سه‌شنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  چهارشنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  پنج‌شنبه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                              <tr>
+                                <td className="UserPage_first_column text-center ">
+                                  جمعه
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-center"></td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        </CardBody>
+                      </Card>
+                    </Col>
+                  </Row> */}
                 </div>
                 <div
                   style={{
