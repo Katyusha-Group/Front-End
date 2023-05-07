@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useState } from "react";
 import classNames from "classnames";
 
 // import { Line, Bar } from "react-chartjs-2";
@@ -54,34 +56,60 @@ function ExamChart() {
   const [showX, setShowX] = React.useState("none");
   let defu = 15;
   let length = 12.7;
-  let top_right = 4.9;
-  let top_defu = 5.8;
+  let top_right = 4.91;
+  let top_defu = 5.77;
   function closeLesson(open) {
     setShowLesson(false);
   }
-  console.log(info.courseChoosed);
+  var weekday = new Array(7);
+  weekday[0] = "شنبه";
+  weekday[1] = "یکشنبه";
+  weekday[2] = "دوشنبه";
+  weekday[3] = "سه‌شنبه";
+  weekday[4] = "چهارشنبه";
+  weekday[5] = "پنج‌شنبه";
+  weekday[6] = "جمعه";
   function lessons() {
     return info.courseChoosed.map((lesson) => {
+      let lessonBoxId = `${lesson.complete_course_number}`;
       let day = lesson.exam_times[0].date.split("-")[2] - 17;
+      // console.log(lesson.course_times[0].course_day);
       if (day < 0) day = day + 31;
       let time =
         (timeStringToFloat(lesson.exam_times[0].exam_start_time) - 8) / 2;
       return (
-        <div key={lesson.id}>
+        <div key={lessonBoxId}>
           <div>
             <div
-              id={lesson.id}
+
+              id={lessonBoxId}
+
               className="exam text-center"
               style={{
                 top: `${defu + length * time}%`,
                 right: `${top_defu + top_right * day}%`,
               }}
+              onMouseOver={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "block")
+              }
+              onMouseOut={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "none")
+              }
             >
-              <div
-                style={{ height: "100%" }}
-                onClick={() => setShowLesson(true)}
-              >
-                {lesson.name}
+              <div>{lesson.name}</div>
+              <div className="exam_hover" id={lessonBoxId + "x"}>
+                <div className="dir-left">{lesson.complete_course_number}</div>
+                <div>{lesson.teacher.name}</div>
+                <div>
+                  {weekday[parseInt(lesson.course_times[0].course_day)]}
+                </div>
+                <div>
+                  {timeStringToFloat(lesson.exam_times[0].exam_start_time) +
+                    "-" +
+                    timeStringToFloat(lesson.exam_times[0].exam_end_time)}
+                </div>
               </div>
             </div>
           </div>
@@ -91,25 +119,15 @@ function ExamChart() {
   }
   return (
     <>
-      {/* <div className="chart">{lessons()}</div> */}
-      {/* <Form>
-        <FormGroup>
-          <Label for="exampleSelect"></Label>
-          <Input className="select" type="select" name="select" id="exampleSelect">
-            <option>ریاضی</option>
-            <option>کامپایلر</option>
-            <option>فیزیک</option>
-            <option>ریزپر</option>
-          </Input>
-        </FormGroup>
-      </Form> */}
       <Row>
         <Col lg="12" sm="12">
           <Card>
+
             {/* <CardHeader className="text-right">
               <CardTitle tag="h4">برنامه هفتگی</CardTitle>
             </CardHeader> */}
             <CardBody className="exam-card-body">
+
               <div className="overflow-auto">
                 <div className="chart1">{lessons()}</div>
               </div>
@@ -141,135 +159,21 @@ function ExamChart() {
                 <tbody>
                   <tr className="Table_first_row">
                     <td className="Table_first_column text-center  ">8-10</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                   <tr>
                     <td className="Table_first_column text-center ">10-12</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                   <tr>
                     <td className="Table_first_column text-center ">12-14</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                   <tr>
                     <td className="Table_first_column text-center ">14-16</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                   <tr>
                     <td className="Table_first_column text-center ">16-18</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                   <tr className="Table_last_row">
                     <td className="Table_first_column text-center ">18-20</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td className="text-center"></td>
                   </tr>
                 </tbody>
               </Table> */}

@@ -224,6 +224,7 @@ export default function UserPage() {
         <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">
           <Card>
+
             <CardBody className="week-card-body">
               <CardHeader>
                 <Row>

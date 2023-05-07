@@ -36,6 +36,10 @@ border-bottom: none !important;
     overflow: visible !important;
 }
 
+/* .course :hover{
+    color: rebeccapurple;
+} */
+
 .exam, i .exam{
     position: absolute;
     height: 16%;
@@ -48,7 +52,7 @@ border-bottom: none !important;
     opacity: 0.75;
     justify-content: center;
     font-size: 0.66rem;
-    padding-top: 0.4rem;
+    padding: 0.3rem;
 }
 
 .exam:hover{
@@ -62,14 +66,41 @@ border-bottom: none !important;
     padding: 0.2rem 1rem;
     color: white;
 }
+/* 
+.exam_hover ::before{
+    display: inline-block;
+    position: absolute;
+    align-items: center;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    content: "";
+    top: -5px;
+    right: 45%;
+    color: #1d8bf86d;
+    border-radius: 10rem;
+    border-bottom: 0.4em solid ;
+    border-right: 0.7em solid transparent;
+    border-left: 0.7em solid transparent;
+} */
 
-.lesson_button{
-    background: none;
+.exam_hover{
+    background: #1d8bf86d;
+    width: 110px;
+    height: auto;
     border: none;
     color: white;
     position: absolute;
-    right: 0;
-    top:0;
+    top:100%;
+    right: -50%;
+    border-radius: 1.4rem;
     z-index: 1;
+    padding: 0.5rem;
+    margin-top: 5px;
     display: none;
+   line-height: 1.5rem;
+   font-size: 0.7rem;
+}
+.dir-left{
+    direction: ltr;
 }
