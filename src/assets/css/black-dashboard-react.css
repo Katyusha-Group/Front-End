@@ -12575,7 +12575,8 @@ code {
 
 @media screen and (max-width: 991px) {
   .rtl .sidebar {
-    margin-right: 0; }
+    /* TODO change margin*/
+    margin-right: -70px; }
   .rtl .main-panel .content {
     padding-right: 50px; }
   .rtl #bodyClick {
@@ -13649,7 +13650,7 @@ select.form-control option {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background: #344675;
+  background: 344675;
 }
 
 /* Handle on hover */
