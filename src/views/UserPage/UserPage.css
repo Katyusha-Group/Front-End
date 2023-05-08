@@ -1,27 +1,88 @@
-
+.week_table{
+    table-layout: fixed;
+    overflow: visible ;
+}
+.week_table thead{
+    padding: 10px;
+}
+/* .table > thead > tr :first-child{
+    position: relative;
+    right: -50px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: transparent;
+    border-radius: 3rem;
+}
+.mamad > th {
+    position: relative;
+    right: -61.5px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 3rem;
+} */
+.backBlue{
+    position: relative;
+    right: -45px !important;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 1rem;
+    display: block;
+    width: 76px;
+}
+/* .table > thead > tr > th{
+    position: relative;
+    right: -50px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 3rem;
+} */
 .UserPage_first_column{
-    border: none;
+    border-right: none !important;
+}
+.UserPage_first_column{
+    border-right: none !important;
 }
 
-.table td{
-    border-top: none;
-    border-right: 0.0625rem solid #e3e3e3;
+.UserPage_first_row > td{
+border-top: none !important;
 }
 
+.UserPage_last_row > td{
+border-bottom: none !important;
+}
+
+.week_table td{
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top: 0.0625rem solid #e3e3e3;
+    border-right: 0.0625rem solid  rgba(255, 255, 255, 0.1);
+    padding: 15px 0px !important;
+    /* border-right: 0.0625rem solid #e3e3e3 !important; */
+}
+.week-card-body{
+    height: 510px;
+}
 .chart{
-    background: url(../../assets/img/chart3.png);
+    background: url(../../assets/img/WeekChart4.png);
     background-size: 100% 100%;
     min-width: 60rem;
     height: 30em;
     position: relative;
     background-repeat: no-repeat;
     resize: both;
-
+    /* margin-left: 10px; */
+    margin-top: 5px !important;
 }
 
 .course, i .course{
     position: absolute;
-    height: 2.3rem;
+    height: 3.6rem;
     width: 5rem;
     background-color:#1d8cf8 ;
     top:20%;
@@ -32,7 +93,6 @@
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
-    height: 3rem;
 }
 
 .course:hover{
@@ -149,4 +209,23 @@ p{
     /* border-radius: 20px; */
     /* border-width: 0.1875rem;
     border-color: "red"; */
+}
+.course_hover{
+    background: #1d8bf86d;
+    width: 110px;
+    height: auto;
+    border: none;
+    color: white;
+    position: absolute;
+    top:100%;
+    border-radius: 1.4rem;
+    z-index: 1;
+    padding: 0.5rem;
+    margin-top: 5px;
+    display: none;
+   line-height: 1.5rem;
+   font-size: 0.7rem;
+}
+.dir-left{
+    direction: ltr;
 }

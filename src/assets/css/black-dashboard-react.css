@@ -11755,7 +11755,7 @@ hr {
       height: 60px; }
   .sidebar .nav,
   .off-canvas-sidebar .nav {
-    margin-top: 20px;
+    margin-top: 5px;
     display: block; }
     .sidebar .nav .caret,
     .off-canvas-sidebar .nav .caret {
@@ -12467,6 +12467,7 @@ code {
 
 .rtl .sidebar,
 .rtl .bootstrap-navbar {
+  width: 20rem;
   right: 0;
   left: auto;
   margin-right: 20px;
@@ -12510,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 80px 280px 30px 30px; }
+  padding: 80px 356px 30px 30px; }
 
 
 .rtl .footer {
@@ -12574,7 +12575,8 @@ code {
 
 @media screen and (max-width: 991px) {
   .rtl .sidebar {
-    margin-right: 0; }
+    /* TODO change margin*/
+    margin-right: -70px; }
   .rtl .main-panel .content {
     padding-right: 50px; }
   .rtl #bodyClick {
@@ -13632,3 +13634,26 @@ select.form-control option {
   color: #888; }
 
 /*# sourceMappingURL=black-dashboard-react.css.map */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  background: #27293d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: 344675;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

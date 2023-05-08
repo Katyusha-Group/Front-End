@@ -11,7 +11,7 @@ const ModalLessons = (props) => {
   return (
     <>
       <Modal
-        show={props.show}
+        show={props.show.flag}
         cancel={props.close}
         // centered
       >
@@ -30,18 +30,17 @@ const ModalLessons = (props) => {
           </Modal.Header>
           <Modal.Body className="loginLmsModalBody">
             <CardHeader>
-              
+              {props.show.data.name}
             </CardHeader>
             <CardBody>
               <Form>
                 <Row>
                   <Col className="text-right" md="12">
-                    
+                    ظرفیت: {props.show.data.capacity}
                   </Col>
                 </Row>
                 <Row>
                   <Col className="text-right" md="12">
-                    
                   </Col>
                 </Row>
               </Form>
