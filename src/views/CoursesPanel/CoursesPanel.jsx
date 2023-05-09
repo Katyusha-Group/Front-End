@@ -21,7 +21,7 @@ export default function CoursesPanel() {
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
   React.useEffect(() => {
-    fetch("http://katyushaiust.ir/allcoursesdepartment/", {
+    fetch("https://katyushaiust.ir/allcourses-based-department/13", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())

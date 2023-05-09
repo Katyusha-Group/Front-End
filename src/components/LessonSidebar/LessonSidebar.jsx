@@ -23,6 +23,8 @@ import classData from "../../assets/data/data.json";
 
 import SearchBox from "../SearchBox/SearchBox.jsx";
 
+import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
+
 var ps;
 
 function Sidebar(props) {
@@ -151,6 +153,11 @@ function Sidebar(props) {
                 ))}
               </div>
               <div className="lessonSidebar_component lessonSidebar_component-lessons">
+                {/* {
+                  // window.location.pathname == "/admin/Courses" ?  console.log("yes") : console.log("No")
+                  window.location.pathname == "/admin/Courses" ?  
+                    CoursesPanel() : null
+                } */}
                 {
                   lessonState ? (
                     <SearchBox data={lessonState?.base_courses
@@ -158,6 +165,7 @@ function Sidebar(props) {
                     ) : null}
                     {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
+                {/* {console.log(window.location.pathname)} */}
                 {/* {lessonState?.base_course.map((prop) => (
                   <NavLink
                     className="nav-link"
