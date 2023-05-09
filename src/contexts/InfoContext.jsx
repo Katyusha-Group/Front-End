@@ -16,7 +16,12 @@ export default function ContextInfo(props) {
     token: "",
     courseGroupID:"0",
     courseGroupsListInContext:[],
-    courseChoosed:[]
+    courseChoosed:[],
+    shop:[{
+      code:"121212_12",
+      name:"ریاضی",
+      price:"3000"
+    }]
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
