@@ -136,6 +136,10 @@ border-bottom: none !important;
     flex-direction: row;
 }
 
+.courseCardBody:hover{
+    cursor: pointer;
+}
+
 .courseGroupCard{
     align-items: flex-start;
     display: flex;

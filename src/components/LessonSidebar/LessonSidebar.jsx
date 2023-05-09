@@ -45,7 +45,7 @@ function Sidebar(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        // console.log("data all",data);
         setDeparteman(data);
       })
       .catch((error) => console.error(error));
