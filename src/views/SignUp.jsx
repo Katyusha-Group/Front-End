@@ -4,6 +4,7 @@ import Select from "react-select";
 import "../assets/css/SignUp.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useInfo } from "../contexts/InfoContext";
 // reactstrap components
 import {
   Button,
@@ -26,6 +27,8 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
+  const { info, changeInfo } = useInfo();
+  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,7 +45,7 @@ function SignUp() {
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((subjectOptions) => {
-        console.log(subjectOptions);
+        // console.log(subjectOptions);
         setSubjectOptions(subjectOptions);
       });
   }, []);
@@ -253,8 +256,16 @@ function SignUp() {
     });
     const data = await response.json();
     console.log(data);
-    if (response.status === 200) {
+    if ( response.status===201){
+
+    // if ( data.message.includes("created successfully")){
+      
+      changeInfo("token",data.token)
+      console.log(info.token);
+      console.log(data.token)
+
       console.log("خوش آمدید");
+      console.log(info.token)
       Navigate("/verification");
     } else {
       if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";

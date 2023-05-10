@@ -1,7 +1,9 @@
 
 import React, { useState, useRef ,useEffect} from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { verificationApi } from "../../components/LessonSidebar/ApiCalls";
 import "./Verification.css"
+import { useInfo } from "../../contexts/InfoContext";
 // import axios from "axios";
 // reactstrap components
 import {
@@ -35,6 +37,7 @@ const [formData, setFormData] = useState({
 //       });
 //   }, []);
 const Navigate = useNavigate();
+const { info, changeInfo } = useInfo();
   // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     codeError: ""
@@ -86,6 +89,7 @@ const Navigate = useNavigate();
   
    const values = formData.code.split("");
 const [code, setCode] = useState("");
+const [showAlert, setShowAlert] = useState(false);
   const codeInputRefs = [
     useRef(null),
     useRef(null),
@@ -127,6 +131,9 @@ function isValidCode(code) {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(code)
+    setShowAlert(verificationApi(code,info.token))
+    
+
 
     const errors = [
       {
@@ -146,7 +153,7 @@ function isValidCode(code) {
       return;
     }
    
-Navigate("/admin/page");
+// Navigate("/admin/page");
   }
 
   return (
@@ -155,13 +162,22 @@ Navigate("/admin/page");
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="justify-content-center">
+              
               <Col className="text-right" md="4">
                 <Card>
+
                   <CardHeader>
                     <h4 className="title text-center"> فعال سازی ایمیل</h4>
                   </CardHeader>
                   <CardBody style={{ padding: '40px' }}>
                     <Form >
+                      {showAlert &&
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" >
+                      <strong>.کد با موفقیت ثبت شد</strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          {/* <i class="tim-icons icon-simple-remove"></i> */}
+                      </button>
+                    </div>}
                       <Row>
                         <Col md="12">
                           <FormGroup className="text-right">
@@ -194,6 +210,7 @@ Navigate("/admin/page");
                       </Row>
                     </Form>
                   </CardBody>
+                  
                   <CardFooter className="text-center">
                     <Button
                       onClick={handleSubmit}
@@ -204,6 +221,12 @@ Navigate("/admin/page");
                       ثبت کد
                     </Button>
                   </CardFooter>
+                  <CardBody>
+                  <Link to="/login" color="primary">
+                            ورود به حساب کابری
+                    </Link>
+                  </CardBody>
+                  
                 </Card>
               </Col>
             </Row>
