@@ -33,6 +33,7 @@
     "sass": "^1.60.0",
     "simplebar": "^6.2.4",
     "simplebar-react": "^3.2.3",
+    "sweetalert2": "^11.7.5",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

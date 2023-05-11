@@ -1,7 +1,7 @@
 //import { info } from "sass";
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Swal from 'sweetalert2';
 import { useInfo } from "../../contexts/InfoContext";
 
 export function takeLessonsGroups(token){
@@ -31,52 +31,6 @@ export function takeLessonsGroups(token){
   }
 
   export async function verificationApi(code,token,setShowAlert){
-    // console.log(`https://katyushaiust.ir/accounts/activation-confirm/${token}/`)
-    // console.log(code)
-    // strCode=code.toString()
-    
-    // fetch(`https://katyushaiust.ir/accounts/activation-confirm/${token}/`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "accept": "application/json"
-    //   },
-
-    //   body: JSON.stringify(
-    //   {
-    //     verification_code: code
-    //   })
-    // }).then((response) => response.json())
-    // .then((data) => {
-    //   console.log("heyy it was done!", data);
-    //   // console.log(response)
-    //   // setData(data);
-    //   if ( response.status===200){
-    //     return setShowAlert(true);
-    //   }else{
-    //     return setShowAlert(false);
-    //   }
-    // })
-    
-  //   .catch((error) => console.error(error));
-  // console.log(data);
-  //   const data = await response.json();
-  //   console.log(data.token);
-  //   if (response.status === 200) {
-  //     setAuthTokens(data.token);
-  //     console.log(authTokens);
-
-  //     localStorage.setItem("authTokens", JSON.stringify(data));
-  //     Navigate("/admin/page");
-  //   } else {
-  //     console.log(data.error);
-  //     errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
-  //     setErrorMessage({
-  //       ...errorMessage,
-  //       backError: errors.backError,
-  //     });
-  //   }
-
   const response = await fetch(`https://katyushaiust.ir/accounts/activation-confirm/${token}/`, {
       method: "POST",
       headers: {
@@ -89,28 +43,32 @@ export function takeLessonsGroups(token){
         verification_code: code
       })
     });
+    
     const data = await response.json();
     console.log(data);
     if ( response.status===200){
 
-    // if ( data.message.includes("created successfully")){
-      
-      // changeInfo("token",data.token)
-      // console.log(info.token);
-      // console.log(data.token)
 
       console.log("خوش آمدید");
-      alert("کد با موفقیت تایید شد. می توانید وارد حساب کاربری شوید ")
       Swal.fire({
-        title: "Success",
-        text: "Alert successful",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-      // setShowAlert(true);
+        icon: 'success',
+        title: 'کد با موفقیت تایید شد.',
+        html:'می توانید وارد حساب کاربری شوید',
+        background: '#3c3e5d',
+        color:'#ceccc0',
+        width:'25rem',
+      })
+      
       }else{
-        alert("کد صحیح نیست")
-        // setShowAlert(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'کد صحیح نیست',
+          text: 'دوباره بررسی کنید',
+          background: '#3c3e5d',
+          color:'#ceccc0',
+          width:'25rem',
+          // footer: '<a href="">Why do I have this issue?</a>'
+        })
       }
     
   }
