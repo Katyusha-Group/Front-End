@@ -1,6 +1,7 @@
 import React from "react";
 import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
+import Select from "react-select";
 import {
   Card,
   CardHeader,
@@ -18,14 +19,16 @@ import dataJson from "./Classes"
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
   let [ChosenCourses, setChosenCourses] = React.useState([]);
-  let temp = dataJson;
+  const [Department, setDepartment] = React.useState([]);
+  //let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
+  let DepartmentCourses = dataJson;
   // let timetable = dataJson;
   //let [timetable, settimetable] = React.useState([]);
   // const tokenJson = localStorage.getItem("authTokens");
   // const tokenClass = JSON.parse(tokenJson);
   // const token = tokenClass.token.access;
   // React.useEffect(() => {
-  //   fetch("https://katyushaiust.ir/allcourses-based-department/13", {
+  //   fetch(`https://katyushaiust.ir/allcourses-based-department/${Department}`, {
   //     headers: { Authorization: `Bearer ${token}` },
   //   })
   //     .then((response) => response.json())
@@ -99,6 +102,61 @@ export default function CoursesPanel() {
   //       return location.pathname === routeName ? "active" : "";
   //     };
   //   }, []);
+  const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
+  // const subjects = [];
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/departments/names")
+      .then((response) => response.json())
+      .then((DepartmentOptions) => {
+        console.log(DepartmentOptions);
+        setDepartmentOptions(DepartmentOptions);
+      });
+  }, []);
+  const customStyles = {
+    input: (defaultStyles) => ({
+      ...defaultStyles,
+      color: "transparent",
+    }),
+    option: (defaultStyles, state) => ({
+      ...defaultStyles,
+      color: "#9A9A9A",
+      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
+      "&:hover": {
+        backgroundColor: "rgba(222, 222, 222, 0.3)",
+      },
+      transition: "all 150ms linear",
+      margin: "-4px 0px",
+      padding: "0.6rem 24px",
+      fontSize: "0.75rem",
+      fontWeight: "400",
+    }),
+
+    control: (defaultStyles, state) => ({
+      ...defaultStyles,
+
+      "&:hover": {
+        borderColor: "#e14eca",
+      },
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      color: "rgba(255, 255, 255, 0.8)",
+      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
+      borderRadius: "0.4285rem",
+      fontSize: "0.75rem",
+      marginTop: "5px",
+      fontWeight: "400",
+      transition:
+        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
+    }),
+    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
+  };
+  // const [subject, setSubject] = useState();
+
+  function handleDepartment(selectedOption) {
+    // setErrorMessage("");
+    setDepartment(selectedOption.value);
+    console.log("Chosen Department: " + selectedOption.value)
+  }
 
   // function GetChosenLessons()
   // {
@@ -118,9 +176,25 @@ export default function CoursesPanel() {
           //   untiSum += data[i].total_unit;
           // }
           // console.log(untiSum);
-          console.log("get data after reload", data);
+          // console.log("get data after reload", data);
         })
         .catch((error) => console.error(error));
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    }, []);
+
+    React.useEffect(() => {
+      fetch("https://www.katyushaiust.ir/departments/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+          setDepartment(data);
+        })
+        .catch((error) => console.error(error));
+      // console.log(data);
       const activeRoute = (routeName) => {
         return location.pathname === routeName ? "active" : "";
       };
@@ -158,9 +232,9 @@ export default function CoursesPanel() {
   // timetable.concat(ChosenCourses);
   // timetable.push.apply(timetable, ChosenCourses);
   // // GetChosenLessons();
-  let timetable = [...ChosenCourses, ...temp];
-  console.log("Chosen courses are: " + ChosenCourses);
-  console.log("Result timetable is: " + timetable);
+  let timetable = [...ChosenCourses, ...DepartmentCourses];
+  // console.log("Chosen courses are: " + ChosenCourses);
+  // console.log("Result timetable is: " + timetable);
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
     const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() })
@@ -209,7 +283,7 @@ export default function CoursesPanel() {
                       //console.log("x", x);
                       //addNewLesson(x.complete_course_number);
                       //changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      console.log("info", info.courseChoosed);
+                      // console.log("info", info.courseChoosed);
                     }}>
                       +
                     </button>
@@ -239,7 +313,15 @@ export default function CoursesPanel() {
           <Col>
             <Card>
               <CardHeader className="text-right">
-                <CardTitle tag="h4">برنامه هفتگی</CardTitle>
+                {/* <CardTitle tag="h4">برنامه هفتگی</CardTitle> */}
+                <Select
+                  options={DepartmentOptions}
+                  styles={customStyles}
+                  isRtl
+                  placeholder="دانشکده مورد نظر را انتخاب کنید"
+                  name="Department"
+                  onChange={handleDepartment}
+                />
               </CardHeader>
               <CardBody>
                 <Table className="ClassesTable" responsive>
