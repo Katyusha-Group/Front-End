@@ -39,48 +39,48 @@ export default function CoursesPanel() {
   //     .catch((error) => console.error(error));
   // }, []);
   
-  // function addNewLesson(num) {
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = JSON.parse(tokenJson);
-  //   // console.log("tokenClass", tokenClass);
-  //   const token = tokenClass.token.access;
-  //   // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
-  //   //   method: "POST",
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   //   body: JSON.stringify({
-  //   //     username: formData.email,
-  //   //     password: formData.password,
-  //   //   }),
-  //   // });
-  //   // const data = await response.json();
-  //   // console.log(`num is : ${num}`);
-  //   // console.log(`type :`, typeof num);
+  function addNewLesson(num) {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    // console.log("tokenClass", tokenClass);
+    const token = tokenClass.token.access;
+    // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     username: formData.email,
+    //     password: formData.password,
+    //   }),
+    // });
+    // const data = await response.json();
+    // console.log(`num is : ${num}`);
+    // console.log(`type :`, typeof num);
   
-  //   fetch("https://www.katyushaiust.ir/courses/my_courses/", {
-  //     method: "PUT",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       complete_course_number: num,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // console.log("gjgjhdsfffffhs post successfully");
-  //       console.log("put data", data);
-  //       // setData(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  //   // console.log(data);
-  //   const activeRoute = (routeName) => {
-  //     return location.pathname === routeName ? "active" : "";
-  //   };
-  // }
+    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("gjgjhdsfffffhs post successfully");
+        console.log("put data", data);
+        // setData(data);
+      })
+      .catch((error) => console.error(error));
+    // console.log(data);
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }
 
   // const tokenJson2 = localStorage.getItem("authTokens");
   //   const tokenClass2 = JSON.parse(tokenJson2);
@@ -288,6 +288,10 @@ export default function CoursesPanel() {
                       //addNewLesson(x.complete_course_number);
                       //changeInfo("courseChoosed", [...info.courseChoosed, x]);
                       // console.log("info", info.courseChoosed);
+                      console.log("Course to be added: ", entry);
+                      addNewLesson(entry.complete_course_number);
+                      changeInfo("courseChoosed", [...info.courseChoosed, entry]);
+                      console.log("info", info);
                     }}>
                       +
                     </button>
