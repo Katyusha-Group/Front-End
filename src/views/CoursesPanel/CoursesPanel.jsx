@@ -79,8 +79,8 @@ export default function CoursesPanel() {
 
   function mapTimeToIndex (start_time) {
     const times = [
-      "7:30:00",
-      "9:00:00",
+      "07:30:00",
+      "09:00:00",
       "10:30:00",
       "12:00:00",
       "13:30:00",
@@ -112,9 +112,23 @@ export default function CoursesPanel() {
     const NumInEachSlot = createCourseGroupsArray(timetable)
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
-        let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
-        lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
+        //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
+        currentPeriod.course_times.forEach(time => {
+          // console.log("=======================")
+          const day = time.course_day;
+          // console.log("day is: " + day);
+          
+          const startTime = time.course_start_time;
+          // console.log("time is: " + startTime)
+          // Do something with the day and start time, such as counting the number of courses
+          NumInEachSlot[day][mapTimeToIndex(startTime)]++;
+          // console.log("time index is: " + mapTimeToIndex(startTime))
+          let count = NumInEachSlot[day][mapTimeToIndex(startTime)];
+          // console.log("count is: " + count)
+          lessonsKeyedByDayAndPeriod[day][mapTimeToIndex(startTime)][count] = currentPeriod
+        });
+        // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
+        // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
         return lessonsKeyedByDayAndPeriod
       },
       {
@@ -134,7 +148,7 @@ export default function CoursesPanel() {
             <div>
               {entry !== null && (
                 <div className="Course" color="primary">
-                  {entry.name} ({entry.class_gp})
+                  {entry.name} ({entry.group_number})
                   <br/>
                   <button className="btn-fill-AddCourseButton" onClick={() => {
                       //console.log("x", x);

@@ -1,164 +1,154 @@
 [
     {
-        "id" : 0,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "حسابان",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1611117_13",
+        "added_to_calendar_count": 1,
+        "name": "فیزیک پایه 2",
+        "base_course_id": 1611117,
+        "group_number": "13",
+        "capacity": 70,
+        "registered_count": 71,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-27",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 2"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 2"
+            }
+        ],
+        "teacher": {
+            "id": 186,
+            "name": "مصطفی سلحشور",
+            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/28909.png"
+        },
+        "color_intensity_percentage": 0,
+        "color_code": "None"
     },
     {
-        "id" : 1,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "گسسته",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1611117_13",
+        "added_to_calendar_count": 1,
+        "name": "فیزیک پایه 2",
+        "base_course_id": 1611117,
+        "group_number": "13",
+        "capacity": 70,
+        "registered_count": 71,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-27",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 2"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 2"
+            }
+        ],
+        "teacher": {
+            "id": 186,
+            "name": "مصطفی سلحشور",
+            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/28909.png"
+        },
+        "color_intensity_percentage": 0,
+        "color_code": "None"
     },
     {
-        "id" : 2,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "آمار",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1611117_06",
+        "added_to_calendar_count": 0,
+        "name": "فیزیک پایه 2",
+        "base_course_id": 1611117,
+        "group_number": "06",
+        "capacity": 57,
+        "registered_count": 60,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-27",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "2",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 1"
+            },
+            {
+                "course_day": "0",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 1"
+            }
+        ],
+        "teacher": {
+            "id": 183,
+            "name": "محمدرضا جعفرفرد",
+            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/8088.png"
+        },
+        "color_intensity_percentage": 0,
+        "color_code": "None"
     },
     {
-        "id" : 3,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "دیفرانسیل",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 4,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "فیزیک",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 5,
-        "day" : "5",
-        "time" : "15:00:00",
-        "name" : "الگوریتم",
-        "teacher" : "اعتمادی",
-        "room" : "A-72",
-        "long" : "1"
-    },
-    {
-        "id" : 6,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "علوم",
-        "teacher" : "خنجری",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 7,
-        "day" : "2",
-        "time" : "16:30:00",
-        "name" : "عربی",
-        "teacher" : "ملکی",
-        "room" : "A-1",
-        "long" : "1"
-    },
-    {
-        "id" : 8,
-        "day" : "3",
-        "time" : "18:00:00",
-        "name" : "دینی",
-        "teacher" : "رحمانی",
-        "room" : "B-2",
-        "long" : "1"
-    },
-    {
-        "id" : 9,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "اخلاق",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 10,
-        "day" : "0",
-        "time" : "7:30:00",
-        "name" : "اندیشه",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 11,
-        "day" : "1",
-        "time" : "10:30:00",
-        "name" : "دیتابیس",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 12,
-        "day" : "1",
-        "time" : "10:30:00",
-        "name" : "نظریه",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 13,
-        "day" : "1",
-        "time" : "10:30:00",
-        "name" : "ریزپر",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 14,
-        "day" : "1",
-        "time" : "10:30:00",
-        "name" : "سیگنال",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 15,
-        "day" : "1",
-        "time" : "10:30:00",
-        "name" : "گسسته",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 16,
-        "day" : "3",
-        "time" : "15:00:00",
-        "name" : "هوش",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 17,
-        "day" : "3",
-        "time" : "15:00:00",
-        "name" : "ساختمان داده",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1411087_58",
+        "added_to_calendar_count": 1,
+        "name": "معادلات دیفرانسیل",
+        "base_course_id": 1411087,
+        "group_number": "58",
+        "capacity": 55,
+        "registered_count": 55,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-03-30",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 1"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "علوم پایه کلاس شماره 1"
+            }
+        ],
+        "teacher": {
+            "id": 106,
+            "name": "زهرا تند پور",
+            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/20067.png"
+        },
+        "color_intensity_percentage": 10,
+        "color_code": "None"
     }
-  ]
+]
