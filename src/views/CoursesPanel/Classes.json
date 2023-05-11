@@ -3,6 +3,7 @@
         "complete_course_number": "1411087_58",
         "name": "Differential Equations",
        	   "total_unit": 3,
+           "can_take" : true,
         "practical_unit": 0,
         "capacity": 55,
         "registered_count": 55,
@@ -39,6 +40,7 @@
         "complete_course_number": "1411089_63",
         "name": "Engineering Mathematics",
         	  "total_unit": 3,
+              "can_take" : false,
         "practical_unit": 0,
         "capacity": 60,
         "registered_count": 67,
@@ -75,6 +77,7 @@
         "complete_course_number": "1411087_59",
         "name": "Hello",
         "total_unit": 3,
+        "can_take" : false,
         "practical_unit": 0,
         "capacity": 55,
         "registered_count": 50,
@@ -138,6 +141,7 @@
             }
         ],
         "color_intensity_percentage": 20,
-        "color_code": "None"
+        "color_code": "None",
+        "can_take" : true
     }
 ]

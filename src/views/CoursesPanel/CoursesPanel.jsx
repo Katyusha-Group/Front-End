@@ -232,7 +232,8 @@ export default function CoursesPanel() {
   // timetable.concat(ChosenCourses);
   // timetable.push.apply(timetable, ChosenCourses);
   // // GetChosenLessons();
-  let timetable = [...ChosenCourses, ...DepartmentCourses];
+  // let timetable = [...ChosenCourses, ...DepartmentCourses];  //Correcccccccccccccccttttttttttttttt
+  let timetable = DepartmentCourses;
   // console.log("Chosen courses are: " + ChosenCourses);
   // console.log("Result timetable is: " + timetable);
   const keyedTimetable = useMemo(() => {
@@ -273,10 +274,13 @@ export default function CoursesPanel() {
   const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
+        const backgroundColor = (entry !== null && entry.can_take) ? "hsl(235, 22%, 30%)": "rgb(100, 100, 120)";
           return (
             <div>
               {entry !== null && (
-                <div className="Course" color="primary">
+                <div className="Course" 
+                     style={{ backgroundColor: backgroundColor }}
+                >
                   {entry.name} ({entry.group_number})
                   <br/>
                   <button className="btn-fill-AddCourseButton" onClick={() => {
