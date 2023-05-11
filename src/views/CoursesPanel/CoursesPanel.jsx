@@ -17,8 +17,10 @@ import dataJson from "./Classes"
 
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
-  let timetable = dataJson;
-  // let [timetable, settimetable] = React.useState([]);
+  let [ChosenCourses, setChosenCourses] = React.useState([]);
+  let temp = dataJson;
+  // let timetable = dataJson;
+  //let [timetable, settimetable] = React.useState([]);
   // const tokenJson = localStorage.getItem("authTokens");
   // const tokenClass = JSON.parse(tokenJson);
   // const token = tokenClass.token.access;
@@ -77,6 +79,54 @@ export default function CoursesPanel() {
   //   };
   // }
 
+  // const tokenJson2 = localStorage.getItem("authTokens");
+  //   const tokenClass2 = JSON.parse(tokenJson2);
+  //   // console.log(tokenClass);
+  //   const token2 = tokenClass2.token2.access;
+  //   React.useEffect(() => {
+  //     fetch("https://www.katyushaiust.ir/courses/my_courses", {
+  //       headers: { Authorization: `Bearer ${token2}` },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         // setChosenCourses(data);
+  //         setChosenCourses(data);
+  //         changeInfo("courseChoosed", data);
+  //         console.log("get data after reload", data);
+  //       })
+  //       .catch((error) => console.error(error));
+  //     const activeRoute = (routeName) => {
+  //       return location.pathname === routeName ? "active" : "";
+  //     };
+  //   }, []);
+
+  // function GetChosenLessons()
+  // {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    // console.log(tokenClass);
+    const token = tokenClass.token.access;
+    React.useEffect(() => {
+      fetch("https://www.katyushaiust.ir/courses/my_courses", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setChosenCourses(data);
+          changeInfo("courseChoosed", data);
+          // for (let i = 0; i < data.length; i++) {
+          //   untiSum += data[i].total_unit;
+          // }
+          // console.log(untiSum);
+          console.log("get data after reload", data);
+        })
+        .catch((error) => console.error(error));
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    }, []);
+  // }
+
   function mapTimeToIndex (start_time) {
     const times = [
       "07:30:00",
@@ -105,7 +155,12 @@ export default function CoursesPanel() {
     // });
     return courseGroups;
   }
-
+  // timetable.concat(ChosenCourses);
+  // timetable.push.apply(timetable, ChosenCourses);
+  // // GetChosenLessons();
+  let timetable = [...ChosenCourses, ...temp];
+  console.log("Chosen courses are: " + ChosenCourses);
+  console.log("Result timetable is: " + timetable);
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
     const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() })

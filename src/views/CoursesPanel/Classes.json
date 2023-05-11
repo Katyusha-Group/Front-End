@@ -1,127 +1,18 @@
 [
     {
-        "complete_course_number": "1611117_13",
-        "added_to_calendar_count": 1,
-        "name": "فیزیک پایه 2",
-        "base_course_id": 1611117,
-        "group_number": "13",
-        "capacity": 70,
-        "registered_count": 71,
-        "waiting_count": 0,
-        "exam_times": [
-            {
-                "date": "1402-03-27",
-                "exam_start_time": "08:30:00",
-                "exam_end_time": "10:30:00"
-            }
-        ],
-        "course_times": [
-            {
-                "course_day": "3",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 2"
-            },
-            {
-                "course_day": "1",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 2"
-            }
-        ],
-        "teacher": {
-            "id": 186,
-            "name": "مصطفی سلحشور",
-            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/28909.png"
-        },
-        "color_intensity_percentage": 0,
-        "color_code": "None"
-    },
-    {
-        "complete_course_number": "1611117_13",
-        "added_to_calendar_count": 1,
-        "name": "فیزیک پایه 2",
-        "base_course_id": 1611117,
-        "group_number": "13",
-        "capacity": 70,
-        "registered_count": 71,
-        "waiting_count": 0,
-        "exam_times": [
-            {
-                "date": "1402-03-27",
-                "exam_start_time": "08:30:00",
-                "exam_end_time": "10:30:00"
-            }
-        ],
-        "course_times": [
-            {
-                "course_day": "3",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 2"
-            },
-            {
-                "course_day": "1",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 2"
-            }
-        ],
-        "teacher": {
-            "id": 186,
-            "name": "مصطفی سلحشور",
-            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/28909.png"
-        },
-        "color_intensity_percentage": 0,
-        "color_code": "None"
-    },
-    {
-        "complete_course_number": "1611117_06",
-        "added_to_calendar_count": 0,
-        "name": "فیزیک پایه 2",
-        "base_course_id": 1611117,
-        "group_number": "06",
-        "capacity": 57,
-        "registered_count": 60,
-        "waiting_count": 0,
-        "exam_times": [
-            {
-                "date": "1402-03-27",
-                "exam_start_time": "08:30:00",
-                "exam_end_time": "10:30:00"
-            }
-        ],
-        "course_times": [
-            {
-                "course_day": "2",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 1"
-            },
-            {
-                "course_day": "0",
-                "course_start_time": "16:30:00",
-                "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 1"
-            }
-        ],
-        "teacher": {
-            "id": 183,
-            "name": "محمدرضا جعفرفرد",
-            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/8088.png"
-        },
-        "color_intensity_percentage": 0,
-        "color_code": "None"
-    },
-    {
         "complete_course_number": "1411087_58",
-        "added_to_calendar_count": 1,
-        "name": "معادلات دیفرانسیل",
-        "base_course_id": 1411087,
-        "group_number": "58",
+        "name": "Differential Equations",
+       	   "total_unit": 3,
+        "practical_unit": 0,
         "capacity": 55,
         "registered_count": 55,
         "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan",
+        "description": "nan",
+        "presentation_type": "N",
         "exam_times": [
             {
                 "date": "1402-03-30",
@@ -134,21 +25,119 @@
                 "course_day": "3",
                 "course_start_time": "16:30:00",
                 "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 1"
+                "place": "A1"
             },
             {
                 "course_day": "1",
                 "course_start_time": "16:30:00",
                 "course_end_time": "18:00:00",
-                "place": "علوم پایه کلاس شماره 1"
+                "place": "A2"
+            }
+        ]
+    },
+    {
+        "complete_course_number": "1411089_63",
+        "name": "Engineering Mathematics",
+        	  "total_unit": 3,
+        "practical_unit": 0,
+        "capacity": 60,
+        "registered_count": 67,
+        "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan،",
+                "description": "nan",
+        "presentation_type": "N",
+        "exam_times": [
+            {
+                "date": "1402-03-29",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
             }
         ],
-        "teacher": {
-            "id": 106,
-            "name": "زهرا تند پور",
-            "teacher_image": "https://www.katyushaiust.ir/media/images/teachers_image/20067.png"
-        },
-        "color_intensity_percentage": 10,
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "B-202"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "B-202"
+            }
+        ]
+    },
+    {
+        "complete_course_number": "1411087_59",
+        "name": "Hello",
+        "total_unit": 3,
+        "practical_unit": 0,
+        "capacity": 55,
+        "registered_count": 50,
+        "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan",
+        "description": "nan",
+        "presentation_type": "N",
+        "exam_times": [
+            {
+                "date": "1402-03-30",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "C2"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "C2"
+            }
+        ]
+    },
+    {
+        "complete_course_number": "1411088_76",
+        "added_to_calendar_count": 3,
+        "name": "Statistics",
+        "base_course_id": 1411088,
+        "group_number": "76",
+        "capacity": 59,
+        "registered_count": 47,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-04-04",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "13:30:00",
+                "course_end_time": "15:00:00",
+                "place": "C6"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "13:30:00",
+                "course_end_time": "15:00:00",
+                "place": "C6"
+            }
+        ],
+        "color_intensity_percentage": 20,
         "color_code": "None"
     }
 ]
