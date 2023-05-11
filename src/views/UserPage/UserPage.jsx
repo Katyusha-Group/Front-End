@@ -506,7 +506,8 @@ export default function UserPage() {
                     <CardBody className="courseCardBody">
                       <img
                         className="professorImage"
-                        src={sampleProfile}
+                        src={x.teacher.teacher_image}
+                        // src={sampleProfile}
                         alt="professorImage"
                       />
                       <div className="infoPart">
@@ -537,6 +538,10 @@ export default function UserPage() {
                             
                           </text>
                           </p> */}
+                          {/* <img className="fullLogo"
+                          src={x.teacher.teacher_image}
+                          ></img> */}
+                          <div>{x.teacher.teacher_image}</div>
                           {/* <Button className="addToPlanButton">+</Button> */}
                           <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
                           onClick={() => {
