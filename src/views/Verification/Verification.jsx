@@ -131,7 +131,11 @@ function isValidCode(code) {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(code)
-    setShowAlert(verificationApi(code,info.token))
+    // setShowAlert(verificationApi(code,info.token,setShowAlert))
+    console.log(showAlert)
+    console.log(verificationApi(code,info.token))
+    console.log(showAlert)
+    // verificationApi(code,info.token)
     
 
 
@@ -152,8 +156,6 @@ function isValidCode(code) {
     ) {
       return;
     }
-   
-// Navigate("/admin/page");
   }
 
   return (
@@ -162,10 +164,8 @@ function isValidCode(code) {
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="justify-content-center">
-              
               <Col className="text-right" md="4">
                 <Card>
-
                   <CardHeader>
                     <h4 className="title text-center"> فعال سازی ایمیل</h4>
                   </CardHeader>
