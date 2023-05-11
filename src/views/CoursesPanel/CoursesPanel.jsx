@@ -222,20 +222,24 @@ export default function CoursesPanel() {
     {
       courseGroups[i] = Array(8).fill(0);
     }
-    // courses.forEach(course => {
-    //   const day = parseInt(course.day, 10);
-    //   const timeIndex = mapTimeToIndex(course.time);
-    //   courseGroups[day][timeIndex]++;
-    // });
     return courseGroups;
   }
-  // timetable.concat(ChosenCourses);
-  // timetable.push.apply(timetable, ChosenCourses);
-  // // GetChosenLessons();
-  // let timetable = [...ChosenCourses, ...DepartmentCourses];  //Correcccccccccccccccttttttttttttttt
-  let timetable = DepartmentCourses;
-  // console.log("Chosen courses are: " + ChosenCourses);
-  // console.log("Result timetable is: " + timetable);
+
+  let timetable = [...ChosenCourses, ...DepartmentCourses];  //Correct
+  // let NotUnique = [...ChosenCourses, ...DepartmentCourses];
+  // let timetable = ({ NotUnique }) => {
+  //   const uniqueArray = NotUnique.filter((item, index) => {
+  //     return NotUnique.indexOf(item) === index;
+  //   });
+  // }
+  function uniquifyArrayByKey(arr, key) {
+    return arr.filter((item, index) => {
+      return (
+        arr.findIndex((element) => element[key] === item[key]) === index
+      );
+    });
+  }
+  timetable = uniquifyArrayByKey(timetable, "complete_course_number")
   const keyedTimetable = useMemo(() => {
     const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
     const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() })
@@ -274,7 +278,7 @@ export default function CoursesPanel() {
   const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
-        const backgroundColor = (entry !== null && entry.can_take) ? "hsl(235, 22%, 30%)": "rgb(100, 100, 120)";
+        const backgroundColor = (entry !== null && entry.can_take) ? "hsl(235, 22%, 30%)": "rgb(100, 100, 120)"; // Also makes the courses that don't have the attribute gray
           return (
             <div>
               {entry !== null && (
