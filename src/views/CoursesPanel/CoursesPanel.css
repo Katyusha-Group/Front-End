@@ -38,3 +38,22 @@ tbody{
     border-radius: 5px;
 }
 
+.btn-fill-RemoveCourseButton
+{
+    /* height: 15px;
+    width: 15px;
+    text-align: center;
+    padding: 1px 0; */
+    background-color: rgb(253,93,147);
+    border: none;
+    color: white;
+    padding: 1px 5px;
+    text-align: center;
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    font-size: x-small;
+    margin: 5px;
+    /* cursor: pointer; */
+    border-radius: 5px;
+}
+

@@ -18,6 +18,7 @@ import dataJson from "./Classes"
 
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
+  console.log("info", info);
   // let [ChosenCourses, setChosenCourses] = React.useState([]);
   const [Department, setDepartment] = React.useState([]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
@@ -274,11 +275,17 @@ export default function CoursesPanel() {
           const startTime = time.course_start_time;
           // console.log("time is: " + startTime)
           // Do something with the day and start time, such as counting the number of courses
-          NumInEachSlot[day][mapTimeToIndex(startTime)]++;
-          // console.log("time index is: " + mapTimeToIndex(startTime))
-          let count = NumInEachSlot[day][mapTimeToIndex(startTime)];
+          let TimeIndex = mapTimeToIndex(startTime);
+          if (TimeIndex === -1)
+          {
+            TimeIndex = 4;
+          }
+          NumInEachSlot[day][TimeIndex]++;
+          // console.log("time index is: " + TimeIndex)
+          let count = NumInEachSlot[day][TimeIndex];
           // console.log("count is: " + count)
-          lessonsKeyedByDayAndPeriod[day][mapTimeToIndex(startTime)][count] = currentPeriod
+
+          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod
         });
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
@@ -312,11 +319,31 @@ export default function CoursesPanel() {
                       //changeInfo("courseChoosed", [...info.courseChoosed, x]);
                       // console.log("info", info.courseChoosed);
                       console.log("Course to be added: ", entry);
-                      addNewLesson(entry.complete_course_number);
-                      changeInfo("courseChoosed", [...info.courseChoosed, entry]);
+                      // addNewLesson(entry.complete_course_number);
+                      // changeInfo("courseChoosed", [...info.courseChoosed, entry]);
                       console.log("info", info);
                     }}>
                       +
+                    </button>
+                    <button
+                      className="btn-fill-RemoveCourseButton"
+                      onClick={() => {
+                        addNewLesson(entry.complete_course_number);
+                        console.log("delete lesson", entry.complete_course_number);
+                        changeInfo("courseChoosed",
+                          info.courseChoosed.filter(
+                            (item) =>
+                              item.complete_course_number !==
+                              entry.complete_course_number
+                          )
+                        );
+                        // setShowLesson(false);
+                        console.log("delete info", info);
+                        // settimetable(info.courseChoosed);
+                      }}
+                      // id={lessonBoxId + "x"}
+                    >
+                      x
                     </button>
                 </div>     
               )}     
