@@ -541,7 +541,7 @@ export default function UserPage() {
                           {/* <img className="fullLogo"
                           src={x.teacher.teacher_image}
                           ></img> */}
-                          <div>{x.teacher.teacher_image}</div>
+                          {/* <div>{x.teacher.teacher_image}</div> */}
                           {/* <Button className="addToPlanButton">+</Button> */}
                           <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
                           onClick={() => {
