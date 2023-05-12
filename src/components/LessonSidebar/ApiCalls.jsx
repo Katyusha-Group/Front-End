@@ -57,7 +57,15 @@ export function takeLessonsGroups(token){
         background: '#3c3e5d',
         color:'#ceccc0',
         width:'25rem',
-      })
+      }).then((result) => {
+        console.log(result);
+        if(result) {
+          window.location="/login";
+          // ok click
+        } else {
+          // not clicked
+        }
+      });
       
       }else{
         Swal.fire({
