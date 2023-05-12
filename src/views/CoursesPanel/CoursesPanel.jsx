@@ -18,45 +18,43 @@ import dataJson from "./Classes"
 
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
-  let [ChosenCourses, setChosenCourses] = React.useState([]);
+  // let [ChosenCourses, setChosenCourses] = React.useState([]);
   const [Department, setDepartment] = React.useState([]);
-  //let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
-  let DepartmentCourses = dataJson;
-  // let timetable = dataJson;
-  //let [timetable, settimetable] = React.useState([]);
-  // const tokenJson = localStorage.getItem("authTokens");
-  // const tokenClass = JSON.parse(tokenJson);
-  // const token = tokenClass.token.access;
-  // React.useEffect(() => {
-  //   fetch(`https://katyushaiust.ir/allcourses-based-department/${Department}`, {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       //console.log("DATA IS::::::: " + data);
-  //       settimetable(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
+  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
   
+  // let DepartmentCourses = dataJson;
+  // let timetable = dataJson;
+  let [timetable, settimetable] = React.useState([]);
+
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  // console.log(tokenClass);
+  const token = tokenClass.token.access;
+  React.useEffect(() => {       //Already Chosen Lessons
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // setChosenCourses(data);
+        changeInfo("courseChoosed", data);
+        // for (let i = 0; i < data.length; i++) {
+        //   untiSum += data[i].total_unit;
+        // }
+        // console.log(untiSum);
+        // console.log("get data after reload", data);
+        settimetable (data);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, []);
+
   function addNewLesson(num) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    // console.log("tokenClass", tokenClass);
     const token = tokenClass.token.access;
-    // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username: formData.email,
-    //     password: formData.password,
-    //   }),
-    // });
-    // const data = await response.json();
-    // console.log(`num is : ${num}`);
-    // console.log(`type :`, typeof num);
   
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
@@ -71,39 +69,16 @@ export default function CoursesPanel() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("gjgjhdsfffffhs post successfully");
         console.log("put data", data);
-        // setData(data);
       })
       .catch((error) => console.error(error));
-    // console.log(data);
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
   }
 
-  // const tokenJson2 = localStorage.getItem("authTokens");
-  //   const tokenClass2 = JSON.parse(tokenJson2);
-  //   // console.log(tokenClass);
-  //   const token2 = tokenClass2.token2.access;
-  //   React.useEffect(() => {
-  //     fetch("https://www.katyushaiust.ir/courses/my_courses", {
-  //       headers: { Authorization: `Bearer ${token2}` },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         // setChosenCourses(data);
-  //         setChosenCourses(data);
-  //         changeInfo("courseChoosed", data);
-  //         console.log("get data after reload", data);
-  //       })
-  //       .catch((error) => console.error(error));
-  //     const activeRoute = (routeName) => {
-  //       return location.pathname === routeName ? "active" : "";
-  //     };
-  //   }, []);
+  // Select Department
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
-  // const subjects = [];
   React.useEffect(() => {
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
@@ -150,55 +125,99 @@ export default function CoursesPanel() {
     }),
     singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
   };
-  // const [subject, setSubject] = useState();
 
   function handleDepartment(selectedOption) {
-    // setErrorMessage("");
     setDepartment(selectedOption.value);
-    console.log("Chosen Department: " + selectedOption.value)
+    // console.log("Chosen Department: " + selectedOption.value);
+    // console.log("Department is: " + Department)
+    // GetDepartmentLessons(Department);
+    // settimetable([...ChosenCourses, ...DepartmentCourses]);
   }
+
+
+  // function GetDepartmentLessons (DepartmentID)
+  // {
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = JSON.parse(tokenJson);
+  //   const token = tokenClass.token.access;
+  //   React.useEffect(() => {
+  //     fetch(`https://katyushaiust.ir/allcourses-based-department/${DepartmentID}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("DATA IS::::::: " + data);
+  //         setDepartmentCourses(data);
+  //       })
+  //       .catch((error) => console.error(error));
+  //   }, []);
+  // }
+  React.useEffect(() => {
+    if (Department) {
+      const tokenJson = localStorage.getItem("authTokens");
+      const tokenClass = JSON.parse(tokenJson);
+      const token = tokenClass.token.access;
+
+      fetch(`https://katyushaiust.ir/allcourses-based-department/${Department}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("DATA IS::::::: " + data);
+          // setDepartmentCourses(data);
+          settimetable(data);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [Department]);
+  
+  
+  
+
+  // const tokenJson2 = localStorage.getItem("authTokens");
+  //   const tokenClass2 = JSON.parse(tokenJson2);
+  //   // console.log(tokenClass);
+  //   const token2 = tokenClass2.token2.access;
+  //   React.useEffect(() => {
+  //     fetch("https://www.katyushaiust.ir/courses/my_courses", {
+  //       headers: { Authorization: `Bearer ${token2}` },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         // setChosenCourses(data);
+  //         setChosenCourses(data);
+  //         changeInfo("courseChoosed", data);
+  //         console.log("get data after reload", data);
+  //       })
+  //       .catch((error) => console.error(error));
+  //     const activeRoute = (routeName) => {
+  //       return location.pathname === routeName ? "active" : "";
+  //     };
+  //   }, []);
+  
+  // const [subject, setSubject] = useState();
+
+  
 
   // function GetChosenLessons()
   // {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    // console.log(tokenClass);
-    const token = tokenClass.token.access;
-    React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/courses/my_courses", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setChosenCourses(data);
-          changeInfo("courseChoosed", data);
-          // for (let i = 0; i < data.length; i++) {
-          //   untiSum += data[i].total_unit;
-          // }
-          // console.log(untiSum);
-          // console.log("get data after reload", data);
-        })
-        .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    }, []);
+    
 
-    React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/departments/", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data);
-          setDepartment(data);
-        })
-        .catch((error) => console.error(error));
-      // console.log(data);
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    }, []);
+    // React.useEffect(() => {
+    //   fetch("https://www.katyushaiust.ir/departments/", {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log("Department is: " + data);
+    //       setDepartment(data);
+    //     })
+    //     .catch((error) => console.error(error));
+    //   // console.log(data);
+    //   const activeRoute = (routeName) => {
+    //     return location.pathname === routeName ? "active" : "";
+    //   };
+    // }, []);
   // }
 
   function mapTimeToIndex (start_time) {
@@ -224,8 +243,8 @@ export default function CoursesPanel() {
     }
     return courseGroups;
   }
-
-  let timetable = [...ChosenCourses, ...DepartmentCourses];  //Correct
+  // let timetable = ChosenCourses;
+  // settimetable([...ChosenCourses, ...DepartmentCourses]);  //Correct
   // let NotUnique = [...ChosenCourses, ...DepartmentCourses];
   // let timetable = ({ NotUnique }) => {
   //   const uniqueArray = NotUnique.filter((item, index) => {
@@ -285,7 +304,7 @@ export default function CoursesPanel() {
                 <div className="Course" 
                      style={{ backgroundColor: backgroundColor }}
                 >
-                  {entry.name} ({entry.group_number})
+                  {entry.name} ({entry.class_gp})
                   <br/>
                   <button className="btn-fill-AddCourseButton" onClick={() => {
                       //console.log("x", x);
@@ -332,6 +351,7 @@ export default function CoursesPanel() {
                   isRtl
                   placeholder="دانشکده مورد نظر را انتخاب کنید"
                   name="Department"
+                  value={Department}
                   onChange={handleDepartment}
                 />
               </CardHeader>
