@@ -17,11 +17,7 @@ export default function ContextInfo(props) {
     courseGroupID:"0",
     courseGroupsListInContext:[],
     courseChoosed:[],
-    shop:[{
-      code:"121212_12",
-      name:"ریاضی",
-      price:"3000"
-    }]
+    shop:[]
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
