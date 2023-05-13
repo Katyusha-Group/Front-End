@@ -2,3 +2,7 @@
     padding: 78px 30px 30px 30px;
     min-height: calc(100vh - 70px);
 }
+
+.shoping_label{
+    margin: .5rem 1rem;
+}
