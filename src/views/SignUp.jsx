@@ -284,18 +284,18 @@ function SignUp() {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     Swal.close()
     if ( response.status===201){
 
     // if ( data.message.includes("created successfully")){
       
       changeInfo("token",data.token)
-      console.log(info.token);
-      console.log(data.token)
+      // console.log(info.token);
+      // console.log(data.token)
 
       console.log("خوش آمدید");
-      console.log(info.token)
+      // console.log(info.token)
       Swal.fire({
         // position: 'top-end',
         icon: 'success',
