@@ -228,7 +228,8 @@ export default function UserPage() {
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
                 >
-                  {lessons()}
+                  {lessons(info, changeInfo)}
+                  {lessons(showCourseHover, setShowCourseHoverFunc)}
                   <ModalLessons
                     show={showLesson}
                     close={() =>
