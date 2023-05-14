@@ -136,6 +136,7 @@ export default function UserPage() {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log("get data", data);
           setData(data);
           changeInfoState("courseChoosed", data);
           console.log("get data after reload", data);
