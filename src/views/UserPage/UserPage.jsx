@@ -235,156 +235,6 @@ export default function UserPage() {
                       setShowLesson(() => ({ ...showLesson, flag: false }))
                     }
                   />
-                  {/* <Row>
-                    <Col lg="12" sm="10">
-                      <Table className="week_table">
-                        <thead className="text-primary">
-                          <tr className="mamad">
-                            <th className="text-center"></th>
-                            <th className="text-center">
-                              <span className="backBlue">۷</span>
-                            </th>
-                            <th className="text-center">
-                              <span className="backBlue">۸</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۹</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۰</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۱</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۲</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۳</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۴</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۵</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۶</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۷</span>
-                            </th>
-                            <th className="text-center">
-                              <span className="backBlue">۱۸</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۱۹</span>
-                            </th>
-                            <th className="text-center ">
-                              <span className="backBlue">۲۰</span>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="UserPage_first_row">
-                            <td className="UserPage_first_column text-center">
-                              شنبه
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-center"></td>
-                          </tr>
-                          <tr>
-                            <td className="UserPage_first_column text-center ">
-                              یکشنبه
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-center"></td>
-                          </tr>
-                          <tr>
-                            <td className="UserPage_first_column text-center ">
-                              دوشنبه
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-center"></td>
-                          </tr>
-                          <tr>
-                            <td className="UserPage_first_column text-center ">
-                              سه‌شنبه
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-center"></td>
-                          </tr>
-                          <tr>
-                            <td className="UserPage_first_column text-center ">
-                              چهارشنبه
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-center"></td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </Col>
-                  </Row> */}
                 </div>
                 <div
                   style={{
@@ -492,51 +342,6 @@ export default function UserPage() {
         </Col>
         <Col sm="12">
           <Card className="dir-right">
-            {/* <CardHeader>
-              <Row>
-                <Col sm="6">
-                  <ButtonGroup
-                    className="btn-group-toggle float-right"
-                    data-toggle="buttons"
-                  >
-                    <Button
-                      color="info"
-                      id="1"
-                      size="sm"
-                      tag="label"
-                      className={classNames("btn-simple", {
-                        active: bigChartData === "data2",
-                      })}
-                      onClick={() => setBgChartData("data2")}
-                    >
-                      <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-                        خلاصه وضعیت
-                      </span>
-                      <span className="d-block d-sm-block d-md-none">
-                        <i className="tim-icons icon-gift-2" />
-                      </span>
-                    </Button>
-                    <Button
-                      color="info"
-                      id="2"
-                      size="sm"
-                      tag="label"
-                      className={classNames("btn-simple", {
-                        active: bigChartData === "data3",
-                      })}
-                      onClick={() => setBgChartData("data3")}
-                    >
-                      <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-                        برنامه امتحانات
-                      </span>
-                      <span className="d-block d-sm-block d-md-none">
-                        <i className="tim-icons icon-tap-02" />
-                      </span>
-                    </Button>
-                  </ButtonGroup>
-                </Col>
-              </Row>
-            </CardHeader> */}
             <CardBody className="courseGroupCard">
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
@@ -552,7 +357,8 @@ export default function UserPage() {
                           : "dimgray",
                     }}
                     onMouseEnter={() => {
-                      console.log(x.complete_course_number);
+                      console.log("x.complete",x.complete_course_number);
+                      // console.log("z");
                       setShowCourseHoverFunc("courseChoosed", [
                         ...info.courseChoosed,
                         x,
@@ -580,29 +386,6 @@ export default function UserPage() {
                             <p>
                               ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
                             </p>
-                            {/* <p style={{ fontSize: 12 }}>
-                          {" "}
-                          {x.course_times.map((x) => (
-                            <text>{dayOfWeek(x.course_day)} </text>
-                          ))}
-                          <text>
-                            {timeStringToFloat(
-                              x.course_times[0].course_start_time
-                            )}
-                          </text>{" "}
-                          تا{" "}
-                          <text>
-                            {timeStringToFloat(
-                              x.course_times[0].course_end_time
-                            )}
-                            
-                          </text>
-                          </p> */}
-                            {/* <img className="fullLogo"
-                          src={x.teacher.teacher_image}
-                          ></img> */}
-                            {/* <div>{x.teacher.teacher_image}</div> */}
-                            {/* <Button className="addToPlanButton">+</Button> */}
                             <Button
                               variant="secondary"
                               size="sm"
