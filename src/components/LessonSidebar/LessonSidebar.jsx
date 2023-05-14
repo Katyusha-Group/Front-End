@@ -31,6 +31,9 @@ function Sidebar(props) {
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
+  const [allColleges, setAllColleges] = React.useState([]);
+  // const [allColleges, setAllColleges] = React.useState([]);
+  
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
 
@@ -47,7 +50,7 @@ function Sidebar(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        // console.log("data all",data);
         setDeparteman(data);
       })
       .catch((error) => console.error(error));
@@ -55,6 +58,23 @@ function Sidebar(props) {
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
+  }, []);
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/allcoursesdepartment/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((all_colleges_data) => {
+        // changeInfoState("courseChoosed", all_colleges_data);
+        console.log("all Colleges", all_colleges_data);
+        console.log("all Colleges type", typeof(all_colleges_data));
+        setAllColleges(all_colleges_data);
+      })
+      .catch((error) => console.error(error));
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    console.log("all Colleges state", allColleges);
   }, []);
 
   React.useEffect(() => {
@@ -149,7 +169,7 @@ function Sidebar(props) {
                       <NavLink
                         className="nav-link nav-link-lessonSidebar"
                         activeClassName="active"
-                        onClick={() => setLessonState(prop)}
+                        onClick={() => setLessonState(prop.base_courses)}
                         key={index}
                       >
                         <i className="tim-icons icon-chart-bar-32" />
@@ -158,10 +178,23 @@ function Sidebar(props) {
                     );
                   }
                 })}
+                <NavLink
+                  className="nav-link nav-link-lessonSidebar"
+                  activeClassName="active"
+                  onClick={() => {
+                    setLessonState(allColleges);
+                    // console.log("all colleges in onclick",allColleges);
+                    // console.log("lesson state in onclick",lessonState);
+                  }}
+                  // key={index}
+                >
+                  <i className="tim-icons icon-chart-bar-32" />
+                  <p>همه دانشکده ها</p>
+                </NavLink>
               </div>
               <div className="lessonSidebar_component-lessons">
                 {lessonState ? (
-                  <SearchBox data={lessonState?.base_courses} />
+                  <SearchBox data={lessonState} />
                 ) : null}
                 {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
