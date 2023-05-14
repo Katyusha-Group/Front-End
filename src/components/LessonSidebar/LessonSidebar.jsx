@@ -25,6 +25,8 @@ import classData from "../../assets/data/data.json";
 
 import SearchBox from "../SearchBox/SearchBox.jsx";
 
+import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
+
 var ps;
 
 function Sidebar(props) {
@@ -198,6 +200,7 @@ function Sidebar(props) {
                 ) : null}
                 {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
+                {/* {console.log(window.location.pathname)} */}
                 {/* {lessonState?.base_course.map((prop) => (
                   <NavLink
                     className="nav-link"
