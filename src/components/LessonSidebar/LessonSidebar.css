@@ -4,8 +4,10 @@
   overflow-y: auto;
   background-color: #27293d;
   /* margin-top: 1rem; */
-  border-radius: .3rem;
+  border-radius: .5rem;
   padding-top: .8rem;
+  margin-top: 1rem;
+
 }
 
 .sidebar[data="normal"],
@@ -18,11 +20,34 @@
 .lessonSidebar_component-lessons 
 {
   overflow-y: hidden;
+  
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .5rem;
+  padding-top: .8rem;
   margin-top: 1rem;
-  height:56vh;
+  height: 56vh;
 }
 
 .nav-link-lessonSidebar:hover{
   background-color: #32325d;
 
+}
+
+.nav-lessonSidebar{
+  
+  height: 55px ;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .5rem;
+}
+.nav-img{
+  border-radius: 50%;
+  width: 35px;
+  float: right;
+}
+.brand-name{
+  float: right;
 }

@@ -1,38 +1,21 @@
 .week_table{
     table-layout: fixed;
     overflow: visible ;
+    height: 350px;
 }
 .week_table thead{
     padding: 10px;
 }
-/* .table > thead > tr :first-child{
-    position: relative;
-    right: -50px;
-    font-size: 15px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    background-color: transparent;
-    border-radius: 3rem;
-}
-.mamad > th {
-    position: relative;
-    right: -61.5px;
-    font-size: 15px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    background-color: #34467546;
-    border-radius: 3rem;
-} */
 .backBlue{
     position: relative;
-    right: -45px !important;
+    right: -33px !important;
     font-size: 15px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     background-color: #34467546;
     border-radius: 1rem;
     display: block;
-    width: 76px;
+    width: 50px;
 }
 /* .table > thead > tr > th{
     position: relative;
@@ -65,24 +48,39 @@ border-bottom: none !important;
     padding: 15px 0px !important;
     /* border-right: 0.0625rem solid #e3e3e3 !important; */
 }
+
+.week-card{
+    margin-bottom: 13px !important;
+    /* padding: 0px !important; */
+}
+.overflow-visible{
+    overflow: visible !important;
+}
 .week-card-body{
-    height: 510px;
+    height: 380px;
+    padding: 0px !important;
+    margin-top: -20px;
+}
+.week-card-footer{
+    margin-top: 13px;
+    padding-bottom: 0px !important;
 }
 .chart{
-    background: url(../../assets/img/WeekChart4.png);
+    background: url(../../assets/img/WeekChart5.png);
     background-size: 100% 100%;
     min-width: 60rem;
-    height: 30em;
+    height: 28em;
     position: relative;
     background-repeat: no-repeat;
     resize: both;
+    margin-top: 7px;
     /* margin-left: 10px; */
-    margin-top: 5px !important;
+    /* margin-top: -15px !important; */
 }
 
 .course, i .course{
     position: absolute;
-    height: 3.6rem;
+    height: 4.1rem;
     width: 5rem;
     background-color:#1d8cf8 ;
     top:20%;
@@ -106,7 +104,6 @@ border-bottom: none !important;
     padding: 0.2rem 1rem;
     color: white;
 }
-
 .lesson_button{
     background: none;
     border: none;
@@ -117,8 +114,6 @@ border-bottom: none !important;
     z-index: 1;
     display: none;
 }
-
-
 .courseCard{
     /* background-color: hsl(256, 45%, 50%)!important; */
     /* border: none !important; */
@@ -134,6 +129,7 @@ border-bottom: none !important;
     padding: 0px ;
     display: flex;
     flex-direction: row;
+    /* cursor: pointer; */
 }
 
 .courseGroupCard{
@@ -198,5 +194,8 @@ p{
    font-size: 0.7rem;
 }
 .dir-left{
-    direction: ltr;
+    direction: ltr !important;
+}
+.dir-right{
+    direction: rtl;
 }

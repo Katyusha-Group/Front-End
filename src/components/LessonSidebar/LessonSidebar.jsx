@@ -19,6 +19,8 @@ import {
 
 import "./LessonSidebar.css";
 
+import * as log from "../../assets/img/react-logo.png";
+
 import classData from "../../assets/data/data.json";
 
 import SearchBox from "../SearchBox/SearchBox.jsx";
@@ -136,6 +138,10 @@ function Sidebar(props) {
               </div>
             ) : null} */}
             <Nav>
+              <div className="nav-lessonSidebar">
+                {/* <img alt="LoginImage" className="nav-img" src={log.default} />
+                <h3 className="brand-name">کاتیوشا</h3> */}
+              </div>
               <div className="lessonSidebar_component">
                 {departeman.map((prop, index) => {
                   if (prop.base_courses.length > 0) {
@@ -153,7 +159,7 @@ function Sidebar(props) {
                   }
                 })}
               </div>
-              <div className="lessonSidebar_component lessonSidebar_component-lessons">
+              <div className="lessonSidebar_component-lessons">
                 {lessonState ? (
                   <SearchBox data={lessonState?.base_courses} />
                 ) : null}
