@@ -70,6 +70,13 @@ export default function UserPage() {
     setbigChartData(name);
   };
   const [showX, setShowX] = React.useState("none");
+  const [showCourseHover, setShowCourseHover] = React.useState({
+    courseChoosed: [],
+  });
+  function setShowCourseHoverFunc(name, value) {
+    console.log("setShowCourseHover func");
+    setShowCourseHover((info) => ({ ...info, [name]: value }));
+  }
   let defu = 12.3;
   let length = 13.6;
   let top_right = 9.8;
@@ -79,28 +86,18 @@ export default function UserPage() {
   const { info, changeInfo } = useInfo();
   console.log("info", info);
   function closeLesson(flag, data) {
-    setShowLesson({flag: flag ,data: data});
+    setShowLesson({ flag: flag, data: data });
     console.log("closeLesson", flag, data, showLesson);
   }
-
+  /**
+   * send course number to save in database
+   * @param {} num
+   */
   function addNewLesson(num) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    // console.log("tokenClass", tokenClass);
+
     const token = tokenClass.token.access;
-    // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username: formData.email,
-    //     password: formData.password,
-    //   }),
-    // });
-    // const data = await response.json();
-    // console.log(`num is : ${num}`);
-    // console.log(`type :`, typeof num);
 
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
@@ -115,21 +112,25 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("gjgjhdsfffffhs post successfully");
         console.log("put data", data);
-        // setData(data);
       })
       .catch((error) => console.error(error));
-    // console.log(data);
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
   }
 
-  function lessons() {
+  /**
+   * To get data of lessons from back and save it to infoState with changeInfoState
+   * @param {*} infoState
+   * @param {*} changeInfoState
+   * @returns
+   */
+
+  function lessons(infoState, changeInfoState) {
+    console.log("hello");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-    // console.log(tokenClass);
     const token = tokenClass.token.access;
     React.useEffect(() => {
       fetch("https://www.katyushaiust.ir/courses/my_courses", {
@@ -137,12 +138,9 @@ export default function UserPage() {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log("get data", data);
           setData(data);
-          changeInfo("courseChoosed", data);
-          // for (let i = 0; i < data.length; i++) {
-          //   untiSum += data[i].total_unit;
-          // }
-          // console.log(untiSum);
+          changeInfoState("courseChoosed", data);
           console.log("get data after reload", data);
         })
         .catch((error) => console.error(error));
@@ -151,15 +149,12 @@ export default function UserPage() {
       };
     }, []);
 
-    return info.courseChoosed.map((lessons) => {
+    return infoState.courseChoosed.map((lessons) => {
       console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
 
-        // console.log(unitsCount);
-        // console.log(`time of ${lessons.name}`, timeStringToFloat(lesson.course_start_time));
-        // console.log(`long of ${lessons.name}`, timeStringToFloat(lesson.course_start_time ) - timeStringToFloat(lesson.course_end_time ));
         return (
           <div key={lessonBoxId}>
             <div
@@ -185,9 +180,6 @@ export default function UserPage() {
                   "none")
               }
             >
-              {
-                //delete button
-              }
               <button
                 className="lesson_button"
                 onClick={() => {
@@ -195,14 +187,14 @@ export default function UserPage() {
                   console.log("delete lesson", lessons.complete_course_number);
                   changeInfo(
                     "courseChoosed",
-                    info.courseChoosed.filter(
+                    infoState.courseChoosed.filter(
                       (item) =>
                         item.complete_course_number !==
                         lessons.complete_course_number
                     )
                   );
-                  closeLesson(false,lessons);
-                  console.log("delete info", info);
+                  closeLesson(false, lessons);
+                  console.log("delete info", infoState);
                 }}
                 id={lessonBoxId + "x"}
               >
@@ -214,10 +206,6 @@ export default function UserPage() {
               >
                 {lessons.name}
               </div>
-              {/* <div className="course_hover" id={lessonBoxId + "x"}>
-                <div className="dir-left">{lessons.complete_course_number}</div>
-                <div>{lessons.teacher.name}</div>
-              </div> */}
             </div>
           </div>
         );
@@ -231,7 +219,6 @@ export default function UserPage() {
         <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">
           <Card>
-
             <CardBody className="week-card-body">
               <CardHeader>
                 <Row>
@@ -320,153 +307,14 @@ export default function UserPage() {
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
                 >
-                  {lessons()}
+                  {lessons(info, changeInfo)}
+                  {lessons(showCourseHover, setShowCourseHoverFunc)}
                   <ModalLessons
                     show={showLesson}
-                    close = {()=>setShowLesson(() => ({...showLesson,flag:false}))}
+                    close={() =>
+                      setShowLesson(() => ({ ...showLesson, flag: false }))
+                    }
                   />
-                  {/* <Row>
-                    <Col lg="12" sm="10">
-                      <Card>
-                        <CardBody>
-                          <Table className="week_table" responsive>
-                            <thead className="text-primary">
-                              <tr className="mamad">
-                                <th className="text-center"></th>
-                                <th className="text-center">
-                                  <span className="backBlue">۷:۳۰</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۹</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۱۰:۳۰</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۱۲</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۱:۳۰</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۳</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۴:۳۰</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۶</span>
-                                </th>
-                                <th className="text-center ">
-                                  <span className="backBlue">۷:۳۰</span>
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr className="UserPage_first_row">
-                                <td className="UserPage_first_column text-center">
-                                  شنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  یکشنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  دوشنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  سه‌شنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  چهارشنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  پنج‌شنبه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                              <tr>
-                                <td className="UserPage_first_column text-center ">
-                                  جمعه
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td className="text-center"></td>
-                              </tr>
-                            </tbody>
-                          </Table>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row> */}
                 </div>
                 <div
                   style={{
@@ -501,6 +349,20 @@ export default function UserPage() {
                       backgroundColor: x.color_intensity_percentage>10 ? `hsl(256, 45%, ${convertPercentagetoLigtness(
                         x.color_intensity_percentage 
                       )}%)`:"dimgray"
+                    }}
+                    onMouseEnter={() => {
+                      console.log(x.complete_course_number);
+                      setShowCourseHoverFunc("courseChoosed", [
+                        ...info.courseChoosed,
+                        x,
+                      ]);
+                    }}
+                    onMouseLeave={() => {
+                      console.log("out");
+                      setShowCourseHoverFunc(
+                        "courseChoosed",
+                        []
+                      );
                     }}
                   >
                     <CardBody className="courseCardBody">
@@ -568,16 +430,6 @@ export default function UserPage() {
                     </CardBody>
                   </Card>
                 ))}
-
-              {/* <div className="overflow-auto"> */}
-              {/* {
-                colorpaletHey.map(c=>
-                  <div className="color" style={{backgroundColor: `${c.value}`}}>
-                <p></p>
-                <p>{c.id}</p>
-              </div>
-                )
-              } */}
             </CardBody>
           </Card>
         </Col>
