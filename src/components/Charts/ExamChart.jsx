@@ -54,10 +54,10 @@ function ExamChart() {
     setbigChartData(name);
   };
   const [showX, setShowX] = React.useState("none");
-  let defu = 15;
-  let length = 12.7;
-  let top_right = 4.91;
-  let top_defu = 5.77;
+  let defu = 14.5;
+  let length = 14.5;
+  let top_right = 4.975;
+  let top_defu = 5.1;
   function closeLesson(open) {
     setShowLesson(false);
   }
@@ -81,9 +81,7 @@ function ExamChart() {
         <div key={lessonBoxId}>
           <div>
             <div
-
               id={lessonBoxId}
-
               className="exam text-center"
               style={{
                 top: `${defu + length * time}%`,
@@ -121,17 +119,13 @@ function ExamChart() {
     <>
       <Row>
         <Col lg="12" sm="12">
-          <Card>
+          {/* <Card> */}
+          {/* <CardBody className="exam-card-body"> */}
+          <div className="overflow-auto nmt-1">
+            <div className="chart1">{lessons()}</div>
+          </div>
 
-            {/* <CardHeader className="text-right">
-              <CardTitle tag="h4">برنامه هفتگی</CardTitle>
-            </CardHeader> */}
-            <CardBody className="exam-card-body">
-
-              <div className="overflow-auto">
-                <div className="chart1">{lessons()}</div>
-              </div>
-              {/* <Table>
+          {/* <Table>
                 <thead className="text-primary">
                   <tr>
                     <th className="text-center "></th>
@@ -177,8 +171,6 @@ function ExamChart() {
                   </tr>
                 </tbody>
               </Table> */}
-            </CardBody>
-          </Card>
         </Col>
       </Row>
     </>

@@ -11667,7 +11667,7 @@ hr {
   background-position: center center;
   display: block;
   box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
-  margin-top: 80px;
+  margin-top: 18px;
   margin-left: 20px;
   border-radius: 5px;
   transition: 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1); }
@@ -11675,7 +11675,7 @@ hr {
   .off-canvas-sidebar .sidebar-wrapper {
     width: 100%;
     min-height: 100%;
-    max-height: calc(100vh - 705px);
+    max-height: 95.5vh;
     z-index: 4;
     position: relative;
     overflow: auto; }
@@ -12511,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 80px 356px 30px 30px; }
+  padding: 20px 356px 30px 30px; }
 
 
 .rtl .footer {

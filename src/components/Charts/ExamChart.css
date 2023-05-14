@@ -1,10 +1,10 @@
 .row{
     margin: 0 0px !important;
 }
-.table{
+/* .table{
     table-layout: fixed
     ;
-}
+} */
 
 .Table_first_column{
     border-right: none !important;
@@ -26,23 +26,23 @@ border-bottom: none !important;
     padding: 0px 0 !important;
 }
 .chart1{
-    background: url(../../assets/img/ExamChartBack3.png);
+    background: url(../../assets/img/ExamChartBack5.png);
     background-size: 100% 100%;
     min-width: 60rem;
     height: 28em;
     position: relative;
     background-repeat: no-repeat;
     resize: both;
-    overflow: visible !important;
-}
+    /* overflow: visible !important; */
 
+}
 /* .course :hover{
     color: rebeccapurple;
 } */
 
 .exam, i .exam{
     position: absolute;
-    height: 16%;
+    height: 14%;
     width: 4.8%;
     background-color:#1d8cf8 ;
     top:20%;
@@ -85,7 +85,7 @@ border-bottom: none !important;
 } */
 
 .exam_hover{
-    background: #1d8bf86d;
+    background: #1d8bf887;
     width: 110px;
     height: auto;
     border: none;
@@ -94,7 +94,7 @@ border-bottom: none !important;
     top:100%;
     right: -50%;
     border-radius: 1.4rem;
-    z-index: 1;
+    z-index: -1;
     padding: 0.5rem;
     margin-top: 5px;
     display: none;
