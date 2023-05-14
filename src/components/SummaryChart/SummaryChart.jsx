@@ -39,7 +39,7 @@ export default function SummaryChart(props) {
   }
   return (
     <>
-      <Table className="tablesorter  ">
+      <Table className="tablesorter summary-table">
         <thead className="text-primary ">
           <tr>
             <th className="text-center ">کد</th>

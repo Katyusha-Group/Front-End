@@ -16,7 +16,9 @@ import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
 import LandingPage from "./views/LandingPage.jsx"; 
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
-import Shoping from "./views/Shoping/Shoping.jsx"
+import Shoping from "./views/Shoping/Shoping.jsx";
+import Verification from "./views/Verification/Verification.jsx";
+
 function App() {
   return (
     <>
@@ -29,6 +31,7 @@ function App() {
               <Router.Routes>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/signup" element={<SignUp />}></Router.Route>
+                <Router.Route path="/verification" element={<Verification />}></Router.Route>
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
