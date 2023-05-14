@@ -27,6 +27,8 @@ function Shoping() {
   const [state, useState] = React.useState(true)
   console.log("INFO",info)
   const notificationAlertRef = React.useRef(null);
+  // console.log("info lenght", info.shop.length);
+
   const notify = (place) => {
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
@@ -79,8 +81,9 @@ function Shoping() {
                 <Card>
                   <CardBody>
                     <div className="places-buttons">
-                      <Row md="4" sm="2" xs="1">
+                      <Row md="5" sm="2" xs="1">
                         <Col className="m-auto text-center category">حذف</Col>
+                        <Col className="m-auto text-center category">نوع</Col>
                         <Col className="m-auto text-center category">قیمت</Col>
                         <Col className="m-auto text-center category">
                           نام درس
@@ -95,9 +98,10 @@ function Shoping() {
                 <Card>
                   <CardBody>
                     <div className="places-buttons">
-                      <Row md="4" sm="2" xs="1">
-                        {info.shop.map((x) => {
-                          console.log("X", x);
+                      <Row md="5" sm="2" xs="1">
+                        {
+                        info.shop.map((x) => {
+                          console.log("info lenght", info.shop.lenght);
                           return (
                             <>
                               <Col className="m-auto text-center category">
@@ -119,6 +123,26 @@ function Shoping() {
                                 </Button>
                               </Col>
                               <Col className="m-auto text-center category">
+                                <Form>
+                                  <FormGroup check>
+                                    <Label className="shoping_label" check>
+                                      <Input defaultValue="" type="checkbox" />
+                                      <span className="form-check-sign">
+                                        <span className="check" />
+                                      </span>
+                                      ایمیل
+                                    </Label>
+                                    <Label check className="shoping_label">
+                                      <Input defaultValue="" type="checkbox" />
+                                      <span className="form-check-sign">
+                                        <span className="check" />
+                                      </span>
+                                      sms
+                                    </Label>
+                                  </FormGroup>
+                                </Form>
+                              </Col>
+                              <Col className="m-auto text-center category">
                                 2000 تومان
                               </Col>
                               <Col className="m-auto text-center category">
@@ -127,18 +151,7 @@ function Shoping() {
                               <Col className="m-auto text-center category">
                                 {x.complete_course_number}
                               </Col>
-                              {/* <Col className="m-auto text-center category">
-                            <Form>
-                              <FormGroup check inline>
-                                <Input type="checkbox" />
-                                <Label check></Label>
-                              </FormGroup>
-                              <FormGroup check inline>
-                                <Input type="checkbox" />
-                                <Label check>sms</Label>
-                              </FormGroup>
-                            </Form>
-                          </Col> */}
+                              
                               {/* <Col className="m-auto text-center category">
                             <Form>
                               <FormGroup switch>
