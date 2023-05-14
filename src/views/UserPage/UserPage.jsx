@@ -30,13 +30,13 @@ import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
-import fullLogo from "./full.png"
+import fullLogo from "./full.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
-import cartlogo from"./cart.png";
+import cartlogo from "./cart.png";
 
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
@@ -150,7 +150,7 @@ export default function UserPage() {
       };
     }, []);
 
-    return infoState.courseChoosed.map((lessons) => {
+    return info.courseChoosed.map((lessons) => {
       console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
@@ -194,7 +194,7 @@ export default function UserPage() {
                         lessons.complete_course_number
                     )
                   );
-                  closeLesson(false,  lessons);
+                  closeLesson(false, lessons);
                   console.log("delete info", infoState);
                 }}
                 id={lessonBoxId + "x"}
@@ -541,13 +541,15 @@ export default function UserPage() {
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
                   <Card
-                    
                     className="courseCard"
                     key={index}
                     style={{
-                      backgroundColor: x.color_intensity_percentage>10 ? `hsl(256, 45%, ${convertPercentagetoLigtness(
-                        x.color_intensity_percentage 
-                      )}%)`:"dimgray"
+                      backgroundColor:
+                        x.color_intensity_percentage > 10
+                          ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                              x.color_intensity_percentage
+                            )}%)`
+                          : "dimgray",
                     }}
                     onMouseEnter={() => {
                       console.log(x.complete_course_number);
@@ -558,10 +560,7 @@ export default function UserPage() {
                     }}
                     onMouseLeave={() => {
                       console.log("out");
-                      setShowCourseHoverFunc(
-                        "courseChoosed",
-                        []
-                      );
+                      setShowCourseHoverFunc("courseChoosed", []);
                     }}
                   >
                     <CardBody className="courseCardBody">
@@ -578,10 +577,10 @@ export default function UserPage() {
                         <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
                         <div className="courseCardDownSide">
                           <div>
-                          <p>
-                            ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
-                          </p>
-                          {/* <p style={{ fontSize: 12 }}>
+                            <p>
+                              ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                            </p>
+                            {/* <p style={{ fontSize: 12 }}>
                           {" "}
                           {x.course_times.map((x) => (
                             <text>{dayOfWeek(x.course_day)} </text>
@@ -599,36 +598,55 @@ export default function UserPage() {
                             
                           </text>
                           </p> */}
-                          {/* <img className="fullLogo"
+                            {/* <img className="fullLogo"
                           src={x.teacher.teacher_image}
                           ></img> */}
-                          {/* <div>{x.teacher.teacher_image}</div> */}
-                          {/* <Button className="addToPlanButton">+</Button> */}
-                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
-                          onClick={() => {
-                            console.log("x", x);
-                            if (!info.courseChoosed.includes(x) ) {
-                              console.log("includes")
-                              addNewLesson(x.complete_course_number);
-                              changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                            }
-                            console.log("info", info);
-                          }}
-                          >+</Button>
-                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}>
-                          <img className="cart"
-                          src={cartlogo}
-                          alt="cartlogo"></img>
-                          </Button>
+                            {/* <div>{x.teacher.teacher_image}</div> */}
+                            {/* <Button className="addToPlanButton">+</Button> */}
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: "aqua", fontSize: "medium" }}
+                              onClick={() => {
+                                console.log("x", x);
+                                if (!info.courseChoosed.includes(x)) {
+                                  console.log("includes");
+                                  addNewLesson(x.complete_course_number);
+                                  changeInfo("courseChoosed", [
+                                    ...info.courseChoosed,
+                                    x,
+                                  ]);
+                                }
+                                console.log("info", info);
+                              }}
+                            >
+                              +
+                            </Button>
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: "aqua", fontSize: "medium" }}
+                            >
+                              <img
+                                className="cart"
+                                src={cartlogo}
+                                alt="cartlogo"
+                              ></img>
+                            </Button>
                           </div>
-                          <img className="fullLogo"
-                          src={fullLogo}
-                          alt="fullLogo"
-                          style={{display: x.color_intensity_percentage<11 ? 'block' : 'none' }}></img>
+                          <img
+                            className="fullLogo"
+                            src={fullLogo}
+                            alt="fullLogo"
+                            style={{
+                              display:
+                                x.color_intensity_percentage < 11
+                                  ? "block"
+                                  : "none",
+                            }}
+                          ></img>
                         </div>
-                        
                       </div>
-                      
                     </CardBody>
                   </Card>
                 ))}

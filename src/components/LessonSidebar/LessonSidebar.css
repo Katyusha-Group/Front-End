@@ -1,10 +1,10 @@
 .lessonSidebar_component {
-  height: 28vh;
+  height: 30vh;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #27293d;
   /* margin-top: 1rem; */
-  border-radius: .5rem;
+  border-radius: 1rem;
   padding-top: .8rem;
   margin-top: 1rem;
 
@@ -23,7 +23,7 @@
   
   background-color: #27293d;
   /* margin-top: 1rem; */
-  border-radius: .5rem;
+  border-radius: 1rem;
   padding-top: .8rem;
   margin-top: 1rem;
   height: 56vh;
