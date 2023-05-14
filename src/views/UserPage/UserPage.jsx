@@ -1,6 +1,10 @@
 import React from "react";
 import classNames from "classnames";
+import routes from "../../route.jsx";
+import logo from "../../assets/img/react-logo.png"
+import LessonSidebar from "../../components/LessonSidebar/LessonSidebar.jsx"
 // import { Line, Bar } from "react-chartjs-2";
+// import routes from "../../route.jsx";
 import {
   Button,
   ButtonGroup,
@@ -45,6 +49,14 @@ function timeStringToFloat(time) {
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 export default function UserPage() {
+  const [sidebarOpened, setsidebarOpened] = React.useState(
+    document.documentElement.className.indexOf("nav-open") !== -1
+  );
+  const toggleSidebar = () => {
+    console.log("toggle")
+    document.documentElement.classList.toggle("nav-open");
+    setsidebarOpened(!sidebarOpened);
+  };
   const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
     name: "",
@@ -213,6 +225,16 @@ export default function UserPage() {
 
   return (
     <>
+    <LessonSidebar
+          // routes={routes}
+          rtlActive
+          logo={{
+            outterLink: "https://www.creative-tim.com/",
+            text: "کاتیوشا",
+            imgSrc: logo,
+          }}
+          // toggleSidebar={toggleSidebar}
+        />
       <Row>
         <Col lg="12">{/* <ExamChart /> */}</Col>
         <Col lg="12" sm="10">

@@ -55,7 +55,7 @@ export default function Admin() {
   return (
     <>
       <div className="wrapper">
-        <LessonSidebar
+        {/* <LessonSidebar
           routes={routes}
           rtlActive
           logo={{
@@ -64,7 +64,7 @@ export default function Admin() {
             imgSrc: logo,
           }}
           toggleSidebar={toggleSidebar}
-        />
+        /> */}
         <div className="main-panel">
           <AdminNavbar 
           brandText={getBrandText(location.pathname)}
