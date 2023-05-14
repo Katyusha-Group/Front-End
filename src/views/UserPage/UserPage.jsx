@@ -408,8 +408,11 @@ export default function UserPage() {
                           <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
                           onClick={() => {
                             console.log("x", x);
-                            addNewLesson(x.complete_course_number);
-                            changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                            if (!info.courseChoosed.includes(x) ) {
+                              console.log("includes")
+                              addNewLesson(x.complete_course_number);
+                              changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                            }
                             console.log("info", info);
                           }}
                           >+</Button>
