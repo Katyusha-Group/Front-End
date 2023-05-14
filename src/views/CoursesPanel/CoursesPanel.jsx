@@ -167,7 +167,8 @@ export default function CoursesPanel() {
         .then((data) => {
           console.log("DATA IS::::::: " + data);
           // setDepartmentCourses(data);
-          let NewTimeTable = [...timetable, ...data]
+          setDepartment(data);
+          let NewTimeTable = [...ChosenCourses, ...data]
           settimetable(NewTimeTable);
         })
         .catch((error) => console.error(error));
@@ -307,13 +308,13 @@ export default function CoursesPanel() {
     <div>
       {Object.entries(Section).map(([count, entry]) => {
         // const backgroundColor = (entry !== null && entry.can_take) ? "rgb(29, 113, 236)": "rgb(100, 100, 120)"; // Also makes the courses that don't have the attribute gray
-        const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-        console.log(backgroundColor);
+        // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+        // console.log(backgroundColor);
           return (
             <div>
               {entry !== null && (
                 <div className="Course" 
-                     style={{ backgroundColor: backgroundColor }}
+                    //  style={{ backgroundColor: backgroundColor }}
                 >
                   {entry.name} ({entry.class_gp})
                   <br/>
