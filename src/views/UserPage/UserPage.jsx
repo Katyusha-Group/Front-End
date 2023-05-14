@@ -150,7 +150,7 @@ export default function UserPage() {
       };
     }, []);
 
-    return info.courseChoosed.map((lessons) => {
+    return infoState.courseChoosed.map((lessons) => {
       console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
