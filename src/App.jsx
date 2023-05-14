@@ -16,7 +16,8 @@ import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
 import LandingPage from "./views/LandingPage.jsx"; 
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
-import Shoping from "./views/Shoping/Shoping.jsx"import Verification from "./views/Verification/Verification.jsx";
+import Shoping from "./views/Shoping/Shoping.jsx";
+import Verification from "./views/Verification/Verification.jsx";
 
 function App() {
   return (
