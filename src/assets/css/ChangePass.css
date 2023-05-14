@@ -1,12 +1,28 @@
 .ChangePassRow{
-    margin-top: 10%;
-    width: 30%;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    
+    width: 35%;
+    display: flex;
+    align-items: 'center';
+    flex: 1;
+    justify-content: 'center';
+    flex-direction: row;
+    margin: auto;
+    margin-top: 50px;
 }
 .ChangePassCard{
-    padding-left: 5%;
-    padding-right: 5%;
+    align-items: 'center';
+    flex: 1;
+    justify-content: 'center';
+
+    /* margin-right: 300px; */
+    /* margin-left: 300px; */
+    /* margin-top: 50px; */
+    /* padding-left: 5%;
+    padding-right: 5%; */
+
+    width: 50%;
+    /* background-color: red; */
+
 }
 
 @media only screen and (max-width: 890px ){

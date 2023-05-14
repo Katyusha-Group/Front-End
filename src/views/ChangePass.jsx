@@ -18,9 +18,8 @@ import {
 function ChangePassword() {
   return (
     <>
-        <Row className="ChangePassRow">
-          <Col>
-            <Card>
+        <div className="ChangePassRow">
+            <Card className="ChangePassCard">
               <CardHeader>
                 <h5 className="title text-right">تغییر گذرواژه</h5>
               </CardHeader>
@@ -28,10 +27,12 @@ function ChangePassword() {
                 <Form>
                   <Row>
                     <Col className="text-right" md="12">
-                      <FormGroup>
+                      <FormGroup className="text-right">
                         <label>گذرواژه فعلی</label>
                         <Input
-                          placeholder="Old Password"
+                        className="text-right"
+                        placeholder="گذرواژه خود را وارد کنید"
+                          // placeholder="Old Password"
                           type="password"
                         />
                       </FormGroup>
@@ -39,10 +40,10 @@ function ChangePassword() {
                   </Row>
                   <Row >
                     <Col className="text-right" md="12">
-                      <FormGroup>
+                      <FormGroup className="text-right">
                         <label>گذرواژه جدید</label>
                         <Input
-                          placeholder="New Password"
+                          placeholder="گذرواژه جدید را وارد کنید"
                           type="password"
                         />
                       </FormGroup>
@@ -50,10 +51,10 @@ function ChangePassword() {
                   </Row>
                   <Row>
                     <Col className="text-right" md="12">
-                      <FormGroup>
+                      <FormGroup className="text-right">
                         <label>تکرار گذرواژه جدید</label>
                         <Input
-                          placeholder="Confirm new Password"
+                          placeholder="گذرواژه جدید را دوباره وارد کنید"
                           type="password"
                         />
                       </FormGroup>
@@ -67,8 +68,8 @@ function ChangePassword() {
                 </Button>
               </CardFooter>
             </Card>
-          </Col>
-        </Row>
+          
+        </div>
     </>
   );
 }
