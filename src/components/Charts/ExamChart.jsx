@@ -125,12 +125,6 @@ function ExamChart() {
             <div className="chart1">{lessons()}</div>
           </div>
 
-          <button id="button" aria-describedby="tooltip">
-            I'm a button
-          </button>
-          <div id="tooltip" role="tooltip">
-            I'm a tooltip
-          </div>
           {/* <Table>
                 <thead className="text-primary">
                   <tr>

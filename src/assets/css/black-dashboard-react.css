@@ -11675,7 +11675,7 @@ hr {
   .off-canvas-sidebar .sidebar-wrapper {
     width: 100%;
     min-height: 100%;
-    max-height: 95vh;
+    max-height: 95.5vh;
     z-index: 4;
     position: relative;
     overflow: auto; }
