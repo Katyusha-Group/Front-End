@@ -121,12 +121,14 @@ border-bottom: none !important;
 
 .courseCard{
     /* background-color: hsl(256, 45%, 50%)!important; */
-    /* border: none !important; */
-    /* border-color: rgba(227, 49, 243, 0.527) !important; */
+    /* border-width: 5px; */
+    /* background-color: transparent; */
+    /* border: solid !important; */
+    border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
     width: 20rem !important;
-    height: 6.5625rem;
-    margin-left: 0.9375rem;
+    height: 120px;
+    margin-left: 15px;
 }
 .courseCardBody{
     justify-items: center;
@@ -141,15 +143,16 @@ border-bottom: none !important;
 }
 
 .courseGroupCard{
-    align-items: flex-start;
+    /* align-items: flex-start ; */
     display: flex;
     flex-direction: row;
     /* justify-content: space-around; */
     /* align-content: space-between; */
     flex-wrap: wrap;
-    height: 30vh;
+    height: 45vh;
     overflow: auto;
-    justify-content: center;
+    /* justify-content: center; */
+    padding-left: 0 !important;
 
 }
 div{
@@ -184,7 +187,33 @@ p{
 .userpageFirstComponent{
     height: 50%;
 }
-
+.fullLogo{
+    /* width: 20px; */
+    height: 40px;
+    margin-right: auto;
+}
+.courseCardDownSide{
+    display: flex;
+    direction: row;
+    padding-right: 15px;
+    justify-content: right;
+}
+.infoPart{
+    width: 100%;
+}
+.addToPlanButton{
+    width: 20px !important;
+    color: red;
+}
+.cart{
+    margin: 0px;
+    width: 25px;
+    height: 25px;
+    /* margin-left: 10px; */
+    /* border-radius: 20px; */
+    /* border-width: 0.1875rem;
+    border-color: "red"; */
+}
 .course_hover{
     background: #1d8bf86d;
     width: 110px;

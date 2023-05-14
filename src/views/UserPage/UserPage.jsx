@@ -29,11 +29,13 @@ import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
 import sampleProfile from "./image1.png";
+import fullLogo from "./full.png"
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
 import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
+import cartlogo from"./cart.png";
 
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
@@ -340,18 +342,13 @@ export default function UserPage() {
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
                   <Card
-                    onClick={() => {
-                      console.log("x", x);
-                      addNewLesson(x.complete_course_number);
-                      changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      console.log("info", info);
-                    }}
+                    
                     className="courseCard"
                     key={index}
                     style={{
-                      backgroundColor: `hsl(256, 45%, ${convertPercentagetoLigtness(
-                        x.color_intensity_percentage
-                      )}%)`,
+                      backgroundColor: x.color_intensity_percentage>10 ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                        x.color_intensity_percentage 
+                      )}%)`:"dimgray"
                     }}
                     onMouseEnter={() => {
                       console.log(x.complete_course_number);
@@ -371,20 +368,21 @@ export default function UserPage() {
                     <CardBody className="courseCardBody">
                       <img
                         className="professorImage"
-                        src={sampleProfile}
+                        src={x.teacher.teacher_image}
+                        // src={sampleProfile}
                         alt="professorImage"
                       />
-                      <div>
+                      <div className="infoPart">
                         <p>
                           {x.name} (گروه {x.group_number})
                         </p>
                         <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <p>
-                          ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
-                        </p>
-                        <div></div>
-
-                        <p style={{ fontSize: 12 }}>
+                        <div className="courseCardDownSide">
+                          <div>
+                          <p>
+                            ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                          </p>
+                          {/* <p style={{ fontSize: 12 }}>
                           {" "}
                           {x.course_times.map((x) => (
                             <text>{dayOfWeek(x.course_day)} </text>
@@ -399,9 +397,36 @@ export default function UserPage() {
                             {timeStringToFloat(
                               x.course_times[0].course_end_time
                             )}
+                            
                           </text>
-                        </p>
+                          </p> */}
+                          {/* <img className="fullLogo"
+                          src={x.teacher.teacher_image}
+                          ></img> */}
+                          {/* <div>{x.teacher.teacher_image}</div> */}
+                          {/* <Button className="addToPlanButton">+</Button> */}
+                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}
+                          onClick={() => {
+                            console.log("x", x);
+                            addNewLesson(x.complete_course_number);
+                            changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                            console.log("info", info);
+                          }}
+                          >+</Button>
+                          <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}}>
+                          <img className="cart"
+                          src={cartlogo}
+                          alt="cartlogo"></img>
+                          </Button>
+                          </div>
+                          <img className="fullLogo"
+                          src={fullLogo}
+                          alt="fullLogo"
+                          style={{display: x.color_intensity_percentage<11 ? 'block' : 'none' }}></img>
+                        </div>
+                        
                       </div>
+                      
                     </CardBody>
                   </Card>
                 ))}
