@@ -1,7 +1,7 @@
 //import { info } from "sass";
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Swal from 'sweetalert2';
 import { useInfo } from "../../contexts/InfoContext";
 
 export function takeLessonsGroups(token){
@@ -29,3 +29,56 @@ export function takeLessonsGroups(token){
     
 
   }
+
+  export async function verificationApi(code,token,setShowAlert){
+  const response = await fetch(`https://katyushaiust.ir/accounts/activation-confirm/${token}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json"
+      },
+
+      body: JSON.stringify(
+      {
+        verification_code: code
+      })
+    });
+    
+    const data = await response.json();
+    console.log(data);
+    if ( response.status===200){
+
+
+      console.log("خوش آمدید");
+      Swal.fire({
+        icon: 'success',
+        title: 'کد با موفقیت تایید شد.',
+        html:'می توانید وارد حساب کاربری شوید',
+        background: '#3c3e5d',
+        color:'#ceccc0',
+        width:'25rem',
+      }).then((result) => {
+        console.log(result);
+        if(result) {
+          window.location="/login";
+          // ok click
+        } else {
+          // not clicked
+        }
+      });
+      
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'کد صحیح نیست',
+          text: 'دوباره بررسی کنید',
+          background: '#3c3e5d',
+          color:'#ceccc0',
+          width:'25rem',
+          // footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+    
+  }
+  
+  

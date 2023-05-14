@@ -60,8 +60,13 @@ const ModalLessons = (props) => {
                 <Button
                   color="primary"
                   size="sm"
-                  onClick={() =>
-                    changeInfo("shop", [...info.shop, props.show.data])
+                  onClick={() =>{
+                    if (!info.shop.includes(props.show.data) ) {
+                      console.log("includes shop")
+                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                      changeInfo("shop", [...info.shop, props.show.data])
+                    }
+                  }
                   }
                 >
                   <i className="tim-icons icon-simple-add" />

@@ -41,7 +41,7 @@ const SearchBox = ( data ) => {
           // courseData=data;
           // console.log("heyy it was done!", data);
           changeInfo("courseGroupsListInContext",data)
-          console.log(info)
+          console.log("info is: " + info)
         })
         .catch((error) => console.error(error));
       // console.log(data);
