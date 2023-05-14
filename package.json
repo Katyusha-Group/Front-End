@@ -30,7 +30,6 @@
     "react-router-dom": "^6.9.0",
     "react-select": "^5.7.2",
     "reactstrap": "^9.1.6",
-    "sass": "^1.60.0",
     "simplebar": "^6.2.4",
     "simplebar-react": "^3.2.3",
     "sweetalert2": "^11.7.5",
@@ -40,6 +39,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "sass": "^1.62.1",
     "vite": "^4.1.0"
   }
 }

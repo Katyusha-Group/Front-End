@@ -1,27 +1,88 @@
-
+.week_table{
+    table-layout: fixed;
+    overflow: visible ;
+}
+.week_table thead{
+    padding: 10px;
+}
+/* .table > thead > tr :first-child{
+    position: relative;
+    right: -50px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: transparent;
+    border-radius: 3rem;
+}
+.mamad > th {
+    position: relative;
+    right: -61.5px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 3rem;
+} */
+.backBlue{
+    position: relative;
+    right: -45px !important;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 1rem;
+    display: block;
+    width: 76px;
+}
+/* .table > thead > tr > th{
+    position: relative;
+    right: -50px;
+    font-size: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #34467546;
+    border-radius: 3rem;
+} */
 .UserPage_first_column{
-    border: none;
+    border-right: none !important;
+}
+.UserPage_first_column{
+    border-right: none !important;
 }
 
-.table td{
-    border-top: none;
-    border-right: 0.0625rem solid #e3e3e3;
+.UserPage_first_row > td{
+border-top: none !important;
 }
 
+.UserPage_last_row > td{
+border-bottom: none !important;
+}
+
+.week_table td{
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top: 0.0625rem solid #e3e3e3;
+    border-right: 0.0625rem solid  rgba(255, 255, 255, 0.1);
+    padding: 15px 0px !important;
+    /* border-right: 0.0625rem solid #e3e3e3 !important; */
+}
+.week-card-body{
+    height: 510px;
+}
 .chart{
-    background: url(../../assets/img/chart3.png);
+    background: url(../../assets/img/WeekChart4.png);
     background-size: 100% 100%;
     min-width: 60rem;
     height: 30em;
     position: relative;
     background-repeat: no-repeat;
     resize: both;
-
+    /* margin-left: 10px; */
+    margin-top: 5px !important;
 }
 
 .course, i .course{
     position: absolute;
-    height: 2.3rem;
+    height: 3.6rem;
     width: 5rem;
     background-color:#1d8cf8 ;
     top:20%;
@@ -32,7 +93,6 @@
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
-    height: 3rem;
 }
 
 .course:hover{
@@ -61,12 +121,14 @@
 
 .courseCard{
     /* background-color: hsl(256, 45%, 50%)!important; */
-    /* border: none !important; */
-    /* border-color: rgba(227, 49, 243, 0.527) !important; */
+    /* border-width: 5px; */
+    /* background-color: transparent; */
+    /* border: solid !important; */
+    border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
     width: 20rem !important;
-    height: 6.5625rem;
-    margin-left: 0.9375rem;
+    height: 120px;
+    margin-left: 15px;
 }
 .courseCardBody{
     justify-items: center;
@@ -76,16 +138,21 @@
     flex-direction: row;
 }
 
+.courseCardBody:hover{
+    cursor: pointer;
+}
+
 .courseGroupCard{
-    align-items: flex-start;
+    /* align-items: flex-start ; */
     display: flex;
     flex-direction: row;
     /* justify-content: space-around; */
     /* align-content: space-between; */
     flex-wrap: wrap;
-    height: 30vh;
+    height: 45vh;
     overflow: auto;
-    justify-content: center;
+    /* justify-content: center; */
+    padding-left: 0 !important;
 
 }
 div{
@@ -119,4 +186,50 @@ p{
 
 .userpageFirstComponent{
     height: 50%;
+}
+.fullLogo{
+    /* width: 20px; */
+    height: 40px;
+    margin-right: auto;
+}
+.courseCardDownSide{
+    display: flex;
+    direction: row;
+    padding-right: 15px;
+    justify-content: right;
+}
+.infoPart{
+    width: 100%;
+}
+.addToPlanButton{
+    width: 20px !important;
+    color: red;
+}
+.cart{
+    margin: 0px;
+    width: 25px;
+    height: 25px;
+    /* margin-left: 10px; */
+    /* border-radius: 20px; */
+    /* border-width: 0.1875rem;
+    border-color: "red"; */
+}
+.course_hover{
+    background: #1d8bf86d;
+    width: 110px;
+    height: auto;
+    border: none;
+    color: white;
+    position: absolute;
+    top:100%;
+    border-radius: 1.4rem;
+    z-index: 1;
+    padding: 0.5rem;
+    margin-top: 5px;
+    display: none;
+   line-height: 1.5rem;
+   font-size: 0.7rem;
+}
+.dir-left{
+    direction: ltr;
 }
