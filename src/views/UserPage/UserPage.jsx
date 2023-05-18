@@ -75,8 +75,8 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
-    console.log("setShowCourseHover func");
-    setShowCourseHover((info) => ({ ...info, [name]: value }));
+    // console.log("setShowCourseHover func", value);
+    setShowCourseHover((info) => ({ [name]: value }));
   }
   let defu = 13.3;
   let length = 17.1;
@@ -85,10 +85,10 @@ export default function UserPage() {
   // let initial = useInfo();
   //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
-  console.log("info", info);
+  // console.log("info", info);
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
-    console.log("closeLesson", flag, data, showLesson);
+    // console.log("closeLesson", flag, data, showLesson);
   }
   /**
    * send course number to save in database
@@ -128,30 +128,33 @@ export default function UserPage() {
    * @returns
    */
 
-  function lessons(infoState, changeInfoState) {
-    console.log("hello");
+  function lessons(infoState, changeInfoState, getapi, classNameHover) {
+    // console.log("hello");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
+
     React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/courses/my_courses", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("get data", data);
-          setData(data);
-          changeInfoState("courseChoosed", data);
-          console.log("get data after reload", data);
+      if (getapi == true) {
+        fetch("https://www.katyushaiust.ir/courses/my_courses", {
+          headers: { Authorization: `Bearer ${token}` },
         })
-        .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
+          .then((response) => response.json())
+          .then((data) => {
+            // console.log("get data", data);
+            setData(data);
+            changeInfoState("courseChoosed", data);
+            // console.log("get data after reload", data);
+          })
+          .catch((error) => console.error(error));
+        const activeRoute = (routeName) => {
+          return location.pathname === routeName ? "active" : "";
+        };
+      }
     }, []);
 
     return infoState.courseChoosed.map((lessons) => {
-      console.log("lessons", lessons);
+      // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
@@ -160,7 +163,7 @@ export default function UserPage() {
           <div key={lessonBoxId}>
             <div
               id={lessonBoxId}
-              className="course text-center"
+              className={`course text-center ${classNameHover} course-hover`}
               style={{
                 top: `${defu + length * lesson.course_day}%`, //TODO
                 right: `${top_defu + top_right * time}%`,
@@ -185,7 +188,7 @@ export default function UserPage() {
                 className="lesson_button"
                 onClick={() => {
                   addNewLesson(lessons.complete_course_number);
-                  console.log("delete lesson", lessons.complete_course_number);
+                  // console.log("delete lesson", lessons.complete_course_number);
                   changeInfo(
                     "courseChoosed",
                     infoState.courseChoosed.filter(
@@ -195,17 +198,28 @@ export default function UserPage() {
                     )
                   );
                   closeLesson(false, lessons);
-                  console.log("delete info", infoState);
+                  // console.log("delete info", infoState);
                 }}
                 id={lessonBoxId + "x"}
               >
-                x
+                <strong >
+                <i className="tim-icons icon-simple-remove" style={{margin:"auto"}}></i>
+                </strong>
+                {/* x */}
               </button>
               <div
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
               >
+                <strong>
                 {lessons.name}
+                  
+                </strong>
+                <br />
+                {lessons.registered_count}/{lessons.capacity}
+                <br />
+                {lessons.complete_course_number}
+                {console.log("lessons click",lessons)}
               </div>
             </div>
           </div>
@@ -228,8 +242,8 @@ export default function UserPage() {
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
                 >
-                  {lessons(info, changeInfo)}
-                  {lessons(showCourseHover, setShowCourseHoverFunc)}
+                  {lessons(info, changeInfo, true, null)}
+                  {lessons(showCourseHover, setShowCourseHoverFunc, false, "classNameHover")}
                   <ModalLessons
                     show={showLesson}
                     close={() =>
@@ -247,7 +261,7 @@ export default function UserPage() {
                   }}
                 >
                   {" "}
-                  <SummaryChart props={info.courseChoosed} />
+                  {/* <SummaryChart props={info.courseChoosed} /> */}
                 </div>
                 <div
                   style={{
@@ -255,7 +269,7 @@ export default function UserPage() {
                   }}
                 >
                   {" "}
-                  <ExamChart />
+                  {/* <ExamChart /> */}
                 </div>
               </div>
             </CardBody>
@@ -358,15 +372,12 @@ export default function UserPage() {
                           : "dimgray",
                     }}
                     onMouseEnter={() => {
-                      console.log("x.complete",x.complete_course_number);
+                      console.log("x.complete", x.complete_course_number);
                       // console.log("z");
-                      setShowCourseHoverFunc("courseChoosed", [
-                        ...info.courseChoosed,
-                        x,
-                      ]);
+                      setShowCourseHoverFunc("courseChoosed", [x]);
                     }}
                     onMouseLeave={() => {
-                      console.log("out");
+                      // console.log("out");
                       setShowCourseHoverFunc("courseChoosed", []);
                     }}
                   >
@@ -392,42 +403,56 @@ export default function UserPage() {
                               size="sm"
                               style={{ color: "aqua", fontSize: "medium" }}
                               onClick={() => {
-                                console.log("x", x);
-                                if (!info.courseChoosed.includes(x)) {
-                                  console.log("includes");
+                                // let bool = info.courseChoosed.map(z=>{
+                                //   // console.log("course choosed", z)
+                                //   if (z.complete_course_number == x.complete_course_number) {
+                                //     return true;
+                                //   }
+                                // })
+                                let isFound = info.courseChoosed.some(element => {
+                                  if (element.complete_course_number === x.complete_course_number) {
+                                    return true;
+                                  }
+                              
+                                  return false;
+                                });
+                                // bool = bool == true?true:false;
+                                // console.log('bool', bool)
+                                if (isFound != true) {
+                                  console.log("includes------------------");
                                   addNewLesson(x.complete_course_number);
                                   changeInfo("courseChoosed", [
                                     ...info.courseChoosed,
                                     x,
                                   ]);
+                                  console.log("x con", x, info.courseChoosed);
                                 }
-                                console.log("info", info);
+                                // console.log("info", info);
                               }}
                             >
                               +
                             </Button>
                             <Button
-                            variant="secondary"
-                            size="sm"
-                            style={{ color: "aqua", fontSize: "medium" }}
-                  // color="primary"
-                  // size="sm"
-                  onClick={() =>{
-                    if (!info.shop.includes(x) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, x])
-                    }
-                  }
-                  }
-                >
-                  {/* <i className="tim-icons icon-simple-add" /> */}
-                  <img
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: "aqua", fontSize: "medium" }}
+                              // color="primary"
+                              // size="sm"
+                              onClick={() => {
+                                if (!info.shop.includes(x)) {
+                                  // console.log("includes shop");
+                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                                  changeInfo("shop", [...info.shop, x]);
+                                }
+                              }}
+                            >
+                              {/* <i className="tim-icons icon-simple-add" /> */}
+                              <img
                                 className="cart"
                                 src={cartlogo}
                                 alt="cartlogo"
                               ></img>
-                </Button>
+                            </Button>
                             {/* <Button
                               variant="secondary"
                               size="sm"
