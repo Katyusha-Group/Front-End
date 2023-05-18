@@ -14,11 +14,10 @@ import {
 } from "reactstrap";
 import "./CoursesPanel.css"
 import dataJson from "./Classes"
-// import { addNewLesson, changeInfo } from "../UserPage/UserPage"
 
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
-  console.log("info", info);
+  // console.log("info", info);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   const [Department, setDepartment] = React.useState([]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
@@ -27,11 +26,19 @@ export default function CoursesPanel() {
   // let timetable = dataJson;
   let [timetable, settimetable] = React.useState([]);
 
+  // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-  // console.log(tokenClass);
   const token = tokenClass.token.access;
-  React.useEffect(() => {       //Already Chosen Lessons
+
+  // function UpdateTimetableArray (Chosen, Depart)
+  // {
+  //   let NewTimeTable = [...ChosenCourses, ...Depart];
+  //   settimetable(NewTimeTable);
+  //   // console.log("Timetable changed")
+  // }
+  
+  React.useEffect(() => {                                             //Already Chosen Lessons
     fetch("https://www.katyushaiust.ir/courses/my_courses", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -39,12 +46,8 @@ export default function CoursesPanel() {
       .then((data) => {
         setChosenCourses(data);
         changeInfo("courseChoosed", data);
-        // for (let i = 0; i < data.length; i++) {
-        //   untiSum += data[i].total_unit;
-        // }
-        // console.log(untiSum);
-        // console.log("get data after reload", data);
         settimetable (data);
+        // UpdateTimetableArray(ChosenCourses, []);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -52,11 +55,7 @@ export default function CoursesPanel() {
     };
   }, []);
 
-  function addNewLesson(num) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-  
+  function addNewLesson(num) {                                        //Add a lesson                                
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
       headers: {
@@ -70,8 +69,9 @@ export default function CoursesPanel() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("put data", data);
+        // console.log("put data", data);
         setChosenCourses(data);
+        // UpdateTimetableArray(ChosenCourses, )
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -354,6 +354,30 @@ export default function CoursesPanel() {
                     >
                       x
                     </button> */}
+                    <button
+                      name = "RemoveCourseButton"
+                      className="btn-fill-RemoveCourseButton"
+                      onClick={() => {
+                        addNewLesson(entry.complete_course_number);
+                        console.log("delete lesson", entry.complete_course_number);
+                        changeInfo(
+                          "courseChoosed",
+                          info.courseChoosed.filter(
+                            (item) =>
+                              item.complete_course_number !==
+                              entry.complete_course_number
+                          )
+                        );
+                        setChosenCourses(info.courseChoosed);
+                        let NewTimeTable = [...ChosenCourses, ...timetable] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+                        settimetable(NewTimeTable);
+                        // closeLesson(false, lessons);
+                        // console.log("delete info", infoState);
+                      }}
+                      // id={lessonBoxId + "x"}
+                    >
+                      x
+                    </button>
                 </div>     
               )}     
             </div>
