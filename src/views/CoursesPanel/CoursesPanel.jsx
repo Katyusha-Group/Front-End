@@ -21,7 +21,7 @@ export default function CoursesPanel() {
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   const [Department, setDepartment] = React.useState([]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
-  
+  // let [myObject, setMyObject] = React.useState([]);
   // let DepartmentCourses = dataJson;
   // let timetable = dataJson;
   let [timetable, settimetable] = React.useState([]);
@@ -78,6 +78,8 @@ export default function CoursesPanel() {
       return location.pathname === routeName ? "active" : "";
     };
   }
+
+  // function 
 
   // Select Department
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
@@ -137,23 +139,6 @@ export default function CoursesPanel() {
   }
 
 
-  // function GetDepartmentLessons (DepartmentID)
-  // {
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = JSON.parse(tokenJson);
-  //   const token = tokenClass.token.access;
-  //   React.useEffect(() => {
-  //     fetch(`https://katyushaiust.ir/allcourses-based-department/${DepartmentID}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("DATA IS::::::: " + data);
-  //         setDepartmentCourses(data);
-  //       })
-  //       .catch((error) => console.error(error));
-  //   }, []);
-  // }
   React.useEffect(() => {
     if (Department) {
       const tokenJson = localStorage.getItem("authTokens");
@@ -176,53 +161,15 @@ export default function CoursesPanel() {
   }, [Department]);
   
   
-  
+  function AddShowAttribute (obj)
+  {
+    const UpdatedObj = { ...obj, Show:true};
+    return UpdatedObj;
+    // setMyObject(UpdatedObj);
+    // return myObject;
+  }
 
-  // const tokenJson2 = localStorage.getItem("authTokens");
-  //   const tokenClass2 = JSON.parse(tokenJson2);
-  //   // console.log(tokenClass);
-  //   const token2 = tokenClass2.token2.access;
-  //   React.useEffect(() => {
-  //     fetch("https://www.katyushaiust.ir/courses/my_courses", {
-  //       headers: { Authorization: `Bearer ${token2}` },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         // setChosenCourses(data);
-  //         setChosenCourses(data);
-  //         changeInfo("courseChoosed", data);
-  //         console.log("get data after reload", data);
-  //       })
-  //       .catch((error) => console.error(error));
-  //     const activeRoute = (routeName) => {
-  //       return location.pathname === routeName ? "active" : "";
-  //     };
-  //   }, []);
-  
-  // const [subject, setSubject] = useState();
 
-  
-
-  // function GetChosenLessons()
-  // {
-    
-
-    // React.useEffect(() => {
-    //   fetch("https://www.katyushaiust.ir/departments/", {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log("Department is: " + data);
-    //       setDepartment(data);
-    //     })
-    //     .catch((error) => console.error(error));
-    //   // console.log(data);
-    //   const activeRoute = (routeName) => {
-    //     return location.pathname === routeName ? "active" : "";
-    //   };
-    // }, []);
-  // }
 
   function mapTimeToIndex (start_time) {
     const times = [
@@ -272,6 +219,7 @@ export default function CoursesPanel() {
         //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
         currentPeriod.course_times.forEach(time => {
           // console.log("=======================")
+          // time.course_day = 4;
           const day = time.course_day;
           // console.log("day is: " + day);
           
@@ -287,8 +235,10 @@ export default function CoursesPanel() {
           // console.log("time index is: " + TimeIndex)
           let count = NumInEachSlot[day][TimeIndex];
           // console.log("count is: " + count)
-
-          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod
+          
+          // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod
+          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
+          console.log ("HELLLOOOO: " + lessonsKeyedByDayAndPeriod[day][TimeIndex][count].Show);
         });
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
@@ -312,7 +262,7 @@ export default function CoursesPanel() {
         // console.log(backgroundColor);
           return (
             <div>
-              {entry !== null && (
+              {entry !== null && entry.Show && (
                 <div className="Course" 
                     //  style={{ backgroundColor: backgroundColor }}
                 >
@@ -321,43 +271,21 @@ export default function CoursesPanel() {
                   <button className="btn-fill-AddCourseButton" 
                   name = "AddCourseButton"
                   onClick={() => {
-                      //console.log("x", x);
-                      //addNewLesson(x.complete_course_number);
-                      //changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      // console.log("info", info.courseChoosed);
-                      console.log("Course to be added: ", entry);
-                      addNewLesson(entry.complete_course_number);
-                      // changeInfo("courseChoosed", [...info.courseChoosed, entry]);
-                      console.log("INFOOOOO: " + info.courseChoosed);
-                      console.log("info", info);
+                      if (!info.courseChoosed.includes(entry)) 
+                      {
+                        console.log("does not include");
+                        addNewLesson(entry.complete_course_number);
+                        changeInfo("courseChoosed", [...info.courseChoosed, entry]);
+                      }
                     }}>
                       +
                     </button>
-                    {/* <button
-                      name = "RemoveCourseButton"
-                      className="btn-fill-RemoveCourseButton"
-                      onClick={() => {
-                        addNewLesson(entry.complete_course_number);
-                        console.log("delete lesson", entry.complete_course_number);
-                        changeInfo("courseChoosed",
-                          info.courseChoosed.filter(
-                            (item) =>
-                              item.complete_course_number !==
-                              entry.complete_course_number
-                          )
-                        );
-                        // setShowLesson(false);
-                        console.log("delete info", info);
-                        // settimetable(info.courseChoosed);
-                      }}
-                      // id={lessonBoxId + "x"}
-                    >
-                      x
-                    </button> */}
                     <button
                       name = "RemoveCourseButton"
                       className="btn-fill-RemoveCourseButton"
                       onClick={() => {
+                        // entry.Show = false;
+                        // console.log("Entry show is: " + entry.Show);
                         addNewLesson(entry.complete_course_number);
                         console.log("delete lesson", entry.complete_course_number);
                         changeInfo(
