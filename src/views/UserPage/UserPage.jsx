@@ -373,8 +373,7 @@ export default function UserPage() {
                     <CardBody className="courseCardBody">
                       <img
                         className="professorImage"
-                        src={x.teacher.teacher_image}
-                        // src={sampleProfile}
+                        src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
                         alt="professorImage"
                       />
                       <div className="infoPart">
