@@ -332,14 +332,13 @@ export default function CoursesPanel() {
           <Col>
             <Card>
               <CardHeader className="text-right">
-                {/* <CardTitle tag="h4">برنامه هفتگی</CardTitle> */}
                 <Select
                   options={DepartmentOptions}
                   styles={customStyles}
                   isRtl
                   placeholder="دانشکده مورد نظر را انتخاب کنید"
                   name="Department"
-                  value={Department}
+                  value={Department.name}
                   onChange={handleDepartment}
                 />
               </CardHeader>
