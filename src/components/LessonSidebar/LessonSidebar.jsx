@@ -62,7 +62,7 @@ function Sidebar(props) {
     };
   }, []);
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/allcoursesdepartment/", {
+    fetch("https://www.katyushaiust.ir/departments/all", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -171,7 +171,7 @@ function Sidebar(props) {
                       <NavLink
                         className="nav-link nav-link-lessonSidebar"
                         activeClassName="active"
-                        onClick={() => setLessonState(prop.base_courses)}
+                        onClick={() => setLessonState([prop])}
                         key={index}
                       >
                         <i className="tim-icons icon-chart-bar-32" />
