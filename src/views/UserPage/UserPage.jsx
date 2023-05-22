@@ -386,7 +386,28 @@ export default function UserPage() {
                             <p>
                               ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
                             </p>
-                            <Button
+
+
+                            
+                          </div>
+                          <img
+                            className="fullLogo"
+                            src={fullLogo}
+                            alt="fullLogo"
+                            style={{
+                              display:
+                                x.color_intensity_percentage < 11
+                                  ? "block"
+                                  : "none",
+                            }}
+                          ></img>
+
+                        </div>
+
+                      </div>
+                      <div className="buttonBar">
+                      <Button
+                              className="courseCardButton"
                               variant="secondary"
                               size="sm"
                               style={{ color: "aqua", fontSize: "medium" }}
@@ -405,52 +426,56 @@ export default function UserPage() {
                             >
                               +
                             </Button>
+                      <Button
+                              // variant="outline-danger"
+                              className="courseCardButton"
+                              size="sm"
+                              style={{ color: "deeppink", fontSize: "small" }}
+                            
+                              onClick={() => {
+                                addNewLesson(x.complete_course_number);
+                                console.log(x.complete_course_number);
+                                console.log("delete lesson", x.complete_course_number);
+                                changeInfo(
+                                  "courseChoosed",
+                                  info.courseChoosed.filter(
+                                    (item) =>
+                                      item.complete_course_number !==
+                                      x.complete_course_number
+                                  )
+                                );
+                                closeLesson(false, lessons);
+                                // console.log("delete info", infoState);
+                              }}
+                            
+                            >
+                              --
+                            </Button>
+                            
                             <Button
+                            className="courseCardButton"
                             variant="secondary"
                             size="sm"
-                            style={{ color: "aqua", fontSize: "medium" }}
-                  // color="primary"
-                  // size="sm"
-                  onClick={() =>{
-                    if (!info.shop.includes(x) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, x])
-                    }
-                  }
-                  }
-                >
-                  {/* <i className="tim-icons icon-simple-add" /> */}
-                  <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                </Button>
-                            {/* <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
+                            style={{ color: "aqua", fontSize: "medium" , display:"flex"}}
+                              // color="primary"
+                              // size="sm"
+                              onClick={() =>{
+                                if (!info.shop.includes(x) ) {
+                                  console.log("includes shop")
+                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                                  changeInfo("shop", [...info.shop, x])
+                                }
+                              }
+                              }
                             >
+                              {/* <i className="tim-icons icon-simple-add" /> */}
                               <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                            </Button> */}
-                          </div>
-                          <img
-                            className="fullLogo"
-                            src={fullLogo}
-                            alt="fullLogo"
-                            style={{
-                              display:
-                                x.color_intensity_percentage < 11
-                                  ? "block"
-                                  : "none",
-                            }}
-                          ></img>
-                        </div>
+                                            className="cart"
+                                            src={cartlogo}
+                                            alt="cartlogo"
+                                          ></img>
+                            </Button>
+
                       </div>
                     </CardBody>
                   </Card>

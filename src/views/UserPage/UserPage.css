@@ -17,15 +17,7 @@
     display: block;
     width: 50px;
 }
-/* .table > thead > tr > th{
-    position: relative;
-    right: -50px;
-    font-size: 15px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    background-color: #34467546;
-    border-radius: 3rem;
-} */
+
 .UserPage_first_column{
     border-right: none !important;
 }
@@ -115,15 +107,12 @@ border-bottom: none !important;
     display: none;
 }
 .courseCard{
-    /* background-color: hsl(256, 45%, 50%)!important; */
-    /* border-width: 5px; */
-    /* background-color: transparent; */
-    /* border: solid !important; */
     border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
-    width: 20rem !important;
+    width: 21rem !important;
     height: 120px;
     margin-left: 15px;
+    padding: 0px;
 }
 .courseCardBody{
     justify-items: center;
@@ -133,17 +122,14 @@ border-bottom: none !important;
     flex-direction: row;
     /* cursor: pointer; */
 }
-
+/* 
 .courseCardBody:hover{
     cursor: pointer;
-}
+} */
 
 .courseGroupCard{
-    /* align-items: flex-start ; */
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
-    /* align-content: space-between; */
     flex-wrap: wrap;
     height: 30vh;
     overflow: auto;
@@ -187,6 +173,7 @@ p{
     /* width: 20px; */
     height: 40px;
     margin-right: auto;
+    margin-left: 5px;
 }
 .courseCardDownSide{
     display: flex;
@@ -202,13 +189,17 @@ p{
     color: red;
 }
 .cart{
-    margin: 0px;
     width: 25px;
     height: 25px;
-    /* margin-left: 10px; */
-    /* border-radius: 20px; */
-    /* border-width: 0.1875rem;
-    border-color: "red"; */
+    max-width: none;
+}
+.courseCardButton{
+    width: 38px;
+    margin-left: 0px !important;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+
 }
 .course_hover{
     background: #1d8bf86d;
@@ -231,4 +222,8 @@ p{
 }
 .dir-right{
     direction: rtl;
+}
+.buttonBar{
+    display: flex;
+    flex-direction: column;
 }
