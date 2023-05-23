@@ -10,7 +10,13 @@ import { PropTypes } from "prop-types";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // reactstrap components
-import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
+import {
+  Button,
+  Col,
+  Nav,
+  NavLink as ReactstrapNavLink,
+  Row,
+} from "reactstrap";
 
 import {
   BackgroundColorContext,
@@ -20,6 +26,8 @@ import {
 import "./LessonSidebar.css";
 
 import * as log from "../../assets/img/react-logo.png";
+
+// import * as log from "../../assets/img/react-logo.png";
 
 import classData from "../../assets/data/data.json";
 
@@ -35,7 +43,7 @@ function Sidebar(props) {
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   // const [allColleges, setAllColleges] = React.useState([]);
-  
+
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
 
@@ -69,13 +77,13 @@ function Sidebar(props) {
       .then((all_colleges_data) => {
         // changeInfoState("courseChoosed", all_colleges_data);
         console.log("all Colleges", all_colleges_data);
-        console.log("all Colleges type", typeof(all_colleges_data));
+        console.log("all Colleges type", typeof all_colleges_data);
         setAllColleges(all_colleges_data);
       })
       .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
     console.log("all Colleges state", allColleges);
   }, []);
 
@@ -160,10 +168,23 @@ function Sidebar(props) {
               </div>
             ) : null} */}
             <Nav>
-              <div className="nav-lessonSidebar">
-                {/* <img alt="LoginImage" className="nav-img" src={log.default} />
-                <h3 className="brand-name">کاتیوشا</h3> */}
-              </div>
+              <Row className="nav-lessonSidebar">
+                <Col md="5">
+                  <NavLink className="nav-header nav-link-icon">
+                    <i className="tim-icons icon-atom" />
+                  </NavLink>
+                </Col>
+                <Col md="4">
+                  <NavLink className="nav-header nav-link-course">
+                    پنل دروس
+                  </NavLink>
+                </Col>
+                <Col md="3">
+                  <NavLink className="nav-header nav-link-profile">
+                    <i className="tim-icons icon-single-02"></i>
+                  </NavLink>
+                </Col>
+              </Row>
               <div className="lessonSidebar_component">
                 {departeman.map((prop, index) => {
                   if (prop.base_courses.length > 0) {
@@ -195,9 +216,7 @@ function Sidebar(props) {
                 </NavLink>
               </div>
               <div className="lessonSidebar_component-lessons">
-                {lessonState ? (
-                  <SearchBox data={lessonState} />
-                ) : null}
+                {lessonState ? <SearchBox data={lessonState} /> : null}
                 {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
                 {/* {console.log(window.location.pathname)} */}
