@@ -39,14 +39,16 @@ import { json } from "react-router-dom";
 import cartlogo from "./cart.png";
 
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
+
+import ExamChart from "../../components/Charts/ExamChart.jsx";
+import { sum } from "lodash";
+import axios from "axios";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
-import ExamChart from "../../components/Charts/ExamChart.jsx";
-import { sum } from "lodash";
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
@@ -75,7 +77,7 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
-    console.log("setShowCourseHover func");
+    // console.log("setShowCourseHover func");
     setShowCourseHover((info) => ({ ...info, [name]: value }));
   }
   let defu = 13.3;
@@ -85,10 +87,10 @@ export default function UserPage() {
   // let initial = useInfo();
   //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
-  console.log("info", info);
+  // console.log("info", info);
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
-    console.log("closeLesson", flag, data, showLesson);
+    // console.log("closeLesson", flag, data, showLesson);
   }
   /**
    * send course number to save in database
@@ -113,7 +115,7 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("put data", data);
+        // console.log("put data", data);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -129,7 +131,6 @@ export default function UserPage() {
    */
 
   function lessons(infoState, changeInfoState) {
-    console.log("hello");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -139,10 +140,10 @@ export default function UserPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("get data", data);
+          // console.log("get data", data);
           setData(data);
           changeInfoState("courseChoosed", data);
-          console.log("get data after reload", data);
+          // console.log("get data after reload", data);
         })
         .catch((error) => console.error(error));
       const activeRoute = (routeName) => {
@@ -151,7 +152,7 @@ export default function UserPage() {
     }, []);
 
     return infoState.courseChoosed.map((lessons) => {
-      console.log("lessons", lessons);
+      // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
@@ -185,7 +186,7 @@ export default function UserPage() {
                 className="lesson_button"
                 onClick={() => {
                   addNewLesson(lessons.complete_course_number);
-                  console.log("delete lesson", lessons.complete_course_number);
+                  // console.log("delete lesson", lessons.complete_course_number);
                   changeInfo(
                     "courseChoosed",
                     infoState.courseChoosed.filter(
@@ -195,7 +196,7 @@ export default function UserPage() {
                     )
                   );
                   closeLesson(false, lessons);
-                  console.log("delete info", infoState);
+                  // console.log("delete info", infoState);
                 }}
                 id={lessonBoxId + "x"}
               >
@@ -212,6 +213,57 @@ export default function UserPage() {
         );
       });
     });
+  }
+
+  function addItemShop(num) {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    // console.log("shopId in userpage", shopId);
+    // console.log("token is", token);
+    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("shop data", data);
+        
+      })
+      .catch((error) => console.error(error));
+    // axios
+    //   .post(
+    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
+    //     {
+    //       complete_course_number: num,
+    //       contain_telegram: true,
+    //       contain_sms: true,
+    //       contain_email: true,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 
   return (
@@ -358,7 +410,7 @@ export default function UserPage() {
                           : "dimgray",
                     }}
                     onMouseEnter={() => {
-                      console.log("x.complete",x.complete_course_number);
+                      console.log("x.complete", x.complete_course_number);
                       // console.log("z");
                       setShowCourseHoverFunc("courseChoosed", [
                         ...info.courseChoosed,
@@ -407,27 +459,30 @@ export default function UserPage() {
                               +
                             </Button>
                             <Button
-                            variant="secondary"
-                            size="sm"
-                            style={{ color: "aqua", fontSize: "medium" }}
-                  // color="primary"
-                  // size="sm"
-                  onClick={() =>{
-                    if (!info.shop.includes(x) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, x])
-                    }
-                  }
-                  }
-                >
-                  {/* <i className="tim-icons icon-simple-add" /> */}
-                  <img
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: "aqua", fontSize: "medium" }}
+                              // color="primary"
+                              // size="sm"
+                              onClick={() => {
+                                if (!info.shop.includes(x)) {
+                                  console.log("includes shop");
+                                  // changeInfo("courseChoosed", [
+                                  //   ...info.courseChoosed,
+                                  //   x,
+                                  // ]);
+                                  changeInfo("shop", [...info.shop, x]);
+                                  addItemShop(x.complete_course_number);
+                                }
+                              }}
+                            >
+                              {/* <i className="tim-icons icon-simple-add" /> */}
+                              <img
                                 className="cart"
                                 src={cartlogo}
                                 alt="cartlogo"
                               ></img>
-                </Button>
+                            </Button>
                             {/* <Button
                               variant="secondary"
                               size="sm"

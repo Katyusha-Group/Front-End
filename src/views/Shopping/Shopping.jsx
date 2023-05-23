@@ -25,11 +25,29 @@ import { convertPercentagetoLigtness } from "../../global/functions";
 
 function Shopping() {
   const { info, changeInfo } = useInfo();
-  const [state, useState] = React.useState(true);
+  const [state, useState] = React.useState([]);
   console.log("INFO", info);
   const notificationAlertRef = React.useRef(null);
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
   // console.log("info lenght", info.shop.length);
-
+  React.useEffect(() => {
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    console.log("shopId in userpage", shopId);
+    console.log("token is", token);
+    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("shop data", data);
+        useState(data);
+        console.log("state", state);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  
   const notify = (place) => {
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
@@ -69,6 +87,36 @@ function Shopping() {
     };
     notificationAlertRef.current.notificationAlert(options);
   };
+
+  /**
+   * Change the checkbox
+   * @param {int} num 1 is email 2 is sms 3 is telegram
+   * @param {int} index index of list of state you need to change
+   */
+  function changeChecked(num,index) {
+    let u = state;
+    switch (num) {
+      case 1:
+        u[index].contain_email = !u[index].contain_email;
+        break;
+      case 2:
+        u[index].contain_email = !u[index].contain_sms;
+        break;
+      case 3:
+        u[index].contain_email = !u[index].contain_telegram;
+        break;
+
+      default:
+        break;
+    }
+    useState(u);
+    console.log(u);
+
+  }
+
+  function deleteItem(index) {
+    
+  }
   return (
     <>
       <div className="wrapper">
@@ -97,7 +145,7 @@ function Shopping() {
                   </CardBody>
                 </Card>
                 <Card>
-                  {info.shop.map((x) => {
+                  {state.map((x, index) => {
                     console.log("info lenght", info.shop.lenght);
                     return (
                       <>
@@ -109,12 +157,11 @@ function Shopping() {
                                   color="primary"
                                   size="sm"
                                   onClick={() =>
-                                    changeInfo(
-                                      "shop",
-                                      info.shop.filter(
+                                    useState(
+                                      state.filter(
                                         (y) =>
-                                          y.complete_course_number !==
-                                          x.complete_course_number
+                                          y.course.complete_course_number !==
+                                          x.course.complete_course_number
                                       )
                                     )
                                   }
@@ -125,22 +172,34 @@ function Shopping() {
                               <Col className="m-auto text-center category">
                                 <Form>
                                   <FormGroup className="shopping_form" check>
-                                    <Label className="shoping_label" check>
-                                      <Input defaultValue="" type="checkbox" />
+                                    <Label check className="shoping_label">
+                                      <Input
+                                        onChange={() => {
+                                          changeChecked(1,index)
+                                        }}
+                                        checked={state[index].contain_email}
+                                        type="checkbox"
+                                      />
                                       <span className="form-check-sign">
                                         <span className="check" />
                                       </span>
                                       ایمیل
                                     </Label>
                                     <Label check className="shoping_label">
-                                      <Input defaultValue="" type="checkbox" />
+                                      <Input
+                                        checked={x.contain_sms}
+                                        type="checkbox"
+                                      />
                                       <span className="form-check-sign">
                                         <span className="check" />
                                       </span>
                                       sms
                                     </Label>
                                     <Label check className="shoping_label">
-                                      <Input defaultValue="" type="checkbox" />
+                                      <Input
+                                        checked={x.contain_telegram}
+                                        type="checkbox"
+                                      />
                                       <span className="form-check-sign">
                                         <span className="check" />
                                       </span>
@@ -150,45 +209,14 @@ function Shopping() {
                                 </Form>
                               </Col>
                               <Col className="m-auto text-center category">
-                                2000 تومان
+                                {x.price}
                               </Col>
                               <Col className="m-auto text-center category">
-                                {x.name}
+                                {x.course.name}
                               </Col>
                               <Col className="m-auto text-center category">
-                                {x.complete_course_number}
+                                {x.course.complete_course_number}
                               </Col>
-                              <Col className="shopping_professorImage">
-                                <img
-                                  className="professorImage "
-                                  src={x.teacher.teacher_image}
-                                  // src={sampleProfile}
-                                  alt="professorImage"
-                                />
-                              </Col>
-
-                              {/* <Col className="m-auto text-center category">
-                            <Form>
-                              <FormGroup switch>
-                                <Input type="switch" role="switch" />
-                                <Label check>
-                                  Default switch checkbox input
-                                </Label>
-                              </FormGroup>
-                              <FormGroup switch>
-                                <Input
-                                  type="switch"
-                                  checked={state}
-                                  onClick={() => {
-                                    setState(!state);
-                                  }}
-                                />
-                                <Label check>
-                                  Checked switch checkbox input
-                                </Label>
-                              </FormGroup>
-                            </Form>
-                          </Col> */}
                             </Row>
                           </div>
                         </CardBody>

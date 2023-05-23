@@ -65,22 +65,20 @@ function Login() {
     }));
   }
   
-  React.useEffect(() => {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    fetch("https://katyushaiust.ir/carts/", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log("data all",data);
-        console.log("data of shop catched: ", data)
-        localStorage.setItem("shopId", data)
-      })
-      .catch((error) => console.error(error));
-    // console.log(data);
-  }, [shop_caller]);
+  // React.useEffect(() => {
+    
+  //   fetch("https://katyushaiust.ir/carts/", {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log("data all",data);
+  //       console.log("data of shop catched: ", data)
+  //       localStorage.setItem("shopId", data)
+  //     })
+  //     .catch((error) => console.error(error));
+  //   // console.log(data);
+  // }, [shop_caller]);
   function gohNakhor(){
     setShop_caller(true);
     console.log("gohNakhor:",shop_caller)
@@ -145,14 +143,29 @@ function Login() {
       }),
     });
     const data = await response.json();
-    console.log(data.token);
+    // console.log(data.token);
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
       setShop_caller(true);
       console.log("shop_caller: ", shop_caller)
       localStorage.setItem("authTokens", JSON.stringify(data));
-      
+      // localStorage.getItem("authTokens");
+      const tokenClass = JSON.parse(JSON.stringify(data));
+      const token = tokenClass.token.access;
+      const shopId = await fetch("https://katyushaiust.ir/carts/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      // console.log("shopId.status", shopId.response)
+      const shopId_data = await shopId.json();
+      if (shopId.status == 200) {
+        // console.log("shopId.json()",shopId_data)
+        localStorage.setItem("shopId", JSON.stringify(shopId_data))
+        console.log("shopId localstorage ",localStorage.getItem("shopId"))
+        let test = localStorage.getItem("shopId")
+        console.log("test", JSON.parse(test)[0])
+      }
+      console.log("shopId: ",shopId)
       Navigate("/admin/page");
     } else {
       console.log(data.error);
@@ -279,15 +292,6 @@ function Login() {
                       type="submit"
                     >
                       ورود
-                    </Button>
-                    <Button
-                      onClick={gohNakhor}
-                      //onChange={handleClick}
-                      className="btn-fill"
-                      color="primary"
-                      type="submit"
-                    >
-                      گوه نخور
                     </Button>
                   </CardFooter>
                   <br></br>
