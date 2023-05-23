@@ -1,4 +1,3 @@
-
 import React from "react";
 // react plugin for creating notifications over the dashboard
 // import NotificationAlert from "react-notification-alert";
@@ -20,12 +19,14 @@ import {
   Form,
 } from "reactstrap";
 
-import "./Shoping.css"
+import "./Shopping.css";
+import cartlogo from "./cart.png";
+import { convertPercentagetoLigtness } from "../../global/functions";
 
-function Shoping() {
-  const {info,changeInfo} = useInfo()
-  const [state, useState] = React.useState(true)
-  console.log("INFO",info)
+function Shopping() {
+  const { info, changeInfo } = useInfo();
+  const [state, useState] = React.useState(true);
+  console.log("INFO", info);
   const notificationAlertRef = React.useRef(null);
   // console.log("info lenght", info.shop.length);
 
@@ -64,7 +65,7 @@ function Shoping() {
       ),
       type: type,
       icon: "tim-icons icon-bell-55",
-      autoDismiss: 7
+      autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
   };
@@ -96,14 +97,13 @@ function Shoping() {
                   </CardBody>
                 </Card>
                 <Card>
-                  <CardBody>
-                    <div className="places-buttons">
-                      <Row md="5" sm="2" xs="1">
-                        {
-                        info.shop.map((x) => {
-                          console.log("info lenght", info.shop.lenght);
-                          return (
-                            <>
+                  {info.shop.map((x) => {
+                    console.log("info lenght", info.shop.lenght);
+                    return (
+                      <>
+                        <CardBody>
+                          <div className="places-buttons">
+                            <Row md="6" sm="2" xs="1">
                               <Col className="m-auto text-center category">
                                 <Button
                                   color="primary"
@@ -124,7 +124,7 @@ function Shoping() {
                               </Col>
                               <Col className="m-auto text-center category">
                                 <Form>
-                                  <FormGroup check>
+                                  <FormGroup className="shopping_form" check>
                                     <Label className="shoping_label" check>
                                       <Input defaultValue="" type="checkbox" />
                                       <span className="form-check-sign">
@@ -139,6 +139,13 @@ function Shoping() {
                                       </span>
                                       sms
                                     </Label>
+                                    <Label check className="shoping_label">
+                                      <Input defaultValue="" type="checkbox" />
+                                      <span className="form-check-sign">
+                                        <span className="check" />
+                                      </span>
+                                      تلگرام
+                                    </Label>
                                   </FormGroup>
                                 </Form>
                               </Col>
@@ -151,7 +158,15 @@ function Shoping() {
                               <Col className="m-auto text-center category">
                                 {x.complete_course_number}
                               </Col>
-                              
+                              <Col className="shopping_professorImage">
+                                <img
+                                  className="professorImage "
+                                  src={x.teacher.teacher_image}
+                                  // src={sampleProfile}
+                                  alt="professorImage"
+                                />
+                              </Col>
+
                               {/* <Col className="m-auto text-center category">
                             <Form>
                               <FormGroup switch>
@@ -174,12 +189,12 @@ function Shoping() {
                               </FormGroup>
                             </Form>
                           </Col> */}
-                            </>
-                          );
-                        })}
-                      </Row>
-                    </div>
-                  </CardBody>
+                            </Row>
+                          </div>
+                        </CardBody>
+                      </>
+                    );
+                  })}
                 </Card>
               </Col>
             </Row>
@@ -190,4 +205,4 @@ function Shoping() {
   );
 }
 
-export default Shoping;
+export default Shopping;

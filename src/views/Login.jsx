@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 import { conforms } from "lodash";
 
 function Login() {
+  let [shop_caller,setShop_caller] = React.useState()
+  console.log("default gohNakhor",shop_caller)
   // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
@@ -61,6 +63,27 @@ function Login() {
       ...prevFormData,
       [name]: value,
     }));
+  }
+  
+  React.useEffect(() => {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    fetch("https://katyushaiust.ir/carts/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("data all",data);
+        console.log("data of shop catched: ", data)
+        localStorage.setItem("shopId", data)
+      })
+      .catch((error) => console.error(error));
+    // console.log(data);
+  }, [shop_caller]);
+  function gohNakhor(){
+    setShop_caller(true);
+    console.log("gohNakhor:",shop_caller)
   }
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
@@ -126,14 +149,10 @@ function Login() {
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
-      // if (authTokens) {
-      //   console.log(user);
-      //   setUser(jwt_decode(authTokens));
-      //   console.log(user);
-      // }
-      // info.token = authTokens;
-      // console.log(info);
+      setShop_caller(true);
+      console.log("shop_caller: ", shop_caller)
       localStorage.setItem("authTokens", JSON.stringify(data));
+      
       Navigate("/admin/page");
     } else {
       console.log(data.error);
@@ -260,6 +279,15 @@ function Login() {
                       type="submit"
                     >
                       ورود
+                    </Button>
+                    <Button
+                      onClick={gohNakhor}
+                      //onChange={handleClick}
+                      className="btn-fill"
+                      color="primary"
+                      type="submit"
+                    >
+                      گوه نخور
                     </Button>
                   </CardFooter>
                   <br></br>
