@@ -16,6 +16,10 @@ import {
   Nav,
   NavLink as ReactstrapNavLink,
   Row,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
 } from "reactstrap";
 
 import {
@@ -171,17 +175,69 @@ function Sidebar(props) {
               <Row className="nav-lessonSidebar">
                 <Col md="5">
                   <NavLink className="nav-header nav-link-icon">
-                    <i className="tim-icons icon-atom" />
+                    <i className="tim-icons icon-atom ml-0" />
                   </NavLink>
                 </Col>
                 <Col md="4">
-                  <NavLink className="nav-header nav-link-course">
+                  <NavLink
+                    to="..\CoursesPanel"
+                    className="nav-header nav-link-course"
+                  >
                     پنل دروس
                   </NavLink>
                 </Col>
                 <Col md="3">
-                  <NavLink className="nav-header nav-link-profile">
-                    <i className="tim-icons icon-single-02"></i>
+                  <NavLink className="nav-link-profile">
+                    <UncontrolledDropdown>
+                      <DropdownToggle
+                        className="m-0 p-10"
+                        color="link"
+                        data-toggle="dropdown"
+                      >
+                        <i className="tim-icons icon-single-02 ml-0" />
+                      </DropdownToggle>
+                      <DropdownMenu
+                        className="br-7"
+                        aria-labelledby="dropdownMenuLink"
+                        right
+                      >
+                        <DropdownItem
+                          href="http://localhost:5173/shoping"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          سبد خرید
+                          <span className="tim-icons icon-basket-simple" />
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          اعلان ها
+                          <span className="tim-icons icon-email-85" />
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          تغییر رمز عبور
+                          <span className="tim-icons icon-lock-circle" />
+                        </DropdownItem>
+                        {/* <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          ویرایش پروفایل
+                          <span className="tim-icons icon-badge" />
+                        </DropdownItem> */}
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          خروج
+                          <span className="tim-icons icon-simple-remove" />
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
                   </NavLink>
                 </Col>
               </Row>
