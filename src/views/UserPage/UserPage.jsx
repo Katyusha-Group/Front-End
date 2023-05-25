@@ -216,6 +216,12 @@ export default function UserPage() {
   }
 
   function addItemShop(num) {
+    console.log("json", JSON.stringify({
+      complete_course_number: num,
+      contain_telegram: true,
+      contain_sms: true,
+      contain_email: true,
+    }))
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
