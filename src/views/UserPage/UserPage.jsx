@@ -37,7 +37,7 @@ import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
 import cartlogo from "./cart.png";
-
+import {showLoading, closeLoading} from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
@@ -136,6 +136,7 @@ export default function UserPage() {
 
     React.useEffect(() => {
       if (getapi == true) {
+        showLoading();
         fetch("https://www.katyushaiust.ir/courses/my_courses", {
           headers: { Authorization: `Bearer ${token}` },
         })
@@ -152,7 +153,7 @@ export default function UserPage() {
         };
       }
     }, []);
-
+    closeLoading();
     return infoState.courseChoosed.map((lessons) => {
       // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
@@ -230,6 +231,7 @@ export default function UserPage() {
 
   return (
     <>
+    {/* {showLoading()} */}
       <Row>
         {/* <Col lg="12"><ExamChart /></Col> */}
         <Col sm="12">
