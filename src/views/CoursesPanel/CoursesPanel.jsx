@@ -2,6 +2,9 @@ import React from "react";
 import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
+import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
+import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+
 import {
   Card,
   CardHeader,
@@ -159,7 +162,7 @@ export default function CoursesPanel() {
       const tokenJson = localStorage.getItem("authTokens");
       const tokenClass = JSON.parse(tokenJson);
       const token = tokenClass.token.access;
-
+      
       fetch(`https://katyushaiust.ir/allcourses-based-department/${Department}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -321,6 +324,7 @@ export default function CoursesPanel() {
                   <button className="btn-fill-AddCourseButton" 
                   name = "AddCourseButton"
                   onClick={() => {
+                      showLoading();
                       //console.log("x", x);
                       //addNewLesson(x.complete_course_number);
                       //changeInfo("courseChoosed", [...info.courseChoosed, x]);
@@ -330,6 +334,7 @@ export default function CoursesPanel() {
                       // changeInfo("courseChoosed", [...info.courseChoosed, entry]);
                       console.log("INFOOOOO: " + info.courseChoosed);
                       console.log("info", info);
+                      closeLoading();
                     }}>
                       +
                     </button>
