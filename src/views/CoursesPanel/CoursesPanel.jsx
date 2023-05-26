@@ -258,12 +258,13 @@ export default function CoursesPanel() {
           console.log("time is: " + startTime)
           // Do something with the day and start time, such as counting the number of courses
           let TimeIndex = mapTimeToIndex(startTime);
-          // if (TimeIndex === -1)
-          // {
-          //   TimeIndex = 4;
-          // }
-          NumInEachSlot[day][TimeIndex]++;
           console.log("time index is: " + TimeIndex)
+          if (TimeIndex === -1)
+          {
+            TimeIndex = 7;
+          }
+          NumInEachSlot[day][TimeIndex]++;
+          // console.log("time index is: " + TimeIndex)
           let count = NumInEachSlot[day][TimeIndex];
           // console.log("count is: " + count)
           
