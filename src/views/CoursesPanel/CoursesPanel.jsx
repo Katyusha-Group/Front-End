@@ -182,7 +182,38 @@ export default function CoursesPanel() {
       "16:30:00",
       "18:00:00",
     ];
-    return times.findIndex(time => time === start_time);
+    let index = times.findIndex(time => time === start_time);
+    if (index === -1)
+    {
+      const times2 = [
+        "08:00:00",
+        "09:30:00",
+        "11:00:00",
+        "12:30:00",
+        "14:00:00",
+        "15:30:00",
+        "17:00:00",
+        "18:30:00",
+      ];
+      let index2 = times2.findIndex(time => time === start_time);
+      if (index2 === -1)
+      {
+        const times3 = [
+          "07:00:00",
+          "08:30:00",
+          "10:00:00",
+          "11:30:00",
+          "13:00:00",
+          "14:30:00",
+          "16:00:00",
+          "17:30:00",
+        ];
+        return times3.findIndex(time => time === start_time);
+      }
+      return index2;
+    }
+    // return times.findIndex(time => time === start_time);
+    return index;
   }
 
   function createCourseGroupsArray (courses)
@@ -218,27 +249,27 @@ export default function CoursesPanel() {
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
         currentPeriod.course_times.forEach(time => {
-          // console.log("=======================")
+          console.log("=======================")
           // time.course_day = 4;
           const day = time.course_day;
           // console.log("day is: " + day);
           
           const startTime = time.course_start_time;
-          // console.log("time is: " + startTime)
+          console.log("time is: " + startTime)
           // Do something with the day and start time, such as counting the number of courses
           let TimeIndex = mapTimeToIndex(startTime);
-          if (TimeIndex === -1)
-          {
-            TimeIndex = 4;
-          }
+          // if (TimeIndex === -1)
+          // {
+          //   TimeIndex = 4;
+          // }
           NumInEachSlot[day][TimeIndex]++;
-          // console.log("time index is: " + TimeIndex)
+          console.log("time index is: " + TimeIndex)
           let count = NumInEachSlot[day][TimeIndex];
           // console.log("count is: " + count)
           
           // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod
           lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
-          console.log ("HELLLOOOO: " + lessonsKeyedByDayAndPeriod[day][TimeIndex][count].Show);
+          // console.log ("HELLLOOOO: " + lessonsKeyedByDayAndPeriod[day][TimeIndex][count].Show);
         });
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
@@ -318,7 +349,7 @@ export default function CoursesPanel() {
       <td className="CoursesPanel_column text-center">{dayName}</td>
       {Object.entries(periods).map(([time, entry]) => {
         return (
-          <td className="CoursesPanel_column" key={time}>
+          <td className="CoursesPanel_column2" key={time}>
             {DayPeriod(entry)}
           </td>
         )
