@@ -370,6 +370,9 @@ export default function UserPage() {
                       console.log("out");
                       setShowCourseHoverFunc("courseChoosed", []);
                     }}
+                    onClick={() =>{
+                      setShowLesson({ flag: true, data: x });
+                    }}
                   >
                     <CardBody className="courseCardBody">               
                         <img
@@ -465,6 +468,12 @@ export default function UserPage() {
                             </Button>
 
                       </div>
+                      <ModalLessons
+                    show={showLesson}
+                    close={() =>
+                      setShowLesson(() => ({ ...showLesson, flag: false }))
+                    }
+                  />
                   </div>
                 ))}
             </CardBody>
