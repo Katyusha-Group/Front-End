@@ -346,6 +346,7 @@ export default function UserPage() {
             <CardBody className="courseGroupCard">
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
+                  <div className="coursCardContainer">
                   <Card
                     className="courseCard"
                     key={index}
@@ -370,8 +371,8 @@ export default function UserPage() {
                       setShowCourseHoverFunc("courseChoosed", []);
                     }}
                   >
-                    <CardBody className="courseCardBody">
-                      <img
+                    <CardBody className="courseCardBody">               
+                        <img
                         className="professorImage"
                         src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
                         alt="professorImage"
@@ -384,11 +385,8 @@ export default function UserPage() {
                         <div className="courseCardDownSide">
                           <div>
                             <p>
-                              ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
                             </p>
-
-
-                            
                           </div>
                           <img
                             className="fullLogo"
@@ -405,13 +403,15 @@ export default function UserPage() {
                         </div>
 
                       </div>
-                      <div className="buttonBar">
-                      <Button
+                    </CardBody>
+                  </Card>
+                  <div className="buttonBar"> 
+                            <Button 
                               className="courseCardButton"
                               variant="secondary"
                               size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                              onClick={() => {
+                              style={{ color: !info.courseChoosed.includes(x)?"aqua":"deeppink", fontSize: !info.courseChoosed.includes(x)?"medium":"medium" }}
+                              onClick={() => { //add lesson
                                 console.log("x", x);
                                 if (!info.courseChoosed.includes(x)) {
                                   console.log("includes");
@@ -420,19 +420,7 @@ export default function UserPage() {
                                     ...info.courseChoosed,
                                     x,
                                   ]);
-                                }
-                                console.log("info", info);
-                              }}
-                            >
-                              +
-                            </Button>
-                      <Button
-                              // variant="outline-danger"
-                              className="courseCardButton"
-                              size="sm"
-                              style={{ color: "deeppink", fontSize: "small" }}
-                            
-                              onClick={() => {
+                                }else{//remove lesson
                                 addNewLesson(x.complete_course_number);
                                 console.log(x.complete_course_number);
                                 console.log("delete lesson", x.complete_course_number);
@@ -445,13 +433,13 @@ export default function UserPage() {
                                   )
                                 );
                                 closeLesson(false, lessons);
-                                // console.log("delete info", infoState);
+                                }
+                                console.log("info", info);
                               }}
-                            
                             >
-                              --
+                              {!info.courseChoosed.includes(x)? "+" : "x"}
+                              
                             </Button>
-                            
                             <Button
                             className="courseCardButton"
                             variant="secondary"
@@ -477,8 +465,7 @@ export default function UserPage() {
                             </Button>
 
                       </div>
-                    </CardBody>
-                  </Card>
+                  </div>
                 ))}
             </CardBody>
           </Card>
