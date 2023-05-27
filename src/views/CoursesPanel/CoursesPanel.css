@@ -11,10 +11,7 @@
     text-align: left;
 }
 
-.CoursesPanel_column2
-{
-    column-width: 100px;
-}
+
 
 .CoursesPanel_column2 {
     border: 1px solid;
@@ -68,6 +65,15 @@ tbody{
 
 .CoursesPanel_TableRow
 {
-    width: 200px !important;
+    width: 2000px !important;
 }
 
+.table-head
+{
+    column-width: 1000px;
+}
+
+.CoursesPanel_column2
+{
+    column-width: 1000px;
+}

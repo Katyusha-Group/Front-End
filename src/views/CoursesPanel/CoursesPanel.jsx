@@ -249,16 +249,16 @@ export default function CoursesPanel() {
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
         currentPeriod.course_times.forEach(time => {
-          console.log("=======================")
+          // console.log("=======================")
           // time.course_day = 4;
           const day = time.course_day;
           // console.log("day is: " + day);
           
           const startTime = time.course_start_time;
-          console.log("time is: " + startTime)
+          // console.log("time is: " + startTime)
           // Do something with the day and start time, such as counting the number of courses
           let TimeIndex = mapTimeToIndex(startTime);
-          console.log("time index is: " + TimeIndex)
+          // console.log("time index is: " + TimeIndex)
           if (TimeIndex === -1)
           {
             TimeIndex = 7;
@@ -290,13 +290,26 @@ export default function CoursesPanel() {
     <div>
       {Object.entries(Section).map(([count, entry]) => {
         // const backgroundColor = (entry !== null && entry.can_take) ? "rgb(29, 113, 236)": "rgb(100, 100, 120)"; // Also makes the courses that don't have the attribute gray
-        // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+        // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(100, 22%, 30%)";
         // console.log(backgroundColor);
+        let IsInTheChosenCourses = false;
+        console.log("Chosen Courses are: " + entry);
+        // const objectStrings = ChosenCourses.map(course => JSON.stringify(course));
+        // const objectsString = objectStrings.join(", ");
+        // console.log(objectStrings);
+        ChosenCourses.forEach(course => {
+          if (course !== null && entry !== null && course.complete_course_number === entry.complete_course_number)
+          {
+            console.log("+++++++++++++++++++++" + course.name);
+            IsInTheChosenCourses = true;
+          }
+        });
+        const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
           return (
             <div>
               {entry !== null && entry.Show && (
                 <div className="Course" 
-                    //  style={{ backgroundColor: backgroundColor }}
+                     style={{ backgroundColor: backgroundColor }}
                 >
                   {entry.name} ({entry.class_gp})
                   <br/>
@@ -306,6 +319,7 @@ export default function CoursesPanel() {
                       if (!info.courseChoosed.includes(entry)) 
                       {
                         console.log("does not include");
+                        console.log("Added Lesson: " + entry)
                         addNewLesson(entry.complete_course_number);
                         changeInfo("courseChoosed", [...info.courseChoosed, entry]);
                       }
@@ -378,15 +392,15 @@ export default function CoursesPanel() {
                 <Table className="ClassesTable">
                   <thead className="text-primary">
                     <tr>
-                      <th className="text-center "></th>
-                      <th className="text-center ">۷:۳۰ تا ۹</th>
-                      <th className="text-center ">۹ تا ۱۰:۳۰</th>
-                      <th className="text-center ">۱۰:۳۰ تا ۱۲</th>
-                      <th className="text-center ">۱۲ تا ۱:۳۰</th>
-                      <th className="text-center ">۱:۳۰ تا ۳</th>
-                      <th className="text-center ">۳ تا ۴:۳۰  </th>
-                      <th className="text-center ">۴:۳۰ تا ۶  </th>
-                      <th className="text-center ">۶ تا ۷:۳۰  </th>
+                      <th className="table-head text-center "></th>
+                      <th className="table-head text-center ">۷:۳۰ تا ۹</th>
+                      <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
+                      <th className="table-head text-center ">۱۰:۳۰ تا ۱۲</th>
+                      <th className="table-head text-center ">۱۲ تا ۱:۳۰</th>
+                      <th className="table-head text-center ">۱:۳۰ تا ۳</th>
+                      <th className="table-head text-center ">۳ تا ۴:۳۰  </th>
+                      <th className="table-head text-center ">۴:۳۰ تا ۶  </th>
+                      <th className="table-head text-center ">۶ تا ۷:۳۰  </th>
                     </tr>
                   </thead>
                   <tbody className="CoursesTableBody">
