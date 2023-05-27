@@ -3,6 +3,8 @@ import "../../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
+import "./ModalLessons.css";
+import { dayOfWeek , timeStringToFloat , sexTostring} from "../../global/functions";
 // reactstrap components
 import {
   Button,
@@ -22,6 +24,7 @@ const ModalLessons = (props) => {
   console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
   console.log("INFO", info)
+  const x=props.show.data;
   return (
     <>
       <Modal
@@ -30,7 +33,7 @@ const ModalLessons = (props) => {
         // centered
       >
         <div className="loginLmsModal">
-          <Modal.Header className="ModalHeader">
+          <Modal.Header >
             <button
               type="button"
               class="close close-btn"
@@ -42,24 +45,89 @@ const ModalLessons = (props) => {
               </span>
             </button>
           </Modal.Header>
-          <Modal.Body className="loginLmsModalBody">
-            <CardHeader>{props.show.data.name}</CardHeader>
+          <Modal.Body >
+            <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader>
             <CardBody>
-              <Form>
+              
+              <Form style={{color:"white"}}>
+                {/* <Row>
+                  <Col className="text-right" md="12">
+                  استاد: {x.teacher}
+                  </Col>
+                </Row> */}
                 <Row>
                   <Col className="text-right" md="12">
-                    ظرفیت: {props.show.data.capacity}
+                   زمان برگزاری : 
+                   <p style={{ fontSize: 12 }}>
+                          {" "}
+                          {/* {x.course_times[0].course_start_time} */}
+                          {/* {x.course_times.map((t) => (
+                            <text>{dayOfWeek(t.course_day)} </text>
+                          ))}
+                          <text>
+                            {timeStringToFloat(
+                              t.course_times[0].course_start_time
+                            )}
+                          </text>{" "}
+                          تا{" "}
+                          <text>
+                            {timeStringToFloat(
+                              t.course_times[0].course_end_time
+                            )}
+                          </text> */}
+                        </p>
+                        
+                  </Col>
+                </Row>
+                
+                <Row>
+                  <Col className="text-right" md="12">
+                   جنسیت: {sexTostring(x.sex)}
                   </Col>
                 </Row>
                 <Row>
+                  <Col className="text-right" md="12">
+                   تعداد واحد:{x.total_unit} 
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right" md="12">
+                  کد درس: {x.complete_course_number}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right" md="12">
+                  ثبت نام شده: {x.registered_count}{" "} از {x.capacity}
+                  </Col>
+                  <Col className="text-right" md="12">
+                  تعداد در صف انتظار: {x.waiting_count}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right" md="12">
+                  تاریخ امتحان پایانی: 
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right" md="12">
+                  پیشنیاز ها : 
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="text-right" md="12">
+                  کد درس: {x.complete_course_number}
+                  </Col>
+                </Row>
+                
+                <Row>
                   <Col className="text-right" md="12"></Col>
                 </Row>
-                  <Link to="/shoping">
-                    خرید
-                  </Link>
+                  
+                  افزودن به سبد خرید
                 <Button
-                  color="primary"
+                  variant="secondary"
                   size="sm"
+                  style={{ color: "aqua", fontSize: "medium" }}
                   onClick={() =>{
                     if (!info.shop.includes(props.show.data) ) {
                       console.log("includes shop")
@@ -71,6 +139,11 @@ const ModalLessons = (props) => {
                 >
                   <i className="tim-icons icon-simple-add" />
                 </Button>
+                <Row>
+                 <Link to="/shoping">
+                    سبد خرید
+                  </Link>
+                </Row>
               </Form>
             </CardBody>
             <CardFooter>
