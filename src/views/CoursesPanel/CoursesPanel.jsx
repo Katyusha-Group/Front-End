@@ -296,14 +296,30 @@ export default function CoursesPanel() {
         console.log("Chosen Courses are: " + entry);
         // const objectStrings = ChosenCourses.map(course => JSON.stringify(course));
         // const objectsString = objectStrings.join(", ");
-        // console.log(objectStrings);
-        ChosenCourses.forEach(course => {
-          if (course !== null && entry !== null && course.complete_course_number === entry.complete_course_number)
+        // // console.log(objectStrings);
+        // if (Array.isArray(ChosenCourses))
+        // {
+          // ChosenCourses.forEach(course => {
+          //   if (course !== null && entry !== null && course.complete_course_number === entry.complete_course_number)
+          //   {
+          //     console.log("+++++++++++++++++++++" + course.name);
+          //     IsInTheChosenCourses = true;
+          //   }
+          // });
+          for (let i=0; i < ChosenCourses.length; i++)
           {
-            console.log("+++++++++++++++++++++" + course.name);
-            IsInTheChosenCourses = true;
+            if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number)
+            {
+              console.log("+++++++++++++++++++++" + ChosenCourses[i].name);
+              IsInTheChosenCourses = true;
+            }
           }
-        });
+        // }
+        // else
+        // {
+        //   // IsInTheChosenCourses = true;
+        //   console.log("ChosenCourses is not an array");
+        // }
         const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
           return (
             <div>
