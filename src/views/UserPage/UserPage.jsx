@@ -263,7 +263,7 @@ export default function UserPage() {
                   }}
                 >
                   {" "}
-                  {/* <SummaryChart props={info.courseChoosed} /> */}
+                  <SummaryChart props={info.courseChoosed} />
                 </div>
                 <div
                   style={{
@@ -271,7 +271,7 @@ export default function UserPage() {
                   }}
                 >
                   {" "}
-                  {/* <ExamChart /> */}
+                  <ExamChart />
                 </div>
               </div>
             </CardBody>
@@ -420,6 +420,7 @@ export default function UserPage() {
                                 });
                                 // bool = bool == true?true:false;
                                 // console.log('bool', bool)
+                                console.log("clicked");
                                 if (isFound != true) {
                                   console.log("includes------------------");
                                   addNewLesson(x.complete_course_number);
