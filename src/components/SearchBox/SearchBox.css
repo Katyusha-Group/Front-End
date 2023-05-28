@@ -9,7 +9,8 @@
 .lessons_in_searchBox{
     /* margin-top: 4rem; */
     height: 80%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .button_lessons:hover{

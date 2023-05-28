@@ -50,7 +50,7 @@ const SearchBox = (data) => {
     console.log(`token is : ${token}`);
     console.log(`course ID is: ${num}`);
     // propsSetter({ type: fetchRequest });
-    changeInfo("loading", 1)
+    changeInfo("loading", 1);
 
     fetch(`https://www.katyushaiust.ir/coursegroups/${num}`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -60,9 +60,9 @@ const SearchBox = (data) => {
         // courseData=data;
         // console.log("heyy it was done!", data);
         // setDeparteman(data);
-      // propsSetter({type:fetchSuccess, payload:data.data}) 
-      changeInfo("loading", 2)
-        
+        // propsSetter({type:fetchSuccess, payload:data.data})
+        changeInfo("loading", 2);
+
         changeInfo("courseGroupsListInContext", data);
         console.log("info is: " + info);
       })
@@ -75,6 +75,7 @@ const SearchBox = (data) => {
     //     return location.pathname === routeName ? "active" : "";
     //   };
   }
+  // console.log("nameList", nameList.length);
 
   return (
     <>
@@ -88,31 +89,35 @@ const SearchBox = (data) => {
         />
       </div>
       <div className="lessons_in_searchBox">
-        {nameList
-          ?.filter((item, index) =>
-            item.name.toLowerCase().includes(query.toLowerCase())
-          )
-          .map((item, index) => (
-            <a
-              className="nav-link button_lessons"
-              activeClassName="active"
-              onClick={() => {
-                // console.log("I'm called 111");
-                changeInfo("courseGroupID", item.course_number);
-                // console.log("new info")
-                // console.log({info})
-                takeLessonsGroups(token, item.course_number);
+        {/* {nameList.lenght} */}
+        {
+          nameList.length == 0 ? "انتخاب کنید":
+          nameList
+            ?.filter((item, index) =>
+              item.name.toLowerCase().includes(query.toLowerCase())
+            )
+            .map((item, index) => (
+              <a
+                className="nav-link button_lessons"
+                activeClassName="active"
+                onClick={() => {
+                  // console.log("I'm called 111");
+                  changeInfo("courseGroupID", item.course_number);
+                  // console.log("new info")
+                  // console.log({info})
+                  takeLessonsGroups(token, item.course_number);
 
-                // console.log('prop.course_ID',item.course_number)
-              }}
-              key={index}
-            >
-              <div>
-                <i className="tim-icons icon-credit-card" />
-                <p>{item.name}</p>
-              </div>
-            </a>
-          ))}
+                  // console.log('prop.course_ID',item.course_number)
+                }}
+                key={index}
+              >
+                <div>
+                  <i className="tim-icons icon-credit-card" />
+                  <p>{item.name}</p>
+                </div>
+              </a>
+            ))
+        }
       </div>
     </>
   );

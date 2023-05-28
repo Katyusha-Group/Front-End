@@ -273,8 +273,9 @@ export default function UserPage() {
         console.log("loading", loading)
         
       })
-      .catch((error) => {console.error(error)
-      
+      .catch((error) => {
+        console.error(error)
+        console.log("failed course complete", num);
       });
     // axios
     //   .post(
