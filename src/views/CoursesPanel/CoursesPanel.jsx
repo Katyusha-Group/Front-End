@@ -11,16 +11,25 @@ import {
   Row,
   Col,
   Button,
+  View
 } from "reactstrap";
 import "./CoursesPanel.css"
 import dataJson from "./Classes"
-
+import ReactSwitch from "react-switch";
 export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
+  const [SwitchChecked, setSwitchChecked] = React.useState(false);
+
+  const handleSwitchChange = val => {
+    setSwitchChecked(val)
+    settimetable(info.courseGroupsListInContext);/////////////////
+    AllowedCourses();
+  }
   // console.log("info", info);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
-  const [Department, setDepartment] = React.useState([]);
+  let [Department, setDepartment] = React.useState([]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
+  let [Allowed, setAllowed] = React.useState([]);
   // let [myObject, setMyObject] = React.useState([]);
   // let DepartmentCourses = dataJson;
   // let timetable = dataJson;
@@ -79,7 +88,53 @@ export default function CoursesPanel() {
     };
   }
 
-  // function 
+  function AllowedCourses ()
+  {
+    // React.useEffect(() => {
+      fetch("https://www.katyushaiust.ir/departments/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data all",data);
+          setAllowed(data);
+          Allowed.map ((dep, index) => {
+            if (dep.base_courses.length > 0)
+            {
+              console.log("Name:::: " + dep.name)
+              console.log ("Department name is: " + Department.name);
+              if (dep.name === Department.name)
+              {
+                console.log("This " + dep.name + " equals " + Department);
+              }
+              // settimetable(dep.base_courses);
+            }
+          }
+          )
+          console.log("Allowed courses are:  " + data)
+        })
+        .catch((error) => console.error(error));
+      // console.log(data);
+      const activeRoute = (routeName) => {
+        return location.pathname === routeName ? "active" : "";
+      };
+    // }, []);
+
+    // {departeman.map((prop, index) => {
+    //   if (prop.base_courses.length > 0) {
+    //     return (
+    //       <NavLink
+    //         className="nav-link nav-link-lessonSidebar"
+    //         activeClassName="active"
+    //         onClick={() => setLessonState(prop.base_courses)}
+    //         key={index}
+    //       >
+    //         <i className="tim-icons icon-chart-bar-32" />
+    //         <p>{prop.name}</p>
+    //       </NavLink>
+    //     );
+    //   }
+  }
 
   // Select Department
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
@@ -132,6 +187,7 @@ export default function CoursesPanel() {
 
   function handleDepartment(selectedOption) {
     setDepartment(selectedOption.value);
+    console.log("Department changed::::::" + Department.name);
     // console.log("Chosen Department: " + selectedOption.value);
     // console.log("Department is: " + Department)
     // GetDepartmentLessons(Department);
@@ -152,7 +208,7 @@ export default function CoursesPanel() {
         .then((data) => {
           console.log("DATA IS::::::: " + data);
           // setDepartmentCourses(data);
-          setDepartment(data);
+          // setDepartment(data);
           let NewTimeTable = [...ChosenCourses, ...data]
           settimetable(NewTimeTable);
         })
@@ -403,6 +459,11 @@ export default function CoursesPanel() {
                   value={Department.name}
                   onChange={handleDepartment}
                 />
+                <ReactSwitch className="Switch"
+                  checked={SwitchChecked}
+                  onChange={handleSwitchChange}
+                />
+                
               </CardHeader>
               <CardBody>
                 <Table className="ClassesTable">

@@ -77,3 +77,8 @@ tbody{
 {
     column-width: 1000px;
 }
+
+.Switch
+{
+    width: 50%;
+}
