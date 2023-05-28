@@ -78,7 +78,12 @@ export default function UserPage() {
     long: 0,
   });
   //getting token
-
+  const getError = (error) => {
+    // console.log(error.data.message)
+    return error.responst && error.response.data
+    ? error.response.data
+    :error.message;
+  }
   const token = localStorage.getItem("authTokens");
   const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
 
