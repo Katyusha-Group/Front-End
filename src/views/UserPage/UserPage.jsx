@@ -411,6 +411,7 @@ export default function UserPage() {
                                 //     return true;
                                 //   }
                                 // })
+                                
                                 let isFound = info.courseChoosed.some(element => {
                                   if (element.complete_course_number === x.complete_course_number) {
                                     return true;
@@ -420,6 +421,7 @@ export default function UserPage() {
                                 });
                                 // bool = bool == true?true:false;
                                 // console.log('bool', bool)
+                                console.log("all the courses in group", info.courseGroupsListInContext)
                                 console.log("clicked");
                                 if (isFound != true) {
                                   console.log("includes------------------");
@@ -430,6 +432,11 @@ export default function UserPage() {
                                   ]);
                                   console.log("x con", x, info.courseChoosed);
                                 }
+                                else{
+                                  console.log("not added", x)
+
+                                }
+                                
                                 // console.log("info", info);
                               }}
                             >
