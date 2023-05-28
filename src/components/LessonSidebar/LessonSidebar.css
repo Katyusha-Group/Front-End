@@ -51,3 +51,7 @@
 .brand-name{
   float: right;
 }
+
+.lessons_in_searchBox{
+  overflow-x: hidden;
+}

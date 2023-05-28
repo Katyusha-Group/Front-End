@@ -1,13 +1,13 @@
 .search_box{
     margin: 0.7rem;
     width: 18rem !important;
-    position: fixed;
+    /* position: fixed; */
     display: block;
     /* background-color: red; */
 }
 
 .lessons_in_searchBox{
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     height: 80%;
     overflow: auto;
 }

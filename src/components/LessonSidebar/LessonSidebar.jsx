@@ -27,15 +27,44 @@ import SearchBox from "../SearchBox/SearchBox.jsx";
 
 import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
 
+import Spinner from 'react-bootstrap/Spinner';
+import { useInfo } from "../../contexts/InfoContext";
 var ps;
+const fetchRequest = 'FETC_REQUEST';
+const fetchSuccess = 'FETCH_SUCCESS';
+const fetchFail = 'FETCH_FAIL';
+const reducer= (state, action) => {
+  switch (action.type) {
+    case fetchRequest:
+      // changeInfo("loading", true)
+      return {...state,loading: true}
+    case fetchSuccess:
+      // changeInfo("loading", false)
+      return {...state,loading: false,props: action.payload}
+    case fetchFail:
+      // changeInfo("loading", false)
+      return {...state,loading: false,error: action.payload}
+      default:
+        return state;
+  }
+};
+
 
 function Sidebar(props) {
+  const {info, changeInfo} = useInfo();
+  const getError = (error) => {
+    // console.log(error.data.message)
+    return error.responst && error.response.data
+    ? error.response.data
+    :error.message;
+  }
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   // const [allColleges, setAllColleges] = React.useState([]);
-  
+  const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
+  // changeInfo("loading", true)
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
 
@@ -47,15 +76,21 @@ function Sidebar(props) {
   // myHeaders.append("Authorization", `Bearer ${token}` );
   // console.log(myHeaders)
   React.useEffect(() => {
+    propsSetter({type:fetchRequest})
     fetch("https://www.katyushaiust.ir/departments/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
+      propsSetter({type:fetchSuccess, payload:data.data}) 
+
         // console.log("data all",data);
         setDeparteman(data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+      propsSetter({type:fetchFail, payload:getError(error)})
+        
+        console.error(error)});
     // console.log(data);
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
@@ -68,15 +103,15 @@ function Sidebar(props) {
       .then((response) => response.json())
       .then((all_colleges_data) => {
         // changeInfoState("courseChoosed", all_colleges_data);
-        console.log("all Colleges", all_colleges_data);
-        console.log("all Colleges type", typeof(all_colleges_data));
+        // console.log("all Colleges", all_colleges_data);
+        // console.log("all Colleges type", typeof(all_colleges_data));
         setAllColleges(all_colleges_data);
       })
       .catch((error) => console.error(error));
       const activeRoute = (routeName) => {
         return location.pathname === routeName ? "active" : "";
       };
-    console.log("all Colleges state", allColleges);
+    // console.log("all Colleges state", allColleges);
   }, []);
 
   React.useEffect(() => {
@@ -165,7 +200,8 @@ function Sidebar(props) {
                 <h3 className="brand-name">کاتیوشا</h3> */}
               </div>
               <div className="lessonSidebar_component">
-                {departeman.map((prop, index) => {
+                {loading ? <Spinner/> : error? "error" :
+                departeman.map((prop, index) => {
                   if (prop.base_courses.length > 0) {
                     return (
                       <NavLink
@@ -180,6 +216,7 @@ function Sidebar(props) {
                     );
                   }
                 })}
+                {loading ? "" : error? "" :
                 <NavLink
                   className="nav-link nav-link-lessonSidebar"
                   activeClassName="active"
@@ -193,6 +230,8 @@ function Sidebar(props) {
                   <i className="tim-icons icon-chart-bar-32" />
                   <p>همه دانشکده ها</p>
                 </NavLink>
+
+                }
               </div>
               <div className="lessonSidebar_component-lessons">
                 {lessonState ? (

@@ -16,3 +16,17 @@
 .shopping_professorImage{
     margin: auto;
 }
+
+.buy_button{
+    /* position: fixed;
+    bottom: 43px; */
+}
+
+.shop_card{
+    height: 66vh;
+    overflow: auto; 
+}
+
+.places-buttons{
+    padding: 10px 0;
+}
