@@ -6,3 +6,13 @@
 .shoping_label{
     margin: .5rem 1rem;
 }
+
+.shopping_form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.shopping_professorImage{
+    margin: auto;
+}
