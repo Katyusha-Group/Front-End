@@ -27,12 +27,13 @@ const ModalLessons = (props) => {
   const x=props.show.data;
   return (
     <>
-      <Modal
+      <Modal 
+       
         show={props.show.flag}
         cancel={props.close}
         // centered
       >
-        <div className="loginLmsModal">
+        <div className="loginLmsModal" style={{width:"800px"}}>
           <Modal.Header >
             <button
               type="button"
@@ -48,6 +49,43 @@ const ModalLessons = (props) => {
           <Modal.Body >
             <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader>
             <CardBody>
+            <Card
+                    className="ModalLessonCourseCard"
+                    style={{
+                      backgroundColor:
+                        x.color_intensity_percentage > 10
+                          ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                              x.color_intensity_percentage
+                            )}%)`
+                          : "dimgray",
+                    }}
+                  >
+                    <CardBody className="courseCardBody">               
+                        <img
+                        className="professorImage"
+                        src={x.teacher.teacher_image}
+                        alt="professorImage"
+                      />
+                      <div className="infoPart">
+                        <p>
+                          {x.name} (گروه {x.group_number})
+                        </p>
+                        <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
+                        <div className="courseCardDownSide">
+                          <div>
+                            <p>
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
+                            </p>
+                          </div>
+                         
+
+                        </div>
+
+                      </div>
+                    </CardBody>
+                  </Card>
+            </CardBody>
+            {/* <CardBody>
               
               <Form style={{color:"white"}}>
                 <Row>
@@ -141,7 +179,7 @@ const ModalLessons = (props) => {
                   </Link>
                 </Row>
               </Form>
-            </CardBody>
+            </CardBody> */}
             {/* <CardFooter>
               <Button className="btn-fill" color="primary" type="submit">
                 تایید
