@@ -44,7 +44,6 @@ import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
-import { closeLoading, showLoading } from "../../components/LoadingAlert/LoadingAlert";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
