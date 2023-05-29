@@ -23,14 +23,13 @@ import {
 } from "reactstrap";
 // import * as chart from "../../assets/img/schedule_table.png"
 export default function SummaryChart(props) {
-  // console.log(props.props);
   function summar(data) {
     return data.map((table_row) => (
       <tr>
         <td className="dir-left">{table_row.complete_course_number}</td>
         <td>{table_row.name}</td>
         <td>{table_row.teacher.name}</td>
-        <td>{table_row.exam_times[0].date}</td>
+        <td>{table_row.exam_times[0]?.date}</td>
         <td>{table_row.capacity}</td>
         <td>{table_row.registered_count}</td>
         <td>{table_row.total_unit}</td>

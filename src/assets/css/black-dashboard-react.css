@@ -12511,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 20px 356px 30px 30px; }
+  padding: 20px 356px 0px 30px; }
 
 
 .rtl .footer {
@@ -13298,7 +13298,7 @@ textarea.form-control {
   border: 0;
   position: relative;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1); }
   .card label {
     color: rgba(255, 255, 255, 0.6); }

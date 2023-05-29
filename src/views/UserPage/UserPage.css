@@ -17,15 +17,7 @@
     display: block;
     width: 50px;
 }
-/* .table > thead > tr > th{
-    position: relative;
-    right: -50px;
-    font-size: 15px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    background-color: #34467546;
-    border-radius: 3rem;
-} */
+
 .UserPage_first_column{
     border-right: none !important;
 }
@@ -52,6 +44,8 @@ border-bottom: none !important;
 .week-card{
     margin-bottom: 13px !important;
     /* padding: 0px !important; */
+    height: 66vh;
+    overflow: auto;
 }
 .overflow-visible{
     overflow: visible !important;
@@ -76,6 +70,9 @@ border-bottom: none !important;
     margin-top: 7px;
     /* margin-left: 10px; */
     /* margin-top: -15px !important; */
+    display: block;
+    height: 46vh;
+    min-height: 390px;
 }
 
 .course, i .course{
@@ -105,7 +102,8 @@ border-bottom: none !important;
     color: white;
 }
 .lesson_button{
-    background: none;
+    background: rgba(227, 49, 243, 0.527);
+    border-radius: .2rem;
     border: none;
     color: white;
     position: absolute;
@@ -113,17 +111,16 @@ border-bottom: none !important;
     top:0;
     z-index: 1;
     display: none;
+    padding: -1px 5px;
 }
 .courseCard{
-    /* background-color: hsl(256, 45%, 50%)!important; */
-    /* border-width: 5px; */
-    /* background-color: transparent; */
-    /* border: solid !important; */
     border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
-    width: 20rem !important;
-    height: 120px;
-    margin-left: 15px;
+    width: 18.125rem !important;
+    height: 105px; 
+    margin-left: 10px;
+    margin-bottom: 0px !important;
+    padding: 0px;
 }
 .courseCardBody{
     justify-items: center;
@@ -131,35 +128,36 @@ border-bottom: none !important;
     padding: 0px ;
     display: flex;
     flex-direction: row;
-    /* cursor: pointer; */
-}
-
-.courseCardBody:hover{
+    padding: 5px !important;
     cursor: pointer;
 }
+/* 
+.courseCardBody:hover{
+    cursor: pointer;
+} */
 
 .courseGroupCard{
-    /* align-items: flex-start ; */
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
-    /* align-content: space-between; */
     flex-wrap: wrap;
     height: 30vh;
     overflow: auto;
     /* justify-content: center; */
     padding-left: 0 !important;
     justify-content: center;
-
+    height: 27vh;
 }
 div{
     text-align: center;
+}
+.imageDiv{
+    width: 3.4375rem;
 }
 
 .professorImage{
     width: 3.4375rem;
     height: 3.4375rem;
-    margin-left: 0.625rem;
+    /* margin-left: 0.625rem; */
     border-radius: 4.6875rem;
     overflow: "hidden";
     border-width: 0.1875rem;
@@ -188,6 +186,7 @@ p{
     /* width: 20px; */
     height: 40px;
     margin-right: auto;
+    margin-left: 5px;
 }
 .courseCardDownSide{
     display: flex;
@@ -203,13 +202,18 @@ p{
     color: red;
 }
 .cart{
-    margin: 0px;
     width: 25px;
     height: 25px;
-    /* margin-left: 10px; */
-    /* border-radius: 20px; */
-    /* border-width: 0.1875rem;
-    border-color: "red"; */
+    max-width: none;
+}
+.courseCardButton{
+    width: 38px;
+    margin-left: 0px !important;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    width: 48%;
+
 }
 .course_hover{
     background: #1d8bf86d;
@@ -233,3 +237,23 @@ p{
 .dir-right{
     direction: rtl;
 }
+
+.buttonBar{
+    display: flex;
+    flex-direction: row;
+}
+.coursCardContainer{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+
+.classNameHover{
+    background-color: rgb(124, 98, 195);
+}
+
+.course-hover:hover{
+    z-index: 100;
+}
+
