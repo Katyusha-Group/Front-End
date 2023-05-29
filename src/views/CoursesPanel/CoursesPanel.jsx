@@ -22,12 +22,13 @@ export default function CoursesPanel() {
 
   const handleSwitchChange = val => {
     setSwitchChecked(val)
-    settimetable(info.courseGroupsListInContext);/////////////////
-    AllowedCourses();
+    // settimetable(info.courseGroupsListInContext);/////////////////
+    AllowedCourses("زبان");
   }
   // console.log("info", info);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
-  let [Department, setDepartment] = React.useState([]);
+  // let [Department, setDepartment] = React.useState([]);
+  let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
   let [Allowed, setAllowed] = React.useState([]);
   // let [myObject, setMyObject] = React.useState([]);
@@ -64,7 +65,37 @@ export default function CoursesPanel() {
     };
   }, []);
 
-  function addNewLesson(num) {                                        //Add a lesson                                
+  // function addNewLesson(num) {                                        //Add a lesson                                
+  //   fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+  //     method: "PUT",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       complete_course_number: num,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log("put data", data);
+  //       setChosenCourses(data);
+  //       // UpdateTimetableArray(ChosenCourses, )
+  //     })
+  //     .catch((error) => console.error(error));
+  //   const activeRoute = (routeName) => {
+  //     return location.pathname === routeName ? "active" : "";
+  //   };
+  // }
+
+  function addNewLesson(num) {
+    console.log("complete course number is: " + num);
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+
+    const token = tokenClass.token.access;
+
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
       headers: {
@@ -78,9 +109,8 @@ export default function CoursesPanel() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("put data", data);
+        console.log("put data", data);
         setChosenCourses(data);
-        // UpdateTimetableArray(ChosenCourses, )
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -88,7 +118,13 @@ export default function CoursesPanel() {
     };
   }
 
-  function AllowedCourses ()
+  // function AppendToTimetable (toBeAppended)
+  // {
+  //   let tempArr = [...timetable, ...toBeAppended];
+  //   settimetable(tempArr);
+  // }
+
+  function AllowedCourses (Department)                                          // Allowed Lessons
   {
     // React.useEffect(() => {
       fetch("https://www.katyushaiust.ir/departments/", {
@@ -102,10 +138,14 @@ export default function CoursesPanel() {
             if (dep.base_courses.length > 0)
             {
               console.log("Name:::: " + dep.name)
-              console.log ("Department name is: " + Department.name);
-              if (dep.name === Department.name)
+              console.log ("Department name is: " + Department);
+              if (dep.name === Department)
               {
                 console.log("This " + dep.name + " equals " + Department);
+                console.log("base_courses are: " + dep.base_courses);
+                let AllowedTimeTable = [...ChosenCourses, ...data];
+                // settimetable(AllowedTimeTable);
+                // settimetable(dep.base_courses);
               }
               // settimetable(dep.base_courses);
             }
@@ -186,8 +226,8 @@ export default function CoursesPanel() {
   };
 
   function handleDepartment(selectedOption) {
-    setDepartment(selectedOption.value);
-    console.log("Department changed::::::" + Department.name);
+    setSelectedDepartment(selectedOption.value);
+    console.log("Department changed::::::" + SelectedDepartment.name);
     // console.log("Chosen Department: " + selectedOption.value);
     // console.log("Department is: " + Department)
     // GetDepartmentLessons(Department);
@@ -195,26 +235,27 @@ export default function CoursesPanel() {
   }
 
 
-  React.useEffect(() => {
-    if (Department) {
+  React.useEffect(() => {                                                // Selected Department courses
+    if (SelectedDepartment) {
       const tokenJson = localStorage.getItem("authTokens");
       const tokenClass = JSON.parse(tokenJson);
       const token = tokenClass.token.access;
 
-      fetch(`https://katyushaiust.ir/allcourses-based-department/${Department}`, {
+      fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("DATA IS::::::: " + data);
+          // console.log("DATA IS::::::: " + data);
           // setDepartmentCourses(data);
           // setDepartment(data);
-          let NewTimeTable = [...ChosenCourses, ...data]
-          settimetable(NewTimeTable);
+          // let NewTimeTable = [...ChosenCourses, ...data];
+          // settimetable(NewTimeTable);
+          settimetable(data);
         })
         .catch((error) => console.error(error));
     }
-  }, [Department]);
+  }, [SelectedDepartment]);
   
   
   function AddShowAttribute (obj)
@@ -227,7 +268,7 @@ export default function CoursesPanel() {
 
 
 
-  function mapTimeToIndex (start_time) {
+  function mapTimeToIndex (start_time) {                                    // Time Index finder
     const times = [
       "07:30:00",
       "09:00:00",
@@ -304,6 +345,8 @@ export default function CoursesPanel() {
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
+        // (currentPeriod !== null) && (
+          // console.log ("Course_times: " + currentPeriod.course_times);
         currentPeriod.course_times.forEach(time => {
           // console.log("=======================")
           // time.course_day = 4;
@@ -350,18 +393,6 @@ export default function CoursesPanel() {
         // console.log(backgroundColor);
         let IsInTheChosenCourses = false;
         console.log("Chosen Courses are: " + entry);
-        // const objectStrings = ChosenCourses.map(course => JSON.stringify(course));
-        // const objectsString = objectStrings.join(", ");
-        // // console.log(objectStrings);
-        // if (Array.isArray(ChosenCourses))
-        // {
-          // ChosenCourses.forEach(course => {
-          //   if (course !== null && entry !== null && course.complete_course_number === entry.complete_course_number)
-          //   {
-          //     console.log("+++++++++++++++++++++" + course.name);
-          //     IsInTheChosenCourses = true;
-          //   }
-          // });
           for (let i=0; i < ChosenCourses.length; i++)
           {
             if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number)
@@ -370,12 +401,6 @@ export default function CoursesPanel() {
               IsInTheChosenCourses = true;
             }
           }
-        // }
-        // else
-        // {
-        //   // IsInTheChosenCourses = true;
-        //   console.log("ChosenCourses is not an array");
-        // }
         const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
           return (
             <div>
@@ -420,7 +445,6 @@ export default function CoursesPanel() {
                         // closeLesson(false, lessons);
                         // console.log("delete info", infoState);
                       }}
-                      // id={lessonBoxId + "x"}
                     >
                       x
                     </button>
@@ -455,8 +479,8 @@ export default function CoursesPanel() {
                   styles={customStyles}
                   isRtl
                   placeholder="دانشکده مورد نظر را انتخاب کنید"
-                  name="Department"
-                  value={Department.name}
+                  name="SelectDepartment"
+                  value={SelectedDepartment.name}
                   onChange={handleDepartment}
                 />
                 <ReactSwitch className="Switch"
