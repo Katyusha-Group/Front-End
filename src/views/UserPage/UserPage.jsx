@@ -65,7 +65,37 @@ export default function UserPage() {
 
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
-    data: {},
+    data: {
+      
+        "exam_times": [
+            {
+                "date": "",
+                "exam_start_time": "",
+                "exam_end_time": ""
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "4",
+                "course_start_time": "",
+                "course_end_time": "",
+                "place": ""
+            },
+            {
+                "course_day": "",
+                "course_start_time": "",
+                "course_end_time": "",
+                "place": ""
+            }
+        ],
+        "teacher": {
+            "id": 0,
+            "name": " ",
+            "teacher_image": ""
+        },
+      
+    
+    },
   });
   // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
@@ -550,7 +580,7 @@ export default function UserPage() {
                                 if (!info.shop.includes(x)) {
                                   changeInfo("shop", [...info.shop, x]);
                                 }
-                              }
+                              }}
                             >
                               <img
                                 className="cart"
