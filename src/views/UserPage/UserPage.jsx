@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-// import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
   ButtonGroup,
@@ -23,7 +22,6 @@ import {
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
-// import * as chart from "../../assets/img/schedule_table.png"
 import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
@@ -37,9 +35,11 @@ import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
 import cartlogo from "./cart.png";
-import {showLoading, closeLoading} from "../../components/LoadingAlert/LoadingAlert.jsx";
+import {
+  showLoading,
+  closeLoading,
+} from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
-
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
@@ -58,16 +58,11 @@ export default function UserPage() {
     long: 0,
   });
   //getting token
-
   const token = localStorage.getItem("authTokens");
-
-  // console.log("context" , useInfo);
-
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
     data: {},
   });
-  // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -77,24 +72,15 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
-
-    
-
-    // console.log("setShowCourseHover func", value);
     setShowCourseHover((info) => ({ [name]: value }));
-
   }
   let defu = 13.3;
   let length = 17.1;
   let top_right = 9.6;
   let top_defu = 11.7;
-  // let initial = useInfo();
-  //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
-  // console.log("info", info);
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
-    // console.log("closeLesson", flag, data, showLesson);
   }
   /**
    * send course number to save in database
@@ -134,7 +120,6 @@ export default function UserPage() {
    * @returns
    */
 
-
   function lessons(infoState, changeInfoState, getapi, classNameHover) {
     // console.log("hello");
 
@@ -143,7 +128,6 @@ export default function UserPage() {
     const token = tokenClass.token.access;
 
     React.useEffect(() => {
-
       if (getapi == true) {
         showLoading();
         fetch("https://www.katyushaiust.ir/courses/my_courses", {
@@ -212,8 +196,11 @@ export default function UserPage() {
                 }}
                 id={lessonBoxId + "x"}
               >
-                <strong >
-                <i className="tim-icons icon-simple-remove" style={{margin:"auto"}}></i>
+                <strong>
+                  <i
+                    className="tim-icons icon-simple-remove"
+                    style={{ margin: "auto" }}
+                  ></i>
                 </strong>
                 {/* x */}
               </button>
@@ -221,15 +208,12 @@ export default function UserPage() {
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
               >
-                <strong>
-                {lessons.name}
-                  
-                </strong>
+                <strong>{lessons.name}</strong>
                 <br />
                 {lessons.registered_count}/{lessons.capacity}
                 <br />
                 {lessons.complete_course_number}
-                {console.log("lessons click",lessons)}
+                {console.log("lessons click", lessons)}
               </div>
             </div>
           </div>
@@ -239,12 +223,15 @@ export default function UserPage() {
   }
 
   function addItemShop(num) {
-    console.log("json", JSON.stringify({
-      complete_course_number: num,
-      contain_telegram: true,
-      contain_sms: true,
-      contain_email: true,
-    }))
+    console.log(
+      "json",
+      JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      })
+    );
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -267,37 +254,13 @@ export default function UserPage() {
       .then((response) => response.json())
       .then((data) => {
         // console.log("shop data", data);
-        
       })
       .catch((error) => console.error(error));
-    // axios
-    //   .post(
-    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
-    //     {
-    //       complete_course_number: num,
-    //       contain_telegram: true,
-    //       contain_sms: true,
-    //       contain_email: true,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }
 
   return (
     <>
-    {/* {showLoading()} */}
+      {/* {showLoading()} */}
       <Row>
         {/* <Col lg="12"><ExamChart /></Col> */}
         <Col sm="12">
@@ -311,7 +274,12 @@ export default function UserPage() {
                   }}
                 >
                   {lessons(info, changeInfo, true, null)}
-                  {lessons(showCourseHover, setShowCourseHoverFunc, false, "classNameHover")}
+                  {lessons(
+                    showCourseHover,
+                    setShowCourseHoverFunc,
+                    false,
+                    "classNameHover"
+                  )}
                   <ModalLessons
                     show={showLesson}
                     close={() =>
@@ -429,143 +397,162 @@ export default function UserPage() {
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
                   <div className="coursCardContainer">
-                  <Card
-                    className="courseCard"
-                    key={index}
-                    style={{
-                      backgroundColor:
-                        x.color_intensity_percentage > 10
-                          ? `hsl(256, 45%, ${convertPercentagetoLigtness(
-                              x.color_intensity_percentage
-                            )}%)`
-                          : "dimgray",
-                    }}
-                    onMouseEnter={() => {
-                      console.log("x.complete", x.complete_course_number);
-                      // console.log("z");
-                      setShowCourseHoverFunc("courseChoosed", [x]);
-                    }}
-                    onMouseLeave={() => {
-                      // console.log("out");
-                      setShowCourseHoverFunc("courseChoosed", []);
-                    }}
-                    onClick={() =>{
-                      setShowLesson({ flag: true, data: x });
-                    }}
-                  >
-                    <CardBody className="courseCardBody">               
+                    <Card
+                      className="courseCard"
+                      key={index}
+                      style={{
+                        backgroundColor:
+                          x.color_intensity_percentage > 10
+                            ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                                x.color_intensity_percentage
+                              )}%)`
+                            : "dimgray",
+                      }}
+                      onMouseEnter={() => {
+                        console.log("x.complete", x.complete_course_number);
+                        // console.log("z");
+                        setShowCourseHoverFunc("courseChoosed", [x]);
+                      }}
+                      onMouseLeave={() => {
+                        // console.log("out");
+                        setShowCourseHoverFunc("courseChoosed", []);
+                      }}
+                      onClick={() => {
+                        setShowLesson({ flag: true, data: x });
+                      }}
+                    >
+                      <CardBody className="courseCardBody">
                         <img
-                        className="professorImage"
-                        src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
-                        alt="professorImage"
-                      />
-                      <div className="infoPart">
-                        <p>
-                          {x.name} (گروه {x.group_number})
-                        </p>
-                        <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <div className="courseCardDownSide">
-                          <div>
-                            <p>
-                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
-                            </p>
-                          </div>
-                          <img
-                            className="fullLogo"
-                            src={fullLogo}
-                            alt="fullLogo"
-                            style={{
-                              display:
-                                x.color_intensity_percentage < 11
-                                  ? "block"
-                                  : "none",
-                            }}
-                          ></img>
-
-                        </div>
-
-                      </div>
-                    </CardBody>
-                  </Card>
-                  <div className="buttonBar"> 
-                            <Button 
-                              className="courseCardButton"
-                              variant="secondary"
-                              size="sm"
-
-                              style={{ color: !info.courseChoosed.includes(x)?"aqua":"deeppink", fontSize: !info.courseChoosed.includes(x)?"medium":"medium" }}
-                             
-
-                              onClick={() => {
-                                
-                                let isFound = info.courseChoosed.some(element => {
-                                  if (element.complete_course_number === x.complete_course_number) {
-                                    return true;
-                                  }
-                              
-                                  return false;
-                                });
-                                // bool = bool == true?true:false;
-                                // console.log('bool', bool)
-                                console.log("all the courses in group", info.courseGroupsListInContext)
-                                console.log("clicked");
-                                if (isFound != true) {
-                                  console.log("includes------------------");
-
-                                  addNewLesson(x.complete_course_number);
-                                  changeInfo("courseChoosed", [
-                                    ...info.courseChoosed,
-                                    x,
-                                  ]);
-
-                                }else{//remove lesson
-                                addNewLesson(x.complete_course_number);
-                                console.log(x.complete_course_number);
-                                console.log("delete lesson", x.complete_course_number);
-                                changeInfo(
-                                  "courseChoosed",
-                                  info.courseChoosed.filter(
-                                    (item) =>
-                                      item.complete_course_number !==
-                                      x.complete_course_number
-                                  )
-                                );
-                                closeLesson(false, lessons);
-
-                                }
-                                
-                                // console.log("info", info);
+                          className="professorImage"
+                          src={
+                            x.teacher.teacher_image
+                              ? x.teacher.teacher_image
+                              : sampleProfile
+                          }
+                          alt="professorImage"
+                        />
+                        <div className="infoPart">
+                          <p>
+                            {x.name} (گروه {x.group_number})
+                          </p>
+                          <p style={{ fontSize: 12 }}>
+                            {" "}
+                            استاد:{x.teacher.name}
+                          </p>
+                          <div className="courseCardDownSide">
+                            <div>
+                              <p>
+                                ثبت نام شده: {x.registered_count} از{" "}
+                                {x.capacity}{" "}
+                              </p>
+                            </div>
+                            <img
+                              className="fullLogo"
+                              src={fullLogo}
+                              alt="fullLogo"
+                              style={{
+                                display:
+                                  x.color_intensity_percentage < 11
+                                    ? "block"
+                                    : "none",
                               }}
-                            >
-                              {!info.courseChoosed.includes(x)? "+" : "x"}
-                              
-                            </Button>
-                            <Button
+                            ></img>
+                          </div>
+                        </div>
+                      </CardBody>
+                    </Card>
+                    <div className="buttonBar">
+                      <Button
+                        className="courseCardButton"
+                        variant="secondary"
+                        size="sm"
+                        style={{
+                          color: !info.courseChoosed.includes(x)
+                            ? "aqua"
+                            : "deeppink",
+                          fontSize: !info.courseChoosed.includes(x)
+                            ? "medium"
+                            : "medium",
+                        }}
+                        onClick={() => {
+                          let isFound = info.courseChoosed.some((element) => {
+                            if (
+                              element.complete_course_number ===
+                              x.complete_course_number
+                            ) {
+                              return true;
+                            }
 
-                            className="courseCardButton"
-                            variant="secondary"
-                            size="sm"
-                            style={{ color: "aqua", fontSize: "medium" , display:"flex"}}
-                              onClick={() => {
-                                if (!info.shop.includes(x)) {
-                                  changeInfo("shop", [...info.shop, x]);
-                                }
-                              }
-                            >
-                              <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                            </Button>
+                            return false;
+                          });
+                          // bool = bool == true?true:false;
+                          // console.log('bool', bool)
+                          console.log(
+                            "all the courses in group",
+                            info.courseGroupsListInContext
+                          );
+                          console.log("clicked");
+                          if (isFound != true) {
+                            console.log("includes------------------");
 
-                      </div>
-                      <ModalLessons
-                    show={showLesson}
-                    close={() =>
-                      setShowLesson(() => ({ ...showLesson, flag: false }))
-                    }
-                  />
+                            addNewLesson(x.complete_course_number);
+                            changeInfo("courseChoosed", [
+                              ...info.courseChoosed,
+                              x,
+                            ]);
+                          } else {
+                            //remove lesson
+                            addNewLesson(x.complete_course_number);
+                            console.log(x.complete_course_number);
+                            console.log(
+                              "delete lesson",
+                              x.complete_course_number
+                            );
+                            changeInfo(
+                              "courseChoosed",
+                              info.courseChoosed.filter(
+                                (item) =>
+                                  item.complete_course_number !==
+                                  x.complete_course_number
+                              )
+                            );
+                            closeLesson(false, lessons);
+                          }
+
+                          // console.log("info", info);
+                        }}
+                      >
+                        {!info.courseChoosed.includes(x) ? "+" : "x"}
+                      </Button>
+                      <Button
+                        className="courseCardButton"
+                        variant="secondary"
+                        size="sm"
+                        style={{
+                          color: "aqua",
+                          fontSize: "medium",
+                          display: "flex",
+                        }}
+                        onClick={() => {
+                          if (!info.shop.includes(x)) {
+                            changeInfo("shop", [...info.shop, x]);
+                            addItemShop(x.complete_course_number);
+                          }
+                        }}
+                      >
+                        <img
+                          className="cart"
+                          src={cartlogo}
+                          alt="cartlogo"
+                        ></img>
+                      </Button>
+                    </div>
+                    <ModalLessons
+                      show={showLesson}
+                      close={() =>
+                        setShowLesson(() => ({ ...showLesson, flag: false }))
+                      }
+                    />
                   </div>
                 ))}
             </CardBody>
