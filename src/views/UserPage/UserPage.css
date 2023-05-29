@@ -97,7 +97,8 @@ border-bottom: none !important;
     color: white;
 }
 .lesson_button{
-    background: none;
+    background: rgba(227, 49, 243, 0.527);
+    border-radius: .2rem;
     border: none;
     color: white;
     position: absolute;
@@ -105,6 +106,7 @@ border-bottom: none !important;
     top:0;
     z-index: 1;
     display: none;
+    padding: -1px 5px;
 }
 .courseCard{
     border-color: rgba(227, 49, 243, 0.527) !important;
@@ -229,6 +231,7 @@ p{
 .dir-right{
     direction: rtl;
 }
+
 .buttonBar{
     display: flex;
     flex-direction: row;
@@ -238,3 +241,13 @@ p{
     flex-direction: column;
     align-content: flex-start;
 }
+
+
+.classNameHover{
+    background-color: rgb(124, 98, 195);
+}
+
+.course-hover:hover{
+    z-index: 100;
+}
+
