@@ -54,7 +54,7 @@ const ModalLessons = (props) => {
                 <Row>
                   <Col className="text-right" md="12"></Col>
                 </Row>
-                  <Link to="/shoping">
+                  <Link to="/shopping">
                     خرید
                   </Link>
                 <Button

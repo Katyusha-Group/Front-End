@@ -39,14 +39,16 @@ import { json } from "react-router-dom";
 import cartlogo from "./cart.png";
 import {showLoading, closeLoading} from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
+
+import ExamChart from "../../components/Charts/ExamChart.jsx";
+import { sum } from "lodash";
+import axios from "axios";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
-import ExamChart from "../../components/Charts/ExamChart.jsx";
-import { sum } from "lodash";
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
   const [lesson, setLesson] = React.useState({
@@ -75,8 +77,12 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
+
+    
+
     // console.log("setShowCourseHover func", value);
     setShowCourseHover((info) => ({ [name]: value }));
+
   }
   let defu = 13.3;
   let length = 17.1;
@@ -113,7 +119,7 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("put data", data);
+        // console.log("put data", data);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -128,13 +134,16 @@ export default function UserPage() {
    * @returns
    */
 
+
   function lessons(infoState, changeInfoState, getapi, classNameHover) {
     // console.log("hello");
+
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
 
     React.useEffect(() => {
+
       if (getapi == true) {
         showLoading();
         fetch("https://www.katyushaiust.ir/courses/my_courses", {
@@ -227,6 +236,63 @@ export default function UserPage() {
         );
       });
     });
+  }
+
+  function addItemShop(num) {
+    console.log("json", JSON.stringify({
+      complete_course_number: num,
+      contain_telegram: true,
+      contain_sms: true,
+      contain_email: true,
+    }))
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    // console.log("shopId in userpage", shopId);
+    // console.log("token is", token);
+    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("shop data", data);
+        
+      })
+      .catch((error) => console.error(error));
+    // axios
+    //   .post(
+    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
+    //     {
+    //       complete_course_number: num,
+    //       contain_telegram: true,
+    //       contain_sms: true,
+    //       contain_email: true,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 
   return (
@@ -362,6 +428,7 @@ export default function UserPage() {
             <CardBody className="courseGroupCard">
               {info.courseGroupsListInContext.length &&
                 info.courseGroupsListInContext.map((x, index) => (
+                  <div className="coursCardContainer">
                   <Card
                     className="courseCard"
                     key={index}
@@ -382,12 +449,14 @@ export default function UserPage() {
                       // console.log("out");
                       setShowCourseHoverFunc("courseChoosed", []);
                     }}
+                    onClick={() =>{
+                      setShowLesson({ flag: true, data: x });
+                    }}
                   >
-                    <CardBody className="courseCardBody">
-                      <img
+                    <CardBody className="courseCardBody">               
+                        <img
                         className="professorImage"
-                        src={x.teacher.teacher_image}
-                        // src={sampleProfile}
+                        src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
                         alt="professorImage"
                       />
                       <div className="infoPart">
@@ -398,19 +467,36 @@ export default function UserPage() {
                         <div className="courseCardDownSide">
                           <div>
                             <p>
-                              ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
                             </p>
-                            <Button
+                          </div>
+                          <img
+                            className="fullLogo"
+                            src={fullLogo}
+                            alt="fullLogo"
+                            style={{
+                              display:
+                                x.color_intensity_percentage < 11
+                                  ? "block"
+                                  : "none",
+                            }}
+                          ></img>
+
+                        </div>
+
+                      </div>
+                    </CardBody>
+                  </Card>
+                  <div className="buttonBar"> 
+                            <Button 
+                              className="courseCardButton"
                               variant="secondary"
                               size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
+
+                              style={{ color: !info.courseChoosed.includes(x)?"aqua":"deeppink", fontSize: !info.courseChoosed.includes(x)?"medium":"medium" }}
+                             
+
                               onClick={() => {
-                                // let bool = info.courseChoosed.map(z=>{
-                                //   // console.log("course choosed", z)
-                                //   if (z.complete_course_number == x.complete_course_number) {
-                                //     return true;
-                                //   }
-                                // })
                                 
                                 let isFound = info.courseChoosed.some(element => {
                                   if (element.complete_course_number === x.complete_course_number) {
@@ -425,71 +511,62 @@ export default function UserPage() {
                                 console.log("clicked");
                                 if (isFound != true) {
                                   console.log("includes------------------");
+
                                   addNewLesson(x.complete_course_number);
                                   changeInfo("courseChoosed", [
                                     ...info.courseChoosed,
                                     x,
                                   ]);
-                                  console.log("x con", x, info.courseChoosed);
-                                }
-                                else{
-                                  console.log("not added", x)
+
+                                }else{//remove lesson
+                                addNewLesson(x.complete_course_number);
+                                console.log(x.complete_course_number);
+                                console.log("delete lesson", x.complete_course_number);
+                                changeInfo(
+                                  "courseChoosed",
+                                  info.courseChoosed.filter(
+                                    (item) =>
+                                      item.complete_course_number !==
+                                      x.complete_course_number
+                                  )
+                                );
+                                closeLesson(false, lessons);
 
                                 }
                                 
                                 // console.log("info", info);
                               }}
                             >
-                              +
+                              {!info.courseChoosed.includes(x)? "+" : "x"}
+                              
                             </Button>
                             <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                              // color="primary"
-                              // size="sm"
+
+                            className="courseCardButton"
+                            variant="secondary"
+                            size="sm"
+                            style={{ color: "aqua", fontSize: "medium" , display:"flex"}}
                               onClick={() => {
                                 if (!info.shop.includes(x)) {
-                                  // console.log("includes shop");
-                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
                                   changeInfo("shop", [...info.shop, x]);
                                 }
-                              }}
+                              }
                             >
-                              {/* <i className="tim-icons icon-simple-add" /> */}
                               <img
                                 className="cart"
                                 src={cartlogo}
                                 alt="cartlogo"
                               ></img>
                             </Button>
-                            {/* <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                            >
-                              <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                            </Button> */}
-                          </div>
-                          <img
-                            className="fullLogo"
-                            src={fullLogo}
-                            alt="fullLogo"
-                            style={{
-                              display:
-                                x.color_intensity_percentage < 11
-                                  ? "block"
-                                  : "none",
-                            }}
-                          ></img>
-                        </div>
+
                       </div>
-                    </CardBody>
-                  </Card>
+                      <ModalLessons
+                    show={showLesson}
+                    close={() =>
+                      setShowLesson(() => ({ ...showLesson, flag: false }))
+                    }
+                  />
+                  </div>
                 ))}
             </CardBody>
           </Card>
