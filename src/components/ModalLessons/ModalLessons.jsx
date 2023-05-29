@@ -115,7 +115,10 @@ const ModalLessons = (props) => {
                   <Col className="text-right" md="12"></Col>
                 </Row>
                   
-                  افزودن به سبد خرید
+                  
+                  <Link to="/shopping">
+                    خریدافزودن به سبد 
+                  </Link>
                 <Button
                   variant="secondary"
                   size="sm"
