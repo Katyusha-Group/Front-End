@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-// import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
   ButtonGroup,
@@ -23,7 +22,6 @@ import {
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
-// import * as chart from "../../assets/img/schedule_table.png"
 import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
@@ -42,7 +40,6 @@ import {
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
-
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
@@ -61,16 +58,11 @@ export default function UserPage() {
     long: 0,
   });
   //getting token
-
   const token = localStorage.getItem("authTokens");
-
-  // console.log("context" , useInfo);
-
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
     data: {},
   });
-  // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -80,20 +72,15 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
-    // console.log("setShowCourseHover func", value);
     setShowCourseHover((info) => ({ [name]: value }));
   }
   let defu = 13.3;
   let length = 17.1;
   let top_right = 9.6;
   let top_defu = 11.7;
-  // let initial = useInfo();
-  //const[info,changeInfo]=React.useEffect(initial);
   const { info, changeInfo } = useInfo();
-  // console.log("info", info);
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
-    // console.log("closeLesson", flag, data, showLesson);
   }
   /**
    * send course number to save in database
@@ -269,29 +256,6 @@ export default function UserPage() {
         // console.log("shop data", data);
       })
       .catch((error) => console.error(error));
-    // axios
-    //   .post(
-    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
-    //     {
-    //       complete_course_number: num,
-    //       contain_telegram: true,
-    //       contain_sms: true,
-    //       contain_email: true,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }
 
   return (
