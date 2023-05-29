@@ -144,6 +144,7 @@ border-bottom: none !important;
     overflow: auto;
     /* justify-content: center; */
     padding-left: 0 !important;
+    justify-content: center;
     height: 27vh;
 }
 div{

@@ -22,6 +22,10 @@ import {
 import "./Shopping.css";
 import cartlogo from "./cart.png";
 import { convertPercentagetoLigtness } from "../../global/functions";
+import {
+  closeLoading,
+  showLoading,
+} from "../../components/LoadingAlert/LoadingAlert";
 
 function Shopping() {
   const { info, changeInfo } = useInfo();
@@ -39,6 +43,7 @@ function Shopping() {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     console.log("shopId in userpage", shopId);
     console.log("token is", token);
+    showLoading();
     fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -50,28 +55,79 @@ function Shopping() {
       })
       .catch((error) => console.error(error));
   }, []);
-
-  function delete_item(num,index) {
+  closeLoading();
+  function delete_item(num, index) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    console.log("shop", num)
+    console.log("shop", num);
     // console.log("shopId in userpage", shopId);
     // console.log("token is", token);
-    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/${state[index].id}/`, {
-      method: "DELETE",
+    fetch(
+      `https://katyushaiust.ir/carts/${shopId[0].id}/items/${state[index].id}/`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          complete_course_number: num,
+          contain_telegram: true,
+          contain_sms: true,
+          contain_email: true,
+        }),
+      }
+    );
+  }
+
+  function sefaresh(){
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    // console.log("shop", num);
+    // console.log("shopId in userpage", shopId);
+    // console.log("token is", token);
+    fetch(`https://katyushaiust.ir/orders/`, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        complete_course_number: num,
-        contain_telegram: true,
-        contain_sms: true,
-        contain_email: true,
+        cart_id: shopId[0].id,
       }),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("put data", data);
+      })
+      .catch((error) => {console.error(error)
+        propsSetter({type:fetchFail, payload:getError(error)})
+        
+      });
+      fetch(
+        "https://katyushaiust.ir/carts/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          
+        }
+      ).then((response) => response.json())
+      .then((data)=>{
+        localStorage.setItem("shopId", JSON.stringify(data))
+        console.log("shopId localstorage ",localStorage.getItem("shopId"))
+        let test = localStorage.getItem("shopId")
+        console.log("test", JSON.parse(test)[0])
+      })
+      .then(error => console.error(error))
+      // const tokenClass = JSON.parse(JSON.stringify(data));
+      // const token = tokenClass.token.access;
+      
   }
 
   const notify = (place) => {
@@ -156,7 +212,7 @@ function Shopping() {
         },
         body: JSON.stringify({
           complete_course_number: num,
-          contain_telegram: u[index].contain_telegram ,
+          contain_telegram: u[index].contain_telegram,
           contain_sms: u[index].contain_sms,
           contain_email: u[index].contain_email,
         }),
@@ -192,19 +248,20 @@ function Shopping() {
                     </div>
                   </CardBody>
                 </Card>
-                <Card>
+                <Card className="shop_card">
                   {state.map((x, index) => {
                     console.log("info lenght", info.shop.lenght);
                     return (
-                      <CardBody key={index}>
-                        <div className="places-buttons">
-                          <Row md="6" sm="2" xs="1">
+                          <Row md="6" sm="2" xs="1" className="places-buttons">
                             <Col className="m-auto text-center category">
                               <Button
                                 color="primary"
                                 size="sm"
                                 onClick={() => {
-                                  delete_item(x.course.complete_course_number,index);
+                                  delete_item(
+                                    x.course.complete_course_number,
+                                    index
+                                  );
                                   setState(
                                     state.filter(
                                       (y) =>
@@ -223,7 +280,7 @@ function Shopping() {
                                   <Label check className="shoping_label">
                                     <Input
                                       onChange={() => {
-                                        ss1(()=>!s1)
+                                        ss1(() => !s1);
                                         changeChecked(1, index);
                                       }}
                                       checked={state[index].contain_email}
@@ -240,9 +297,8 @@ function Shopping() {
                                       checked={x.contain_sms}
                                       type="checkbox"
                                       onChange={() => {
-                                        ss2(()=>!s2)
+                                        ss2(() => !s2);
                                         changeChecked(2, index);
-                                        
                                       }}
                                     />
                                     <span className="form-check-sign">
@@ -256,7 +312,7 @@ function Shopping() {
                                       key={x.contain_telegram}
                                       type="checkbox"
                                       onChange={() => {
-                                        ss3(()=>!s3)
+                                        ss3(() => !s3);
                                         changeChecked(3, index);
                                       }}
                                     />
@@ -278,13 +334,16 @@ function Shopping() {
                               {x.course.complete_course_number}
                             </Col>
                           </Row>
-                        </div>
-                      </CardBody>
                     );
                   })}
                 </Card>
               </Col>
             </Row>
+            {state.length == 0 ? "کالایی انتخاب نشده" : 
+            <Button onClick={sefaresh} color="primary" className="buy_button">
+              ثبت سفارش
+            </Button>
+          }
           </div>
         </div>
       </div>

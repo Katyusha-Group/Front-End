@@ -23,7 +23,6 @@ import {
 } from "reactstrap";
 // import * as chart from "../../assets/img/schedule_table.png"
 export default function SummaryChart(props) {
-  console.log("summary props: ",props.props);
   function summar(data) {
     return data.map((table_row) => (
       <tr>

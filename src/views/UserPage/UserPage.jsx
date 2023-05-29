@@ -22,6 +22,7 @@ import {
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
+import Spinner from 'react-bootstrap/Spinner';
 import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
@@ -49,8 +50,26 @@ function timeStringToFloat(time) {
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
+const fetchRequest = 'FETC_REQUEST';
+const fetchSuccess = 'FETCH_SUCCESS';
+const fetchFail = 'FETCH_FAIL';
+const reducer= (state, action) => {
+  switch (action.type) {
+    case fetchRequest:
+      // changeInfo("loading" , true)
+      return {...state,loading: true}
+    case fetchSuccess:
+      return {...state,loading: false,props: action.payload}
+      case fetchFail:
+        // changeInfo("loading" , false)
+        return {...state,loading: false,error: action.payload}
+        default:
+      return state;
+  }
+};
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
+  const { info, changeInfo } = useInfo();
   const [lesson, setLesson] = React.useState({
     name: "",
     day: 0,
@@ -58,7 +77,15 @@ export default function UserPage() {
     long: 0,
   });
   //getting token
+  const getError = (error) => {
+    // console.log(error.data.message)
+    return error.responst && error.response.data
+    ? error.response.data
+    :error.message;
+  }
   const token = localStorage.getItem("authTokens");
+  const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
+
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
     data: {},
@@ -78,7 +105,6 @@ export default function UserPage() {
   let length = 17.1;
   let top_right = 9.6;
   let top_defu = 11.7;
-  const { info, changeInfo } = useInfo();
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
   }
@@ -105,9 +131,12 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("put data", data);
+        console.log("loading", info.loading);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {console.error(error)
+        propsSetter({type:fetchFail, payload:getError(error)})
+      
+      });
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
@@ -223,15 +252,6 @@ export default function UserPage() {
   }
 
   function addItemShop(num) {
-    console.log(
-      "json",
-      JSON.stringify({
-        complete_course_number: num,
-        contain_telegram: true,
-        contain_sms: true,
-        contain_email: true,
-      })
-    );
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -253,15 +273,41 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("shop data", data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error)
+        console.log("failed course complete", num);
+      });
+    // axios
+    //   .post(
+    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
+    //     {
+    //       complete_course_number: num,
+    //       contain_telegram: true,
+    //       contain_sms: true,
+    //       contain_email: true,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 
   return (
     <>
       {/* {showLoading()} */}
       <Row>
+        {/* <Spinner/> */}
         {/* <Col lg="12"><ExamChart /></Col> */}
         <Col sm="12">
           <Card className="week-card card-body">
@@ -394,7 +440,8 @@ export default function UserPage() {
         <Col sm="12">
           <Card className="dir-right">
             <CardBody className="courseGroupCard">
-              {info.courseGroupsListInContext.length &&
+              {
+              info.loading==0 ? "گروهی انتخاب نشده" : info.loading==1 ? <Spinner/>  :
                 info.courseGroupsListInContext.map((x, index) => (
                   <div className="coursCardContainer">
                     <Card

@@ -143,7 +143,7 @@ function Login() {
       }),
     });
     const data = await response.json();
-    // console.log(data.token);
+    console.log("response",response);
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
@@ -154,12 +154,17 @@ function Login() {
       const tokenClass = JSON.parse(JSON.stringify(data));
       const token = tokenClass.token.access;
       const shopId = await fetch("https://katyushaiust.ir/carts/", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+
+         },
       })
-      // console.log("shopId.status", shopId.response)
+      // console.log("shopId", shopId.json())
       const shopId_data = await shopId.json();
+      // console.log(shopId_data);
       if (shopId.status == 200) {
-        // console.log("shopId.json()",shopId_data)
+        console.log("shopId.json()",shopId_data)
         localStorage.setItem("shopId", JSON.stringify(shopId_data))
         console.log("shopId localstorage ",localStorage.getItem("shopId"))
         let test = localStorage.getItem("shopId")
