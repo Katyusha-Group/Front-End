@@ -58,25 +58,15 @@ const ModalLessons = (props) => {
                 <Row>
                   <Col className="text-right" md="12">
                    زمان برگزاری : 
-                   <p style={{ fontSize: 12 }}>
-                          {" "}
-                          {/* {x.course_times[0].course_start_time} */}
-                          {/* {x.course_times.map((t) => (
+                          {x.course_times.map((t) => (
                             <text>{dayOfWeek(t.course_day)} </text>
                           ))}
                           <text>
-                            {timeStringToFloat(
-                              t.course_times[0].course_start_time
-                            )}
-                          </text>{" "}
+                          {timeStringToFloat(x.course_times[0].course_start_time)}
+                             {" "}
                           تا{" "}
-                          <text>
-                            {timeStringToFloat(
-                              t.course_times[0].course_end_time
-                            )}
-                          </text> */}
-                        </p>
-                        
+                          {timeStringToFloat(x.course_times[0].course_end_time)}
+                          </text>
                   </Col>
                 </Row>
                 
@@ -106,6 +96,8 @@ const ModalLessons = (props) => {
                 <Row>
                   <Col className="text-right" md="12">
                   تاریخ امتحان پایانی: 
+                  {/* {x.exam_times[0].date} */}
+                  
                   </Col>
                 </Row>
                 <Row>
@@ -146,11 +138,11 @@ const ModalLessons = (props) => {
                 </Row>
               </Form>
             </CardBody>
-            <CardFooter>
+            {/* <CardFooter>
               <Button className="btn-fill" color="primary" type="submit">
                 تایید
               </Button>
-            </CardFooter>
+            </CardFooter> */}
           </Modal.Body>
         </div>
       </Modal>
