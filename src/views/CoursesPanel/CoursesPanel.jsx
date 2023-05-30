@@ -23,7 +23,7 @@ export default function CoursesPanel() {
   const handleSwitchChange = val => {
     setSwitchChecked(val)
     // settimetable(info.courseGroupsListInContext);/////////////////
-    AllowedCourses("زبان");
+    // AllowedCourses("زبان");
   }
   // console.log("info", info);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
@@ -90,7 +90,7 @@ export default function CoursesPanel() {
   // }
 
   function addNewLesson(num) {
-    console.log("complete course number is: " + num);
+    // console.log("complete course number is: " + num);
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
 
@@ -109,7 +109,7 @@ export default function CoursesPanel() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("put data", data);
+        // console.log("put data", data);
         setChosenCourses(data);
       })
       .catch((error) => console.error(error));
@@ -124,10 +124,64 @@ export default function CoursesPanel() {
   //   settimetable(tempArr);
   // }
 
-  function AllowedCourses (Department)                                          // Allowed Lessons
-  {
-    // React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/departments/", {
+  // function AllowedCourses (Department)                                          // Allowed Lessons
+  // {
+  //   // React.useEffect(() => {
+  //     fetch("https://www.katyushaiust.ir/departments/", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         // console.log("data all",data);
+  //         setAllowed(data);
+  //         Allowed.map ((dep, index) => {
+  //           if (dep.base_courses.length > 0)
+  //           {
+  //             // console.log("Name:::: " + dep.name)
+  //             // console.log ("Department name is: " + Department);
+  //             // if (dep.name === Department)
+  //             // {
+  //             //   console.log("This " + dep.name + " equals " + Department);
+  //             //   console.log("base_courses are: " + dep.base_courses);
+  //             //   let AllowedTimeTable = [...ChosenCourses, ...data];
+  //             //   // console.log("Allowed timetable is: " + AllowedTimeTable[0]);
+  //             //   settimetable(AllowedTimeTable);
+  //             //   // settimetable(dep.base_courses);
+  //             // }
+  //             // // settimetable(dep.base_courses);
+  //             dep.base_courses.map ((course, ind) => {
+  //               console.log("Base courses courses: " + course.name);
+  //             })
+  //           }
+  //         }
+  //         )
+  //         // console.log("Allowed courses are:  " + data)
+  //       })
+  //       .catch((error) => console.error(error));
+  //     // console.log(data);
+  //     const activeRoute = (routeName) => {
+  //       return location.pathname === routeName ? "active" : "";
+  //     };
+  //   // }, []);
+
+  //   // {departeman.map((prop, index) => {
+  //   //   if (prop.base_courses.length > 0) {
+  //   //     return (
+  //   //       <NavLink
+  //   //         className="nav-link nav-link-lessonSidebar"
+  //   //         activeClassName="active"
+  //   //         onClick={() => setLessonState(prop.base_courses)}
+  //   //         key={index}
+  //   //       >
+  //   //         <i className="tim-icons icon-chart-bar-32" />
+  //   //         <p>{prop.name}</p>
+  //   //       </NavLink>
+  //   //     );
+  //   //   }
+  // }
+
+  React.useEffect(() => {                                             //Already Chosen Lessons
+    fetch("https://www.katyushaiust.ir/departments/", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
@@ -137,43 +191,38 @@ export default function CoursesPanel() {
           Allowed.map ((dep, index) => {
             if (dep.base_courses.length > 0)
             {
-              console.log("Name:::: " + dep.name)
-              console.log ("Department name is: " + Department);
-              if (dep.name === Department)
-              {
-                console.log("This " + dep.name + " equals " + Department);
-                console.log("base_courses are: " + dep.base_courses);
-                let AllowedTimeTable = [...ChosenCourses, ...data];
-                // settimetable(AllowedTimeTable);
-                // settimetable(dep.base_courses);
-              }
-              // settimetable(dep.base_courses);
+              dep.base_courses.map ((course, ind) => {
+                console.log("Base courses courses: " + course.name);
+              })
             }
-          }
-          )
-          console.log("Allowed courses are:  " + data)
+          })
         })
         .catch((error) => console.error(error));
-      // console.log(data);
       const activeRoute = (routeName) => {
         return location.pathname === routeName ? "active" : "";
       };
-    // }, []);
+  }, []);
 
-    // {departeman.map((prop, index) => {
-    //   if (prop.base_courses.length > 0) {
-    //     return (
-    //       <NavLink
-    //         className="nav-link nav-link-lessonSidebar"
-    //         activeClassName="active"
-    //         onClick={() => setLessonState(prop.base_courses)}
-    //         key={index}
-    //       >
-    //         <i className="tim-icons icon-chart-bar-32" />
-    //         <p>{prop.name}</p>
-    //       </NavLink>
-    //     );
-    //   }
+  function IsAllowed (base_course_number)  //Department
+  {
+    console.log("Is allowed called");
+    for (let i=0; i<Allowed.length; i++)
+    {
+      if (Allowed[i].base_courses.length > 0)
+      {
+        for (let j=0; j<Allowed[i].base_courses.length; j++)
+        {
+          // console.log ("Allowed[i] is: " + Allowed[i].name);
+          // console.log ("Checking equality between " + Allowed[i].base_courses[j].course_number + " and " + base_course_number);
+          if (Allowed[i].base_courses[j].course_number === base_course_number)
+          {
+            // console.log (Allowed[i].course_number + " equals " + base_course_number);
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   // Select Department
@@ -182,7 +231,7 @@ export default function CoursesPanel() {
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((DepartmentOptions) => {
-        console.log(DepartmentOptions);
+        // console.log(DepartmentOptions);
         setDepartmentOptions(DepartmentOptions);
       });
   }, []);
@@ -227,7 +276,7 @@ export default function CoursesPanel() {
 
   function handleDepartment(selectedOption) {
     setSelectedDepartment(selectedOption.value);
-    console.log("Department changed::::::" + SelectedDepartment.name);
+    // console.log("Department changed::::::" + SelectedDepartment);
     // console.log("Chosen Department: " + selectedOption.value);
     // console.log("Department is: " + Department)
     // GetDepartmentLessons(Department);
@@ -347,6 +396,13 @@ export default function CoursesPanel() {
         //NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)]++;
         // (currentPeriod !== null) && (
           // console.log ("Course_times: " + currentPeriod.course_times);
+        // if (SwitchChecked)
+        // {
+        //   if (IsAllowed(currentPeriod.base_course))
+        //   {
+        //     console.log (currentPeriod.name + " is allowed");
+        //   }
+        // }
         currentPeriod.course_times.forEach(time => {
           // console.log("=======================")
           // time.course_day = 4;
@@ -368,9 +424,32 @@ export default function CoursesPanel() {
           // console.log("count is: " + count)
           
           // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod
-          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
+          // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
           // console.log ("HELLLOOOO: " + lessonsKeyedByDayAndPeriod[day][TimeIndex][count].Show);
-        });
+
+          if (SwitchChecked)
+          {
+            let base_course_number = parseInt(currentPeriod.complete_course_number.substring(0, currentPeriod.complete_course_number.length - 3));
+            console.log ("Base course is: " + base_course_number + " Course name is: " + currentPeriod.name);
+            
+            if (IsAllowed(base_course_number))
+            {
+              console.log (currentPeriod.name + " is allowed");
+              console.log ("The course is: " + currentPeriod.name);
+              lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
+            }
+            else
+            {
+              console.log (currentPeriod.name + " is NOOOOOOOOOOT allowed");
+              console.log ("The course is: " + currentPeriod.name);
+            }
+          }
+          else
+          {
+            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
+          }
+        }
+        );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
         return lessonsKeyedByDayAndPeriod
@@ -392,12 +471,12 @@ export default function CoursesPanel() {
         // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(100, 22%, 30%)";
         // console.log(backgroundColor);
         let IsInTheChosenCourses = false;
-        console.log("Chosen Courses are: " + entry);
+        // console.log("Chosen Courses are: " + entry);
           for (let i=0; i < ChosenCourses.length; i++)
           {
             if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number)
             {
-              console.log("+++++++++++++++++++++" + ChosenCourses[i].name);
+              // console.log("+++++++++++++++++++++" + ChosenCourses[i].name);
               IsInTheChosenCourses = true;
             }
           }
@@ -415,8 +494,8 @@ export default function CoursesPanel() {
                   onClick={() => {
                       if (!info.courseChoosed.includes(entry)) 
                       {
-                        console.log("does not include");
-                        console.log("Added Lesson: " + entry)
+                        // console.log("does not include");
+                        // console.log("Added Lesson: " + entry)
                         addNewLesson(entry.complete_course_number);
                         changeInfo("courseChoosed", [...info.courseChoosed, entry]);
                       }
@@ -430,7 +509,7 @@ export default function CoursesPanel() {
                         // entry.Show = false;
                         // console.log("Entry show is: " + entry.Show);
                         addNewLesson(entry.complete_course_number);
-                        console.log("delete lesson", entry.complete_course_number);
+                        // console.log("delete lesson", entry.complete_course_number);
                         changeInfo(
                           "courseChoosed",
                           info.courseChoosed.filter(
