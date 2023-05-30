@@ -35,7 +35,7 @@ function Login() {
       passwordV.getAttribute("type") === "password" ? "text" : "password";
 
     togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
+      ? (document.localStoragegetElementById("togglePassword").className =
           "fa fa-eye-slash viewpass mr-4 text-muted")
       : (document.getElementById("togglePassword").className =
           "fa fa-eye viewpass mr-4 text-muted");
@@ -82,6 +82,8 @@ function Login() {
     backError: "",
   });
   async function handleSubmit(event) {
+
+    console.log("toooooken"+localStorage.authTokens)
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
@@ -126,13 +128,6 @@ function Login() {
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
-      // if (authTokens) {
-      //   console.log(user);
-      //   setUser(jwt_decode(authTokens));
-      //   console.log(user);
-      // }
-      // info.token = authTokens;
-      // console.log(info);
       localStorage.setItem("authTokens", JSON.stringify(data));
       Navigate("/admin/page");
     } else {

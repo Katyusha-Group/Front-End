@@ -1,11 +1,11 @@
 /*eslint-disable*/
 import React from "react";
-
+import { useState ,useEffect} from "react";
 import { NavLink, Link } from "react-router-dom";
 
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
@@ -46,11 +46,16 @@ function Sidebar(props) {
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
+  const Navigate = useNavigate();
   // const [allColleges, setAllColleges] = React.useState([]);
 
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
-
+//   const [authTokens, setAuthTokens] = useState(() =>
+//   localStorage.getItem("authTokens")
+//     // ? JSON.parse(localStorage.getItem("authTokens"))
+//     // : null
+// );
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   // console.log(tokenClass);
@@ -202,25 +207,36 @@ function Sidebar(props) {
                         right
                       >
                         <DropdownItem
+                          className="navbarDropDownItem"
                           href="http://localhost:5173/shoping"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => {e.preventDefault()
+                            Navigate("/shoping")
+                          }}
                         >
+                          <span className="tim-icons icon-basket-simple" 
+                          
+                          />
+                          {"  "}
                           سبد خرید
-                          <span className="tim-icons icon-basket-simple" />
+                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
                           onClick={(e) => e.preventDefault()}
                         >
-                          اعلان ها
                           <span className="tim-icons icon-email-85" />
+                          {"  "}
+                          اعلان ها
+                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => {e.preventDefault()
+                            Navigate("/admin/change")
+                          }}
                         >
-                          تغییر رمز عبور
                           <span className="tim-icons icon-lock-circle" />
+                          تغییر رمز عبور
                         </DropdownItem>
                         {/* <DropdownItem
                           href="#pablo"
@@ -231,10 +247,23 @@ function Sidebar(props) {
                         </DropdownItem> */}
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          // onClick={()=>{
+                          //   setAuthTokens(null);
+                          //   console.log("clicked")
+                          //   Navigate("/login");
+                          // }}
                         >
-                          خروج
                           <span className="tim-icons icon-simple-remove" />
+                          <Link to="/login"
+                           onClick={()=>{
+                            localStorage.setItem('authTokens', "");
+                            // setAuthTokens(null);
+                            // console.log("clicked")
+                          }}
+                          >
+                          {"  "}
+                          خروج
+                          </Link>
                         </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
