@@ -179,7 +179,8 @@ function Sidebar(props) {
             <Nav>
               <Row className="nav-lessonSidebar">
                 <Col md="5">
-                  <NavLink className="nav-header nav-link-icon">
+                  <NavLink to="/admin/page" className="nav-header nav-link-icon">
+                   
                     <i className="tim-icons icon-atom ml-0" />
                   </NavLink>
                 </Col>
