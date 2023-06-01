@@ -22,7 +22,7 @@ import {
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
@@ -44,26 +44,27 @@ import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
+import ModalShopping from "../../components/ModalShopping/ModlaShopping.jsx";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
-const fetchRequest = 'FETC_REQUEST';
-const fetchSuccess = 'FETCH_SUCCESS';
-const fetchFail = 'FETCH_FAIL';
-const reducer= (state, action) => {
+const fetchRequest = "FETC_REQUEST";
+const fetchSuccess = "FETCH_SUCCESS";
+const fetchFail = "FETCH_FAIL";
+const reducer = (state, action) => {
   switch (action.type) {
     case fetchRequest:
       // changeInfo("loading" , true)
-      return {...state,loading: true}
+      return { ...state, loading: true };
     case fetchSuccess:
-      return {...state,loading: false,props: action.payload}
-      case fetchFail:
-        // changeInfo("loading" , false)
-        return {...state,loading: false,error: action.payload}
-        default:
+      return { ...state, loading: false, props: action.payload };
+    case fetchFail:
+      // changeInfo("loading" , false)
+      return { ...state, loading: false, error: action.payload };
+    default:
       return state;
   }
 };
@@ -80,12 +81,19 @@ export default function UserPage() {
   const getError = (error) => {
     // console.log(error.data.message)
     return error.responst && error.response.data
-    ? error.response.data
-    :error.message;
-  }
+      ? error.response.data
+      : error.message;
+  };
   const token = localStorage.getItem("authTokens");
-  const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
+  const [{ loading, props: input, error }, propsSetter] = React.useReducer(
+    reducer,
+    { loading: true, props: {}, error: "" }
+  );
 
+  const [showShoppingModal, setShowShoppingModal] = React.useState({
+    flag: false,
+    data: {},
+  });
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
     data: {},
@@ -107,6 +115,9 @@ export default function UserPage() {
   let top_defu = 11.7;
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
+  }
+  function funcSetShowShoppingModal(flag, data) {
+    setShowShoppingModal({ flag: flag, data: data });
   }
   /**
    * send course number to save in database
@@ -133,9 +144,9 @@ export default function UserPage() {
       .then((data) => {
         console.log("loading", info.loading);
       })
-      .catch((error) => {console.error(error)
-        propsSetter({type:fetchFail, payload:getError(error)})
-      
+      .catch((error) => {
+        console.error(error);
+        propsSetter({ type: fetchFail, payload: getError(error) });
       });
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
@@ -237,7 +248,7 @@ export default function UserPage() {
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
               >
-                <strong style={{fontSize:"0.8rem"}}>{lessons.name}</strong>
+                <strong style={{ fontSize: "0.8rem" }}>{lessons.name}</strong>
                 <br />
                 {lessons.registered_count} از {lessons.capacity}
                 <br />
@@ -252,7 +263,7 @@ export default function UserPage() {
   }
 
   function addItemShop(num) {
-    console.log("hello")
+    console.log("hello");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -274,10 +285,10 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(`shop add ${num}`,data)
+        console.log(`shop add ${num}`, data);
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
         console.log("failed course complete", num);
       });
   }
@@ -417,10 +428,13 @@ export default function UserPage() {
           </Card>
         </Col>
         <Col sm="12">
-          <Card className="dir-right groups_card" style={{marginBottom:"0"}}>
+          <Card className="dir-right groups_card" style={{ marginBottom: "0" }}>
             <CardBody className="courseGroupCard">
-              {
-              info.loading==0 ? "گروهی انتخاب نشده" : info.loading==1 ? <Spinner/>  :
+              {info.loading == 0 ? (
+                "گروهی انتخاب نشده"
+              ) : info.loading == 1 ? (
+                <Spinner />
+              ) : (
                 info.courseGroupsListInContext.map((x, index) => (
                   <div className="coursCardContainer">
                     <Card
@@ -561,8 +575,9 @@ export default function UserPage() {
                         }}
                         onClick={() => {
                           if (true) {
-                            changeInfo("shop", [...info.shop, x]);
-                            addItemShop(x.complete_course_number);
+                            // changeInfo("shop", [...info.shop, x]);
+                            // addItemShop(x.complete_course_number);
+                            funcSetShowShoppingModal(true,x)
                           }
                         }}
                       >
@@ -579,8 +594,15 @@ export default function UserPage() {
                         setShowLesson(() => ({ ...showLesson, flag: false }))
                       }
                     />
+                    <ModalShopping
+                      show={showShoppingModal}
+                      close={() =>
+                        setShowShoppingModal(() => ({ ...showShoppingModal, flag: false }))
+                      }
+                    />
                   </div>
-                ))}
+                ))
+              )}
             </CardBody>
           </Card>
         </Col>

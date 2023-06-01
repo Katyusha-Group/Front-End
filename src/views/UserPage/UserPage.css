@@ -1,12 +1,14 @@
-.week_table{
+.week_table {
     table-layout: fixed;
-    overflow: visible ;
+    overflow: visible;
     height: 350px;
 }
-.week_table thead{
+
+.week_table thead {
     padding: 10px;
 }
-.backBlue{
+
+.backBlue {
     position: relative;
     right: -33px !important;
     font-size: 15px !important;
@@ -18,48 +20,53 @@
     width: 50px;
 }
 
-.UserPage_first_column{
-    border-right: none !important;
-}
-.UserPage_first_column{
+.UserPage_first_column {
     border-right: none !important;
 }
 
-.UserPage_first_row > td{
-border-top: none !important;
+.UserPage_first_column {
+    border-right: none !important;
 }
 
-.UserPage_last_row > td{
-border-bottom: none !important;
+.UserPage_first_row>td {
+    border-top: none !important;
 }
 
-.week_table td{
+.UserPage_last_row>td {
+    border-bottom: none !important;
+}
+
+.week_table td {
     border-color: rgba(255, 255, 255, 0.1);
     border-top: 0.0625rem solid #e3e3e3;
-    border-right: 0.0625rem solid  rgba(255, 255, 255, 0.1);
+    border-right: 0.0625rem solid rgba(255, 255, 255, 0.1);
     padding: 15px 0px !important;
     /* border-right: 0.0625rem solid #e3e3e3 !important; */
 }
 
-.week-card{
+.week-card {
     margin-bottom: 2vh !important;
     /* padding: 0px !important; */
     height: 66vh;
     overflow: auto;
 }
-.overflow-visible{
+
+.overflow-visible {
     overflow: visible !important;
 }
-.week-card-body{
+
+.week-card-body {
     height: 380px;
     padding: 0px !important;
     margin-top: -20px;
 }
-.week-card-footer{
+
+.week-card-footer {
     margin-top: 13px;
     padding-bottom: 0px !important;
 }
-.chart{
+
+.chart {
     background: url(../../assets/img/WeekChart5.png);
     background-size: 100% 100%;
     min-width: 60rem;
@@ -75,13 +82,15 @@ border-bottom: none !important;
     min-height: 390px;
 }
 
-.course, i .course{
+.course,
+i .course {
     position: absolute;
     height: 10vh;
     width: 5rem;
-    background-color:#1d8cf8 ;
-    top:20%;
-    right:13%;/* 10.7 */
+    background-color: #1d8cf8;
+    top: 20%;
+    right: 13%;
+    /* 10.7 */
     border-radius: 5%;
     color: white;
     opacity: 0.75;
@@ -90,53 +99,57 @@ border-bottom: none !important;
     padding-top: 0.4rem;
 }
 
-.course:hover{
+.course:hover {
     cursor: pointer;
 }
 
-.select{
+.select {
     background-color: #344675;
     border: none;
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     color: white;
 }
-.lesson_button{
+
+.lesson_button {
     background: rgba(227, 49, 243, 0.527);
     border-radius: .2rem;
     border: none;
     color: white;
     position: absolute;
     right: 0;
-    top:0;
+    top: 0;
     z-index: 1;
     display: none;
     padding: -1px 5px;
 }
-.courseCard{
+
+.courseCard {
     border-color: rgba(227, 49, 243, 0.527) !important;
     color: rgb(199, 193, 193) !important;
     width: 18.125rem !important;
-    height: 105px; 
+    height: 105px;
     margin-left: 10px;
     margin-bottom: 0px !important;
     padding: 0px;
 }
-.courseCardBody{
+
+.courseCardBody {
     justify-items: center;
     align-items: center;
-    padding: 0px ;
+    padding: 0px;
     display: flex;
     flex-direction: row;
     padding: 5px !important;
     cursor: pointer;
 }
+
 /* 
 .courseCardBody:hover{
     cursor: pointer;
 } */
 
-.courseGroupCard{
+.courseGroupCard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -147,14 +160,16 @@ border-bottom: none !important;
     justify-content: center;
     height: 26vh;
 }
-div{
+
+div {
     text-align: center;
 }
-.imageDiv{
+
+.imageDiv {
     width: 3.4375rem;
 }
 
-.professorImage{
+.professorImage {
     width: 3.4375rem;
     height: 3.4375rem;
     /* margin-left: 0.625rem; */
@@ -163,50 +178,58 @@ div{
     border-width: 0.1875rem;
     border-color: "red";
 }
-.color{
+
+.color {
     width: 23%;
     height: 5rem;
     border: none;
     justify-content: center;
     align-items: center;
-    color :inherit;
+    color: inherit;
     margin-top: 0.3125rem;
     /* background-color:hsl(266, 55%, 54%) */
-    
+
 }
-p{
+
+p {
     color: inherit;
 }
 
 
-.userpageFirstComponent{
+.userpageFirstComponent {
     height: 50%;
 }
-.fullLogo{
+
+.fullLogo {
     /* width: 20px; */
     height: 40px;
     margin-right: auto;
     margin-left: 5px;
 }
-.courseCardDownSide{
+
+.courseCardDownSide {
     display: flex;
     direction: row;
     padding-right: 15px;
     justify-content: right;
 }
-.infoPart{
+
+.infoPart {
     width: 100%;
 }
-.addToPlanButton{
+
+.addToPlanButton {
     width: 20px !important;
     color: red;
 }
-.cart{
+
+.cart {
     width: 25px;
     height: 25px;
     max-width: none;
 }
-.courseCardButton{
+
+.courseCardButton {
     width: 38px;
     margin-left: 0px !important;
     padding: 0px;
@@ -215,50 +238,60 @@ p{
     width: 48%;
 
 }
-.course_hover{
+
+.course_hover {
     background: #1d8bf86d;
     width: 110px;
     height: auto;
     border: none;
     color: white;
     position: absolute;
-    top:100%;
+    top: 100%;
     border-radius: 1.4rem;
     z-index: 1;
     padding: 0.5rem;
     margin-top: 5px;
     display: none;
-   line-height: 1.5rem;
-   font-size: 0.7rem;
+    line-height: 1.5rem;
+    font-size: 0.7rem;
 }
-.dir-left{
+
+.dir-left {
     direction: ltr !important;
 }
-.dir-right{
+
+.dir-right {
     direction: rtl;
 }
 
-.buttonBar{
+.buttonBar {
     display: flex;
     flex-direction: row;
 }
-.coursCardContainer{
+
+.coursCardContainer {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
 }
 
 
-.classNameHover{
+.classNameHover {
     background-color: rgb(124, 98, 195);
 }
 
-.course-hover:hover{
+.course-hover:hover {
     z-index: 100;
 }
 
-.id_code{
+.id_code {
     direction: ltr;
     unicode-bidi: embed;
 }
 
+.shopping_form_userpage {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+
+}

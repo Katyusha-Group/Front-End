@@ -1,6 +1,6 @@
 .loginLmsModal{
     background: #27293d;
-    
+    border-radius: 1rem;
 }
 .card-header{
     background-color: transparent!important;
@@ -22,4 +22,5 @@
 
 .modal-content{
     background-color: #27293d!important;
+    box-shadow: none!important;
 }
