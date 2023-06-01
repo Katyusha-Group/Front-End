@@ -358,7 +358,7 @@ export default function UserPage() {
                           : "dimgray",
                     }}
                     onMouseEnter={() => {
-                      console.log("x.complete",x.complete_course_number);
+                      console.log("x.complete", x.complete_course_number);
                       // console.log("z");
                       setShowCourseHoverFunc("courseChoosed", [
                         ...info.courseChoosed,
@@ -407,27 +407,26 @@ export default function UserPage() {
                               +
                             </Button>
                             <Button
-                            variant="secondary"
-                            size="sm"
-                            style={{ color: "aqua", fontSize: "medium" }}
-                  // color="primary"
-                  // size="sm"
-                  onClick={() =>{
-                    if (!info.shop.includes(x) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, x])
-                    }
-                  }
-                  }
-                >
-                  {/* <i className="tim-icons icon-simple-add" /> */}
-                  <img
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: "aqua", fontSize: "medium" }}
+                              // color="primary"
+                              // size="sm"
+                              onClick={() => {
+                                if (!info.shop.includes(x)) {
+                                  console.log("includes shop");
+                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                                  changeInfo("shop", [...info.shop, x]);
+                                }
+                              }}
+                            >
+                              {/* <i className="tim-icons icon-simple-add" /> */}
+                              <img
                                 className="cart"
                                 src={cartlogo}
                                 alt="cartlogo"
                               ></img>
-                </Button>
+                            </Button>
                             {/* <Button
                               variant="secondary"
                               size="sm"

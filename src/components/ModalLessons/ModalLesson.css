@@ -1,0 +1,38 @@
+.modal.show .modal-dialog {
+     -webkit-transform: translate(0, 0%) !important; 
+     transform: translate(0, 0%) !important; 
+     margin: 0 !important;
+}
+
+.modal-content{
+    width: 1500px !important;
+}
+
+.loginLmsModal{
+    background: #27293d;
+    
+}
+.card-header{
+    background-color: transparent!important;
+    direction: ltr;
+}
+.card-footer{
+    background-color: transparent!important;
+}
+.loginLmsModalBody{
+    padding: 0 !important;
+}
+.close-btn
+{
+  display:inline-block;
+  padding:4px;
+  /* border:1px solid pink; */
+  z-index:500;
+}
+
+.modal-content{
+    background-color: #27293d!important;
+}
+
+.ModalLesson{
+}

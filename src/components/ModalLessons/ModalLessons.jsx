@@ -1,8 +1,9 @@
 import React from "react";
-import "../../assets/css/LoginLms.css";
+import "./ModalLesson.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
+import Timeline from "../Timeline/Timeline";
 // reactstrap components
 import {
   Button,
@@ -21,12 +22,13 @@ import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
   console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
-  console.log("INFO", info)
+  console.log("INFO", info);
   return (
     <>
       <Modal
         show={props.show.flag}
         cancel={props.close}
+        className="ModalLesson"
         // centered
       >
         <div className="loginLmsModal">
@@ -47,37 +49,37 @@ const ModalLessons = (props) => {
             <CardBody>
               <Form>
                 <Row>
+                  <Col md="12">
+                    <Timeline show={props} />
+                  </Col>
+                </Row>
+                {/* <Row>
                   <Col className="text-right" md="12">
                     ظرفیت: {props.show.data.capacity}
                   </Col>
-                </Row>
-                <Row>
-                  <Col className="text-right" md="12"></Col>
-                </Row>
-                  <Link to="/shoping">
-                    خرید
-                  </Link>
-                <Button
-                  color="primary"
-                  size="sm"
-                  onClick={() =>{
-                    if (!info.shop.includes(props.show.data) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, props.show.data])
-                    }
-                  }
-                  }
-                >
-                  <i className="tim-icons icon-simple-add" />
-                </Button>
+                </Row> */}
               </Form>
             </CardBody>
-            <CardFooter>
+            {/* <CardFooter>
+              <Link to="/shoping">خرید</Link>
+              <Button
+                color="primary"
+                size="sm"
+                onClick={() => {
+                  if (!info.shop.includes(props.show.data)) {
+                    console.log("includes shop");
+                    // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                    changeInfo("shop", [...info.shop, props.show.data]);
+                  }
+                }}
+              >
+                <i className="tim-icons icon-simple-add" />
+              </Button>
+
               <Button className="btn-fill" color="primary" type="submit">
                 تایید
               </Button>
-            </CardFooter>
+            </CardFooter> */}
           </Modal.Body>
         </div>
       </Modal>
