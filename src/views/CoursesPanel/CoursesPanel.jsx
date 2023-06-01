@@ -10,8 +10,11 @@ import {
   Table,
   Row,
   Col,
+  Input,
+  Label,
   Button,
-  View
+  View,
+  FormGroup
 } from "reactstrap";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
@@ -24,8 +27,9 @@ export default function CoursesPanel() {
     setSwitchChecked(val)
   }
 
+  let [timeTableChanged, settimeTableChanged] = React.useState(false);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
-  let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
+  let [SelectedDepartment, setSelectedDepartment] = React.useState([1]);
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
   let [Allowed, setAllowed] = React.useState([]);
   let [timetable, settimetable] = React.useState([]);
@@ -35,6 +39,14 @@ export default function CoursesPanel() {
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
 
+  function AppendToTimetable (ToBeAppended)
+  {
+    let NewTimeTable = [...timetable, ...ToBeAppended];
+    settimetable(NewTimeTable);
+    settimetable(uniquifyArrayByKey(timetable, "complete_course_number"));
+    return (timetable);
+  }
+
   React.useEffect(() => {                                             // Already Chosen Lessons
     fetch("https://www.katyushaiust.ir/courses/my_courses", {
       headers: { Authorization: `Bearer ${token}` },
@@ -43,7 +55,9 @@ export default function CoursesPanel() {
       .then((data) => {
         setChosenCourses(data);
         changeInfo("courseChoosed", data);
+        console.log("Chosen courses changed!")
         settimetable(data);
+        // AppendToTimetable(ChosenCourses)
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -162,7 +176,8 @@ export default function CoursesPanel() {
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
-    if (SelectedDepartment) {
+    console.log("Selected Department is: " + SelectedDepartment);
+    if (SelectedDepartment !== 1) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -172,10 +187,28 @@ export default function CoursesPanel() {
         })
         .catch((error) => console.error(error));
     }
+    else if (SelectedDepartment === 1){
+      settimetable(info.courseChoosed);
+    }
   }, [SelectedDepartment]);
+  
+  // React.useEffect(() => {                                             // Set Selected Department courses
+  //   if (timeTableChanged)
+  //   {
+
+  //   }
+  // }, []);
 
   function AddShowAttribute(obj) {                                    // Adding Show Attribute to object
-    const UpdatedObj = { ...obj, Show: true };
+    let IsInTheChosenCourses = false;
+    for (let i = 0; i < ChosenCourses.length; i++) {
+      if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
+        IsInTheChosenCourses = true;
+        break;
+      }
+    }
+    const backgColor = (IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+    const UpdatedObj = { ...obj, Show: true, color: backgColor };
     return UpdatedObj;
   }
 
@@ -304,12 +337,17 @@ export default function CoursesPanel() {
             IsInTheChosenCourses = true;
           }
         }
-        const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+        // if (entry !== null)
+        // {
+        //   console.log("Entry name: " + entry.name + " Is null? " + entry + " IsInTheChosenCourses " + IsInTheChosenCourses);
+        // }
+        
+        // const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
         return (
           <div>
             {entry !== null && entry.Show && (
               <div className="Course"
-                style={{ backgroundColor: backgroundColor }}
+                style={{ backgroundColor: entry.color }}
               >
                 {entry.name} ({entry.class_gp})
                 <br />
@@ -327,6 +365,7 @@ export default function CoursesPanel() {
                   name="RemoveCourseButton"
                   className="btn-fill-RemoveCourseButton"
                   onClick={() => {
+                    console.log("timetable",timetable)
                     // entry.Show = false;
                     // console.log("Entry show is: " + entry.Show);
                     addNewLesson(entry.complete_course_number);
@@ -338,10 +377,13 @@ export default function CoursesPanel() {
                           entry.complete_course_number
                       )
                     );
-                    setChosenCourses(info.courseChoosed);
-                    let NewTimeTable = [...ChosenCourses, ...timetable] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                    settimetable(NewTimeTable);
+                    console.log("info.courseChoosed", info.courseChoosed)
+                    // setChosenCourses(info.courseChoosed);
+                    // let NewTimeTable = [...ChosenCourses] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+                    console.log("NewTime", info.courseChoosed)
+                    // settimetable(info.courseChoosed);
                     // closeLesson(false, lessons);
+                    // setChosenCourses(info.co)
                   }}
                 >
                   x
@@ -384,8 +426,14 @@ export default function CoursesPanel() {
               <ReactSwitch className="Switch"
                 checked={SwitchChecked}
                 onChange={handleSwitchChange}
+                // style={{}}
               />
-
+              {/* <Toggle
+                id='cheese-status'
+                defaultChecked={this.state.cheeseIsReady}
+                onChange={this.handleCheeseChange} />
+              <label htmlFor='cheese-status'>Adjacent label tag</label> */}
+              
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">

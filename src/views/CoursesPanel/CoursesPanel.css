@@ -63,4 +63,8 @@ tbody{
 .Switch
 {
     width: 50%;
+    /* text-align: right; */
+}
+.react-switch-bg{
+    text-align: inherit;
 }
