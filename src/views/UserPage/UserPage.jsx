@@ -385,12 +385,15 @@ export default function UserPage() {
                           {x.name} (گروه {x.group_number})
                         </p>
                         <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <div className="courseCardDownSide">
-                          <div>
+                        <p>
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
+                        </p>
+                        {/* <div className="courseCardDownSide"> */}
+                          {/* <div>
                             <p>
                               ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
                             </p>
-                          </div>
+                          </div> */}
                           <img
                             className="fullLogo"
                             src={fullLogo}
@@ -403,7 +406,7 @@ export default function UserPage() {
                             }}
                           ></img>
 
-                        </div>
+                        {/* </div> */}
 
                       </div>
                     </CardBody>

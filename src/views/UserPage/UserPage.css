@@ -135,7 +135,7 @@ border-bottom: none !important;
     flex-wrap: wrap;
     height: 30vh;
     overflow: auto;
-    /* justify-content: center; */
+    justify-content: space-between;
     padding-left: 0 !important;
 
 }
@@ -179,6 +179,11 @@ p{
     height: 40px;
     margin-right: auto;
     margin-left: 5px;
+    position: absolute;
+    left: 0px;
+    bottom: 5px;
+    transform: rotate(10deg);
+
 }
 .courseCardDownSide{
     display: flex;
@@ -205,8 +210,28 @@ p{
     display: flex;
     justify-content: center;
     width: 48%;
+    /* background: red !important; */
+    
+}
+.courseCardButton:hover{
+
+    background: rgb(251, 255, 0) !important;
+    transform: none !important; 
+    -webkit-transform: none !important;
+    /* color:  peru !important; */
+    box-shadow: none !important;
 
 }
+.courseCardButton:active{
+
+       color: rgb(152, 43, 202) !important;
+       transform: none !important; 
+        -webkit-transform: none !important;
+        /* transform: scale(1) !important;
+        color:  peru !important;
+        box-shadow: none !important; */
+}
+
 .course_hover{
     background: #1d8bf86d;
     width: 110px;
