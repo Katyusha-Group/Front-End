@@ -20,127 +20,26 @@ import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 export default function CoursesPanel() {
 
-  class Course
-  {
-    constructor (props)
-    {
-      this.name = props.name;
-      this.class_gp = props.class_gp;
-      this.complete_course_number = props.complete_course_number;
-      this.course_times = props.course_times;
-    }
-  }
-
-
-  const { info, changeInfo } = useInfo();
-  const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
-  const [SwitchChecked, setSwitchChecked] = React.useState(false);
-
-  const handleSwitchChange = val => {
-    setSwitchChecked(val)
-  }
-
-  let [timeTableChanged, settimeTableChanged] = React.useState(false);
-  let [ChosenCourses, setChosenCourses] = React.useState([]);
-  let [SelectedDepartment, setSelectedDepartment] = React.useState([1]);
-  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
-  let [Allowed, setAllowed] = React.useState([]);
-  let [timetable, settimetable] = React.useState([]);
-
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
 
-  function AppendToTimetable (ToBeAppended)
-  {
-    let NewTimeTable = [...timetable, ...ToBeAppended];
-    settimetable(NewTimeTable);
-    settimetable(uniquifyArrayByKey(timetable, "complete_course_number"));
-    return (timetable);
-  }
+  // Info
+  const { info, changeInfo } = useInfo();
 
-  React.useEffect(() => {                                             // Already Chosen Lessons
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setChosenCourses(data);
-        changeInfo("courseChoosed", data);
-        console.log("Chosen courses changed!")
-        settimetable(data);
-        // AppendToTimetable(ChosenCourses)
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }, []);
-
-  function addNewLesson(num) {                                        // Add a lesson
-    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        complete_course_number: num,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setChosenCourses(data);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }
-
-  React.useEffect(() => {                                             // Allowed Lessons
-    fetch("https://www.katyushaiust.ir/departments/", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAllowed(data);
-        // Allowed.map((dep, index) => {
-        //   if (dep.base_courses.length > 0) {
-        //     dep.base_courses.map((course, ind) => {
-        //       console.log("Base courses courses: " + course.name);
-        //     })
-        //   }
-        // })
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }, []);
-
-  function IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
-  {
-    console.log("Is allowed called");
-    for (let i = 0; i < Allowed.length; i++) {
-      if (Allowed[i].base_courses.length > 0) {
-        for (let j = 0; j < Allowed[i].base_courses.length; j++) {
-          if (Allowed[i].base_courses[j].course_number === base_course_number) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
+  // Department courses
+  const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
+  let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
+  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
   React.useEffect(() => {                                             // Set Department Options
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((DepartmentOptions) => {
         // console.log(DepartmentOptions);
+        // const NewOption = {label:"دروس اخذ شده", value: 100};
+        // let temp = [...DepartmentOptions, NewOption];
+        // setDepartmentOptions(temp);
         setDepartmentOptions(DepartmentOptions);
       });
   }, []);
@@ -189,22 +88,191 @@ export default function CoursesPanel() {
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
-    console.log("Selected Department is: " + SelectedDepartment);
-    if (SelectedDepartment !== 1) {
+    // console.log("Selected Department is: " + SelectedDepartment);
+    //if (SelectedDepartment !== 1) {
+    // if (SelectedDepartment === 100)
+    // {
+    //   console.log("Hellllllllllllllllllllllooooooooooooooooooo")
+    // }
+    if (SelectedDepartment) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
         .then((data) => {
-          settimetable(data);
+          // settimetable(data);
+          const courses = data.map(course => new Course(course, false));
+          // settimetable(courses);
+          let NewTimeTable = [...ChosenCourses, ...courses];
+          settimetable(NewTimeTable);
         })
         .catch((error) => console.error(error));
     }
-    else if (SelectedDepartment === 1){
-      settimetable(info.courseChoosed);
-    }
+    // else if (SelectedDepartment === 1) {
+    //   settimetable(info.courseChoosed);
+    // }
   }, [SelectedDepartment]);
+
+  // Switch
+  const [SwitchChecked, setSwitchChecked] = React.useState(false);
+  const handleSwitchChange = val => {
+    setSwitchChecked(val)
+  }
+  React.useEffect(() => { 
+    if (SwitchChecked) {
+      let temp = timetable.filter(course => course.can_take);
+      console.log("temp is: " + temp);
+      settimetable(temp);
+    }
+    else
+    {
+      setSelectedDepartment(SelectedDepartment);
+    }
+    // else if (SelectedDepartment === 1) {
+    //   settimetable(info.courseChoosed);
+    // }
+  }, [SwitchChecked]);
+
+  // Already Chosen Lessons
+  let [ChosenCourses, setChosenCourses] = React.useState([]);
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // setChosenCourses(data);
+        changeInfo("courseChoosed", data);
+        // console.log("Chosen courses changed!")
+        // settimetable(data);
+        // AppendToTimetable(ChosenCourses)
+        const courses = data.map(course => new Course(course, true));
+        // console.log("Classss: " + courses); // Array of Course objects
+        setChosenCourses(courses);
+        settimetable(courses);
+        // settimetable(AppendToTimetable(ChosenCourses));
+        // let NewTimeTable = [...timetable, ...ChosenCourses];
+        // settimetable(NewTimeTable);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, []);
+
+
+
+  class Course {
+    constructor(props, IsFromChosencourses) {
+      this.name = props.name;
+      this.class_gp = props.class_gp;
+      this.complete_course_number = props.complete_course_number;
+      this.course_times = props.course_times;
+      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+      this.can_take = this.IsAllowed(this.base_course_number);
+      // this.IsInTheChosenCourses = false;
+      // for (let i = 0; i < ChosenCourses.length; i++) {
+      //   if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
+      //     IsInTheChosenCourses = true;
+      //     break;
+      //   }
+      // }
+      // if (ChosenCourses.includes(this)) {
+      //   this.IsInTheChosenCourses = true;
+      // }
+      // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+      this.backgColor = (IsFromChosencourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+      console.log(this.name + " has color of " + this.backgColor);
+    }
+
+    IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
+    {
+      console.log("Is allowed called");
+      for (let i = 0; i < Allowed.length; i++) {
+        if (Allowed[i].base_courses.length > 0) {
+          for (let j = 0; j < Allowed[i].base_courses.length; j++) {
+            if (Allowed[i].base_courses[j].course_number === base_course_number) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+  }
+
+
+
+  let [timeTableChanged, settimeTableChanged] = React.useState(false);
+
+
+  let [Allowed, setAllowed] = React.useState([]);
+  React.useEffect(() => {                                             // Allowed Lessons
+    fetch("https://www.katyushaiust.ir/departments/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAllowed(data);
+        // Allowed.map((dep, index) => {
+        //   if (dep.base_courses.length > 0) {
+        //     dep.base_courses.map((course, ind) => {
+        //       console.log("Base courses courses: " + course.name);
+        //     })
+        //   }
+        // })
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, []);
+
+
+
+  let [timetable, settimetable] = React.useState([]);
+
+
+
+  function AppendToTimetable(ToBeAppended) {
+    let NewTimeTable = [...timetable, ...ToBeAppended];
+    settimetable(NewTimeTable);
+    settimetable(uniquifyArrayByKey(timetable, "complete_course_number"));
+    return (timetable);
+  }
+
+
+  function addNewLesson(num) {                                        // Add a lesson
+    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // const dataArray = JSON.parse(data);
+        const courses = dataArray.map(course => new Course(course, true));
+        // setChosenCourses(data);
+        setChosenCourses(courses);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }
+
   
+
+
+
+
+
   // React.useEffect(() => {                                             // Set Selected Department courses
   //   if (timeTableChanged)
   //   {
@@ -212,18 +280,7 @@ export default function CoursesPanel() {
   //   }
   // }, []);
 
-  function AddShowAttribute(obj) {                                    // Adding Show Attribute to object
-    let IsInTheChosenCourses = false;
-    for (let i = 0; i < ChosenCourses.length; i++) {
-      if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
-        IsInTheChosenCourses = true;
-        break;
-      }
-    }
-    const backgColor = (IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-    const UpdatedObj = { ...obj, Show: true, color: backgColor };
-    return UpdatedObj;
-  }
+
 
   function mapTimeToIndex(start_time) {                               // Time Index finder
     const times = [
@@ -285,43 +342,76 @@ export default function CoursesPanel() {
 
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
-    const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null });
-    const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() });
+    const emptySection = () => ({
+      0: null,
+      1: null,
+      2: null,
+      3: null,
+      4: null,
+      5: null
+    });
+    const emptyDay = () => ({
+      0: emptySection(),
+      1: emptySection(),
+      2: emptySection(),
+      3: emptySection(),
+      4: emptySection(),
+      5: emptySection(),
+      6: emptySection(),
+      7: emptySection()
+    });
+
     const NumInEachSlot = createCourseGroupsArray(timetable);
 
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         currentPeriod.course_times.forEach(time => {
+
           const day = time.course_day;
 
-          const startTime = time.course_start_time;
-
-          let TimeIndex = mapTimeToIndex(startTime);
-
-          if (TimeIndex === -1) {
-            TimeIndex = 7;
+          let TimeIndex = time.course_time_representation;
+          if (TimeIndex === undefined )
+          {
+            TimeIndex = mapTimeToIndex(time.course_start_time);
           }
+
           NumInEachSlot[day][TimeIndex]++;
 
           let count = NumInEachSlot[day][TimeIndex];
 
-          if (SwitchChecked) {                                       // Filter allowed courses
-            let base_course_number = parseInt(currentPeriod.complete_course_number.substring(0, currentPeriod.complete_course_number.length - 3));
-            // console.log ("Base course is: " + base_course_number + " Course name is: " + currentPeriod.name);
+          // if (SwitchChecked) {                                       // Filter allowed courses
+          //   // let base_course_number = parseInt(currentPeriod.complete_course_number.substring(0, currentPeriod.complete_course_number.length - 3));
+          //   // console.log ("Base course is: " + base_course_number + " Course name is: " + currentPeriod.name);
 
-            if (IsAllowed(base_course_number)) {
-              // console.log (currentPeriod.name + " is allowed");
-              // console.log ("The course is: " + currentPeriod.name);
-              lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
-            }
-            else {
-              // console.log (currentPeriod.name + " is NOOOOOOOOOOT allowed");
-              // console.log ("The course is: " + currentPeriod.name);
-            }
-          }
-          else {
-            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = AddShowAttribute(currentPeriod);
-          }
+          //   if (currentPeriod.IsAllowed(base_course_number)) {
+          //     // console.log (currentPeriod.name + " is allowed");
+          //     // console.log ("The course is: " + currentPeriod.name);
+          //     lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          //   }
+          //   else {
+          //     // console.log (currentPeriod.name + " is NOOOOOOOOOOT allowed");
+          //     // console.log ("The course is: " + currentPeriod.name);
+          //   }
+          // }
+          // else {
+          //   lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          // }
+          // if (currentPeriod !== undefined)
+          // {
+          //   console.log("THIS IS NOT NULLLLLLL");
+          //   console.log("Current Period's name is: " + currentPeriod.name);
+          //   console.log("Current name is: " + currentPeriod);
+          //   // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = new Course(currentPeriod);
+          //   console.log("day is: " + day + " TimeIndex is: " + TimeIndex + " count is: " + count);
+          //   lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          // }
+          // else
+          // {
+          //   console.log("Current Period is (nulll): " + currentPeriod.name);
+          //   console.log("THIS IS NULLLLLLL");
+          // }
+          console.log(currentPeriod.name + " added");
+          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
         }
         );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
@@ -344,23 +434,23 @@ export default function CoursesPanel() {
         // const backgroundColor = (entry !== null && entry.can_take) ? "rgb(29, 113, 236)": "rgb(100, 100, 120)"; // Also makes the courses that don't have the attribute gray
         // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(100, 22%, 30%)";
         // console.log(backgroundColor);
-        let IsInTheChosenCourses = false;
-        for (let i = 0; i < ChosenCourses.length; i++) {
-          if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number) {
-            IsInTheChosenCourses = true;
-          }
-        }
+        // let IsInTheChosenCourses = false;
+        // for (let i = 0; i < ChosenCourses.length; i++) {
+        //   if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number) {
+        //     IsInTheChosenCourses = true;
+        //   }
+        // }
         // if (entry !== null)
         // {
         //   console.log("Entry name: " + entry.name + " Is null? " + entry + " IsInTheChosenCourses " + IsInTheChosenCourses);
         // }
-        
+
         // const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
         return (
           <div>
-            {entry !== null && entry.Show && (
+            {entry !== null && (
               <div className="Course"
-                style={{ backgroundColor: entry.color }}
+                style={{ backgroundColor: entry.backgColor }}
               >
                 {entry.name} ({entry.class_gp})
                 <br />
@@ -378,7 +468,7 @@ export default function CoursesPanel() {
                   name="RemoveCourseButton"
                   className="btn-fill-RemoveCourseButton"
                   onClick={() => {
-                    console.log("timetable",timetable)
+                    console.log("timetable", timetable)
                     // entry.Show = false;
                     // console.log("Entry show is: " + entry.Show);
                     addNewLesson(entry.complete_course_number);
@@ -439,14 +529,14 @@ export default function CoursesPanel() {
               <ReactSwitch className="Switch"
                 checked={SwitchChecked}
                 onChange={handleSwitchChange}
-                // style={{}}
+              // style={{}}
               />
               {/* <Toggle
                 id='cheese-status'
                 defaultChecked={this.state.cheeseIsReady}
                 onChange={this.handleCheeseChange} />
               <label htmlFor='cheese-status'>Adjacent label tag</label> */}
-              
+
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">
