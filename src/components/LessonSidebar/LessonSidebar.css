@@ -6,7 +6,7 @@
   /* margin-top: 1rem; */
   border-radius: .2rem;
   padding-top: .8rem;
-  margin-top: 1rem;
+  margin-top: 2vh;
 
 }
 
@@ -25,7 +25,7 @@
   /* margin-top: 1rem; */
   border-radius: .2rem;
   padding-top: .8rem;
-  margin-top: 1rem;
+  margin-top: 2vh;
   height: 52.2vh;
 }
 
@@ -36,7 +36,7 @@
 
 .nav-lessonSidebar{
   
-  height: 55px ;
+  height: 7.8vh ;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #27293d;

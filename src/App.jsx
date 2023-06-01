@@ -20,6 +20,7 @@ import Shopping from "./views/Shopping/Shopping.jsx";
 import Verification from "./views/Verification/Verification.jsx";
 
 function App() {
+  document.documentElement.dir = 'rtl'
   return (
     <>
       {/* <SimpleBar style={{ maxHeight: '300px' }}> */}

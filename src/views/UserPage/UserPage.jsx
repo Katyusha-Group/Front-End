@@ -237,12 +237,12 @@ export default function UserPage() {
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
               >
-                <strong>{lessons.name}</strong>
+                <strong style={{fontSize:"0.8rem"}}>{lessons.name}</strong>
                 <br />
-                {lessons.registered_count}/{lessons.capacity}
+                {lessons.registered_count} از {lessons.capacity}
                 <br />
-                {lessons.complete_course_number}
-                {console.log("lessons click", lessons)}
+                <p className="id_code"> {lessons.complete_course_number}</p>
+                {/* {console.log("lessons click", lessons)}n */}
               </div>
             </div>
           </div>
@@ -252,6 +252,7 @@ export default function UserPage() {
   }
 
   function addItemShop(num) {
+    console.log("hello")
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -273,34 +274,12 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(`shop add ${num}`,data)
       })
       .catch((error) => {
         console.error(error)
         console.log("failed course complete", num);
       });
-    // axios
-    //   .post(
-    //     `https://katyushaiust.ir/carts/${shopId[0].id}/items`,
-    //     {
-    //       complete_course_number: num,
-    //       contain_telegram: true,
-    //       contain_sms: true,
-    //       contain_email: true,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   }
 
   return (
@@ -438,7 +417,7 @@ export default function UserPage() {
           </Card>
         </Col>
         <Col sm="12">
-          <Card className="dir-right">
+          <Card className="dir-right groups_card" style={{marginBottom:"0"}}>
             <CardBody className="courseGroupCard">
               {
               info.loading==0 ? "گروهی انتخاب نشده" : info.loading==1 ? <Spinner/>  :
@@ -581,7 +560,7 @@ export default function UserPage() {
                           display: "flex",
                         }}
                         onClick={() => {
-                          if (!info.shop.includes(x)) {
+                          if (true) {
                             changeInfo("shop", [...info.shop, x]);
                             addItemShop(x.complete_course_number);
                           }

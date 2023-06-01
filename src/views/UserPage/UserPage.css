@@ -42,7 +42,7 @@ border-bottom: none !important;
 }
 
 .week-card{
-    margin-bottom: 13px !important;
+    margin-bottom: 2vh !important;
     /* padding: 0px !important; */
     height: 66vh;
     overflow: auto;
@@ -71,13 +71,13 @@ border-bottom: none !important;
     /* margin-left: 10px; */
     /* margin-top: -15px !important; */
     display: block;
-    height: 46vh;
+    height: 60vh;
     min-height: 390px;
 }
 
 .course, i .course{
     position: absolute;
-    height: 4.1rem;
+    height: 10vh;
     width: 5rem;
     background-color:#1d8cf8 ;
     top:20%;
@@ -145,7 +145,7 @@ border-bottom: none !important;
     /* justify-content: center; */
     padding-left: 0 !important;
     justify-content: center;
-    height: 27vh;
+    height: 26vh;
 }
 div{
     text-align: center;
@@ -255,5 +255,10 @@ p{
 
 .course-hover:hover{
     z-index: 100;
+}
+
+.id_code{
+    direction: ltr;
+    unicode-bidi: embed;
 }
 
