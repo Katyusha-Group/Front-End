@@ -19,6 +19,19 @@ import {
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 export default function CoursesPanel() {
+
+  class Course
+  {
+    constructor (props)
+    {
+      this.name = props.name;
+      this.class_gp = props.class_gp;
+      this.complete_course_number = props.complete_course_number;
+      this.course_times = props.course_times;
+    }
+  }
+
+
   const { info, changeInfo } = useInfo();
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   const [SwitchChecked, setSwitchChecked] = React.useState(false);
