@@ -243,7 +243,7 @@ function Shopping() {
             </div>
             <Row>
               <Col md="12">
-                <Card>
+                <Card >
                   <CardBody>
                     <div className="places-buttons">
                       <Row md="6" sm="2" xs="1">
@@ -265,7 +265,7 @@ function Shopping() {
                   {state.map((x, index) => {
                     console.log("info lenght", info.shop.lenght);
                     return (
-                      <Row md="6" sm="2" xs="1" className="places-buttons">
+                      <Row md="6" sm="2" xs="1" className="places-buttons shop_row">
                         <Col className="m-auto text-center category">
                           <Button
                             color="primary"
@@ -346,7 +346,7 @@ function Shopping() {
                         <Col className="m-auto text-center category">
                           {x.course.complete_course_number}
                         </Col>
-                        <Col>
+                        <Col className="m-auto">
                           <img
                             className="professorImage"
                             src={
