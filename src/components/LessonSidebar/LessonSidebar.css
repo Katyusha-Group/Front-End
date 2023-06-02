@@ -31,9 +31,10 @@
 
 .nav-link-lessonSidebar:hover{
   background-color: #32325d;
-
 }
-
+/* .btn-icon{
+  margin-bottom: 10px ;
+} */
 .nav-lessonSidebar{
   
   height: 7.8vh ;
@@ -42,6 +43,51 @@
   background-color: #27293d;
   /* margin-top: 1rem; */
   border-radius: .5rem;
+  justify-content: center;
+}
+.nav-header{
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.nav-header > a{
+  margin-left: 0;
+}
+.p-10{
+  padding: 10px !important;
+}
+.nav-link-icon{
+  font-size: x-large;
+}
+
+.nav-link-course{
+  color: rgba(255, 255, 255, 0.8);
+  border: solid 2px;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-radius: .5rem;
+  margin: 10px 0px;
+  padding: 5px 0px ;
+  background-color: #484b7262;
+}
+a.nav-link-course:hover{
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 40%;
+}
+.nav-link-profile{
+  font-size: x-large;
+  color:rgba(255, 255, 255, 0.8) ;
+  justify-content: center;
+  display: flex;
+  /* border: solid 2px;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  margin: 5px; */
+}
+.br-7{
+  border-radius: .7rem !important;
+}
+.dropdown-menu:before{
+  left: 21px !important;
 }
 .nav-img{
   border-radius: 50%;

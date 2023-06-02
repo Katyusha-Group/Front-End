@@ -37,7 +37,7 @@ function Login() {
       passwordV.getAttribute("type") === "password" ? "text" : "password";
 
     togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
+      ? (document.localStoragegetElementById("togglePassword").className =
           "fa fa-eye-slash viewpass mr-4 text-muted")
       : (document.getElementById("togglePassword").className =
           "fa fa-eye viewpass mr-4 text-muted");
@@ -103,6 +103,8 @@ function Login() {
     backError: "",
   });
   async function handleSubmit(event) {
+
+    console.log("toooooken"+localStorage.authTokens)
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
