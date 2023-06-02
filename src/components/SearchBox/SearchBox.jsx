@@ -25,15 +25,15 @@ const reducer = (state, action) => {
   }
 };
 
-const SearchBox = (data) => {
-  const [query, setQuery] = useState("");
-  const { info, changeInfo } = useInfo();
-  const [{ loading, props: input, error }, propsSetter] = React.useReducer(
-    reducer,
-    { loading: true, props: {}, error: "" }
-  );
-  // const {info, changeInfo}
-  // changeInfo("loading", true);
+// const SearchBox = (data) => {
+//   const [query, setQuery] = useState("");
+//   const { info, changeInfo } = useInfo();
+//   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
+//     reducer,
+//     { loading: true, props: {}, error: "" }
+//   );
+//   // const {info, changeInfo}
+//   // changeInfo("loading", true);
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
