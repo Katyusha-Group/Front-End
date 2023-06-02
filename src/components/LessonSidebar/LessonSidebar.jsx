@@ -244,9 +244,9 @@ function Sidebar(props) {
                       >
                         <DropdownItem
                           className="navbarDropDownItem"
-                          href="http://localhost:5173/shoping"
+                          href="http://localhost:5173/shopping"
                           onClick={(e) => {e.preventDefault()
-                            Navigate("/shoping")
+                            Navigate("/shopping")
                           }}
                         >
                           <span className="tim-icons icon-basket-simple" 

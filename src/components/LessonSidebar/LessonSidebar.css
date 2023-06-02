@@ -38,8 +38,8 @@
 .nav-lessonSidebar{
   
   height: 7.8vh ;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
   background-color: #27293d;
   /* margin-top: 1rem; */
   border-radius: .5rem;

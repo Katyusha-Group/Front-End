@@ -29,7 +29,7 @@ border-bottom: none !important;
     background: url(../../assets/img/ExamChartBack5.png);
     background-size: 100% 100%;
     min-width: 60rem;
-    height: 28em;
+    height: 60vh;
     position: relative;
     background-repeat: no-repeat;
     resize: both;

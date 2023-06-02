@@ -220,13 +220,18 @@ function Shopping() {
       console.log("new data", data
       )
       let newData = state[index];
-      if(data.price !== undefined){
-        newData.price = data.price;
+      if(data.total_price !== undefined){
+        newData.price = data.total_price;
       }
       console.log("newData", newData);
-      let newList = state.filter((item) => item.id !== newData.id);
+      let newList = state.map((item) => {
+        if(item.id === newData.id){
+          return newData;
+        }
+        return item;
+      });
       // setState((state) => [...state, newData]);
-      setState([...newList, newData]);
+      setState([...newList]);
     }).then((error) => {
       console.error(error);
     });
