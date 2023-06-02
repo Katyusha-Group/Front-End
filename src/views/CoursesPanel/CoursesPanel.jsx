@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
+import crss from "./13.json";
 export default function CoursesPanel() {
 
   // Token
@@ -181,7 +182,7 @@ export default function CoursesPanel() {
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = this.IsAllowed(this.base_course_number);
-      
+      this.IsChosen = IsFromChosencourses;
       // this.IsInTheChosenCourses = false;
       // for (let i = 0; i < ChosenCourses.length; i++) {
       //   if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
@@ -235,6 +236,12 @@ export default function CoursesPanel() {
         }
       }
       return false;
+    }
+
+    ButtonClicked ()
+    {
+      console.log("Hello World!");
+      this.IsChosen = !this.IsChosen;
     }
   }
 
@@ -471,42 +478,52 @@ export default function CoursesPanel() {
                 {entry.name} ({entry.class_gp})
                 <br />
                 <button className="btn-fill-AddCourseButton"
-                  name="AddCourseButton"
+                  name="AddOrRemoveCourseButton"
                   onClick={() => {
-                    if (!info.courseChoosed.includes(entry)) {
-                      addNewLesson(entry.complete_course_number);
-                      changeInfo("courseChoosed", [...info.courseChoosed, entry]);
-                    }
+                    // if (entry.IsFromChosencourses)
+                    // {
+                    //   if (!info.courseChoosed.includes(entry)) {
+                    //     addNewLesson(entry.complete_course_number);
+                    //     changeInfo("courseChoosed", [...info.courseChoosed, entry]);
+                    //     entry.IsFromChosencourses = true;
+                    //   }
+                    // }
+                    // else
+                    // {
+                    //   console.log("timetable", timetable)
+                    //   // entry.Show = false;
+                    //   // console.log("Entry show is: " + entry.Show);
+                    //   addNewLesson(entry.complete_course_number);
+                    //   changeInfo(
+                    //     "courseChoosed",
+                    //     info.courseChoosed.filter(
+                    //       (item) =>
+                    //         item.complete_course_number !==
+                    //         entry.complete_course_number
+                    //     )
+                    //   );
+                    //   console.log("info.courseChoosed", info.courseChoosed)
+                    //   // setChosenCourses(info.courseChoosed);
+                    //   // let NewTimeTable = [...ChosenCourses] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+                    //   console.log("NewTime", info.courseChoosed)
+                    //   // settimetable(info.courseChoosed);
+                    //   // closeLesson(false, lessons);
+                    //   // setChosenCourses(info.co)
+                    //   entry.IsFromChosencourses = false;
+                    // }
+                    entry.ButtonClicked();
                   }}>
-                  +
+                  {entry.IsChosen ? 'x' : '+'}
                 </button>
-                <button
+                {/* <button
                   name="RemoveCourseButton"
                   className="btn-fill-RemoveCourseButton"
                   onClick={() => {
-                    console.log("timetable", timetable)
-                    // entry.Show = false;
-                    // console.log("Entry show is: " + entry.Show);
-                    addNewLesson(entry.complete_course_number);
-                    changeInfo(
-                      "courseChoosed",
-                      info.courseChoosed.filter(
-                        (item) =>
-                          item.complete_course_number !==
-                          entry.complete_course_number
-                      )
-                    );
-                    console.log("info.courseChoosed", info.courseChoosed)
-                    // setChosenCourses(info.courseChoosed);
-                    // let NewTimeTable = [...ChosenCourses] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-                    console.log("NewTime", info.courseChoosed)
-                    // settimetable(info.courseChoosed);
-                    // closeLesson(false, lessons);
-                    // setChosenCourses(info.co)
+                    
                   }}
                 >
                   x
-                </button>
+                </button> */}
               </div>
             )}
           </div>
@@ -542,6 +559,7 @@ export default function CoursesPanel() {
                 value={SelectedDepartment.name}
                 onChange={handleDepartment}
               />
+              <br/>
               <ReactSwitch className="Switch"
                 checked={SwitchChecked}
                 onChange={handleSwitchChange}
