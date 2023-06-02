@@ -21,20 +21,9 @@ import {
 } from "reactstrap";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
-import SwitchToggle from "./Switch";
-// import Popup from './Popup';
 import HomeIcon from './home.png';
+import { size } from "lodash";
 export default function CoursesPanel() {
-
-  // Pop up
-  // const [isPopupOpen, setIsPopupOpen] = useState(false);
-  // const handleOpenPopup = () => {
-  //   setIsPopupOpen(true);
-  // };
-  // const handleClosePopup = () => {
-  //   setIsPopupOpen(false);
-  // };
-
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -172,6 +161,7 @@ export default function CoursesPanel() {
     // {
     //   console.log("Hellllllllllllllllllllllooooooooooooooooooo")
     // }
+    // showLoading();
     if (SelectedDepartment) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -191,6 +181,7 @@ export default function CoursesPanel() {
     // else if (SelectedDepartment === 1) {
     //   settimetable(info.courseChoosed);
     // }
+    // closeLoading();
   }, [SelectedDepartment]);
 
   // Switch
@@ -199,6 +190,7 @@ export default function CoursesPanel() {
     setSwitchChecked(val)
   }
   React.useEffect(() => { 
+    showLoading();
     if (SwitchChecked) {
       // showLoading();
       let temp = timetable.filter(course => course.can_take);
@@ -214,6 +206,7 @@ export default function CoursesPanel() {
     // else if (SelectedDepartment === 1) {
     //   settimetable(info.courseChoosed);
     // }
+    closeLoading();
   }, [SwitchChecked]);
 
   
@@ -589,6 +582,9 @@ export default function CoursesPanel() {
         <Col>
           <Card className="TableCard">
             <CardHeader className="text-right">
+              <CardTitle style={{fontSize:"25px"}}>
+                پنل دروس
+              </CardTitle>
               <Button
                 href="/admin/page"
               >
@@ -604,24 +600,17 @@ export default function CoursesPanel() {
                 onChange={handleDepartment}
               />
               <br/>
-              <p className="SwitchLabel"> 
-                فقط دروس قابل اخذ
-              </p>
-              <ReactSwitch className="Switch"
-                checked={SwitchChecked}
-                onChange={handleSwitchChange}
-                // label = {"Hello"}
-              // style={{}}
-              />
-              {/* <Toggle
-                id='cheese-status'
-                defaultChecked={this.state.cheeseIsReady}
-                onChange={this.handleCheeseChange} />
-              <label htmlFor='cheese-status'>Adjacent label tag</label> */}
-              {/* <SwitchToggle
-                isOn={SwitchChecked}
-                handleToggle={() => setSwitchChecked(!SwitchChecked)}
-              /> */}
+              <div className="SwitchCard">
+                <p className="SwitchLabel"> 
+                  فقط دروس قابل اخذ
+                </p>
+                <ReactSwitch className="Switch"
+                  checked={SwitchChecked}
+                  onChange={handleSwitchChange}
+                  // label = {"Hello"}
+                // style={{}}
+                />
+              </div>
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">

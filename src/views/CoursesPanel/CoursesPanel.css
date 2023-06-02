@@ -18,6 +18,8 @@
     margin-left: 5%;
     margin-bottom: 5%; */
     margin-top: 20px;
+    /* margin: auto; */
+    margin-left: 20px;
 }
 
 .CoursesPanel_column2 {
@@ -67,23 +69,34 @@ tbody{
     column-width: 1000px;
 }
 
-.Switch 
+
+/* .react-switch-bg{
+    text-align: inherit;
+} */
+/* .SwitchLabel
+{
+    text-align : center;
+    padding-left: 50px;
+} */
+
+.SwitchCard
+{
+    background-color: hsl(235, 22%, 30%);
+    margin-right: 40%;
+    margin-left: 40%;
+    border-radius: 10px;
+    font-size: x-small,
+}
+
+/* .Switch 
 {
     width: 50%;
-    /* text-align: center; */
-    /* padding-left: 20px ; */
-}
+    text-align: center;
+    padding-left: 20px ;
+} */
 .Switch svg
 {
     width: 100%;
     /* text-align: inherit !important; */
     right: 2px;
-}
-/* .react-switch-bg{
-    text-align: inherit;
-} */
-.SwitchLabel
-{
-    text-align : center;
-    padding-left: 50px;
 }
