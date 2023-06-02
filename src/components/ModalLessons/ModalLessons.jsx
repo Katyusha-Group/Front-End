@@ -132,7 +132,18 @@ const ModalLessons = (props) => {
                       </div>
                     </CardBody>
                   </Card>
+              {/* <Row>
+                  <Col className="text-right" md="12">
+                    ظرفیت: {props.show.data.capacity}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md="12">
+                    <Timeline show={props} />
+                  </Col>
+                </Row> */}
             </CardBody>
+            
           </Modal.Body>
         </div>
       </Modal>
