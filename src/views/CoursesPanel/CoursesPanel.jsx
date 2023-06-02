@@ -524,13 +524,17 @@ export default function CoursesPanel() {
 
         // const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
         return (
-          <div>
+          <div className="CourseListContainer">
             {entry !== null && (
-              <div className="Course"
-                style={{ backgroundColor: entry.backgColor }}
-              >
-                {entry.name} ({entry.class_gp})
-                <br />
+              <div className="CourseContainer">
+                <div className="Course"
+                  style={{ backgroundColor: entry.backgColor }}
+                >
+                  <div style={{ margin: '5px' }}>
+                    {entry.name} ({entry.class_gp})
+                  </div>
+                  {/* <br /> */}
+                </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
                   style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
@@ -541,21 +545,7 @@ export default function CoursesPanel() {
                   }}>
                   {entry.IsChosen ? 'x' : '+'}
                 </button>
-                {/* <button
-                  name="RemoveCourseButton"
-                  className="btn-fill-RemoveCourseButton"
-                  onClick={() => {
-                    
-                  }}
-                >
-                  x
-                </button> */}
-                {/* {!isPopupOpen && 
-                  <Popup isOpen={isPopupOpen} onClose={handleClosePopup}>
-                    <h2>Popup Content</h2>
-                    <p>This is the content of the popup.</p>
-                  </Popup>
-                } */}
+                {/* <br/> */}
               </div>
             )}
           </div>

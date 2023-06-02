@@ -1,12 +1,3 @@
-.Course{
-    text-align: center;
-    background-color: hsl(235, 22%, 30%);
-    border: 1px solid rgb(67, 59, 99);
-    margin-top: 3px;
-    font-size: x-small;
-    border-radius: 5px;
-}
-
 .TopRow {
     text-align: left;
 }
@@ -19,7 +10,8 @@
     margin-bottom: 5%; */
     margin-top: 20px;
     /* margin: auto; */
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    overflow-x: auto;
 }
 
 .CoursesPanel_column2 {
@@ -30,39 +22,52 @@ tbody{
     border: 1px solid hsl(235, 22%, 30%);
 }
 
+.CourseListContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.CourseContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    /* align-items: stretch; */
+    margin: 2px;
+    height: 50px;
+    width: 100px;
+}
+
+.Course{
+    height: 100%;
+    text-align: center;
+    background-color: hsl(235, 22%, 30%);
+    margin-top: 3px;
+    font-size: x-small;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    /* box-sizing: border-box; */
+    align-items: center;
+    /* margin: auto; */
+}
+
 .btn-fill-AddCourseButton
 {
-    background-color: rgb(0, 191, 255);
+    height: 100%;
     border: none;
     color: white;
     padding: 1px 5px;
     text-align: center;
     font-size: x-small;
-    margin: 5px;
     border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    /* vertical-align: middle; */
+    margin-top: 3px;
+    margin-bottom: -1px;
+    /* box-sizing: border-box; */
 }
 
-.btn-fill-RemoveCourseButton
-{
-    background-color: rgb(253,93,147);
-    border: none;
-    color: white;
-    padding: 1px 5px;
-    text-align: center;
-    font-size: x-small;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-/* .CoursesPanel_TableRow
-{
-    width: 2000px !important;
-} */
-
-/* .table-head
-{
-    column-width: 1000px;
-} */
 
 .CoursesPanel_column2
 {
@@ -100,3 +105,18 @@ tbody{
     /* text-align: inherit !important; */
     right: 2px;
 }
+
+/* @media only screen and (max-width: 1600px ) {
+    .CourseContainer
+    {
+        height: 30px;
+    }
+} */
+/* @media only screen and (max-width: 800px ) {
+    .CourseContainer
+    {
+        height: 30px;
+        width: 100px;
+    }
+} */
+
