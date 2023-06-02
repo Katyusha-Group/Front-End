@@ -28,6 +28,7 @@ import {
 } from "../../components/LoadingAlert/LoadingAlert";
 
 function Shopping() {
+
   const { info, changeInfo } = useInfo();
   const [state, setState] = React.useState([]);
   const [s1, ss1] = React.useState(false);
@@ -82,7 +83,7 @@ function Shopping() {
     );
   }
 
-  function sefaresh(){
+  function sefaresh() {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -105,29 +106,25 @@ function Shopping() {
       .then((data) => {
         // console.log("put data", data);
       })
-      .catch((error) => {console.error(error)
-        propsSetter({type:fetchFail, payload:getError(error)})
-        
+      .catch((error) => {
+        console.error(error);
+        propsSetter({ type: fetchFail, payload: getError(error) });
       });
-      fetch(
-        "https://katyushaiust.ir/carts/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          
-        }
-      ).then((response) => response.json())
-      .then((data)=>{
-        localStorage.setItem("shopId", JSON.stringify(data))
-        console.log("shopId localstorage ",localStorage.getItem("shopId"))
-        let test = localStorage.getItem("shopId")
-        console.log("test", JSON.parse(test)[0])
+    fetch("https://katyushaiust.ir/carts/", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("shopId", JSON.stringify(data));
+        console.log("shopId localstorage ", localStorage.getItem("shopId"));
+        let test = localStorage.getItem("shopId");
+        console.log("test", JSON.parse(test)[0]);
       })
-      .then(error => console.error(error))
-      // const tokenClass = JSON.parse(JSON.stringify(data));
-      // const token = tokenClass.token.access;
-      
+      .then((error) => console.error(error));
+    // const tokenClass = JSON.parse(JSON.stringify(data));
+    // const token = tokenClass.token.access;
   }
 
   const notify = (place) => {
@@ -217,13 +214,28 @@ function Shopping() {
           contain_email: u[index].contain_email,
         }),
       }
-    );
+    ).then((response) => response.json())
+    .then((data) => {
+      // state[index].price = data.price;
+      console.log("new data", data
+      )
+      let newData = state[index];
+      if(data.price !== undefined){
+        newData.price = data.price;
+      }
+      console.log("newData", newData);
+      let newList = state.filter((item) => item.id !== newData.id);
+      // setState((state) => [...state, newData]);
+      setState([...newList, newData]);
+    }).then((error) => {
+      console.error(error);
+    });
   }
 
   function deleteItem(index) {}
   return (
     <>
-      <div className="wrapper">
+      <div className="wrapper" style={{direction:"ltr"}}>
         <div className="main-panel">
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
@@ -231,10 +243,10 @@ function Shopping() {
             </div>
             <Row>
               <Col md="12">
-                <Card>
+                <Card >
                   <CardBody>
                     <div className="places-buttons">
-                      <Row md="5" sm="2" xs="1">
+                      <Row md="6" sm="2" xs="1">
                         <Col className="m-auto text-center category">حذف</Col>
                         <Col className="m-auto text-center category">نوع</Col>
                         <Col className="m-auto text-center category">قیمت</Col>
@@ -244,6 +256,7 @@ function Shopping() {
                         <Col className="m-auto text-center category">
                           کد درس
                         </Col>
+                        <Col className="m-auto text-center category">عکس</Col>
                       </Row>
                     </div>
                   </CardBody>
@@ -252,98 +265,111 @@ function Shopping() {
                   {state.map((x, index) => {
                     console.log("info lenght", info.shop.lenght);
                     return (
-                          <Row md="6" sm="2" xs="1" className="places-buttons">
-                            <Col className="m-auto text-center category">
-                              <Button
-                                color="primary"
-                                size="sm"
-                                onClick={() => {
-                                  delete_item(
-                                    x.course.complete_course_number,
-                                    index
-                                  );
-                                  setState(
-                                    state.filter(
-                                      (y) =>
-                                        y.course.complete_course_number !==
-                                        x.course.complete_course_number
-                                    )
-                                  );
-                                }}
-                              >
-                                <i className="tim-icons icon-simple-remove" />
-                              </Button>
-                            </Col>
-                            <Col className="m-auto text-center category">
-                              <Form>
-                                <FormGroup className="shopping_form" check>
-                                  <Label check className="shoping_label">
-                                    <Input
-                                      onChange={() => {
-                                        ss1(() => !s1);
-                                        changeChecked(1, index);
-                                      }}
-                                      checked={state[index].contain_email}
-                                      // checked={s}
-                                      type="checkbox"
-                                    />
-                                    <span className="form-check-sign">
-                                      <span className="check" />
-                                    </span>
-                                    ایمیل
-                                  </Label>
-                                  <Label check className="shoping_label">
-                                    <Input
-                                      checked={x.contain_sms}
-                                      type="checkbox"
-                                      onChange={() => {
-                                        ss2(() => !s2);
-                                        changeChecked(2, index);
-                                      }}
-                                    />
-                                    <span className="form-check-sign">
-                                      <span className="check" />
-                                    </span>
-                                    sms
-                                  </Label>
-                                  <Label check className="shoping_label">
-                                    <Input
-                                      checked={x.contain_telegram}
-                                      key={x.contain_telegram}
-                                      type="checkbox"
-                                      onChange={() => {
-                                        ss3(() => !s3);
-                                        changeChecked(3, index);
-                                      }}
-                                    />
-                                    <span className="form-check-sign">
-                                      <span className="check" />
-                                    </span>
-                                    تلگرام
-                                  </Label>
-                                </FormGroup>
-                              </Form>
-                            </Col>
-                            <Col className="m-auto text-center category">
-                              {x.price}
-                            </Col>
-                            <Col className="m-auto text-center category">
-                              {x.course.name}
-                            </Col>
-                            <Col className="m-auto text-center category">
-                              {x.course.complete_course_number}
-                            </Col>
-                          </Row>
+                      <Row md="6" sm="2" xs="1" className="places-buttons shop_row">
+                        <Col className="m-auto text-center category">
+                          <Button
+                            color="primary"
+                            size="sm"
+                            onClick={() => {
+                              delete_item(
+                                x.course.complete_course_number,
+                                index
+                              );
+                              setState(
+                                state.filter(
+                                  (y) =>
+                                    y.course.complete_course_number !==
+                                    x.course.complete_course_number
+                                )
+                              );
+                            }}
+                          >
+                            <i className="tim-icons icon-simple-remove" />
+                          </Button>
+                        </Col>
+                        <Col className="m-auto text-center category">
+                          <Form>
+                            <FormGroup className="shopping_form" check>
+                              <Label check className="shoping_label">
+                                <Input
+                                  onChange={() => {
+                                    ss1(() => !s1);
+                                    changeChecked(1, index);
+                                  }}
+                                  checked={state[index].contain_email}
+                                  // checked={s}
+                                  type="checkbox"
+                                />
+                                <span className="form-check-sign">
+                                  <span className="check" />
+                                </span>
+                                ایمیل
+                              </Label>
+                              <Label check className="shoping_label">
+                                <Input
+                                  checked={x.contain_sms}
+                                  type="checkbox"
+                                  onChange={() => {
+                                    ss2(() => !s2);
+                                    changeChecked(2, index);
+                                  }}
+                                />
+                                <span className="form-check-sign">
+                                  <span className="check" />
+                                </span>
+                                sms
+                              </Label>
+                              <Label check className="shoping_label">
+                                <Input
+                                  checked={x.contain_telegram}
+                                  key={x.contain_telegram}
+                                  type="checkbox"
+                                  onChange={() => {
+                                    ss3(() => !s3);
+                                    changeChecked(3, index);
+                                  }}
+                                />
+                                <span className="form-check-sign">
+                                  <span className="check" />
+                                </span>
+                                تلگرام
+                              </Label>
+                            </FormGroup>
+                          </Form>
+                        </Col>
+                        <Col className="m-auto text-center category">
+                          {x.price}
+                        </Col>
+                        <Col className="m-auto text-center category">
+                          {x.course.name}
+                        </Col>
+                        <Col className="m-auto text-center category">
+                          {x.course.complete_course_number}
+                        </Col>
+                        <Col className="m-auto">
+                          <img
+                            className="professorImage"
+                            src={
+                              x.course.teacher.teacher_image
+                                ? x.course.teacher.teacher_image
+                                : sampleProfile
+                            }
+                            alt="professorImage"
+                          />
+                        </Col>
+                      </Row>
                     );
                   })}
                 </Card>
               </Col>
             </Row>
-            {state.length == 0 ? "کالایی انتخاب نشده" : 
-            <Button onClick={sefaresh} color="primary" className="buy_button">
-              ثبت سفارش
-            </Button>
-          }
+            {state.length == 0 ? (
+              "کالایی انتخاب نشده"
+            ) : (
+              <Button onClick={sefaresh} color="primary" className="buy_button">
+                ثبت سفارش
+              </Button>
+            )}
           </div>
         </div>
       </div>
