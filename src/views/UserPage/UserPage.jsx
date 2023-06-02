@@ -461,107 +461,143 @@ export default function UserPage() {
                     >
                       <CardBody className="courseCardBody">
                         <img
-                        className="professorImage"
-                        src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
-                        alt="professorImage"
-                      />
-                      <div className="infoPart">
-                        <p>
-                          {x.name} (گروه {x.group_number})
-                        </p>
-                        <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <p>
-                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
-                        </p>
-                        {/* <div className="courseCardDownSide"> */}
-                          {/* <div>
-                            <p>
-                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
-                            </p>
-                          </div> */}
-                          <img
-                            className="fullLogo"
-                            src={fullLogo}
-                            alt="fullLogo"
-                            style={{
-                              display:
-                                x.color_intensity_percentage < 11
-                                  ? "block"
-                                  : "none",
-                            }}
-                          ></img>
-
-                        {/* </div> */}
-
-                      </div>
-                    </CardBody>
-                  </Card>
-                  <div className="buttonBar"> 
-                            <Button 
-                              className="courseCardButton"
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: !info.courseChoosed.includes(x)?"aqua":"deeppink", fontSize: !info.courseChoosed.includes(x)?"medium":"medium" }}
-                              onClick={() => { //add lesson
-                                console.log("x", x);
-                                if (!info.courseChoosed.includes(x)) {
-                                  console.log("includes");
-                                  addNewLesson(x.complete_course_number);
-                                  changeInfo("courseChoosed", [
-                                    ...info.courseChoosed,
-                                    x,
-                                  ]);
-                                }else{//remove lesson
-                                addNewLesson(x.complete_course_number);
-                                console.log(x.complete_course_number);
-                                console.log("delete lesson", x.complete_course_number);
-                                changeInfo(
-                                  "courseChoosed",
-                                  info.courseChoosed.filter(
-                                    (item) =>
-                                      item.complete_course_number !==
-                                      x.complete_course_number
-                                  )
-                                );
-                                closeLesson(false, lessons);
-                                }
-                                console.log("info", info);
+                          className="professorImage"
+                          src={
+                            x.teacher.teacher_image
+                              ? x.teacher.teacher_image
+                              : sampleProfile
+                          }
+                          alt="professorImage"
+                        />
+                        <div className="infoPart">
+                          <p>
+                            {x.name} (گروه {x.group_number})
+                          </p>
+                          <p style={{ fontSize: 12 }}>
+                            {" "}
+                            استاد:{x.teacher.name}
+                          </p>
+                          <div className="courseCardDownSide">
+                            <div>
+                              <p>
+                                ثبت نام شده: {x.registered_count} از{" "}
+                                {x.capacity}{" "}
+                              </p>
+                            </div>
+                            <img
+                              className="fullLogo"
+                              src={fullLogo}
+                              alt="fullLogo"
+                              style={{
+                                display:
+                                  x.color_intensity_percentage < 11
+                                    ? "block"
+                                    : "none",
                               }}
-                            >
-                              {!info.courseChoosed.includes(x)? "+" : "x"}
-                              
-                            </Button>
-                            <Button
-                            className="courseCardButton"
-                            variant="secondary"
-                            size="sm"
-                            style={{ color: "aqua", fontSize: "medium" , display:"flex"}}
-                              // color="primary"
-                              // size="sm"
-                              onClick={() =>{
-                                if (!info.shop.includes(x) ) {
-                                  console.log("includes shop")
-                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                                  changeInfo("shop", [...info.shop, x])
-                                }
-                              }
-                              }
-                            >
-                              {/* <i className="tim-icons icon-simple-add" /> */}
-                              <img
-                                            className="cart"
-                                            src={cartlogo}
-                                            alt="cartlogo"
-                                          ></img>
-                            </Button>
+                            ></img>
+                          </div>
+                        </div>
+                      </CardBody>
+                    </Card>
+                    <div className="buttonBar">
+                      <Button
+                        className="courseCardButton"
+                        variant="secondary"
+                        size="sm"
+                        style={{
+                          color: !info.courseChoosed.includes(x)
+                            ? "aqua"
+                            : "deeppink",
+                          fontSize: !info.courseChoosed.includes(x)
+                            ? "medium"
+                            : "medium",
+                        }}
+                        onClick={() => {
+                          let isFound = info.courseChoosed.some((element) => {
+                            if (
+                              element.complete_course_number ===
+                              x.complete_course_number
+                            ) {
+                              return true;
+                            }
 
-                      </div>
-                      <ModalLessons
-                    show={showLesson}
-                    close={() =>
-                      setShowLesson(() => ({ ...showLesson, flag: false }))
-                    }
-                  />
+                            return false;
+                          });
+                          // bool = bool == true?true:false;
+                          // console.log('bool', bool)
+                          console.log(
+                            "all the courses in group",
+                            info.courseGroupsListInContext
+                          );
+                          console.log("clicked");
+                          if (isFound != true) {
+                            console.log("includes------------------");
+
+                            addNewLesson(x.complete_course_number);
+                            changeInfo("courseChoosed", [
+                              ...info.courseChoosed,
+                              x,
+                            ]);
+                          } else {
+                            //remove lesson
+                            addNewLesson(x.complete_course_number);
+                            console.log(x.complete_course_number);
+                            console.log(
+                              "delete lesson",
+                              x.complete_course_number
+                            );
+                            changeInfo(
+                              "courseChoosed",
+                              info.courseChoosed.filter(
+                                (item) =>
+                                  item.complete_course_number !==
+                                  x.complete_course_number
+                              )
+                            );
+                            closeLesson(false, lessons);
+                          }
+
+                          // console.log("info", info);
+                        }}
+                      >
+                        {!info.courseChoosed.includes(x) ? "+" : "x"}
+                      </Button>
+                      <Button
+                        className="courseCardButton"
+                        variant="secondary"
+                        size="sm"
+                        style={{
+                          color: "aqua",
+                          fontSize: "medium",
+                          display: "flex",
+                        }}
+                        onClick={() => {
+                          if (true) {
+                            // changeInfo("shop", [...info.shop, x]);
+                            // addItemShop(x.complete_course_number);
+                            funcSetShowShoppingModal(true,x)
+                          }
+                        }}
+                      >
+                        <img
+                          className="cart"
+                          src={cartlogo}
+                          alt="cartlogo"
+                        ></img>
+                      </Button>
+                    </div>
+                    <ModalLessons
+                      show={showLesson}
+                      close={() =>
+                        setShowLesson(() => ({ ...showLesson, flag: false }))
+                      }
+                    />
+                    <ModalShopping
+                      show={showShoppingModal}
+                      close={() =>
+                        setShowShoppingModal(() => ({ ...showShoppingModal, flag: false }))
+                      }
+                    />
                   </div>
                 ))
               )}
