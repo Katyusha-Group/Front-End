@@ -18,7 +18,17 @@ import {
 } from "reactstrap";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
+// import Popup from './Popup';
 export default function CoursesPanel() {
+
+  // Pop up
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // const handleOpenPopup = () => {
+  //   setIsPopupOpen(true);
+  // };
+  // const handleClosePopup = () => {
+  //   setIsPopupOpen(false);
+  // };
 
   // Token
   const tokenJson = localStorage.getItem("authTokens");
@@ -33,6 +43,7 @@ export default function CoursesPanel() {
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
+  let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
     // fetch("https://www.katyushaiust.ir/departments/", {
@@ -77,6 +88,30 @@ export default function CoursesPanel() {
     };
 
   }, []);
+
+  React.useEffect ( () => {
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        changeInfo("courseChoosed", data);
+        const courses = data.map(course => new Course(course, true));
+        setChosenCourses(courses);
+        // setDepartmentCourses(courses);
+
+        settimetable(courses);
+        // settimetable(AppendToTimetable(ChosenCourses));
+        // let NewTimeTable = [...timetable, ...ChosenCourses];
+        // settimetable(NewTimeTable);
+        // let NewTimeTable = [...courses, ...timetable];
+        // settimetable(NewTimeTable);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, [ChosenCoursesChanged]);
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
 
@@ -193,7 +228,7 @@ export default function CoursesPanel() {
       //   this.IsInTheChosenCourses = true;
       // }
       // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      this.backgColor = (IsFromChosencourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
       console.log(this.name + " has color of " + this.backgColor);
     }
 
@@ -275,6 +310,11 @@ export default function CoursesPanel() {
       // this.IsChosen = !this.IsChosen;
       // let NewTimeTable = [...ChosenCourses, ...DepartmentCourses];
       // settimetable(NewTimeTable);
+      // const chcourses = info.courseChoosed.map(course => new Course(course, true));
+      setChosenCoursesChanged(prev => !prev);
+      // setChosenCourses(chcourses);
+      // settimetable(chcourses);
+      
     }
   }
 
@@ -313,7 +353,7 @@ export default function CoursesPanel() {
       .then((response) => response.json())
       .then((data) => {
         // const dataArray = JSON.parse(data);
-        const courses = dataArray.map(course => new Course(course, true));
+        const courses = data.map(course => new Course(course, true));
         // setChosenCourses(data);
         setChosenCourses(courses);
       })
@@ -467,7 +507,14 @@ export default function CoursesPanel() {
           //   console.log("THIS IS NULLLLLLL");
           // }
           // console.log(currentPeriod.name + " added");
-          lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          try {
+            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          }
+          catch (error) {
+            console.log("ERROR is: " + error);
+            // handleOpenPopup;
+          }
+          
         }
         );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
@@ -527,6 +574,12 @@ export default function CoursesPanel() {
                 >
                   x
                 </button> */}
+                {/* {!isPopupOpen && 
+                  <Popup isOpen={isPopupOpen} onClose={handleClosePopup}>
+                    <h2>Popup Content</h2>
+                    <p>This is the content of the popup.</p>
+                  </Popup>
+                } */}
               </div>
             )}
           </div>
