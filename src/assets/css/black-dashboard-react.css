@@ -11675,7 +11675,7 @@ hr {
   .off-canvas-sidebar .sidebar-wrapper {
     width: 100%;
     min-height: 100%;
-    max-height: 95.5vh;
+    max-height: 101vh;
     z-index: 4;
     position: relative;
     overflow: auto; }
@@ -12511,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 20px 356px 30px 30px; }
+  padding: 20px 356px 0px 30px; }
 
 
 .rtl .footer {
@@ -13298,7 +13298,7 @@ textarea.form-control {
   border: 0;
   position: relative;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1); }
   .card label {
     color: rgba(255, 255, 255, 0.6); }
@@ -13639,18 +13639,22 @@ select.form-control option {
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  border-radius: 1rem;
+  border-radius: .2rem;
   background: #27293d;
+  /* background: rgba(0, 0, 0, 0); */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
+  border-radius: .2rem;
   background: 344675;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Handle on hover */

@@ -1,0 +1,42 @@
+.main-panel > .content_without_sidebar{
+    padding: 78px 30px 30px 30px;
+    min-height: calc(100vh - 70px);
+}
+
+.shoping_label{
+    margin: .5rem 1rem;
+}
+
+.shopping_form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.shopping_professorImage{
+    margin: auto;
+}
+
+.buy_button{
+    /* position: fixed;
+    bottom: 43px; */
+}
+
+.shop_card{
+    height: 66vh;
+    overflow: auto; 
+    
+}
+
+.places-buttons{
+    padding: 10px 0;
+    /* border-bottom: 1px solid #e5e5e5; */
+
+}
+
+.shop_row{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: red;
+    /* background-color: rgba(0, 0, 0, 0); */
+}
+

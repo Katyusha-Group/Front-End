@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-// import { Line, Bar } from "react-chartjs-2";
 import {
   Button,
   ButtonGroup,
@@ -23,7 +22,7 @@ import {
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
-// import * as chart from "../../assets/img/schedule_table.png"
+import Spinner from "react-bootstrap/Spinner";
 import * as chart from "../../assets/img/chart.png";
 import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
@@ -37,18 +36,41 @@ import colorpaletHey from "./colors.json";
 import { dayOfWeek } from "../../global/functions";
 import { json } from "react-router-dom";
 import cartlogo from "./cart.png";
-
+import {
+  showLoading,
+  closeLoading,
+} from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
+import ExamChart from "../../components/Charts/ExamChart.jsx";
+import { sum } from "lodash";
+import axios from "axios";
+import ModalShopping from "../../components/ModalShopping/ModlaShopping.jsx";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
-import ExamChart from "../../components/Charts/ExamChart.jsx";
-import { sum } from "lodash";
+const fetchRequest = "FETC_REQUEST";
+const fetchSuccess = "FETCH_SUCCESS";
+const fetchFail = "FETCH_FAIL";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case fetchRequest:
+      // changeInfo("loading" , true)
+      return { ...state, loading: true };
+    case fetchSuccess:
+      return { ...state, loading: false, props: action.payload };
+    case fetchFail:
+      // changeInfo("loading" , false)
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 export default function UserPage() {
   const [datac, setData] = React.useState([]);
+  const { info, changeInfo } = useInfo();
   const [lesson, setLesson] = React.useState({
     name: "",
     day: 0,
@@ -56,16 +78,26 @@ export default function UserPage() {
     long: 0,
   });
   //getting token
-
+  const getError = (error) => {
+    // console.log(error.data.message)
+    return error.responst && error.response.data
+      ? error.response.data
+      : error.message;
+  };
   const token = localStorage.getItem("authTokens");
+  const [{ loading, props: input, error }, propsSetter] = React.useReducer(
+    reducer,
+    { loading: true, props: {}, error: "" }
+  );
 
-  // console.log("context" , useInfo);
-
+  const [showShoppingModal, setShowShoppingModal] = React.useState({
+    flag: false,
+    data: {},
+  });
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
     data: {},
   });
-  // console.log(data);
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -75,20 +107,17 @@ export default function UserPage() {
     courseChoosed: [],
   });
   function setShowCourseHoverFunc(name, value) {
-    console.log("setShowCourseHover func");
-    setShowCourseHover((info) => ({ ...info, [name]: value }));
+    setShowCourseHover((info) => ({ [name]: value }));
   }
   let defu = 13.3;
   let length = 17.1;
   let top_right = 9.6;
   let top_defu = 11.7;
-  // let initial = useInfo();
-  //const[info,changeInfo]=React.useEffect(initial);
-  const { info, changeInfo } = useInfo();
-  console.log("info", info);
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
-    console.log("closeLesson", flag, data, showLesson);
+  }
+  function funcSetShowShoppingModal(flag, data) {
+    setShowShoppingModal({ flag: flag, data: data });
   }
   /**
    * send course number to save in database
@@ -113,9 +142,12 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("put data", data);
+        console.log("loading", info.loading);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        propsSetter({ type: fetchFail, payload: getError(error) });
+      });
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
@@ -128,30 +160,35 @@ export default function UserPage() {
    * @returns
    */
 
-  function lessons(infoState, changeInfoState) {
-    console.log("hello");
+  function lessons(infoState, changeInfoState, getapi, classNameHover) {
+    // console.log("hello");
+
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
-    React.useEffect(() => {
-      fetch("https://www.katyushaiust.ir/courses/my_courses", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("get data", data);
-          setData(data);
-          changeInfoState("courseChoosed", data);
-          console.log("get data after reload", data);
-        })
-        .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    }, []);
 
+    React.useEffect(() => {
+      if (getapi == true) {
+        showLoading();
+        fetch("https://www.katyushaiust.ir/courses/my_courses", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // console.log("get data", data);
+            setData(data);
+            changeInfoState("courseChoosed", data);
+            // console.log("get data after reload", data);
+          })
+          .catch((error) => console.error(error));
+        const activeRoute = (routeName) => {
+          return location.pathname === routeName ? "active" : "";
+        };
+      }
+    }, []);
+    closeLoading();
     return infoState.courseChoosed.map((lessons) => {
-      console.log("lessons", lessons);
+      // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
@@ -160,7 +197,7 @@ export default function UserPage() {
           <div key={lessonBoxId}>
             <div
               id={lessonBoxId}
-              className="course text-center"
+              className={`course text-center ${classNameHover} course-hover`}
               style={{
                 top: `${defu + length * lesson.course_day}%`, //TODO
                 right: `${top_defu + top_right * time}%`,
@@ -185,7 +222,7 @@ export default function UserPage() {
                 className="lesson_button"
                 onClick={() => {
                   addNewLesson(lessons.complete_course_number);
-                  console.log("delete lesson", lessons.complete_course_number);
+                  // console.log("delete lesson", lessons.complete_course_number);
                   changeInfo(
                     "courseChoosed",
                     infoState.courseChoosed.filter(
@@ -195,17 +232,28 @@ export default function UserPage() {
                     )
                   );
                   closeLesson(false, lessons);
-                  console.log("delete info", infoState);
+                  // console.log("delete info", infoState);
                 }}
                 id={lessonBoxId + "x"}
               >
-                x
+                <strong>
+                  <i
+                    className="tim-icons icon-simple-remove"
+                    style={{ margin: "auto" }}
+                  ></i>
+                </strong>
+                {/* x */}
               </button>
               <div
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
               >
-                {lessons.name}
+                <strong style={{ fontSize: "0.8rem" }}>{lessons.name}</strong>
+                <br />
+                {lessons.registered_count} از {lessons.capacity}
+                <br />
+                <p className="id_code"> {lessons.complete_course_number}</p>
+                {/* {console.log("lessons click", lessons)}n */}
               </div>
             </div>
           </div>
@@ -214,9 +262,42 @@ export default function UserPage() {
     });
   }
 
+  function addItemShop(num) {
+    console.log("hello");
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    // console.log("shopId in userpage", shopId);
+    // console.log("token is", token);
+    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(`shop add ${num}`, data);
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log("failed course complete", num);
+      });
+  }
+
   return (
     <>
+      {/* {showLoading()} */}
       <Row>
+        {/* <Spinner/> */}
         {/* <Col lg="12"><ExamChart /></Col> */}
         <Col sm="12">
           <Card className="week-card card-body">
@@ -228,8 +309,13 @@ export default function UserPage() {
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
                 >
-                  {lessons(info, changeInfo)}
-                  {lessons(showCourseHover, setShowCourseHoverFunc)}
+                  {lessons(info, changeInfo, true, null)}
+                  {lessons(
+                    showCourseHover,
+                    setShowCourseHoverFunc,
+                    false,
+                    "classNameHover"
+                  )}
                   <ModalLessons
                     show={showLesson}
                     close={() =>
@@ -240,13 +326,12 @@ export default function UserPage() {
                 <div
                   style={{
                     display: bigChartData == "data2" ? "block" : "none",
-                    maxHeight: "400px",
+                    // maxHeight: "400px",
                     overflowX: "auto",
                     overflowY: "scroll",
                     minWidth: "100%",
                   }}
                 >
-                  {" "}
                   <SummaryChart props={info.courseChoosed} />
                 </div>
                 <div
@@ -254,7 +339,6 @@ export default function UserPage() {
                     display: bigChartData == "data3" ? "block" : "none",
                   }}
                 >
-                  {" "}
                   <ExamChart />
                 </div>
               </div>
@@ -342,39 +426,43 @@ export default function UserPage() {
           </Card>
         </Col>
         <Col sm="12">
-          <Card className="dir-right">
+          <Card className="dir-right groups_card" style={{ marginBottom: "0" }}>
             <CardBody className="courseGroupCard">
-              {info.courseGroupsListInContext.length &&
+              {info.loading == 0 ? (
+                "گروهی انتخاب نشده"
+              ) : info.loading == 1 ? (
+                <Spinner />
+              ) : (
                 info.courseGroupsListInContext.map((x, index) => (
-                  <Card
-                    className="courseCard"
-                    key={index}
-                    style={{
-                      backgroundColor:
-                        x.color_intensity_percentage > 10
-                          ? `hsl(256, 45%, ${convertPercentagetoLigtness(
-                              x.color_intensity_percentage
-                            )}%)`
-                          : "dimgray",
-                    }}
-                    onMouseEnter={() => {
-                      console.log("x.complete", x.complete_course_number);
-                      // console.log("z");
-                      setShowCourseHoverFunc("courseChoosed", [
-                        ...info.courseChoosed,
-                        x,
-                      ]);
-                    }}
-                    onMouseLeave={() => {
-                      console.log("out");
-                      setShowCourseHoverFunc("courseChoosed", []);
-                    }}
-                  >
-                    <CardBody className="courseCardBody">
-                      <img
+                  <div className="coursCardContainer">
+                    <Card
+                      className="courseCard"
+                      key={index}
+                      style={{
+                        backgroundColor:
+                          x.color_intensity_percentage > 10
+                            ? `hsl(256, 45%, ${convertPercentagetoLigtness(
+                                x.color_intensity_percentage
+                              )}%)`
+                            : "dimgray",
+                      }}
+                      onMouseEnter={() => {
+                        console.log("x.complete", x.complete_course_number);
+                        // console.log("z");
+                        setShowCourseHoverFunc("courseChoosed", [x]);
+                      }}
+                      onMouseLeave={() => {
+                        // console.log("out");
+                        setShowCourseHoverFunc("courseChoosed", []);
+                      }}
+                      onClick={() => {
+                        setShowLesson({ flag: true, data: x });
+                      }}
+                    >
+                      <CardBody className="courseCardBody">
+                        <img
                         className="professorImage"
-                        src={x.teacher.teacher_image}
-                        // src={sampleProfile}
+                        src={x.teacher.teacher_image?x.teacher.teacher_image:sampleProfile}
                         alt="professorImage"
                       />
                       <div className="infoPart">
@@ -382,63 +470,15 @@ export default function UserPage() {
                           {x.name} (گروه {x.group_number})
                         </p>
                         <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <div className="courseCardDownSide">
-                          <div>
+                        <p>
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
+                        </p>
+                        {/* <div className="courseCardDownSide"> */}
+                          {/* <div>
                             <p>
-                              ثبت نام شده: {x.capacity}/{x.registered_count}{" "}
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
                             </p>
-                            <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                              onClick={() => {
-                                console.log("x", x);
-                                if (!info.courseChoosed.includes(x)) {
-                                  console.log("includes");
-                                  addNewLesson(x.complete_course_number);
-                                  changeInfo("courseChoosed", [
-                                    ...info.courseChoosed,
-                                    x,
-                                  ]);
-                                }
-                                console.log("info", info);
-                              }}
-                            >
-                              +
-                            </Button>
-                            <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                              // color="primary"
-                              // size="sm"
-                              onClick={() => {
-                                if (!info.shop.includes(x)) {
-                                  console.log("includes shop");
-                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                                  changeInfo("shop", [...info.shop, x]);
-                                }
-                              }}
-                            >
-                              {/* <i className="tim-icons icon-simple-add" /> */}
-                              <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                            </Button>
-                            {/* <Button
-                              variant="secondary"
-                              size="sm"
-                              style={{ color: "aqua", fontSize: "medium" }}
-                            >
-                              <img
-                                className="cart"
-                                src={cartlogo}
-                                alt="cartlogo"
-                              ></img>
-                            </Button> */}
-                          </div>
+                          </div> */}
                           <img
                             className="fullLogo"
                             src={fullLogo}
@@ -450,11 +490,81 @@ export default function UserPage() {
                                   : "none",
                             }}
                           ></img>
-                        </div>
+
+                        {/* </div> */}
+
                       </div>
                     </CardBody>
                   </Card>
-                ))}
+                  <div className="buttonBar"> 
+                            <Button 
+                              className="courseCardButton"
+                              variant="secondary"
+                              size="sm"
+                              style={{ color: !info.courseChoosed.includes(x)?"aqua":"deeppink", fontSize: !info.courseChoosed.includes(x)?"medium":"medium" }}
+                              onClick={() => { //add lesson
+                                console.log("x", x);
+                                if (!info.courseChoosed.includes(x)) {
+                                  console.log("includes");
+                                  addNewLesson(x.complete_course_number);
+                                  changeInfo("courseChoosed", [
+                                    ...info.courseChoosed,
+                                    x,
+                                  ]);
+                                }else{//remove lesson
+                                addNewLesson(x.complete_course_number);
+                                console.log(x.complete_course_number);
+                                console.log("delete lesson", x.complete_course_number);
+                                changeInfo(
+                                  "courseChoosed",
+                                  info.courseChoosed.filter(
+                                    (item) =>
+                                      item.complete_course_number !==
+                                      x.complete_course_number
+                                  )
+                                );
+                                closeLesson(false, lessons);
+                                }
+                                console.log("info", info);
+                              }}
+                            >
+                              {!info.courseChoosed.includes(x)? "+" : "x"}
+                              
+                            </Button>
+                            <Button
+                            className="courseCardButton"
+                            variant="secondary"
+                            size="sm"
+                            style={{ color: "aqua", fontSize: "medium" , display:"flex"}}
+                              // color="primary"
+                              // size="sm"
+                              onClick={() =>{
+                                if (!info.shop.includes(x) ) {
+                                  console.log("includes shop")
+                                  // changeInfo("courseChoosed", [...info.courseChoosed, x]);
+                                  changeInfo("shop", [...info.shop, x])
+                                }
+                              }
+                              }
+                            >
+                              {/* <i className="tim-icons icon-simple-add" /> */}
+                              <img
+                                            className="cart"
+                                            src={cartlogo}
+                                            alt="cartlogo"
+                                          ></img>
+                            </Button>
+
+                      </div>
+                      <ModalLessons
+                    show={showLesson}
+                    close={() =>
+                      setShowLesson(() => ({ ...showLesson, flag: false }))
+                    }
+                  />
+                  </div>
+                ))
+              )}
             </CardBody>
           </Card>
         </Col>
