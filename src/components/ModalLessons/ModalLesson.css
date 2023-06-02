@@ -34,5 +34,14 @@
     background-color: #27293d!important;
 }
 
-.ModalLesson{
+/* .ModalLesson{
+} */
+
+.ModalLesson {
+    width: 70% !important;
+    left: 15%;
+    right: 15%;
+    top: 30px !important; 
+    overflow-x: auto;
+     height: auto;
 }

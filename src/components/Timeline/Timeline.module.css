@@ -6,8 +6,8 @@ body, html {
   }
   
   .timelinebox {
-    max-width: 1140px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: auto 0;
   }
   
   ul {
