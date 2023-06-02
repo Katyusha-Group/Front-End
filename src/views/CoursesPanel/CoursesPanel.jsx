@@ -28,11 +28,24 @@ export default function CoursesPanel() {
   // Info
   const { info, changeInfo } = useInfo();
 
-  // Department courses
+  // Allowed Lessons
+  let [Allowed, setAllowed] = React.useState([]);
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
-  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
-  React.useEffect(() => {                                             // Set Department Options
+  let [ChosenCourses, setChosenCourses] = React.useState([]);
+  React.useEffect(() => {
+    // fetch("https://www.katyushaiust.ir/departments/", {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setAllowed(data);
+    //     console.log("ALLLLOOOWWEDDD SET: " + Allowed);
+    //     // let temp1 = JSON.stringify(Allowed);
+    //     // console.log("Allowed Courses are: " + Allowed);
+    //     // return data;
+    //   });
+    
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((DepartmentOptions) => {
@@ -42,7 +55,28 @@ export default function CoursesPanel() {
         // setDepartmentOptions(temp);
         setDepartmentOptions(DepartmentOptions);
       });
+    
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        changeInfo("courseChoosed", data);
+        const courses = data.map(course => new Course(course, true));
+        setChosenCourses(courses);
+        settimetable(courses);
+        // settimetable(AppendToTimetable(ChosenCourses));
+        // let NewTimeTable = [...timetable, ...ChosenCourses];
+        // settimetable(NewTimeTable);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+
   }, []);
+  // Department courses
+  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
 
   const customStyles = {                                              // Select Styles
     input: (defaultStyles) => ({
@@ -133,32 +167,8 @@ export default function CoursesPanel() {
     // }
   }, [SwitchChecked]);
 
-  // Already Chosen Lessons
-  let [ChosenCourses, setChosenCourses] = React.useState([]);
-  React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // setChosenCourses(data);
-        changeInfo("courseChoosed", data);
-        // console.log("Chosen courses changed!")
-        // settimetable(data);
-        // AppendToTimetable(ChosenCourses)
-        const courses = data.map(course => new Course(course, true));
-        // console.log("Classss: " + courses); // Array of Course objects
-        setChosenCourses(courses);
-        settimetable(courses);
-        // settimetable(AppendToTimetable(ChosenCourses));
-        // let NewTimeTable = [...timetable, ...ChosenCourses];
-        // settimetable(NewTimeTable);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }, []);
+  // Already Chosen Lessons and Set Department Options and AllowedLessons
+  
 
 
 
@@ -169,7 +179,9 @@ export default function CoursesPanel() {
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+      this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = this.IsAllowed(this.base_course_number);
+      
       // this.IsInTheChosenCourses = false;
       // for (let i = 0; i < ChosenCourses.length; i++) {
       //   if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
@@ -185,13 +197,38 @@ export default function CoursesPanel() {
       console.log(this.name + " has color of " + this.backgColor);
     }
 
+    componentDidMount()
+    {
+        fetch("https://www.katyushaiust.ir/departments/", {
+        headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setAllowed(data);
+          console.log("ALLLLOOOWWEDDD SET: " + Allowed);
+          // let temp1 = JSON.stringify(Allowed);
+          // console.log("Allowed Courses are: " + Allowed);
+          // return data;
+        });
+    }
+
     IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
     {
+      // let AllowedLess = FindAllowedLessons();
+      console.log("base course number is: " + base_course_number);
+      console.log ("ALLOEWED ASDKSDJSD1: " + Allowed);
+      
+      console.log ("ALLOEWED ASDKSDJSD2: " + Allowed);
       console.log("Is allowed called");
+      console.log("dept ID is: " + this.DepartmentID);
       for (let i = 0; i < Allowed.length; i++) {
-        if (Allowed[i].base_courses.length > 0) {
+        console.log("Entered LOOP");
+        console.log ("DEPT ID IN LOOP IS: " + Allowed[i].id);
+        if (Allowed[i].id === this.DepartmentID && Allowed[i].base_courses.length > 0) {
+          console.log("Checking " + Allowed[i].name);
           for (let j = 0; j < Allowed[i].base_courses.length; j++) {
             if (Allowed[i].base_courses[j].course_number === base_course_number) {
+              console.log(this.name + " is allowed");
               return true;
             }
           }
@@ -205,28 +242,7 @@ export default function CoursesPanel() {
 
   let [timeTableChanged, settimeTableChanged] = React.useState(false);
 
-
-  let [Allowed, setAllowed] = React.useState([]);
-  React.useEffect(() => {                                             // Allowed Lessons
-    fetch("https://www.katyushaiust.ir/departments/", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAllowed(data);
-        // Allowed.map((dep, index) => {
-        //   if (dep.base_courses.length > 0) {
-        //     dep.base_courses.map((course, ind) => {
-        //       console.log("Base courses courses: " + course.name);
-        //     })
-        //   }
-        // })
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }, []);
+  
 
 
 
@@ -410,7 +426,7 @@ export default function CoursesPanel() {
           //   console.log("Current Period is (nulll): " + currentPeriod.name);
           //   console.log("THIS IS NULLLLLLL");
           // }
-          console.log(currentPeriod.name + " added");
+          // console.log(currentPeriod.name + " added");
           lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
         }
         );
