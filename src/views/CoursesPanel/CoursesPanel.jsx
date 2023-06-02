@@ -23,6 +23,7 @@ import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 import SwitchToggle from "./Switch";
 // import Popup from './Popup';
+import HomeIcon from './home.png';
 export default function CoursesPanel() {
 
   // Pop up
@@ -199,9 +200,11 @@ export default function CoursesPanel() {
   }
   React.useEffect(() => { 
     if (SwitchChecked) {
+      // showLoading();
       let temp = timetable.filter(course => course.can_take);
       console.log("temp is: " + temp);
       settimetable(temp);
+      // closeLoading();
     }
     else
     {
@@ -485,39 +488,6 @@ export default function CoursesPanel() {
           NumInEachSlot[day][TimeIndex]++;
 
           let count = NumInEachSlot[day][TimeIndex];
-
-          // if (SwitchChecked) {                                       // Filter allowed courses
-          //   // let base_course_number = parseInt(currentPeriod.complete_course_number.substring(0, currentPeriod.complete_course_number.length - 3));
-          //   // console.log ("Base course is: " + base_course_number + " Course name is: " + currentPeriod.name);
-
-          //   if (currentPeriod.IsAllowed(base_course_number)) {
-          //     // console.log (currentPeriod.name + " is allowed");
-          //     // console.log ("The course is: " + currentPeriod.name);
-          //     lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          //   }
-          //   else {
-          //     // console.log (currentPeriod.name + " is NOOOOOOOOOOT allowed");
-          //     // console.log ("The course is: " + currentPeriod.name);
-          //   }
-          // }
-          // else {
-          //   lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          // }
-          // if (currentPeriod !== undefined)
-          // {
-          //   console.log("THIS IS NOT NULLLLLLL");
-          //   console.log("Current Period's name is: " + currentPeriod.name);
-          //   console.log("Current name is: " + currentPeriod);
-          //   // lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = new Course(currentPeriod);
-          //   console.log("day is: " + day + " TimeIndex is: " + TimeIndex + " count is: " + count);
-          //   lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          // }
-          // else
-          // {
-          //   console.log("Current Period is (nulll): " + currentPeriod.name);
-          //   console.log("THIS IS NULLLLLLL");
-          // }
-          // console.log(currentPeriod.name + " added");
           try {
             lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
           }
@@ -617,8 +587,13 @@ export default function CoursesPanel() {
     <>
       <Row>
         <Col>
-          <Card>
+          <Card className="TableCard">
             <CardHeader className="text-right">
+              <Button
+                href="/admin/page"
+              >
+                <img src={HomeIcon} alt="Button Image" />
+              </Button>
               <Select
                 options={DepartmentOptions}
                 styles={customStyles}

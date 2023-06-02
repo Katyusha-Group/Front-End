@@ -11,7 +11,14 @@
     text-align: left;
 }
 
-
+.TableCard
+{
+    /* margin-top: 5%; */
+    /* margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 5%; */
+    margin-top: 20px;
+}
 
 .CoursesPanel_column2 {
     border: 1px solid;
@@ -45,15 +52,15 @@ tbody{
     border-radius: 5px;
 }
 
-.CoursesPanel_TableRow
+/* .CoursesPanel_TableRow
 {
     width: 2000px !important;
-}
+} */
 
-.table-head
+/* .table-head
 {
     column-width: 1000px;
-}
+} */
 
 .CoursesPanel_column2
 {
