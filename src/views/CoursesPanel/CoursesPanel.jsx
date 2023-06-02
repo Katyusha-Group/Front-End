@@ -2,6 +2,9 @@ import React from "react";
 import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
+import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
+import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+
 import {
   Card,
   CardHeader,
@@ -569,7 +572,9 @@ export default function CoursesPanel() {
                   name="AddOrRemoveCourseButton"
                   style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
+                      showLoading();
                     entry.ButtonClicked();
+                      closeLoading();
                   }}>
                   {entry.IsChosen ? 'x' : '+'}
                 </button>

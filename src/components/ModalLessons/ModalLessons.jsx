@@ -19,9 +19,9 @@ import {
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
-  console.log("PROPS in MODAL", props);
+  // console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
-  console.log("INFO", info)
+  // console.log("INFO", info)
   return (
     <>
       <Modal
@@ -54,7 +54,7 @@ const ModalLessons = (props) => {
                 <Row>
                   <Col className="text-right" md="12"></Col>
                 </Row>
-                  <Link to="/shoping">
+                  <Link to="/shopping">
                     خرید
                   </Link>
                 <Button
@@ -62,7 +62,7 @@ const ModalLessons = (props) => {
                   size="sm"
                   onClick={() =>{
                     if (!info.shop.includes(props.show.data) ) {
-                      console.log("includes shop")
+                      // console.log("includes shop")
                       // changeInfo("courseChoosed", [...info.courseChoosed, x]);
                       changeInfo("shop", [...info.shop, props.show.data])
                     }

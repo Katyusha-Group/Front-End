@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 import { conforms } from "lodash";
 
 function Login() {
+  let [shop_caller,setShop_caller] = React.useState()
+  console.log("default gohNakhor",shop_caller)
   // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
@@ -35,7 +37,7 @@ function Login() {
       passwordV.getAttribute("type") === "password" ? "text" : "password";
 
     togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
+      ? (document.localStoragegetElementById("togglePassword").className =
           "fa fa-eye-slash viewpass mr-4 text-muted")
       : (document.getElementById("togglePassword").className =
           "fa fa-eye viewpass mr-4 text-muted");
@@ -62,6 +64,25 @@ function Login() {
       [name]: value,
     }));
   }
+  
+  // React.useEffect(() => {
+    
+  //   fetch("https://katyushaiust.ir/carts/", {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log("data all",data);
+  //       console.log("data of shop catched: ", data)
+  //       localStorage.setItem("shopId", data)
+  //     })
+  //     .catch((error) => console.error(error));
+  //   // console.log(data);
+  // }, [shop_caller]);
+  function gohNakhor(){
+    setShop_caller(true);
+    console.log("gohNakhor:",shop_caller)
+  }
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -82,6 +103,8 @@ function Login() {
     backError: "",
   });
   async function handleSubmit(event) {
+
+    console.log("toooooken"+localStorage.authTokens)
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
@@ -122,18 +145,34 @@ function Login() {
       }),
     });
     const data = await response.json();
-    console.log(data.token);
+    console.log("response",response);
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
-      // if (authTokens) {
-      //   console.log(user);
-      //   setUser(jwt_decode(authTokens));
-      //   console.log(user);
-      // }
-      // info.token = authTokens;
-      // console.log(info);
+      setShop_caller(true);
+      console.log("shop_caller: ", shop_caller)
       localStorage.setItem("authTokens", JSON.stringify(data));
+      // localStorage.getItem("authTokens");
+      const tokenClass = JSON.parse(JSON.stringify(data));
+      const token = tokenClass.token.access;
+      const shopId = await fetch("https://katyushaiust.ir/carts/", {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+
+         },
+      })
+      // console.log("shopId", shopId.json())
+      const shopId_data = await shopId.json();
+      // console.log(shopId_data);
+      if (shopId.status == 200) {
+        console.log("shopId.json()",shopId_data)
+        localStorage.setItem("shopId", JSON.stringify(shopId_data))
+        console.log("shopId localstorage ",localStorage.getItem("shopId"))
+        let test = localStorage.getItem("shopId")
+        console.log("test", JSON.parse(test)[0])
+      }
+      console.log("shopId: ",shopId)
       Navigate("/admin/page");
     } else {
       console.log(data.error);
