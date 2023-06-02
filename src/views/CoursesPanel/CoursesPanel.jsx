@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
+import SwitchToggle from "./Switch";
 // import Popup from './Popup';
 export default function CoursesPanel() {
 
@@ -39,7 +40,7 @@ export default function CoursesPanel() {
   const { info, changeInfo } = useInfo();
 
   // Allowed Lessons
-  let [Allowed, setAllowed] = React.useState([]);
+  // let [Allowed, setAllowed] = React.useState([]);
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
@@ -200,7 +201,8 @@ export default function CoursesPanel() {
     }
     else
     {
-      setSelectedDepartment(SelectedDepartment);
+      // setSelectedDepartment(SelectedDepartment);
+      setChosenCoursesChanged(prev => !prev);
     }
     // else if (SelectedDepartment === 1) {
     //   settimetable(info.courseChoosed);
@@ -217,7 +219,9 @@ export default function CoursesPanel() {
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
-      this.can_take = this.IsAllowed(this.base_course_number);
+      // this.can_take = this.IsAllowed(this.base_course_number);
+      this.can_take = props.is_allowed;
+      console.log(this.name + " is allowed: " + this.can_take);
       this.IsChosen = IsFromChosencourses;
       // this.IsInTheChosenCourses = false;
       // for (let i = 0; i < ChosenCourses.length; i++) {
@@ -231,48 +235,48 @@ export default function CoursesPanel() {
       // }
       // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      console.log(this.name + " has color of " + this.backgColor);
+      // console.log(this.name + " has color of " + this.backgColor);
     }
 
-    componentDidMount()
-    {
-        fetch("https://www.katyushaiust.ir/departments/", {
-        headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          setAllowed(data);
-          console.log("ALLLLOOOWWEDDD SET: " + Allowed);
-          // let temp1 = JSON.stringify(Allowed);
-          // console.log("Allowed Courses are: " + Allowed);
-          // return data;
-        });
-    }
+    // componentDidMount()
+    // {
+    //     fetch("https://www.katyushaiust.ir/departments/", {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       setAllowed(data);
+    //       console.log("ALLLLOOOWWEDDD SET: " + Allowed);
+    //       // let temp1 = JSON.stringify(Allowed);
+    //       // console.log("Allowed Courses are: " + Allowed);
+    //       // return data;
+    //     });
+    // }
 
-    IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
-    {
-      // let AllowedLess = FindAllowedLessons();
-      console.log("base course number is: " + base_course_number);
-      console.log ("ALLOEWED ASDKSDJSD1: " + Allowed);
+    // IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
+    // {
+    //   // let AllowedLess = FindAllowedLessons();
+    //   console.log("base course number is: " + base_course_number);
+    //   console.log ("ALLOEWED ASDKSDJSD1: " + Allowed);
       
-      console.log ("ALLOEWED ASDKSDJSD2: " + Allowed);
-      console.log("Is allowed called");
-      console.log("dept ID is: " + this.DepartmentID);
-      for (let i = 0; i < Allowed.length; i++) {
-        console.log("Entered LOOP");
-        console.log ("DEPT ID IN LOOP IS: " + Allowed[i].id);
-        if (Allowed[i].id === this.DepartmentID && Allowed[i].base_courses.length > 0) {
-          console.log("Checking " + Allowed[i].name);
-          for (let j = 0; j < Allowed[i].base_courses.length; j++) {
-            if (Allowed[i].base_courses[j].course_number === base_course_number) {
-              console.log(this.name + " is allowed");
-              return true;
-            }
-          }
-        }
-      }
-      return false;
-    }
+    //   console.log ("ALLOEWED ASDKSDJSD2: " + Allowed);
+    //   console.log("Is allowed called");
+    //   console.log("dept ID is: " + this.DepartmentID);
+    //   for (let i = 0; i < Allowed.length; i++) {
+    //     console.log("Entered LOOP");
+    //     console.log ("DEPT ID IN LOOP IS: " + Allowed[i].id);
+    //     if (Allowed[i].id === this.DepartmentID && Allowed[i].base_courses.length > 0) {
+    //       console.log("Checking " + Allowed[i].name);
+    //       for (let j = 0; j < Allowed[i].base_courses.length; j++) {
+    //         if (Allowed[i].base_courses[j].course_number === base_course_number) {
+    //           console.log(this.name + " is allowed");
+    //           return true;
+    //         }
+    //       }
+    //     }
+    //   }
+    //   return false;
+    // }
 
     ButtonClicked ()
     {
@@ -629,7 +633,10 @@ export default function CoursesPanel() {
                 defaultChecked={this.state.cheeseIsReady}
                 onChange={this.handleCheeseChange} />
               <label htmlFor='cheese-status'>Adjacent label tag</label> */}
-
+              <SwitchToggle
+                isOn={SwitchChecked}
+                handleToggle={() => setSwitchChecked(!SwitchChecked)}
+              />
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">
