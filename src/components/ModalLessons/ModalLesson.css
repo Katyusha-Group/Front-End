@@ -5,7 +5,7 @@
 }
 
 .modal-content{
-    width: 1500px !important;
+    width: 1000px !important;
 }
 
 .loginLmsModal{
@@ -30,22 +30,74 @@
   z-index:500;
 }
 
-.modal-content{
+/* .modal-content{
     background-color: #27293d!important;
-}
+} */
 
 /* .ModalLesson{
 } */
 
 .ModalLesson {
-    width: 70% !important;
+    /* width: 70% !important; */
     left: 15%;
     right: 15%;
     top: 30px !important; 
     overflow-x: auto;
      height: auto;
 }
-.modalHeader{
+/* .modalHeader{
     color: white;
     
+    } */
+
+    .ModalLessonCourseCard{
+        /* background-color: hsl(256, 45%, 50%)!important; */
+        /* border-width: 5px; */
+        /* background-color: transparent; */
+        /* border: solid !important; */
+        border-color: #ab69b1 !important;
+        color: rgb(199, 193, 193) !important;
+        /* width: 20rem !important; */
+        height: 180px;
+        margin-top: 15px;
+    }
+    .courseCardBody{
+        justify-items: center;
+        align-items: center;
+        padding: 0px ;
+        display: flex;
+        flex-direction: row;
+        /* cursor: pointer; */
+    }
+    
+    .courseCardBody:hover{
+        cursor: pointer;
+    }
+    
+    .courseGroupCard{
+        /* align-items: flex-start ; */
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-around; */
+        /* align-content: space-between; */
+        flex-wrap: wrap;
+        height: 30vh;
+        overflow: auto;
+        /* justify-content: center; */
+        padding-left: 0 !important;
+    
+    }
+    div{
+        text-align: center;
+    }
+    
+    .ModalprofessorImage{
+        margin-top: 0px;
+        width: 120px;
+        height: 120px;
+        margin-left: 0.625rem;
+        /* border-radius: 4.6875rem; */
+        overflow: "hidden";
+        border-width: 0.1875rem;
+        border-color: "red";
     }

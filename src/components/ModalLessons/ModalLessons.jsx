@@ -33,7 +33,7 @@ const ModalLessons = (props) => {
         className="ModalLesson"
         // centered
       >
-        <div className="loginLmsModal">
+        <div >
           <Modal.Header className="ModalHeader">
             <button
               type="button"
@@ -50,55 +50,37 @@ const ModalLessons = (props) => {
             {/* //////////////////////////////////////////////////////// */}
 
             {/* //////////////////////////////////////////////////////// */}
-            <CardHeader>{props.show.data.name}</CardHeader>
-            <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader>
+            {/* <CardHeader>{props.show.data.name}</CardHeader>
+            <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader> */}
              <CardBody>
             <Card
                     className="ModalLessonCourseCard"
                     style={{
                       backgroundColor:
-                        x.color_intensity_percentage > 10
-                          ? `hsl(256, 45%, ${convertPercentagetoLigtness(
-                              x.color_intensity_percentage
-                            )}%)`
-                          : "dimgray",
+                        "#ab69b1",
                     }}
                   >
                     <CardBody className="courseCardBody">               
                         <img
-                        className="professorImage"
+                        className="ModalprofessorImage"
                         src={x.teacher.teacher_image}
                         alt="professorImage"
                       />
                       <div className="infoPart">
-                        <p>
-                          {x.name} (گروه {x.group_number})
-                        </p>
-                        <p style={{ fontSize: 12 }}> استاد:{x.teacher.name}</p>
-                        <div className="courseCardDownSide">
-                          <div>
-                            <p>
-                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
-                            </p>
-                          </div>
-                         
-
-                        </div>
-
-                      </div>
-                    </CardBody>
-                  </Card>
-            </CardBody>
-            {/*            <CardBody>
-              
-              <Form style={{color:"white"}}>
-                <Row>
-                  <Col className="text-right" md="12">
-                  استاد: {x.teacher.name}
+                      <CardHeader className="modalHeader"></CardHeader> 
+                      <Row>
+                  <Col className="text-right" md="6">
+                    {x.name} (گروه {x.class_gp})
+                  </Col>
+                  <Col className="text-right" md="6">
+                   جنسیت: {sexTostring(x.sex)}
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="text-right" md="12">
+                <Col className="text-right" md="6">
+                  استاد: {x.teacher.name}
+                  </Col>
+                <Col className="text-right" md="6">
                    زمان برگزاری :  
                           {x.course_times.map((t) => (
                             <text>{dayOfWeek(t.course_day)} </text>
@@ -111,39 +93,13 @@ const ModalLessons = (props) => {
                           </text>
                   </Col>
                 </Row>
-                
                 <Row>
-                  <Col className="text-right" md="12">
-                   جنسیت: {sexTostring(x.sex)}
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="text-right" md="6">
-                    تعداد واحد های عملی:{x.practical_unit} 
-                  </Col>
-                  <Col className="text-right" md="6">
-                    تعداد کل واحد ها:{x.total_unit} 
-                  </Col>
-                </Row>
-                
-                <Row>
-                  <Col className="text-right" md="6">
-                  ثبت نام شده: {x.registered_count}{" "} از {x.capacity}
-                  </Col>
-                  <Col className="text-right" md="6">
-                  تعداد در صف انتظار: {x.waiting_count}
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="text-right" md="12">
+                <Col className="text-right" md="6">
                   کد درس: {x.complete_course_number}
                   </Col>
-                </Row>
-                <Row>
-                <Col className="text-right" md="12" dir="ltr">
+                  <Col className="text-right" md="6" dir="ltr">
                   
                   تاریخ امتحان پایانی: {x.exam_times[0].date}
-                  
                   <text>
                   {" "}
                   ساعت 
@@ -155,70 +111,27 @@ const ModalLessons = (props) => {
                 </Col>
                 </Row>
                 <Row>
-                  <Col className="text-right" md="12"></Col>
-                </Row>
-                  
-                  
-                  
-                    افزودن به سبد خرید
-                  
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  style={{ color: "aqua", fontSize: "medium" }}
-                  onClick={() =>{
-                    if (!info.shop.includes(props.show.data) ) {
-                      console.log("includes shop")
-                      // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                      changeInfo("shop", [...info.shop, props.show.data])
-                    }
-                  }
-                  }
-                >
-                  <i className="tim-icons icon-simple-add" />
-                </Button>
-                <Row>
-                 <Link to="/shoping">
-                    سبد خرید
-                  </Link>
-                </Row>
-              </Form>
-            </CardBody>
-            <CardBody>
-              <Form>
-              <Row>
-                  <Col className="text-right" md="12">
-                    ظرفیت: {x.capacity}
+                <Col className="text-right" md="6">
+                  ثبت نام شده: {x.registered_count}{" "} از {x.capacity}
                   </Col>
-                </Row>
-                <Row>
-                  <Col md="12">
-                    <Timeline show={props} />
+                  <Col className="text-right" md="6">
+                    تعداد واحد های عملی:{x.practical_unit} 
                   </Col>
                 </Row>
                 
-              </Form>
-            </CardBody> */}
-            {/* <CardFooter>
-              <Link to="/shoping">خرید</Link>
-              <Button
-                color="primary"
-                size="sm"
-                onClick={() => {
-                  if (!info.shop.includes(props.show.data)) {
-                    console.log("includes shop");
-                    // changeInfo("courseChoosed", [...info.courseChoosed, x]);
-                    changeInfo("shop", [...info.shop, props.show.data]);
-                  }
-                }}
-              >
-                <i className="tim-icons icon-simple-add" />
-              </Button>
-
-              <Button className="btn-fill" color="primary" type="submit">
-                تایید
-              </Button>
-            </CardFooter> */}
+                <Row>
+                <Col className="text-right" md="6">
+                  تعداد در صف انتظار: {x.waiting_count}
+                  </Col>
+                  
+                  <Col className="text-right" md="6">
+                    تعداد کل واحد ها:{x.total_unit} 
+                  </Col>
+                </Row>
+                      </div>
+                    </CardBody>
+                  </Card>
+            </CardBody>
           </Modal.Body>
         </div>
       </Modal>
