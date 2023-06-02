@@ -100,12 +100,14 @@ export default function CoursesPanel() {
         setChosenCourses(courses);
         // setDepartmentCourses(courses);
 
-        settimetable(courses);
+        // settimetable(courses);
         // settimetable(AppendToTimetable(ChosenCourses));
         // let NewTimeTable = [...timetable, ...ChosenCourses];
         // settimetable(NewTimeTable);
         // let NewTimeTable = [...courses, ...timetable];
         // settimetable(NewTimeTable);
+        let NewTimeTable = [...courses, ...DepartmentCourses];
+        settimetable(NewTimeTable);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -356,6 +358,7 @@ export default function CoursesPanel() {
         const courses = data.map(course => new Course(course, true));
         // setChosenCourses(data);
         setChosenCourses(courses);
+        // setChosenCoursesChanged(prev => !prev);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
