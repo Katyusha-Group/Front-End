@@ -52,7 +52,7 @@ const ModalLessons = (props) => {
             {/* //////////////////////////////////////////////////////// */}
             <CardHeader>{props.show.data.name}</CardHeader>
             <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader>
-            <CardBody>
+             <CardBody>
             <Card
                     className="ModalLessonCourseCard"
                     style={{
@@ -89,7 +89,7 @@ const ModalLessons = (props) => {
                     </CardBody>
                   </Card>
             </CardBody>
-                        <CardBody>
+            {/*            <CardBody>
               
               <Form style={{color:"white"}}>
                 <Row>
@@ -198,7 +198,7 @@ const ModalLessons = (props) => {
                 </Row>
                 
               </Form>
-            </CardBody>
+            </CardBody> */}
             {/* <CardFooter>
               <Link to="/shoping">خرید</Link>
               <Button
