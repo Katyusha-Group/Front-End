@@ -133,9 +133,7 @@ const Timeline = (props) => {
             ([termid, dorus]) => (
               <>
                 <li>
-                  <span className="year">
-                    {"1" + termid.replace(/(\d{3})/, "$1-")}
-                  </span>
+                  <span className="year">{termid}</span>
                   <ul className="content">
                     {dorus.map((dars) => (
                       <li>{dars.teacher_name}</li>

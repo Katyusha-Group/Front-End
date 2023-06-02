@@ -44,15 +44,15 @@ ul
 		//padding-left: 24px
 		line-height: 24px
 		font-weight: bold
-		font-size: 16px
+		font-size: 18px
 		&::before
 			content: ''
-			+square(30px, 30px)
+			+square(40px, 40px)
 			position: absolute
 			background: map-get($color, light)
 			border-radius: 50%
-			left: -19px
-			top: calc( (30 - 19) / 2 * -1px )
+			left: -24px
+			top: calc( (40 - 24) / 2 * -1px )
 		&.new
 			border-radius: 0 24px 24px 0
 			&::after
@@ -70,17 +70,17 @@ ul
 	.content
 		border-left: 8px solid map-get($color, light)
 		margin-left: -8px
-		//padding: 10px 0
+		padding: 15px 0
+		padding-right: 24px
 		> li
-			//padding-left: 10px
-			padding: 5px 0px 5px 10px
-			border-bottom: 1px solid map-get($color, light)
-			//padding-bottom: 8px
+			padding-left: 20px
+			border-bottom: 4px solid map-get($color, gray)
+			padding-bottom: 8px
 			position: relative
 			margin-left: -8px
 			&:last-of-type
 				border-bottom: 0
-				//padding-bottom: 0
+				padding-bottom: 0
 			&::before
 				content: ''
 				display: block
