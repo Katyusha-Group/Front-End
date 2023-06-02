@@ -326,13 +326,12 @@ export default function UserPage() {
                 <div
                   style={{
                     display: bigChartData == "data2" ? "block" : "none",
-                    maxHeight: "400px",
+                    // maxHeight: "400px",
                     overflowX: "auto",
                     overflowY: "scroll",
                     minWidth: "100%",
                   }}
                 >
-                  {" "}
                   <SummaryChart props={info.courseChoosed} />
                 </div>
                 <div
@@ -340,7 +339,6 @@ export default function UserPage() {
                     display: bigChartData == "data3" ? "block" : "none",
                   }}
                 >
-                  {" "}
                   <ExamChart />
                 </div>
               </div>

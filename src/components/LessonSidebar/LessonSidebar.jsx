@@ -246,7 +246,7 @@ function Sidebar(props) {
                           className="navbarDropDownItem"
                           href="http://localhost:5173/shoping"
                           onClick={(e) => {e.preventDefault()
-                            Navigate("/shoping")
+                            Navigate("/shopping")
                           }}
                         >
                           <span className="tim-icons icon-basket-simple" 
