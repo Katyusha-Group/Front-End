@@ -180,6 +180,7 @@ export default function CoursesPanel() {
           setDepartmentCourses(courses);
           let NewTimeTable = [...ChosenCourses, ...courses];
           settimetable(NewTimeTable);
+          setSwitchChecked(false);
         })
         .catch((error) => console.error(error));
     }
@@ -623,9 +624,13 @@ export default function CoursesPanel() {
                 onChange={handleDepartment}
               />
               <br/>
+              <p className="SwitchLabel"> 
+                فقط دروس قابل اخذ
+              </p>
               <ReactSwitch className="Switch"
                 checked={SwitchChecked}
                 onChange={handleSwitchChange}
+                // label = {"Hello"}
               // style={{}}
               />
               {/* <Toggle
@@ -633,10 +638,10 @@ export default function CoursesPanel() {
                 defaultChecked={this.state.cheeseIsReady}
                 onChange={this.handleCheeseChange} />
               <label htmlFor='cheese-status'>Adjacent label tag</label> */}
-              <SwitchToggle
+              {/* <SwitchToggle
                 isOn={SwitchChecked}
                 handleToggle={() => setSwitchChecked(!SwitchChecked)}
-              />
+              /> */}
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">

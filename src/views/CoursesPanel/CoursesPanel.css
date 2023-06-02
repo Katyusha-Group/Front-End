@@ -60,11 +60,23 @@ tbody{
     column-width: 1000px;
 }
 
-.Switch
+.Switch 
 {
     width: 50%;
-    /* text-align: right; */
+    /* text-align: center; */
+    /* padding-left: 20px ; */
 }
-.react-switch-bg{
+.Switch svg
+{
+    width: 100%;
+    /* text-align: inherit !important; */
+    right: 2px;
+}
+/* .react-switch-bg{
     text-align: inherit;
+} */
+.SwitchLabel
+{
+    text-align : center;
+    padding-left: 50px;
 }
