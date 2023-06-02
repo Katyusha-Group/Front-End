@@ -213,13 +213,13 @@ function Sidebar(props) {
             ) : null} */}
             <Nav>
               <Row className="nav-lessonSidebar">
-                <Col md="5">
+                <Col md="5" style={{margin:"auto"}}>
                   <NavLink to="/admin/page" className="nav-header nav-link-icon">
                    
                     <i className="tim-icons icon-atom ml-0" />
                   </NavLink>
                 </Col>
-                <Col md="4">
+                <Col md="4" style={{margin:"auto"}}>
                   <NavLink
                     to="..\CoursesPanel"
                     className="nav-header nav-link-course"
@@ -227,7 +227,7 @@ function Sidebar(props) {
                     پنل دروس
                   </NavLink>
                 </Col>
-                <Col md="3">
+                <Col md="3" style={{margin:"auto"}}>
                   <NavLink className="nav-link-profile">
                     <UncontrolledDropdown>
                       <DropdownToggle
