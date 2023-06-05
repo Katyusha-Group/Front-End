@@ -55,8 +55,10 @@
         /* border-width: 5px; */
         /* background-color: transparent; */
         /* border: solid !important; */
+        /* color: black !important; */
         border-color: #ab69b1 !important;
         color: rgb(199, 193, 193) !important;
+        /* background-color: #5c469c !important; */
         /* width: 20rem !important; */
         height: 180px;
         margin-top: 15px;
@@ -93,6 +95,7 @@
     
     .ModalprofessorImage{
         margin-top: 0px;
+        margin-right: 5px ;
         width: 120px;
         height: 120px;
         margin-left: 0.625rem;

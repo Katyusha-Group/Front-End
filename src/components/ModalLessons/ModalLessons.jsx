@@ -25,7 +25,7 @@ import {
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
-  // console.log("PROPS in MODAL", props);
+  console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
   const x = props.show.data;
   console.log("Info x", x);
@@ -61,7 +61,7 @@ const ModalLessons = (props) => {
                 <Card
                   className="ModalLessonCourseCard"
                   style={{
-                    backgroundColor: "#ab69b1",
+                    backgroundColor: "rgb(75 49 78)",
                   }}
                 >
                   <CardBody className="courseCardBody">
@@ -74,7 +74,7 @@ const ModalLessons = (props) => {
                       <CardHeader className="modalHeader"></CardHeader>
                       <Row>
                         <Col className="text-right" md="6">
-                          {x.name} (گروه {x.class_gp})
+                          {x.name} (گروه {x.group_number})
                         </Col>
                         <Col className="text-right" md="6">
                           جنسیت: {sexTostring(x.sex)}
@@ -102,7 +102,9 @@ const ModalLessons = (props) => {
                       </Row>
                       <Row>
                         <Col className="text-right" md="6">
-                          کد درس: {x.complete_course_number}
+                          <div style={{ display: 'flex' }}>
+                          کد درس:
+                          <p style={{direction:'ltr' , color:'rgb(199, 193, 193)'}}>{x.complete_course_number}</p>  </div>
                         </Col>
                         <Col className="text-right" md="6" dir="ltr">
                           تاریخ امتحان پایانی: {x.exam_times[0].date}
@@ -135,19 +137,21 @@ const ModalLessons = (props) => {
                           تعداد کل واحد ها:{x.total_unit}
                         </Col>
                       </Row>
+                      <Row>
+                        
+                        <Col className="text-right" md="6">
+                          تعداد اخذ شده در کاتیوشا: {x.added_to_calendar_count}
+                        </Col>
+                      </Row>
                     </div>
                   </CardBody>
                 </Card>
-                {/* <Row>
-                  <Col className="text-right" md="12">
-                    ظرفیت: {props.show.data.capacity}
-                  </Col>
-                </Row>
+                
                 <Row>
                   <Col md="12">
                     <Timeline show={props} />
                   </Col>
-                </Row> */}
+                </Row>
               </CardBody>
             </Modal.Body>
           </div>
