@@ -47,8 +47,8 @@
 .week-card {
     margin-bottom: 2vh !important;
     /* padding: 0px !important; */
+    /* overflow: auto; */
     height: 66vh;
-    overflow: auto;
 }
 
 .overflow-visible {
@@ -59,6 +59,8 @@
     height: 380px;
     padding: 0px !important;
     margin-top: -20px;
+    overflow: auto;
+    margin-top: .1rem;
 }
 
 .week-card-footer {
@@ -87,7 +89,7 @@ i .course {
     position: absolute;
     height: 10vh;
     width: 5rem;
-    background-color: #1d8cf8;
+    background-color: rgb(124, 98, 195);
     top: 20%;
     right: 13%;
     /* 10.7 */
@@ -97,6 +99,7 @@ i .course {
     justify-content: center;
     font-size: 0.66rem;
     padding-top: 0.4rem;
+    min-height: 65px;
 }
 
 .course:hover {
@@ -159,6 +162,7 @@ i .course {
     padding-left: 0 !important;
     justify-content: center;
     height: 26vh;
+    align-items: center;
 }
 
 div {
@@ -301,7 +305,8 @@ p {
 
 
 .classNameHover {
-    background-color: rgb(124, 98, 195);
+    background-color: #917FB3 !important;
+    /* TODO color */
 }
 
 .course-hover:hover {
@@ -318,4 +323,9 @@ p {
     /* justify-content: center; */
     flex-direction: column;
 
+}
+
+.week-chart-button{
+    background-color: #917FB3;
+    color: #917FB3;
 }

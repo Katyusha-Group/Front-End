@@ -163,8 +163,8 @@ function Login() {
          },
       })
       // console.log("shopId", shopId.json())
-      const shopId_data = await shopId.json();
-      // console.log(shopId_data);
+      let shopId_data = await shopId.json();
+      console.log("shopId_data",shopId_data);
       if (shopId.status == 200) {
         console.log("shopId.json()",shopId_data)
         localStorage.setItem("shopId", JSON.stringify(shopId_data))

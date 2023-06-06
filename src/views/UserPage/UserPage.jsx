@@ -247,13 +247,19 @@ export default function UserPage() {
               <div
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
+                className="d-flex align-items-center justify-content-center"
               >
-                <strong style={{ fontSize: "0.8rem" }}>{lessons.name}</strong>
+                <div className="m-1">
+
+                <strong title= {lessons.name}>{lessons.name.length < 27 ? lessons.name : lessons.name.slice(0, 27) + "..."}</strong>
+                
+
                 <br />
                 {lessons.registered_count} از {lessons.capacity}
                 <br />
                 <p className="id_code"> {lessons.complete_course_number}</p>
                 {/* {console.log("lessons click", lessons)}n */}
+                </div>
               </div>
             </div>
           </div>
@@ -302,11 +308,12 @@ export default function UserPage() {
         <Col sm="12">
           <Card className="week-card card-body">
             <CardBody className="week-card-body">
-              <div className="overflow-auto">
+              <div className="">
                 <div
                   className="chart"
                   style={{
                     display: bigChartData == "data1" ? "block" : "none",
+                    
                   }}
                 >
                   {lessons(info, changeInfo, true, null)}
@@ -343,7 +350,7 @@ export default function UserPage() {
                 </div>
               </div>
             </CardBody>
-            <CardFooter className="week-card-footer">
+            <CardFooter className="week-card-footer mt-0 pt-0">
               <Row>
                 <Col sm="6">
                   <ButtonGroup
@@ -355,7 +362,7 @@ export default function UserPage() {
                       className={classNames("btn-simple", {
                         active: bigChartData === "data1",
                       })}
-                      color="info"
+                      color="primary"
                       id="0"
                       size="sm"
                       onClick={() => setBgChartData("data1")}
@@ -368,7 +375,7 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="info"
+                      color="primary"
                       id="1"
                       size="sm"
                       tag="label"
@@ -385,7 +392,7 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="info"
+                      color="primary"
                       id="2"
                       size="sm"
                       tag="label"
