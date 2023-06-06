@@ -4,13 +4,7 @@
 
 .TableCard
 {
-    /* margin-top: 5%; */
-    /* margin-right: 5%;
-    margin-left: 5%;
-    margin-bottom: 5%; */
     margin-top: 20px;
-    /* margin: auto; */
-    /* margin-left: 20px; */
     overflow-x: auto;
 }
 
@@ -19,7 +13,7 @@
 }
 
 tbody{
-    border: 1px solid hsl(235, 22%, 30%);
+    border: 3px solid hsl(235, 22%, 30%);
 }
 
 .CourseListContainer {
@@ -31,7 +25,6 @@ tbody{
 .CourseContainer {
     display: flex;
     flex-direction: row-reverse;
-    /* align-items: stretch; */
     margin: 2px;
     height: 50px;
     width: 100px;
@@ -46,9 +39,7 @@ tbody{
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    /* box-sizing: border-box; */
     align-items: center;
-    /* margin: auto; */
 }
 
 .btn-fill-AddCourseButton
@@ -62,27 +53,10 @@ tbody{
     border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    /* vertical-align: middle; */
     margin-top: 3px;
     margin-bottom: -1px;
-    /* box-sizing: border-box; */
 }
 
-
-.CoursesPanel_column2
-{
-    column-width: 1000px;
-}
-
-
-/* .react-switch-bg{
-    text-align: inherit;
-} */
-/* .SwitchLabel
-{
-    text-align : center;
-    padding-left: 50px;
-} */
 
 .SwitchCard
 {
@@ -93,16 +67,9 @@ tbody{
     font-size: x-small,
 }
 
-/* .Switch 
-{
-    width: 50%;
-    text-align: center;
-    padding-left: 20px ;
-} */
 .Switch svg
 {
     width: 100%;
-    /* text-align: inherit !important; */
     right: 2px;
 }
 
@@ -120,3 +87,24 @@ tbody{
     }
 } */
 
+/* .ClassesTable
+{
+    border: 1px solid;
+} */
+/* 
+.table-head
+{
+    border: 1px solid;
+} */
+.TableROW
+{
+    border: 3px solid;
+    /* color: rgb(82,95,127); */
+    color: rgb(61,63,81);
+}
+.CoursesPanel_column2
+{
+    column-width: 1000px;
+    border: 3px solid;
+    /* color: rgb(82,95,127); */
+}

@@ -554,7 +554,7 @@ export default function CoursesPanel() {
     </div>
   )
   const DayRow = ({ periods, dayName }) => (
-    <tr>
+    <tr className="TableROW">
       <td className="CoursesPanel_column text-center">{dayName}</td>
       {Object.entries(periods).map(([time, entry]) => {
         return (
@@ -604,7 +604,7 @@ export default function CoursesPanel() {
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">
-                <thead className="text-primary">
+                <thead className="text-primary TableHead">
                   <tr>
                     <th className="table-head text-center "></th>
                     <th className="table-head text-center ">۷:۳۰ تا ۹</th>
