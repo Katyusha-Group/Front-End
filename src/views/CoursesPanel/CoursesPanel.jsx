@@ -623,7 +623,7 @@ export default function CoursesPanel() {
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
-                  <DayRow dayName="پنجشنبه" periods={keyedTimetable[5]} />
+                  {/* <DayRow dayName="پنجشنبه" periods={keyedTimetable[5]} /> */}
                 </tbody>
               </Table>
             </CardBody>
