@@ -79,11 +79,12 @@ const ModalShopping = (props) => {
       <Modal
         show={props.show.flag}
         cancel={props.close}
+        style={{ background: "rgba(0,0,0,0.2)" }}
+        onHide={props.close}
         // centered
       >
         <div className="loginLmsModal">
-          <Modal.Header className="ModalHeader"
-        >
+          <Modal.Header className="ModalHeader">
             <button
               type="button"
               class="close close-btn"
@@ -106,7 +107,11 @@ const ModalShopping = (props) => {
                 </Row>
                 <Col className="m-auto text-center category">
                   <Form className="d-flex justify-content-center">
-                    <FormGroup className="shopping_form_userpage" check disabled>
+                    <FormGroup
+                      className="shopping_form_userpage"
+                      check
+                      disabled
+                    >
                       <Label check className="shoping_label">
                         <Input
                           onChange={() => {
@@ -120,8 +125,12 @@ const ModalShopping = (props) => {
                         </span>
                         ایمیل
                       </Label>
-                      </FormGroup>
-                        <FormGroup className="shopping_form_userpage" check disabled>
+                    </FormGroup>
+                    <FormGroup
+                      className="shopping_form_userpage"
+                      check
+                      disabled
+                    >
                       <Label check className="shoping_label">
                         <Input
                           checked={false}
@@ -129,7 +138,6 @@ const ModalShopping = (props) => {
                           onChange={() => {
                             setSms(!sms);
                           }}
-                          
                         />
                         <span className="form-check-sign">
                           <span className="check" />
@@ -137,7 +145,7 @@ const ModalShopping = (props) => {
                         sms
                       </Label>
                     </FormGroup>
-                    <FormGroup className="shopping_form_userpage" check >
+                    <FormGroup className="shopping_form_userpage" check>
                       <Label check className="shoping_label">
                         <Input
                           checked={telegram}
@@ -154,18 +162,21 @@ const ModalShopping = (props) => {
                     </FormGroup>
                   </Form>
                 </Col>
-                <Col>
-                </Col>
-               
+                <Col></Col>
               </Form>
             </CardBody>
-                  <Link to="/shopping">رفتن به سبد خرید</Link>
+            <Link to="/shopping">رفتن به سبد خرید</Link>
             <CardFooter>
-              <Button className="btn-fill" color="primary" type="submit" disabled={!sms && !email && !telegram}
-              onClick={()=>{
-                addItemShop(props.show.data.complete_course_number);
-                props.close();
-                }}>
+              <Button
+                className="btn-fill"
+                color="primary"
+                type="submit"
+                disabled={!sms && !email && !telegram}
+                onClick={() => {
+                  addItemShop(props.show.data.complete_course_number);
+                  props.close();
+                }}
+              >
                 تایید
               </Button>
             </CardFooter>

@@ -63,6 +63,7 @@ function Shopping() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
+    console.log("iteem id ", state[index].id)
     // console.log("shop", num);
     // console.log("shopId in userpage", shopId);
     // console.log("token is", token);
@@ -252,8 +253,8 @@ function Shopping() {
             <Row>
               <Col md="3">
                 <Card className="">
-                  <CardHeader className="shop_row" style={{borderBottom:" 1px solid rgba(255, 255, 255, 0.1)"}}>
-                    <h1>خلاصه سفارش</h1>
+                  <CardHeader className="shop_row m-1" style={{borderBottom:" 1px solid rgba(255, 255, 255, 0.1)"}}>
+                    <h2>خلاصه سفارش</h2>
                   </CardHeader>
                   <CardBody className="week-card-body ">
                     <Row
