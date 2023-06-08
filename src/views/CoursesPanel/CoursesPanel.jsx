@@ -577,18 +577,25 @@ export default function CoursesPanel() {
         <Col>
           <Card className="TableCard">
             <CardHeader className="text-right">
-              <button className="HomeButton"
-                href="/admin/page"
-              >
-                {/* <img src={HomeIcon} alt="Button Image" /> */}
-                خانه
-              </button>
               <Row>
+                <Col>
+                  <button className="HomeButton"
+                    // class="HomeButton tim-icons icon-double-right"
+                    href="/admin/page"
+                  >
+                    <img src={HomeIcon} alt="Button Image" />
+                    {/* خانه */}
+                  </button>
+                </Col>
+                <Col>
                   <CardTitle style={{fontSize:"25px"}}>
                     پنل دروس
                   </CardTitle>
+                </Col>
               </Row>
-              <Row>
+            </CardHeader>
+            <CardBody>
+            <Row>
                 <Col className="ToggleCol">
                   <div className="SwitchCard">
                       <p className="SwitchLabel"> 
@@ -613,8 +620,6 @@ export default function CoursesPanel() {
                   />
                 </Col>
               </Row>
-            </CardHeader>
-            <CardBody>
               <Table className="ClassesTable">
                 <thead className="text-primary TableHead">
                   <tr>

@@ -105,8 +105,9 @@
 
 .HomeButton
 {
-    /* background-color:black; */
-    /* top: 0;
-    right: 0; */
-    width: 200px;
+    width: 50px;
+    /* color: aliceblue; */
+    background-color: rgb(102, 83, 160);
+    /* border-color: rgb(200, 78, 202); */
+    border-radius: 5px;
 }
