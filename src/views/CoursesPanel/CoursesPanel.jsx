@@ -239,7 +239,7 @@ export default function CoursesPanel() {
       //   this.IsInTheChosenCourses = true;
       // }
       // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      this.backgColor = (this.IsChosen) ? "rgb(102, 83, 161)" : "hsl(255, 22%, 30%)";
+      this.backgColor = (this.IsChosen) ? "rgb(200, 78, 202)" : "hsl(255, 22%, 30%)";
       // console.log(this.name + " has color of " + this.backgColor);
     }
 
@@ -542,7 +542,7 @@ export default function CoursesPanel() {
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(220,93,147)" : "rgb(200, 78, 202)"}}
+                  style={{ backgroundColor: (entry.IsChosen) ? "hsl(255, 22%, 30%)" : "rgb(200, 78, 202)"}}
                   onClick={() => {
                       showLoading();
                     entry.ButtonClicked();
@@ -577,11 +577,19 @@ export default function CoursesPanel() {
         <Col>
           <Card className="TableCard">
             <CardHeader className="text-right">
-              <CardTitle style={{fontSize:"25px"}}>
-                پنل دروس
-              </CardTitle>
+              <button className="HomeButton"
+                href="/admin/page"
+              >
+                {/* <img src={HomeIcon} alt="Button Image" /> */}
+                خانه
+              </button>
               <Row>
-                <Col>
+                  <CardTitle style={{fontSize:"25px"}}>
+                    پنل دروس
+                  </CardTitle>
+              </Row>
+              <Row>
+                <Col className="ToggleCol">
                   <div className="SwitchCard">
                       <p className="SwitchLabel"> 
                         <ReactSwitch className="Switch"
@@ -593,7 +601,7 @@ export default function CoursesPanel() {
                      </p>
                   </div>
                 </Col>
-                <Col>
+                <Col className="SelectCol">
                   <Select
                     options={DepartmentOptions}
                     styles={customStyles}
@@ -603,13 +611,6 @@ export default function CoursesPanel() {
                     value={SelectedDepartment.name}
                     onChange={handleDepartment}
                   />
-                </Col>
-                <Col>
-                  <Button className="HomeButton"
-                    href="/admin/page"
-                  >
-                    <img src={HomeIcon} alt="Button Image" />
-                  </Button>
                 </Col>
               </Row>
             </CardHeader>

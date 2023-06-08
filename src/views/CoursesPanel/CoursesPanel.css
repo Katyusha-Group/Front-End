@@ -1,26 +1,13 @@
-.TopRow {
-    text-align: left;
-}
-
-.TableCard
-{
+.TableCard {
     margin-top: 20px;
     overflow-x: auto;
-}
-
-.CoursesPanel_column2 {
-    border: 1px solid;
-}
-
-tbody{
-    border: 3px solid hsl(235, 22%, 30%);
 }
 
 .CourseListContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
 .CourseContainer {
     display: flex;
@@ -30,7 +17,7 @@ tbody{
     width: 100px;
 }
 
-.Course{
+.Course {
     height: 100%;
     text-align: center;
     background-color: hsl(235, 22%, 30%);
@@ -42,8 +29,7 @@ tbody{
     align-items: center;
 }
 
-.btn-fill-AddCourseButton
-{
+.btn-fill-AddCourseButton {
     height: 100%;
     border: none;
     color: white;
@@ -58,8 +44,7 @@ tbody{
 }
 
 
-.SwitchCard
-{
+.SwitchCard {
     background-color: hsl(235, 22%, 30%);
     /* margin-right: 40%; */
     /* margin-left: 40%; */
@@ -78,8 +63,7 @@ tbody{
     background-color: black; 
 } */
 
-.Switch svg
-{
+.Switch svg {
     width: 100%;
     right: 2px;
 }
@@ -107,20 +91,22 @@ tbody{
 {
     border: 1px solid;
 } */
-.TableROW
-{
+.TableROW {
     border: 3px solid;
     /* color: rgb(82,95,127); */
-    color: rgb(61,63,81);
+    color: rgb(61, 63, 81);
 }
-.CoursesPanel_column2
-{
+
+.CoursesPanel_column2 {
     column-width: 1000px;
     border: 3px solid;
     /* color: rgb(82,95,127); */
 }
 
-/* .HomeButton
+.HomeButton
 {
-    background-color:black;
-} */
+    /* background-color:black; */
+    /* top: 0;
+    right: 0; */
+    width: 200px;
+}
