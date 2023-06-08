@@ -141,7 +141,7 @@ export default function CoursesPanel() {
       color: "rgba(255, 255, 255, 0.8)",
       borderColor: state.isFocused ? "#e14eca" : "#2b3553",
       borderRadius: "0.4285rem",
-      fontSize: "0.75rem",
+      fontSize: "1rem",
       marginTop: "5px",
       fontWeight: "400",
       transition:
@@ -214,6 +214,11 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
+      if (this.name.length > 30)
+      {
+        // console.log("*****Length is: " + this.name.length);
+        this.name = this.name.substring(0, 25) + "...";
+      }
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
@@ -234,7 +239,7 @@ export default function CoursesPanel() {
       //   this.IsInTheChosenCourses = true;
       // }
       // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+      this.backgColor = (this.IsChosen) ? "rgb(102, 83, 161)" : "hsl(255, 22%, 30%)";
       // console.log(this.name + " has color of " + this.backgColor);
     }
 
@@ -537,7 +542,7 @@ export default function CoursesPanel() {
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(220,93,147)" : "rgb(200, 78, 202)"}}
                   onClick={() => {
                       showLoading();
                     entry.ButtonClicked();
@@ -575,32 +580,38 @@ export default function CoursesPanel() {
               <CardTitle style={{fontSize:"25px"}}>
                 پنل دروس
               </CardTitle>
-              <Button
-                href="/admin/page"
-              >
-                <img src={HomeIcon} alt="Button Image" />
-              </Button>
-              <Select
-                options={DepartmentOptions}
-                styles={customStyles}
-                isRtl
-                placeholder="دانشکده مورد نظر را انتخاب کنید"
-                name="SelectDepartment"
-                value={SelectedDepartment.name}
-                onChange={handleDepartment}
-              />
-              <br/>
-              <div className="SwitchCard">
-                <p className="SwitchLabel"> 
-                  فقط دروس قابل اخذ
-                </p>
-                <ReactSwitch className="Switch"
-                  checked={SwitchChecked}
-                  onChange={handleSwitchChange}
-                  // label = {"Hello"}
-                // style={{}}
-                />
-              </div>
+              <Row>
+                <Col>
+                  <div className="SwitchCard">
+                      <p className="SwitchLabel"> 
+                        <ReactSwitch className="Switch"
+                            checked={SwitchChecked}
+                            onChange={handleSwitchChange}
+                          />
+                          <br/>
+                        فقط دروس قابل اخذ
+                     </p>
+                  </div>
+                </Col>
+                <Col>
+                  <Select
+                    options={DepartmentOptions}
+                    styles={customStyles}
+                    isRtl
+                    placeholder="دانشکده مورد نظر را انتخاب کنید"
+                    name="SelectDepartment"
+                    value={SelectedDepartment.name}
+                    onChange={handleDepartment}
+                  />
+                </Col>
+                <Col>
+                  <Button className="HomeButton"
+                    href="/admin/page"
+                  >
+                    <img src={HomeIcon} alt="Button Image" />
+                  </Button>
+                </Col>
+              </Row>
             </CardHeader>
             <CardBody>
               <Table className="ClassesTable">

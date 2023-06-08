@@ -61,11 +61,22 @@ tbody{
 .SwitchCard
 {
     background-color: hsl(235, 22%, 30%);
-    margin-right: 40%;
-    margin-left: 40%;
+    /* margin-right: 40%; */
+    /* margin-left: 40%; */
     border-radius: 10px;
-    font-size: x-small,
+    font-size: small;
+    padding: 5px;
 }
+
+/* .Switch div
+{
+    background-color: azure;
+} */
+
+/* .react-switch-bg
+{
+    background-color: black; 
+} */
 
 .Switch svg
 {
@@ -108,3 +119,8 @@ tbody{
     border: 3px solid;
     /* color: rgb(82,95,127); */
 }
+
+/* .HomeButton
+{
+    background-color:black;
+} */
