@@ -21,15 +21,38 @@ import {
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
-  const [email, setEmail] = React.useState(true);
+  const [email, setEmail] = React.useState(false);
   const [telegram, setTelegram] = React.useState(true);
-  const [sms, setSms] = React.useState(true);
-  function addItemShop(num) {
-    const tokenJson = localStorage.getItem("authTokens");
+  const [sms, setSms] = React.useState(false);
+  const [enableBotton, setEnableBotton] = React.useState(false);
+  const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
+  function getShopData() {
+    console.log("hello22")
+    // React.useEffect(() => {
+      console.log("data", props.show.data)
+    fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/${props.show.data.complete_course_number}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${info.token.access}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+      .then((data) => {
+        console.log("get shop data",data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // }, []);
+    
+  }
+
+  function addItemShop(num) {
+    fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -82,15 +105,14 @@ const ModalShopping = (props) => {
                   </Col>
                 </Row>
                 <Col className="m-auto text-center category">
-                  <Form>
-                    <FormGroup className="shopping_form_userpage" check>
+                  <Form className="d-flex justify-content-center">
+                    <FormGroup className="shopping_form_userpage" check disabled>
                       <Label check className="shoping_label">
                         <Input
                           onChange={() => {
                             setEmail(!email);
                           }}
-                          checked={email}
-                          // checked={s}
+                          checked={false}
                           type="checkbox"
                         />
                         <span className="form-check-sign">
@@ -98,19 +120,24 @@ const ModalShopping = (props) => {
                         </span>
                         ایمیل
                       </Label>
+                      </FormGroup>
+                        <FormGroup className="shopping_form_userpage" check disabled>
                       <Label check className="shoping_label">
                         <Input
-                          checked={sms}
+                          checked={false}
                           type="checkbox"
                           onChange={() => {
                             setSms(!sms);
                           }}
+                          
                         />
                         <span className="form-check-sign">
                           <span className="check" />
                         </span>
                         sms
                       </Label>
+                    </FormGroup>
+                    <FormGroup className="shopping_form_userpage" check >
                       <Label check className="shoping_label">
                         <Input
                           checked={telegram}
@@ -134,8 +161,7 @@ const ModalShopping = (props) => {
             </CardBody>
                   <Link to="/shopping">رفتن به سبد خرید</Link>
             <CardFooter>
-                            
-              <Button className="btn-fill" color="primary" type="submit" 
+              <Button className="btn-fill" color="primary" type="submit" disabled={!sms && !email && !telegram}
               onClick={()=>{
                 addItemShop(props.show.data.complete_course_number);
                 props.close();

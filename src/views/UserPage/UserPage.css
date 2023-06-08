@@ -329,3 +329,12 @@ p {
     background-color: #917FB3;
     color: #917FB3;
 }
+
+.sidebar_button{
+    width: 0.1rem;
+    height: 2rem;
+    z-index: 1;
+    right: 37px;
+    flex-direction: row;
+    justify-content: end;
+}

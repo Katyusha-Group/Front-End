@@ -27,6 +27,10 @@ import { conforms } from "lodash";
 function Login() {
   let [shop_caller,setShop_caller] = React.useState()
   console.log("default gohNakhor",shop_caller)
+  let idShop = "ali";
+  React.useEffect(() => {
+    console.log("state", idShop);
+  }, [idShop]);
   // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
@@ -156,21 +160,24 @@ function Login() {
       const tokenClass = JSON.parse(JSON.stringify(data));
       const token = tokenClass.token.access;
       const shopId = await fetch("https://katyushaiust.ir/carts/", {
+        method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-
          },
       })
       // console.log("shopId", shopId.json())
-      let shopId_data = await shopId.json();
-      console.log("shopId_data",shopId_data);
-      if (shopId.status == 200) {
-        console.log("shopId.json()",shopId_data)
-        localStorage.setItem("shopId", JSON.stringify(shopId_data))
+      idShop = await shopId.json();
+      console.log("shopId_data",idShop);
+      if (shopId.status == 201 || shopId.status == 200) {
+        console.log("shopId.json()",idShop)
+        localStorage.setItem("shopId", JSON.stringify(idShop))
         console.log("shopId localstorage ",localStorage.getItem("shopId"))
         let test = localStorage.getItem("shopId")
         console.log("test", JSON.parse(test)[0])
+      }
+      else{
+        console.error("shopId error", shopId.status)
       }
       console.log("shopId: ",shopId)
       Navigate("/admin/page");

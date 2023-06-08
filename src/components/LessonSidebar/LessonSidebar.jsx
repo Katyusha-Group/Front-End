@@ -62,8 +62,8 @@ const reducer= (state, action) => {
 };
 
 
-function Sidebar(props) {
-  const {info, changeInfo} = useInfo();
+function LessonSidebar(props) {
+  // const {info, changeInfo} = useInfo();
   const getError = (error) => {
     // console.log(error.data.message)
     return error.responst && error.response.data
@@ -156,7 +156,7 @@ function Sidebar(props) {
   if (logo !== undefined) {
     if (logo.outterLink !== undefined) {
       logoImg = (
-        <a
+        <Link
           href={logo.outterLink}
           className="simple-text logo-mini"
           target="_blank"
@@ -165,17 +165,17 @@ function Sidebar(props) {
           <div className="logo-img">
             <img src={logo.imgSrc} alt="react-logo" />
           </div>
-        </a>
+        </Link>
       );
       logoText = (
-        <a
+        <Link
           href={logo.outterLink}
           className="simple-text logo-normal"
           target="_blank"
           onClick={props.toggleSidebar}
         >
           {logo.text}
-        </a>
+        </Link>
       );
     } else {
       logoImg = (
@@ -228,7 +228,7 @@ function Sidebar(props) {
                   </NavLink>
                 </Col>
                 <Col md="3" style={{margin:"auto"}}>
-                  <NavLink className="nav-link-profile">
+                  <div className="nav-link-profile">
                     <UncontrolledDropdown>
                       <DropdownToggle
                         className="m-0 p-10"
@@ -240,7 +240,7 @@ function Sidebar(props) {
                       <DropdownMenu
                         className="br-7"
                         aria-labelledby="dropdownMenuLink"
-                        right
+                        end
                       >
                         <DropdownItem
                           className="navbarDropDownItem"
@@ -274,13 +274,7 @@ function Sidebar(props) {
                           <span className="tim-icons icon-lock-circle" />
                           تغییر رمز عبور
                         </DropdownItem>
-                        {/* <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          ویرایش پروفایل
-                          <span className="tim-icons icon-badge" />
-                        </DropdownItem> */}
+                        
                         <DropdownItem
                           href="#pablo"
                           // onClick={()=>{
@@ -303,7 +297,7 @@ function Sidebar(props) {
                         </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
-                  </NavLink>
+                  </div>
                 </Col>
               </Row>
               <div className="lessonSidebar_component">
@@ -313,7 +307,7 @@ function Sidebar(props) {
                     return (
                       <NavLink
                         className="nav-link nav-link-lessonSidebar"
-                        activeClassName="active"
+                        // activeClassName="active"
                         onClick={() => setLessonState([prop])}
                         key={index}
                       >
@@ -326,7 +320,7 @@ function Sidebar(props) {
                 {loading ? "" : error? "" :
                 <NavLink
                   className="nav-link nav-link-lessonSidebar"
-                  activeClassName="active"
+                  // activeClassName="active"
                   onClick={() => {
                     setLessonState(allColleges);
                     // console.log("all colleges in onclick",allColleges);
@@ -363,7 +357,7 @@ function Sidebar(props) {
   );
 }
 
-Sidebar.propTypes = {
+LessonSidebar.propTypes = {
   rtlActive: PropTypes.bool,
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
@@ -374,4 +368,4 @@ Sidebar.propTypes = {
   }),
 };
 
-export default Sidebar;
+export default LessonSidebar;

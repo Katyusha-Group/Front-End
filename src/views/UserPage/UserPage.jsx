@@ -69,7 +69,7 @@ const reducer = (state, action) => {
   }
 };
 export default function UserPage() {
-  const [datac, setData] = React.useState([]);
+  // const [datac, setData] = React.useState([]);
   const { info, changeInfo } = useInfo();
   const [lesson, setLesson] = React.useState({
     name: "",
@@ -176,7 +176,7 @@ export default function UserPage() {
           .then((response) => response.json())
           .then((data) => {
             // console.log("get data", data);
-            setData(data);
+            // setData(data);
             changeInfoState("courseChoosed", data);
             // console.log("get data after reload", data);
           })
@@ -305,6 +305,10 @@ export default function UserPage() {
       <Row>
         {/* <Spinner/> */}
         {/* <Col lg="12"><ExamChart /></Col> */}
+        {/* <Button className="sidebar_button d-flex" style={{position:"absolute"}}>
+        <i className="tim-icons icon-gift-2" />
+
+        </Button> */}
         <Col sm="12">
           <Card className="week-card card-body">
             <CardBody className="week-card-body">
@@ -441,7 +445,7 @@ export default function UserPage() {
                 <Spinner />
               ) : (
                 info.courseGroupsListInContext.map((x, index) => (
-                  <div className="coursCardContainer">
+                  <div className="coursCardContainer" key={index}>
                     <Card
                       className="courseCard"
                       key={index}
