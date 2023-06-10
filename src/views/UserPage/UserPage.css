@@ -338,3 +338,9 @@ p {
     flex-direction: row;
     justify-content: end;
 }
+
+@media (max-width: 991px){
+    .courseGroupCard{
+        height: 16vh;
+    }   
+}

@@ -63,7 +63,7 @@ function Shopping() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    console.log("iteem id ", state[index].id)
+    console.log("iteem id ", state[index].id);
     // console.log("shop", num);
     // console.log("shopId in userpage", shopId);
     // console.log("token is", token);
@@ -253,7 +253,12 @@ function Shopping() {
             <Row>
               <Col md="3">
                 <Card className="">
-                  <CardHeader className="shop_row m-1" style={{borderBottom:" 1px solid rgba(255, 255, 255, 0.1)"}}>
+                  <CardHeader
+                    className="shop_row m-1"
+                    style={{
+                      borderBottom: " 1px solid rgba(255, 255, 255, 0.1)",
+                    }}
+                  >
                     <h2>خلاصه سفارش</h2>
                   </CardHeader>
                   <CardBody className="week-card-body ">
@@ -271,7 +276,9 @@ function Shopping() {
                       xs="1"
                       className="places-buttons shop_row"
                     >
-                      <Col className="m-auto text-center category">کیف پول شما</Col>
+                      <Col className="m-auto text-center category">
+                        کیف پول شما
+                      </Col>
                     </Row>
                     <Row
                       md="1"
@@ -351,14 +358,15 @@ function Shopping() {
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
-                            <FormGroup className="shopping_form" check>
+                            <FormGroup className="shopping_form" check disabled>
                               <Label check className="shoping_label">
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
                                     changeChecked(1, index);
                                   }}
-                                  checked={state[index].contain_email}
+                                  // checked={state[index].contain_email}
+                                  checked={false}
                                   // checked={s}
                                   type="checkbox"
                                 />
@@ -367,9 +375,12 @@ function Shopping() {
                                 </span>
                                 ایمیل
                               </Label>
+                            </FormGroup>
+                            <FormGroup className="shopping_form" check disabled>
                               <Label check className="shoping_label">
                                 <Input
-                                  checked={x.contain_sms}
+                                  // checked={x.contain_sms}
+                                  checked={false}
                                   type="checkbox"
                                   valid={false}
                                   onChange={() => {
@@ -382,6 +393,8 @@ function Shopping() {
                                 </span>
                                 sms
                               </Label>
+                            </FormGroup>
+                            <FormGroup className="shopping_form" check>
                               <Label check className="shoping_label">
                                 <Input
                                   checked={x.contain_telegram}

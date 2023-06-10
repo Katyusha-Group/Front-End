@@ -141,7 +141,7 @@ function LessonSidebar(props) {
     // Specify how to clean up after this effect:
     return function cleanup() {
       if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-        ps.destroy();
+        //ps.destroy();
       }
     };
   });

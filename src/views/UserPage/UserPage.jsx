@@ -45,6 +45,7 @@ import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
 import ModalShopping from "../../components/ModalShopping/ModlaShopping.jsx";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
@@ -302,6 +303,7 @@ export default function UserPage() {
   return (
     <>
       {/* {showLoading()} */}
+        {/* <AdminNavbar/> */}
       <Row>
         {/* <Spinner/> */}
         {/* <Col lg="12"><ExamChart /></Col> */}
