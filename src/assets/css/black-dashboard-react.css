@@ -12637,6 +12637,9 @@ code {
   right: -4px; }
 
 @media screen and (max-width: 768px) {
+  .rtl .sidebar{
+    width: 16rem;
+  }
   .rtl .main-panel .content {
     padding-left: 15px;
     padding-right: 15px; } }
@@ -13667,6 +13670,10 @@ select.form-control option {
   .navbar-admin{
     display: none;
   }
+
+  .rtl .sidebar{
+    width: 21rem;
+  }
 }
 
 @media (max-width: 991px) {
@@ -13674,13 +13681,16 @@ select.form-control option {
   .sidebar .nav{
     margin-top: 1vh;
   }
+
+  .admin-content{
+    margin-top: 1vh;
+    /* padding-top: 1vh; */
+  }
 }
+
 
 .navbar-admin{
   height: 7.5vh;
   padding:0 1vh ;
 }
 
-.admin-content{
-  margin-top: 1vh;
-}

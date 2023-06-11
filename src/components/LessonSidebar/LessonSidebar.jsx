@@ -131,20 +131,20 @@ function LessonSidebar(props) {
     // console.log("all Colleges state", allColleges);
   }, []);
 
-  React.useEffect(() => {
-    if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(sidebarRef.current, {
-        suppressScrollX: true,
-        suppressScrollY: false,
-      });
-    }
-    // Specify how to clean up after this effect:
-    return function cleanup() {
-      if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-        //ps.destroy();
-      }
-    };
-  });
+  // React.useEffect(() => {
+  //   if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //     ps = new PerfectScrollbar(sidebarRef.current, {
+  //       suppressScrollX: true,
+  //       suppressScrollY: false,
+  //     });
+  //   }
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //       //ps.destroy();
+  //     }
+  //   };
+  // });
 
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
@@ -213,13 +213,13 @@ function LessonSidebar(props) {
             ) : null} */}
             <Nav>
               <Row className="nav-lessonSidebar">
-                <Col md="5" style={{margin:"auto"}}>
+                <Col md="5" xs="5" style={{margin:"auto"}}>
                   <NavLink to="/admin/page" className="nav-header nav-link-icon">
                    
                     <i className="tim-icons icon-atom ml-0" />
                   </NavLink>
                 </Col>
-                <Col md="4" style={{margin:"auto"}}>
+                <Col md="4" xs="4" style={{margin:"auto"}}>
                   <NavLink
                     to="..\CoursesPanel"
                     className="nav-header nav-link-course"
@@ -227,7 +227,7 @@ function LessonSidebar(props) {
                     پنل دروس
                   </NavLink>
                 </Col>
-                <Col md="3" style={{margin:"auto"}}>
+                <Col md="3" xs="3" style={{margin:"auto"}}>
                   <div className="nav-link-profile">
                     <UncontrolledDropdown>
                       <DropdownToggle

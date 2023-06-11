@@ -44,7 +44,7 @@ import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
-import ModalShopping from "../../components/ModalShopping/ModlaShopping.jsx";
+import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);

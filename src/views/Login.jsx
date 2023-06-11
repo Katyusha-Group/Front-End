@@ -302,7 +302,7 @@ function Login() {
                       onClick={handleSubmit}
                       //onChange={handleClick}
                       className="btn-fill"
-                      color="primary"
+                      color="info"
                       type="submit"
                     >
                       ورود

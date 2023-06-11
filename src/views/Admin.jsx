@@ -93,7 +93,7 @@ export default function Admin() {
             toggleSidebar={toggleSidebar}
             sidebarOpened={sidebarOpened}
           /> */}
-          <div className="content admin-content">
+          <div className="content admin-content" style={{paddingTop:"2.7vh"}}>
             <Navbar className="px-0 navbar-admin">
               <Container className="m-0">
                 <div className="navbar-wrapper">
