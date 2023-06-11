@@ -12511,7 +12511,7 @@ code {
     left: auto; }
 
 .rtl .main-panel .content {
-  padding: 20px 356px 0px 30px; }
+  padding: 25px 356px 0px 30px; }
 
 
 .rtl .footer {
@@ -12578,7 +12578,9 @@ code {
     /* TODO change margin*/
     margin-right: -70px; }
   .rtl .main-panel .content {
-    padding-right: 50px; }
+    padding-right: 50px;
+    padding-top: 20px;
+  }
   .rtl #bodyClick {
     right: 260px;
     left: auto; }
@@ -13684,6 +13686,7 @@ select.form-control option {
 
   .admin-content{
     margin-top: 1vh;
+    padding-top: 20px;
     /* padding-top: 1vh; */
   }
 }
