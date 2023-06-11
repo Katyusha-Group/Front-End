@@ -30,12 +30,6 @@
   z-index:500;
 }
 
-/* .modal-content{
-    background-color: #27293d!important;
-} */
-
-/* .ModalLesson{
-} */
 
 .ModalLesson {
     /* width: 70% !important; */
@@ -76,19 +70,14 @@
         cursor: pointer;
     }
     
-    .courseGroupCard{
-        /* align-items: flex-start ; */
+    /* .courseGroupCard{
         display: flex;
         flex-direction: row;
-        /* justify-content: space-around; */
-        /* align-content: space-between; */
         flex-wrap: wrap;
         height: 30vh;
         overflow: auto;
-        /* justify-content: center; */
         padding-left: 0 !important;
-    
-    }
+    } */
     div{
         text-align: center;
     }

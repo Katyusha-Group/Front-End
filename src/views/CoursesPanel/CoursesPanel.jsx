@@ -20,7 +20,7 @@ import {
   FormGroup
 } from "reactstrap";
 import "./CoursesPanel.css"
-//import ReactSwitch from "react-switch";
+import ReactSwitch from "react-switch";
 import HomeIcon from './home.png';
 import { size } from "lodash";
 export default function CoursesPanel() {
@@ -594,12 +594,12 @@ export default function CoursesPanel() {
                 <p className="SwitchLabel"> 
                   فقط دروس قابل اخذ
                 </p>
-                {/* <ReactSwitch className="Switch"
+                <ReactSwitch className="Switch"
                   checked={SwitchChecked}
                   onChange={handleSwitchChange}
                   // label = {"Hello"}
                 // style={{}}
-                /> */}
+                />
               </div>
             </CardHeader>
             <CardBody>
