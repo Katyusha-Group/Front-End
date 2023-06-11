@@ -16,7 +16,7 @@ import {
   Input,
   Row,
   Col,
-  Label
+  Label,
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
@@ -26,30 +26,9 @@ const ModalShopping = (props) => {
   const [sms, setSms] = React.useState(false);
   const [enableBotton, setEnableBotton] = React.useState(false);
   const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-  function getShopData() {
-    console.log("hello22")
-    // React.useEffect(() => {
-      console.log("data", props.show.data)
-    fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/${props.show.data.complete_course_number}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${info.token.access}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => response.json())
-      .then((data) => {
-        console.log("get shop data",data)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    // }, []);
-    
-  }
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
+  const shopId = JSON.parse(localStorage.getItem("shopId"));
 
   function addItemShop(num) {
     fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
