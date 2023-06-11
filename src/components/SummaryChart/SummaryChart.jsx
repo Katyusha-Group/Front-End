@@ -24,8 +24,8 @@ import {
 // import * as chart from "../../assets/img/schedule_table.png"
 export default function SummaryChart(props) {
   function summar(data) {
-    return data.map((table_row) => (
-      <tr>
+    return data.map((table_row, index) => (
+      <tr key={index}>
         <td className="dir-left">{table_row.complete_course_number}</td>
         <td>{table_row.name}</td>
         <td>{table_row.teacher.name}</td>

@@ -100,7 +100,11 @@ function ExamChart() {
                     "none")
                 }
               >
-                <div>{lesson.name}</div>
+                <div>
+                  {/* {lesson.name} */}
+                <strong title= {lesson.name}>{lesson.name.length < 13 ? lesson.name : lesson.name.slice(0, 13) + "..."}</strong>
+
+                </div>
                 <div className="exam_hover" id={lessonBoxId + "x"}>
                   <div className="dir-left">
                     {lesson.complete_course_number}

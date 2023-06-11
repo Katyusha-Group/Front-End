@@ -27,6 +27,9 @@ const ModalLessons = (props) => {
       <Modal
         show={props.show.flag}
         cancel={props.close}
+        onHide={props.close}
+        style={{ background: "rgba(0,0,0,0.2)" }}
+
         // centered
       >
         <div className="loginLmsModal">

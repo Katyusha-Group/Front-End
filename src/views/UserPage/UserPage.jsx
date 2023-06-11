@@ -44,7 +44,8 @@ import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import { sum } from "lodash";
 import axios from "axios";
-import ModalShopping from "../../components/ModalShopping/ModlaShopping.jsx";
+import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 function timeStringToFloat(time) {
   var hoursMinutes = time.split(/[.:]/);
   var hours = parseInt(hoursMinutes[0], 10);
@@ -69,7 +70,7 @@ const reducer = (state, action) => {
   }
 };
 export default function UserPage() {
-  const [datac, setData] = React.useState([]);
+  // const [datac, setData] = React.useState([]);
   const { info, changeInfo } = useInfo();
   const [lesson, setLesson] = React.useState({
     name: "",
@@ -176,7 +177,7 @@ export default function UserPage() {
           .then((response) => response.json())
           .then((data) => {
             // console.log("get data", data);
-            setData(data);
+            // setData(data);
             changeInfoState("courseChoosed", data);
             // console.log("get data after reload", data);
           })
@@ -247,13 +248,20 @@ export default function UserPage() {
               <div
                 style={{ height: "100%" }}
                 onClick={() => closeLesson(true, lessons)}
+                className="d-flex align-items-center justify-content-center"
               >
-                <strong style={{ fontSize: "0.8rem" }}>{lessons.name}</strong>
-                <br />
-                {lessons.registered_count} از {lessons.capacity}
-                <br />
-                <p className="id_code"> {lessons.complete_course_number}</p>
-                {/* {console.log("lessons click", lessons)}n */}
+                <div className="m-1">
+                  <strong title={lessons.name}>
+                    {lessons.name.length < 27
+                      ? lessons.name
+                      : lessons.name.slice(0, 27) + "..."}
+                  </strong>
+                  <br />
+                  {lessons.registered_count} از {lessons.capacity}
+                  <br />
+                  <p className="id_code"> {lessons.complete_course_number}</p>
+                  {/* {console.log("lessons click", lessons)}n */}
+                </div>
               </div>
             </div>
           </div>
@@ -262,47 +270,46 @@ export default function UserPage() {
     });
   }
 
-  function addItemShop(num) {
-    console.log("hello");
+  function getShopData(x) {
+    console.log("hello22");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    // console.log("shopId in userpage", shopId);
-    // console.log("token is", token);
-    fetch(`https://katyushaiust.ir/carts/${shopId[0].id}/items/`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        complete_course_number: num,
-        contain_telegram: true,
-        contain_sms: true,
-        contain_email: true,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(`shop add ${num}`, data);
-      })
-      .catch((error) => {
-        console.error(error);
-        console.log("failed course complete", num);
-      });
+    // console.log("data", props.show.data);
+    console.log("id", showShoppingModal.data);
+    console.log("api", `https://katyushaiust.ir/course-cart-order-info/${shopId.id}/`);
+    // fetch(`https://katyushaiust.ir/course-cart-order-info/${shopId.id}/${x}`, {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: `Bearer ${info.token.access}`,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("get shop data", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }
 
   return (
     <>
       {/* {showLoading()} */}
+      {/* <AdminNavbar/> */}
       <Row>
         {/* <Spinner/> */}
         {/* <Col lg="12"><ExamChart /></Col> */}
+        {/* <Button className="sidebar_button d-flex" style={{position:"absolute"}}>
+        <i className="tim-icons icon-gift-2" />
+
+        </Button> */}
         <Col sm="12">
           <Card className="week-card card-body">
             <CardBody className="week-card-body">
-              <div className="overflow-auto">
+              <div className="">
                 <div
                   className="chart"
                   style={{
@@ -343,7 +350,7 @@ export default function UserPage() {
                 </div>
               </div>
             </CardBody>
-            <CardFooter className="week-card-footer">
+            <CardFooter className="week-card-footer mt-0 pt-0">
               <Row>
                 <Col sm="6">
                   <ButtonGroup
@@ -355,7 +362,7 @@ export default function UserPage() {
                       className={classNames("btn-simple", {
                         active: bigChartData === "data1",
                       })}
-                      color="info"
+                      color="primary"
                       id="0"
                       size="sm"
                       onClick={() => setBgChartData("data1")}
@@ -368,7 +375,7 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="info"
+                      color="primary"
                       id="1"
                       size="sm"
                       tag="label"
@@ -385,7 +392,7 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="info"
+                      color="primary"
                       id="2"
                       size="sm"
                       tag="label"
@@ -434,7 +441,7 @@ export default function UserPage() {
                 <Spinner />
               ) : (
                 info.courseGroupsListInContext.map((x, index) => (
-                  <div className="coursCardContainer">
+                  <div className="coursCardContainer" key={index}>
                     <Card
                       className="courseCard"
                       key={index}
@@ -575,7 +582,8 @@ export default function UserPage() {
                           if (true) {
                             // changeInfo("shop", [...info.shop, x]);
                             // addItemShop(x.complete_course_number);
-                            funcSetShowShoppingModal(true,x)
+                            getShopData(x.complete_course_number)
+                            funcSetShowShoppingModal(true, x);
                           }
                         }}
                       >
@@ -595,7 +603,10 @@ export default function UserPage() {
                     <ModalShopping
                       show={showShoppingModal}
                       close={() =>
-                        setShowShoppingModal(() => ({ ...showShoppingModal, flag: false }))
+                        setShowShoppingModal(() => ({
+                          ...showShoppingModal,
+                          flag: false,
+                        }))
                       }
                     />
                   </div>
