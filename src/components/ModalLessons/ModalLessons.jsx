@@ -31,18 +31,16 @@ const ModalLessons = (props) => {
   console.log("Info x", x);
   if (Object.keys(x).length != 0) {
     return (
-      <>
+      
         <Modal
+        dialogClassName={"courseProfileModal"} centered 
           show={props.show.flag}
           cancel={props.close}
-        onHide={props.close}
-        style={{ background: "rgba(0,0,0,0.2)" }}
-
-          className="ModalLesson"
+          onHide={props.close}
           // centered
         >
-          <div>
-            <Modal.Header className="ModalHeader">
+          <div >
+            <Modal.Header >
               <button
                 type="button"
                 class="close close-btn"
@@ -67,7 +65,7 @@ const ModalLessons = (props) => {
                     backgroundColor: "rgb(75 49 78)",
                   }}
                 >
-                  <CardBody className="courseCardBody">
+                  <CardBody className="ModalCourseCardBody">
                     <img
                       className="ModalprofessorImage"
                       src={x.teacher.teacher_image}
@@ -159,7 +157,6 @@ const ModalLessons = (props) => {
             </Modal.Body>
           </div>
         </Modal>
-      </>
     );
   }
 };
