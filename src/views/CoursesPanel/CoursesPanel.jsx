@@ -12,18 +12,15 @@ import {
   CardTitle,
   Table,
   Row,
-  Col,
-  Input,
-  Label,
-  Button,
-  View,
-  FormGroup
+  Col
 } from "reactstrap";
+
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 import HomeIcon from './home.png';
 import { size } from "lodash";
 export default function CoursesPanel() {
+
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -577,8 +574,17 @@ export default function CoursesPanel() {
         <Col>
           <Card className="TableCard">
             <CardHeader className="text-right">
-              <Row>
-                <Col>
+              {/* <Row>
+                <Col> */}
+                  <CardTitle style={{fontSize:"25px"}}>
+                    پنل دروس
+                  </CardTitle>
+                {/* </Col>
+              </Row> */}
+            </CardHeader>
+            <CardBody>
+              <Row className="CardBodyRow">
+                <Col className="HomePageButtonCol">
                   <button className="HomeButton"
                     // class="HomeButton tim-icons icon-double-right"
                     href="/admin/page"
@@ -587,15 +593,6 @@ export default function CoursesPanel() {
                     {/* خانه */}
                   </button>
                 </Col>
-                <Col>
-                  <CardTitle style={{fontSize:"25px"}}>
-                    پنل دروس
-                  </CardTitle>
-                </Col>
-              </Row>
-            </CardHeader>
-            <CardBody>
-            <Row>
                 <Col className="ToggleCol">
                   <div className="SwitchCard">
                       <p className="SwitchLabel"> 

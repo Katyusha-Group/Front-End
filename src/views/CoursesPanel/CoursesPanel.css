@@ -1,15 +1,15 @@
-.TableCard {
+.TableCard {                        /* Main card of the page */
     margin-top: 20px;
     overflow-x: auto;
 }
 
-.CourseListContainer {
+.CourseListContainer {           /* List of all courses */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.CourseContainer {
+.CourseContainer {              /* Course info and button */
     display: flex;
     flex-direction: row-reverse;
     margin: 2px;
@@ -17,7 +17,7 @@
     width: 100px;
 }
 
-.Course {
+.Course {                   /* Course info (without button) */
     height: 100%;
     text-align: center;
     background-color: hsl(235, 22%, 30%);
@@ -29,7 +29,7 @@
     align-items: center;
 }
 
-.btn-fill-AddCourseButton {
+.btn-fill-AddCourseButton {             /* Add or remove course button */
     height: 100%;
     border: none;
     color: white;
@@ -43,6 +43,20 @@
     margin-bottom: -1px;
 }
 
+
+
+.CardBodyRow                /* Row of the Card body */
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.HomePageButtonCol
+{
+    /* background-color: red; */
+    flex: 1;
+    width: 2px;
+}
 
 .SwitchCard {
     background-color: hsl(235, 22%, 30%);
@@ -68,6 +82,18 @@
     right: 2px;
 }
 
+
+.ToggleCol
+{
+    /* background-color: blue; */
+    flex: 2;
+}
+
+.SelectCol
+{
+    /* background-color: green; */
+    flex: 3;
+}
 /* @media only screen and (max-width: 1600px ) {
     .CourseContainer
     {
