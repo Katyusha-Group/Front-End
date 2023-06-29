@@ -107,6 +107,13 @@ export default function UserPage() {
   const [showCourseHover, setShowCourseHover] = React.useState({
     courseChoosed: [],
   });
+  const [OrderInfo, SetOrderInfo] = React.useState({
+  name: "",
+  price: 0,
+  contain_telegram: "O",
+  contain_sms: "N",
+  contain_email:"N",
+  });
   function setShowCourseHoverFunc(name, value) {
     setShowCourseHover((info) => ({ [name]: value }));
   }
@@ -278,21 +285,22 @@ export default function UserPage() {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     // console.log("data", props.show.data);
     console.log("id", showShoppingModal.data);
-    console.log("api", `https://katyushaiust.ir/course-cart-order-info/${shopId.id}/`);
-    // fetch(`https://katyushaiust.ir/course-cart-order-info/${shopId.id}/${x}`, {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${info.token.access}`,
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("get shop data", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    console.log("api", `https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`);
+    fetch(`https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("order data", data);
+        SetOrderInfo(data[0])
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -602,6 +610,7 @@ export default function UserPage() {
                     />
                     <ModalShopping
                       show={showShoppingModal}
+                      order={OrderInfo}
                       close={() =>
                         setShowShoppingModal(() => ({
                           ...showShoppingModal,

@@ -1,16 +1,10 @@
 import React from "react";
-// react plugin for creating notifications over the dashboard
-// import NotificationAlert from "react-notification-alert";
 import { useInfo } from "../../contexts/InfoContext";
-// reactstrap components
 import {
-  Alert,
-  UncontrolledAlert,
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
   Row,
   Col,
   Label,
@@ -21,52 +15,55 @@ import {
 } from "reactstrap";
 
 import "./Shopping.css";
-import cartlogo from "./cart.png";
-import { convertPercentagetoLigtness } from "../../global/functions";
 import {
   closeLoading,
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
+import { CartCreator } from "../../Functions/CartCreator";
 
 function Shopping() {
   const { info, changeInfo } = useInfo();
   const [state, setState] = React.useState([]);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  const [amount, setAmount] = React.useState(0);
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
-  // console.log("INFO", info);
   const notificationAlertRef = React.useRef(null);
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
-  // console.log("info lenght", info.shop.length);
+  const token = JSON.parse(localStorage.getItem("authTokens")).token.access
+
+  const [wallet, setWallet] = React.useState(0);
   React.useEffect(() => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    // console.log("shopId in userpage", shopId);
-    // console.log("token is", token);
     showLoading();
-    fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
+    fetch(`https://katyushaiust.ir/carts/${shopId.id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("shop data", data);
-        setState(data);
-        // console.log("state", state);
+        console.log("shop data", data);
+        setState(data.items);
+        setTotalPrice(data.total_price)
+        setAmount(data.total_number)
+      })
+      .catch((error) => console.error(error));
+     fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("wallet data", data)
+        setWallet(data.balance
+          );
+          
       })
       .catch((error) => console.error(error));
   }, []);
 
   closeLoading();
   function delete_item(num, index) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     console.log("iteem id ", state[index].id);
-    // console.log("shop", num);
-    // console.log("shopId in userpage", shopId);
-    // console.log("token is", token);
     fetch(
       `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
       {
@@ -82,17 +79,14 @@ function Shopping() {
           contain_email: true,
         }),
       }
+
     );
+    
   }
 
-  function sefaresh() {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
+  function order() {
+    console.log("token",token)
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    // console.log("shop", num);
-    // console.log("shopId in userpage", shopId);
-    // console.log("token is", token);
     fetch(`https://katyushaiust.ir/orders/`, {
       method: "POST",
       headers: {
@@ -102,31 +96,18 @@ function Shopping() {
       },
       body: JSON.stringify({
         cart_id: shopId.id,
+        payment_method: "W",
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("put data", data);
+        let newCart = CartCreator({setState, setTotalPrice, setAmount});
+        console.log("data", newCart);
       })
       .catch((error) => {
         console.error(error);
-        propsSetter({ type: fetchFail, payload: getError(error) });
       });
-    fetch("https://katyushaiust.ir/carts/", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("shopId", JSON.stringify(data));
-        console.log("shopId localstorage ", localStorage.getItem("shopId"));
-        let test = localStorage.getItem("shopId");
-        // console.log("test", JSON.parse(test)[0]);
-      })
-      .then((error) => console.error(error));
-    // const tokenClass = JSON.parse(JSON.stringify(data));
-    // const token = tokenClass.token.access;
+    
   }
 
   const notify = (place) => {
@@ -179,9 +160,6 @@ function Shopping() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    // console.log("shop", num);
-    // console.log("shopId in userpage", shopId);
-    // console.log("token is", token);
     let u = state;
     switch (num) {
       case 1:
@@ -197,12 +175,11 @@ function Shopping() {
       default:
         break;
     }
-    // setState([]);
     setState(u);
     console.log("state", state);
 
     fetch(
-      `https://katyushaiust.ir/carts/${shopId[0].id}/items/${state[index].id}/`,
+      `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
       {
         method: "PATCH",
         headers: {
@@ -219,7 +196,6 @@ function Shopping() {
     )
       .then((response) => response.json())
       .then((data) => {
-        // state[index].price = data.price;
         console.log("new data", data);
         let newData = state[index];
         if (data.total_price !== undefined) {
@@ -232,7 +208,6 @@ function Shopping() {
           }
           return item;
         });
-        // setState((state) => [...state, newData]);
         setState([...newList]);
       })
       .then((error) => {
@@ -268,7 +243,7 @@ function Shopping() {
                       xs="1"
                       className="places-buttons shop_row"
                     >
-                      <Col className="m-auto text-center category">قیمت</Col>
+                      <Col className="m-auto text-center category">قیمت {totalPrice} تومان</Col>
                     </Row>
                     <Row
                       md="1"
@@ -277,7 +252,7 @@ function Shopping() {
                       className="places-buttons shop_row"
                     >
                       <Col className="m-auto text-center category">
-                        کیف پول شما
+                        کیف پول شما: {wallet} تومان
                       </Col>
                     </Row>
                     <Row
@@ -286,18 +261,19 @@ function Shopping() {
                       xs="1"
                       className="places-buttons shop_row"
                     >
-                      <Col className="m-auto text-center category">مالیات</Col>
+                      <Col className="m-auto text-center category">تعداد {amount}</Col>
                     </Row>
                     <div className="d-flex justify-content-center align-items-center price">
-                      <h2>قیمت کل</h2>
+                      <h2>قیمت کل <br /> <br />  {totalPrice} تومان</h2>
                     </div>
                   </CardBody>
                   <CardFooter>
+
                     {state.length == 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
                       <Button
-                        onClick={sefaresh}
+                        onClick={order}
                         color="primary"
                         className="buy_button"
                       >
@@ -308,25 +284,11 @@ function Shopping() {
                 </Card>
               </Col>
               <Col md="9">
-                {/* <Card >
-                  <CardBody>
-                    <div className="places-buttons">
-                      <Row md="6" sm="2" xs="1">
-                        <Col className="m-auto text-center category">حذف</Col>
-                        <Col className="m-auto text-center category">نوع</Col>
-                        <Col className="m-auto text-center category">قیمت</Col>
-                        <Col className="m-auto text-center category">
-                          نام درس
-                        </Col>
-                        <Col className="m-auto text-center category">
-                          کد درس
-                        </Col>
-                        <Col className="m-auto text-center category">عکس</Col>
-                      </Row>
-                    </div>
-                  </CardBody>
-                </Card> */}
-                <Card className="shop_card">
+                {/* <CardHeader>
+                </CardHeader> */}
+                <Card  className="shop_card">
+                  
+                  {state.length == 0 ? <h4 className="mt-4">کالایی انتخاب نشده</h4 > : ""}
                   {state.map((x, index) => {
                     console.log("info lenght", info.shop.lenght);
                     return (
@@ -335,6 +297,7 @@ function Shopping() {
                         sm="2"
                         xs="1"
                         className="places-buttons shop_row"
+                        key={index}
                       >
                         <Col className="m-auto">
                           <img

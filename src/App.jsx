@@ -46,6 +46,7 @@ function App() {
         </BackgroundColorWrapper>
       </ThemeContextWrapper>
       {/* </SimpleBar> */}
+      {/* <img src="./assets/img/Logo.jpg" alt="logo" /> */}
     </>
   );
 }
