@@ -324,11 +324,11 @@ function SignUp() {
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="justify-content-center">
-              <Col className="text-right" md="4">
+              <Col className="text-right" md="4" >
                 {errorMessage.backError && (
-                  <div className="back-error">{errorMessage.backError}</div>
+                  <div className="back-error" >{errorMessage.backError}</div>
                 )}
-                <Card>
+                <Card style={{direction: 'ltr'}}>
                   <CardHeader>
                     <h5 className="title text-center">ثبت نام</h5>
                   </CardHeader>
@@ -444,7 +444,7 @@ function SignUp() {
                             />
 
                             {errorMessage.genderError && (
-                              <div className="select-error">
+                              <div className="select-error" style={{whiteSpace: 'nowrap'}}>
                                 {errorMessage.genderError}
                               </div>
                             )}
