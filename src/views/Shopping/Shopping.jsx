@@ -30,7 +30,7 @@ function Shopping() {
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
   const notificationAlertRef = React.useRef(null);
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access
+  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
   const [wallet, setWallet] = React.useState(0);
   React.useEffect(() => {
@@ -43,19 +43,16 @@ function Shopping() {
       .then((data) => {
         console.log("shop data", data);
         setState(data.items);
-        setTotalPrice(data.total_price)
-        setAmount(data.total_number)
+        setTotalPrice(data.total_price);
+        setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
-     fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
+    fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("wallet data", data)
-        setWallet(data.balance
-          );
-          
+        setWallet(data.balance);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -63,7 +60,6 @@ function Shopping() {
   closeLoading();
   function delete_item(num, index) {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    console.log("iteem id ", state[index].id);
     fetch(
       `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
       {
@@ -79,13 +75,10 @@ function Shopping() {
           contain_email: true,
         }),
       }
-
     );
-    
   }
 
   function order() {
-    console.log("token",token)
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(`https://katyushaiust.ir/orders/`, {
       method: "POST",
@@ -101,13 +94,11 @@ function Shopping() {
     })
       .then((response) => response.json())
       .then((data) => {
-        let newCart = CartCreator({setState, setTotalPrice, setAmount});
-        console.log("data", newCart);
+        let newCart = CartCreator({ setState, setTotalPrice, setAmount });
       })
       .catch((error) => {
         console.error(error);
       });
-    
   }
 
   const notify = (place) => {
@@ -176,8 +167,6 @@ function Shopping() {
         break;
     }
     setState(u);
-    console.log("state", state);
-
     fetch(
       `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
       {
@@ -196,12 +185,10 @@ function Shopping() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("new data", data);
         let newData = state[index];
         if (data.total_price !== undefined) {
           newData.price = data.total_price;
         }
-        console.log("newData", newData);
         let newList = state.map((item) => {
           if (item.id === newData.id) {
             return newData;
@@ -243,7 +230,9 @@ function Shopping() {
                       xs="1"
                       className="places-buttons shop_row"
                     >
-                      <Col className="m-auto text-center category">قیمت {totalPrice} تومان</Col>
+                      <Col className="m-auto text-center category">
+                        قیمت {totalPrice} تومان
+                      </Col>
                     </Row>
                     <Row
                       md="1"
@@ -261,14 +250,17 @@ function Shopping() {
                       xs="1"
                       className="places-buttons shop_row"
                     >
-                      <Col className="m-auto text-center category">تعداد {amount}</Col>
+                      <Col className="m-auto text-center category">
+                        تعداد {amount}
+                      </Col>
                     </Row>
                     <div className="d-flex justify-content-center align-items-center price">
-                      <h2>قیمت کل <br /> <br />  {totalPrice} تومان</h2>
+                      <h2>
+                        قیمت کل <br /> <br /> {totalPrice} تومان
+                      </h2>
                     </div>
                   </CardBody>
                   <CardFooter>
-
                     {state.length == 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
@@ -286,11 +278,13 @@ function Shopping() {
               <Col md="9">
                 {/* <CardHeader>
                 </CardHeader> */}
-                <Card  className="shop_card">
-                  
-                  {state.length == 0 ? <h4 className="mt-4">کالایی انتخاب نشده</h4 > : ""}
+                <Card className="shop_card">
+                  {state.length == 0 ? (
+                    <h4 className="mt-4">کالایی انتخاب نشده</h4>
+                  ) : (
+                    ""
+                  )}
                   {state.map((x, index) => {
-                    console.log("info lenght", info.shop.lenght);
                     return (
                       <Row
                         md="6"
