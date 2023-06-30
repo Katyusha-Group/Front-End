@@ -5,6 +5,7 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
+import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 //import swal from "sweetalert";
 // reactstrap components
 import {
@@ -138,6 +139,7 @@ function Login() {
     }
     // alert("Erfan Googooli!");
     // console.log("No error in front");
+    showLoading();
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
       headers: {
@@ -150,6 +152,7 @@ function Login() {
     });
     const data = await response.json();
     console.log("response",response);
+    closeLoading();
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
@@ -205,9 +208,9 @@ function Login() {
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="just-center">
-              <Col className="text-right" md="4">
+              <Col className="text-right" md="5">
                 {errorMessage.backError && (
-                  <div className="back-error">{errorMessage.backError}</div>
+                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}
                 <Card>
                   <CardHeader>
@@ -225,7 +228,7 @@ function Login() {
                   <br></br>
                   <CardBody>
                     <Form>
-                      <Row>
+                      <Row style={{justifyContent: 'center'}}>
                         <Col md="12">
                           <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
@@ -246,7 +249,7 @@ function Login() {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Row>
+                      <Row style={{justifyContent: 'center'}}>
                         <Col md="12">
                           <FormGroup className="text-right">
                             <label>رمز عبور</label>
@@ -276,8 +279,8 @@ function Login() {
                     </Form>
                     <br></br>
                     <Container>
-                      <Row>
-                        <Col className="text-center" md="12">
+                      <Row style={{justifyContent: 'center'}}>
+                        <Col className="text-center" md="10">
                           <Link href="#" color="primary">
                             فراموشی رمز عبور
                           </Link>
@@ -285,8 +288,8 @@ function Login() {
                       </Row>
                     </Container>
                     <Container>
-                      <Row>
-                        <Col className="text-center pt-md-2" md="12">
+                      <Row style={{justifyContent: 'center'}}>
+                        <Col className="text-center pt-md-2" md="10">
                           در صورت نداشتن حساب کاربری
                           <Link to="../signup" color="primary">
                             &nbsp;ثبت‌نام&nbsp;
