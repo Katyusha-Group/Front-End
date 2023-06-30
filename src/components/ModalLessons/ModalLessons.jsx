@@ -68,7 +68,7 @@ const ModalLessons = (props) => {
                   <CardBody className="ModalCourseCardBody">
                     <img
                       className="ModalprofessorImage"
-                      src={x.teacher.teacher_image}
+                      src={x.teachers[0].teacher_image}
                       alt="professorImage"
                     />
                     <div className="infoPart">
@@ -83,7 +83,7 @@ const ModalLessons = (props) => {
                       </Row>
                       <Row>
                         <Col className="text-right" md="6">
-                          استاد: {x.teacher.name}
+                          استاد: {x.teachers[0].name}
                         </Col>
                         <Col className="text-right" md="6">
                           زمان برگزاری :

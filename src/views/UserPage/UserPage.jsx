@@ -470,8 +470,8 @@ export default function UserPage() {
                         <img
                           className="professorImage"
                           src={
-                            x.teacher.teacher_image
-                              ? x.teacher.teacher_image
+                            x.teachers[0].teacher_image
+                              ? x.teachers[0].teacher_image
                               : sampleProfile
                           }
                           alt="professorImage"
@@ -481,9 +481,13 @@ export default function UserPage() {
                             {x.name} (گروه {x.group_number})
                           </p>
                           <p style={{ fontSize: 12 }}>
-                            {" "}
-                            استاد:{x.teacher.name}
+                            {"استاد:  "}
+                            {x.teachers.map((y)=>(y.name)).join(" , ")}
                           </p>
+                          {/* <p style={{ fontSize: 12 }}>
+                            {" "}
+                            استاد:{x.teachers[0].name}
+                          </p> */}
                           <div className="courseCardDownSide">
                             <div>
                               <p>
