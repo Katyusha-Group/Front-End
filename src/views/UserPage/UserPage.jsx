@@ -462,8 +462,56 @@ export default function UserPage() {
                         // console.log("out");
                         setShowCourseHoverFunc("courseChoosed", []);
                       }}
+                      // onClick={() => {
+                      //   setShowLesson({ flag: true, data: x });
+                      // }}
                       onClick={() => {
-                        setShowLesson({ flag: true, data: x });
+                        let isFound = info.courseChoosed.some((element) => {
+                          if (
+                            element.complete_course_number ===
+                            x.complete_course_number
+                          ) {
+                            return true;
+                          }
+
+                          return false;
+                        });
+                        // bool = bool == true?true:false;
+                        // console.log('bool', bool)
+                        console.log(
+                          "all the courses in group",
+                          info.courseGroupsListInContext
+                        );
+                        console.log("clicked");
+                        if (isFound != true) {
+                          console.log("includes------------------");
+
+                          addNewLesson(x.complete_course_number);
+                          changeInfo("courseChoosed", [
+                            ...info.courseChoosed,
+                            x,
+                          ]);
+                          } 
+                        // else {
+                        //   //remove lesson
+                        //   addNewLesson(x.complete_course_number);
+                        //   console.log(x.complete_course_number);
+                        //   console.log(
+                        //     "delete lesson",
+                        //     x.complete_course_number
+                        //   );
+                        //   changeInfo(
+                        //     "courseChoosed",
+                        //     info.courseChoosed.filter(
+                        //       (item) =>
+                        //         item.complete_course_number !==
+                        //         x.complete_course_number
+                        //     )
+                        //   );
+                        //   closeLesson(false, lessons);
+                        // }
+
+                        // console.log("info", info);
                       }}
                     >
                       <CardBody className="courseCardBody">
@@ -517,69 +565,74 @@ export default function UserPage() {
                         size="sm"
                         style={{
                           color: !info.courseChoosed.includes(x)
-                            ? "aqua"
-                            : "deeppink",
+                            ? "white"
+                            : "aqua",
                           fontSize: !info.courseChoosed.includes(x)
-                            ? "medium"
-                            : "medium",
+                            ? "large"
+                            : "large",
                         }}
                         onClick={() => {
-                          let isFound = info.courseChoosed.some((element) => {
-                            if (
-                              element.complete_course_number ===
-                              x.complete_course_number
-                            ) {
-                              return true;
-                            }
-
-                            return false;
-                          });
-                          // bool = bool == true?true:false;
-                          // console.log('bool', bool)
-                          console.log(
-                            "all the courses in group",
-                            info.courseGroupsListInContext
-                          );
-                          console.log("clicked");
-                          if (isFound != true) {
-                            console.log("includes------------------");
-
-                            addNewLesson(x.complete_course_number);
-                            changeInfo("courseChoosed", [
-                              ...info.courseChoosed,
-                              x,
-                            ]);
-                          } else {
-                            //remove lesson
-                            addNewLesson(x.complete_course_number);
-                            console.log(x.complete_course_number);
-                            console.log(
-                              "delete lesson",
-                              x.complete_course_number
-                            );
-                            changeInfo(
-                              "courseChoosed",
-                              info.courseChoosed.filter(
-                                (item) =>
-                                  item.complete_course_number !==
-                                  x.complete_course_number
-                              )
-                            );
-                            closeLesson(false, lessons);
-                          }
-
-                          // console.log("info", info);
+                        setShowLesson({ flag: true, data: x });
                         }}
+                        // onClick={() => {
+                        //   let isFound = info.courseChoosed.some((element) => {
+                        //     if (
+                        //       element.complete_course_number ===
+                        //       x.complete_course_number
+                        //     ) {
+                        //       return true;
+                        //     }
+
+                        //     return false;
+                        //   });
+                        //   // bool = bool == true?true:false;
+                        //   // console.log('bool', bool)
+                        //   console.log(
+                        //     "all the courses in group",
+                        //     info.courseGroupsListInContext
+                        //   );
+                        //   console.log("clicked");
+                        //   if (isFound != true) {
+                        //     console.log("includes------------------");
+
+                        //     addNewLesson(x.complete_course_number);
+                        //     changeInfo("courseChoosed", [
+                        //       ...info.courseChoosed,
+                        //       x,
+                        //     ]);
+                        //     } 
+                        //   // else {
+                        //   //   //remove lesson
+                        //   //   addNewLesson(x.complete_course_number);
+                        //   //   console.log(x.complete_course_number);
+                        //   //   console.log(
+                        //   //     "delete lesson",
+                        //   //     x.complete_course_number
+                        //   //   );
+                        //   //   changeInfo(
+                        //   //     "courseChoosed",
+                        //   //     info.courseChoosed.filter(
+                        //   //       (item) =>
+                        //   //         item.complete_course_number !==
+                        //   //         x.complete_course_number
+                        //   //     )
+                        //   //   );
+                        //   //   closeLesson(false, lessons);
+                        //   // }
+
+                        //   // console.log("info", info);
+                        // }}
                       >
-                        {!info.courseChoosed.includes(x) ? "+" : "x"}
+                        {/* {!info.courseChoosed.includes(x) ?  "+": "x"} */}
+                        <i className="tim-icons icon-badge ml-0" />
                       </Button>
                       <Button
                         className="courseCardButton"
                         variant="secondary"
                         size="sm"
                         style={{
-                          color: "aqua",
-                          fontSize: "medium",
+                          // color: "aqua",
+                          fontSize: "large",
                           display: "flex",
                         }}
                         onClick={() => {
@@ -591,11 +644,12 @@ export default function UserPage() {
                           }
                         }}
                       >
-                        <img
+                        <i className="tim-icons icon-cart ml-0" />
+                        {/* <img
                           className="cart"
                           src={cartlogo}
                           alt="cartlogo"
-                        ></img>
+                        ></img> */}
                       </Button>
                     </div>
                     <ModalLessons
