@@ -76,21 +76,21 @@ export default function CoursesPanel() {
         changeInfo("courseChoosed", data);
         const courses = data.map(course => new Course(course, true));
         setChosenCourses(courses);
-        let NewTimeTable = [...courses, ...DepartmentCourses];
-        settimetable(NewTimeTable);
-        // if (SwitchChecked)
-        // {
-        //   console.log("DEPPPP COutseSc: " + DepartmentCourses);
-        //   let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
-        //   // let temp = NewTimeTable.filter(course => course.can_take);
-        //   let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
-        //   settimetable(NewTimeTable);
-        // }
-        // else
-        // {
-        //   let NewTimeTable = [...courses, ...DepartmentCourses];
-        //   settimetable(NewTimeTable);
-        // }
+        // let NewTimeTable = [...courses, ...DepartmentCourses];
+        // settimetable(NewTimeTable);
+        if (SwitchChecked)
+        {
+          // console.log("DEPPPP COutseSc: " + DepartmentCourses);
+          let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+          // let temp = NewTimeTable.filter(course => course.can_take);
+          let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
+          settimetable(NewTimeTable);
+        }
+        else
+        {
+          let NewTimeTable = [...courses, ...DepartmentCourses];
+          settimetable(NewTimeTable);
+        }
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
