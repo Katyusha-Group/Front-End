@@ -326,7 +326,7 @@ function SignUp() {
             <Row className="justify-content-center">
               <Col className="text-right" md="5" >
                 {errorMessage.backError && (
-                  <div className="back-error" >{errorMessage.backError}</div>
+                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}
                 <Card style={{direction: 'ltr'}}>
                   <CardHeader>
@@ -347,7 +347,7 @@ function SignUp() {
                               value={formData.email}
                             />
                             {errorMessage.emailError && (
-                              <div className="error">
+                              <div className="error" >
                                 {errorMessage.emailError}
                               </div>
                             )}
