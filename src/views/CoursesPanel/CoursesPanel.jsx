@@ -211,11 +211,11 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      if (this.name.length > 30)
-      {
-        // console.log("*****Length is: " + this.name.length);
-        this.name = this.name.substring(0, 25) + "...";
-      }
+      // if (this.name.length > 30)
+      // {
+      //   // console.log("*****Length is: " + this.name.length);
+      //   this.name = this.name.substring(0, 25) + "...";
+      // }
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
@@ -236,7 +236,7 @@ export default function CoursesPanel() {
       //   this.IsInTheChosenCourses = true;
       // }
       // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      this.backgColor = (this.IsChosen) ? "rgb(200, 78, 202)" : "hsl(255, 22%, 30%)";
+      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
       // console.log(this.name + " has color of " + this.backgColor);
     }
 
@@ -539,7 +539,7 @@ export default function CoursesPanel() {
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "hsl(255, 22%, 30%)" : "rgb(200, 78, 202)"}}
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
                       showLoading();
                     entry.ButtonClicked();
