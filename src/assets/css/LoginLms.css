@@ -22,5 +22,6 @@
 
 .modal-content{
     background-color: #27293d!important;
+    width: 100%;
     box-shadow: none!important;
 }

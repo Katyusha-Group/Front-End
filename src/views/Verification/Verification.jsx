@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { verificationApi } from "../../components/LessonSidebar/ApiCalls";
 import "./Verification.css"
 import { useInfo } from "../../contexts/InfoContext";
+import { closeLoading, showLoading } from "../../components/LoadingAlert/LoadingAlert";
 // import axios from "axios";
 // reactstrap components
 import {
@@ -130,10 +131,12 @@ function isValidCode(code) {
   
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(code)
+    //console.log(code)
     // setShowAlert(verificationApi(code,info.token,setShowAlert))
+    showLoading();
     console.log(showAlert)
     console.log(verificationApi(code,info.token))
+    closeLoading();
     console.log(showAlert)
     // verificationApi(code,info.token)
     
@@ -181,7 +184,7 @@ function isValidCode(code) {
                       <Row>
                         <Col md="12">
                           <FormGroup className="text-right">
-                            <label style={{"fontSize":"0.9375rem"}}>:لطفا کد ارسال شده به ایمیل تان را وارد کنید</label>
+                            <label style={{"fontSize":"0.9375rem"}}>لطفا کد ارسال شده به ایمیل تان را وارد کنید:</label>
                           </FormGroup>
                           <Row>
                           <div className="verification-code-box">

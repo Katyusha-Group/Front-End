@@ -109,7 +109,7 @@ function ExamChart() {
                   <div className="dir-left">
                     {lesson.complete_course_number}
                   </div>
-                  <div>{lesson.teacher.name}</div>
+                  <div>{lesson.teachers.map((y)=>(y.name)).join(" , ")}</div>
                   <div>
                     {weekday[parseInt(lesson.course_times[0].course_day)]}
                   </div>
