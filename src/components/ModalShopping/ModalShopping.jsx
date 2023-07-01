@@ -22,13 +22,19 @@ import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
   const [email, setEmail] = React.useState(false);
-  const [telegram, setTelegram] = React.useState(true);
+  const [telegram, setTelegram] = React.useState(props.order.contain_telegram == "C" ? true:false);
   const [sms, setSms] = React.useState(false);
   const [enableBotton, setEnableBotton] = React.useState(false);
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
   const shopId = JSON.parse(localStorage.getItem("shopId"));
+
+  React.useEffect(() => {
+    setTelegram(()=>props.order.contain_telegram == "C" ? true:false);
+    console.log("telegram",telegram);
+  }, [props]);
+
 
   function addItemShop(num) {
     fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
@@ -83,6 +89,9 @@ const ModalShopping = (props) => {
                   <Col className="text-right" md="12">
                     گزینه های مورد نظر را انتخاب کنید
                   </Col>
+                  <Col className="text-right" md="12">
+                    قیمت: {props.order.price} تومان
+                  </Col>
                 </Row>
                 <Col className="m-auto text-center category">
                   <Form className="d-flex justify-content-center">
@@ -94,7 +103,9 @@ const ModalShopping = (props) => {
                       <Label check className="shoping_label">
                         <Input
                           onChange={() => {
-                            setEmail(!email);
+                            if(props.order.contain_email != "O"){
+                              setEmail(!email);
+                            }
                           }}
                           checked={false}
                           type="checkbox"
@@ -115,7 +126,9 @@ const ModalShopping = (props) => {
                           checked={false}
                           type="checkbox"
                           onChange={() => {
-                            setSms(!sms);
+                            if(props.order.contain_sms != "O"){
+                              setSms(!sms);
+                            }
                           }}
                         />
                         <span className="form-check-sign">
@@ -127,10 +140,13 @@ const ModalShopping = (props) => {
                     <FormGroup className="shopping_form_userpage" check>
                       <Label check className="shoping_label">
                         <Input
-                          checked={telegram}
+                          checked={props.order.contain_telegram == "O" ? true:telegram}
                           type="checkbox"
                           onChange={() => {
-                            setTelegram(!telegram);
+                            console.log("order contain telegram",props.order.contain_telegram);
+                            if(props.order.contain_telegram != "O"){
+                              setTelegram(!telegram);
+                            }
                           }}
                         />
                         <span className="form-check-sign">

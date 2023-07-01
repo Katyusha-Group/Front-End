@@ -215,8 +215,8 @@ function LessonSidebar(props) {
               <Row className="nav-lessonSidebar">
                 <Col md="5" xs="5" style={{margin:"auto"}}>
                   <NavLink to="/admin/page" className="nav-header nav-link-icon">
-                   
-                    <i className="tim-icons icon-atom ml-0" />
+                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px"}}/>
+                    {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
                 </Col>
                 <Col md="4" xs="4" style={{margin:"auto"}}>
