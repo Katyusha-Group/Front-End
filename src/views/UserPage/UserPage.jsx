@@ -519,8 +519,7 @@ export default function UserPage() {
                           className="professorImage"
                           src={
                             x.teachers[0].teacher_image
-                              ? x.teachers[0].teacher_image
-                              : sampleProfile
+                              
                           }
                           alt="professorImage"
                         />

@@ -281,9 +281,9 @@ function Login() {
                     <Container>
                       <Row style={{justifyContent: 'center'}}>
                         <Col className="text-center" md="10">
-                          <Link href="#" color="primary">
+                          <Link to="../forgetPassword" color="primary">
                             فراموشی رمز عبور
-                          </Link>
+                            </Link>
                         </Col>
                       </Row>
                     </Container>
