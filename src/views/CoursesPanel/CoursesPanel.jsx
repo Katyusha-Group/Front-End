@@ -4,7 +4,8 @@ import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-
+import "../../assets/css/nucleo-icons.css";
+import DayRow from './DayRow';
 import {
   Card,
   CardHeader,
@@ -13,17 +14,22 @@ import {
   Table,
   Row,
   Col,
-  Input,
-  Label,
-  Button,
-  View,
-  FormGroup
+  Button
 } from "reactstrap";
+
+import {
+  addNewLesson,
+  mapTimeToIndex,
+  createCourseGroupsArray,
+  uniquifyArrayByKey
+} from "./CoursesPanel_Functions";
+
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
-import HomeIcon from './home.png';
-import { size } from "lodash";
+// import HomeIcon from './home.png';
+// import { size } from "lodash";
 export default function CoursesPanel() {
+
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -38,30 +44,14 @@ export default function CoursesPanel() {
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
+
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
-    // fetch("https://www.katyushaiust.ir/departments/", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setAllowed(data);
-    //     console.log("ALLLLOOOWWEDDD SET: " + Allowed);
-    //     // let temp1 = JSON.stringify(Allowed);
-    //     // console.log("Allowed Courses are: " + Allowed);
-    //     // return data;
-    //   });
-    
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((DepartmentOptions) => {
-        // console.log(DepartmentOptions);
-        // const NewOption = {label:"دروس اخذ شده", value: 100};
-        // let temp = [...DepartmentOptions, NewOption];
-        // setDepartmentOptions(temp);
-        setDepartmentOptions(DepartmentOptions);
-      });
-    
+      setDepartmentOptions(DepartmentOptions);
+    });
     fetch("https://www.katyushaiust.ir/courses/my_courses", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -70,11 +60,7 @@ export default function CoursesPanel() {
         changeInfo("courseChoosed", data);
         const courses = data.map(course => new Course(course, true));
         setChosenCourses(courses);
-        // setDepartmentCourses(courses);
         settimetable(courses);
-        // settimetable(AppendToTimetable(ChosenCourses));
-        // let NewTimeTable = [...timetable, ...ChosenCourses];
-        // settimetable(NewTimeTable);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -92,16 +78,21 @@ export default function CoursesPanel() {
         changeInfo("courseChoosed", data);
         const courses = data.map(course => new Course(course, true));
         setChosenCourses(courses);
-        // setDepartmentCourses(courses);
-
-        // settimetable(courses);
-        // settimetable(AppendToTimetable(ChosenCourses));
-        // let NewTimeTable = [...timetable, ...ChosenCourses];
+        // let NewTimeTable = [...courses, ...DepartmentCourses];
         // settimetable(NewTimeTable);
-        // let NewTimeTable = [...courses, ...timetable];
-        // settimetable(NewTimeTable);
-        let NewTimeTable = [...courses, ...DepartmentCourses];
-        settimetable(NewTimeTable);
+        if (SwitchChecked)
+        {
+          // console.log("DEPPPP COutseSc: " + DepartmentCourses);
+          let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+          // let temp = NewTimeTable.filter(course => course.can_take);
+          let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
+          settimetable(NewTimeTable);
+        }
+        else
+        {
+          let NewTimeTable = [...courses, ...DepartmentCourses];
+          settimetable(NewTimeTable);
+        }
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -141,7 +132,7 @@ export default function CoursesPanel() {
       color: "rgba(255, 255, 255, 0.8)",
       borderColor: state.isFocused ? "#e14eca" : "#2b3553",
       borderRadius: "0.4285rem",
-      fontSize: "0.75rem",
+      fontSize: "1rem",
       marginTop: "5px",
       fontWeight: "400",
       transition:
@@ -155,13 +146,6 @@ export default function CoursesPanel() {
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
-    // console.log("Selected Department is: " + SelectedDepartment);
-    //if (SelectedDepartment !== 1) {
-    // if (SelectedDepartment === 100)
-    // {
-    //   console.log("Hellllllllllllllllllllllooooooooooooooooooo")
-    // }
-    // showLoading();
     if (SelectedDepartment) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -178,10 +162,6 @@ export default function CoursesPanel() {
         })
         .catch((error) => console.error(error));
     }
-    // else if (SelectedDepartment === 1) {
-    //   settimetable(info.courseChoosed);
-    // }
-    // closeLoading();
   }, [SelectedDepartment]);
 
   // Switch
@@ -192,20 +172,15 @@ export default function CoursesPanel() {
   React.useEffect(() => { 
     showLoading();
     if (SwitchChecked) {
-      // showLoading();
-      let temp = timetable.filter(course => course.can_take);
-      console.log("temp is: " + temp);
+      let FilteredDepartmentCourses = DepartmentCourses.filter(course => course.can_take);
+      // let temp = timetable.filter(course => course.can_take);
+      let temp = [...ChosenCourses, ...FilteredDepartmentCourses];
       settimetable(temp);
-      // closeLoading();
     }
     else
     {
-      // setSelectedDepartment(SelectedDepartment);
-      setChosenCoursesChanged(prev => !prev);
+      setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
     }
-    // else if (SelectedDepartment === 1) {
-    //   settimetable(info.courseChoosed);
-    // }
     closeLoading();
   }, [SwitchChecked]);
 
@@ -214,70 +189,22 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
+      // if (this.name.length > 30)
+      // {
+      //   // console.log("*****Length is: " + this.name.length);
+      //   this.name = this.name.substring(0, 25) + "...";
+      // }
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
-      // this.can_take = this.IsAllowed(this.base_course_number);
       this.can_take = props.is_allowed;
-      console.log(this.name + " is allowed: " + this.can_take);
+      // console.log(this.name + " is allowed: " + this.can_take);
       this.IsChosen = IsFromChosencourses;
-      // this.IsInTheChosenCourses = false;
-      // for (let i = 0; i < ChosenCourses.length; i++) {
-      //   if (ChosenCourses[i] !== null && ChosenCourses[i].complete_course_number === obj.complete_course_number) {
-      //     IsInTheChosenCourses = true;
-      //     break;
-      //   }
-      // }
-      // if (ChosenCourses.includes(this)) {
-      //   this.IsInTheChosenCourses = true;
-      // }
-      // this.backgColor = (this.IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-      // console.log(this.name + " has color of " + this.backgColor);
     }
-
-    // componentDidMount()
-    // {
-    //     fetch("https://www.katyushaiust.ir/departments/", {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       setAllowed(data);
-    //       console.log("ALLLLOOOWWEDDD SET: " + Allowed);
-    //       // let temp1 = JSON.stringify(Allowed);
-    //       // console.log("Allowed Courses are: " + Allowed);
-    //       // return data;
-    //     });
-    // }
-
-    // IsAllowed(base_course_number)                              // Checks if the input course is in the allowed lessons or not
-    // {
-    //   // let AllowedLess = FindAllowedLessons();
-    //   console.log("base course number is: " + base_course_number);
-    //   console.log ("ALLOEWED ASDKSDJSD1: " + Allowed);
-      
-    //   console.log ("ALLOEWED ASDKSDJSD2: " + Allowed);
-    //   console.log("Is allowed called");
-    //   console.log("dept ID is: " + this.DepartmentID);
-    //   for (let i = 0; i < Allowed.length; i++) {
-    //     console.log("Entered LOOP");
-    //     console.log ("DEPT ID IN LOOP IS: " + Allowed[i].id);
-    //     if (Allowed[i].id === this.DepartmentID && Allowed[i].base_courses.length > 0) {
-    //       console.log("Checking " + Allowed[i].name);
-    //       for (let j = 0; j < Allowed[i].base_courses.length; j++) {
-    //         if (Allowed[i].base_courses[j].course_number === base_course_number) {
-    //           console.log(this.name + " is allowed");
-    //           return true;
-    //         }
-    //       }
-    //     }
-    //   }
-    //   return false;
-    // }
-
+    
     ButtonClicked ()
     {
       if (this.IsChosen)
@@ -290,9 +217,6 @@ export default function CoursesPanel() {
       }
       else
       {
-        // console.log("timetable", timetable)
-        // entry.Show = false;
-        // console.log("Entry show is: " + entry.Show);
         addNewLesson(this.complete_course_number);
         changeInfo(
           "courseChoosed",
@@ -311,137 +235,14 @@ export default function CoursesPanel() {
         // setChosenCourses(info.co)
         this.IsChosen = false;
       }
-      // addNewLesson(this.complete_course_number);
-      // console.log("Hello World!");
-      // this.IsChosen = !this.IsChosen;
-      // let NewTimeTable = [...ChosenCourses, ...DepartmentCourses];
-      // settimetable(NewTimeTable);
-      // const chcourses = info.courseChoosed.map(course => new Course(course, true));
       setChosenCoursesChanged(prev => !prev);
-      // setChosenCourses(chcourses);
-      // settimetable(chcourses);
-      
     }
   }
-
-
-
-  let [timeTableChanged, settimeTableChanged] = React.useState(false);
-
-  
-
-
-
   let [timetable, settimetable] = React.useState([]);
 
-
-
-  function AppendToTimetable(ToBeAppended) {
-    let NewTimeTable = [...timetable, ...ToBeAppended];
-    settimetable(NewTimeTable);
-    settimetable(uniquifyArrayByKey(timetable, "complete_course_number"));
-    return (timetable);
-  }
-
-
-  function addNewLesson(num) {                                        // Add a lesson
-    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        complete_course_number: num,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // const dataArray = JSON.parse(data);
-        const courses = data.map(course => new Course(course, true));
-        // setChosenCourses(data);
-        setChosenCourses(courses);
-        // setChosenCoursesChanged(prev => !prev);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }
-
   
 
-
-
-
-
-  // React.useEffect(() => {                                             // Set Selected Department courses
-  //   if (timeTableChanged)
-  //   {
-
-  //   }
-  // }, []);
-
-
-
-  function mapTimeToIndex(start_time) {                               // Time Index finder
-    const times = [
-      "07:30:00",
-      "09:00:00",
-      "10:30:00",
-      "12:00:00",
-      "13:30:00",
-      "15:00:00",
-      "16:30:00",
-      "18:00:00",
-    ];
-    let index = times.findIndex(time => time === start_time);
-    if (index === -1) {
-      const times2 = [
-        "08:00:00",
-        "09:30:00",
-        "11:00:00",
-        "12:30:00",
-        "14:00:00",
-        "15:30:00",
-        "17:00:00",
-        "18:30:00",
-      ];
-      let index2 = times2.findIndex(time => time === start_time);
-      if (index2 === -1) {
-        const times3 = [
-          "07:00:00",
-          "08:30:00",
-          "10:00:00",
-          "11:30:00",
-          "13:00:00",
-          "14:30:00",
-          "16:00:00",
-          "17:30:00",
-        ];
-        return times3.findIndex(time => time === start_time);
-      }
-      return index2;
-    }
-    return index;
-  }
-
-  function createCourseGroupsArray(courses) {                         // Creates an array to store number of courses in each time slot
-    const courseGroups = [];
-    for (let i = 0; i < 6; i++) {
-      courseGroups[i] = Array(8).fill(0);
-    }
-    return courseGroups;
-  }
-
-  function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
-    return arr.filter((item, index) => {
-      return (
-        arr.findIndex((element) => element[key] === item[key]) === index
-      );
-    });
-  }
+  
 
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
@@ -505,106 +306,58 @@ export default function CoursesPanel() {
       }
     )
   }, [timetable])
-  const DayPeriod = (Section) => (
-    <div>
-      {Object.entries(Section).map(([count, entry]) => {
-        // const backgroundColor = (entry !== null && entry.can_take) ? "rgb(29, 113, 236)": "rgb(100, 100, 120)"; // Also makes the courses that don't have the attribute gray
-        // const backgroundColor = (entry !== null && ChosenCourses.includes(entry)) ? "rgb(29, 113, 236)" : "hsl(100, 22%, 30%)";
-        // console.log(backgroundColor);
-        // let IsInTheChosenCourses = false;
-        // for (let i = 0; i < ChosenCourses.length; i++) {
-        //   if (ChosenCourses[i] !== null && entry !== null && ChosenCourses[i].complete_course_number === entry.complete_course_number) {
-        //     IsInTheChosenCourses = true;
-        //   }
-        // }
-        // if (entry !== null)
-        // {
-        //   console.log("Entry name: " + entry.name + " Is null? " + entry + " IsInTheChosenCourses " + IsInTheChosenCourses);
-        // }
-
-        // const backgroundColor = (entry !== null && IsInTheChosenCourses) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-        return (
-          <div className="CourseListContainer">
-            {entry !== null && (
-              <div className="CourseContainer">
-                <div className="Course"
-                  style={{ backgroundColor: entry.backgColor }}
-                >
-                  <div style={{ margin: '5px' }}>
-                    {entry.name} ({entry.class_gp})
-                  </div>
-                  {/* <br /> */}
-                </div>
-                <button className="btn-fill-AddCourseButton"
-                  name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
-                  onClick={() => {
-                      showLoading();
-                    entry.ButtonClicked();
-                      closeLoading();
-                  }}>
-                  {entry.IsChosen ? 'x' : '+'}
-                </button>
-                {/* <br/> */}
-              </div>
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
-  const DayRow = ({ periods, dayName }) => (
-    <tr>
-      <td className="CoursesPanel_column text-center">{dayName}</td>
-      {Object.entries(periods).map(([time, entry]) => {
-        return (
-          <td className="CoursesPanel_column2" key={time}>
-            {DayPeriod(entry)}
-          </td>
-        )
-      })}
-    </tr>
-  )
-
+  
+  
   return (
     <>
       <Row>
         <Col>
           <Card className="TableCard">
-            <CardHeader className="text-right">
+            <CardHeader className="MainCardHeader text-right">
               <CardTitle style={{fontSize:"25px"}}>
                 پنل دروس
               </CardTitle>
-              <Button
+              <Button //className="HomeButton"
+                // class="HomeButton tim-icons icon-double-right"
                 href="/admin/page"
+                className="HomeButton tim-icons icon-double-right"
               >
-                <img src={HomeIcon} alt="Button Image" />
+                {/* <img src={HomeIcon} alt="Button Image" /> */}
+                {/* خانه */}
               </Button>
-              <Select
-                options={DepartmentOptions}
-                styles={customStyles}
-                isRtl
-                placeholder="دانشکده مورد نظر را انتخاب کنید"
-                name="SelectDepartment"
-                value={SelectedDepartment.name}
-                onChange={handleDepartment}
-              />
-              <br/>
-              <div className="SwitchCard">
-                <p className="SwitchLabel"> 
-                  فقط دروس قابل اخذ
-                </p>
-                <ReactSwitch className="Switch"
-                  checked={SwitchChecked}
-                  onChange={handleSwitchChange}
-                  // label = {"Hello"}
-                // style={{}}
-                />
-              </div>
             </CardHeader>
             <CardBody>
+              <Row className="CardBodyRow">
+                {/* <Col className="HomePageButtonCol">
+                  
+                </Col> */}
+                
+                <Col className="SelectCol">
+                  <Select
+                    options={DepartmentOptions}
+                    styles={customStyles}
+                    isRtl
+                    placeholder="دانشکده مورد نظر را انتخاب کنید"
+                    name="SelectDepartment"
+                    value={SelectedDepartment.name}
+                    onChange={handleDepartment}
+                  />
+                </Col>
+                <Col className="ToggleCol">
+                  <div className="SwitchCard">
+                      <p className="SwitchLabel"> 
+                        <ReactSwitch className="Switch"
+                            checked={SwitchChecked}
+                            onChange={handleSwitchChange}
+                          />
+                          <br/>
+                        فقط دروس قابل اخذ
+                     </p>
+                  </div>
+                </Col>
+              </Row>
               <Table className="ClassesTable">
-                <thead className="text-primary">
+                <thead className="text-primary TableHead">
                   <tr>
                     <th className="table-head text-center "></th>
                     <th className="table-head text-center ">۷:۳۰ تا ۹</th>
@@ -623,7 +376,6 @@ export default function CoursesPanel() {
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
-                  <DayRow dayName="پنجشنبه" periods={keyedTimetable[5]} />
                 </tbody>
               </Table>
             </CardBody>
