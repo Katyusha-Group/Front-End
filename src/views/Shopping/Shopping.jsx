@@ -206,7 +206,7 @@ function Shopping() {
   return (
     <>
       <div className="wrapper" style={{ direction: "ltr" }}>
-        <div className="main-panel">
+        <div className="mt-5">
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
               {/* <NotificationAlert ref={notificationAlertRef} /> */}
