@@ -41,6 +41,7 @@ function Shopping() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("api ", `https://katyushaiust.ir/carts/${shopId.id}/`)
         console.log("shop data", data);
         setState(data.items);
         setTotalPrice(data.total_price);
@@ -75,7 +76,8 @@ function Shopping() {
           contain_email: true,
         }),
       }
-    );
+    )
+    let temp = state;
   }
 
   function order() {
@@ -297,8 +299,8 @@ function Shopping() {
                           <img
                             className="professorImage"
                             src={
-                              x.course.teacher.teacher_image
-                                ? x.course.teacher.teacher_image
+                              x.course.teachers[0].teacher_image
+                                ? x.course.teachers[0].teacher_image
                                 : sampleProfile
                             }
                             alt="professorImage"
