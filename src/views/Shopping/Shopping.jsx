@@ -297,8 +297,8 @@ function Shopping() {
                           <img
                             className="professorImage"
                             src={
-                              x.course.teacher.teacher_image
-                                ? x.course.teacher.teacher_image
+                              x.course.teachers[0].teacher_image
+                                ? x.course.teachers[0].teacher_image
                                 : sampleProfile
                             }
                             alt="professorImage"
