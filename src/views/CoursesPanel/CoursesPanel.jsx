@@ -4,6 +4,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import "../../assets/css/nucleo-icons.css";
 import DayRow from './DayRow';
 import {
   Card,
@@ -12,7 +13,8 @@ import {
   CardTitle,
   Table,
   Row,
-  Col
+  Col,
+  Button
 } from "reactstrap";
 
 import {
@@ -24,8 +26,8 @@ import {
 
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
-import HomeIcon from './home.png';
-import { size } from "lodash";
+// import HomeIcon from './home.png';
+// import { size } from "lodash";
 export default function CoursesPanel() {
 
   // Token
@@ -311,25 +313,35 @@ export default function CoursesPanel() {
       <Row>
         <Col>
           <Card className="TableCard">
-            <CardHeader className="text-right">
-              {/* <Row>
-                <Col> */}
-                  <CardTitle style={{fontSize:"25px"}}>
-                    پنل دروس
-                  </CardTitle>
-                {/* </Col>
-              </Row> */}
+            <CardHeader className="MainCardHeader text-right">
+              <CardTitle style={{fontSize:"25px"}}>
+                پنل دروس
+              </CardTitle>
+              <Button //className="HomeButton"
+                // class="HomeButton tim-icons icon-double-right"
+                href="/admin/page"
+                className="HomeButton tim-icons icon-double-right"
+              >
+                {/* <img src={HomeIcon} alt="Button Image" /> */}
+                {/* خانه */}
+              </Button>
             </CardHeader>
             <CardBody>
               <Row className="CardBodyRow">
-                <Col className="HomePageButtonCol">
-                  <button className="HomeButton"
-                    // class="HomeButton tim-icons icon-double-right"
-                    href="/admin/page"
-                  >
-                    <img src={HomeIcon} alt="Button Image" />
-                    {/* خانه */}
-                  </button>
+                {/* <Col className="HomePageButtonCol">
+                  
+                </Col> */}
+                
+                <Col className="SelectCol">
+                  <Select
+                    options={DepartmentOptions}
+                    styles={customStyles}
+                    isRtl
+                    placeholder="دانشکده مورد نظر را انتخاب کنید"
+                    name="SelectDepartment"
+                    value={SelectedDepartment.name}
+                    onChange={handleDepartment}
+                  />
                 </Col>
                 <Col className="ToggleCol">
                   <div className="SwitchCard">
@@ -342,17 +354,6 @@ export default function CoursesPanel() {
                         فقط دروس قابل اخذ
                      </p>
                   </div>
-                </Col>
-                <Col className="SelectCol">
-                  <Select
-                    options={DepartmentOptions}
-                    styles={customStyles}
-                    isRtl
-                    placeholder="دانشکده مورد نظر را انتخاب کنید"
-                    name="SelectDepartment"
-                    value={SelectedDepartment.name}
-                    onChange={handleDepartment}
-                  />
                 </Col>
               </Row>
               <Table className="ClassesTable">

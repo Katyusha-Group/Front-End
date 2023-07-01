@@ -65,6 +65,7 @@
     border-radius: 10px;
     font-size: small;
     padding: 5px;
+    width: 200px;
 }
 
 /* .Switch div
@@ -87,6 +88,9 @@
 {
     /* background-color: blue; */
     flex: 2;
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    /* padding: 100px; */
 }
 
 .SelectCol
@@ -129,11 +133,32 @@
     /* color: rgb(82,95,127); */
 }
 
+
+.MainCardHeader
+{
+    position: relative;
+}
+
 .HomeButton
 {
-    width: 50px;
+    width: 100px;
     /* color: aliceblue; */
-    background-color: rgb(102, 83, 160);
+    /* background-color: rgb(102, 83, 160); */
+    /* background-color: transparent; */
     /* border-color: rgb(200, 78, 202); */
     border-radius: 5px;
+    background-color: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: -50px;
+    
 }
+
+/* .SwitchLabel
+{
+    width: 0px;
+} */
