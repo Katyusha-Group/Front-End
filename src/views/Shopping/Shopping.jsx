@@ -2,6 +2,7 @@ import React from "react";
 // react plugin for creating notifications over the dashboard
 // import NotificationAlert from "react-notification-alert";
 import { useInfo } from "../../contexts/InfoContext";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 // reactstrap components
 import {
   Alert,
@@ -245,10 +246,13 @@ function Shopping() {
     <>
       <div className="wrapper" style={{ direction: "ltr" }}>
         <div className="main-panel">
+        <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
               {/* <NotificationAlert ref={notificationAlertRef} /> */}
+              
             </div>
+            
 
             <Row>
               <Col md="3">

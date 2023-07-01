@@ -79,17 +79,17 @@ function AdminNavbar(props) {
             {routes.map(
               x => (
                 <NavItem>
-                  <NavLink href={ x.layout + x.path}>{x.rtlName}</NavLink>
+                  <NavLink href={ x.layout + x.path}><i className= {"tim-icons "+ x.icon}/>{" "}{x.rtlName}</NavLink>
                 </NavItem>
               )
             )}
-            <InputGroup className="search-bar">
+            {/* <InputGroup className="search-bar">
               <Button color="link" onClick={toggleModalSearch}>
                 <i className="tim-icons icon-zoom-split" />
                 <span className="d-lg-none d-md-block">Search</span>
               </Button>
-            </InputGroup>
-            <UncontrolledDropdown nav style={{ "width":"55%"}} >
+            </InputGroup> */}
+            {/* <UncontrolledDropdown nav style={{ "width":"55%"}} >
               <DropdownToggle caret color="default" data-toggle="dropdown"  nav>
                 <div className="notification d-none d-lg-block d-xl-block" />
                 <i className="tim-icons icon-sound-wave" />
@@ -100,8 +100,8 @@ function AdminNavbar(props) {
                   <DropdownItem className="nav-item">سلام</DropdownItem>
                 </NavLink>
               </DropdownMenu>
-            </UncontrolledDropdown>
-            <UncontrolledDropdown nav>
+            </UncontrolledDropdown> */}
+            {/* <UncontrolledDropdown nav>
               <DropdownToggle
                 caret
                 color="default"
@@ -109,7 +109,7 @@ function AdminNavbar(props) {
                 onClick={(e) => e.preventDefault()}
               >
                 <div className="photo">
-                  {/* <img alt="..." src={require("assets/img/anime3.png")} /> */}
+                  <img alt="..." src={require("assets/img/anime3.png")} />
                 </div>
                 <b className="caret d-none d-lg-block d-xl-block" />
                 <p className="d-lg-none">Log out</p>
@@ -126,8 +126,8 @@ function AdminNavbar(props) {
                   <DropdownItem className="nav-item">خروج</DropdownItem>
                 </NavLink>
               </DropdownMenu>
-            </UncontrolledDropdown>
-            <li className="separator d-lg-none" />
+            </UncontrolledDropdown> */}
+            {/* <li className="separator d-lg-none" /> */}
           </Nav>
         </Collapse>
       </Navbar>
