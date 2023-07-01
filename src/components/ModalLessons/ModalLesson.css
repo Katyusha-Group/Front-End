@@ -1,0 +1,60 @@
+
+
+/* .loginLmsModal{
+   background: #27293d;
+   
+} */
+/* .card-header{
+   background-color: transparent!important;
+   direction: ltr;
+} */
+/* .card-footer{
+   background-color: transparent!important;
+}
+.loginLmsModalBody{
+   padding: 0 !important;
+}
+.close-btn
+{
+ display:inline-block;
+ padding:4px;
+ z-index:500;
+} */
+
+.courseProfileModal{
+    /* width: 1000px; */
+    /* max-width: 900px!important; */
+    max-width: 60%!important;
+
+    /* margin-top: 0px !important; */
+}
+
+
+   .ModalLessonCourseCard{
+       /* background-color: hsl(256, 45%, 50%)!important; */
+       /* border: solid !important; */
+       /* color: black !important; */
+       border-color: #ab69b1 !important;
+       color: rgb(199, 193, 193) !important;
+       /* background-color: #5c469c !important; */
+       /* width: 20rem !important; */
+       height: 200px;
+       margin-top: 15px;
+   }
+   .ModalCourseCardBody{
+       justify-items: center;
+       align-items: center;
+       padding: 0px ;
+       display: flex;
+       flex-direction: row;
+   }
+
+   .ModalprofessorImage{
+       margin-top: 0px;
+       margin-right: 5px ;
+       width: 120px;
+       height: 120px;
+       margin-left: 0.625rem;
+       overflow: "hidden";
+       border-width: 0.1875rem;
+   }

@@ -5,6 +5,7 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
+import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 //import swal from "sweetalert";
 // reactstrap components
 import {
@@ -27,6 +28,10 @@ import { conforms } from "lodash";
 function Login() {
   let [shop_caller,setShop_caller] = React.useState()
   console.log("default gohNakhor",shop_caller)
+  let idShop = "ali";
+  React.useEffect(() => {
+    console.log("state", idShop);
+  }, [idShop]);
   // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
@@ -134,6 +139,7 @@ function Login() {
     }
     // alert("Erfan Googooli!");
     // console.log("No error in front");
+    showLoading();
     const response = await fetch("https://katyushaiust.ir/accounts/login/", {
       method: "POST",
       headers: {
@@ -146,6 +152,7 @@ function Login() {
     });
     const data = await response.json();
     console.log("response",response);
+    closeLoading();
     if (response.status === 200) {
       setAuthTokens(data.token);
       console.log(authTokens);
@@ -156,21 +163,24 @@ function Login() {
       const tokenClass = JSON.parse(JSON.stringify(data));
       const token = tokenClass.token.access;
       const shopId = await fetch("https://katyushaiust.ir/carts/", {
+        method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-
          },
       })
       // console.log("shopId", shopId.json())
-      const shopId_data = await shopId.json();
-      // console.log(shopId_data);
-      if (shopId.status == 200) {
-        console.log("shopId.json()",shopId_data)
-        localStorage.setItem("shopId", JSON.stringify(shopId_data))
+      idShop = await shopId.json();
+      console.log("shopId_data",idShop);
+      if (shopId.status == 201 || shopId.status == 200) {
+        console.log("shopId.json()",idShop)
+        localStorage.setItem("shopId", JSON.stringify(idShop))
         console.log("shopId localstorage ",localStorage.getItem("shopId"))
         let test = localStorage.getItem("shopId")
         console.log("test", JSON.parse(test)[0])
+      }
+      else{
+        console.error("shopId error", shopId.status)
       }
       console.log("shopId: ",shopId)
       Navigate("/admin/page");
@@ -198,9 +208,9 @@ function Login() {
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="just-center">
-              <Col className="text-right" md="4">
+              <Col className="text-right" md="5">
                 {errorMessage.backError && (
-                  <div className="back-error">{errorMessage.backError}</div>
+                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}
                 <Card>
                   <CardHeader>
@@ -218,7 +228,7 @@ function Login() {
                   <br></br>
                   <CardBody>
                     <Form>
-                      <Row>
+                      <Row style={{justifyContent: 'center'}}>
                         <Col md="12">
                           <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
@@ -239,7 +249,7 @@ function Login() {
                           </FormGroup>
                         </Col>
                       </Row>
-                      <Row>
+                      <Row style={{justifyContent: 'center'}}>
                         <Col md="12">
                           <FormGroup className="text-right">
                             <label>رمز عبور</label>
@@ -269,8 +279,8 @@ function Login() {
                     </Form>
                     <br></br>
                     <Container>
-                      <Row>
-                        <Col className="text-center" md="12">
+                      <Row style={{justifyContent: 'center'}}>
+                        <Col className="text-center" md="10">
                           <Link href="#" color="primary">
                             فراموشی رمز عبور
                           </Link>
@@ -278,8 +288,8 @@ function Login() {
                       </Row>
                     </Container>
                     <Container>
-                      <Row>
-                        <Col className="text-center pt-md-2" md="12">
+                      <Row style={{justifyContent: 'center'}}>
+                        <Col className="text-center pt-md-2" md="10">
                           در صورت نداشتن حساب کاربری
                           <Link to="../signup" color="primary">
                             &nbsp;ثبت‌نام&nbsp;
@@ -295,7 +305,7 @@ function Login() {
                       onClick={handleSubmit}
                       //onChange={handleClick}
                       className="btn-fill"
-                      color="primary"
+                      color="info"
                       type="submit"
                     >
                       ورود

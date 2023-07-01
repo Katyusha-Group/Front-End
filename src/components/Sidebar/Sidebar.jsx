@@ -23,20 +23,20 @@ function Sidebar(props) {
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
   };
-  React.useEffect(() => {
-    if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(sidebarRef.current, {
-        suppressScrollX: true,
-        suppressScrollY: false,
-      });
-    }
-    // Specify how to clean up after this effect:
-    return function cleanup() {
-      if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-        ps.destroy();
-      }
-    };
-  });
+  // React.useEffect(() => {
+  //   if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //     ps = new PerfectScrollbar(sidebarRef.current, {
+  //       suppressScrollX: true,
+  //       suppressScrollY: false,
+  //     });
+  //   }
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //       ps.destroy();
+  //     }
+  //   };
+  // });
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
