@@ -28,6 +28,9 @@
 
     /* margin-top: 0px !important; */
 }
+.modal-dialog{
+   margin: -12rem auto !important;
+}
 
 
    .ModalLessonCourseCard{
