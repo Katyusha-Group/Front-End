@@ -345,22 +345,13 @@ export default function CoursesPanel() {
                 </Col>
                 <Col className="SwitchCol">
                   <div className="SwitchCard"> 
-                    <Row>
-                      <Col className="SwitchButton">
-                        <ReactSwitch className="Switch"
-                          checked={SwitchChecked}
-                          onChange={handleSwitchChange}
-                        />
-                        <label>
-                        فقط دروس قابل اخذ
-                        </label>
-                      </Col>
-                      {/* <Col>
-                        <p>
-                          فقط دروس قابل اخذ
-                        </p>
-                      </Col> */}
-                    </Row>
+                    <ReactSwitch className="Switch"
+                      checked={SwitchChecked}
+                      onChange={handleSwitchChange}
+                    />
+                    <label>
+                    فقط دروس قابل اخذ
+                    </label>
                   </div>
                 </Col>
               </Row>
