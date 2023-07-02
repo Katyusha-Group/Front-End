@@ -71,48 +71,59 @@ function ExamChart() {
   weekday[6] = "جمعه";
   function lessons() {
     return info.courseChoosed.map((lesson) => {
-      let lessonBoxId = `${lesson.complete_course_number}`;
-      let day = lesson.exam_times[0].date.split("-")[2] - 17;
-      // console.log(lesson.course_times[0].course_day);
-      if (day < 0) day = day + 31;
-      let time =
-        (timeStringToFloat(lesson.exam_times[0].exam_start_time) - 8) / 2;
-      return (
-        <div key={lessonBoxId}>
-          <div>
-            <div
-              id={lessonBoxId}
-              className="exam text-center"
-              style={{
-                top: `${defu + length * time}%`,
-                right: `${top_defu + top_right * day}%`,
-              }}
-              onMouseOver={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "block")
-              }
-              onMouseOut={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "none")
-              }
-            >
-              <div>{lesson.name}</div>
-              <div className="exam_hover" id={lessonBoxId + "x"}>
-                <div className="dir-left">{lesson.complete_course_number}</div>
-                <div>{lesson.teacher.name}</div>
+      // console.log("lesson", lesson.exam_times.length);
+      if (lesson.exam_times.length > 0) {
+        let lessonBoxId = `${lesson.complete_course_number}`;
+
+        let day = lesson.exam_times[0].date.split("-")[2] - 17;
+
+        // console.log(lesson.course_times[0].course_day);
+        if (day < 0) day = day + 31;
+        let time =
+          (timeStringToFloat(lesson.exam_times[0].exam_start_time) - 8) / 2;
+        return (
+          <div key={lessonBoxId}>
+            <div>
+              <div
+                id={lessonBoxId}
+                className="exam text-center"
+                style={{
+                  top: `${defu + length * time}%`,
+                  right: `${top_defu + top_right * day}%`,
+                }}
+                onMouseOver={() =>
+                  (document.getElementById(lessonBoxId + "x").style.display =
+                    "block")
+                }
+                onMouseOut={() =>
+                  (document.getElementById(lessonBoxId + "x").style.display =
+                    "none")
+                }
+              >
                 <div>
-                  {weekday[parseInt(lesson.course_times[0].course_day)]}
+                  {/* {lesson.name} */}
+                <strong title= {lesson.name}>{lesson.name.length < 13 ? lesson.name : lesson.name.slice(0, 13) + "..."}</strong>
+
                 </div>
-                <div>
-                  {timeStringToFloat(lesson.exam_times[0].exam_start_time) +
-                    "-" +
-                    timeStringToFloat(lesson.exam_times[0].exam_end_time)}
+                <div className="exam_hover" id={lessonBoxId + "x"}>
+                  <div className="dir-left">
+                    {lesson.complete_course_number}
+                  </div>
+                  <div>{lesson.teachers.map((y)=>(y.name)).join(" , ")}</div>
+                  <div>
+                    {weekday[parseInt(lesson.course_times[0].course_day)]}
+                  </div>
+                  <div>
+                    {timeStringToFloat(lesson.exam_times[0].exam_start_time) +
+                      "-" +
+                      timeStringToFloat(lesson.exam_times[0].exam_end_time)}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
   }
   return (

@@ -16,10 +16,12 @@ import ContextInfo from "./contexts/InfoContext.jsx";
 import LoginLms from './views/LoginLms.jsx';
 import LandingPage from "./views/LandingPage.jsx"; 
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
-import Shoping from "./views/Shoping/Shoping.jsx";
+import Shopping from "./views/Shopping/Shopping.jsx";
 import Verification from "./views/Verification/Verification.jsx";
+import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 
 function App() {
+  document.documentElement.dir = 'rtl'
   return (
     <>
       {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
@@ -37,7 +39,8 @@ function App() {
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/CoursesPanel" element={<CoursesPanel />}></Router.Route>
-                <Router.Route path="/shoping" element={<Shoping />}></Router.Route>
+                <Router.Route path="/shopping" element={<Shopping />}></Router.Route>
+                <Router.Route path="/user" element={<UserProfile />}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
             {/* </SimpleBar> */}
@@ -45,6 +48,7 @@ function App() {
         </BackgroundColorWrapper>
       </ThemeContextWrapper>
       {/* </SimpleBar> */}
+      {/* <img src="./assets/img/Logo.jpg" alt="logo" /> */}
     </>
   );
 }

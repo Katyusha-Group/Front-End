@@ -17,7 +17,8 @@ export default function ContextInfo(props) {
     courseGroupID:"0",
     courseGroupsListInContext:[],
     courseChoosed:[],
-    shop:[]
+    shop:[],
+    loading:0
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
