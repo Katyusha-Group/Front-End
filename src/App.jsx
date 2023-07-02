@@ -4,6 +4,7 @@ import * as Router from "react-router-dom";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper.jsx";
 import SignUp from "./views/SignUp.jsx";
+import ForgetPassword from "./views/ForgetPassword.jsx";
 import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import ChangePassword from './views/ChangePass.jsx';
@@ -19,6 +20,8 @@ import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
 import Verification from "./views/Verification/Verification.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
+import VerificationForgetPassword from "./views/Verification/VerificationForgetPassword.jsx";
+import SetNewPassword from "./views/SetNewPassword.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
@@ -34,8 +37,11 @@ function App() {
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/signup" element={<SignUp />}></Router.Route>
                 <Router.Route path="/verification" element={<Verification />}></Router.Route>
+                <Router.Route path="/verificationForgetPassword" element={<VerificationForgetPassword />}></Router.Route>
+                <Router.Route path="/setNewPassword" element={<SetNewPassword />}></Router.Route>
                 <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
+                <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/CoursesPanel" element={<CoursesPanel />}></Router.Route>
