@@ -78,18 +78,23 @@
     background-color: black; 
 } */
 
+
 .Switch svg {
     width: 100%;
     right: 2px;
 }
 
 
-.ToggleCol
+.SwitchCol
 {
     /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 2;
     padding-right: 100px !important;
-    padding-left: 100px !important;
+    /* padding-left: 100px !important; */
     /* padding: 100px; */
 }
 
@@ -157,8 +162,3 @@
     top: -50px;
     
 }
-
-/* .SwitchLabel
-{
-    width: 0px;
-} */

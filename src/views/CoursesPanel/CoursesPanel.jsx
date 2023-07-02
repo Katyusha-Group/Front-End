@@ -343,16 +343,24 @@ export default function CoursesPanel() {
                     onChange={handleDepartment}
                   />
                 </Col>
-                <Col className="ToggleCol">
-                  <div className="SwitchCard">
-                      <p className="SwitchLabel"> 
+                <Col className="SwitchCol">
+                  <div className="SwitchCard"> 
+                    <Row>
+                      <Col className="SwitchButton">
                         <ReactSwitch className="Switch"
-                            checked={SwitchChecked}
-                            onChange={handleSwitchChange}
-                          />
-                          <br/>
+                          checked={SwitchChecked}
+                          onChange={handleSwitchChange}
+                        />
+                        <label>
                         فقط دروس قابل اخذ
-                     </p>
+                        </label>
+                      </Col>
+                      {/* <Col>
+                        <p>
+                          فقط دروس قابل اخذ
+                        </p>
+                      </Col> */}
+                    </Row>
                   </div>
                 </Col>
               </Row>
