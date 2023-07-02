@@ -89,7 +89,10 @@ const Timeline = (props) => {
               <>
                 <li>
                   {console.log("Im here", Object.entries(dorus))}
-                  <span className="year">{termid}</span>
+                  {/* <span className="year">{termid}</span> */}
+                  <span className="year">
+                    {"1" + termid.replace(/(\d{3})/, "$1-")}
+                  </span>
                   <ul className="content">
                     {Object.keys(dorus).map((dars) => (
                       <li>{dars}</li>
