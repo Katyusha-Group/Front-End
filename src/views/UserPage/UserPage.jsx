@@ -28,7 +28,7 @@ import dataJson from "../../assets/data/week.json";
 import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import courseGroups from "./courseGroups.json";
-import sampleProfile from "./image1.png";
+//import sampleProfile from "./image1.png";
 import fullLogo from "./full.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
@@ -447,7 +447,7 @@ export default function UserPage() {
                       key={index}
                       style={{
                         backgroundColor:
-                          x.color_intensity_percentage > 10
+                          x.color_intensity_percentage > 0
                             ? `hsl(256, 45%, ${convertPercentagetoLigtness(
                                 x.color_intensity_percentage
                               )}%)`
@@ -519,8 +519,7 @@ export default function UserPage() {
                           className="professorImage"
                           src={
                             x.teachers[0].teacher_image
-                              ? x.teachers[0].teacher_image
-                              : sampleProfile
+                              
                           }
                           alt="professorImage"
                         />
@@ -549,7 +548,7 @@ export default function UserPage() {
                               alt="fullLogo"
                               style={{
                                 display:
-                                  x.color_intensity_percentage < 11
+                                  x.color_intensity_percentage < 1
                                     ? "block"
                                     : "none",
                               }}

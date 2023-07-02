@@ -23,5 +23,8 @@
     color: rgb(230, 63, 154);
 
 }
+.logoutLink{
+    cursor: pointer;
+}
 
 

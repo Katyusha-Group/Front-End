@@ -7,6 +7,7 @@ import LoginModalGolestan from "../../views/LoginGolestan";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
 import "../Navbars/AdminNavbar.css";
+import { useNavigate } from "react-router-dom";
 
 
 // reactstrap components
@@ -41,6 +42,7 @@ function AdminNavbar(props) {
   const [showLogin, setShowLogin] = useState(false);
   const [showLoginG, setShowLoginG] = useState(false);
   const [selected, setSelected] = useState(false);
+  const Navigate = useNavigate();
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     // Specify how to clean up after this effect:
@@ -81,8 +83,18 @@ function AdminNavbar(props) {
                 <NavItem>
                   <NavLink href={ x.layout + x.path}><i className= {"tim-icons "+ x.icon}/>{" "}{x.rtlName}</NavLink>
                 </NavItem>
+                
               )
             )}
+            <NavItem className="logoutLink">
+              <NavLink
+              onClick={()=>{
+                localStorage.setItem('authTokens', "");
+                Navigate("/login")
+              }}
+              ><i className= {"tim-icons icon-button-power"}/>{" خروج"}
+              </NavLink>
+            </NavItem>
             {/* <InputGroup className="search-bar">
               <Button color="link" onClick={toggleModalSearch}>
                 <i className="tim-icons icon-zoom-split" />

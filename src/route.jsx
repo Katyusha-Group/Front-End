@@ -4,6 +4,7 @@ import ChangePassword from './views/ChangePass.jsx';
 import UserPage from "./views/UserPage/UserPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
+import Shopping from "./views/Shopping/Shopping.jsx";
 var routes = [
     
     // {
@@ -23,20 +24,20 @@ var routes = [
         layout: "/admin"
     },
     {
-        path: '/Courses',
+        path: '../CoursesPanel',
         name:"CoursesPanel",
         component: CoursesPanel,
         rtlName: "پنل دروس",
         icon: "icon-paper",
-        layout: "/admin"
+        layout: ""
     }
     ,{
-        path: '/aboutUs',
-        name:"AboutUs",
-        component: AboutUs,
+        path: '/shopping',
+        name:"Shopping",
+        component: Shopping,
         rtlName: "سبد خرید",
         icon: "icon-basket-simple",
-        layout: "/admin"
+        layout: ""
     },
     {
         path: '/aboutUs',
@@ -64,16 +65,7 @@ var routes = [
         // icon: "icon-alert-circle-exc",
         icon: "icon-send",
         layout: "/admin"
-    },{
-        path: '/aboutUs',
-        name:"AboutUs",
-        component: AboutUs,
-        rtlName: "خروج",
-        icon: "icon-button-power",
-        layout: "/admin"
     }
-    
-   
 ]
 
 export default routes;
