@@ -1,5 +1,6 @@
 .rtl .navbar .navbar-nav{
-    width: 70%;
+    width: 100%;
+    direction: rtl;
 }
 .navbar-nav li{
     width: 100%;
@@ -16,11 +17,14 @@
 
 }
 .dropdown nav-item{
-    width: 55%;
+    width: 30%;
 }
 .navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
     color: rgb(230, 63, 154);
 
+}
+.logoutLink{
+    cursor: pointer;
 }
 
 
