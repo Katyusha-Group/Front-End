@@ -153,7 +153,7 @@ const ModalLessons = (props) => {
               </Card>
 
               <Row>
-                <Col md="12">
+                <Col md="12" style={{overflow:"hidden"}}>
                   <Timeline show={props} />
                 </Col>
               </Row>
