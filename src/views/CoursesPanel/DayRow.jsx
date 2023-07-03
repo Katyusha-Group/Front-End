@@ -12,17 +12,20 @@ const DayPeriod = (Section) => (
                 <div className="Course"
                   style={{ backgroundColor: entry.backgColor }}
                 >
-                  <div style={{ margin: '5px' }}>
+                  {/* <div style={{ margin: '5px' }}>
                     {entry.name} ({entry.class_gp})
+                  </div> */}
+                  <div title= {entry.name}>
+                    {entry.name.length < 25 ? entry.name : entry.name.slice(0, 25) + "..."} ({entry.class_gp})
                   </div>
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
                   style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
-                      showLoading();
+                    showLoading();
                     entry.ButtonClicked();
-                      closeLoading();
+                    closeLoading();
                   }}>
                   {entry.IsChosen ? 'x' : '+'}
                 </button>
@@ -36,19 +39,23 @@ const DayPeriod = (Section) => (
   )
 
 const DayRow = ({ periods, dayName }) => {
+  // showLoading();
     return (
     <>
-        <tr className="TableROW">
-        <td className="CoursesPanel_column text-center">{dayName}</td>
-        {Object.entries(periods).map(([time, entry]) => {
-            return (
-            <td className="CoursesPanel_column2" key={time}>
-                {DayPeriod(entry)}
-            </td>
-            )
-        })}
-        </tr>
+      {/* {showLoading()} */}
+      <tr className="TableROW">
+      <td className="CoursesPanel_column text-center">{dayName}</td>
+      {Object.entries(periods).map(([time, entry]) => {
+          return (
+          <td className="CoursesPanel_column2" key={time}>
+              {DayPeriod(entry)}
+          </td>
+          )
+      })}
+      </tr>
+      {/* {closeLoading()} */}
     </>
     );
+    // closeLoading();
 };
 export default DayRow;

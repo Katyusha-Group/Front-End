@@ -158,6 +158,7 @@ export default function CoursesPanel() {
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
+    // showLoading();
     if (SelectedDepartment) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -174,6 +175,7 @@ export default function CoursesPanel() {
         })
         .catch((error) => console.error(error));
     }
+    // closeLoading();
   }, [SelectedDepartment]);
 
   // Switch
@@ -201,11 +203,6 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      // if (this.name.length > 30)
-      // {
-      //   // console.log("*****Length is: " + this.name.length);
-      //   this.name = this.name.substring(0, 25) + "...";
-      // }
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
@@ -256,8 +253,9 @@ export default function CoursesPanel() {
 
   
 
-  timetable = uniquifyArrayByKey(timetable, "complete_course_number")
+  timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
+    // showLoading();
     const emptySection = () => ({
       0: null,
       1: null,
@@ -306,6 +304,7 @@ export default function CoursesPanel() {
         );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
+        // closeLoading();
         return lessonsKeyedByDayAndPeriod
       },
       {

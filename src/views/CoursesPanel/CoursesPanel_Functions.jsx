@@ -1,5 +1,3 @@
-
-
 export function addNewLesson(num) {                                        // Add a lesson
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
