@@ -27,6 +27,7 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     align-items: center;
+    width: 100px;
 }
 
 .btn-fill-AddCourseButton {             /* Add or remove course button */
@@ -78,18 +79,23 @@
     background-color: black; 
 } */
 
+
 .Switch svg {
     width: 100%;
     right: 2px;
 }
 
 
-.ToggleCol
+.SwitchCol
 {
     /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 2;
     padding-right: 100px !important;
-    padding-left: 100px !important;
+    /* padding-left: 100px !important; */
     /* padding: 100px; */
 }
 
@@ -131,6 +137,7 @@
     column-width: 1000px;
     border: 3px solid;
     /* color: rgb(82,95,127); */
+    vertical-align: top !important;
 }
 
 
@@ -157,8 +164,3 @@
     top: -50px;
     
 }
-
-/* .SwitchLabel
-{
-    width: 0px;
-} */
