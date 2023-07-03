@@ -272,7 +272,7 @@ function LessonSidebar(props) {
                           }}
                         >
                           <span className="tim-icons icon-lock-circle" />
-                          تغییر رمز عبور
+                          تغییر  گذرواژه
                         </DropdownItem>
                         
                         <DropdownItem

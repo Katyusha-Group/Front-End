@@ -174,24 +174,26 @@ function SetNewPassword() {
       }
     })
   
-    // const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
+    const response = await fetch(`${localStorage.getItem("link")}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-    //   body: JSON.stringify({
-    //     email: formData.email,
-    //     password1: formData.password,
-    //     password2: formData.passwordConfirm,
-    //     department: subject,
-    //     gender: gender,
-    //   }),
-    // });
-    // const data = await response.json();
-    // console.log(data);
+      body: JSON.stringify({
+        new_password:formData.password ,
+        confirm_password: formData.passwordConfirm
+        // email: formData.email,
+        // password: ,
+        // password2: ,
+        // department: subject,
+        // gender: gender,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
     Swal.close()
-    // if ( response.status===201){
+    if ( data.detail==="Password successfully changed."){
 
     // // if ( data.message.includes("created successfully")){
       
@@ -201,16 +203,15 @@ function SetNewPassword() {
 
     //   console.log("خوش آمدید");
     //   // console.log(info.token)
-    //   Swal.fire({
-    //     // position: 'top-end',
-    //     icon: 'success',
-    //     title: ' کد تایید ارسال شد',
-    //     html:'لطفا ایمیلتان را چک کنید',
-    //     background: '#3c3e5d',
-    //     color:'#ceccc0',
-    //     width:'25rem',
-      
-    //   })
+      Swal.fire({
+        // position: 'top-end',
+        icon: 'success',
+        title: 'رمز عبور با موفقیت تغیر کرد   ',
+        background: '#3c3e5d',
+        color:'#ceccc0',
+        width:'25rem',
+        confirmButtonText:"باشه"
+      })
     //   Navigate("/verification");
     // } else {
     //   if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
@@ -219,9 +220,18 @@ function SetNewPassword() {
     //     ...errorMessage,
     //     backError: errors.backError,
     //   });
-    // }
-    // console.log(formData);
     Navigate("/login")
+    }
+    else {
+        
+        errors.backError = "!رمز عبور قابل قبول نیست";
+        setErrorMessage({
+          ...errorMessage,
+          backError: errors.backError,
+        });
+        }
+    // console.log(formData);
+    
   }
 
   return (

@@ -49,13 +49,13 @@ export function takeLessonsGroups(token){
     const data = await response.json();
     console.log(data);
     if ( response.status===200){
-
-
+      localStorage.setItem("link",data.link)
       console.log("خوش آمدید");
+      console.log(data.link)
       Swal.fire({
         icon: 'success',
         title: 'کد با موفقیت تایید شد.',
-        html:'می توانید وارد حساب کاربری شوید',
+        html:'می توانید گذرواژه ی جدید ایجاد کنید',
         background: '#3c3e5d',
         color:'#ceccc0',
         width:'25rem',
