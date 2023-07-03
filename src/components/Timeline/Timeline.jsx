@@ -11,93 +11,47 @@ const Timeline = (props) => {
   const tokenClass = JSON.parse(tokenJson);
   const [Data, setData] = React.useState();
   // const [Data, setData] = useState();
-  // const Data = [
-  //   {
-  //     course_number: 2211026,
-  //     name: "معماری کامپیوتر",
-  //     data: {
-  //       3981: [
-  //         {
-  //           capacity: 35,
-  //           registered_count: 36,
-  //           teacher_name: "محسن سریانی",
-  //         },
-  //       ],
-  //       3982: [
-  //         {
-  //           capacity: 41,
-  //           registered_count: 41,
-  //           teacher_name: "محسن سریانی",
-  //         },
-  //         {
-  //           capacity: 41,
-  //           registered_count: 42,
-  //           teacher_name: "حاکم بیت الهی",
-  //         },
-  //       ],
-  //       3991: [
-  //         {
-  //           capacity: 49,
-  //           registered_count: 52,
-  //           teacher_name: "محسن سریانی",
-  //         },
-  //       ],
-  //       3992: [
-  //         {
-  //           capacity: 35,
-  //           registered_count: 32,
-  //           teacher_name: "محسن سریانی",
-  //         },
-  //         {
-  //           capacity: 60,
-  //           registered_count: 61,
-  //           teacher_name: "حاکم بیت الهی",
-  //         },
-  //       ],
-  //       4001: [
-  //         {
-  //           capacity: 42,
-  //           registered_count: 42,
-  //           teacher_name: "محسن سریانی",
-  //         },
-  //       ],
-  //       4002: [
-  //         {
-  //           capacity: 54,
-  //           registered_count: 54,
-  //           teacher_name: "حاکم بیت الهی",
-  //         },
-  //         {
-  //           capacity: 54,
-  //           registered_count: 52,
-  //           teacher_name: "امیرمهدی حسینی منزه",
-  //         },
-  //       ],
-  //       4011: [
-  //         {
-  //           capacity: 44,
-  //           registered_count: 45,
-  //           teacher_name: "پریا دربانی",
-  //         },
-  //       ],
-  //       4012: [
-  //         {
-  //           capacity: 47,
-  //           registered_count: 47,
-  //           teacher_name: "حاکم بیت الهی",
-  //         },
-  //         {
-  //           capacity: 49,
-  //           registered_count: 50,
-  //           teacher_name: "امیرمهدی حسینی منزه",
-  //         },
-  //       ],
-  //     },
-  //   },
-  // ];
+  const Data1 = [
+    {
+      course_number: 2211405,
+      name: "مقدمه ای بر مسابقات برنامه نویسی",
+      data: {
+        4011: {
+          "سید صالح اعتمادی": {
+            courses: [
+              {
+                capacity: 32,
+                registered_count: 28,
+                complete_course_number: "22-11-405-01",
+              },
+            ],
+            total_capacity: 32,
+            total_registered_count: 28,
+            popularity: 87.0,
+            total_classes: 1,
+          },
+        },
+        4012: {
+          "سید صالح اعتمادی": {
+            courses: [
+              {
+                capacity: 35,
+                registered_count: 34,
+                complete_course_number: "22-11-405-01",
+              },
+            ],
+            total_capacity: 35,
+            total_registered_count: 34,
+            popularity: 97.0,
+            total_classes: 1,
+          },
+        },
+      },
+    },
+  ];
   const token = tokenClass.token.access;
   React.useEffect(() => {
-    fetch(`https://www.katyushaiust.ir/timeline/${course_group}`, {
+    fetch(`https://www.katyushaiust.ir/timeline/courses/${course_group}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -121,6 +75,7 @@ const Timeline = (props) => {
     //   return location.pathname === routeName ? "active" : "";
     // };
     console.log("Data of time", Data);
+    // console.log("data in it ", Object.entries(Data[0].data));
   }, [Data]);
   // console.log("LOGH", Data);
   // console.log("LOGH1", Data[0].data);
@@ -133,10 +88,14 @@ const Timeline = (props) => {
             ([termid, dorus]) => (
               <>
                 <li>
-                  <span className="year">{termid}</span>
+                  {console.log("Im here", Object.entries(dorus))}
+                  {/* <span className="year">{termid}</span> */}
+                  <span className="year">
+                    {"1" + termid.replace(/(\d{3})/, "$1-")}
+                  </span>
                   <ul className="content">
-                    {dorus.map((dars) => (
-                      <li>{dars.teacher_name}</li>
+                    {Object.keys(dorus).map((dars) => (
+                      <li>{dars}</li>
                     ))}
                   </ul>
                 </li>

@@ -6,6 +6,7 @@ import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import "../../assets/css/nucleo-icons.css";
 import DayRow from './DayRow';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -31,9 +32,20 @@ import ReactSwitch from "react-switch";
 export default function CoursesPanel() {
 
   // Token
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
+  // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
+  // const tokenClass = JSON.parse(tokenJson) || 'nothing';
+  // // const token = tokenClass.token.access;
+  // const token = tokenClass.token.access || 'nothing';
+
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
+    const newToken = tokenClass ? tokenClass.token.access : null;
+    setToken(newToken);
+  }, [localStorage.getItem("authTokens")]);
+
 
   // Info
   const { info, changeInfo } = useInfo();

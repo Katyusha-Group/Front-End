@@ -1,5 +1,7 @@
 import React from "react";
 import { useInfo } from "../../contexts/InfoContext";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+// reactstrap components
 import {
   Button,
   Card,
@@ -206,11 +208,14 @@ function Shopping() {
   return (
     <>
       <div className="wrapper" style={{ direction: "ltr" }}>
-        <div className="mt-5">
+        <div className="main-panel">
+        <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
               {/* <NotificationAlert ref={notificationAlertRef} /> */}
+              
             </div>
+            
 
             <Row>
               <Col md="3">

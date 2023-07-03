@@ -57,6 +57,7 @@ export function takeLessonsGroups(token){
         background: '#3c3e5d',
         color:'#ceccc0',
         width:'25rem',
+        confirmButtonText:"باشه"
       }).then((result) => {
         console.log(result);
         if(result) {
@@ -75,6 +76,7 @@ export function takeLessonsGroups(token){
           background: '#3c3e5d',
           color:'#ceccc0',
           width:'25rem',
+          confirmButtonText:'باشه'
           // footer: '<a href="">Why do I have this issue?</a>'
         })
       }
