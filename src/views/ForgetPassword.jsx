@@ -4,7 +4,8 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
-//import swal from "sweetalert";
+import Swal from "sweetalert2";
+import ContextInfo, { useInfo } from "../contexts/InfoContext";
 // reactstrap components
 import {
   Button,
@@ -24,6 +25,7 @@ import { Link } from "react-router-dom";
 // import { conforms } from "lodash";
 
 function ForgetPassword() {
+  const { info, changeInfo } = useInfo();
   ////////////////////////////// Input errors ///////////////////////
   const [formData, setFormData] = useState({
     email: ""
@@ -72,20 +74,44 @@ function ForgetPassword() {
     }
     
     showLoading();
-    // const response = await fetch("https://katyushaiust.ir/accounts/login/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username: formData.email,
-    //     password: formData.password,
-    //   }),
-    // });
-    // const data = await response.json();
-    // console.log("response",response);
+    const response = await fetch("https://katyushaiust.ir/accounts/reset-password/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: formData.email,
+      }),
+    });
+    const data = await response.json();
+    console.log("response",response);
     closeLoading();
-    // if (response.status === 200) {
+    if (response.status === 200) {
+      // console.log("خوش آمدید");
+      // console.log(info.link);
+      localStorage.setItem('link', data.link);
+      // ContextInfo.changeInfo("link",data.link)
+      // setInfo((info) => ({ ...info, [link]: data.link }))
+  
+      console.log(info.link);
+      console.log(data.link);
+      Swal.fire({
+        icon: 'success',
+        title: 'کد تایید ارسال شد.',
+        html:'لطفا ایمیلتان را چک کنید',
+        background: '#3c3e5d',
+        color:'#ceccc0',
+        width:'25rem',
+        confirmButtonText:"باشه"
+      }).then((result) => {
+        console.log(result);
+        if(result) {
+          window.location="/verificationForgetPassword";
+          // ok click
+        } else {
+          // not clicked
+        }
+      });
     //   setAuthTokens(data.token);
     //   console.log(authTokens);
     //   setShop_caller(true);
@@ -110,19 +136,20 @@ function ForgetPassword() {
     //     console.log("shopId localstorage ",localStorage.getItem("shopId"))
     //     let test = localStorage.getItem("shopId")
     //     console.log("test", JSON.parse(test)[0])
-    //   }
-    //   else{
+    Navigate("/verificationForgetPassword")
+      }
+     else{
     //     console.error("shopId error", shopId.status)
     //   }
     //   console.log("shopId: ",shopId)
     //   Navigate("/admin/page");
     // } else {
     //   console.log(data.error);
-    //   errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
-    //   setErrorMessage({
-    //     ...errorMessage,
-    //     backError: errors.backError,
-    //   });
+      errors.backError = "!ایمیل وارد شده اشتباه است و یا حساب کاربری ندارید";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
     //   // if (data.error === "Invalid credentials") {
     //   //   //show pop up
     //   //   swal("Error!", "Invalid credentials!", "error");
@@ -131,8 +158,8 @@ function ForgetPassword() {
     //   //   swal("Error!", "check your mailbox for verification", "error");
     //   //   //show pop up with  check your mailbox for verification
     //   // }
-    // }
-    Navigate("/verificationForgetPassword")
+    }
+    
   }
   //////////////////////////// End of input errors //////////////////
   return (
@@ -152,7 +179,7 @@ function ForgetPassword() {
                   </CardHeader>
                   <br></br>
                   <CardBody>
-                    <Form>
+                    <Form>                   
                       <Row style={{justifyContent: 'center'}}>
                         <Col md="12">
                           <FormGroup className="text-right">
