@@ -19,6 +19,9 @@
 
 .Course {                   /* Course info (without button) */
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     background-color: hsl(235, 22%, 30%);
     margin-top: 3px;
@@ -28,6 +31,7 @@
     border-bottom-right-radius: 0;
     align-items: center;
     width: 100px;
+    padding: 2px;
 }
 
 .btn-fill-AddCourseButton {             /* Add or remove course button */

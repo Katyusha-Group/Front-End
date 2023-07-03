@@ -30,7 +30,7 @@ import ReactSwitch from "react-switch";
 // import HomeIcon from './home.png';
 // import { size } from "lodash";
 export default function CoursesPanel() {
-
+  // console.log("HELLO WORLD!");
   // Token
   // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
   // const tokenClass = JSON.parse(tokenJson) || 'nothing';
@@ -154,7 +154,9 @@ export default function CoursesPanel() {
   };
 
   function handleDepartment(selectedOption) {                         // Handle Select
+    // showLoading();
     setSelectedDepartment(selectedOption.value);
+    // closeLoading();
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
@@ -168,10 +170,23 @@ export default function CoursesPanel() {
           // settimetable(data);
           const courses = data.map(course => new Course(course, false));
           // settimetable(courses);
-          setDepartmentCourses(courses);
-          let NewTimeTable = [...ChosenCourses, ...courses];
-          settimetable(NewTimeTable);
-          setSwitchChecked(false);
+          setDepartmentCourses(courses); //Do we need this?
+          // let NewTimeTable = [...ChosenCourses, ...courses];
+          // settimetable(NewTimeTable);
+          // setSwitchChecked(false);
+          if (SwitchChecked)
+          {
+            let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+            let NewTimeTable = [...ChosenCourses, ...AllowedDepartmentCourses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(true);
+          }
+          else
+          {
+            let NewTimeTable = [...ChosenCourses, ...courses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(false);
+          }
         })
         .catch((error) => console.error(error));
     }
@@ -279,6 +294,7 @@ export default function CoursesPanel() {
 
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+        // showLoading();
         currentPeriod.course_times.forEach(time => {
 
           const day = time.course_day;
@@ -321,6 +337,7 @@ export default function CoursesPanel() {
   
   return (
     <>
+      {/* {console.log("hello")} */}
       <Row>
         <Col>
           <Card className="TableCard">
@@ -381,11 +398,14 @@ export default function CoursesPanel() {
                   </tr>
                 </thead>
                 <tbody className="CoursesTableBody">
+                  {/* {console.log("hello")} */}
                   <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
                   <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
+                  {/* {console.log("bye")} */}
+                  {/* {closeLoading()} */}
                 </tbody>
               </Table>
             </CardBody>
