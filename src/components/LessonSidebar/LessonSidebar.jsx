@@ -286,7 +286,8 @@ function LessonSidebar(props) {
                           <span className="tim-icons icon-simple-remove" />
                           <Link to="/login"
                            onClick={()=>{
-                            localStorage.setItem('authTokens', "");
+                            localStorage.removeItem('authTokens');
+                            //localStorage.setItem('authTokens', "");
                             // setAuthTokens(null);
                             // console.log("clicked")
                           }}
