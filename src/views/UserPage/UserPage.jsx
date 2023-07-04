@@ -114,6 +114,14 @@ export default function UserPage() {
   contain_sms: "N",
   contain_email:"N",
   });
+
+  const [prices, setPrices] = React.useState({
+    S: 0,
+    E: 0,
+    T: 0,
+  });
+
+
   function setShowCourseHoverFunc(name, value) {
     setShowCourseHover((info) => ({ [name]: value }));
   }
@@ -193,8 +201,11 @@ export default function UserPage() {
           return location.pathname === routeName ? "active" : "";
         };
       }
+      
     }, []);
+
     closeLoading();
+
     return infoState.courseChoosed.map((lessons) => {
       // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
@@ -278,14 +289,10 @@ export default function UserPage() {
   }
 
   function getShopData(x) {
-    console.log("hello22");
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    // console.log("data", props.show.data);
-    console.log("id", showShoppingModal.data);
-    console.log("api", `https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`);
     fetch(`https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`, {
       method: "GET",
       headers: {
@@ -295,12 +302,20 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("order data", data);
         SetOrderInfo(data[0])
       })
       .catch((error) => {
         console.error(error);
       });
+      fetch(`https://katyushaiust.ir/get-prices/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setPrices(data);
+          console.log("prices", data);
+        })
+        .catch((error) => console.error(error));
   }
 
   return (
@@ -462,7 +477,7 @@ export default function UserPage() {
                             : "dimgray",
                       }}
                       onMouseEnter={() => {
-                        console.log("x.complete", x.complete_course_number);
+                        // console.log("x.complete", x.complete_course_number);
                         // console.log("z");
                         setShowCourseHoverFunc("courseChoosed", [x]);
                       }}
@@ -668,6 +683,7 @@ export default function UserPage() {
                     <ModalShopping
                       show={showShoppingModal}
                       order={OrderInfo}
+                      prices={prices}
                       close={() =>
                         setShowShoppingModal(() => ({
                           ...showShoppingModal,

@@ -23,7 +23,7 @@ import NotificationAlert from "react-notification-alert";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
-  const [email, setEmail] = React.useState(false);
+  const [email, setEmail] = React.useState(props.order.contain_email == "C" ? true:false);
   const [telegram, setTelegram] = React.useState(props.order.contain_telegram == "C" ? true:false);
   const [sms, setSms] = React.useState(false);
   const [enableBotton, setEnableBotton] = React.useState(false);
@@ -31,13 +31,36 @@ const ModalShopping = (props) => {
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
   const shopId = JSON.parse(localStorage.getItem("shopId"));
+  const [prices, setPrices] = React.useState({});
+  const [totalPrices, setTotalPrices] = React.useState(0);
+  function calPrice() {
+    let price = 0;
+    if (email) {
+      price += props.prices.E;
+    }
+    if (telegram) {
+      price += props.prices.T;
+    }
+    if (sms) {
+      price += props.prices.S;
+    }
+    setTotalPrices(price);
+  }
+
+  React.useEffect(() => {
+    calPrice()
+  }, [telegram,email,sms]);
+
   React.useEffect(() => {
     setTelegram(()=>props.order.contain_telegram == "C" ? true:false);
-    console.log("telegram",telegram);
+    setEmail(()=>props.order.contain_email == "C" ? true:false);
+    calPrice()
   }, [props]);
+
+
   const notificationAlertRef = React.useRef(null);
+
   const notify = (place) => {
-    console.log("hello")
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
     switch (color) {
@@ -75,7 +98,6 @@ const ModalShopping = (props) => {
     };
     notificationAlertRef.current.notificationAlert(options);
   };
-
   function addItemShop(num) {
     fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
       method: "POST",
@@ -86,17 +108,15 @@ const ModalShopping = (props) => {
       body: JSON.stringify({
         complete_course_number: num,
         contain_telegram: telegram,
-        contain_sms: email,
-        contain_email: sms,
+        contain_sms: sms,
+        contain_email: email,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(`shop add ${num}`, data);
       })
       .catch((error) => {
         console.error(error);
-        console.log("failed course complete", num);
       });
     }
     return (
@@ -129,11 +149,11 @@ const ModalShopping = (props) => {
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="text-right" md="12">
+                    <Col className="text-center" md="12">
                       گزینه های مورد نظر را انتخاب کنید
                     </Col>
-                    <Col className="text-right" md="12">
-                      قیمت: {props.order.price} تومان
+                    <Col className="text-center" md="12">
+                      قیمت: {totalPrices} تومان
                     </Col>
                   </Row>
                   <Col className="m-auto text-center category">
@@ -141,7 +161,7 @@ const ModalShopping = (props) => {
                       <FormGroup
                         className="shopping_form_userpage"
                         check
-                        disabled
+                        
                       >
                         <Label check className="shoping_label">
                           <Input
@@ -150,7 +170,11 @@ const ModalShopping = (props) => {
                                 setEmail(!email);
                               }
                             }}
-                            checked={false}
+                            checked={
+                              props.order.contain_email == "O"
+                                ? true
+                                : email
+                            }
                             type="checkbox"
                           />
                           <span className="form-check-sign">
@@ -190,10 +214,6 @@ const ModalShopping = (props) => {
                             }
                             type="checkbox"
                             onChange={() => {
-                              console.log(
-                                "order contain telegram",
-                                props.order.contain_telegram
-                              );
                               if (props.order.contain_telegram != "O") {
                                 setTelegram(!telegram);
                               }
@@ -223,7 +243,7 @@ const ModalShopping = (props) => {
                     props.close();
                   }}
                 >
-                  تایید
+                  اضافه کردن به سبد خرید
                 </Button>
               </CardFooter>
             </Modal.Body>

@@ -25,10 +25,10 @@ import {
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
-  console.log("PROPS in MODAL", props);
+  // console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
   const x = props.show.data;
-  console.log("Info x", x);
+  // console.log("Info x", x);
   if (Object.keys(x).length != 0) {
     return (
       <Modal
