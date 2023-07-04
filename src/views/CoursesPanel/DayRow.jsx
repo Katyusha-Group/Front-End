@@ -16,7 +16,7 @@ const DayPeriod = (Section) => (
                     {entry.name} ({entry.class_gp})
                   </div> */}
                   <div title= {entry.name}>
-                    {entry.name.length < 25 ? entry.name : entry.name.slice(0, 25) + "..."} ({entry.class_gp})
+                    {entry.name.length < 20 ? entry.name : entry.name.slice(0, 20) + "..."} ({entry.class_gp})
                   </div>
                 </div>
                 <button className="btn-fill-AddCourseButton"
