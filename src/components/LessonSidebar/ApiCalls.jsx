@@ -55,7 +55,7 @@ export function takeLessonsGroups(token){
       Swal.fire({
         icon: 'success',
         title: 'کد با موفقیت تایید شد.',
-        html:'می توانید گذرواژه ی جدید ایجاد کنید',
+        html:'می توانید رمز عبور جدید ایجاد کنید',
         background: '#3c3e5d',
         color:'#ceccc0',
         width:'25rem',
