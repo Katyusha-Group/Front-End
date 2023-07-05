@@ -1,7 +1,7 @@
 
 import React, { useState, useRef ,useEffect} from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-//import { verificationApi } from "../../components/LessonSidebar/ApiCalls";
+import { forgetPasswordVerificationApi } from "../../components/LessonSidebar/ApiCalls";
 import "./Verification.css"
 import { useInfo } from "../../contexts/InfoContext";
 import { closeLoading, showLoading } from "../../components/LoadingAlert/LoadingAlert";
@@ -134,10 +134,10 @@ function isValidCode(code) {
     //console.log(code)
     // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
-    console.log(showAlert)
-    //console.log(verificationApi(code,info.token))
+    console.log(localStorage.getItem("link"))
+    console.log(forgetPasswordVerificationApi(code))
     closeLoading();
-    Navigate("/setNewPassword")
+    // Navigate("/setNewPassword")
     //console.log(showAlert)
     // verificationApi(code,info.token)
     

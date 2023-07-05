@@ -304,7 +304,7 @@ function SignUp() {
         background: '#3c3e5d',
         color:'#ceccc0',
         width:'25rem',
-      
+        confirmButtonText:"باشه"
       })
       Navigate("/verification");
     } else {

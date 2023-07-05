@@ -29,6 +29,7 @@ import {
 
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 // import HomeIcon from './home.png';
 // import { size } from "lodash";
 export default function CoursesPanel() {
@@ -337,22 +338,23 @@ export default function CoursesPanel() {
   
   return (
     <>
-      {/* {console.log("hello")} */}
-      <Row>
+
+    <AdminNavbar></AdminNavbar>
+      <Row >
         <Col>
           <Card className="TableCard">
             <CardHeader className="MainCardHeader text-right">
               <CardTitle style={{fontSize:"25px"}}>
                 پنل دروس
               </CardTitle>
-              <Button //className="HomeButton"
+              {/* <Button //className="HomeButton"
                 // class="HomeButton tim-icons icon-double-right"
                 href="/admin/page"
                 className="HomeButton tim-icons icon-double-right"
-              >
+              > */}
                 {/* <img src={HomeIcon} alt="Button Image" /> */}
                 {/* خانه */}
-              </Button>
+              {/* </Button> */}
             </CardHeader>
             <CardBody>
               <Row className="CardBodyRow">

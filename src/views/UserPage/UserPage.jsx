@@ -532,10 +532,10 @@ export default function UserPage() {
                           alt="professorImage"
                         />
                         <div className="infoPart">
-                          <p>
+                          <p style={{ textAlign: 'right'}}>
                             {x.name} (گروه {x.group_number})
                           </p>
-                          <p style={{ fontSize: 12 }}>
+                          <p style={{ fontSize: 12 , textAlign: 'right', marginRight :'10px'}}>
                             {"استاد:  "}
                             {x.teachers.map((y)=>(y.name)).join(" , ")}
                           </p>
@@ -544,12 +544,12 @@ export default function UserPage() {
                             استاد:{x.teachers[0].name}
                           </p> */}
                           <div className="courseCardDownSide">
-                            <div>
+                            
                               <p>
                                 ثبت نام شده: {x.registered_count} از{" "}
                                 {x.capacity}{" "}
                               </p>
-                            </div>
+                            
                             <img
                               className="fullLogo"
                               src={fullLogo}
@@ -573,7 +573,7 @@ export default function UserPage() {
                         style={{
                           color: !info.courseChoosed.includes(x)
                             ? "white"
-                            : "aqua",
+                            : "white",
                           fontSize: !info.courseChoosed.includes(x)
                             ? "large"
                             : "large",
