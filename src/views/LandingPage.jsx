@@ -12,6 +12,7 @@ import {
   Row,
   Col,
   Card,
+  Container
 } from "reactstrap";
 
 
@@ -24,6 +25,7 @@ var sectionStyle = {
 function LandingPage() {
   return (
     <>
+    <Container>
     <Row>
       <Col className="BGimgCol">
         <img className="BGimg" src={BGImage}/>
@@ -39,10 +41,10 @@ function LandingPage() {
               <div className="div-3">
                 این سایت به شما کمک می کنه که:
                 <li>
-                  برنامه هفتگی و لیست ددلاین ها و امتحاناتون رو ببینین 📆
+                  برنامه هفتگی و لیست واحدها و امتحاناتون رو ببینین 📆
                 </li>
                 <li>
-                  برای طول ترم و تکالیف برنامه ریزی کنین 📒
+                   📒
                 </li>
                 <li>
                   برای ترم آینده برنامه ریزی کنین 
@@ -77,6 +79,7 @@ function LandingPage() {
         </Card>
       </Col>
     </Row>
+    </Container>
     </>
   );
 }

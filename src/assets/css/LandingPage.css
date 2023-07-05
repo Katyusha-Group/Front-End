@@ -1,33 +1,32 @@
-/* Set box-sizing property to border-box on all elements */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-  
-  /* Center the columns vertically */
+
   .row {
     display: flex;
     align-items: center;
   }
   
-  /* Add padding to the columns */
   .col {
     padding: 10px;
   }
   
-  /* Style the card */
+  /* Card */
   .LandingPageCard {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(39, 41, 61);
+    color: white;
     border-radius: 10px;
     padding: 15px;
     text-align: right;
     max-width: 80%;
     margin: 0 auto;
+    margin-top: 80px;
     direction: rtl;
   }
   
-  /* Style the headings */
+  /* Headings */
   .div-2 {
     font-size: 36px;
     font-weight: bold;
@@ -39,7 +38,7 @@
     margin-bottom: 0px;
   }
   
-  /* Style the list items */
+  /* List items */
   .div-3 li {
     font-size: 20px;
     line-height: 1.5;
@@ -47,7 +46,7 @@
     padding: 10px 0;
   }
   
-  /* Style the buttons */
+  /* Buttons */
   .btn-fill-landingPage {
     background-color: #007bff;
     border-color: #007bff;
@@ -64,7 +63,7 @@
     color: #fff;
   }
   
-  /* Style the contact information */
+  /* Contact info */
   .div-4 {
     font-size: 20px;
     margin-top: 20px;
@@ -75,11 +74,12 @@
     color: #007bff;
   }
   .BGimg {
-    width: 80%;
-    height: 80%;
+    /* width: 80%;
+    height: 80%; */
     margin-left: 0px;
-    /* width: 100%;
-    height: auto; */
+    width: 100%;
+    height: auto;
+    margin-top: 80px;
+    margin-left: 0;
   }
-
   
