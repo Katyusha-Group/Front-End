@@ -19,6 +19,9 @@
 
 .Course {                   /* Course info (without button) */
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     background-color: hsl(235, 22%, 30%);
     margin-top: 3px;
@@ -28,6 +31,7 @@
     border-bottom-right-radius: 0;
     align-items: center;
     width: 100px;
+    padding: 5px;
 }
 
 .btn-fill-AddCourseButton {             /* Add or remove course button */
@@ -42,6 +46,7 @@
     border-bottom-left-radius: 0;
     margin-top: 3px;
     margin-bottom: -1px;
+    width: 30% !important;
 }
 
 
@@ -134,10 +139,11 @@
 }
 
 .CoursesPanel_column2 {
-    column-width: 1000px;
+    /* column-width: 1000px; */
     border: 3px solid;
     /* color: rgb(82,95,127); */
     vertical-align: top !important;
+    /* padding: 1000px; */
 }
 
 

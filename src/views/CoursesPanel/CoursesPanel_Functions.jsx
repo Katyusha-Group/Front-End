@@ -1,4 +1,8 @@
-
+import Course from './CoursesPanel';
+// Token
+const tokenJson = localStorage.getItem("authTokens");
+const tokenClass = JSON.parse(tokenJson);
+const token = tokenClass.token.access;
 
 export function addNewLesson(num) {                                        // Add a lesson
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
@@ -14,10 +18,9 @@ export function addNewLesson(num) {                                        // Ad
     })
       .then((response) => response.json())
       .then((data) => {
-        // const dataArray = JSON.parse(data);
         const courses = data.map(course => new Course(course, true));
-        // setChosenCourses(data);
-        setChosenCourses(courses);
+        // setChosenCourses(courses);
+        return courses;
         // setChosenCoursesChanged(prev => !prev);
       })
       .catch((error) => console.error(error));
@@ -83,3 +86,15 @@ export function uniquifyArrayByKey(arr, key) {                             // Re
         );
     });
 }
+
+export function Create2DArray (Rows, Cols) {                              // Create a 2D array
+    const arr = [];
+    for (let i = 0; i < Rows; i++) {
+        arr[i] = Array(Cols).fill(0);
+    }
+    return arr;
+}
+
+export function containsWhitespace(str) {
+  return /\s/.test(str);
+} 
