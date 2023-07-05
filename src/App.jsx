@@ -22,39 +22,94 @@ import Verification from "./views/Verification/Verification.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 import VerificationForgetPassword from "./views/Verification/VerificationForgetPassword.jsx";
 import SetNewPassword from "./views/SetNewPassword.jsx";
-
+import RequireAuth from "./components/RequirAuth/RequirAuth.jsx";
+import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
+import { useState } from "react";
+import { useEffect } from "react";
 function App() {
   document.documentElement.dir = 'rtl'
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => localStorage.getItem('authTokens') !== null
+  );
+
+  useEffect(() => {
+    console.log("🚀 ~ file: App.jsx:40 ~ App ~ isLoggedIn:", isLoggedIn)
+    setIsLoggedIn(true)
+  }, [isLoggedIn]);
+
+  const logIn = () => setIsLoggedIn(true);
+
+  const logOut = () => setIsLoggedIn(false);
+
   return (
     <>
-      {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
       <ThemeContextWrapper>
         <BackgroundColorWrapper>
           <ContextInfo>
-          {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
             <Router.BrowserRouter>
               <Router.Routes>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
-                <Router.Route path="/signup" element={<SignUp />}></Router.Route>
-                <Router.Route path="/verification" element={<Verification />}></Router.Route>
-                <Router.Route path="/verificationForgetPassword" element={<VerificationForgetPassword />}></Router.Route>
-                <Router.Route path="/setNewPassword" element={<SetNewPassword />}></Router.Route>
-                <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
-                <Router.Route path="/login" element={<Login />}></Router.Route>
-                <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
-                <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
-                <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
-                <Router.Route path="/CoursesPanel" element={<CoursesPanel />}></Router.Route>
-                <Router.Route path="/shopping" element={<Shopping />}></Router.Route>
-                <Router.Route path="/user" element={<UserProfile />}></Router.Route>
+                <Router.Route
+                  path="/signup"
+                  element={<SignUp />}
+                ></Router.Route>
+                <Router.Route
+                  path="/verification"
+                  element={<Verification />}
+                ></Router.Route>
+                <Router.Route
+                  path="/verificationForgetPassword"
+                  element={<VerificationForgetPassword />}
+                ></Router.Route>
+                <Router.Route
+                  path="/setNewPassword"
+                  element={<SetNewPassword />}
+                ></Router.Route>
+                <Router.Route path="/login" element={<Login onLogIn = {logIn} />}></Router.Route>
+                <Router.Route
+                  path="/forgetPassword"
+                  element={<ForgetPassword />
+                }
+                ></Router.Route>
+                <Router.Route
+                  path="/loginLms"
+                  element={<LoginLms />}
+                ></Router.Route>
+                <Router.Route
+                  path="/landingPage"
+                  element={<LandingPage />}
+                ></Router.Route>
+                <Router.Route
+                  path="/CoursesPanel"
+                  element={
+                  isLoggedIn ? <CoursesPanel/> : <Router.Navigate to="/login"/>
+                }
+                ></Router.Route>
+                <Router.Route
+                  path="/shopping"
+                  element={<Shopping />}
+                ></Router.Route>
+                <Router.Route
+                  path="/user"
+                  element={
+                  isLoggedIn ? <UserProfile/> : <Router.Navigate to="/login"/>
+                }
+                ></Router.Route>
+                <Router.Route
+                  path="/admin/*"
+                  element={
+                    isLoggedIn ? <Admin/> : <Router.Navigate to="/login"/>
+                  }
+                />
+                {/* <Router.Route
+                  path="/admin/*"
+                  element={<Admin />}
+                ></Router.Route> */}
               </Router.Routes>
             </Router.BrowserRouter>
-            {/* </SimpleBar> */}
           </ContextInfo>
         </BackgroundColorWrapper>
       </ThemeContextWrapper>
-      {/* </SimpleBar> */}
-      {/* <img src="./assets/img/Logo.jpg" alt="logo" /> */}
     </>
   );
 }
