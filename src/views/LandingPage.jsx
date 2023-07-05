@@ -22,79 +22,61 @@ var sectionStyle = {
 };
 
 function LandingPage() {
-  // const myStyle={
-  //   backgroundImage: 
-  //       `url(${BGImage})`,
-  //       height:'100vh',
-  //       marginTop:'-70px',
-  //       fontSize:'50px',
-  //       backgroundSize: 'cover',
-  //       backgroundRepeat: 'no-repeat',
-  //   };
-  // let imageStyle = {
-  //   height: "350px",
-  //   width: "600px",
-  //   backgroundImage:
-  //   BGImage,
-  //   backgroundSize: "contain",
-  //   backgroundRepeat: "no-repeat",
-  // }
   return (
     <>
-    {/* <div className="FullLandingPage" style={{ backgroundImage:`url(${BGImage})`}}> */}
-    <img className="BGimg" src={BGImage}/>
-    
-    {/* <div
-      style = {sectionStyle}
-    > */}
-      <Card className="LandingPageCard">
-        <div className="div-1">
-        
-        <span >
-          <div className="div-2">
-            به کاتیوشا خوش اومدین!
+    <Row>
+      <Col className="BGimgCol">
+        <img className="BGimg" src={BGImage}/>
+      </Col>
+      <Col className="LandingPageCardCol">
+        <Card className="LandingPageCard">
+          <div className="div-1">
+            <span >
+              <div className="div-2">
+                به کاتیوشا خوش اومدین!
+              </div>
+              <br/>
+              <div className="div-3">
+                این سایت به شما کمک می کنه که:
+                <li>
+                  برنامه هفتگی و لیست ددلاین ها و امتحاناتون رو ببینین 📆
+                </li>
+                <li>
+                  برای طول ترم و تکالیف برنامه ریزی کنین 📒
+                </li>
+                <li>
+                  برای ترم آینده برنامه ریزی کنین 
+                </li>
+                <li>
+                    انتخاب واحد بهتری داشته باشین 
+                </li>
+              </div>
+              <br/>
+              <Row className="LandingPageRow">
+                <Col>
+                  <Link to="../Signup">
+                    <Button className="btn-fill-landingPage" color="primary"> ثبت نام</Button>
+                  </Link>
+                </Col>
+                <Col>
+                <Link to="../Login">
+                    <Button className="btn-fill-landingPage" color="primary">ورود</Button>
+                  </Link>
+                </Col>
+              </Row>
+            </span>
           </div>
-          <br/>
-          <div className="div-3">
-            این سایت به شما کمک می کنه که:
-            <li>
-              برنامه هفتگی و لیست ددلاین ها و امتحاناتون رو ببینین 📆
-            </li>
-            <li>
-              برای طول ترم و تکالیف برنامه ریزی کنین 📒
-            </li>
-            <li>
-              برای ترم آینده برنامه ریزی کنین 
-            </li>
-            <li>
-                انتخاب واحد بهتری داشته باشین 
-            </li>
-          </div>
-          <br/>
-          <Row className="LandingPageRow">
-            <Col>
-              <Link to="../Signup">
-                <Button className="btn-fill-landingPage" color="primary"> ثبت نام</Button>
-              </Link>
-            </Col>
-            <Col>
-            <Link to="../Login">
-                <Button className="btn-fill-landingPage" color="primary">ورود</Button>
-              </Link>
-            </Col>
-          </Row>
-        </span>
-        </div>
-        <span>
-          <div className="div-4">
-            <Row>
-              در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
-              katyushaiust@gmail.com
-            </Row>
-          </div>
-        </span>
-      </Card>
-    {/* </div>   */}
+          <span>
+            <div className="div-4">
+              <Row>
+                در صورت وجود هرگونه مشکل با ما در ارتباط باشید:
+                katyushaiust@gmail.com
+              </Row>
+            </div>
+          </span>
+        </Card>
+      </Col>
+    </Row>
     </>
   );
 }
