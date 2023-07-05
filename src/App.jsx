@@ -22,6 +22,7 @@ import Verification from "./views/Verification/Verification.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 import VerificationForgetPassword from "./views/Verification/VerificationForgetPassword.jsx";
 import SetNewPassword from "./views/SetNewPassword.jsx";
+import { PrivatRoute } from "./global/functions.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
@@ -39,14 +40,31 @@ function App() {
                 <Router.Route path="/verification" element={<Verification />}></Router.Route>
                 <Router.Route path="/verificationForgetPassword" element={<VerificationForgetPassword />}></Router.Route>
                 <Router.Route path="/setNewPassword" element={<SetNewPassword />}></Router.Route>
-                <Router.Route path="/admin/*" element={<Admin />}></Router.Route>
+                
+                 <Router.Route path="/admin/*" element={
+                  <PrivatRoute>
+                  <Admin />
+                  </PrivatRoute>
+                 }></Router.Route> 
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
-                <Router.Route path="/CoursesPanel" element={<CoursesPanel />}></Router.Route>
-                <Router.Route path="/shopping" element={<Shopping />}></Router.Route>
-                <Router.Route path="/user" element={<UserProfile />}></Router.Route>
+                <Router.Route path="/CoursesPanel" element={
+                  <PrivatRoute>
+                    <CoursesPanel />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/shopping" element={
+                  <PrivatRoute>
+                    <Shopping />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/user" element={
+                  <PrivatRoute>
+                    <UserProfile />
+                  </PrivatRoute>
+                }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
             {/* </SimpleBar> */}
