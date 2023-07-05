@@ -37,15 +37,20 @@ export default function CoursesPanel() {
   // // const token = tokenClass.token.access;
   // const token = tokenClass.token.access || 'nothing';
 
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
-    const newToken = tokenClass ? tokenClass.token.access : null;
-    setToken(newToken);
-  }, [localStorage.getItem("authTokens")]);
+  // useEffect(() => {
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
+  //   const newToken = tokenClass ? tokenClass.token.access : null;
+  //   setToken(newToken);
+  // }, [localStorage.getItem("authTokens")]);
 
+
+  // Token
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
 
   // Info
   const { info, changeInfo } = useInfo();
@@ -199,7 +204,7 @@ export default function CoursesPanel() {
     setSwitchChecked(val)
   }
   React.useEffect(() => { 
-    showLoading();
+    // showLoading();
     if (SwitchChecked) {
       let FilteredDepartmentCourses = DepartmentCourses.filter(course => course.can_take);
       // let temp = timetable.filter(course => course.can_take);
@@ -213,8 +218,6 @@ export default function CoursesPanel() {
     closeLoading();
   }, [SwitchChecked]);
 
-  
-
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
@@ -224,7 +227,6 @@ export default function CoursesPanel() {
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = props.is_allowed;
-      // console.log(this.name + " is allowed: " + this.can_take);
       this.IsChosen = IsFromChosencourses;
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
     }
@@ -250,24 +252,13 @@ export default function CoursesPanel() {
               this.complete_course_number
           )
         );
-        // console.log("info.courseChoosed", info.courseChoosed)
-        // setChosenCourses(info.courseChoosed);
-        // let NewTimeTable = [...ChosenCourses] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-        // console.log("NewTime", info.courseChoosed)
-        // settimetable(info.courseChoosed);
-        // closeLesson(false, lessons);
-        // setChosenCourses(info.co)
         this.IsChosen = false;
       }
       setChosenCoursesChanged(prev => !prev);
     }
   }
+
   let [timetable, settimetable] = React.useState([]);
-
-  
-
-  
-
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
     // showLoading();
@@ -314,8 +305,7 @@ export default function CoursesPanel() {
           catch (error) {
             console.log("ERROR is: " + error);
             // handleOpenPopup;
-          }
-          
+          }  
         }
         );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
@@ -415,4 +405,3 @@ export default function CoursesPanel() {
     </>
   );
 }
-

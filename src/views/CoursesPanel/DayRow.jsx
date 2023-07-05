@@ -2,6 +2,12 @@ import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 
+// Token
+const tokenJson = localStorage.getItem("authTokens");
+const tokenClass = JSON.parse(tokenJson);
+const token = tokenClass.token.access;
+
+
 const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
@@ -16,7 +22,7 @@ const DayPeriod = (Section) => (
                     {entry.name} ({entry.class_gp})
                   </div> */}
                   <div title= {entry.name}>
-                    {entry.name.length < 20 ? entry.name : entry.name.slice(0, 20) + "..."} ({entry.class_gp})
+                    {entry.name.length < 17 ? entry.name : entry.name.slice(0, 17) + "..."} ({entry.class_gp})
                   </div>
                 </div>
                 <button className="btn-fill-AddCourseButton"

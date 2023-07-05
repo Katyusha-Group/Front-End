@@ -1,3 +1,8 @@
+// Token
+const tokenJson = localStorage.getItem("authTokens");
+const tokenClass = JSON.parse(tokenJson);
+const token = tokenClass.token.access;
+
 export function addNewLesson(num) {                                        // Add a lesson
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
