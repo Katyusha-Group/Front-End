@@ -192,11 +192,11 @@ const ModalShopping = (props) => {
                           <Input
                             checked={false}
                             type="checkbox"
-                            onChange={() => {
-                              if (props.order.contain_sms != "O") {
-                                setSms(!sms);
-                              }
-                            }}
+                            // onChange={() => {
+                            //   if (props.order.contain_sms != "O") {
+                            //     setSms(!sms);
+                            //   }
+                            // }}
                           />
                           <span className="form-check-sign">
                             <span className="check" />

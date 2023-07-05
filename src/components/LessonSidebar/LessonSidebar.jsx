@@ -216,7 +216,7 @@ function LessonSidebar(props) {
                 <Col md="5" xs="5" style={{margin:"auto"}}>
                   <NavLink to="/admin/page" className="nav-header nav-link-icon">
                     <img src="../../public/Logo1.png" alt=""  style={{height:"34px"}}/>
-                    <p className="mr-2 small" style={{alignSelf: "center"}}>کاتیوشا</p>
+                    <p className="mr-2 small" style={{alignSelf: "center", fontSize:".99rem"}}>کاتیوشا</p>
                     {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
                 </Col>

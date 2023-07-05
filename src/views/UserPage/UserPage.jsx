@@ -382,10 +382,10 @@ export default function UserPage() {
                   >
                     <Button
                       tag="label"
-                      className={classNames("btn-simple", {
+                      className={classNames("btn-simple","week_chart-btn", {
                         active: bigChartData === "data1",
                       })}
-                      color="primary"
+                      // color="primary"
                       id="0"
                       size="sm"
                       onClick={() => setBgChartData("data1")}
@@ -398,11 +398,11 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="primary"
+                      // color="primary"
                       id="1"
                       size="sm"
                       tag="label"
-                      className={classNames("btn-simple", {
+                      className={classNames("btn-simple","week_chart-btn", {
                         active: bigChartData === "data2",
                       })}
                       onClick={() => setBgChartData("data2")}
@@ -415,11 +415,11 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      color="primary"
+                      // color="primary"
                       id="2"
                       size="sm"
                       tag="label"
-                      className={classNames("btn-simple", {
+                      className={classNames("btn-simple","week_chart-btn", {
                         active: bigChartData === "data3",
                       })}
                       onClick={() => setBgChartData("data3")}
