@@ -22,7 +22,9 @@ import {
   addNewLesson,
   mapTimeToIndex,
   createCourseGroupsArray,
-  uniquifyArrayByKey
+  uniquifyArrayByKey,
+  Create2DArray,
+  // containsWhitespace
 } from "./CoursesPanel_Functions";
 
 import "./CoursesPanel.css"
@@ -55,12 +57,12 @@ export default function CoursesPanel() {
   // Info
   const { info, changeInfo } = useInfo();
 
-  // Allowed Lessons
-  // let [Allowed, setAllowed] = React.useState([]);
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
+
+  let NumberOfChosenLessons = Create2DArray(5, 9);
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
@@ -75,9 +77,14 @@ export default function CoursesPanel() {
       .then((response) => response.json())
       .then((data) => {
         changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setChosenCourses(courses);
-        settimetable(courses);
+        if (Array.isArray(data)) {
+          const courses = data.map(course => new Course(course, true));
+          setChosenCourses(courses);
+          settimetable(courses);
+        }
+        else {
+          console.log("Type of data is: " + typeof data);
+        }
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -235,10 +242,12 @@ export default function CoursesPanel() {
     {
       if (this.IsChosen)
       {
+        // console.log("Want to delete")
         if (!info.courseChoosed.includes(this)) {
-          addNewLesson(this.complete_course_number);
+          ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
           this.IsChosen = true;
+          // this.IsChosen = false;
         }
       }
       else
@@ -253,6 +262,7 @@ export default function CoursesPanel() {
           )
         );
         this.IsChosen = false;
+        // this.IsChosen = true;
       }
       setChosenCoursesChanged(prev => !prev);
     }
