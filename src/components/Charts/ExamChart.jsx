@@ -126,62 +126,117 @@ function ExamChart() {
       }
     });
   }
+
+
+  ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
+  const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
+    const emptySection = () => ({
+      0: null,
+      1: null,
+      2: null,
+      3: null,
+      4: null,
+      5: null
+    });
+    const emptyDay = () => ({
+      0: emptySection(),
+      1: emptySection(),
+      2: emptySection(),
+      3: emptySection(),
+      4: emptySection(),
+      5: emptySection(),
+      6: emptySection(),
+      7: emptySection()
+    });
+
+    const NumInEachSlot = createCourseGroupsArray(ExamTable);
+
+    return ExamTable.reduce(
+      (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+        currentPeriod.course_times.forEach(time => {
+
+          const day = time.course_day;
+
+          let TimeIndex = time.course_time_representation;
+          if (TimeIndex === undefined )
+          {
+            TimeIndex = mapTimeToIndex(time.course_start_time);
+          }
+
+          NumInEachSlot[day][TimeIndex]++;
+
+          let count = NumInEachSlot[day][TimeIndex];
+          try {
+            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          }
+          catch (error) {
+            console.log("ERROR is: " + error);
+            // handleOpenPopup;
+          }
+          
+        }
+        );
+        // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
+        // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
+        return lessonsKeyedByDayAndPeriod
+      },
+      {
+        0: emptyDay(),
+        1: emptyDay(),
+        2: emptyDay(),
+        3: emptyDay(),
+        4: emptyDay(),
+        5: emptyDay(),
+      }
+    )
+  }, [ExamTable])
+
+
   return (
     <>
       <Row>
         <Col lg="12" sm="12">
-          {/* <Card> */}
-          {/* <CardBody className="exam-card-body"> */}
           <div className="overflow-auto nmt-1">
             <div className="chart1">{lessons()}</div>
           </div>
-
-          {/* <Table>
-                <thead className="text-primary">
-                  <tr>
-                    <th className="text-center "></th>
-                    <th className="text-center ">17 خرداد</th>
-                    <th className="text-center ">18</th>
-                    <th className="text-center ">19</th>
-                    <th className="text-center ">20</th>
-                    <th className="text-center ">21</th>
-                    <th className="text-center ">22</th>
-                    <th className="text-center ">23</th>
-                    <th className="text-center ">24</th>
-                    <th className="text-center ">25</th>
-                    <th className="text-center ">26</th>
-                    <th className="text-center ">27</th>
-                    <th className="text-center ">28</th>
-                    <th className="text-center ">29</th>
-                    <th className="text-center ">30</th>
-                    <th className="text-center ">31</th>
-                    <th className="text-center ">1 تیر</th>
-                    <th className="text-center ">2</th>
-                    <th className="text-center ">3</th>
-                    <th className="text-center ">4</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="Table_first_row">
-                    <td className="Table_first_column text-center  ">8-10</td>
-                  </tr>
-                  <tr>
-                    <td className="Table_first_column text-center ">10-12</td>
-                  </tr>
-                  <tr>
-                    <td className="Table_first_column text-center ">12-14</td>
-                  </tr>
-                  <tr>
-                    <td className="Table_first_column text-center ">14-16</td>
-                  </tr>
-                  <tr>
-                    <td className="Table_first_column text-center ">16-18</td>
-                  </tr>
-                  <tr className="Table_last_row">
-                    <td className="Table_first_column text-center ">18-20</td>
-                  </tr>
-                </tbody>
-              </Table> */}
+          <Table className="ExamsTable">
+            <thead className="text-primary TableHead">
+              <tr>
+                <th className="table-head text-center "></th>
+                <th className="table-head text-center ">13 خرداد</th>
+                <th className="table-head text-center ">14</th>
+                <th className="table-head text-center ">15</th>
+                <th className="table-head text-center ">16</th>
+                <th className="table-head text-center ">17</th>
+                <th className="table-head text-center ">18</th>
+                <th className="table-head text-center ">19</th>
+                <th className="table-head text-center ">20</th>
+                <th className="table-head text-center ">21</th>
+                <th className="table-head text-center ">22</th>
+                <th className="table-head text-center ">23</th>
+                <th className="table-head text-center ">24</th>
+                <th className="table-head text-center ">25</th>
+                <th className="table-head text-center ">26</th>
+                <th className="table-head text-center ">28</th>
+                <th className="table-head text-center ">29</th>
+                <th className="table-head text-center ">30</th>
+                <th className="table-head text-center ">31</th>
+                <th className="table-head text-center ">1 تیر</th>
+                <th className="table-head text-center ">2</th>
+                <th className="table-head text-center ">3</th>
+                <th className="table-head text-center ">4</th>
+                <th className="table-head text-center ">5</th>
+              </tr>
+            </thead>
+            <tbody className="ExamChartTableBody">
+              <DayRow dayName="8-10"  periods={keyedExamTable[0]} />
+              <DayRow dayName="10-12" periods={keyedExamTable[1]} />
+              <DayRow dayName="12-14" periods={keyedExamTable[2]} />
+              <DayRow dayName="14-16" periods={keyedExamTable[3]} />
+              <DayRow dayName="16-18" periods={keyedExamTable[4]} />
+              <DayRow dayName="18-20" periods={keyedExamTable[5]} />
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </>
