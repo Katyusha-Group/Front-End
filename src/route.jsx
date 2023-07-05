@@ -47,15 +47,7 @@ var routes = [
         icon: "icon-single-02",
         layout: "/admin"
     }
-    ,
-    {
-        path: '/aboutUs',
-        name:"AboutUs",
-        component: AboutUs,
-        rtlName: " تنظیمات",
-        icon: "icon-settings-gear-63",
-        layout: "/admin"
-    }
+    
     ,
     {
         path: '/aboutUs',

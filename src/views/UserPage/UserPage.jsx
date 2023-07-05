@@ -532,10 +532,10 @@ export default function UserPage() {
                           alt="professorImage"
                         />
                         <div className="infoPart">
-                          <p>
+                          <p style={{ textAlign: 'right'}}>
                             {x.name} (گروه {x.group_number})
                           </p>
-                          <p style={{ fontSize: 12 }}>
+                          <p style={{ fontSize: 12 , textAlign: 'right', marginRight :'10px'}}>
                             {"استاد:  "}
                             {x.teachers.map((y)=>(y.name)).join(" , ")}
                           </p>

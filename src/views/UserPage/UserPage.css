@@ -226,12 +226,13 @@ p {
     display: flex;
     direction: row;
     padding-right: 15px;
-    justify-content:  center;
+    justify-content:  right;
 }
 
 .infoPart {
-    width: 100%;
-    
+    width: 80%;
+    justify-content:  right;
+    padding-right: 5px;
 }
 
 .addToPlanButton {

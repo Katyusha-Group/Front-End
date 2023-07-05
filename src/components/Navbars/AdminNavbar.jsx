@@ -75,9 +75,13 @@ function AdminNavbar(props) {
 
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color)} expand="xl">
+      <Navbar className={classNames("navbar-absolute", color, "rtl")} expand="xl">
         <Collapse navbar isOpen={collapseOpen}>
-          <Nav className="mr-auto" navbar>
+          <Nav className="wideNavbar" navbar>
+          <NavLink href="/admin/page" className="nav-header nav-link-icon">
+                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px" , width:"300px"}}/>
+                    {/* <i className="tim-icons icon-atom ml-0" /> */}
+                  </NavLink>
             {routes.map(
               x => (
                 <NavItem>

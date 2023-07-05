@@ -1,5 +1,5 @@
 .TableCard {                        /* Main card of the page */
-    margin-top: 20px;
+    margin-top: 60px;
     overflow-x: auto;
 }
 
@@ -163,4 +163,7 @@
     right: 10px;
     top: -50px;
     
+}
+.panelContainer{
+    margin-top: 300px;
 }
