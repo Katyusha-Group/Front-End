@@ -5,6 +5,7 @@ import UserPage from "./views/UserPage/UserPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
+import TeacherPage from "./views/TeacherPage/TeacherPage.jsx"
 var routes = [
     
     // {
@@ -65,7 +66,15 @@ var routes = [
         // icon: "icon-alert-circle-exc",
         icon: "icon-send",
         layout: "/admin"
-    }
+    },
+    {
+        path: '/TeacherPage',
+        name:"TeacherPage",
+        component: TeacherPage,
+        rtlName: "صفحه استاد",
+        icon: "icon-paper",
+        layout: "/admin"
+    },
 ]
 
 export default routes;
