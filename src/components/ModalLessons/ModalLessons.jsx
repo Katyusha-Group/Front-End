@@ -74,7 +74,7 @@ const ModalLessons = (props) => {
                   <div className="infoPart">
                     <CardHeader className="modalHeader"></CardHeader>
                     <Row>
-                      <Col className="text-right" md="6">
+                      <Col  md="12" style={{fontWeight: 'bold', textAlign: 'center', fontSize:'20px', marginTop:'10px'}}>
                         {x.name} (گروه {x.group_number})
                       </Col>
                       <Col className="text-right" md="6">

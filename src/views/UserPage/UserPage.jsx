@@ -425,7 +425,7 @@ export default function UserPage() {
                 >
                   <span
                     style={{
-                      display: bigChartData == "data2" ? "block" : "none",
+                      display: bigChartData == "data2" ? "block" : "none", marginLeft:"0px" ,textAlign:"left"
                     }}
                   >
                     {info.courseChoosed.reduce(
