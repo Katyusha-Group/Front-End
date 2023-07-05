@@ -4,7 +4,9 @@ import routes from "../route.jsx";
 import {Link} from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import styles from "../assets/css/LandingPage.css";
-import BGImage from "../assets/img/Landing.jpg";
+// import BGImage from "../assets/img/Landing.jpg";
+import BGImage from "../assets/img/Landing page-amico.svg";
+
 import {
   Button,
   Row,
@@ -40,7 +42,7 @@ function LandingPage() {
   return (
     <>
     {/* <div className="FullLandingPage" style={{ backgroundImage:`url(${BGImage})`}}> */}
-    <img className="FullLandingPage" src={BGImage}/>
+    <img className="BGimg" src={BGImage}/>
     
     {/* <div
       style = {sectionStyle}
