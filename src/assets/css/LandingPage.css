@@ -1,8 +1,8 @@
-/* Set background image for the page */
-body {
-    background-image: url('your-background-image-url');
-    background-size: cover;
-    background-position: center;
+/* Set box-sizing property to border-box on all elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   
   /* Center the columns vertically */
@@ -13,15 +13,17 @@ body {
   
   /* Add padding to the columns */
   .col {
-    padding: 20px;
+    padding: 10px;
   }
   
   /* Style the card */
   .LandingPageCard {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    padding: 30px;
+    padding: 15px;
     text-align: right;
+    max-width: 80%;
+    margin: 0 auto;
     direction: rtl;
   }
   
@@ -29,12 +31,12 @@ body {
   .div-2 {
     font-size: 36px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   
   .div-3 {
     font-size: 24px;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
   }
   
   /* Style the list items */
@@ -72,3 +74,12 @@ body {
   .div-4 a {
     color: #007bff;
   }
+  .BGimg {
+    width: 80%;
+    height: 80%;
+    margin-left: 0px;
+    /* width: 100%;
+    height: auto; */
+  }
+
+  
