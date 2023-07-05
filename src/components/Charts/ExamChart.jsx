@@ -1,7 +1,14 @@
 import React from "react";
-
+import { useMemo } from 'react';
 import { useState } from "react";
 import classNames from "classnames";
+
+import {
+  Create2DArray,
+  uniquifyArrayByKey,
+  MapTimeToIndex,
+  MapDateToIndex
+} from "./ExamChart_Functions";
 
 // import { Line, Bar } from "react-chartjs-2";
 import {
@@ -127,7 +134,7 @@ function ExamChart() {
     });
   }
 
-
+  let [ExamTable, setExamTable] = React.useState([]);
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     const emptySection = () => ({
@@ -149,36 +156,25 @@ function ExamChart() {
       7: emptySection()
     });
 
-    const NumInEachSlot = createCourseGroupsArray(ExamTable);
+    const NumInEachSlot = Create2DArray(6, 23);
 
     return ExamTable.reduce(
-      (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        currentPeriod.course_times.forEach(time => {
-
-          const day = time.course_day;
-
-          let TimeIndex = time.course_time_representation;
-          if (TimeIndex === undefined )
-          {
-            TimeIndex = mapTimeToIndex(time.course_start_time);
-          }
-
-          NumInEachSlot[day][TimeIndex]++;
-
-          let count = NumInEachSlot[day][TimeIndex];
-          try {
-            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          }
-          catch (error) {
-            console.log("ERROR is: " + error);
-            // handleOpenPopup;
-          }
-          
+      (lessonsKeyedByExamDayAndPeriod, currentPeriod) => {
+        const ExamTime = currentPeriod.exam_times.exam_start_time;
+        const ExamDate = currentPeriod.exam_times.date;
+        const TimeIndex = MapTimeToIndex(ExamTime); 
+        const DateIndex = MapDateToIndex(ExamDate);
+        NumInEachSlot[ExamTime][ExamDate] ++;
+        let count = NumInEachSlot[ExamTime][ExamDate];
+        try 
+        {
+          lessonsKeyedByExamDayAndPeriod[ExamTime][ExamDate][count] = currentPeriod;
         }
-        );
-        // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
-        // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
-        return lessonsKeyedByDayAndPeriod
+        catch (error) 
+        {
+          console.log("ERROR in mapping courses is: " + error);
+        }
+        return lessonsKeyedByExamDayAndPeriod
       },
       {
         0: emptyDay(),
@@ -229,12 +225,12 @@ function ExamChart() {
               </tr>
             </thead>
             <tbody className="ExamChartTableBody">
-              <DayRow dayName="8-10"  periods={keyedExamTable[0]} />
-              <DayRow dayName="10-12" periods={keyedExamTable[1]} />
-              <DayRow dayName="12-14" periods={keyedExamTable[2]} />
-              <DayRow dayName="14-16" periods={keyedExamTable[3]} />
-              <DayRow dayName="16-18" periods={keyedExamTable[4]} />
-              <DayRow dayName="18-20" periods={keyedExamTable[5]} />
+              <TimeRow dayName="8-10"  periods={keyedExamTable[0]} />
+              <TimeRow dayName="10-12" periods={keyedExamTable[1]} />
+              <TimeRow dayName="12-14" periods={keyedExamTable[2]} />
+              <TimeRow dayName="14-16" periods={keyedExamTable[3]} />
+              <TimeRow dayName="16-18" periods={keyedExamTable[4]} />
+              <TimeRow dayName="18-20" periods={keyedExamTable[5]} />
             </tbody>
           </Table>
         </Col>
