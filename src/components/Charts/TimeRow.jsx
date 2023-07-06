@@ -16,24 +16,23 @@ function timeStringToFloat(time) {
   return hours + minutes / 60;
 }
 
-const [hoveredCourse, setHoveredCourse] = useState(null);
-const handleMouseOver = (event, entry) => {
-  // console.log("Hovered Course is: " + hoveredCourse.name)
-  document.getElementById(entry.complete_course_number + "x").style.display ="block";
-  setHoveredCourse(entry);
-};
 
-const handleMouseOut = (event, entry) => {
-  document.getElementById(entry.complete_course_number + "x").style.display ="none";
-  setHoveredCourse(null);
-};
+function DayPeriod (Input) {
+  const [hoveredCourse, setHoveredCourse] = useState(null);
+  const handleMouseOver = (event, entry) => {
+    // console.log("Hovered Course is: " + hoveredCourse.name)
+    document.getElementById(entry.complete_course_number + "x").style.display ="block";
+    setHoveredCourse(entry);
+  };
 
+  const handleMouseOut = (event, entry) => {
+    document.getElementById(entry.complete_course_number + "x").style.display ="none";
+    setHoveredCourse(null);
+  };
 
-
-
-const DayPeriod = (Section) => (
+  return (
     <div>
-      {Object.entries(Section).map(([count, entry]) => {
+      {Object.entries(Input).map(([count, entry]) => {
         return (
           <div className="ExamListContainer">
             {entry !== null && (
@@ -81,6 +80,8 @@ const DayPeriod = (Section) => (
       })}
     </div>
   )
+}
+
 
 const TimeRow = ({ periods, ExamT }) => {
     return (
