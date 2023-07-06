@@ -202,10 +202,16 @@ function ExamChart() {
 
     return ExamTable.reduce(
       (lessonsKeyedByExamDayAndPeriod, currentPeriod) => {
+        console.log("================================");
+        console.log("Name: " + currentPeriod.name);
         const ExamTime = currentPeriod.exam_times.exam_start_time;
+        console.log("Exam time: " + ExamTime);
         const ExamDate = currentPeriod.exam_times.date;
+        console.log("Exam Date: " + ExamDate);
         const TimeIndex = MapTimeToIndex(ExamTime); 
+        console.log("Time Index: " + TimeIndex);
         const DateIndex = MapDateToIndex(ExamDate);
+        console.log("DateIndex: " + DateIndex);
         NumInEachSlot[TimeIndex][DateIndex] ++;
         let count = NumInEachSlot[TimeIndex][DateIndex];
         try 

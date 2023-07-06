@@ -7,13 +7,10 @@ const MonthDay = (Section) => (
       {Object.entries(Section).map(([count, entry]) => {
         return (
           <div>
+            {/* {console.log("Hello")} */}
             {entry !== null && (
-              <div>
-                <div>
-                  <div style={{ margin: '5px' }}>
-                    {entry.name}
-                  </div>
-                </div>
+              <div classname = "Examcontents" style={{ margin: '5px' }}>
+                {entry.name}
               </div>
             )}
           </div>
@@ -27,11 +24,16 @@ const TimeRow = ({ periods, ExamT }) => {
     <>
         <tr className="TableROW">
         <td className="ExamChart_column text-center">{ExamT}</td>
+        {/* {
+          for (let i = 0; i < keyedExamTable.length; i++) 
+            for (let j = 0; j < keyedExamTable[i].length; j++) 
+                console.log("item is" + keyedExamTable[i][j][k]);  
+        } */}
         {Object.entries(periods).map(([date, entry]) => {
             return (
             <td className="ExamChart_column2" key={date}>
-                {console.log ("date is: " + date)}
-                {console.log("Entry is: " + entry)}
+                {/* {console.log ("date is: " + date)}
+                {console.log("Entry is: " + entry)} */}
                 {MonthDay(entry)}
             </td>
             )
