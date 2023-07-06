@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React from "react";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 // nodejs library to set properties for components
@@ -39,52 +39,54 @@ import SearchBox from "../SearchBox/SearchBox.jsx";
 
 import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
 
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 import { useInfo } from "../../contexts/InfoContext";
 var ps;
-const fetchRequest = 'FETC_REQUEST';
-const fetchSuccess = 'FETCH_SUCCESS';
-const fetchFail = 'FETCH_FAIL';
-const reducer= (state, action) => {
+const fetchRequest = "FETC_REQUEST";
+const fetchSuccess = "FETCH_SUCCESS";
+const fetchFail = "FETCH_FAIL";
+const reducer = (state, action) => {
   switch (action.type) {
     case fetchRequest:
       // changeInfo("loading", true)
-      return {...state,loading: true}
+      return { ...state, loading: true };
     case fetchSuccess:
       // changeInfo("loading", false)
-      return {...state,loading: false,props: action.payload}
+      return { ...state, loading: false, props: action.payload };
     case fetchFail:
       // changeInfo("loading", false)
-      return {...state,loading: false,error: action.payload}
-      default:
-        return state;
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
   }
 };
-
 
 function LessonSidebar(props) {
   // const {info, changeInfo} = useInfo();
   const getError = (error) => {
     // console.log(error.data.message)
     return error.responst && error.response.data
-    ? error.response.data
-    :error.message;
-  }
+      ? error.response.data
+      : error.message;
+  };
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   const Navigate = useNavigate();
   // const [allColleges, setAllColleges] = React.useState([]);
-  const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
+  const [{ loading, props: input, error }, propsSetter] = React.useReducer(
+    reducer,
+    { loading: true, props: {}, error: "" }
+  );
   // changeInfo("loading", true)
   // verifies if routeName is the one active (in browser input)
   // const myHeaders = new Headers();
-//   const [authTokens, setAuthTokens] = useState(() =>
-//   localStorage.getItem("authTokens")
-//     // ? JSON.parse(localStorage.getItem("authTokens"))
-//     // : null
-// );
+  //   const [authTokens, setAuthTokens] = useState(() =>
+  //   localStorage.getItem("authTokens")
+  //     // ? JSON.parse(localStorage.getItem("authTokens"))
+  //     // : null
+  // );
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   // console.log(tokenClass);
@@ -93,21 +95,22 @@ function LessonSidebar(props) {
   // myHeaders.append("Authorization", `Bearer ${token}` );
   // console.log(myHeaders)
   React.useEffect(() => {
-    propsSetter({type:fetchRequest})
+    propsSetter({ type: fetchRequest });
     fetch("https://www.katyushaiust.ir/departments/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-      propsSetter({type:fetchSuccess, payload:data.data}) 
+        propsSetter({ type: fetchSuccess, payload: data.data });
 
         // console.log("data all",data);
         setDeparteman(data);
       })
       .catch((error) => {
-      propsSetter({type:fetchFail, payload:getError(error)})
-        
-        console.error(error)});
+        propsSetter({ type: fetchFail, payload: getError(error) });
+
+        console.error(error);
+      });
     // console.log(data);
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
@@ -125,9 +128,9 @@ function LessonSidebar(props) {
         setAllColleges(all_colleges_data);
       })
       .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
     // console.log("all Colleges state", allColleges);
   }, []);
 
@@ -213,14 +216,26 @@ function LessonSidebar(props) {
             ) : null} */}
             <Nav>
               <Row className="nav-lessonSidebar">
-                <Col md="5" xs="5" style={{margin:"auto"}}>
-                  <NavLink to="/admin/page" className="nav-header nav-link-icon">
-                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px"}}/>
-                    <p className="mr-2 small" style={{alignSelf: "center", fontSize:".99rem"}}>کاتیوشا</p>
+                <Col md="5" xs="5" style={{ margin: "auto" }}>
+                  <NavLink
+                    to="/admin/page"
+                    className="nav-header nav-link-icon"
+                  >
+                    <img
+                      src="../../public/Logo1.png"
+                      alt=""
+                      style={{ height: "34px" }}
+                    />
+                    <p
+                      className="mr-2 small"
+                      style={{ alignSelf: "center", fontSize: ".99rem" }}
+                    >
+                      کاتیوشا
+                    </p>
                     {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
                 </Col>
-                <Col md="4" xs="4" style={{margin:"auto"}}>
+                <Col md="4" xs="4" style={{ margin: "auto" }}>
                   <NavLink
                     to="..\CoursesPanel"
                     className="nav-header nav-link-course"
@@ -228,7 +243,7 @@ function LessonSidebar(props) {
                     پنل دروس
                   </NavLink>
                 </Col>
-                <Col md="3" xs="3" style={{margin:"auto"}}>
+                <Col md="3" xs="3" style={{ margin: "auto" }}>
                   <div className="nav-link-profile">
                     <UncontrolledDropdown>
                       <DropdownToggle
@@ -246,16 +261,14 @@ function LessonSidebar(props) {
                         <DropdownItem
                           className="navbarDropDownItem"
                           href="http://localhost:5173/shopping"
-                          onClick={(e) => {e.preventDefault()
-                            Navigate("/shopping")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/shopping");
                           }}
                         >
-                          <span className="tim-icons icon-basket-simple" 
-                          
-                          />
+                          <span className="tim-icons icon-basket-simple" />
                           {"  "}
                           سبد خرید
-                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
@@ -264,18 +277,30 @@ function LessonSidebar(props) {
                           <span className="tim-icons icon-email-85" />
                           {"  "}
                           اعلان ها
-                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => {e.preventDefault()
-                            Navigate("/admin/change")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/user");
+                          }}
+                        >
+                          {/* <span className="tim-icons icon-email-85" /> */}
+                        <span className="tim-icons icon-badge" />
+                          {"  "}
+                          پروفایل
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/admin/change");
                           }}
                         >
                           <span className="tim-icons icon-lock-circle" />
                           تغییر رمز عبور
                         </DropdownItem>
-                        
+
                         <DropdownItem
                           href="#pablo"
                           // onClick={()=>{
@@ -285,16 +310,17 @@ function LessonSidebar(props) {
                           // }}
                         >
                           <span className="tim-icons icon-simple-remove" />
-                          <Link to="/login"
-                           onClick={()=>{
-                            localStorage.removeItem('authTokens');
-                            //localStorage.setItem('authTokens', "");
-                            // setAuthTokens(null);
-                            // console.log("clicked")
-                          }}
+                          <Link
+                            to="/login"
+                            onClick={() => {
+                              localStorage.removeItem("authTokens");
+                              //localStorage.setItem('authTokens', "");
+                              // setAuthTokens(null);
+                              // console.log("clicked")
+                            }}
                           >
-                          {"  "}
-                          خروج
+                            {"  "}
+                            خروج
                           </Link>
                         </DropdownItem>
                       </DropdownMenu>
@@ -303,38 +329,46 @@ function LessonSidebar(props) {
                 </Col>
               </Row>
               <div className="lessonSidebar_component">
-                {loading ? <Spinner/> : error? "error" :
-                departeman.map((prop, index) => {
-                  if (prop.base_courses.length > 0) {
-                    return (
-                      <NavLink
-                        className="nav-link nav-link-lessonSidebar"
-                        // activeClassName="active"
-                        onClick={() => setLessonState([prop])}
-                        key={index}
-                      >
-                        <i className="tim-icons icon-chart-bar-32" />
-                        <p>{prop.name}</p>
-                      </NavLink>
-                    );
-                  }
-                })}
-                {loading ? "" : error? "" :
-                <NavLink
-                  className="nav-link nav-link-lessonSidebar"
-                  // activeClassName="active"
-                  onClick={() => {
-                    setLessonState(allColleges);
-                    // console.log("all colleges in onclick",allColleges);
-                    // console.log("lesson state in onclick",lessonState);
-                  }}
-                  // key={index}
-                >
-                  <i className="tim-icons icon-chart-bar-32" />
-                  <p>همه دانشکده ها</p>
-                </NavLink>
-
-                }
+                {loading ? (
+                  <Spinner />
+                ) : error ? (
+                  "error"
+                ) : (
+                  departeman.map((prop, index) => {
+                    if (prop.base_courses.length > 0) {
+                      return (
+                        <NavLink
+                          className="nav-link nav-link-lessonSidebar"
+                          // activeClassName="active"
+                          onClick={() => setLessonState([prop])}
+                          key={index}
+                        >
+                          <i className="tim-icons icon-chart-bar-32" />
+                          <p>{prop.name}</p>
+                        </NavLink>
+                      );
+                    }
+                  })
+                )}
+                {loading ? (
+                  ""
+                ) : error ? (
+                  ""
+                ) : (
+                  <NavLink
+                    className="nav-link nav-link-lessonSidebar"
+                    // activeClassName="active"
+                    onClick={() => {
+                      setLessonState(allColleges);
+                      // console.log("all colleges in onclick",allColleges);
+                      // console.log("lesson state in onclick",lessonState);
+                    }}
+                    // key={index}
+                  >
+                    <i className="tim-icons icon-chart-bar-32" />
+                    <p>همه دانشکده ها</p>
+                  </NavLink>
+                )}
               </div>
               <div className="lessonSidebar_component-lessons">
                 {lessonState ? <SearchBox data={lessonState} /> : null}

@@ -28,7 +28,7 @@
 
     /* margin-top: 0px !important; */
 }
-.ModalLessonCourse > .modal-dialog{
+.ModalLessonCourse .modal-dialog{
    margin: -12rem auto !important;
 }
 
