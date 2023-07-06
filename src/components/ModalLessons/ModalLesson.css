@@ -28,9 +28,9 @@
 
     /* margin-top: 0px !important; */
 }
-/* .modal-dialog{
+.ModalLessonCourse > .modal-dialog{
    margin: -12rem auto !important;
-} */
+} 
 
 
    .ModalLessonCourseCard{
@@ -64,6 +64,7 @@
        border-width: 0.1875rem;
        border-radius: 4.6875rem;
    }
+
 
    .courseTitle{
       display: inline-block;

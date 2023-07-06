@@ -10,7 +10,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 const LoginModal = (props) => {
 
-  console.log("PROPS in MODAL", props);
+  // console.log("PROPS in MODAL", props);
   return (
     <>
       <Modal 

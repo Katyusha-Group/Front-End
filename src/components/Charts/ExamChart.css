@@ -44,7 +44,7 @@ border-bottom: none !important;
     position: absolute;
     height: 14%;
     width: 4.8%;
-    background-color:#1d8cf8 ;
+    background-color:rgb(124, 98, 195) ;
     top:20%;
     right:13%;/* 10.7 */
     border-radius: 5%;
@@ -85,7 +85,7 @@ border-bottom: none !important;
 } */
 
 .exam_hover{
-    background: #1d8bf887;
+    background: rgb(124, 98, 195,.5) ;
     width: 110px;
     height: auto;
     border: none;

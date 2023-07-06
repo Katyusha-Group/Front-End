@@ -35,32 +35,36 @@ function Shopping() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
   const [wallet, setWallet] = React.useState(0);
-  React.useEffect(() => {
+  function getCartInfo() {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    showLoading();
     fetch(`https://katyushaiust.ir/carts/${shopId.id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("shop data", data);
         setState(data.items);
         setTotalPrice(data.total_price);
         setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
+      console.log("cart info run")
+    }  
+  React.useEffect(() => {
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    showLoading();
+    getCartInfo();
     fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setWallet(data.balance);
-      })
-      .catch((error) => console.error(error));
+    .then((response) => response.json())
+    .then((data) => {
+      setWallet(data.balance);
+    })
+    .catch((error) => console.error(error));
   }, []);
 
   closeLoading();
-  function delete_item(num, index) {
+  const delete_item =(num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(
       `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
@@ -77,7 +81,10 @@ function Shopping() {
           contain_email: true,
         }),
       }
-    );
+    ).then((response) =>{
+      getCartInfo();
+
+    });
   }
 
   function order() {
@@ -209,17 +216,15 @@ function Shopping() {
     <>
       <div className="wrapper" style={{ direction: "ltr" }}>
         <div className="main-panel">
-        <AdminNavbar></AdminNavbar>
+          <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
               {/* <NotificationAlert ref={notificationAlertRef} /> */}
-              
             </div>
-            
 
             <Row>
-              <Col md="3">
-                <Card className="">
+              <Col md="3" >
+                <Card className="" style={{height: "100%", marginBottom: "0"}}>
                   <CardHeader
                     className="shop_row m-1"
                     style={{
@@ -280,10 +285,10 @@ function Shopping() {
                   </CardFooter>
                 </Card>
               </Col>
-              <Col md="9">
+              <Col md="9" >
                 {/* <CardHeader>
                 </CardHeader> */}
-                <Card className="shop_card">
+                <Card className="shop_card " style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
@@ -316,7 +321,7 @@ function Shopping() {
                           {x.course.name}
                         </Col>
                         <Col className="m-auto text-center category">
-                          {x.price}
+                          {x.price} تومان
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
