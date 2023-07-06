@@ -140,6 +140,7 @@ i .course {
 
 .coursCardContainer{
     width: 30%;
+    min-width: 315px;
 }
 
 .courseCardBody {

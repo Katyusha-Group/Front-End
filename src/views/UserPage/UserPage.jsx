@@ -210,6 +210,7 @@ export default function UserPage() {
       // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
+        
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
 
         return (
@@ -225,7 +226,7 @@ export default function UserPage() {
                     timeStringToFloat(lesson.course_start_time) ==
                   1.5
                     ? 9.5
-                    : 15
+                    : 13
                 }%`,
               }}
               onMouseOver={() =>

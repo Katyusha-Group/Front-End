@@ -37,6 +37,7 @@ const ModalLessons = (props) => {
         show={props.show.flag}
         cancel={props.close}
         onHide={props.close}
+        className="ModalLessonCourse"
         // centered
       >
         <div>
