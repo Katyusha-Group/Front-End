@@ -85,7 +85,7 @@ border-bottom: none !important;
 } */
 
 .exam_hover{
-    background: #1d8bf887;
+    background: rgb(124, 98, 195,.5) ;
     width: 110px;
     height: auto;
     border: none;
