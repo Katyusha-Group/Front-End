@@ -50,6 +50,7 @@ export default function ExamChart() {
         const courses = data.map(course => new Course(course, true));
         setChosenCourses(courses);
         setExamTable(courses);
+
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -60,14 +61,27 @@ export default function ExamChart() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
+      console.log ("Name: " + this.name);
 
       this.complete_course_number = props.complete_course_number;
 
-      this.ExamTime = props.exam_times.exam_start_time;
-      this.TimeIndex = MapTimeToIndex(this.ExamTime);
+      // this.ExamTime = props.exam_times.exam_start_time;
+      // if (this.ExamTime === undefined)
+      // {
+      //   this.TimeIndex = MapTimeToIndex(this.ExamTime);
+      // }
+      // console.log ("ExamTime: " + this.ExamTime);
+      // console.log ("TimeIndex: " + this.TimeIndex);
 
-      this.ExamDate = props.exam_times.date;
-      this.ExamDate = MapDateToIndex(this.ExamDate);
+      // this.ExamDate = props.exam_times.date;
+      // if (this.ExamDate === undefined)
+      // {
+      //   this.DateIndex = MapTimeToIndex(this.ExamDate);
+      // }
+      // console.log ("ExamDate: " + this.ExamDate);
+      // console.log ("DateIndex: " + this.DateIndex);
+
+      this.exam_times = props.exam_times;
 
       this.IsChosen = IsFromChosencourses;
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
@@ -114,9 +128,10 @@ export default function ExamChart() {
 
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        let time = currentPeriod.ExamTime;
-        let day = currentPeriod.ExamDate;
-        NumInEachSlot[time][day]++;
+        let ExamTime = currentPeriod.exam_times[0].exam_start_time;
+        let ExamDay = currentPeriod.exam_times[0].date;
+        let time = MapTimeToIndex(ExamTime);
+        let day = MapDateToIndex(ExamDay);
         let count = NumInEachSlot[time][day];
         try {
           lessonsKeyedByDayAndPeriod[time][day][count] = currentPeriod;
@@ -166,7 +181,6 @@ export default function ExamChart() {
             <th className="table-head text-center ">2</th>
             <th className="table-head text-center ">3</th>
             <th className="table-head text-center ">4</th>
-            <th className="table-head text-center ">5</th>
           </tr>
         </thead>
         <tbody className="ExamChartTableBody">

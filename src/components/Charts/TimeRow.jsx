@@ -2,15 +2,31 @@ import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 
-const MonthDay = (Section) => (
+const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
         return (
-          <div>
-            {/* {console.log("Hello")} */}
+          <div className="CourseListContainer">
             {entry !== null && (
-              <div classname = "Examcontents" style={{ margin: '5px' }}>
-                {entry.name}
+              <div className="CourseContainer">
+                <div className="Course"
+                  style={{ backgroundColor: entry.backgColor }}
+                >
+                  <div style={{ margin: '5px' }}>
+                    {entry.name} ({entry.class_gp})
+                  </div>
+                </div>
+                <button className="btn-fill-AddCourseButton"
+                  name="AddOrRemoveCourseButton"
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
+                  onClick={() => {
+                      showLoading();
+                    entry.ButtonClicked();
+                      closeLoading();
+                  }}>
+                  {entry.IsChosen ? 'x' : '+'}
+                </button>
+                {/* <br/> */}
               </div>
             )}
           </div>
@@ -23,18 +39,11 @@ const TimeRow = ({ periods, ExamT }) => {
     return (
     <>
         <tr className="TableROW">
-        <td className="ExamChart_column text-center">{ExamT}</td>
-        {/* {
-          for (let i = 0; i < keyedExamTable.length; i++) 
-            for (let j = 0; j < keyedExamTable[i].length; j++) 
-                console.log("item is" + keyedExamTable[i][j][k]);  
-        } */}
-        {Object.entries(periods).map(([date, entry]) => {
+        <td className="CoursesPanel_column text-center" style = {{fontSize : "x-small"}}>{ExamT}</td>
+        {Object.entries(periods).map(([time, entry]) => {
             return (
-            <td className="ExamChart_column2" key={date}>
-                {/* {console.log ("date is: " + date)}
-                {console.log("Entry is: " + entry)} */}
-                {MonthDay(entry)}
+            <td className="CoursesPanel_column2" key={time}>
+                {DayPeriod(entry)}
             </td>
             )
         })}
