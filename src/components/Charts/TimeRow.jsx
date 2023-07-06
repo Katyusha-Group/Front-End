@@ -30,7 +30,7 @@ const TimeRow = ({ periods, ExamT }) => {
         {Object.entries(periods).map(([date, entry]) => {
             return (
             <td className="ExamChart_column2" key={date}>
-                {console.log ("Exam time is: " + ExamT)}
+                {console.log ("date is: " + date)}
                 {console.log("Entry is: " + entry)}
                 {MonthDay(entry)}
             </td>

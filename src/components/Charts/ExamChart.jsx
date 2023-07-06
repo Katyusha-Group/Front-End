@@ -59,6 +59,10 @@ function ExamChart() {
   const [bigChartData, setbigChartData] = React.useState("data1");
   let [ExamTable, setExamTable] = React.useState([]);
 
+  // Token
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
@@ -168,7 +172,7 @@ function ExamChart() {
       4: null,
       5: null
     });
-    const emptyDay = () => ({
+    const emptyTime = () => ({
       0: emptySection(),
       1: emptySection(),
       2: emptySection(),
@@ -176,7 +180,22 @@ function ExamChart() {
       4: emptySection(),
       5: emptySection(),
       6: emptySection(),
-      7: emptySection()
+      7: emptySection(),
+      8: emptySection(),
+      9: emptySection(),
+      10: emptySection(),
+      11: emptySection(),
+      12: emptySection(),
+      13: emptySection(),
+      14: emptySection(),
+      15: emptySection(),
+      16: emptySection(),
+      17: emptySection(),
+      18: emptySection(),
+      19: emptySection(),
+      20: emptySection(),
+      21: emptySection(),
+      22: emptySection()
     });
 
     const NumInEachSlot = Create2DArray(6, 23);
@@ -187,11 +206,11 @@ function ExamChart() {
         const ExamDate = currentPeriod.exam_times.date;
         const TimeIndex = MapTimeToIndex(ExamTime); 
         const DateIndex = MapDateToIndex(ExamDate);
-        NumInEachSlot[ExamTime][ExamDate] ++;
-        let count = NumInEachSlot[ExamTime][ExamDate];
+        NumInEachSlot[TimeIndex][DateIndex] ++;
+        let count = NumInEachSlot[TimeIndex][DateIndex];
         try 
         {
-          lessonsKeyedByExamDayAndPeriod[ExamTime][ExamDate][count] = currentPeriod;
+          lessonsKeyedByExamDayAndPeriod[TimeIndex][DateIndex][count] = currentPeriod;
         }
         catch (error) 
         {
@@ -200,17 +219,24 @@ function ExamChart() {
         return lessonsKeyedByExamDayAndPeriod
       },
       {
-        0: emptyDay(),
-        1: emptyDay(),
-        2: emptyDay(),
-        3: emptyDay(),
-        4: emptyDay(),
-        5: emptyDay(),
+        0: emptyTime(),
+        1: emptyTime(),
+        2: emptyTime(),
+        3: emptyTime(),
+        4: emptyTime(),
+        5: emptyTime(),
       }
     )
   }, [ExamTable])
 
-
+  console.log("Running keyedExamTable:")
+  for (let i = 0; i < keyedExamTable.length; i++) {
+    for (let j = 0; j < keyedExamTable[i].length; j++) {
+      for (let k = 0; k < keyedExamTable[i][j].length; k++) {
+        console.log("item is" + keyedExamTable[i][j][k]);
+      }
+    }
+  }
   return (
     <>
       <Row>
