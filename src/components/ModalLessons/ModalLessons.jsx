@@ -136,7 +136,11 @@ const ModalLessons = (props) => {
                           تا{" "}
                           {convertTime(x.course_times[0].course_end_time)}
                         </text>
+                        
                       </Col>
+                      {
+                        x.exam_times.length===0?null
+                      :
                       <Col className="text-right" >
                         <p className="courseTitleNotInline">
                            زمان آزمون پایانی
@@ -153,6 +157,7 @@ const ModalLessons = (props) => {
                         </text>
                        
                       </Col>
+                      }
                       </Card>
                       
                     </Col>
@@ -191,14 +196,15 @@ const ModalLessons = (props) => {
                       
                     </Row> 
                      </Card>
-                    {/*{!x.description==="nan"?
-                    <Card className="ModalLessondataCard3">
+                    {x.description==="nan"?null
+                    :<Card className="ModalLessondataCard3">
                     <Row>
                       <Col className="text-right" md="12">
                       <p className="courseTitle" > توضیحات&nbsp;&nbsp; </p>
+                      {x.description}
                       </Col>
                     </Row> 
-                    </Card>:{}} */}
+                    </Card>}
                       </Row>
                   </Row>
                     {/* <Card className="ModalLessondataCard1">
