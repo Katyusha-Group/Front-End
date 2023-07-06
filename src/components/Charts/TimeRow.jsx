@@ -8,26 +8,35 @@ const DayPeriod = (Section) => (
         return (
           <div className="CourseListContainer">
             {entry !== null && (
-              // <div className="CourseContainer">
-              //   <div className="Course"
-              //     style={{ backgroundColor: entry.backgColor }}
-              //   >
-              //     <div style={{ margin: '5px' }}>
-              //       {entry.name}
-              //     </div>
-              //   </div>
-              // </div>
-              <div className="exam text-center"
-                  onMouseOver={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "block")
-                }
-                onMouseOut={() =>
-                  (document.getElementById(lessonBoxId + "x").style.display =
-                    "none")
-                }
-              >
-                {entry.name}
+              <div key={entry.complete_course_number}>
+                <div>
+                    <div
+                      id = {entry.complete_course_number}
+                      className="exam text-center"
+                      onMouseOver={() =>
+                        (document.getElementById(entry.complete_course_number + "x").style.display =
+                          "block")
+                      }
+                      onMouseOut={() =>
+                        (document.getElementById(entry.complete_course_number + "x").style.display =
+                          "none")
+                      }
+                    >
+                        <div>{entry.name}</div>
+                        <div className="exam_hover" id={entry.complete_course_number + "x"}>
+                          <div className="dir-left">{entry.complete_course_number}</div>
+                          <div>{entry.teacher.name}</div>
+                          <div>
+                            {weekday[parseInt(entry.course_times[0].course_day)]}
+                          </div>
+                          <div>
+                            {timeStringToFloat(entry.exam_times[0].exam_start_time) +
+                              "-" +
+                              timeStringToFloat(entry.exam_times[0].exam_end_time)}
+                          </div>
+                        </div>
+                    </div>
+                </div>
               </div>
             )}
           </div>
