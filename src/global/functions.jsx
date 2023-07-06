@@ -42,6 +42,18 @@ export function timeStringToFloat(time) {
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
+export function convertTime(time) {
+  // Split the time string into individual components
+  const [hours, minutes, seconds] = time.split(':');
+
+  // Convert the hours string to a number
+  const hoursNum = parseInt(hours);
+
+  // Combine the hours and minutes into the final string
+  const finalTime = `${hoursNum}:${minutes}`;
+
+  return finalTime;
+}
 export function sexTostring(s){
   switch (s) {
       case "F":

@@ -97,7 +97,7 @@ const SearchBox = ( data ) => {
     <>
       <Input
         type="text"
-        placeholder="Search"
+        placeholder="جستجو   "
         value={query}
         onChange={handleQueryChange}
         className="search_box"

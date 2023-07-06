@@ -190,7 +190,7 @@ function Login(props) {
       Navigate("/admin/page");
     } else {
       console.log(data.error);
-      errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
+      errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
       setErrorMessage({
         ...errorMessage,
         backError: errors.backError,

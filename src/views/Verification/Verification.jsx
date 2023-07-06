@@ -135,7 +135,7 @@ function isValidCode(code) {
     // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
     console.log(showAlert)
-    console.log(verificationApi(code,info.token))
+    console.log(verificationApi(code))
     closeLoading();
     console.log(showAlert)
     // verificationApi(code,info.token)
@@ -226,7 +226,7 @@ function isValidCode(code) {
                   </CardFooter>
                   <CardBody>
                   <Link to="/login" color="primary">
-                            ورود به حساب کابری
+                            ورود به حساب کاربری
                     </Link>
                   </CardBody>
                   
