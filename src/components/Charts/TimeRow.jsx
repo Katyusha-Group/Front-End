@@ -8,25 +8,26 @@ const DayPeriod = (Section) => (
         return (
           <div className="CourseListContainer">
             {entry !== null && (
-              <div className="CourseContainer">
-                <div className="Course"
-                  style={{ backgroundColor: entry.backgColor }}
-                >
-                  <div style={{ margin: '5px' }}>
-                    {entry.name} ({entry.class_gp})
-                  </div>
-                </div>
-                <button className="btn-fill-AddCourseButton"
-                  name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
-                  onClick={() => {
-                      showLoading();
-                    entry.ButtonClicked();
-                      closeLoading();
-                  }}>
-                  {entry.IsChosen ? 'x' : '+'}
-                </button>
-                {/* <br/> */}
+              // <div className="CourseContainer">
+              //   <div className="Course"
+              //     style={{ backgroundColor: entry.backgColor }}
+              //   >
+              //     <div style={{ margin: '5px' }}>
+              //       {entry.name}
+              //     </div>
+              //   </div>
+              // </div>
+              <div className="exam text-center"
+                  onMouseOver={() =>
+                (document.getElementById(lessonBoxId + "x").style.display =
+                  "block")
+                }
+                onMouseOut={() =>
+                  (document.getElementById(lessonBoxId + "x").style.display =
+                    "none")
+                }
+              >
+                {entry.name}
               </div>
             )}
           </div>
