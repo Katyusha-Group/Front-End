@@ -155,8 +155,8 @@ function Login(props) {
     console.log("response",response);
     closeLoading();
     if (response.status === 200) {
-      props.onLogIn();
-      console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
+      // props.onLogIn();
+      // console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
       
       setAuthTokens(data.token);
       console.log(authTokens);
