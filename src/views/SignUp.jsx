@@ -290,9 +290,10 @@ function SignUp() {
 
     // if ( data.message.includes("created successfully")){
       
-      changeInfo("token",data.token)
-      // console.log(info.token);
-      // console.log(data.token)
+      localStorage.setItem("token",data.token)
+      localStorage.setItem("verificationLink",data.url)
+      console.log(data.url);
+      console.log(data.token)
 
       console.log("خوش آمدید");
       // console.log(info.token)
@@ -456,7 +457,7 @@ function SignUp() {
                       <Row>
                         <Col className="text-center pt-md-2" md="12">
                           <Link to="/login" color="primary">
-                            ورود به حساب کابری
+                            ورود به حساب کاربری
                           </Link>
                         </Col>
                       </Row>

@@ -33,7 +33,7 @@ export function takeLessonsGroups(token){
   export async function forgetPasswordVerificationApi(code,setShowAlert){
     // console.log("link is ");
     // console.log(localStorage.getItem("link"));
-  const response = await fetch(`${localStorage.getItem("link")}`, {
+    const response = await fetch(`${localStorage.getItem("link")}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,18 +85,32 @@ export function takeLessonsGroups(token){
     
   }
   export async function verificationApi(code,setShowAlert){
-    const response = await fetch(`https://katyushaiust.ir/accounts/code_verification_view/${code}/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "accept": "application/json"
-        },
-  
-        // body: JSON.stringify(
-        // {
-        //   verification_code: code
-        // })
-      });
+    console.log(code);
+    // const { info, changeInfo } = useInfo();
+    // const response = await fetch(`${localStorage.getItem("verificationLink")}`, {
+    //   method: "POST",
+    //   //headers: {
+    //   //   "Content-Type": "application/json",
+    //   //   "accept": "application/json"
+    //   // },
+
+    //   body: JSON.stringify(
+    //   {
+    //     "verification_code": code
+    //   })
+    // });
+    const response = await fetch(`http://katyushaiust.ir/accounts/activation-confirm/${localStorage.getItem("token")}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json"
+      },
+
+      body: JSON.stringify(
+      {
+        "verification_code": code
+      })
+    });
       
       const data = await response.json();
       console.log(data);
