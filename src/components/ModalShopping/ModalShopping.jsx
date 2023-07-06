@@ -61,7 +61,7 @@ const ModalShopping = (props) => {
   const notificationAlertRef = React.useRef(null);
 
   const notify = (place) => {
-    var color = Math.floor(Math.random() * 5 + 1);
+    var color = 2;
     var type;
     switch (color) {
       case 1:
@@ -93,6 +93,7 @@ const ModalShopping = (props) => {
         </div>
       ),
       type: type,
+      color: "white",
       // icon: "tim-icons icon-bell-55",
       autoDismiss: 7
     };
