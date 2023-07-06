@@ -1,17 +1,31 @@
 import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-
+var weekday = new Array(7);
+weekday[0] = "شنبه";
+weekday[1] = "یکشنبه";
+weekday[2] = "دوشنبه";
+weekday[3] = "سه‌شنبه";
+weekday[4] = "چهارشنبه";
+weekday[5] = "پنج‌شنبه";
+weekday[6] = "جمعه";
+function timeStringToFloat(time) {
+  var hoursMinutes = time.split(/[.:]/);
+  var hours = parseInt(hoursMinutes[0], 10);
+  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+  return hours + minutes / 60;
+}
 const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
         return (
-          <div className="CourseListContainer">
+          <div className="ExamListContainer">
             {entry !== null && (
               <div key={entry.complete_course_number}>
-                <div>
-                    <div
+                <div  className="ExamContainer">
+                    <div 
                       id = {entry.complete_course_number}
+                      // className="Course"
                       className="exam text-center"
                       onMouseOver={() =>
                         (document.getElementById(entry.complete_course_number + "x").style.display =
@@ -22,10 +36,16 @@ const DayPeriod = (Section) => (
                           "none")
                       }
                     >
-                        <div>{entry.name}</div>
+                        <div>
+                          {/* {entry.name} */}
+                        <strong title= {entry.name}>{entry.name.length < 13 ? entry.name : entry.name.slice(0, 13) + "..."}</strong>
+
+                        </div>
                         <div className="exam_hover" id={entry.complete_course_number + "x"}>
-                          <div className="dir-left">{entry.complete_course_number}</div>
-                          <div>{entry.teacher.name}</div>
+                          <div className="dir-left">
+                            {entry.complete_course_number}
+                          </div>
+                          {/* <div>{entry.teachers[0].map((y)=>(y.name)).join(" , ")}</div> */}
                           <div>
                             {weekday[parseInt(entry.course_times[0].course_day)]}
                           </div>

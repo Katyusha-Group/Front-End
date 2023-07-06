@@ -1,9 +1,6 @@
 import React from "react";
 import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
-import Select from "react-select";
-import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
-import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import "../../assets/css/nucleo-icons.css";
 import TimeRow from './TimeRow';
 import { useState, useEffect } from 'react';
@@ -28,67 +25,9 @@ import {
 import "./ExamChart.css"
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 
-export default function ExamChart() {
-  // Token
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
 
-  // Info
-  const { info, changeInfo } = useInfo();
-
-  let [ChosenCourses, setChosenCourses] = React.useState([]);
-
-
-  React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setChosenCourses(courses);
-        setExamTable(courses);
-
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }, []);
-
-  class Course {
-    constructor(props, IsFromChosencourses) {
-      this.name = props.name;
-      console.log ("Name: " + this.name);
-
-      this.complete_course_number = props.complete_course_number;
-
-      // this.ExamTime = props.exam_times.exam_start_time;
-      // if (this.ExamTime === undefined)
-      // {
-      //   this.TimeIndex = MapTimeToIndex(this.ExamTime);
-      // }
-      // console.log ("ExamTime: " + this.ExamTime);
-      // console.log ("TimeIndex: " + this.TimeIndex);
-
-      // this.ExamDate = props.exam_times.date;
-      // if (this.ExamDate === undefined)
-      // {
-      //   this.DateIndex = MapTimeToIndex(this.ExamDate);
-      // }
-      // console.log ("ExamDate: " + this.ExamDate);
-      // console.log ("DateIndex: " + this.DateIndex);
-
-      this.exam_times = props.exam_times;
-
-      this.IsChosen = IsFromChosencourses;
-      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-    }
-  }
-  let [ExamTable, setExamTable] = React.useState([]);
-
+function Exams (ExamTable)
+{
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     const emptySection = () => ({
@@ -132,6 +71,7 @@ export default function ExamChart() {
         let ExamDay = currentPeriod.exam_times[0].date;
         let time = MapTimeToIndex(ExamTime);
         let day = MapDateToIndex(ExamDay);
+        NumInEachSlot[time][day] ++;
         let count = NumInEachSlot[time][day];
         try {
           lessonsKeyedByDayAndPeriod[time][day][count] = currentPeriod;
@@ -192,6 +132,69 @@ export default function ExamChart() {
           <TimeRow ExamT="18-20" periods={keyedExamTable[5]} />
         </tbody>
       </Table>
+    </>
+  );
+}
+
+export default function ExamChart() {
+  // Token
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
+
+  // Info
+  const { info, changeInfo } = useInfo();
+
+  let [ExamTable, setExamTable] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fetched data");
+        changeInfo("courseChoosed", data);
+        const courses = data.map(course => new Course(course, true));
+        setExamTable(courses);
+
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, [info.courseChoosed]);
+
+  class Course {
+    constructor(props, IsFromChosencourses) {
+      this.name = props.name;
+      console.log ("Name: " + this.name);
+
+      this.complete_course_number = props.complete_course_number;
+      
+
+      this.class_gp = props.class_gp;
+      this.complete_course_number = props.complete_course_number;
+      this.course_times = props.course_times;
+      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+      this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
+      this.can_take = props.is_allowed;
+
+
+
+      this.exam_times = props.exam_times;
+
+      this.IsChosen = IsFromChosencourses;
+      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+    }
+  }
+
+  return (
+    <>
+      <div>
+        {console.log("Exams called")}
+        {Exams(ExamTable)}
+      </div>
     </>
   );
 }
