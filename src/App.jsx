@@ -22,17 +22,31 @@ import Verification from "./views/Verification/Verification.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 import VerificationForgetPassword from "./views/Verification/VerificationForgetPassword.jsx";
 import SetNewPassword from "./views/SetNewPassword.jsx";
-import { PrivatRoute } from "./global/functions.jsx";
+import RequireAuth from "./components/RequirAuth/RequirAuth.jsx";
+import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
+import { useState } from "react";
+import { useEffect } from "react";import { PrivatRoute } from "./global/functions.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => localStorage.getItem('authTokens') !== null
+  );
+
+  useEffect(() => {
+    console.log("🚀 ~ file: App.jsx:40 ~ App ~ isLoggedIn:", isLoggedIn)
+    setIsLoggedIn(true)
+  }, [isLoggedIn]);
+
+  const logIn = () => setIsLoggedIn(true);
+
+  const logOut = () => setIsLoggedIn(false);
+
   return (
     <>
-      {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
       <ThemeContextWrapper>
         <BackgroundColorWrapper>
           <ContextInfo>
-          {/* <SimpleBar style={{ maxHeight: '300px' }}> */}
             <Router.BrowserRouter>
               <Router.Routes>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
@@ -67,12 +81,9 @@ function App() {
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
-            {/* </SimpleBar> */}
           </ContextInfo>
         </BackgroundColorWrapper>
       </ThemeContextWrapper>
-      {/* </SimpleBar> */}
-      {/* <img src="./assets/img/Logo.jpg" alt="logo" /> */}
     </>
   );
 }
