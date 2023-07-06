@@ -68,7 +68,7 @@ border-bottom: none !important;
     position: relative;
     top:100%;
     /* right: -50%; */
-    right : 10%;
+    right : 5%;
     border-radius: 1.4rem;
     z-index: -1;
     padding: 0.5rem;
@@ -76,6 +76,7 @@ border-bottom: none !important;
     display: none;
    line-height: 1.5rem;
    font-size: 0.7rem;
+   /* text-align: center; */
 }
 /* .dir-left{
     direction: ltr;
