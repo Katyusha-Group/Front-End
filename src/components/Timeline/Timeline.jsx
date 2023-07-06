@@ -3,6 +3,7 @@ import "./Timeline.module.css";
 import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
+import { showLoading ,closeLoading} from "../LoadingAlert/LoadingAlert";
 const Timeline = (props) => {
   console.log(props);
   let course_group = props.show.show.data.complete_course_number.split("_")[0];
@@ -51,6 +52,7 @@ const Timeline = (props) => {
   ];
   const token = tokenClass.token.access;
   React.useEffect(() => {
+    showLoading();
     fetch(`https://www.katyushaiust.ir/timeline/courses/${course_group}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -58,10 +60,11 @@ const Timeline = (props) => {
       .then((data) => {
         console.log("time_data" + data[0], data);
         setData(data);
+        closeLoading();
       })
 
       .catch((error) => console.error(error));
-
+      
     // setData(ndata);
     // changeInfoState("courseChoosed", data);
     // const activeRoute = (routeName) => {

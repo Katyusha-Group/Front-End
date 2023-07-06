@@ -227,7 +227,7 @@ function isValidCode(code) {
                   </CardFooter>
                   <CardBody>
                   {/* <Link to="/login" color="primary">
-                            ورود به حساب کابری
+                            ورود به حساب کاربری
                     </Link> */}
                   </CardBody>
                   

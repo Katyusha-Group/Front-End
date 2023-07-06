@@ -140,6 +140,7 @@ i .course {
 
 .coursCardContainer{
     width: 30%;
+    min-width: 315px;
 }
 
 .courseCardBody {
@@ -354,4 +355,9 @@ p {
     .courseGroupCard{
         height: 16vh;
     }   
+}
+
+.week_chart-btn{
+    /* background-color: #917FB3 !important; */
+    color: #e3e3e3 !important;
 }

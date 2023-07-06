@@ -25,7 +25,8 @@ import {
 import { Link } from "react-router-dom";
 import { conforms } from "lodash";
 
-function Login() {
+function Login(props) {
+  console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
   let [shop_caller,setShop_caller] = React.useState()
   console.log("default gohNakhor",shop_caller)
   let idShop = "ali";
@@ -154,6 +155,9 @@ function Login() {
     console.log("response",response);
     closeLoading();
     if (response.status === 200) {
+      // props.onLogIn();
+      // console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
+      
       setAuthTokens(data.token);
       console.log(authTokens);
       setShop_caller(true);
@@ -186,7 +190,7 @@ function Login() {
       Navigate("/admin/page");
     } else {
       console.log(data.error);
-      errors.backError = "!رمز عبور اشتباه و یا حساب کاربری ندارید";
+      errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
       setErrorMessage({
         ...errorMessage,
         backError: errors.backError,
