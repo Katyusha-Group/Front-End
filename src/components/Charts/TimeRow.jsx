@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 var weekday = new Array(7);
@@ -15,6 +15,22 @@ function timeStringToFloat(time) {
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
 }
+
+const [hoveredCourse, setHoveredCourse] = useState(null);
+const handleMouseOver = (event, entry) => {
+  // console.log("Hovered Course is: " + hoveredCourse.name)
+  document.getElementById(entry.complete_course_number + "x").style.display ="block";
+  setHoveredCourse(entry);
+};
+
+const handleMouseOut = (event, entry) => {
+  document.getElementById(entry.complete_course_number + "x").style.display ="none";
+  setHoveredCourse(null);
+};
+
+
+
+
 const DayPeriod = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
@@ -27,18 +43,19 @@ const DayPeriod = (Section) => (
                       id = {entry.complete_course_number}
                       // className="Course"
                       className="exam text-center"
-                      onMouseOver={() =>
-                        (document.getElementById(entry.complete_course_number + "x").style.display =
-                          "block")
-                      }
-                      onMouseOut={() =>
-                        (document.getElementById(entry.complete_course_number + "x").style.display =
-                          "none")
-                      }
+                      onMouseOver={(e) => handleMouseOver(e, entry)}
+                      onMouseOut={(e) => handleMouseOut (e, entry)}
                     >
                         <div>
                           {/* {entry.name} */}
-                        <strong title= {entry.name}>{entry.name.length < 13 ? entry.name : entry.name.slice(0, 13) + "..."}</strong>
+                        {/* <strong title= {entry.name}>{entry.name.length < 13 ? entry.name : entry.name.slice(0, 13) + "..."}</strong> */}
+                        <strong title= {entry.name}>
+                            {
+                              hoveredCourse === null ?
+                              entry.name.length < 13 ? entry.name : entry.name.slice(0, 13) + "..." :
+                              entry.name
+                            }
+                        </strong>
 
                         </div>
                         <div className="exam_hover" id={entry.complete_course_number + "x"}>
