@@ -99,7 +99,7 @@ export function takeLessonsGroups(token){
     //     "verification_code": code
     //   })
     // });
-    const response = await fetch(`http://katyushaiust.ir/accounts/activation-confirm/${localStorage.getItem("token")}`, {
+    const response = await fetch(`http://katyushaiust.ir/accounts/activation-confirm/${localStorage.getItem("token")}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export function takeLessonsGroups(token){
 
       body: JSON.stringify(
       {
-        "verification_code": code
+        verification_code: code
       })
     });
       
