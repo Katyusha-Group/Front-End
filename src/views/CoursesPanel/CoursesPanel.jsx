@@ -22,40 +22,48 @@ import {
   addNewLesson,
   mapTimeToIndex,
   createCourseGroupsArray,
-  uniquifyArrayByKey
+  uniquifyArrayByKey,
+  Create2DArray,
+  // containsWhitespace
 } from "./CoursesPanel_Functions";
 
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 // import HomeIcon from './home.png';
 // import { size } from "lodash";
 export default function CoursesPanel() {
-
+  // console.log("HELLO WORLD!");
   // Token
   // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
   // const tokenClass = JSON.parse(tokenJson) || 'nothing';
   // // const token = tokenClass.token.access;
   // const token = tokenClass.token.access || 'nothing';
 
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
-    const newToken = tokenClass ? tokenClass.token.access : null;
-    setToken(newToken);
-  }, [localStorage.getItem("authTokens")]);
+  // useEffect(() => {
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
+  //   const newToken = tokenClass ? tokenClass.token.access : null;
+  //   setToken(newToken);
+  // }, [localStorage.getItem("authTokens")]);
 
+
+  // Token
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
 
   // Info
   const { info, changeInfo } = useInfo();
 
-  // Allowed Lessons
-  // let [Allowed, setAllowed] = React.useState([]);
   const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
   let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
+
+  let NumberOfChosenLessons = Create2DArray(5, 9);
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
@@ -70,9 +78,14 @@ export default function CoursesPanel() {
       .then((response) => response.json())
       .then((data) => {
         changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setChosenCourses(courses);
-        settimetable(courses);
+        if (Array.isArray(data)) {
+          const courses = data.map(course => new Course(course, true));
+          setChosenCourses(courses);
+          settimetable(courses);
+        }
+        else {
+          console.log("Type of data is: " + typeof data);
+        }
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -154,10 +167,13 @@ export default function CoursesPanel() {
   };
 
   function handleDepartment(selectedOption) {                         // Handle Select
+    // showLoading();
     setSelectedDepartment(selectedOption.value);
+    // closeLoading();
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
+    // showLoading();
     if (SelectedDepartment) {
       fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -167,13 +183,27 @@ export default function CoursesPanel() {
           // settimetable(data);
           const courses = data.map(course => new Course(course, false));
           // settimetable(courses);
-          setDepartmentCourses(courses);
-          let NewTimeTable = [...ChosenCourses, ...courses];
-          settimetable(NewTimeTable);
-          setSwitchChecked(false);
+          setDepartmentCourses(courses); //Do we need this?
+          // let NewTimeTable = [...ChosenCourses, ...courses];
+          // settimetable(NewTimeTable);
+          // setSwitchChecked(false);
+          if (SwitchChecked)
+          {
+            let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+            let NewTimeTable = [...ChosenCourses, ...AllowedDepartmentCourses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(true);
+          }
+          else
+          {
+            let NewTimeTable = [...ChosenCourses, ...courses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(false);
+          }
         })
         .catch((error) => console.error(error));
     }
+    // closeLoading();
   }, [SelectedDepartment]);
 
   // Switch
@@ -182,7 +212,7 @@ export default function CoursesPanel() {
     setSwitchChecked(val)
   }
   React.useEffect(() => { 
-    showLoading();
+    // showLoading();
     if (SwitchChecked) {
       let FilteredDepartmentCourses = DepartmentCourses.filter(course => course.can_take);
       // let temp = timetable.filter(course => course.can_take);
@@ -196,23 +226,15 @@ export default function CoursesPanel() {
     closeLoading();
   }, [SwitchChecked]);
 
-  
-
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      // if (this.name.length > 30)
-      // {
-      //   // console.log("*****Length is: " + this.name.length);
-      //   this.name = this.name.substring(0, 25) + "...";
-      // }
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = props.is_allowed;
-      // console.log(this.name + " is allowed: " + this.can_take);
       this.IsChosen = IsFromChosencourses;
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
     }
@@ -221,10 +243,12 @@ export default function CoursesPanel() {
     {
       if (this.IsChosen)
       {
+        // console.log("Want to delete")
         if (!info.courseChoosed.includes(this)) {
-          addNewLesson(this.complete_course_number);
+          ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
           this.IsChosen = true;
+          // this.IsChosen = false;
         }
       }
       else
@@ -238,26 +262,17 @@ export default function CoursesPanel() {
               this.complete_course_number
           )
         );
-        // console.log("info.courseChoosed", info.courseChoosed)
-        // setChosenCourses(info.courseChoosed);
-        // let NewTimeTable = [...ChosenCourses] //UNNIIIIIIQUIIIIFYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-        // console.log("NewTime", info.courseChoosed)
-        // settimetable(info.courseChoosed);
-        // closeLesson(false, lessons);
-        // setChosenCourses(info.co)
         this.IsChosen = false;
+        // this.IsChosen = true;
       }
       setChosenCoursesChanged(prev => !prev);
     }
   }
+
   let [timetable, settimetable] = React.useState([]);
-
-  
-
-  
-
-  timetable = uniquifyArrayByKey(timetable, "complete_course_number")
+  timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
+    // showLoading();
     const emptySection = () => ({
       0: null,
       1: null,
@@ -281,6 +296,7 @@ export default function CoursesPanel() {
 
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+        // showLoading();
         currentPeriod.course_times.forEach(time => {
 
           const day = time.course_day;
@@ -300,12 +316,12 @@ export default function CoursesPanel() {
           catch (error) {
             console.log("ERROR is: " + error);
             // handleOpenPopup;
-          }
-          
+          }  
         }
         );
         // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
         // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
+        // closeLoading();
         return lessonsKeyedByDayAndPeriod
       },
       {
@@ -322,21 +338,23 @@ export default function CoursesPanel() {
   
   return (
     <>
-      <Row>
+
+    <AdminNavbar></AdminNavbar>
+      <Row >
         <Col>
           <Card className="TableCard">
             <CardHeader className="MainCardHeader text-right">
               <CardTitle style={{fontSize:"25px"}}>
                 پنل دروس
               </CardTitle>
-              <Button //className="HomeButton"
+              {/* <Button //className="HomeButton"
                 // class="HomeButton tim-icons icon-double-right"
                 href="/admin/page"
                 className="HomeButton tim-icons icon-double-right"
-              >
+              > */}
                 {/* <img src={HomeIcon} alt="Button Image" /> */}
                 {/* خانه */}
-              </Button>
+              {/* </Button> */}
             </CardHeader>
             <CardBody>
               <Row className="CardBodyRow">
@@ -382,11 +400,14 @@ export default function CoursesPanel() {
                   </tr>
                 </thead>
                 <tbody className="CoursesTableBody">
+                  {/* {console.log("hello")} */}
                   <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
                   <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
+                  {/* {console.log("bye")} */}
+                  {/* {closeLoading()} */}
                 </tbody>
               </Table>
             </CardBody>
@@ -396,4 +417,3 @@ export default function CoursesPanel() {
     </>
   );
 }
-

@@ -1,3 +1,10 @@
+import React from "react";
+import { Children } from "react";
+import { Navigate } from "react-router-dom";
+
+export const PrivatRoute = ({ children }) =>{
+  return localStorage.getItem("authTokens")? children : <Navigate to = "/landingPage" />;
+};
 
 export function convertPercentagetoLigtness(num){
     // console.log(`percentage is ${num}`)

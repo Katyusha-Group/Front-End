@@ -22,14 +22,14 @@ function ChangePassword() {
           <Col>
             <Card>
               <CardHeader>
-                <h5 className="title text-right">تغییر گذرواژه</h5>
+                <h5 className="title text-right">تغییر رمز عبور</h5>
               </CardHeader>
               <CardBody>
                 <Form>
                   <Row>
                     <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>گذرواژه فعلی</label>
+                        <label>رمز عبور فعلی</label>
                         <Input
                           placeholder="Old Password"
                           type="password"
@@ -40,7 +40,7 @@ function ChangePassword() {
                   <Row >
                     <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>گذرواژه جدید</label>
+                        <label>رمز عبور جدید</label>
                         <Input
                           placeholder="New Password"
                           type="password"
@@ -51,7 +51,7 @@ function ChangePassword() {
                   <Row>
                     <Col className="text-right" md="12">
                       <FormGroup>
-                        <label>تکرار گذرواژه جدید</label>
+                        <label>تکرار رمز عبور جدید</label>
                         <Input
                           placeholder="Confirm new Password"
                           type="password"
@@ -63,7 +63,7 @@ function ChangePassword() {
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" type="submit">
-                  تغییر گذرواژه
+                  تغییر رمز عبور
                 </Button>
               </CardFooter>
             </Card>

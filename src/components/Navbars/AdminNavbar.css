@@ -1,5 +1,5 @@
-.rtl .navbar .navbar-nav{
-    width: 100%;
+.navbar .navbar-nav{
+    width: 80%;
     direction: rtl;
 }
 .navbar-nav li{
@@ -25,6 +25,9 @@
 }
 .logoutLink{
     cursor: pointer;
+}
+.wideNavbar{
+    margin-left: auto;
 }
 
 
