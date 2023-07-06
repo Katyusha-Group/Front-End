@@ -6,27 +6,14 @@ const MonthDay = (Section) => (
     <div>
       {Object.entries(Section).map(([count, entry]) => {
         return (
-          <div className="CourseListContainer">
+          <div>
             {entry !== null && (
-              <div className="CourseContainer">
-                <div className="Course"
-                  style={{ backgroundColor: entry.backgColor }}
-                >
+              <div>
+                <div>
                   <div style={{ margin: '5px' }}>
-                    {entry.name} ({entry.class_gp})
+                    {entry.name}
                   </div>
                 </div>
-                <button className="btn-fill-AddCourseButton"
-                  name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
-                  onClick={() => {
-                      showLoading();
-                    entry.ButtonClicked();
-                      closeLoading();
-                  }}>
-                  {entry.IsChosen ? 'x' : '+'}
-                </button>
-                {/* <br/> */}
               </div>
             )}
           </div>
@@ -35,14 +22,16 @@ const MonthDay = (Section) => (
     </div>
   )
 
-const TimeRow = ({ periods, dayName }) => {
+const TimeRow = ({ periods, ExamT }) => {
     return (
     <>
         <tr className="TableROW">
-        <td className="CoursesPanel_column text-center">{dayName}</td>
-        {Object.entries(periods).map(([time, entry]) => {
+        <td className="ExamChart_column text-center">{ExamT}</td>
+        {Object.entries(periods).map(([date, entry]) => {
             return (
-            <td className="CoursesPanel_column2" key={time}>
+            <td className="ExamChart_column2" key={date}>
+                {console.log ("Exam time is: " + ExamT)}
+                {console.log("Entry is: " + entry)}
                 {MonthDay(entry)}
             </td>
             )

@@ -2,7 +2,7 @@ import React from "react";
 import { useMemo } from 'react';
 import { useState } from "react";
 import classNames from "classnames";
-
+import TimeRow from './TimeRow';
 import {
   Create2DArray,
   uniquifyArrayByKey,
@@ -57,6 +57,28 @@ function ExamChart() {
   const { info, changeInfo } = useInfo();
   const [showLesson, setShowLesson] = React.useState(false);
   const [bigChartData, setbigChartData] = React.useState("data1");
+  let [ExamTable, setExamTable] = React.useState([]);
+
+
+  // Already Chosen Lessons and Set Department Options and AllowedLessons
+  React.useEffect(() => {
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        changeInfo("courseChoosed", data)
+        setExamTable(info.courseChoosed);
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+
+  }, []);
+
+
+
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
@@ -77,6 +99,7 @@ function ExamChart() {
   weekday[5] = "پنج‌شنبه";
   weekday[6] = "جمعه";
   function lessons() {
+    // setExamTable(info.courseChoosed)
     return info.courseChoosed.map((lesson) => {
       // console.log("lesson", lesson.exam_times.length);
       if (lesson.exam_times.length > 0) {
@@ -134,7 +157,7 @@ function ExamChart() {
     });
   }
 
-  let [ExamTable, setExamTable] = React.useState([]);
+  
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     const emptySection = () => ({
@@ -225,12 +248,12 @@ function ExamChart() {
               </tr>
             </thead>
             <tbody className="ExamChartTableBody">
-              <TimeRow dayName="8-10"  periods={keyedExamTable[0]} />
-              <TimeRow dayName="10-12" periods={keyedExamTable[1]} />
-              <TimeRow dayName="12-14" periods={keyedExamTable[2]} />
-              <TimeRow dayName="14-16" periods={keyedExamTable[3]} />
-              <TimeRow dayName="16-18" periods={keyedExamTable[4]} />
-              <TimeRow dayName="18-20" periods={keyedExamTable[5]} />
+              <TimeRow ExamT="8-10"  periods={keyedExamTable[0]} />
+              <TimeRow ExamT="10-12" periods={keyedExamTable[1]} />
+              <TimeRow ExamT="12-14" periods={keyedExamTable[2]} />
+              <TimeRow ExamT="14-16" periods={keyedExamTable[3]} />
+              <TimeRow ExamT="16-18" periods={keyedExamTable[4]} />
+              <TimeRow ExamT="18-20" periods={keyedExamTable[5]} />
             </tbody>
           </Table>
         </Col>
