@@ -93,3 +93,17 @@ border-bottom: none !important;
     align-items: center;
     width: 100px;
 } */
+
+/* .ExamListContainer
+{
+    width: 50px;
+} */
+.ExamsTable_column
+{
+    width: 50px;
+}
+.ExamsTable_column2
+{
+    border: 3px solid;
+    vertical-align: top !important;
+}

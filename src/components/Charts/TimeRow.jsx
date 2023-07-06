@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import "./ExamChart.css"
 var weekday = new Array(7);
 weekday[0] = "شنبه";
 weekday[1] = "یکشنبه";
@@ -87,10 +88,10 @@ const TimeRow = ({ periods, ExamT }) => {
     return (
     <>
         <tr className="TableROW">
-        <td className="CoursesPanel_column text-center" style = {{fontSize : "x-small"}}>{ExamT}</td>
+        <td className="ExamsTable_column text-center" style = {{fontSize : "x-small"}}>{ExamT}</td>
         {Object.entries(periods).map(([time, entry]) => {
             return (
-            <td className="CoursesPanel_column2" key={time}>
+            <td className="ExamsTable_column2" key={time}>
                 {DayPeriod(entry)}
             </td>
             )
