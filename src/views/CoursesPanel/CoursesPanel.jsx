@@ -72,25 +72,31 @@ export default function CoursesPanel() {
       .then((DepartmentOptions) => {
       setDepartmentOptions(DepartmentOptions);
     });
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        changeInfo("courseChoosed", data);
-        if (Array.isArray(data)) {
-          const courses = data.map(course => new Course(course, true));
-          setChosenCourses(courses);
-          settimetable(courses);
-        }
-        else {
-          console.log("Type of data is: " + typeof data);
-        }
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
+    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     changeInfo("courseChoosed", data);
+    //     if (Array.isArray(data)) {
+    //       const courses = data.map(course => new Course(course, true));
+    //       setChosenCourses(courses);
+    //       settimetable(courses);
+    //     }
+    //     else {
+    //       console.log("Type of data is: " + typeof data);
+    //     }
+    //   })
+    //   .catch((error) => console.error(error));
+    // const activeRoute = (routeName) => {
+    //   return location.pathname === routeName ? "active" : "";
+    // };
+    changeInfo("courseChoosed", info.courseChoosed);
+    if (Array.isArray(info.courseChoosed)) {
+      const courses = info.courseChoosed.map(course => new Course(course, true));
+      setChosenCourses(courses);
+      settimetable(courses);
+    }
 
   }, []);
 
@@ -124,6 +130,7 @@ export default function CoursesPanel() {
       return location.pathname === routeName ? "active" : "";
     };
   }, [ChosenCoursesChanged]);
+  
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
 
@@ -229,8 +236,9 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      this.class_gp = props.class_gp;
+      // this.class_gp = props.group_number;
       this.complete_course_number = props.complete_course_number;
+      this.class_gp = this.complete_course_number.substring(this.complete_course_number.length - 2);
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
