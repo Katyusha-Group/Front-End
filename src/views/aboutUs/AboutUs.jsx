@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import routes from "../../route";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
@@ -28,8 +26,8 @@ export function AboutUs(){
           <div className="aboutUs_content_without_sidebar">
         {/* <Card style={{ height: "200px",padding:"30px" , textAlign:"right"}}> */}
             
-            <Col className="BGimgCol">
-                <img className="BGimg" src={im}/>
+            <Col className="aboutUs_BGimgCol">
+                <img className="aboutUs_BGimg" src={im}/>
                 <div className="infoDivAboutUs"style={{ textAlign:"right",color:"#999aa3"}}>
                 {`این سامانه توسط جمعی از دانشجویان مهندسی کامپیوتر ورودی ۹۹ دانشگاه علم و صنعت طراحی شده است . خوشحال می شویم اگر نظراتتان را با ما در میان بگذارید.  
 `}
