@@ -18,57 +18,58 @@ import {
 function ChangePassword() {
   return (
     <>
-        <Row className="ChangePassRow">
-          <Col>
             <Card>
               <CardHeader>
-                <h5 className="title text-right">تغییر رمز عبور</h5>
+                <h5 className="title">تغییر رمز عبور</h5>
               </CardHeader>
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="text-right" md="12">
+                    <Col className="text-right" md="6">
                       <FormGroup>
                         <label>رمز عبور فعلی</label>
                         <Input
-                          placeholder="Old Password"
+                          placeholder="رمز عبور فعلی را وارد کنید"
+                          type="password"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Button className="btn-fill" color="primary" type="submit">
+                  تغییر رمز عبور
+                </Button>
+                      </FormGroup>
+                      
+                    </Col>
+                    <Col className="text-right" md="6">
+                      <FormGroup>
+                        <label>رمز عبور جدید</label>
+                        <Input
+                          placeholder="رمز عبور جدید را وارد کنید"
+                          type="password"
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <label>تکرار رمز عبور جدید</label>
+                        <Input
+                          placeholder="رمز عبور جدید را دوباره وارد کنید"
                           type="password"
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row >
-                    <Col className="text-right" md="12">
-                      <FormGroup>
-                        <label>رمز عبور جدید</label>
-                        <Input
-                          placeholder="New Password"
-                          type="password"
-                        />
-                      </FormGroup>
-                    </Col>
+                    
                   </Row>
                   <Row>
                     <Col className="text-right" md="12">
-                      <FormGroup>
-                        <label>تکرار رمز عبور جدید</label>
-                        <Input
-                          placeholder="Confirm new Password"
-                          type="password"
-                        />
-                      </FormGroup>
+                      
                     </Col>
                   </Row>
                 </Form>
               </CardBody>
               <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
-                  تغییر رمز عبور
-                </Button>
               </CardFooter>
             </Card>
-          </Col>
-        </Row>
     </>
   );
 }
