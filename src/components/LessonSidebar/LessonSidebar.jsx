@@ -317,7 +317,7 @@ function LessonSidebar(props) {
                           {"  "}
                           درباره ما
                         </DropdownItem>
-                        <DropdownItem
+                        {/* <DropdownItem
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
@@ -326,7 +326,7 @@ function LessonSidebar(props) {
                         >
                           <span className="tim-icons icon-lock-circle" />
                           تغییر رمز عبور
-                        </DropdownItem>
+                        </DropdownItem> */}
 
                         <DropdownItem
                           href="#pablo"

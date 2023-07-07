@@ -29,5 +29,10 @@
 .wideNavbar{
     margin-left: auto;
 }
+.navbar .wideNavbar .nav-item .nav-link.selected {
+    color: rgb(230, 63, 154);
+    /* background-color: #17a2b8;
+    border-radius: 0.25rem; */
+  }
 
 
