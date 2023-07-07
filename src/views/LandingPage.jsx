@@ -45,7 +45,7 @@ function LandingPage() {
   }, []);
   return (
     <>
-    <Container>
+    <Container className="landing">
     <Row>
       <Col className="LandingPageCardCol">
         <Card className="LandingPageCard">

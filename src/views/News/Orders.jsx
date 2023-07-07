@@ -25,12 +25,12 @@ import {
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { Link } from "react-router-dom";
-import "./News.css"
+import "./Orders.css";
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
-  const [orders, setOrders]  = React.useState([])
+  const [orders, setOrders] = React.useState([]);
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
@@ -59,8 +59,7 @@ function UserProfile() {
     closeLoading();
   }, []);
 
-  useEffect(() => {
-  }, [info]);
+  useEffect(() => {}, [info]);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -197,57 +196,65 @@ function UserProfile() {
                   </CardFooter>
                 </Card>
               </Col>
-              <Col md="8" >
+              <Col md="8">
                 <Row>
-
-                <Card>
-                  <div className="category p-3">تاریخچه سبد خرید</div>
-                </Card>
+                  <Card>
+                    <div className="category p-3">تاریخچه سبد خرید</div>
+                  </Card>
                 </Row>
 
                 {/* ----------------------------------------------------------- */}
-                <Row
-                    style={{ maxHeight: "70vh" }}
-                    className="overflow-auto"
-                >
-                <UncontrolledAccordion
-                  defaultOpen={["1", "2"]}
-                  stayOpen
-                  className="card mb-0 "
-                >
-                  {orders.map((order, index) => {
-                    let [date, time] = order.placed_at.split("T")
-                    return (
-                      <AccordionItem className="card mb-0" key={index}>
-                        <AccordionHeader targetId={index} className="card mb-0">
-                          {"در تاریخ "+date} {"و در زمان "+time.split(".")[0]}
-                        </AccordionHeader>
-                        <AccordionBody accordionId={index} className="category">
-                          <Row className="mb-2">
-                            <Col>زمان </Col>
-                            <Col>{time.split(".")[0]}</Col>
-                          </Row>
-                          <Row className="mb-2">
-                            <Col>کد خرید</Col>
-                            <Col>{order.ref_code}</Col>
-                          </Row>
-                          <Row className="mb-2">
-                            <Col>تعداد</Col>
-                            <Col>{order.total_number}</Col>
-                          </Row>
-                          <Row className="mb-2">
-                            <Col>نوع پرداخت</Col>
-                            <Col>{order.payment_method === 'W' ? "کیف پوف" : "درگاه پرداخت"}</Col>
-                          </Row>
-                          <Row className="mb-2">
-                            <Col>وضعیت</Col>
-                            <Col>{order.payment_status}</Col>
-                          </Row>
-                        </AccordionBody>
-                      </AccordionItem>
-                    );
-                  })}
-                </UncontrolledAccordion>
+                <Row style={{ maxHeight: "70vh" }} className="overflow-auto">
+                  <UncontrolledAccordion
+                    defaultOpen={["1", "2"]}
+                    stayOpen
+                    className=" mb-0 "
+                  >
+                    {orders.length === 0 ? "سفارشی وجود ندارد" : ""}
+                    {orders.map((order, index) => {
+                      let [date, time] = order.placed_at.split("T");
+                      return (
+                        <AccordionItem className="card mb-2" key={index}>
+                          <AccordionHeader
+                            targetId={index}
+                            className="card mb-0"
+                          >
+                            {"در تاریخ " + date}{" "}
+                            {"و در زمان " + time.split(".")[0]}
+                          </AccordionHeader>
+                          <AccordionBody
+                            accordionId={index}
+                            className="category"
+                          >
+                            <Row className="mb-2">
+                              <Col>زمان </Col>
+                              <Col>{time.split(".")[0]}</Col>
+                            </Row>
+                            <Row className="mb-2">
+                              <Col>کد خرید</Col>
+                              <Col>{order.ref_code}</Col>
+                            </Row>
+                            <Row className="mb-2">
+                              <Col>تعداد</Col>
+                              <Col>{order.total_number}</Col>
+                            </Row>
+                            <Row className="mb-2">
+                              <Col>نوع پرداخت</Col>
+                              <Col>
+                                {order.payment_method === "W"
+                                  ? "کیف پوف"
+                                  : "درگاه پرداخت"}
+                              </Col>
+                            </Row>
+                            <Row className="mb-2">
+                              <Col>وضعیت</Col>
+                              <Col>{order.payment_status === "C" ?"پرداخت نشده" : "پرداخت شده"}</Col>
+                            </Row>
+                          </AccordionBody>
+                        </AccordionItem>
+                      );
+                    })}
+                  </UncontrolledAccordion>
                 </Row>
 
                 {/* <UncontrolledAccordion
