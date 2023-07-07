@@ -67,10 +67,39 @@ function Exams (ExamTable)
 
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+        
+        // if (!currentPeriod.exam_times[0].exam_start_time || !currentPeriod.exam_times[0].date) {
+        //   // Skip the iteration if either ExamTime or ExamDay is undefined
+        //   return lessonsKeyedByDayAndPeriod;
+        // }
+        
+        try
+        {
+          let ExamTime = currentPeriod.exam_times[0].exam_start_time;
+          let ExamDay = currentPeriod.exam_times[0].date;
+        }
+        catch 
+        {
+          console.log("First Error");
+          return lessonsKeyedByDayAndPeriod;
+        }
+
         let ExamTime = currentPeriod.exam_times[0].exam_start_time;
         let ExamDay = currentPeriod.exam_times[0].date;
+        
         let time = MapTimeToIndex(ExamTime);
         let day = MapDateToIndex(ExamDay);
+
+        try
+        {
+          NumInEachSlot[time][day] ++;
+        }
+        catch 
+        {
+          console.log("Second Error");
+          return lessonsKeyedByDayAndPeriod;
+        }
+
         NumInEachSlot[time][day] ++;
         let count = NumInEachSlot[time][day];
         try {
@@ -148,22 +177,24 @@ export default function ExamChart() {
   let [ExamTable, setExamTable] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("fetched data");
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setExamTable(courses);
+    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("fetched data");
+    //     changeInfo("courseChoosed", data);
+    //     const courses = data.map(course => new Course(course, true));
+    //     setExamTable(courses);
 
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
+    //   })
+    //   .catch((error) => console.error(error));
+    // const activeRoute = (routeName) => {
+    //   return location.pathname === routeName ? "active" : "";
+    // };
+    setExamTable(info.courseChoosed);
   }, [info.courseChoosed]);
+  // setExamTable(info.courseChoosed);
 
   class Course {
     constructor(props, IsFromChosencourses) {

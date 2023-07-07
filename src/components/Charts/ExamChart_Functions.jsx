@@ -44,7 +44,19 @@ export function MapTimeToIndex (start_time)
               "16:30:00",
               "18:30:00"
             ];
-            return times3.findIndex(time => time === start_time);
+            let index3 = times3.findIndex(time => time === start_time);
+            if (index3 === -1) {
+                const times4 = [
+                    "09:00:00",
+                    "11:00:00",
+                    "13:00:00",
+                    "15:00:00",
+                    "17:00:00",
+                    "19:00:00"
+                  ];
+                  return times4.findIndex(time => time === start_time);
+            }
+            return index3;
           }
           return index2;
       }
@@ -53,7 +65,7 @@ export function MapTimeToIndex (start_time)
 
 export function MapDateToIndex (date)
 {
-    console.log("DATE IS: " + date);
+    // console.log("DATE IS: " + date);
     const lastTwoChars = parseInt(date.substring(date.length - 2));
     let DateIndex = lastTwoChars - 13;
     if (DateIndex < 0)
