@@ -362,7 +362,7 @@ export default function UserPage() {
                     display: bigChartData == "data3" ? "block" : "none",
                   }}
                 >
-                  {/* <ExamChart /> */}
+                  <ExamChart />
                 </div>
               </div>
             </CardBody>

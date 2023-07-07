@@ -148,22 +148,24 @@ export default function ExamChart() {
   let [ExamTable, setExamTable] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("fetched data");
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setExamTable(courses);
+    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("fetched data");
+    //     changeInfo("courseChoosed", data);
+    //     const courses = data.map(course => new Course(course, true));
+    //     setExamTable(courses);
 
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
+    //   })
+    //   .catch((error) => console.error(error));
+    // const activeRoute = (routeName) => {
+    //   return location.pathname === routeName ? "active" : "";
+    // };
+    setExamTable(info.courseChoosed);
   }, [info.courseChoosed]);
+  // setExamTable(info.courseChoosed);
 
   class Course {
     constructor(props, IsFromChosencourses) {
