@@ -4,6 +4,7 @@ import { CardGroup, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
 import Timeline from "../Timeline/Timeline";
+import TeacherTimeline from "../TeacherTimeline/TeacherTimeline";
 import {
   dayOfWeek,
   timeStringToFloat,
@@ -265,8 +266,9 @@ const ModalLessons = (props) => {
               </Card>
 
               <Row>
-                <Col md="12" style={{overflow:"hidden"}}>
-                  <Timeline show={props} />
+                <Col md="12" style={{ overflow: "hidden" }}>
+                  <TeacherTimeline show={props} />
+                  {/* <Timeline show={props} /> */}
                 </Col>
               </Row>
             </CardBody>
