@@ -294,6 +294,18 @@ function LessonSidebar(props) {
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
+                            Navigate("../aboutUs");
+                          }}
+                        >
+                          {/* <span className="tim-icons icon-email-85" /> */}
+                          <span className="tim-icons icon-send" />
+                          {"  "}
+                          درباره ما
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
                             Navigate("/admin/change");
                           }}
                         >
