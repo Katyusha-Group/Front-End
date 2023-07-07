@@ -7,6 +7,7 @@ import LoginModalGolestan from "../../views/LoginGolestan";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
 import "../Navbars/AdminNavbar.css";
+import { useNavigate } from "react-router-dom";
 
 
 // reactstrap components
@@ -41,6 +42,7 @@ function AdminNavbar(props) {
   const [showLogin, setShowLogin] = useState(false);
   const [showLoginG, setShowLoginG] = useState(false);
   const [selected, setSelected] = useState(false);
+  const Navigate = useNavigate();
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     // Specify how to clean up after this effect:
@@ -73,23 +75,38 @@ function AdminNavbar(props) {
 
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color)} expand="xl">
+      <Navbar className={classNames("navbar-absolute", color, "rtl")} expand="xl">
         <Collapse navbar isOpen={collapseOpen}>
-          <Nav className="mr-auto" navbar>
+          <Nav className="wideNavbar" navbar>
+          <NavLink href="/admin/page" className="nav-header nav-link-icon">
+                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px" , width:"300px"}}/>
+                    {/* <i className="tim-icons icon-atom ml-0" /> */}
+                  </NavLink>
             {routes.map(
               x => (
                 <NavItem>
-                  <NavLink href={ x.layout + x.path}>{x.rtlName}</NavLink>
+                  <NavLink href={ x.layout + x.path}><i className= {"tim-icons "+ x.icon}/>{" "}{x.rtlName}</NavLink>
                 </NavItem>
+                
               )
             )}
-            <InputGroup className="search-bar">
+            <NavItem className="logoutLink">
+              <NavLink
+              onClick={()=>{
+                localStorage.removeItem('authTokens')
+                //localStorage.setItem('authTokens', "");
+                Navigate("/login")
+              }}
+              ><i className= {"tim-icons icon-button-power"}/>{" خروج"}
+              </NavLink>
+            </NavItem>
+            {/* <InputGroup className="search-bar">
               <Button color="link" onClick={toggleModalSearch}>
                 <i className="tim-icons icon-zoom-split" />
                 <span className="d-lg-none d-md-block">Search</span>
               </Button>
-            </InputGroup>
-            <UncontrolledDropdown nav style={{ "width":"55%"}} >
+            </InputGroup> */}
+            {/* <UncontrolledDropdown nav style={{ "width":"55%"}} >
               <DropdownToggle caret color="default" data-toggle="dropdown"  nav>
                 <div className="notification d-none d-lg-block d-xl-block" />
                 <i className="tim-icons icon-sound-wave" />
@@ -100,8 +117,8 @@ function AdminNavbar(props) {
                   <DropdownItem className="nav-item">سلام</DropdownItem>
                 </NavLink>
               </DropdownMenu>
-            </UncontrolledDropdown>
-            <UncontrolledDropdown nav>
+            </UncontrolledDropdown> */}
+            {/* <UncontrolledDropdown nav>
               <DropdownToggle
                 caret
                 color="default"
@@ -109,7 +126,7 @@ function AdminNavbar(props) {
                 onClick={(e) => e.preventDefault()}
               >
                 <div className="photo">
-                  {/* <img alt="..." src={require("assets/img/anime3.png")} /> */}
+                  <img alt="..." src={require("assets/img/anime3.png")} />
                 </div>
                 <b className="caret d-none d-lg-block d-xl-block" />
                 <p className="d-lg-none">Log out</p>
@@ -126,8 +143,8 @@ function AdminNavbar(props) {
                   <DropdownItem className="nav-item">خروج</DropdownItem>
                 </NavLink>
               </DropdownMenu>
-            </UncontrolledDropdown>
-            <li className="separator d-lg-none" />
+            </UncontrolledDropdown> */}
+            {/* <li className="separator d-lg-none" /> */}
           </Nav>
         </Collapse>
       </Navbar>

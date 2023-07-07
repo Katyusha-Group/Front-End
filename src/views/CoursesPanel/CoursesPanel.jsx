@@ -1,7 +1,12 @@
-
 import React from "react";
 import { useMemo } from 'react';
-
+import { useInfo } from "../../contexts/InfoContext";
+import Select from "react-select";
+import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
+import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import "../../assets/css/nucleo-icons.css";
+import DayRow from './DayRow';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -10,60 +15,313 @@ import {
   Table,
   Row,
   Col,
+  Button
 } from "reactstrap";
+
+import {
+  addNewLesson,
+  mapTimeToIndex,
+  createCourseGroupsArray,
+  uniquifyArrayByKey,
+  Create2DArray,
+  // containsWhitespace
+} from "./CoursesPanel_Functions";
+
 import "./CoursesPanel.css"
-// import dataJson from "./Classes"
-
-
+import ReactSwitch from "react-switch";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+// import HomeIcon from './home.png';
+// import { size } from "lodash";
 export default function CoursesPanel() {
-  // let timetable = dataJson;
-  // console.log(timetable);
-  // const keyedTimetable = useMemo(() => {
-  //   const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
-  //   const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
-  //   return timetable.reduce(
-  //     (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-  //       lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time] = currentPeriod
-  //       console.log(lessonsKeyedByDayAndPeriod)
-  //       return lessonsKeyedByDayAndPeriod
-  //     },
-  //     {
-  //       0: emptyDay(),
-  //       1: emptyDay(),
-  //       2: emptyDay(),
-  //       3: emptyDay(),
-  //       4: emptyDay(),
-  //       5: emptyDay(),
-  //     }
-  //   )
-  // }, [timetable])
-  let [timetable, settimetable] = React.useState([]);
-  //timetable = dataJson;
+  // console.log("HELLO WORLD!");
+  // Token
+  // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
+  // const tokenClass = JSON.parse(tokenJson) || 'nothing';
+  // // const token = tokenClass.token.access;
+  // const token = tokenClass.token.access || 'nothing';
+
+  // const [token, setToken] = useState(null);
+
+  // useEffect(() => {
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
+  //   const newToken = tokenClass ? tokenClass.token.access : null;
+  //   setToken(newToken);
+  // }, [localStorage.getItem("authTokens")]);
+
+
+  // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-  //const timetable;
   const token = tokenClass.token.access;
+
+  // Info
+  const { info, changeInfo } = useInfo();
+
+  const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
+  let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
+  let [ChosenCourses, setChosenCourses] = React.useState([]);
+  let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
+
+  let NumberOfChosenLessons = Create2DArray(5, 9);
+
+  // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
-    fetch("http://katyushaiust.ir/allcoursesdepartment/", {
+    fetch("https://www.katyushaiust.ir/departments/names")
+      .then((response) => response.json())
+      .then((DepartmentOptions) => {
+      setDepartmentOptions(DepartmentOptions);
+    });
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // window.timetable = data;
-        settimetable(data);
+        changeInfo("courseChoosed", data);
+        if (Array.isArray(data)) {
+          const courses = data.map(course => new Course(course, true));
+          setChosenCourses(courses);
+          settimetable(courses);
+        }
+        else {
+          console.log("Type of data is: " + typeof data);
+        }
       })
       .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+
   }, []);
-  
-  const keyedTimetable = useMemo(() => {
-    const emptySection = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null })
-    //const emptyDay = () => ({ 0: null, 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null })
-    const emptyDay = () => ({ 0: emptySection(), 1: emptySection(), 2: emptySection(), 3: emptySection(), 4: emptySection(), 5: emptySection(), 6: emptySection(), 7: emptySection() })
+
+  React.useEffect ( () => {
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        changeInfo("courseChoosed", data);
+        const courses = data.map(course => new Course(course, true));
+        setChosenCourses(courses);
+        // let NewTimeTable = [...courses, ...DepartmentCourses];
+        // settimetable(NewTimeTable);
+        if (SwitchChecked)
+        {
+          // console.log("DEPPPP COutseSc: " + DepartmentCourses);
+          let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+          // let temp = NewTimeTable.filter(course => course.can_take);
+          let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
+          settimetable(NewTimeTable);
+        }
+        else
+        {
+          let NewTimeTable = [...courses, ...DepartmentCourses];
+          settimetable(NewTimeTable);
+        }
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, [ChosenCoursesChanged]);
+  // Department courses
+  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
+
+  const customStyles = {                                              // Select Styles
+    input: (defaultStyles) => ({
+      ...defaultStyles,
+      color: "transparent",
+    }),
+    option: (defaultStyles, state) => ({
+      ...defaultStyles,
+      color: "#9A9A9A",
+      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
+      "&:hover": {
+        backgroundColor: "rgba(222, 222, 222, 0.3)",
+      },
+      transition: "all 150ms linear",
+      margin: "-4px 0px",
+      padding: "0.6rem 24px",
+      fontSize: "0.75rem",
+      fontWeight: "400",
+    }),
+
+    control: (defaultStyles, state) => ({
+      ...defaultStyles,
+
+      "&:hover": {
+        borderColor: "#e14eca",
+      },
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      color: "rgba(255, 255, 255, 0.8)",
+      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
+      borderRadius: "0.4285rem",
+      fontSize: "1rem",
+      marginTop: "5px",
+      fontWeight: "400",
+      transition:
+        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
+    }),
+    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
+  };
+
+  function handleDepartment(selectedOption) {                         // Handle Select
+    // showLoading();
+    setSelectedDepartment(selectedOption.value);
+    // closeLoading();
+  }
+
+  React.useEffect(() => {                                             // Set Selected Department courses
+    // showLoading();
+    if (SelectedDepartment) {
+      fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // settimetable(data);
+          const courses = data.map(course => new Course(course, false));
+          // settimetable(courses);
+          setDepartmentCourses(courses); //Do we need this?
+          // let NewTimeTable = [...ChosenCourses, ...courses];
+          // settimetable(NewTimeTable);
+          // setSwitchChecked(false);
+          if (SwitchChecked)
+          {
+            let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+            let NewTimeTable = [...ChosenCourses, ...AllowedDepartmentCourses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(true);
+          }
+          else
+          {
+            let NewTimeTable = [...ChosenCourses, ...courses];
+            settimetable(NewTimeTable);
+            setSwitchChecked(false);
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+    // closeLoading();
+  }, [SelectedDepartment]);
+
+  // Switch
+  const [SwitchChecked, setSwitchChecked] = React.useState(false);
+  const handleSwitchChange = val => {
+    setSwitchChecked(val)
+  }
+  React.useEffect(() => { 
+    // showLoading();
+    if (SwitchChecked) {
+      let FilteredDepartmentCourses = DepartmentCourses.filter(course => course.can_take);
+      // let temp = timetable.filter(course => course.can_take);
+      let temp = [...ChosenCourses, ...FilteredDepartmentCourses];
+      settimetable(temp);
+    }
+    else
+    {
+      setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
+    }
+    closeLoading();
+  }, [SwitchChecked]);
+
+  class Course {
+    constructor(props, IsFromChosencourses) {
+      this.name = props.name;
+      this.class_gp = props.class_gp;
+      this.complete_course_number = props.complete_course_number;
+      this.course_times = props.course_times;
+      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+      this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
+      this.can_take = props.is_allowed;
+      this.IsChosen = IsFromChosencourses;
+      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+    }
+    
+    ButtonClicked ()
+    {
+      if (this.IsChosen)
+      {
+        // console.log("Want to delete")
+        if (!info.courseChoosed.includes(this)) {
+          ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
+          changeInfo("courseChoosed", [...info.courseChoosed, this]);
+          this.IsChosen = true;
+          // this.IsChosen = false;
+        }
+      }
+      else
+      {
+        addNewLesson(this.complete_course_number);
+        changeInfo(
+          "courseChoosed",
+          info.courseChoosed.filter(
+            (item) =>
+              item.complete_course_number !==
+              this.complete_course_number
+          )
+        );
+        this.IsChosen = false;
+        // this.IsChosen = true;
+      }
+      setChosenCoursesChanged(prev => !prev);
+    }
+  }
+
+  let [timetable, settimetable] = React.useState([]);
+  timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
+  const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
+    // showLoading();
+    const emptySection = () => ({
+      0: null,
+      1: null,
+      2: null,
+      3: null,
+      4: null,
+      5: null
+    });
+    const emptyDay = () => ({
+      0: emptySection(),
+      1: emptySection(),
+      2: emptySection(),
+      3: emptySection(),
+      4: emptySection(),
+      5: emptySection(),
+      6: emptySection(),
+      7: emptySection()
+    });
+
+    const NumInEachSlot = createCourseGroupsArray(timetable);
+
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        lessonsKeyedByDayAndPeriod[currentPeriod.day][currentPeriod.time][currentPeriod.count] = currentPeriod
-        //console.log(lessonsKeyedByDayAndPeriod)
+        // showLoading();
+        currentPeriod.course_times.forEach(time => {
+
+          const day = time.course_day;
+
+          let TimeIndex = time.course_time_representation;
+          if (TimeIndex === undefined )
+          {
+            TimeIndex = mapTimeToIndex(time.course_start_time);
+          }
+
+          NumInEachSlot[day][TimeIndex]++;
+
+          let count = NumInEachSlot[day][TimeIndex];
+          try {
+            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
+          }
+          catch (error) {
+            console.log("ERROR is: " + error);
+            // handleOpenPopup;
+          }  
+        }
+        );
+        // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
+        // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
+        // closeLoading();
         return lessonsKeyedByDayAndPeriod
       },
       {
@@ -76,99 +334,86 @@ export default function CoursesPanel() {
       }
     )
   }, [timetable])
-  const DayPeriod = (Section) => (
-    <div>
-      {/* {console.log("+++++++++++++++++++++++++++++++")} */}
-      {Object.entries(Section).map(([count, entry]) => {
-          return (
-            <div>
-              {entry !== null && (
-                // {console.log(entry.name)}
-                <div className="Course" color="primary">
-                  {entry.name} ({entry.class_gp})
-                </div>     
-              )}     
-            </div>
-          )
-      })}
-    </div>
-  )
-  const DayRow = ({ periods, dayName }) => (
-    //console.log("===================")
-    //console.log(typeof periods)
-    //console.log(periods)
-    //console.log(periods[5])
-    //console.log(periods[0])
-    //console.log(periods[0][0] === null)
-    <tr>
-      <td className="CoursesPanel_first_column text-center">{dayName}</td>
-      {Object.entries(periods).map(([time, entry]) => {
-        return (
-          <td key={time}>
-            {/* {entry !== null && (
-              // <div>
-              //   <div className="Course">
-              //     {entry.name}
-              //   </div>
-              //   <div className="Course">
-              //     {entry.name}
-              //   </div>
-              //   <div className="Course">
-              //     {entry.name}
-              //   </div>
-              // </div>
-              <div className="Course">
-                {entry.name}
-              </div>
-            )} */}
-            {/* {console.log("+++++++++++++++++++")}
-            {console.log(entry === null)} */}
-            {/* {console.log("222222222222222222222222222222222222")}
-            {console.log(entry)} */}
-            {DayPeriod(entry)}
-          </td>
-        )
-      })}
-    </tr>
-  )
-
+  
+  
   return (
     <>
-      <Row>   
-          <Col>
-            <Card>
-              <CardHeader className="text-right">
-                <CardTitle tag="h4">برنامه هفتگی</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th className="text-center "></th>
-                      <th className="text-center ">۷:۳۰ تا ۹</th>
-                      <th className="text-center ">۹ تا ۱۰:۳۰</th>
-                      <th className="text-center ">۱۰:۳۰ تا ۱۲</th>
-                      <th className="text-center ">۱۲ تا ۱:۳۰</th>
-                      <th className="text-center ">۱:۳۰ تا ۳</th>
-                      <th className="text-center ">۳ تا ۴:۳۰  </th>
-                      <th className="text-center ">۴:۳۰ تا ۶  </th>
-                      <th className="text-center ">۶ تا ۷:۳۰  </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
-                    <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
-                    <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
-                    <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
-                    <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
-                    <DayRow dayName="پنجشنبه" periods={keyedTimetable[5]} />
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+
+    <AdminNavbar></AdminNavbar>
+      <Row >
+        <Col>
+          <Card className="TableCard">
+            <CardHeader className="MainCardHeader text-right">
+              <CardTitle style={{fontSize:"25px"}}>
+                پنل دروس
+              </CardTitle>
+              {/* <Button //className="HomeButton"
+                // class="HomeButton tim-icons icon-double-right"
+                href="/admin/page"
+                className="HomeButton tim-icons icon-double-right"
+              > */}
+                {/* <img src={HomeIcon} alt="Button Image" /> */}
+                {/* خانه */}
+              {/* </Button> */}
+            </CardHeader>
+            <CardBody>
+              <Row className="CardBodyRow">
+                {/* <Col className="HomePageButtonCol">
+                  
+                </Col> */}
+                
+                <Col className="SelectCol">
+                  <Select
+                    options={DepartmentOptions}
+                    styles={customStyles}
+                    isRtl
+                    placeholder="دانشکده مورد نظر را انتخاب کنید"
+                    name="SelectDepartment"
+                    value={SelectedDepartment.name}
+                    onChange={handleDepartment}
+                  />
+                </Col>
+                <Col className="SwitchCol">
+                  <div className="SwitchCard"> 
+                    <ReactSwitch className="Switch"
+                      checked={SwitchChecked}
+                      onChange={handleSwitchChange}
+                    />
+                    <label>
+                    فقط دروس قابل اخذ
+                    </label>
+                  </div>
+                </Col>
+              </Row>
+              <Table className="ClassesTable">
+                <thead className="text-primary TableHead">
+                  <tr>
+                    <th className="table-head text-center "></th>
+                    <th className="table-head text-center ">۷:۳۰ تا ۹</th>
+                    <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
+                    <th className="table-head text-center ">۱۰:۳۰ تا ۱۲</th>
+                    <th className="table-head text-center ">۱۲ تا ۱:۳۰</th>
+                    <th className="table-head text-center ">۱:۳۰ تا ۳</th>
+                    <th className="table-head text-center ">۳ تا ۴:۳۰  </th>
+                    <th className="table-head text-center ">۴:۳۰ تا ۶  </th>
+                    <th className="table-head text-center ">۶ تا ۷:۳۰  </th>
+                  </tr>
+                </thead>
+                <tbody className="CoursesTableBody">
+                  {/* {console.log("hello")} */}
+                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
+                  <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
+                  <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
+                  <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
+                  <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
+                  {/* {console.log("bye")} */}
+                  {/* {closeLoading()} */}
+                </tbody>
+              </Table>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }
-

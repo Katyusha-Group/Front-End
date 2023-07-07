@@ -1,0 +1,120 @@
+/* .loginLmsModal{
+   background: #27293d;
+   
+} */
+/* .card-header{
+   background-color: transparent!important;
+   direction: ltr;
+} */
+/* .card-footer{
+   background-color: transparent!important;
+}
+.loginLmsModalBody{
+   padding: 0 !important;
+}
+.close-btn
+{
+ display:inline-block;
+ padding:4px;
+ z-index:500;
+} */
+
+.courseProfileModal {
+   /* width: 1000px; */
+   /* max-width: 900px!important; */
+   max-width: 60% !important;
+
+   /* margin-top: 0px !important; */
+}
+
+.ModalLessonCourse .modal-dialog {
+   margin: -15rem auto !important;
+}
+
+.ModalLessonCourse .card-body{
+   height: 80vh;
+   overflow: auto;
+}
+
+
+.ModalLessonCourseCard {
+   /* background-color: hsl(256, 45%, 50%)!important; */
+   /* border: solid !important; */
+   /* color: black !important; */
+   background-color: #382e53 !important;
+   border-color: #ab69b1 !important;
+   color: #dddddd !important;
+   /* background-color: #5c469c !important; */
+   /* width: 20rem !important; */
+   height: 420px;
+   margin-top: 15px;
+}
+
+.ModalCourseCardBody {
+   justify-items: center;
+   /* align-items: center; */
+   padding: 0px;
+   display: flex;
+   flex-direction: row;
+   font-size: 15px;
+}
+
+.ModalprofessorImage {
+   margin-top: 70px;
+   margin-right: 5px;
+   width: 120px;
+   height: 120px;
+   margin-left: 0.625rem;
+   overflow: "hidden";
+   border-width: 0.1875rem;
+   border-radius: 4.6875rem;
+}
+
+
+.courseTitle {
+   display: inline-block;
+   color: #333752 !important;
+   font-weight: 300;
+
+   /* #d5a6bd */
+   /* color: #cccccc !important; */
+}
+
+.courseTitleNotInline {
+
+   /* color: #f7d2ef !important; */
+   color: #333752 !important;
+   font-weight: 300;
+   /* #d5a6bd */
+   /* color: #cccccc !important; */
+}
+
+.ModalLessondataCard1 {
+   padding-top: 5px;
+   margin-top: 10px;
+   background-color: #8f7ebe !important;
+   width: 100% !important;
+   margin-right: 0px !important;
+   height: 130px;
+}
+
+.ModalLessondataCard2 {
+   margin-top: 10px;
+   background-color: #8f7ebe !important;
+   width: 100% !important;
+   margin-right: 0px !important;
+   height: 130px;
+}
+
+.ModalLessondataCard3 {
+   margin-top: -5px;
+   background-color: #8f7ebe !important;
+   width: 100% !important;
+   margin-right: 0px !important;
+}
+
+.ModalLessoninfoPart {
+   width: 90%;
+   justify-content: right;
+   padding-right: 0px;
+}

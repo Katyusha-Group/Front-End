@@ -3,6 +3,9 @@ import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useInfo } from "../contexts/InfoContext";
+import Swal from 'sweetalert2';
 // reactstrap components
 import {
   Button,
@@ -25,6 +28,8 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
+  const { info, changeInfo } = useInfo();
+  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,7 +46,7 @@ function SignUp() {
     fetch("https://www.katyushaiust.ir/departments/names")
       .then((response) => response.json())
       .then((subjectOptions) => {
-        console.log(subjectOptions);
+        // console.log(subjectOptions);
         setSubjectOptions(subjectOptions);
       });
   }, []);
@@ -174,7 +179,6 @@ function SignUp() {
     backError: "",
   });
   async function handleSubmit(event) {
-    // console.log(subject);
     event.preventDefault();
 
     const errors = [
@@ -236,6 +240,35 @@ function SignUp() {
     ) {
       return;
     }
+    Swal.fire({
+      title: 'کمی صبر کنید',
+      html: 'در حال بررسی درخواست ثبت نام',
+      allowOutsideClick: false,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      background: '#3c3e5d',
+        color:'#ceccc0',
+      // timer: 2000,
+      width:'25rem',
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        // const b = Swal.getHtmlContainer().querySelector('b')
+        // timerInterval = setInterval(() => {
+        //   b.textContent = Swal.getTimerLeft()
+        // }, 100)
+      },
+      // willClose: () => {
+      //   clearInterval(timerInterval)
+      // }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        /////has to be changed to no internet
+      }
+    })
+  
     const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
       method: "POST",
       headers: {
@@ -251,9 +284,30 @@ function SignUp() {
       }),
     });
     const data = await response.json();
-    console.log(data);
-    if (response.status === 200) {
+    // console.log(data);
+    Swal.close()
+    if ( response.status===201){
+
+    // if ( data.message.includes("created successfully")){
+      
+      localStorage.setItem("token",data.token)
+      localStorage.setItem("verificationLink",data.url)
+      console.log(data.url);
+      console.log(data.token)
+
       console.log("خوش آمدید");
+      // console.log(info.token)
+      Swal.fire({
+        // position: 'top-end',
+        icon: 'success',
+        title: ' کد تایید ارسال شد',
+        html:'لطفا ایمیلتان را چک کنید',
+        background: '#3c3e5d',
+        color:'#ceccc0',
+        width:'25rem',
+        confirmButtonText:"باشه"
+      })
+      Navigate("/verification");
     } else {
       if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
       if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
@@ -264,7 +318,6 @@ function SignUp() {
     }
     // console.log(formData);
   }
-  //////////////////////////// End of input errors //////////////////
 
   return (
     <>
@@ -272,11 +325,11 @@ function SignUp() {
         <div className="main-panel">
           <div className="content contentLogin">
             <Row className="justify-content-center">
-              <Col className="text-right" md="4">
+              <Col className="text-right" md="5" >
                 {errorMessage.backError && (
-                  <div className="back-error">{errorMessage.backError}</div>
+                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}
-                <Card>
+                <Card style={{direction: 'ltr'}}>
                   <CardHeader>
                     <h5 className="title text-center">ثبت نام</h5>
                   </CardHeader>
@@ -295,7 +348,7 @@ function SignUp() {
                               value={formData.email}
                             />
                             {errorMessage.emailError && (
-                              <div className="error">
+                              <div className="error" >
                                 {errorMessage.emailError}
                               </div>
                             )}
@@ -392,7 +445,7 @@ function SignUp() {
                             />
 
                             {errorMessage.genderError && (
-                              <div className="select-error">
+                              <div className="select-error" style={{whiteSpace: 'nowrap'}}>
                                 {errorMessage.genderError}
                               </div>
                             )}
@@ -404,7 +457,7 @@ function SignUp() {
                       <Row>
                         <Col className="text-center pt-md-2" md="12">
                           <Link to="/login" color="primary">
-                            ورود به حساب کابری
+                            ورود به حساب کاربری
                           </Link>
                         </Col>
                       </Row>

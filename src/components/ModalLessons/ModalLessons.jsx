@@ -1,22 +1,49 @@
 import React from "react";
-import "../../assets/css/LoginLms.css";
-import { Modal } from "react-bootstrap";
+import "./ModalLesson.css";
+import { CardGroup, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useInfo } from "../../contexts/InfoContext";
+import Timeline from "../Timeline/Timeline";
+import TeacherTimeline from "../TeacherTimeline/TeacherTimeline";
+import {
+  dayOfWeek,
+  timeStringToFloat,
+  sexTostring,
+  convertTime
+} from "../../global/functions";
 // reactstrap components
-import {Button,Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col} from "reactstrap";
-
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+} from "reactstrap";
+import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
-
-  console.log("PROPS in MODAL", props);
-  return (
-    <>
+  // console.log("PROPS in MODAL", props);
+  const { info, changeInfo } = useInfo();
+  const x = props.show.data;
+  // console.log("Info x", x);
+  if (Object.keys(x).length != 0) {
+    return (
       <Modal
-        show={props.show}
+        dialogClassName={"courseProfileModal"}
+        centered
+        show={props.show.flag}
         cancel={props.close}
+        onHide={props.close}
+        className="ModalLessonCourse"
         // centered
       >
-        <div className="loginLmsModal">
-          <Modal.Header className="ModalHeader">
+        <div>
+          <Modal.Header>
             <button
               type="button"
               class="close close-btn"
@@ -29,34 +56,227 @@ const ModalLessons = (props) => {
             </button>
           </Modal.Header>
           <Modal.Body className="loginLmsModalBody">
-            <CardHeader>
-              
-            </CardHeader>
+            {/* //////////////////////////////////////////////////////// */}
+
+            {/* //////////////////////////////////////////////////////// */}
+            {/* <CardHeader>{props.show.data.name}</CardHeader>
+            <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader> */}
             <CardBody>
-              <Form>
-                <Row>
-                  <Col className="text-right" md="12">
-                    
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="text-right" md="12">
-                    
-                  </Col>
-                </Row>
-              </Form>
+              <Card
+                className="ModalLessonCourseCard"
+                // style={{
+                //   backgroundColor: "rgb(75 49 78)",
+                // }}
+              >
+                <CardBody className="ModalCourseCardBody">
+                  
+                  <img
+                    className="ModalprofessorImage"
+                    src={x.teachers[0].teacher_image}
+                    alt="professorImage"
+                  />
+                  <div className="ModalLessoninfoPart">
+                    <CardHeader className="modalHeader">
+                      <p
+                        md="12" style={{fontWeight: 'bold', textAlign: 'center', fontSize:'20px',color: '#c7c1c1'}}
+                        >
+                        {x.name} (گروه {x.group_number})
+                      </p>
+                    </CardHeader>
+                    <Row>
+                    <Col md="6">
+                      <Card className="ModalLessondataCard1">
+                        <Col className="text-right" style={{ marginRight: '0px !important' }}>
+                        <p className="courseTitle" >
+                         استاد&nbsp;&nbsp;
+                        </p> 
+                        {"  "}
+                        {x.teachers.map((y)=>(y.name)).join(" , ")}
+                        </Col >
+                        <Col className="text-right" style={{ display: "flex" }}>
+                          <p className="courseTitle" >
+                         کد درس&nbsp;&nbsp;
+                        </p>
+                          <p
+                            style={{
+                              direction: "ltr",
+                              color:"#dddddd" ,
+                            }}
+                          >
+                            {x.complete_course_number}
+                            
+                          </p>
+                          
+                          {"  "}
+                        
+
+                        </Col>
+                        <Col className="text-right" style={{ marginRight: '0px !important' }}>
+                        <p className="courseTitle" > جنسیت&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                        {"  "}
+                        {sexTostring(x.sex)}
+                        </Col >
+                        {/* <text>
+                        &nbsp;
+                        </text> */}
+                      </Card>
+                    </Col>
+                    <Col md="6">
+                      <Card className="ModalLessondataCard2">
+                      <Col className="text-right" >
+                        <p className="courseTitleNotInline" >
+                          زمان برگزاری 
+                        </p> 
+                       {"  "}
+                        {x.course_times.map((t) => (
+                          <text>{dayOfWeek(t.course_day)} </text>
+                        ))}
+                        <text>
+                          {convertTime(
+                            x.course_times[0].course_start_time
+                          )}{" "}
+                          تا{" "}
+                          {convertTime(x.course_times[0].course_end_time)}
+                        </text>
+                        
+                      </Col>
+                      {
+                        x.exam_times.length===0?null
+                      :
+                      <Col className="text-right" >
+                        <p className="courseTitleNotInline">
+                           زمان آزمون پایانی
+                        </p>
+                       
+                        <text dir="ltr" >{"تاریخ :"}{x.exam_times[0].date}</text>
+                        <text>
+                        &nbsp;
+                          ساعت&nbsp; 
+                          {convertTime(
+                            x.exam_times[0].exam_start_time
+                          )}{" "}
+                          تا {convertTime(x.exam_times[0].exam_end_time)}
+                        </text>
+                       
+                      </Col>
+                      }
+                      </Card>
+                      
+                    </Col>
+                    <Row>
+                    <Card className="ModalLessondataCard3">
+                    <Row>
+                      <Col className="text-right" md="7" style={{ marginRight: '0px !important' }}>
+                      <p className="courseTitle" >ثبت نام شده&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                      {x.registered_count} از {x.capacity}
+                      </Col>
+                      <Col className="text-right" md="5">
+                      <p className="courseTitle" >تعداد واحد های عملی &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                      &nbsp;{x.practical_unit}&nbsp;{"واحد"} 
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-right" md="7">
+                      <p className="courseTitle" >تعداد در صف انتظار&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                        {x.waiting_count} {"نفر"} 
+                      </Col>
+
+                      <Col className="text-right" md="5">
+                      <p className="courseTitle" >تعداد کل واحد ها&nbsp;&nbsp;&nbsp; </p>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.total_unit} {"واحد"} 
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-right" md="12">
+                      <p className="courseTitle" >  تعداد اخذ شده در کاتیوشا&nbsp;&nbsp; </p>
+                       {x.added_to_calendar_count} {"نفر"} 
+                      </Col>
+                      <Col className="text-right" md="6">
+                      <p className="courseTitle" >  قابل اخذ بودن این درس برای شما&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                      {x.is_allowed ? "بله" : "خیر"}
+                      </Col>
+                      
+                    </Row> 
+                     </Card>
+                    {x.description==="nan"?null
+                    :<Card className="ModalLessondataCard3">
+                    <Row>
+                      <Col className="text-right" md="12">
+                      <p className="courseTitle" > توضیحات&nbsp;&nbsp; </p>
+                      {x.description}
+                      </Col>
+                    </Row> 
+                    </Card>}
+                      </Row>
+                  </Row>
+                    {/* <Card className="ModalLessondataCard1">
+                   
+                   
+                    <Row>
+                      <Col className="text-right" md="6">
+                        <div style={{ display: "flex" }}>
+                          کد درس:
+                          <p
+                            style={{
+                              direction: "ltr",
+                              color: "rgb(199, 193, 193)",
+                            }}
+                          >
+                            {x.complete_course_number}
+                          </p>{" "}
+                        </div>
+                      </Col>
+                      <Col className="text-right" md="6" dir="ltr">
+                        تاریخ امتحان پایانی: {x.exam_times[0].date}
+                        <text>
+                          {" "}
+                          ساعت
+                          {timeStringToFloat(
+                            x.exam_times[0].exam_start_time
+                          )}{" "}
+                          تا {timeStringToFloat(x.exam_times[0].exam_end_time)}
+                        </text>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-right" md="6">
+                        ثبت نام شده: {x.registered_count} از {x.capacity}
+                      </Col>
+                      <Col className="text-right" md="6">
+                        تعداد واحد های عملی:{x.practical_unit}
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col className="text-right" md="6">
+                        تعداد در صف انتظار: {x.waiting_count}
+                      </Col>
+
+                      <Col className="text-right" md="6">
+                        تعداد کل واحد ها:{x.total_unit}
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-right" md="6">
+                        تعداد اخذ شده در کاتیوشا: {x.added_to_calendar_count}
+                      </Col>
+                    </Row> */}
+                  </div>
+                </CardBody>
+              </Card>
+
+              <Row>
+                <Col md="12" style={{ overflow: "hidden" }}>
+                  <TeacherTimeline show={props} />
+                  {/* <Timeline show={props} /> */}
+                </Col>
+              </Row>
             </CardBody>
-            <CardFooter>
-              <Button className="btn-fill" color="primary" type="submit">
-                تایید
-              </Button>
-            </CardFooter>
           </Modal.Body>
         </div>
       </Modal>
-    </>
-  );
+    );
+  }
 };
 
 export default ModalLessons;
-

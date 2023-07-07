@@ -1,182 +1,147 @@
 [
     {
-        "id" : 0,
-        "day" : "0",
-        "time" : "0",
-        "count" : "0",
-        "name" : "حسابان",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1411087_58",
+        "name": "Differential Equations",
+       	   "total_unit": 3,
+           "can_take" : true,
+        "practical_unit": 0,
+        "capacity": 55,
+        "registered_count": 55,
+        "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan",
+        "description": "nan",
+        "presentation_type": "N",
+        "exam_times": [
+            {
+                "date": "1402-03-30",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "A1"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "16:30:00",
+                "course_end_time": "18:00:00",
+                "place": "A2"
+            }
+        ]
     },
     {
-        "id" : 1,
-        "day" : "0",
-        "time" : "0",
-        "count" : "1",
-        "name" : "گسسته",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1411089_63",
+        "name": "Engineering Mathematics",
+        	  "total_unit": 3,
+              "can_take" : false,
+        "practical_unit": 0,
+        "capacity": 60,
+        "registered_count": 67,
+        "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan،",
+                "description": "nan",
+        "presentation_type": "N",
+        "exam_times": [
+            {
+                "date": "1402-03-29",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "B-202"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "B-202"
+            }
+        ]
     },
     {
-        "id" : 2,
-        "day" : "0",
-        "time" : "0",
-        "count" : "2",
-        "name" : "آمار",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1411087_59",
+        "name": "Hello",
+        "total_unit": 3,
+        "can_take" : false,
+        "practical_unit": 0,
+        "capacity": 55,
+        "registered_count": 50,
+        "waiting_count": 0,
+        "sex": "B",
+        "guest_able": true,
+        "emergency_deletion": true,
+        "registration_limit": "nan",
+        "description": "nan",
+        "presentation_type": "N",
+        "exam_times": [
+            {
+                "date": "1402-03-30",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "C2"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "15:00:00",
+                "course_end_time": "16:30:00",
+                "place": "C2"
+            }
+        ]
     },
     {
-        "id" : 3,
-        "day" : "0",
-        "time" : "0",
-        "count" : "3",
-        "name" : "دیفرانسیل",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 4,
-        "day" : "0",
-        "time" : "0",
-        "count" : "4",
-        "name" : "فیزیک",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 5,
-        "day" : "5",
-        "time" : "5",
-        "count" : "0",
-        "name" : "الگوریتم",
-        "teacher" : "اعتمادی",
-        "room" : "A-72",
-        "long" : "1"
-    },
-    {
-        "id" : 6,
-        "day" : "0",
-        "time" : "0",
-        "count" : "5",
-        "name" : "علوم",
-        "teacher" : "خنجری",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 7,
-        "day" : "2",
-        "time" : "6",
-        "count" : "0",
-        "name" : "عربی",
-        "teacher" : "ملکی",
-        "room" : "A-1",
-        "long" : "1"
-    },
-    {
-        "id" : 8,
-        "day" : "3",
-        "time" : "7",
-        "count" : "0",
-        "name" : "دینی",
-        "teacher" : "رحمانی",
-        "room" : "B-2",
-        "long" : "1"
-    },
-    {
-        "id" : 9,
-        "day" : "0",
-        "time" : "0",
-        "count" : "6",
-        "name" : "اخلاق",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 10,
-        "day" : "0",
-        "time" : "0",
-        "count" : "7",
-        "name" : "اندیشه",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 11,
-        "day" : "1",
-        "time" : "2",
-        "count" : "0",
-        "name" : "دیتابیس",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 12,
-        "day" : "1",
-        "time" : "2",
-        "count" : "1",
-        "name" : "نظریه",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 13,
-        "day" : "1",
-        "time" : "2",
-        "count" : "3",
-        "name" : "ریزپر",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 14,
-        "day" : "1",
-        "time" : "2",
-        "count" : "4",
-        "name" : "سیگنال",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 15,
-        "day" : "1",
-        "time" : "2",
-        "count" : "5",
-        "name" : "گسسته",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 16,
-        "day" : "3",
-        "time" : "5",
-        "count" : "0",
-        "name" : "هوش",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
-    },
-    {
-        "id" : 17,
-        "day" : "3",
-        "time" : "5",
-        "count" : "1",
-        "name" : "ساختمان داده",
-        "teacher" : "رحمانی",
-        "room" : "A-25",
-        "long" : "2"
+        "complete_course_number": "1411088_76",
+        "added_to_calendar_count": 3,
+        "name": "Statistics",
+        "base_course_id": 1411088,
+        "group_number": "76",
+        "capacity": 59,
+        "registered_count": 47,
+        "waiting_count": 0,
+        "exam_times": [
+            {
+                "date": "1402-04-04",
+                "exam_start_time": "08:30:00",
+                "exam_end_time": "10:30:00"
+            }
+        ],
+        "course_times": [
+            {
+                "course_day": "3",
+                "course_start_time": "13:30:00",
+                "course_end_time": "15:00:00",
+                "place": "C6"
+            },
+            {
+                "course_day": "1",
+                "course_start_time": "13:30:00",
+                "course_end_time": "15:00:00",
+                "place": "C6"
+            }
+        ],
+        "color_intensity_percentage": 20,
+        "color_code": "None",
+        "can_take" : true
     }
-  ]
+]

@@ -1,0 +1,19 @@
+.search_box{
+    margin: 0.7rem;
+    width: 91% !important;
+    /* position: fixed; */
+    display: block;
+    /* background-color: red; */
+}
+
+.lessons_in_searchBox{
+    /* margin-top: 4rem; */
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.button_lessons:hover{
+    cursor: pointer;
+    background-color: #32325d;
+}

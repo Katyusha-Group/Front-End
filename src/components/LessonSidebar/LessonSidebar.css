@@ -1,16 +1,113 @@
-.lessonSidebar_component{
-    height: 36vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #27293d;
-    margin-top: 1rem;
-    border-radius: .3rem;
-    padding-top: .8rem;
+.lessonSidebar_component {
+  height: 30vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .2rem;
+  padding-top: .8rem;
+  margin-top: 2vh;
+
 }
 
 .sidebar[data="normal"],
-  .off-canvas-sidebar[data="normal"] {
-    background: none;
-    box-shadow: none;
+.off-canvas-sidebar[data="normal"] {
+  background: none;
+  box-shadow: none;
 
-     }
+}
+
+.lessonSidebar_component-lessons 
+{
+  overflow-y: hidden;
+  
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .2rem;
+  padding-top: .8rem;
+  margin-top: 2vh;
+  height: 52.2vh;
+}
+
+.nav-link-lessonSidebar:hover{
+  background-color: #32325d;
+}
+/* .btn-icon{
+  margin-bottom: 10px ;
+} */
+.nav-lessonSidebar{
+  
+  height: 7.8vh ;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+  background-color: #27293d;
+  /* margin-top: 1rem; */
+  border-radius: .5rem;
+  justify-content: center;
+}
+.nav-header{
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.nav-header > a{
+  margin-left: 0;
+}
+.pp-4{
+  padding: 2px !important;
+}
+.nav-link-icon{
+  font-size: x-large;
+}
+
+.nav-link-course{
+  color: rgba(255, 255, 255, 0.8);
+  border: solid 2px;
+  border-color: #484b7262;
+  border-radius: .5rem;
+  margin: 10px 0px;
+  padding: 5px 0px ;
+  background-color: #484b7262;
+}
+a.nav-link-course:hover{
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 40%;
+}
+.nav-link-profile{
+  font-size: x-large;
+  color:rgba(255, 255, 255, 0.8) ;
+  justify-content: center;
+  display: flex;
+
+  /* border: solid 2px;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  margin: 5px; */
+}
+/* .backCol{
+  background-color: #484b7262;
+  border-radius: 0.5rem;
+  border: solid 2px;
+  border-color: #484b7262;
+} */
+.btn.btn-link, .navbar .navbar-nav > a.btn.btn-link{
+  background-color: #484b7262;
+}
+.br-7{
+  border-radius: .7rem !important;
+}
+.dropdown-menu:before{
+  left: 21px !important;
+}
+.nav-img{
+  border-radius: 50%;
+  width: 35px;
+  float: right;
+}
+.brand-name{
+  float: right;
+}
+
+.lessons_in_searchBox{
+  overflow-x: hidden;
+}

@@ -1,4 +1,3 @@
-
 /*eslint-disable*/
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
@@ -12,7 +11,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import {
   BackgroundColorContext,
-  backgroundColors
+  backgroundColors,
 } from "../../contexts/BackgroundColorContext";
 
 var ps;
@@ -24,27 +23,27 @@ function Sidebar(props) {
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
   };
-  React.useEffect(() => {
-    if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(sidebarRef.current, {
-        suppressScrollX: true,
-        suppressScrollY: false
-      });
-    }
-    // Specify how to clean up after this effect:
-    return function cleanup() {
-      if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-        ps.destroy();
-      }
-    };
-  });
+  // React.useEffect(() => {
+  //   if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //     ps = new PerfectScrollbar(sidebarRef.current, {
+  //       suppressScrollX: true,
+  //       suppressScrollY: false,
+  //     });
+  //   }
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     if (navigator.userAgentData.platform.indexOf("Win") > -1) {
+  //       ps.destroy();
+  //     }
+  //   };
+  // });
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
   const { routes, rtlActive, logo } = props;
   let logoImg = null;
   let logoText = null;
-//   rtlActive = true;
+  //   rtlActive = true;
   if (logo !== undefined) {
     if (logo.outterLink !== undefined) {
       logoImg = (
@@ -106,7 +105,7 @@ function Sidebar(props) {
             <Nav>
               {routes.map((prop, key) => {
                 // if (prop.redirect) return null;
-                console.log(prop.layout + prop.path)
+                console.log(prop.layout + prop.path);
                 return (
                   // <li
                   //   className={
@@ -114,16 +113,16 @@ function Sidebar(props) {
                   //   }
                   //   key={key}
                   // >
-                    <NavLink
-                      to={prop.layout + prop.path}
-                      className="nav-link"
-                      activeClassName="active"
-                      onClick={props.toggleSidebar}
-                      key = {key}
-                    >
-                      <i className={prop.icon} />
-                      <p>{rtlActive ? prop.rtlName : prop.name}</p>
-                    </NavLink>
+                  <NavLink
+                    to={prop.layout + prop.path}
+                    className="nav-link"
+                    activeClassName="active"
+                    onClick={props.toggleSidebar}
+                    key={key}
+                  >
+                    <i className={prop.icon} />
+                    <p>{rtlActive ? prop.rtlName : prop.name}</p>
+                  </NavLink>
                   // </li>
                 );
               })}
@@ -150,8 +149,8 @@ Sidebar.propTypes = {
     // the text of the logo
     text: PropTypes.node,
     // the image src of the logo
-    imgSrc: PropTypes.string
-  })
+    imgSrc: PropTypes.string,
+  }),
 };
 
 export default Sidebar;
