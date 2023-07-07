@@ -272,7 +272,22 @@ function LessonSidebar(props) {
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/order");
+                          }}
+                        >
+                          {/* <span className="tim-icons icon-email-85" /> */}
+                        <span className="tim-icons icon-bag-16" />
+                          {"  "}
+                          سفارش ها
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/notification");
+                          }}
                         >
                           <span className="tim-icons icon-email-85" />
                           {"  "}

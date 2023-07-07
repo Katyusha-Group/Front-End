@@ -14,18 +14,26 @@ import {
   Input,
   Row,
   Col,
+  Label,
 } from "reactstrap";
 import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { Link } from "react-router-dom";
-import ChangePassword from "../ChangePass";
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
-
+  const [notifs, setNotifs] = React.useState([
+    // {
+    //   id: 48,
+    //   title: "ویرایش درس",
+    //   text: "تعداد ثبت نام شده: 11 \n درس آمایشگاه مدارهای منطقی با شاره 1211012_03 ویرایش شد",
+    //   applied_at: "1402-04-16T11:49:05.750282+0000",
+    //   is_read: false,
+    // },
+  ]);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
     showLoading();
@@ -39,9 +47,18 @@ function UserProfile() {
         setInfo(data);
       })
       .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
+    fetch("https://katyushaiust.ir/notifications/", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+      "Content-Type": "application/json",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("order data", data);
+        setNotifs(data);
+      })
+      .catch((error) => console.error(error));
+
     closeLoading();
   }, []);
 
@@ -67,9 +84,9 @@ function UserProfile() {
     formData.append("first_name", info.first_name);
     console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
-    if(image.length > 0) {
-      formData.append("image", images[0]);
-    }
+    const startTelegramBot = () => {
+      window.location.href = info.telegram_link;
+    };
     console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
     fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
       method: "PATCH",
@@ -117,13 +134,7 @@ function UserProfile() {
           onChange={onChange}
           style={{ display: "none" }}
         />
-        <label
-          id="file-input-label"
-          for="file-input"
-          className="btn btn-primary mt-3"
-        >
-          انتخاب عکس
-        </label>
+      
         <br />
         {images.length !== "" ? images.name : ""}
         {/* {touched && error && <span>{error}</span>} */}
@@ -145,102 +156,6 @@ function UserProfile() {
           <div className="mt-5"></div>
           <div className="content_without_sidebar">
             <Row>
-              <Col md="8">
-                <Card>
-                  <CardHeader>
-                    <h5 className="title">ویرایش پروفایل</h5>
-                  </CardHeader>
-                  <CardBody>
-                    <Form>
-                      <Row>
-                        <Col className="pr-md-1" md="5">
-                          <FormGroup>
-                            <label>رشته</label>
-                            <Input
-                              defaultValue={info.department}
-                              placeholder="رشته"
-                              name="department"
-                              type="text"
-                              onChange={handleChange}
-                              disabled
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col className="px-md-1" md="3">
-                          <FormGroup>
-                            <label>جنسیت</label>
-                            <Input
-                              defaultValue={info.gender === 'M' ? "مرد" : "زن"}
-                              placeholder="جنسیت"
-                              type="text"
-                              name="gender"
-                              disabled
-                              onChange={handleChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col className="pl-md-1" md="4">
-                          <FormGroup>
-                            <label htmlFor="exampleInputEmail1">ایمیل</label>
-                            <Input
-                              placeholder={info.email}
-                              type="email"
-                              disabled
-                              name="email"
-                              onChange={handleChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col className="pr-md-1" md="6">
-                          <FormGroup>
-                            <label>نام</label>
-                            <Input
-                              defaultValue={info.first_name}
-                              placeholder="نام"
-                              type="text"
-                              name="first_name"
-                              onChange={handleChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col className="pl-md-1" md="6">
-                          <FormGroup>
-                            <label>نام خانوادگی</label>
-                            <Input
-                              defaultValue={info.last_name}
-                              placeholder="نام خانوادگی"
-                              type="text"
-                              name="last_name"
-                              onChange={handleChange}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md="12">
-                          <FormGroup>
-                            {/* <label>تلگرام</label> */}
-                            
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </CardBody>
-                  <CardFooter>
-                    <Button
-                      className="btn-fill"
-                      color="primary"
-                      type="submit"
-                      onClick={save}
-                    >
-                      ذخیره
-                    </Button>
-                  </CardFooter>
-                </Card>
-                <ChangePassword></ChangePassword>
-              </Col>
               <Col md="4">
                 <Card className="card-user">
                   <CardBody className="pb-0">
@@ -256,38 +171,58 @@ function UserProfile() {
                           className="avatar"
                           src={imageURLs != "" ? imageURLs : info.image}
                         />
-                        {console.log(
-                          "🚀 ~ file: UserProfile.jsx:223 ~ UserProfile ~ imageURLs:",
-                          typeof imageURLs
-                        )}
+
                         {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
                         {/* <h5 className="title">Mike Andrew</h5> */}
                       </a>
                       {/* <p className="description">Ceo/Co-Founder</p> */}
                     </div>
                     <div className="card-description">
-                      برای پروفایل خود عکس انتخاب کنید
+                      {info.email}
+                      <br />
+                      {info.first_name + " "}
+                      {info.last_name}
+                      <br />
+                      {info.department}
                     </div>
-                    {renderImageField()}
 
                     <div className="card-description"></div>
                   </CardBody>
-                  <div className="card-description mt-2">
-                    برای دیدن اعلان ها به تلگرام بروید
-                  </div>
-                  <CardFooter >
-                    <div className="button-container">
-                      <Button
-                        onClick={startTelegramBot}
-                        // color="primary"
-                        className="btn-icon btn-round"
-                      >
-                        <i className="fab fa-telegram" />
-                      </Button>
-                    </div>
+                  <CardFooter>
+                    <Button
+                      onClick={startTelegramBot}
+                      // color="primary"
+                      className="btn-icon btn-round"
+                    >
+                      <i className="fab fa-telegram" />
+                    </Button>
+
                     <div className="button-container"></div>
                   </CardFooter>
                 </Card>
+              </Col>
+              <Col md="8" className="overflow-auto " style={{ height: "70vh" }}>
+                {notifs.length === 0 ? "اعلانی وجود ندارد" : ""}
+                {notifs.map((notif, index) => {
+                  let time = notif.applied_at.split("T")[1].split(".")[0];
+                  let date = notif.applied_at.split("T")[0];
+                  return (
+                    <Card key={index}>
+                      <Row className="category mb-0 mt-4 mr-4 ">
+                        {notif.title}
+                      </Row>
+                      <Row className="category mb-0 mt-4 mr-4">
+                        {notif.text.split("\n")[0]}
+                      </Row>
+                      <Row className="category mb-0 mt-2 mr-4">
+                        {notif.text.split("\n")[1]}
+                      </Row>
+                      <Row className=" m-3 " style={{direction: "ltr"}}>
+                        {date} {" "} {time}
+                      </Row>
+                    </Card>
+                  );
+                })}
               </Col>
             </Row>
           </div>
