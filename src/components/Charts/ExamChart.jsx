@@ -67,10 +67,39 @@ function Exams (ExamTable)
 
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
+        
+        // if (!currentPeriod.exam_times[0].exam_start_time || !currentPeriod.exam_times[0].date) {
+        //   // Skip the iteration if either ExamTime or ExamDay is undefined
+        //   return lessonsKeyedByDayAndPeriod;
+        // }
+        
+        try
+        {
+          let ExamTime = currentPeriod.exam_times[0].exam_start_time;
+          let ExamDay = currentPeriod.exam_times[0].date;
+        }
+        catch 
+        {
+          console.log("First Error");
+          return lessonsKeyedByDayAndPeriod;
+        }
+
         let ExamTime = currentPeriod.exam_times[0].exam_start_time;
         let ExamDay = currentPeriod.exam_times[0].date;
+        
         let time = MapTimeToIndex(ExamTime);
         let day = MapDateToIndex(ExamDay);
+
+        try
+        {
+          NumInEachSlot[time][day] ++;
+        }
+        catch 
+        {
+          console.log("Second Error");
+          return lessonsKeyedByDayAndPeriod;
+        }
+
         NumInEachSlot[time][day] ++;
         let count = NumInEachSlot[time][day];
         try {
