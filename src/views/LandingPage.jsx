@@ -31,12 +31,12 @@ function LandingPage() {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      // path: "../src/assets/img/28893-book-loading.json"
+      path: "../src/assets/img/28893-book-loading.json"
       // path: "../src/assets/img/92377-quiz-mode.json"
       // path: "../src/assets/img/133116-education-edit.json"
       // path: "../src/assets/img/132921-education-services.json"
       // path: "../src/assets/img/74130-education.json"
-      path: "../src/assets/img/88025-smart-owl-education-animation-icons.json"
+      // path: "../src/assets/img/88025-smart-owl-education-animation-icons.json"
     });
 
     return () => {
@@ -78,12 +78,25 @@ function LandingPage() {
               <Row className="LandingPageRow">
                 <Col>
                   <Link to="../Signup">
-                    <Button className="btn-fill-landingPage" color="primary"> ثبت نام</Button>
+                    <button 
+                      // className="btn-fill-landingPage" 
+                      // color="primary"
+                      // color="#FF365B"
+                      className="Buttons"
+                    > 
+                      ثبت نام
+                    </button>
                   </Link>
                 </Col>
                 <Col>
                 <Link to="../Login">
-                    <Button className="btn-fill-landingPage" color="primary">ورود</Button>
+                    <button 
+                      // className="btn-fill-landingPage" 
+                      // color="primary"
+                      className="Buttons"
+                    >
+                      ورود
+                    </button>
                   </Link>
                 </Col>
               </Row>

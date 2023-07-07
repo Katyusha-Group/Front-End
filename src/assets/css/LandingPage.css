@@ -48,7 +48,7 @@
   
   /* Buttons */
   .btn-fill-landingPage {
-    background-color: #007bff;
+    background-color: #FF365B;
     border-color: #007bff;
     color: #fff;
     font-size: 20px;
@@ -58,7 +58,7 @@
   }
   
   .btn-fill-landingPage:hover {
-    background-color: #0069d9;
+    background-color: #114984;
     border-color: #0062cc;
     color: #fff;
   }
@@ -81,5 +81,23 @@
     height: auto;
     margin-top: 80px;
     margin-left: 0;
+  }
+
+  .Buttons {
+    /* background-color: #FF365B;
+    border-color: #FF365B; */
+    /* background-color: #FFC869;
+    border-color: #FFC869; */
+    /* background-color: #FFA26D;
+    border-color: #FFA26D; */
+    /* background-color: #8194EF;
+    border-color: #8194EF; */
+    background-color: #F27281;
+    border-color: #F27281;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 10px;
   }
   
