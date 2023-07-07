@@ -47,10 +47,6 @@ function LandingPage() {
     <>
     <Container>
     <Row>
-      <Col className="BGimgCol">
-        {/* <img className="BGimg" src={BGImage}/> */}
-        <div id="animation"></div>
-      </Col>
       <Col className="LandingPageCardCol">
         <Card className="LandingPageCard">
           <div className="div-1">
@@ -111,6 +107,10 @@ function LandingPage() {
             </div>
           </span>
         </Card>
+      </Col>
+      <Col className="BGimgCol">
+        {/* <img className="BGimg" src={BGImage}/> */}
+        <div id="animation"></div>
       </Col>
     </Row>
     </Container>
