@@ -1,4 +1,7 @@
 import Course from './CoursesPanel';
+import React from "react";
+import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
+import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 // Token
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
@@ -102,3 +105,4 @@ export function Create2DArray (Rows, Cols) {                              // Cre
 export function containsWhitespace(str) {
   return /\s/.test(str);
 } 
+
