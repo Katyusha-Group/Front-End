@@ -137,7 +137,7 @@ function SignUp() {
     return /\S+@\S+\.\S+/.test(email);
   }
   function isValidPassword(pass) {
-    console.log(/[a-zA-Z]/.test(pass));
+    //console.log(/[a-zA-Z]/.test(pass));
     return /[a-zA-Z]/.test(pass);
   }
 
@@ -264,7 +264,7 @@ function SignUp() {
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        //console.log('I was closed by the timer')
         /////has to be changed to no internet
       }
     })
@@ -292,10 +292,10 @@ function SignUp() {
       
       localStorage.setItem("token",data.token)
       localStorage.setItem("verificationLink",data.url)
-      console.log(data.url);
-      console.log(data.token)
+      //console.log(data.url);
+      //console.log(data.token)
 
-      console.log("خوش آمدید");
+      //console.log("خوش آمدید");
       // console.log(info.token)
       Swal.fire({
         // position: 'top-end',

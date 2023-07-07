@@ -84,7 +84,7 @@ function ForgetPassword() {
       }),
     });
     const data = await response.json();
-    console.log("response",response);
+    //console.log("response",response);
     closeLoading();
     if (response.status === 200) {
       // console.log("خوش آمدید");
@@ -93,8 +93,8 @@ function ForgetPassword() {
       // ContextInfo.changeInfo("link",data.link)
       // setInfo((info) => ({ ...info, [link]: data.link }))
   
-      console.log(info.link);
-      console.log(data.link);
+      //console.log(info.link);
+      //console.log(data.link);
       Swal.fire({
         icon: 'success',
         title: 'کد تایید ارسال شد.',
@@ -104,7 +104,7 @@ function ForgetPassword() {
         width:'25rem',
         confirmButtonText:"باشه"
       }).then((result) => {
-        console.log(result);
+       // console.log(result);
         if(result) {
           window.location="/verificationForgetPassword";
           // ok click

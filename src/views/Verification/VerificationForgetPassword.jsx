@@ -134,8 +134,8 @@ function isValidCode(code) {
     //console.log(code)
     // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
-    console.log(localStorage.getItem("link"))
-    console.log(forgetPasswordVerificationApi(code))
+    //console.log(localStorage.getItem("link"))
+    //console.log(forgetPasswordVerificationApi(code))
     closeLoading();
     // Navigate("/setNewPassword")
     //console.log(showAlert)
