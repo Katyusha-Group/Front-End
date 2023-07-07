@@ -33,6 +33,7 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar";
 // import HomeIcon from './home.png';
 // import { size } from "lodash";
 export default function CoursesPanel() {
+  
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -82,6 +83,11 @@ export default function CoursesPanel() {
     // }
 
   }, []);
+
+  React.useEffect ( () => {
+    console.log("Department from Sidebar is:" + info.chosenDepartment);
+    setSelectedDepartment(info.chosenDepartment);
+  }, [info.chosenDepartment]);
 
   React.useEffect ( () => {
     // fetch("https://www.katyushaiust.ir/courses/my_courses", {

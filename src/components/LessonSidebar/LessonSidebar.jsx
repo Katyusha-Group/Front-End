@@ -61,8 +61,13 @@ const reducer = (state, action) => {
   }
 };
 
+export function SendDepartmentToCoursesPanel (input_department)
+{
+  return input_department;
+}
+
 function LessonSidebar(props) {
-  // const {info, changeInfo} = useInfo();
+  const {info, changeInfo} = useInfo();
   const getError = (error) => {
     // console.log(error.data.message)
     return error.responst && error.response.data
@@ -340,7 +345,12 @@ function LessonSidebar(props) {
                         <NavLink
                           className="nav-link nav-link-lessonSidebar"
                           // activeClassName="active"
-                          onClick={() => setLessonState([prop])}
+                          onClick={() => {
+                            setLessonState([prop]);
+                            // console.log("SIDEBBARRR");
+                            changeInfo("chosenDepartment", [lessonState]);
+                            console.log ("Department is : " + info.chosenDepartment[0]);
+                          }}
                           key={index}
                         >
                           <i className="tim-icons icon-chart-bar-32" />
@@ -362,6 +372,7 @@ function LessonSidebar(props) {
                       setLessonState(allColleges);
                       // console.log("all colleges in onclick",allColleges);
                       // console.log("lesson state in onclick",lessonState);
+                      // console.log 
                     }}
                     // key={index}
                   >
@@ -372,6 +383,7 @@ function LessonSidebar(props) {
               </div>
               <div className="lessonSidebar_component-lessons">
                 {lessonState ? <SearchBox data={lessonState} /> : null}
+                {/* {lessonState ? <CoursesPanel Department={lessonState} /> : null} */}
                 {/* {console.log("props", lessonState.base_courses)} */}
                 {/* {console.log(lessonState)} */}
                 {/* {console.log(window.location.pathname)} */}
