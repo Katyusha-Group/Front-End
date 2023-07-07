@@ -27,7 +27,7 @@ import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
 import { useState } from "react";
 import { useEffect } from "react";import { PrivatRoute } from "./global/functions.jsx";
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
-import News from "./views/News/News.jsx"
+import News from "./views/News/Orders.jsx"
 import Notification from "./views/Notification/Notification.jsx";
 
 function App() {
