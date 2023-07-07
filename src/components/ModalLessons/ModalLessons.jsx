@@ -355,14 +355,14 @@ const ModalLessons = (props) => {
                 <Col md="12" style={{ overflow: "hidden" }}>
                   <div
                     style={{
-                      display: timelineData == "data1" ? "block" : "none",
+                      display: timelineData == "data2" ? "block" : "none",
                     }}
                   >
                     <TeacherTimeline show={props} />
                   </div>
                   <div
                     style={{
-                      display: timelineData == "data2" ? "block" : "none",
+                      display: timelineData == "data1" ? "block" : "none",
                     }}
                   >
                     <Timeline show={props} />

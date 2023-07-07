@@ -96,7 +96,7 @@ const Timeline = (props) => {
                   </span>
                   <ul className="content">
                     {Object.keys(courses.courses)
-                      .filter((course) => course.includes("ا"))
+                      // .filter((course) => course.includes("ا"))
                       .map((course) => (
                         <li>{course}</li>
                       ))}
