@@ -26,6 +26,7 @@ import RequireAuth from "./components/RequirAuth/RequirAuth.jsx";
 import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
 import { useState } from "react";
 import { useEffect } from "react";import { PrivatRoute } from "./global/functions.jsx";
+import AboutUs from "./views/aboutUs/AboutUs.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
@@ -63,6 +64,7 @@ function App() {
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
+                <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/CoursesPanel" element={
                   <PrivatRoute>

@@ -145,11 +145,20 @@ function ForgetPassword() {
     //   Navigate("/admin/page");
     // } else {
     //   console.log(data.error);
+    if (response.status === 429){
+      errors.backError = ". حداکثر تعداد درخواست فراموشی رمز عبور ۵ بار است . شما بیش از ۵ بار درخواست ایمیل کرده اید ";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
+    }else{
       errors.backError = "!ایمیل وارد شده اشتباه است و یا حساب کاربری ندارید";
       setErrorMessage({
         ...errorMessage,
         backError: errors.backError,
       });
+    }
+      
     //   // if (data.error === "Invalid credentials") {
     //   //   //show pop up
     //   //   swal("Error!", "Invalid credentials!", "error");

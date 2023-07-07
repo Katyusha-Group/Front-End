@@ -5,6 +5,7 @@ import UserPage from "./views/UserPage/UserPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
+import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 var routes = [
     
     // {
@@ -40,23 +41,23 @@ var routes = [
         layout: ""
     },
     {
-        path: '/aboutUs',
-        name:"AboutUs",
-        component: AboutUs,
+        path: '/user',
+        name:"profile",
+        component: UserProfile,
         rtlName: " پروفایل",
         icon: "icon-single-02",
-        layout: "/admin"
+        layout: ""
     }
     
     ,
     {
-        path: '/aboutUs',
+        path: '../aboutUs',
         name:"AboutUs",
         component: AboutUs,
         rtlName: "درباره ما",
         // icon: "icon-alert-circle-exc",
         icon: "icon-send",
-        layout: "/admin"
+        layout: ""
     }
 ]
 
