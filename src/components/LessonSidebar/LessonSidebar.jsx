@@ -245,9 +245,9 @@ function LessonSidebar(props) {
                 </Col>
                 <Col md="3" xs="3" style={{ margin: "auto" }}>
                   <div className="nav-link-profile">
-                    <UncontrolledDropdown>
+                    <UncontrolledDropdown className="backCol">
                       <DropdownToggle
-                        className="m-0 p-10"
+                        className="m-0 pp-4"
                         color="link"
                         data-toggle="dropdown"
                       >
@@ -286,7 +286,7 @@ function LessonSidebar(props) {
                           }}
                         >
                           {/* <span className="tim-icons icon-email-85" /> */}
-                        <span className="tim-icons icon-badge" />
+                          <span className="tim-icons icon-badge" />
                           {"  "}
                           پروفایل
                         </DropdownItem>

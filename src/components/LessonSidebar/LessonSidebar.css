@@ -53,8 +53,8 @@
 .nav-header > a{
   margin-left: 0;
 }
-.p-10{
-  padding: 10px !important;
+.pp-4{
+  padding: 2px !important;
 }
 .nav-link-icon{
   font-size: x-large;
@@ -63,7 +63,7 @@
 .nav-link-course{
   color: rgba(255, 255, 255, 0.8);
   border: solid 2px;
-  border-color: rgba(255, 255, 255, 0.8);
+  border-color: #484b7262;
   border-radius: .5rem;
   margin: 10px 0px;
   padding: 5px 0px ;
@@ -78,10 +78,20 @@ a.nav-link-course:hover{
   color:rgba(255, 255, 255, 0.8) ;
   justify-content: center;
   display: flex;
+
   /* border: solid 2px;
   border-color: rgba(255, 255, 255, 0.8);
   border-radius: 100%;
   margin: 5px; */
+}
+/* .backCol{
+  background-color: #484b7262;
+  border-radius: 0.5rem;
+  border: solid 2px;
+  border-color: #484b7262;
+} */
+.btn.btn-link, .navbar .navbar-nav > a.btn.btn-link{
+  background-color: #484b7262;
 }
 .br-7{
   border-radius: .7rem !important;
