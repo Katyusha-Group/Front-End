@@ -26,12 +26,19 @@ import {
 
 function LandingPage() {
   React.useEffect(() => {
+    const container = document.getElementById('animation');
+    if (!container)
+    {
+      container.innerHTML = 'Sorry, we could not load the animation.';
+      return;
+    }
     const animation = lottie.loadAnimation({
       container: document.getElementById('animation'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: "../src/assets/img/28893-book-loading.json"
+      path: "https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json"
+      // path: "../src/assets/img/28893-book-loading.json"
       // path: "../src/assets/img/92377-quiz-mode.json"
       // path: "../src/assets/img/133116-education-edit.json"
       // path: "../src/assets/img/132921-education-services.json"
