@@ -165,7 +165,7 @@ function isValidCode(code) {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
+        <div className="signUpContainer">
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4">

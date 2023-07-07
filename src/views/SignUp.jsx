@@ -322,10 +322,10 @@ function SignUp() {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
+        <div className="signUpContainer">
           <div className="content contentLogin">
             <Row className="justify-content-center">
-              <Col className="text-right" md="5" >
+              <Col className="text-right" md="4" >
                 {errorMessage.backError && (
                   <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}

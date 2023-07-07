@@ -1,5 +1,5 @@
 import React from "react";
-//import "../assets/css/Login.css";
+import "../assets/css/Login.css";
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -174,10 +174,10 @@ function ForgetPassword() {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
+        <div className="signUpContainer">
           <div className="content contentLogin">
             <Row className="just-center">
-              <Col className="text-right" md="5">
+              <Col className="text-right" md="4">
                 {errorMessage.backError && (
                   <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}

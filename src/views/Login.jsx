@@ -209,10 +209,10 @@ function Login(props) {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
-          <div className="content contentLogin">
+        <div className="signUpContainer" >
+          <div className="content contentLogin" style={{direction:"rtl"}}>
             <Row className="just-center">
-              <Col className="text-right" md="5">
+              <Col className="text-right" md="4">
                 {errorMessage.backError && (
                   <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}
