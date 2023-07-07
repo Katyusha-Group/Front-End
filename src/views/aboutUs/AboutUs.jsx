@@ -4,7 +4,7 @@ import React from "react";
 import routes from "../../route";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import "../aboutUs/AboutUs.css"
-import im from "../../assets/img/Landing page-amico.png"
+import im from "../../assets/img/About us page-bro.png"
 import {
     Button,
     Card,
