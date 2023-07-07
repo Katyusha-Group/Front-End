@@ -1,10 +1,14 @@
 import Course from './CoursesPanel';
 // Token
-const tokenJson = localStorage.getItem("authTokens");
-const tokenClass = JSON.parse(tokenJson);
-const token = tokenClass.token.access;
+// const tokenJson = localStorage.getItem("authTokens");
+// const tokenClass = JSON.parse(tokenJson);
+// const token = tokenClass.token.access;
 
-export function addNewLesson(num) {                                        // Add a lesson
+export function addNewLesson(num) {  // Add a lesson
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
+                                     
     fetch("https://www.katyushaiust.ir/courses/my_courses/", {
       method: "PUT",
       headers: {
