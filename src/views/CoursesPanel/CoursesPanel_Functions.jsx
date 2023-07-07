@@ -25,7 +25,11 @@ export function addNewLesson(num) {  // Add a lesson
     })
       .then((response) => response.json())
       .then((data) => {
-        const courses = data.map(course => new Course(course, true));
+        const courses = data;
+        if (Array.isArray(data)) 
+        {
+          courses = data.map(course => new Course(course, true));
+        }
         // setChosenCourses(courses);
         return courses;
         // setChosenCoursesChanged(prev => !prev);

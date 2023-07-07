@@ -33,23 +33,6 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar";
 // import HomeIcon from './home.png';
 // import { size } from "lodash";
 export default function CoursesPanel() {
-  // console.log("HELLO WORLD!");
-  // Token
-  // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
-  // const tokenClass = JSON.parse(tokenJson) || 'nothing';
-  // // const token = tokenClass.token.access;
-  // const token = tokenClass.token.access || 'nothing';
-
-  // const [token, setToken] = useState(null);
-
-  // useEffect(() => {
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
-  //   const newToken = tokenClass ? tokenClass.token.access : null;
-  //   setToken(newToken);
-  // }, [localStorage.getItem("authTokens")]);
-
-
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -101,34 +84,54 @@ export default function CoursesPanel() {
   }, []);
 
   React.useEffect ( () => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
-        setChosenCourses(courses);
-        // let NewTimeTable = [...courses, ...DepartmentCourses];
-        // settimetable(NewTimeTable);
-        if (SwitchChecked)
-        {
-          // console.log("DEPPPP COutseSc: " + DepartmentCourses);
-          let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
-          // let temp = NewTimeTable.filter(course => course.can_take);
-          let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
-          settimetable(NewTimeTable);
-        }
-        else
-        {
-          let NewTimeTable = [...courses, ...DepartmentCourses];
-          settimetable(NewTimeTable);
-        }
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
+    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     changeInfo("courseChoosed", data);
+    //     const courses = data.map(course => new Course(course, true));
+    //     setChosenCourses(courses);
+    //     // let NewTimeTable = [...courses, ...DepartmentCourses];
+    //     // settimetable(NewTimeTable);
+    //     if (SwitchChecked)
+    //     {
+    //       // console.log("DEPPPP COutseSc: " + DepartmentCourses);
+    //       let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+    //       // let temp = NewTimeTable.filter(course => course.can_take);
+    //       let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
+    //       settimetable(NewTimeTable);
+    //     }
+    //     else
+    //     {
+    //       let NewTimeTable = [...courses, ...DepartmentCourses];
+    //       settimetable(NewTimeTable);
+    //     }
+    //   })
+    //   .catch((error) => console.error(error));
+    // const activeRoute = (routeName) => {
+    //   return location.pathname === routeName ? "active" : "";
+    // };
+    console.log("HERERERERERERE");
+    changeInfo("courseChoosed", info.courseChoosed);
+    const courses = info.courseChoosed.map(course => new Course(course, true));
+    setChosenCourses(courses);
+    // let NewTimeTable = [...courses, ...DepartmentCourses];
+    // settimetable(NewTimeTable);
+    if (SwitchChecked)
+    {
+      // console.log("DEPPPP COutseSc: " + DepartmentCourses);
+      let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+      // let temp = NewTimeTable.filter(course => course.can_take);
+      let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
+      settimetable(NewTimeTable);
+    }
+    else
+    {
+      let NewTimeTable = [...courses, ...DepartmentCourses];
+      settimetable(NewTimeTable);
+    }
+
   }, [ChosenCoursesChanged]);
   
   // Department courses
@@ -251,13 +254,39 @@ export default function CoursesPanel() {
     {
       if (this.IsChosen)
       {
-        // console.log("Want to delete")
+        console.log("Want to delete")
         if (!info.courseChoosed.includes(this)) {
           ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
           this.IsChosen = true;
           // this.IsChosen = false;
         }
+        // let isFound = info.courseChoosed.some((element) => {
+        //   if (element.complete_course_number === this.complete_course_number) 
+        //   {
+        //     return true;
+        //   }
+
+        //   return false;
+        // });
+        // console.log(
+        //   "all the courses in group",
+        //   info.courseGroupsListInContext
+        // );
+        // console.log("clicked");
+        // if (!isFound) {
+        //   console.log("includes------------------");
+
+        //   // addNewLesson(x.complete_course_number);
+          
+        //   changeInfo("courseChoosed", [
+        //     ...info.courseChoosed,
+        //     this,
+        //   ]);
+        // } 
+        // // console.log("OLD is it chosen? " + this.IsChosen);
+        // this.IsChosen = false;
+        // // console.log("Now is it chosen? " + this.IsChosen);
       }
       else
       {
