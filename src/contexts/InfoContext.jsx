@@ -15,7 +15,7 @@ export default function ContextInfo(props) {
     address: "1234 Main St, Anytown, USA",
     token: "",
     courseGroupID:"0",
-    chosenDepartment:[],
+    chosenDepartment:"",
     courseGroupsListInContext:[],
     courseChoosed:[],
     shop:[],
