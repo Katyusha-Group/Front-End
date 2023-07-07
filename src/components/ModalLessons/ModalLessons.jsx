@@ -165,24 +165,24 @@ const ModalLessons = (props) => {
                     <Row>
                     <Card className="ModalLessondataCard3">
                     <Row>
-                      <Col className="text-right" md="8" style={{ marginRight: '0px !important' }}>
+                      <Col className="text-right" md="7" style={{ marginRight: '0px !important' }}>
                       <p className="courseTitle" >ثبت نام شده&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                       {x.registered_count} از {x.capacity}
                       </Col>
-                      <Col className="text-right" md="4">
-                      <p className="courseTitle" >تعداد واحد های عملی </p>
+                      <Col className="text-right" md="5">
+                      <p className="courseTitle" >تعداد واحد های عملی &nbsp;&nbsp;&nbsp;&nbsp;</p>
                       &nbsp;{x.practical_unit}&nbsp;{"واحد"} 
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="text-right" md="8">
+                      <Col className="text-right" md="7">
                       <p className="courseTitle" >تعداد در صف انتظار&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
                         {x.waiting_count} {"نفر"} 
                       </Col>
 
-                      <Col className="text-right" md="4">
-                      <p className="courseTitle" >تعداد کل واحد ها&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                        {x.total_unit} &nbsp;{"واحد"} 
+                      <Col className="text-right" md="5">
+                      <p className="courseTitle" >تعداد کل واحد ها&nbsp;&nbsp;&nbsp; </p>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x.total_unit} {"واحد"} 
                       </Col>
                     </Row>
                     <Row>
