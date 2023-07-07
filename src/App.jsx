@@ -27,6 +27,8 @@ import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
 import { useState } from "react";
 import { useEffect } from "react";import { PrivatRoute } from "./global/functions.jsx";
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
+import News from "./views/News/News.jsx"
+import Notification from "./views/Notification/Notification.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
@@ -79,6 +81,16 @@ function App() {
                 <Router.Route path="/user" element={
                   <PrivatRoute>
                     <UserProfile />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/order" element={
+                  <PrivatRoute>
+                    <News />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/notification" element={
+                  <PrivatRoute>
+                    <Notification />
                   </PrivatRoute>
                 }></Router.Route>
               </Router.Routes>
