@@ -240,7 +240,7 @@ function ForgetPassword() {
                     <Button
                       onClick={handleSubmit}
                       className="btn-fill"
-                      color="info"
+                      color="primary"
                       type="submit"
                     >
                       ثبت ایمیل
