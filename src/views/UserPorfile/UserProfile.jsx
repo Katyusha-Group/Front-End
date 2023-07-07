@@ -20,6 +20,7 @@ import {
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { Link } from "react-router-dom";
+import ChangePassword from "../ChangePass";
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
@@ -238,6 +239,7 @@ function UserProfile() {
                     </Button>
                   </CardFooter>
                 </Card>
+                <ChangePassword></ChangePassword>
               </Col>
               <Col md="4">
                 <Card className="card-user">

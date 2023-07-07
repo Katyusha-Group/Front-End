@@ -3,9 +3,9 @@ import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { containsWhitespace } from "./CoursesPanel_Functions";
 // Token
-const tokenJson = localStorage.getItem("authTokens");
-const tokenClass = JSON.parse(tokenJson);
-const token = tokenClass.token.access;
+// const tokenJson = localStorage.getItem("authTokens");
+// const tokenClass = JSON.parse(tokenJson);
+// const token = tokenClass.token.access;
 
 
 const DayPeriod = (Section) => (
@@ -27,7 +27,7 @@ const DayPeriod = (Section) => (
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
                     showLoading();
                     entry.ButtonClicked();

@@ -72,6 +72,7 @@ const reducer = (state, action) => {
 export default function UserPage() {
   // const [datac, setData] = React.useState([]);
   const { info, changeInfo } = useInfo();
+  // const [modalData, setModalData] = React.useState();
   const [lesson, setLesson] = React.useState({
     name: "",
     day: 0,
@@ -120,6 +121,10 @@ export default function UserPage() {
     E: 0,
     T: 0,
   });
+  const [modalData, setModalData] = React.useState(
+    []
+  );
+
 
 
   function setShowCourseHoverFunc(name, value) {
@@ -266,7 +271,7 @@ export default function UserPage() {
               </button>
               <div
                 style={{ height: "100%" }}
-                onClick={() => closeLesson(true, lessons)}
+                onClick={() => apiForModalData(lessons.complete_course_number,true)}
                 className="d-flex align-items-center justify-content-center"
               >
                 <div className="m-1">
@@ -318,6 +323,38 @@ export default function UserPage() {
         })
         .catch((error) => console.error(error));
   }
+  function apiForModalData(x ,showOrNot){
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    showLoading();
+    // const response = await fetch(`https://www.katyushaiust.ir/courses/${x.complete_course_number}`,  {
+    //   method: "GET"
+
+      
+    // });
+    console.log(x);
+    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    }).then((response) => response.json())
+    .then((d) => {
+      console.log(d);
+      setModalData(d);
+      if(showOrNot){
+        setShowLesson({ flag: true, data: d })
+      }
+      
+    });
+    
+    
+    // const data = await response.json();
+    
+   }
 
   return (
     <>
@@ -495,6 +532,7 @@ export default function UserPage() {
                           console.log("includes------------------");
 
                           addNewLesson(x.complete_course_number);
+                          
                           changeInfo("courseChoosed", [
                             ...info.courseChoosed,
                             x,
@@ -556,7 +594,8 @@ export default function UserPage() {
                             : "large",
                         }}
                         onClick={() => {
-                        setShowLesson({ flag: true, data: x });
+                        apiForModalData(x.complete_course_number,true)
+                        // setShowLesson({ flag: true, data: modalData });
                         }}
                       >
                         <i className="tim-icons icon-badge ml-0" />
