@@ -51,36 +51,36 @@ export default function CoursesPanel() {
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/departments/names")
-      .then((response) => response.json())
-      .then((DepartmentOptions) => {
-      setDepartmentOptions(DepartmentOptions);
-    });
-    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
+    // fetch("https://www.katyushaiust.ir/departments/names")
     //   .then((response) => response.json())
-    //   .then((data) => {
-    //     changeInfo("courseChoosed", data);
-    //     if (Array.isArray(data)) {
-    //       const courses = data.map(course => new Course(course, true));
-    //       setChosenCourses(courses);
-    //       settimetable(courses);
-    //     }
-    //     else {
-    //       console.log("Type of data is: " + typeof data);
-    //     }
-    //   })
-    //   .catch((error) => console.error(error));
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
-    changeInfo("courseChoosed", info.courseChoosed);
-    // if (Array.isArray(info.courseChoosed)) {
-      const courses = info.courseChoosed.map(course => new Course(course, true));
-      setChosenCourses(courses);
-      settimetable(courses);
-    // }
+    //   .then((DepartmentOptions) => {
+    //   setDepartmentOptions(DepartmentOptions);
+    // });
+    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        changeInfo("courseChoosed", data);
+        if (Array.isArray(data)) {
+          const courses = data.map(course => new Course(course, true));
+          setChosenCourses(courses);
+          settimetable(courses);
+        }
+        else {
+          console.log("Type of data is: " + typeof data);
+        }
+      })
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+    // changeInfo("courseChoosed", info.courseChoosed);
+    // // if (Array.isArray(info.courseChoosed)) {
+    //   const courses = info.courseChoosed.map(course => new Course(course, true));
+    //   setChosenCourses(courses);
+    //   settimetable(courses);
+    // // }
 
   }, []);
 
@@ -143,50 +143,6 @@ export default function CoursesPanel() {
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
 
-  const customStyles = {                                              // Select Styles
-    input: (defaultStyles) => ({
-      ...defaultStyles,
-      color: "transparent",
-    }),
-    option: (defaultStyles, state) => ({
-      ...defaultStyles,
-      color: "#9A9A9A",
-      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
-      "&:hover": {
-        backgroundColor: "rgba(222, 222, 222, 0.3)",
-      },
-      transition: "all 150ms linear",
-      margin: "-4px 0px",
-      padding: "0.6rem 24px",
-      fontSize: "0.75rem",
-      fontWeight: "400",
-    }),
-
-    control: (defaultStyles, state) => ({
-      ...defaultStyles,
-
-      "&:hover": {
-        borderColor: "#e14eca",
-      },
-      backgroundColor: "transparent",
-      boxShadow: "none",
-      color: "rgba(255, 255, 255, 0.8)",
-      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
-      borderRadius: "0.4285rem",
-      fontSize: "1rem",
-      marginTop: "5px",
-      fontWeight: "400",
-      transition:
-        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-    }),
-    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
-  };
-
-  function handleDepartment(selectedOption) {                         // Handle Select
-    // showLoading();
-    setSelectedDepartment(selectedOption.value);
-    // closeLoading();
-  }
 
   React.useEffect(() => {                                             // Set Selected Department courses
     // showLoading();
@@ -205,6 +161,7 @@ export default function CoursesPanel() {
           // setSwitchChecked(false);
           if (SwitchChecked)
           {
+            console.log("Switch is checked");
             let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
             let NewTimeTable = [...ChosenCourses, ...AllowedDepartmentCourses];
             settimetable(NewTimeTable);
@@ -212,6 +169,7 @@ export default function CoursesPanel() {
           }
           else
           {
+            console.log("Switch is NOT checked");
             let NewTimeTable = [...ChosenCourses, ...courses];
             settimetable(NewTimeTable);
             setSwitchChecked(false);
@@ -404,18 +362,7 @@ export default function CoursesPanel() {
                 {/* <Col className="HomePageButtonCol">
                   
                 </Col> */}
-                
-                <Col className="SelectCol">
-                  <Select
-                    options={DepartmentOptions}
-                    styles={customStyles}
-                    isRtl
-                    placeholder="دانشکده مورد نظر را انتخاب کنید"
-                    name="SelectDepartment"
-                    value={SelectedDepartment.name}
-                    onChange={handleDepartment}
-                  />
-                </Col>
+              
                 <Col className="SwitchCol">
                   <div className="SwitchCard"> 
                     <ReactSwitch className="Switch"
