@@ -27,7 +27,7 @@ const DayPeriod = (Section) => (
                 </div>
                 <button className="btn-fill-AddCourseButton"
                   name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(253,93,147)" : "rgb(0, 191, 255)"}}
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
                     showLoading();
                     entry.ButtonClicked();

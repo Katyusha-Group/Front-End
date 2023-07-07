@@ -92,11 +92,11 @@ export default function CoursesPanel() {
     //   return location.pathname === routeName ? "active" : "";
     // };
     changeInfo("courseChoosed", info.courseChoosed);
-    if (Array.isArray(info.courseChoosed)) {
+    // if (Array.isArray(info.courseChoosed)) {
       const courses = info.courseChoosed.map(course => new Course(course, true));
       setChosenCourses(courses);
       settimetable(courses);
-    }
+    // }
 
   }, []);
 
@@ -244,7 +244,7 @@ export default function CoursesPanel() {
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = props.is_allowed;
       this.IsChosen = IsFromChosencourses;
-      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+      this.backgColor = (this.IsChosen) ? "rgb(87, 106, 224)" : "hsl(235, 22%, 30%)";
     }
     
     ButtonClicked ()
