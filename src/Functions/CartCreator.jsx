@@ -2,6 +2,7 @@ import React from "react";
 export const CartCreator = (props) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access
   const getCart = async () => {
+    console.log("cartCreator run")
     const shopId = await fetch("https://katyushaiust.ir/carts/", {
       method: "POST",
       headers: {

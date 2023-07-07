@@ -101,10 +101,21 @@ function Shopping() {
         payment_method: "W",
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+      .then((response) => {
+        
+        console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
+        if (response.status == 400) {
+          console.log("status 400 run")
+          return  response.json().then((data) => {
+            alert(data.telegram + "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید");
+          });
+        } else return response.json().then((data) => {
+          // console.log("hello error ridi")
+          console.log("status 200 run")
+          let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+        });
       })
+      
       .catch((error) => {
         console.error(error);
       });
@@ -325,15 +336,15 @@ function Shopping() {
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
-                            <FormGroup className="shopping_form" check disabled>
+                            <FormGroup className="shopping_form" check>
                               <Label check className="shoping_label">
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
                                     changeChecked(1, index);
                                   }}
-                                  // checked={state[index].contain_email}
-                                  checked={false}
+                                  checked={state[index].contain_email}
+                                  // checked={false}
                                   // checked={s}
                                   type="checkbox"
                                 />
