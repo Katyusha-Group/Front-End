@@ -138,7 +138,7 @@ function isValidCode(code) {
     //console.log(verificationApi(code))
     closeLoading();
     //console.log(showAlert)
-    // verificationApi(code,info.token)
+     verificationApi(code,info.token)
     
 
 
