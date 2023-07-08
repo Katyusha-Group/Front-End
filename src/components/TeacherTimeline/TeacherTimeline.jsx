@@ -3,7 +3,7 @@ import "./TeacherTimeline.module.css";
 import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
-const Timeline = (props) => {
+const TeacherTimeline = (props) => {
   console.log(props);
   let teacher_id = props.show.show.data.teachers[0].id;
   const { info, changeInfoState } = useInfo();
@@ -95,11 +95,9 @@ const Timeline = (props) => {
                     {"1" + termid.replace(/(\d{3})/, "$1-")}
                   </span>
                   <ul className="content">
-                    {Object.keys(courses.courses)
-                      // .filter((course) => course.includes("ا"))
-                      .map((course) => (
-                        <li>{course}</li>
-                      ))}
+                    {Object.keys(courses.courses).map((course) => (
+                      <li>{course}</li>
+                    ))}
                   </ul>
                 </li>
               </>
@@ -177,4 +175,4 @@ const Timeline = (props) => {
   );
 };
 
-export default Timeline;
+export default TeacherTimeline;

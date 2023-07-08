@@ -352,20 +352,30 @@ const ModalLessons = (props) => {
                 </Col>
               </Row>
               <Row>
-                <Col md="12" className="mt-3" style={{ overflow: "auto" , height:"60vh", background:"rgb(46, 49, 72)"}}>
-                  <div
-                    style={{
-                      display: timelineData == "data2" ? "block" : "none",
-                    }}
-                  >
-                    <TeacherTimeline show={props} />
-                  </div>
+                <Col
+                  md="12"
+                  className="mt-3"
+                  style={{
+                    overflow: "auto",
+                    height: "60vh",
+                    background: "rgb(46, 49, 72)",
+                    paddingLeft: "30px",
+                    paddingRight: "10px",
+                  }}
+                >
                   <div
                     style={{
                       display: timelineData == "data1" ? "block" : "none",
                     }}
                   >
                     <Timeline show={props} />
+                  </div>
+                  <div
+                    style={{
+                      display: timelineData == "data2" ? "block" : "none",
+                    }}
+                  >
+                    <TeacherTimeline show={props} />
                   </div>
                 </Col>
               </Row>
