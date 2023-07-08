@@ -177,6 +177,7 @@ export default function CoursesPanel() {
     // showLoading();
     setSelectedDepartment(selectedOption.value);
     // closeLoading();
+    showLoading();
   }
 
   React.useEffect(() => {                                             // Set Selected Department courses
@@ -230,7 +231,7 @@ export default function CoursesPanel() {
     {
       setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
     }
-    closeLoading();
+    // closeLoading();
   }, [SwitchChecked]);
 
   class Course {
@@ -343,6 +344,9 @@ export default function CoursesPanel() {
     )
   }, [timetable])
   
+  React.useEffect (() => {
+    closeLoading();
+  }, [timetable]);
   
   return (
     <>

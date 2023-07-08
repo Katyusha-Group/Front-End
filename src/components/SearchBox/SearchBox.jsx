@@ -5,6 +5,7 @@ import { useInfo } from "../../contexts/InfoContext";
 // import { takeLessonsGroups } from '../LessonSidebar/ApiCalls';
 import "./SearchBox.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 // import { useInfo } from "../../contexts/InfoContext";
 const fetchRequest = "FETC_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
@@ -37,6 +38,7 @@ const reducer = (state, action) => {
 
 const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
+  const [selectedL, setSelectedL] = React.useState([]);
   const {info,changeInfo}=useInfo()
   console.log("nameList", data)
   // let nameList;
@@ -110,11 +112,12 @@ const SearchBox = ( data ) => {
           )
           .map((item, index) => (
             <a
-              className="nav-link button_lessons"
+              className={item===selectedL?"nav-link button_lessons selectedL":"nav-link button_lessons"}
               activeClassName="active"
               onClick={() => {
                 // console.log("I'm called 111");
                 changeInfo("courseGroupID", item.course_number);
+                setSelectedL(item);
                 // console.log("new info")
                 // console.log({info})
                 takeLessonsGroups(token, item.course_number);
