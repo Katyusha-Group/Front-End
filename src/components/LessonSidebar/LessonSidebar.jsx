@@ -37,8 +37,6 @@ import classData from "../../assets/data/data.json";
 
 import SearchBox from "../SearchBox/SearchBox.jsx";
 
-import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
-
 import Spinner from "react-bootstrap/Spinner";
 import { useInfo } from "../../contexts/InfoContext";
 var ps;
@@ -61,10 +59,6 @@ const reducer = (state, action) => {
   }
 };
 
-export function SendDepartmentToCoursesPanel (input_department)
-{
-  return input_department;
-}
 
 function LessonSidebar(props) {
   const {info, changeInfo} = useInfo();
