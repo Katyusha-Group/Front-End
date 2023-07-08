@@ -317,7 +317,7 @@ function LessonSidebar(props) {
                           {"  "}
                           درباره ما
                         </DropdownItem>
-                        <DropdownItem
+                        {/* <DropdownItem
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
@@ -326,10 +326,10 @@ function LessonSidebar(props) {
                         >
                           <span className="tim-icons icon-lock-circle" />
                           تغییر رمز عبور
-                        </DropdownItem>
+                        </DropdownItem> */}
 
                         <DropdownItem
-                          href="#pablo"
+                          // href="#pablo"
                           // onClick={()=>{
                           //   setAuthTokens(null);
                           //   console.log("clicked")
@@ -338,7 +338,7 @@ function LessonSidebar(props) {
                         >
                           <span className="tim-icons icon-simple-remove" />
                           <Link
-                            to="/login"
+                            to="/landingPage"
                             onClick={() => {
                               localStorage.removeItem("authTokens");
                               //localStorage.setItem('authTokens', "");

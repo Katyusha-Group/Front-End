@@ -83,7 +83,7 @@ function SetNewPassword() {
   //////////////////////////// Input errors //////////////////
 
   function isValidPassword(pass) {
-    console.log(/[a-zA-Z]/.test(pass));
+    //console.log(/[a-zA-Z]/.test(pass));
     return /[a-zA-Z]/.test(pass);
   }
 
@@ -169,7 +169,7 @@ function SetNewPassword() {
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        //console.log('I was closed by the timer')
         /////has to be changed to no internet
       }
     })
@@ -191,7 +191,7 @@ function SetNewPassword() {
       }),
     });
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     Swal.close()
     if ( data.detail==="Password successfully changed."){
 
@@ -237,10 +237,10 @@ function SetNewPassword() {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
+        <div className="signUpContainer">
           <div className="content contentLogin">
             <Row className="justify-content-center">
-              <Col className="text-right" md="5" >
+              <Col className="text-right" md="4" >
                 {errorMessage.backError && (
                   <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}

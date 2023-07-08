@@ -134,10 +134,10 @@ function isValidCode(code) {
     //console.log(code)
     // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
-    console.log(showAlert)
-    console.log(verificationApi(code))
+    //console.log(showAlert)
+    //console.log(verificationApi(code))
     closeLoading();
-    console.log(showAlert)
+    //console.log(showAlert)
     // verificationApi(code,info.token)
     
 

@@ -26,12 +26,12 @@ import { Link } from "react-router-dom";
 import { conforms } from "lodash";
 
 function Login(props) {
-  console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
+  // console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
   let [shop_caller,setShop_caller] = React.useState()
-  console.log("default gohNakhor",shop_caller)
+  // console.log("default gohNakhor",shop_caller)
   let idShop = "ali";
   React.useEffect(() => {
-    console.log("state", idShop);
+    // console.log("state", idShop);
   }, [idShop]);
   // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
@@ -87,7 +87,7 @@ function Login(props) {
   // }, [shop_caller]);
   function gohNakhor(){
     setShop_caller(true);
-    console.log("gohNakhor:",shop_caller)
+    // console.log("gohNakhor:",shop_caller)
   }
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
@@ -110,7 +110,7 @@ function Login(props) {
   });
   async function handleSubmit(event) {
 
-    console.log("toooooken"+localStorage.authTokens)
+    // console.log("toooooken"+localStorage.authTokens)
     event.preventDefault();
     // const { info } = useInfo();
     // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
@@ -152,16 +152,16 @@ function Login(props) {
       }),
     });
     const data = await response.json();
-    console.log("response",response);
+    // console.log("response",response);
     closeLoading();
     if (response.status === 200) {
       // props.onLogIn();
       // console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
       
       setAuthTokens(data.token);
-      console.log(authTokens);
+      // console.log(authTokens);
       setShop_caller(true);
-      console.log("shop_caller: ", shop_caller)
+      // console.log("shop_caller: ", shop_caller)
       localStorage.setItem("authTokens", JSON.stringify(data));
       // localStorage.getItem("authTokens");
       const tokenClass = JSON.parse(JSON.stringify(data));
@@ -175,21 +175,21 @@ function Login(props) {
       })
       // console.log("shopId", shopId.json())
       idShop = await shopId.json();
-      console.log("shopId_data",idShop);
+      // console.log("shopId_data",idShop);
       if (shopId.status == 201 || shopId.status == 200) {
-        console.log("shopId.json()",idShop)
+        // console.log("shopId.json()",idShop)
         localStorage.setItem("shopId", JSON.stringify(idShop))
-        console.log("shopId localstorage ",localStorage.getItem("shopId"))
+        // console.log("shopId localstorage ",localStorage.getItem("shopId"))
         let test = localStorage.getItem("shopId")
-        console.log("test", JSON.parse(test)[0])
+        // console.log("test", JSON.parse(test)[0])
       }
       else{
         console.error("shopId error", shopId.status)
       }
-      console.log("shopId: ",shopId)
+      // console.log("shopId: ",shopId)
       Navigate("/admin/page");
     } else {
-      console.log(data.error);
+      // console.log(data.error);
       errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
       setErrorMessage({
         ...errorMessage,
@@ -209,10 +209,10 @@ function Login(props) {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
-          <div className="content contentLogin">
+        <div className="signUpContainer" >
+          <div className="content contentLogin" style={{direction:"rtl"}}>
             <Row className="just-center">
-              <Col className="text-right" md="5">
+              <Col className="text-right" md="4">
                 {errorMessage.backError && (
                   <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
                 )}

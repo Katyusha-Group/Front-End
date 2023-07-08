@@ -39,3 +39,9 @@
     border-radius: 0.2857rem;
     text-align: center !important;
   } 
+
+  .signUpContainer{
+    margin-top: 120px !important;
+    /* direction:rtl;
+     padding: 0px; */
+  }
