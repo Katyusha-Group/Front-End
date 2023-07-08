@@ -231,7 +231,7 @@ export default function CoursesPanel() {
     {
       setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
     }
-    closeLoading();
+    // closeLoading();
   }, [SwitchChecked]);
 
   class Course {
