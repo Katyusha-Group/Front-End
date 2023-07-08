@@ -359,7 +359,7 @@ export default function UserPage() {
   return (
     <>
       <Row>
-        <Col sm="12">
+        <Col className="landingCol" sm="12">
           <Card className="week-card card-body">
             <CardBody className="week-card-body">
               <div className="">
@@ -550,12 +550,16 @@ export default function UserPage() {
                           alt="professorImage"
                         />
                         <div className="infoPart">
-                          <p style={{ textAlign: 'right'}}>
-                            {x.name} (گروه {x.group_number})
+                          
+                          <p style={{ textAlign: 'right'}} title={`${x.name} (گروه ${x.group_number})`}>
+              {x.name} (گروه {x.group_number})
+                           
                           </p>
-                          <p style={{ fontSize: 12 , textAlign: 'right', marginRight :'10px'}}>
-                            {"استاد:  "}
-                            {x.teachers.map((y)=>(y.name)).join(" , ")}
+                          <p style={{ fontSize: 12 , textAlign: 'right', marginRight :'10px'}} title={`"استاد:  "
+                            ${x.teachers.map((y)=>(y.name)).join(" , ")}`}>
+                              {`استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`.length<35 ? `استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`
+                             : `استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`.slice(0,35)+"..."}
+                            
                           </p>
 
                           <div className="courseCardDownSide">
