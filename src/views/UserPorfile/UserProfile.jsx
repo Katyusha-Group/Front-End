@@ -67,7 +67,7 @@ function UserProfile() {
     formData.append("first_name", info.first_name);
     console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
-    if(image.length > 0) {
+    if(images.length > 0) {
       formData.append("image", images[0]);
     }
     console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
