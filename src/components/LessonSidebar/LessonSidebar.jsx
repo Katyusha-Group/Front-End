@@ -329,7 +329,7 @@ function LessonSidebar(props) {
                         </DropdownItem> */}
 
                         <DropdownItem
-                          href="#pablo"
+                          // href="#pablo"
                           // onClick={()=>{
                           //   setAuthTokens(null);
                           //   console.log("clicked")
@@ -338,7 +338,7 @@ function LessonSidebar(props) {
                         >
                           <span className="tim-icons icon-simple-remove" />
                           <Link
-                            to="/login"
+                            to="/landingPage"
                             onClick={() => {
                               localStorage.removeItem("authTokens");
                               //localStorage.setItem('authTokens', "");
