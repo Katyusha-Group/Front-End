@@ -17,3 +17,6 @@
     cursor: pointer;
     background-color: #32325d;
 }
+.selectedL{
+    background-color: #2c3857;
+}

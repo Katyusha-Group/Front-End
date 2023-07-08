@@ -74,6 +74,7 @@ function LessonSidebar(props) {
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   const [selectedDep, setSelectedDep] = React.useState([]);
+  // const [selectedL, setSelectedL] = React.useState([]);
   const Navigate = useNavigate();
   // const [allColleges, setAllColleges] = React.useState([]);
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
@@ -384,10 +385,11 @@ function LessonSidebar(props) {
                   ""
                 ) : (
                   <NavLink
-                    className="nav-link nav-link-lessonSidebar"
-                    // activeClassName="active"
+                  className={allColleges===selectedDep?"nav-link nav-link-lessonSidebar selecteddItem":"nav-link nav-link-lessonSidebar"}
+                  // activeClassName="active"
                     onClick={() => {
                       setLessonState(allColleges);
+                      setSelectedDep(allColleges);
                       // console.log("all colleges in onclick",allColleges);
                       // console.log("lesson state in onclick",lessonState);
                     }}
