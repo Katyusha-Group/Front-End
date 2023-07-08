@@ -242,7 +242,7 @@ function UserProfile() {
                               <Col>نوع پرداخت</Col>
                               <Col>
                                 {order.payment_method === "W"
-                                  ? "کیف پوف"
+                                  ? "کیف پول"
                                   : "درگاه پرداخت"}
                               </Col>
                             </Row>

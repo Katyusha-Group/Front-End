@@ -9,6 +9,7 @@ export default defineConfig({
   //     "/accounts/" : "http://127.0.0.1:8000/",
   //   }
   // },
+
   plugins: [react()],
   css: {
     preprocessorOptions: {
@@ -17,4 +18,7 @@ export default defineConfig({
       },
     },
   },
+  // esbuild: {
+  //   drop: ['console', 'debugger'],
+  // },
 })

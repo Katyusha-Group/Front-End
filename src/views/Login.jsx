@@ -187,7 +187,7 @@ function Login(props) {
         console.error("shopId error", shopId.status)
       }
       // console.log("shopId: ",shopId)
-      Navigate("/admin/page");
+      Navigate("/home/page");
     } else {
       // console.log(data.error);
       errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";

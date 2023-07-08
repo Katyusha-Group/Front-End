@@ -108,7 +108,7 @@ export function takeLessonsGroups(token){
 
       body: JSON.stringify(
       {
-        verification_code: code
+        "verification_code": code
       })
     });
       
