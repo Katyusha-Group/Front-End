@@ -111,3 +111,7 @@ a.nav-link-course:hover{
 .lessons_in_searchBox{
   overflow-x: hidden;
 }
+
+.selecteddItem{
+ background-color: #2c3857;
+}
