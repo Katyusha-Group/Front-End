@@ -113,7 +113,10 @@ const ModalShopping = (props) => {
         contain_email: email,
       }),
     })
-      .then((response) => response.json())
+      .then((response) =>{ 
+        
+        console.log("🚀 ~ file: ModalShopping.jsx:120 ~ addItemShop ~ response:", response.status)
+        return response.json()})
       .then((data) => {
       })
       .catch((error) => {

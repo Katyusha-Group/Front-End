@@ -38,3 +38,8 @@
   from {opacity :1;}
   to {opacity :0;}
 }
+.signUpContainer{
+  margin-top: 120px !important;
+  direction:rtl;
+   padding: 0px;
+}

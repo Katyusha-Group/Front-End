@@ -8,7 +8,7 @@ import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-
+import logo1 from "../../assets/img/Logo1.png";
 // reactstrap components
 import {
   Button,
@@ -218,11 +218,11 @@ function LessonSidebar(props) {
               <Row className="nav-lessonSidebar">
                 <Col md="5" xs="5" style={{ margin: "auto" }}>
                   <NavLink
-                    to="/admin/page"
+                    to="/home/page"
                     className="nav-header nav-link-icon"
                   >
                     <img
-                      src="../../public/Logo1.png"
+                      src={logo1}
                       alt=""
                       style={{ height: "34px" }}
                     />
@@ -272,7 +272,22 @@ function LessonSidebar(props) {
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/order");
+                          }}
+                        >
+                          {/* <span className="tim-icons icon-email-85" /> */}
+                        <span className="tim-icons icon-bag-16" />
+                          {"  "}
+                          سفارش ها
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/notification");
+                          }}
                         >
                           <span className="tim-icons icon-email-85" />
                           {"  "}
@@ -294,15 +309,27 @@ function LessonSidebar(props) {
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
+                            Navigate("../aboutUs");
+                          }}
+                        >
+                          {/* <span className="tim-icons icon-email-85" /> */}
+                          <span className="tim-icons icon-send" />
+                          {"  "}
+                          درباره ما
+                        </DropdownItem>
+                        {/* <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
                             Navigate("/admin/change");
                           }}
                         >
                           <span className="tim-icons icon-lock-circle" />
                           تغییر رمز عبور
-                        </DropdownItem>
+                        </DropdownItem> */}
 
                         <DropdownItem
-                          href="#pablo"
+                          // href="#pablo"
                           // onClick={()=>{
                           //   setAuthTokens(null);
                           //   console.log("clicked")
@@ -311,7 +338,7 @@ function LessonSidebar(props) {
                         >
                           <span className="tim-icons icon-simple-remove" />
                           <Link
-                            to="/login"
+                            to="/landingPage"
                             onClick={() => {
                               localStorage.removeItem("authTokens");
                               //localStorage.setItem('authTokens', "");

@@ -57,7 +57,7 @@ export default function Admin() {
   head.appendChild(link);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/home") {
         console.log(prop.component);
         return (
           <Router.Route

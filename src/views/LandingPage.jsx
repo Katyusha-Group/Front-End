@@ -26,12 +26,19 @@ import {
 
 function LandingPage() {
   React.useEffect(() => {
+    const container = document.getElementById('animation');
+    if (!container)
+    {
+      container.innerHTML = 'Sorry, we could not load the animation.';
+      return;
+    }
     const animation = lottie.loadAnimation({
       container: document.getElementById('animation'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: "../src/assets/img/28893-book-loading.json"
+      path: "https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json"
+      // path: "../src/assets/img/28893-book-loading.json"
       // path: "../src/assets/img/92377-quiz-mode.json"
       // path: "../src/assets/img/133116-education-edit.json"
       // path: "../src/assets/img/132921-education-services.json"
@@ -45,7 +52,7 @@ function LandingPage() {
   }, []);
   return (
     <>
-    <Container>
+    <Container className="landing">
     <Row>
       <Col className="LandingPageCardCol">
         <Card className="LandingPageCard">
@@ -55,7 +62,7 @@ function LandingPage() {
                 به کاتیوشا خوش اومدین!
               </div>
               <br/>
-              <div className="div-3">
+              <div className="div-3" style={{textAlign: "right"}} >
                 این سامانه به شما کمک می کنه که:
                 <li>
                   برنامه هفتگی و لیست واحدها و امتحاناتون رو ببینین 📆
@@ -66,8 +73,8 @@ function LandingPage() {
                 <li>
                  برای ترم آینده برنامه ریزی کنین 📒
                 </li>
-                <li>
-                  و کلی قابلیت خوب دیگه برای اینکه بتونین انتخاب واحد خوب و راحتی داشته باشین
+                <li style={{fontSize:"17px",textAlign: "right"}} >
+                    و کلی قابلیت منحصر به فرد دیگه برای اینکه بتونین انتخاب واحد خوب و راحتی داشته باشین
                 </li>
               </div>
               <br/>
@@ -100,7 +107,7 @@ function LandingPage() {
           </div>
           <span>
             <div className="div-4">
-              <Row>
+              <Row style={{fontSize:"15px",color:"#494f5d"}}>
                 کنجکاویم که نظرات و پیشنهاداتتون رو درباره کاتیوشا بدونیم:
                 katyushaiust@gmail.com
               </Row>

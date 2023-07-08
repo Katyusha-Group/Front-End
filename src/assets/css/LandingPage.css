@@ -4,12 +4,12 @@
     padding: 0;
   }
 
-  .row {
+  .loanding .row {
     display: flex;
     align-items: center;
   }
   
-  .col {
+  .landingCol {
     padding: 10px;
   }
   

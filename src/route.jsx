@@ -22,10 +22,10 @@ var routes = [
         component: UserPage,
         rtlName: "صفحه کاربری",
         icon: 'icon-bank',
-        layout: "/admin"
+        layout: "/home"
     },
     {
-        path: '../CoursesPanel',
+        path: '/CoursesPanel',
         name:"CoursesPanel",
         component: CoursesPanel,
         rtlName: "پنل دروس",
@@ -51,7 +51,7 @@ var routes = [
     
     ,
     {
-        path: '../aboutUs',
+        path: '/aboutUs',
         name:"AboutUs",
         component: AboutUs,
         rtlName: "درباره ما",
