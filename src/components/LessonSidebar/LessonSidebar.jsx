@@ -348,7 +348,7 @@ function LessonSidebar(props) {
                           onClick={() => {
                             setLessonState([prop]);
                             // console.log("SIDEBBARRR");
-                            changeInfo("chosenDepartment", prop.id);
+                            changeInfo("chosenDepartment", [lessonState]);
                             console.log ("Department is : " + info.chosenDepartment[0]);
                           }}
                           key={index}
