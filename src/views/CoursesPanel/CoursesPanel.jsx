@@ -351,10 +351,10 @@ export default function CoursesPanel() {
       <Row >
         <Col>
           <Card className="TableCard">
-            <CardHeader className="MainCardHeader text-right">
+            {/* <CardHeader className="MainCardHeader text-right">
               <CardTitle style={{fontSize:"25px"}}>
                 پنل دروس
-              </CardTitle>
+              </CardTitle> */}
               {/* <Button //className="HomeButton"
                 // class="HomeButton tim-icons icon-double-right"
                 href="/admin/page"
@@ -363,14 +363,14 @@ export default function CoursesPanel() {
                 {/* <img src={HomeIcon} alt="Button Image" /> */}
                 {/* خانه */}
               {/* </Button> */}
-            </CardHeader>
+            {/* </CardHeader> */}
             <CardBody>
               <Row className="CardBodyRow">
                 {/* <Col className="HomePageButtonCol">
                   
                 </Col> */}
                 
-                <Col className="SelectCol">
+                <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
                     styles={customStyles}
@@ -381,16 +381,20 @@ export default function CoursesPanel() {
                     onChange={handleDepartment}
                   />
                 </Col>
-                <Col className="SwitchCol">
-                  <div className="SwitchCard"> 
-                    <ReactSwitch className="Switch"
-                      checked={SwitchChecked}
-                      onChange={handleSwitchChange}
-                    />
-                    <label>
-                    فقط دروس قابل اخذ
-                    </label>
-                  </div>
+                <Col className="SwitchCol" md="1">
+                  <Row className="SwitchCard">
+                    <Col className="SwitchCardCol">
+                      <ReactSwitch className="Switch"
+                        checked={SwitchChecked}
+                        onChange={handleSwitchChange}
+                      />
+                    </Col>
+                    <Col className="SwitchCardCol">
+                      <p>
+                        فقط دروس قابل اخذ
+                      </p>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
               <Table className="ClassesTable">
