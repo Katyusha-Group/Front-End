@@ -19,6 +19,8 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
+import NotificationAlert from "react-notification-alert";
+
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
 function UserProfile() {
@@ -54,21 +56,66 @@ function UserProfile() {
     const { name, value } = event.target;
     setInfo((prevFormData) => ({
       ...prevFormData,
-      [name]: value, 
+      [name]: value,
     }));
   }
 
   const startTelegramBot = () => {
     window.location.href = info.telegram_link;
   };
-
+  const notificationAlertRef = React.useRef(null);
+  const notify = (place) => {
+    var color = 2;
+    var type;
+    switch (color) {
+      case 1:
+        type = "primary";
+        break;
+      case 2:
+        type = "success";
+        break;
+      case 3:
+        type = "danger";
+        break;
+      case 4:
+        type = "warning";
+        break;
+      case 5:
+        type = "info";
+        break;
+      default:
+        break;
+    }
+    var options = {};
+    options = {
+      place: place,
+      message: (
+        <div>
+          <div>
+            <b>با موفقیت به سبد خرید اضافه شد</b>
+          </div>
+        </div>
+      ),
+      type: type,
+      color: "white",
+      // icon: "tim-icons icon-bell-55",
+      autoDismiss: 7,
+    };
+    notificationAlertRef.current.notificationAlert(options);
+  };
   function save() {
     var formData = new FormData();
     formData.append("first_name", info.first_name);
     console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
-    if(images.length > 0) {
+    if (images.length > 0) {
       formData.append("image", images[0]);
+      console.log(
+        "🚀 ~ file: UserProfile.jsx:73 ~ save ~ images[0]:",
+        images[0]
+      );
+    } else {
+      console.log("no image");
     }
     console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
     fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
@@ -79,7 +126,9 @@ function UserProfile() {
       redirect: "follow",
     })
       .then((response) => response.json())
-      .then((data) => {})
+      .then((data) => {
+        notify("tl");
+      })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
@@ -103,9 +152,13 @@ function UserProfile() {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
+    
+
     // const { touched, error } = meta;
     return (
       <div>
+        <NotificationAlert ref={notificationAlertRef} />
+
         <input
           className="btn"
           name="Image"
@@ -170,7 +223,7 @@ function UserProfile() {
                           <FormGroup>
                             <label>جنسیت</label>
                             <Input
-                              defaultValue={info.gender === 'M' ? "مرد" : "زن"}
+                              defaultValue={info.gender === "M" ? "مرد" : "زن"}
                               placeholder="جنسیت"
                               type="text"
                               name="gender"
@@ -220,10 +273,7 @@ function UserProfile() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup>
-                            {/* <label>تلگرام</label> */}
-                            
-                          </FormGroup>
+                          <FormGroup>{/* <label>تلگرام</label> */}</FormGroup>
                         </Col>
                       </Row>
                     </Form>
@@ -275,7 +325,7 @@ function UserProfile() {
                   <div className="card-description mt-2">
                     برای دیدن اعلان ها به تلگرام بروید
                   </div>
-                  <CardFooter >
+                  <CardFooter>
                     <div className="button-container">
                       <Button
                         onClick={startTelegramBot}

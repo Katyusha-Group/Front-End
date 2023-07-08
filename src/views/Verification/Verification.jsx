@@ -164,7 +164,7 @@ function isValidCode(code) {
   return (
     <>
       <div className="wrapper">
-        <div className="main-panel">
+        <div className="signUpContainer">
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4">
@@ -183,7 +183,7 @@ function isValidCode(code) {
                     </div>}
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
+                          <FormGroup className="text-center">
                             <label style={{"fontSize":"0.9375rem"}}>لطفا کد ارسال شده به ایمیل تان را وارد کنید:</label>
                           </FormGroup>
                           <Row>
