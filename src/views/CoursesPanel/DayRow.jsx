@@ -6,17 +6,56 @@ import { containsWhitespace } from "./CoursesPanel_Functions";
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
 // const token = tokenClass.token.access;
+import ModalLessons from "../../components/ModalLessons/ModalLessons";
 
 
-const DayPeriod = (Section) => (
+function DayPeriod (Input) {
+  const [showLesson, setShowLesson] = React.useState({
+    flag: false,
+    data: {},
+  });
+  const [modalData, setModalData] = React.useState(
+    []
+  );
+  function apiForModalData(x ,showOrNot){
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    showLoading();
+    console.log(x);
+    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    }).then((response) => response.json())
+    .then((d) => {
+      
+      setModalData(d);
+      if(showOrNot){
+        setShowLesson({ flag: true, data: d })
+        console.log("modal is shown");
+      }
+      console.log(d);
+    });
+    
+    closeLoading();
+    // const data = await response.json();
+    
+   }
+
+  return (
     <div>
-      {Object.entries(Section).map(([count, entry]) => {
+      {Object.entries(Input).map(([count, entry]) => {
         return (
           <div className="CourseListContainer">
             {entry !== null && (
               <div className="CourseContainer">
                 <div className="Course"
                   style={{ backgroundColor: entry.backgColor, fontSize: containsWhitespace(entry.name) ? "x-small" : "xx-small" }}
+                  onClick={() => apiForModalData(entry.complete_course_number, true)}
                 >
                   {/* <div style={{ margin: '5px' }}>
                     {entry.name} ({entry.class_gp})
@@ -38,11 +77,18 @@ const DayPeriod = (Section) => (
                 {/* <br/> */}
               </div>
             )}
+            <ModalLessons
+          show={showLesson}
+          close={() =>
+            setShowLesson(() => ({ ...showLesson, flag: false }))
+          }
+        />
           </div>
         )
       })}
     </div>
   )
+}
 
 const DayRow = ({ periods, dayName }) => {
   // showLoading();
