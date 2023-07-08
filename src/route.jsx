@@ -25,12 +25,12 @@ var routes = [
         layout: "/admin"
     },
     {
-        path: '/CoursesPanel',
+        path: '../CoursesPanel',
         name:"CoursesPanel",
         component: CoursesPanel,
         rtlName: "پنل دروس",
         icon: "icon-paper",
-        layout: "/admin"
+        layout: ""
     }
     ,{
         path: '/shopping',

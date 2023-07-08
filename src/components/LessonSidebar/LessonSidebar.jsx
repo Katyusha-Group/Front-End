@@ -237,7 +237,7 @@ function LessonSidebar(props) {
                 </Col>
                 <Col md="4" xs="4" style={{ margin: "auto" }}>
                   <NavLink
-                    to="..\admin\CoursesPanel"
+                    to="..\CoursesPanel"
                     className="nav-header nav-link-course"
                   >
                     پنل دروس
