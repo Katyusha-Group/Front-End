@@ -73,6 +73,7 @@ function LessonSidebar(props) {
   let [lessonState, setLessonState] = React.useState([]);
   const [departeman, setDeparteman] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
+  const [selectedDep, setSelectedDep] = React.useState([]);
   const Navigate = useNavigate();
   // const [allColleges, setAllColleges] = React.useState([]);
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
@@ -365,9 +366,9 @@ function LessonSidebar(props) {
                     if (prop.base_courses.length > 0) {
                       return (
                         <NavLink
-                          className="nav-link nav-link-lessonSidebar"
+                          className={prop===selectedDep?"nav-link nav-link-lessonSidebar selecteddItem":"nav-link nav-link-lessonSidebar"}
                           // activeClassName="active"
-                          onClick={() => setLessonState([prop])}
+                          onClick={() => {setLessonState([prop]) , setSelectedDep(prop)}}
                           key={index}
                         >
                           <i className="tim-icons icon-chart-bar-32" />
