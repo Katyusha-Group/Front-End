@@ -53,7 +53,7 @@ function DayPeriod (Input) {
               <div className="CourseContainer">
                 <div className="Course"
                   style={{ backgroundColor: entry.backgColor, fontSize: containsWhitespace(entry.name) ? "x-small" : "xx-small" }}
-                  // onClick={() => apiForModalData(entry.complete_course_number, true)}
+                  onClick={() => apiForModalData(entry.complete_course_number, true)}
                 >
                   {/* <div style={{ margin: '5px' }}>
                     {entry.name} ({entry.class_gp})
