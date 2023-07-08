@@ -6,7 +6,8 @@ import { containsWhitespace } from "./CoursesPanel_Functions";
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
 // const token = tokenClass.token.access;
-import "./CoursesPanel.css"
+import ModalLessons from "../../components/ModalLessons/ModalLessons";
+
 
 function DayPeriod (Input) {
   const [showLesson, setShowLesson] = React.useState({
@@ -31,18 +32,62 @@ function DayPeriod (Input) {
       },
     }).then((response) => response.json())
     .then((d) => {
-      console.log(d);
+      
       setModalData(d);
       if(showOrNot){
         setShowLesson({ flag: true, data: d })
+        console.log("modal is shown");
       }
-      
+      console.log(d);
     });
     
     closeLoading();
     // const data = await response.json();
     
    }
+
+  return (
+    <div>
+      {Object.entries(Input).map(([count, entry]) => {
+        return (
+          <div className="CourseListContainer">
+            {entry !== null && (
+              <div className="CourseContainer">
+                <div className="Course"
+                  style={{ backgroundColor: entry.backgColor, fontSize: containsWhitespace(entry.name) ? "x-small" : "xx-small" }}
+                  onClick={() => apiForModalData(entry.complete_course_number, true)}
+                >
+                  {/* <div style={{ margin: '5px' }}>
+                    {entry.name} ({entry.class_gp})
+                  </div> */}
+                  <div title= {entry.name}>
+                    {entry.name.length < 17 ? entry.name : entry.name.slice(0, 17) + "..."} ({entry.class_gp})
+                  </div>
+                </div>
+                <button className="btn-fill-AddCourseButton"
+                  name="AddOrRemoveCourseButton"
+                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
+                  onClick={() => {
+                    showLoading();
+                    entry.ButtonClicked();
+                    closeLoading();
+                  }}>
+                  {entry.IsChosen ? 'x' : '+'}
+                </button>
+                {/* <br/> */}
+              </div>
+            )}
+            <ModalLessons
+          show={showLesson}
+          close={() =>
+            setShowLesson(() => ({ ...showLesson, flag: false }))
+          }
+        />
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 const DayRow = ({ periods, dayName }) => {

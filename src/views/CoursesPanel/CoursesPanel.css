@@ -187,3 +187,7 @@
     padding-right: 0px !important;
 }
 }
+
+.Course:hover {
+    cursor: pointer;
+}
