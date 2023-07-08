@@ -65,13 +65,14 @@
 }
 
 .SwitchCard {
-    background-color: hsl(235, 22%, 30%);
+    /* background-color: hsl(235, 22%, 30%); */
     /* margin-right: 40%; */
     /* margin-left: 40%; */
     border-radius: 10px;
     font-size: small;
     padding: 5px;
-    width: 200px;
+    width: 240px;
+    padding-top: 15px !important;
 }
 
 /* .Switch div
@@ -94,7 +95,7 @@
 .SwitchCol
 {
     /* background-color: blue; */
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -172,4 +173,17 @@
 }
 .panelContainer{
     margin-top: 300px;
+}
+.SwitchCardCol {
+    padding: 0px !important;
+    flex-grow: 0;
+}
+
+@media (min-width: 768px)
+{
+.col-md-1 {
+    flex: 0 0 8.33333%;
+    max-width: 0;
+    padding-right: 0px !important;
+}
 }
