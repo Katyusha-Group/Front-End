@@ -359,7 +359,7 @@ export default function UserPage() {
   return (
     <>
       <Row>
-        <Col className="landingCol" sm="12">
+        <Col className="" sm="12">
           <Card className="week-card card-body">
             <CardBody className="week-card-body">
               <div className="">

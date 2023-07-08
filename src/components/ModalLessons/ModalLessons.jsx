@@ -352,10 +352,9 @@ const ModalLessons = (props) => {
                 </Col>
               </Row>
               <Row>
-                <Col md="12" style={{ overflow: "auto" }}>
+                <Col md="12" className="mt-3" style={{ overflow: "auto" , height:"60vh", background:"rgb(46, 49, 72)"}}>
                   <div
                     style={{
-                      overflow: "auto",
                       display: timelineData == "data2" ? "block" : "none",
                     }}
                   >
@@ -363,7 +362,6 @@ const ModalLessons = (props) => {
                   </div>
                   <div
                     style={{
-                      overflow: "auto",
                       display: timelineData == "data1" ? "block" : "none",
                     }}
                   >
