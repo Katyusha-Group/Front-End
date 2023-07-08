@@ -47,19 +47,27 @@ function UserProfile() {
         setInfo(data);
       })
       .catch((error) => console.error(error));
-    fetch("https://katyushaiust.ir/notifications/", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("order data", data);
-        setNotifs(data);
-      })
-      .catch((error) => console.error(error));
-
     closeLoading();
+    const fetchData = () => {
+      console.log("Fetching data...")
+      fetch("https://katyushaiust.ir/notifications/", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+        "Content-Type": "application/json",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("order data", data);
+          setNotifs(data);
+        })
+        .catch((error) => console.error(error));
+    };
+
+    // Fetch data initially
+    fetchData();
+
+    // Fetch data every second using setInterval
+    const intervalId = setInterval(fetchData, 2000);
   }, []);
 
   useEffect(() => {
