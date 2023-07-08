@@ -22,7 +22,7 @@ var routes = [
         component: UserPage,
         rtlName: "صفحه کاربری",
         icon: 'icon-bank',
-        layout: "/admin"
+        layout: "/home"
     },
     {
         path: '/CoursesPanel',

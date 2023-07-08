@@ -58,7 +58,7 @@ function App() {
                 <Router.Route path="/verificationForgetPassword" element={<VerificationForgetPassword />}></Router.Route>
                 <Router.Route path="/setNewPassword" element={<SetNewPassword />}></Router.Route>
                 
-                 <Router.Route path="/admin/*" element={
+                 <Router.Route path="/home/*" element={
                   <PrivatRoute>
                   <Admin />
                   </PrivatRoute>

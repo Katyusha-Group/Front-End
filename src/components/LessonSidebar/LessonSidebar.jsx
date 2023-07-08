@@ -8,7 +8,7 @@ import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import logo1 from "../../assets/img/logo1.png";
+import logo1 from "../../assets/img/Logo1.png";
 // reactstrap components
 import {
   Button,
@@ -218,7 +218,7 @@ function LessonSidebar(props) {
               <Row className="nav-lessonSidebar">
                 <Col md="5" xs="5" style={{ margin: "auto" }}>
                   <NavLink
-                    to="/admin/page"
+                    to="/home/page"
                     className="nav-header nav-link-icon"
                   >
                     <img

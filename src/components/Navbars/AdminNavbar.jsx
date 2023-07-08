@@ -7,7 +7,7 @@ import LoginModalGolestan from "../../views/LoginGolestan";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
 import "../Navbars/AdminNavbar.css";
-import logo from "./logo1.png";
+import logo from "./Logo1.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
@@ -94,7 +94,7 @@ function AdminNavbar(props) {
       <Navbar className={classNames("navbar-absolute", color, "rtl")} expand="xl">
         <Collapse navbar isOpen={collapseOpen}>
           <Nav className="wideNavbar" navbar>
-          <NavLink href="/admin/page" className="nav-header nav-link-icon">
+          <NavLink href="/home/page" className="nav-header nav-link-icon">
                     <img src={logo} alt=""  style={{height:"34px" , width:"300px"}}/>
                     {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
