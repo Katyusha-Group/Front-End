@@ -15,7 +15,7 @@ import {
   Form,
   CardFooter,
 } from "reactstrap";
-
+import NotificationAlert from "react-notification-alert";
 import "./Shopping.css";
 import {
   closeLoading,
@@ -91,6 +91,7 @@ function Shopping() {
   }
 
   function order() {
+    showLoading();
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(`https://katyushaiust.ir/orders/`, {
       method: "POST",
@@ -118,6 +119,7 @@ function Shopping() {
         } else
           return response.json().then((data) => {
             // console.log("hello error ridi")
+            notify("tl");
             saveWallet();
             console.log("status 200 run");
             let newCart = CartCreator({ setState, setTotalPrice, setAmount });
@@ -127,6 +129,7 @@ function Shopping() {
       .catch((error) => {
         console.error(error);
       });
+      closeLoading ();
   }
 
   const notify = (place) => {
@@ -157,13 +160,12 @@ function Shopping() {
       message: (
         <div>
           <div>
-            Welcome to <b>Black Dashboard React</b> - a beautiful freebie for
-            every web developer.
+            خرید شما با موفقیت انجام شد
           </div>
         </div>
       ),
       type: type,
-      icon: "tim-icons icon-bell-55",
+      // icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
@@ -233,6 +235,10 @@ function Shopping() {
   function deleteItem(index) {}
   return (
     <>
+    <div>
+          <NotificationAlert ref={notificationAlertRef} />
+
+    </div>
       <div className="wrapper" style={{ direction: "ltr" }}>
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
