@@ -6,43 +6,44 @@ import { containsWhitespace } from "./CoursesPanel_Functions";
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
 // const token = tokenClass.token.access;
+import "./CoursesPanel.css"
 
-
-const DayPeriod = (Section) => (
-    <div>
-      {Object.entries(Section).map(([count, entry]) => {
-        return (
-          <div className="CourseListContainer">
-            {entry !== null && (
-              <div className="CourseContainer">
-                <div className="Course"
-                  style={{ backgroundColor: entry.backgColor, fontSize: containsWhitespace(entry.name) ? "x-small" : "xx-small" }}
-                >
-                  {/* <div style={{ margin: '5px' }}>
-                    {entry.name} ({entry.class_gp})
-                  </div> */}
-                  <div title= {entry.name}>
-                    {entry.name.length < 17 ? entry.name : entry.name.slice(0, 17) + "..."} ({entry.class_gp})
-                  </div>
-                </div>
-                <button className="btn-fill-AddCourseButton"
-                  name="AddOrRemoveCourseButton"
-                  style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
-                  onClick={() => {
-                    showLoading();
-                    entry.ButtonClicked();
-                    closeLoading();
-                  }}>
-                  {entry.IsChosen ? 'x' : '+'}
-                </button>
-                {/* <br/> */}
-              </div>
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
+function DayPeriod (Input) {
+  const [showLesson, setShowLesson] = React.useState({
+    flag: false,
+    data: {},
+  });
+  const [modalData, setModalData] = React.useState(
+    []
+  );
+  function apiForModalData(x ,showOrNot){
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    showLoading();
+    console.log(x);
+    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    }).then((response) => response.json())
+    .then((d) => {
+      console.log(d);
+      setModalData(d);
+      if(showOrNot){
+        setShowLesson({ flag: true, data: d })
+      }
+      
+    });
+    
+    closeLoading();
+    // const data = await response.json();
+    
+   }
+}
 
 const DayRow = ({ periods, dayName }) => {
   // showLoading();
