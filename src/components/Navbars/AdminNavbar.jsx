@@ -8,6 +8,7 @@ import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
 import "../Navbars/AdminNavbar.css";
 import { useNavigate } from "react-router-dom";
+import logo from "./logo1.png";
 
 
 // reactstrap components
@@ -79,7 +80,7 @@ function AdminNavbar(props) {
         <Collapse navbar isOpen={collapseOpen}>
           <Nav className="wideNavbar" navbar>
           <NavLink href="/admin/page" className="nav-header nav-link-icon">
-                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px" , width:"300px"}}/>
+                    <img src={logo} alt=""  style={{height:"34px" , width:"300px"}}/>
                     {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
             {routes.map(

@@ -47,20 +47,23 @@ function Shopping() {
         setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
-      console.log("cart info run")
-    }  
+    console.log("cart info run");
+  }
+  function saveWallet(){
+    fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setWallet(data.balance);
+      })
+      .catch((error) => console.error(error));
+  }
   React.useEffect(() => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     showLoading();
     getCartInfo();
-    fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      setWallet(data.balance);
-    })
-    .catch((error) => console.error(error));
+    saveWallet();
   }, []);
 
   closeLoading();
@@ -105,15 +108,20 @@ function Shopping() {
         
         console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
         if (response.status == 400) {
-          console.log("status 400 run")
-          return  response.json().then((data) => {
-            alert(data.telegram + "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید");
+          console.log("status 400 run");
+          return response.json().then((data) => {
+            alert(
+              data.telegram +
+                "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
+            );
           });
-        } else return response.json().then((data) => {
-          // console.log("hello error ridi")
-          console.log("status 200 run")
-          let newCart = CartCreator({ setState, setTotalPrice, setAmount });
-        });
+        } else
+          return response.json().then((data) => {
+            // console.log("hello error ridi")
+            saveWallet();
+            console.log("status 200 run");
+            let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+          });
       })
       
       .catch((error) => {

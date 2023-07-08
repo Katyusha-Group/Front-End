@@ -54,7 +54,7 @@ function UserProfile() {
     const { name, value } = event.target;
     setInfo((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value, 
     }));
   }
 
@@ -127,7 +127,7 @@ function UserProfile() {
         <br />
         {images.length !== "" ? images.name : ""}
         {/* {touched && error && <span>{error}</span>} */}
-        {/* <img src={imageURLs} /> */}
+        {/* <img src={imag  eURLs} /> */}
         {console.log(
           "🚀 ~ file: UserProfile.jsx:94 ~ renderImageField ~ imageURLs:",
           imageURLs
@@ -258,7 +258,7 @@ function UserProfile() {
                         />
                         {console.log(
                           "🚀 ~ file: UserProfile.jsx:223 ~ UserProfile ~ imageURLs:",
-                          typeof imageURLs
+                          imageURLs != "" ? imageURLs : info.image
                         )}
                         {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
                         {/* <h5 className="title">Mike Andrew</h5> */}
