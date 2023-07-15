@@ -35,7 +35,7 @@ export default function Admin() {
     document.documentElement.className.indexOf("nav-open") !== -1
   );
   const toggleSidebar = () => {
-    console.log("toggle");
+    // console.log("toggle");
     document.documentElement.classList.toggle("nav-open");
     setsidebarOpened(!sidebarOpened);
   };
@@ -58,7 +58,7 @@ export default function Admin() {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/home") {
-        console.log(prop.component);
+        // console.log(prop.component);
         return (
           <Router.Route
             path={prop.path}

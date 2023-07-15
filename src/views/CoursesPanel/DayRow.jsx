@@ -23,7 +23,7 @@ function DayPeriod (Input) {
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     showLoading();
-    console.log(x);
+    // console.log(x);
     fetch(`https://www.katyushaiust.ir/courses/${x}`, {
       method: "GET",
       headers: {
@@ -36,9 +36,9 @@ function DayPeriod (Input) {
       setModalData(d);
       if(showOrNot){
         setShowLesson({ flag: true, data: d })
-        console.log("modal is shown");
+        // console.log("modal is shown");
       }
-      console.log(d);
+      // console.log(d);
     });
     
     closeLoading();

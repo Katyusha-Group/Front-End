@@ -80,7 +80,7 @@ function Exams (ExamTable)
         }
         catch 
         {
-          console.log("First Error");
+          // console.log("First Error");
           return lessonsKeyedByDayAndPeriod;
         }
 
@@ -96,7 +96,7 @@ function Exams (ExamTable)
         }
         catch 
         {
-          console.log("Second Error");
+          // console.log("Second Error");
           return lessonsKeyedByDayAndPeriod;
         }
 
@@ -106,7 +106,7 @@ function Exams (ExamTable)
           lessonsKeyedByDayAndPeriod[time][day][count] = currentPeriod;
         }
         catch (error) {
-          console.log("ERROR is: " + error);
+          // console.log("ERROR is: " + error);
         }
         return lessonsKeyedByDayAndPeriod
       },
@@ -199,7 +199,7 @@ export default function ExamChart() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      console.log ("Name: " + this.name);
+      // console.log ("Name: " + this.name);
 
       this.complete_course_number = props.complete_course_number;
       
@@ -223,7 +223,7 @@ export default function ExamChart() {
   return (
     <>
       <div>
-        {console.log("Exams called")}
+        {/* {console.log("Exams called")} */}
         {Exams(ExamTable)}
       </div>
     </>

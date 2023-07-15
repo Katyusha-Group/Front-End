@@ -241,6 +241,7 @@ function LessonSidebar(props) {
                   <NavLink
                     to="..\CoursesPanel"
                     className="nav-header nav-link-course"
+                    style={{minWidth:"67px"}}
                   >
                     پنل دروس
                   </NavLink>

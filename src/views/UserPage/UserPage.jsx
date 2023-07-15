@@ -163,7 +163,7 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("loading", info.loading);
+        // console.log("loading", info.loading);
       })
       .catch((error) => {
         console.error(error);
@@ -319,7 +319,7 @@ export default function UserPage() {
         .then((response) => response.json())
         .then((data) => {
           setPrices(data);
-          console.log("prices", data);
+          // console.log("prices", data);
         })
         .catch((error) => console.error(error));
   }
@@ -334,7 +334,7 @@ export default function UserPage() {
 
       
     // });
-    console.log(x);
+    // console.log(x);
     fetch(`https://www.katyushaiust.ir/courses/${x}`, {
       method: "GET",
       headers: {
@@ -343,7 +343,7 @@ export default function UserPage() {
       },
     }).then((response) => response.json())
     .then((d) => {
-      console.log(d);
+      // console.log(d);
       setModalData(d);
       if(showOrNot){
         setShowLesson({ flag: true, data: d })
@@ -523,13 +523,13 @@ export default function UserPage() {
 
                           return false;
                         });
-                        console.log(
-                          "all the courses in group",
-                          info.courseGroupsListInContext
-                        );
-                        console.log("clicked");
+                        // console.log(
+                        //   "all the courses in group",
+                        //   info.courseGroupsListInContext
+                        // );
+                        // console.log("clicked");
                         if (isFound != true) {
-                          console.log("includes------------------");
+                          // console.log("includes------------------");
 
                           addNewLesson(x.complete_course_number);
                           

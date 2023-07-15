@@ -4,7 +4,7 @@ import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 const TeacherTimeline = (props) => {
-  console.log(props);
+  // console.log(props);
   let teacher_id = props.show.show.data.teachers[0].id;
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
@@ -56,7 +56,7 @@ const TeacherTimeline = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("time_data" + data[0], data);
+        // console.log("time_data" + data[0], data);
         setData(data);
       })
 
@@ -74,7 +74,7 @@ const TeacherTimeline = (props) => {
     // const activeRoute = (routeName) => {
     //   return location.pathname === routeName ? "active" : "";
     // };
-    console.log("Data of time", Data);
+    // console.log("Data of time", Data);
     // console.log("data in it ", Object.entries(Data[0].data));
   }, [Data]);
   // console.log("LOGH", Data);
@@ -88,7 +88,7 @@ const TeacherTimeline = (props) => {
             ([termid, courses]) => (
               <>
                 <li>
-                  {console.log("courses", courses.courses)}
+                  {/* {console.log("courses", courses.courses)} */}
                   {/* {console.log("Im here", Object.entries(dorus))} */}
                   {/* <span className="year">{termid}</span> */}
                   <span className="year">

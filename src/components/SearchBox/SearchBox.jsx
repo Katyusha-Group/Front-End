@@ -40,7 +40,7 @@ const SearchBox = ( data ) => {
   const [query, setQuery] = useState('');
   const [selectedL, setSelectedL] = React.useState([]);
   const {info,changeInfo}=useInfo()
-  console.log("nameList", data)
+  // console.log("nameList", data)
   // let nameList;
   let nameList = data.data?.map((item) => item)
   let test = data.data?.map((item) => item.base_courses.map((item) => item))
@@ -54,7 +54,7 @@ const SearchBox = ( data ) => {
   //   }
   // }
   nameList = test.flat()
-  console.log("test", test)
+  // console.log("test", test)
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
@@ -65,8 +65,8 @@ const SearchBox = ( data ) => {
   const token = tokenClass.token.access;
 
   function takeLessonsGroups(token, num) {
-    console.log(`token is : ${token}`);
-    console.log(`course ID is: ${num}`);
+    // console.log(`token is : ${token}`);
+    // console.log(`course ID is: ${num}`);
     // propsSetter({ type: fetchRequest });
     changeInfo("loading", 1);
 
@@ -82,7 +82,7 @@ const SearchBox = ( data ) => {
         changeInfo("loading", 2);
 
         changeInfo("courseGroupsListInContext", data);
-        console.log("info is: " + info);
+        // console.log("info is: " + info);
       })
       .catch((error) => {
         // propsSetter({ type: fetchFail, payload: getError(error) });

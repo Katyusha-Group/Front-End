@@ -37,7 +37,7 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setInfo(data);
       })
       .catch((error) => console.error(error));
@@ -48,7 +48,7 @@ function UserProfile() {
   }, []);
 
   useEffect(() => {
-    console.log("🚀 ~ file: UserProfile.jsx:45 ~ UserProfile ~ info:", info);
+    // console.log("🚀 ~ file: UserProfile.jsx:45 ~ UserProfile ~ info:", info);
   }, [info]);
 
   function handleChange(event) {
@@ -106,18 +106,18 @@ function UserProfile() {
   function save() {
     var formData = new FormData();
     formData.append("first_name", info.first_name);
-    console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
+    // console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
     if (images.length > 0) {
       formData.append("image", images[0]);
-      console.log(
-        "🚀 ~ file: UserProfile.jsx:73 ~ save ~ images[0]:",
-        images[0]
-      );
+      // console.log(
+      //   "🚀 ~ file: UserProfile.jsx:73 ~ save ~ images[0]:",
+      //   images[0]
+      // );
     } else {
-      console.log("no image");
+      // console.log("no image");
     }
-    console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
+    // console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
     fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
@@ -181,10 +181,10 @@ function UserProfile() {
         {images.length !== "" ? images.name : ""}
         {/* {touched && error && <span>{error}</span>} */}
         {/* <img src={imag  eURLs} /> */}
-        {console.log(
+        {/* {console.log(
           "🚀 ~ file: UserProfile.jsx:94 ~ renderImageField ~ imageURLs:",
           imageURLs
-        )}
+        )} */}
         {/* {getImageListItemBarUtilityClass.map(imageSrc => (<img src=""/>))} */}
       </div>
     );
@@ -306,10 +306,10 @@ function UserProfile() {
                           className="avatar"
                           src={imageURLs != "" ? imageURLs : info.image}
                         />
-                        {console.log(
+                        {/* {console.log(
                           "🚀 ~ file: UserProfile.jsx:223 ~ UserProfile ~ imageURLs:",
                           imageURLs != "" ? imageURLs : info.image
-                        )}
+                        )} */}
                         {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
                         {/* <h5 className="title">Mike Andrew</h5> */}
                       </a>

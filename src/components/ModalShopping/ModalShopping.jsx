@@ -115,7 +115,7 @@ const ModalShopping = (props) => {
     })
       .then((response) =>{ 
         
-        console.log("🚀 ~ file: ModalShopping.jsx:120 ~ addItemShop ~ response:", response.status)
+        // console.log("🚀 ~ file: ModalShopping.jsx:120 ~ addItemShop ~ response:", response.status)
         return response.json()})
       .then((data) => {
       })

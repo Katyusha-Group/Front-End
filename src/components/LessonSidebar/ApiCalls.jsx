@@ -10,7 +10,7 @@ export function takeLessonsGroups(token){
     // const token = tokenClass.token.access;
     // const {info,changeInfo}=useInfo()
     const [data, setData] = React.useState([]);
-    console.log(`token is : ${token}`)
+    // console.log(`token is : ${token}`)
     // console.log(`course ID is: ${info.courseGroupID}`);${info.courseGroupID}
    
       fetch(`https://www.katyushaiust.ir/coursegroups/`, {
@@ -18,11 +18,11 @@ export function takeLessonsGroups(token){
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("heyy it was done!", data);
+          // console.log("heyy it was done!", data);
           setData(data);
         })
         .catch((error) => console.error(error));
-      console.log(data);
+      // console.log(data);
     //   const activeRoute = (routeName) => {
     //     return location.pathname === routeName ? "active" : "";
     //   };
@@ -47,11 +47,11 @@ export function takeLessonsGroups(token){
     });
     
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if ( response.status===200){
       localStorage.setItem("link",data.link)
-      console.log("خوش آمدید");
-      console.log(data.link)
+      // console.log("خوش آمدید");
+      // console.log(data.link)
       Swal.fire({
         icon: 'success',
         title: 'کد با موفقیت تایید شد.',
@@ -61,7 +61,7 @@ export function takeLessonsGroups(token){
         width:'25rem',
         confirmButtonText:"باشه"
       }).then((result) => {
-        console.log(result);
+        // console.log(result);
         if(result) {
           window.location="/setNewPassword";
           // ok click
@@ -85,7 +85,7 @@ export function takeLessonsGroups(token){
     
   }
   export async function verificationApi(code,setShowAlert){
-    console.log(code);
+    // console.log(code);
     // const { info, changeInfo } = useInfo();
     // const response = await fetch(`${localStorage.getItem("verificationLink")}`, {
     //   method: "POST",
@@ -113,11 +113,11 @@ export function takeLessonsGroups(token){
     });
       
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if ( response.status===200){
   
   
-        console.log("خوش آمدید");
+        // console.log("خوش آمدید");
         Swal.fire({
           icon: 'success',
           title: 'کد با موفقیت تایید شد.',
@@ -127,7 +127,7 @@ export function takeLessonsGroups(token){
           width:'25rem',
           confirmButtonText:"باشه"
         }).then((result) => {
-          console.log(result);
+          // console.log(result);
           if(result) {
             window.location="/login";
             // ok click

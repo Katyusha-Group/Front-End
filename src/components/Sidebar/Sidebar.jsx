@@ -105,7 +105,7 @@ function Sidebar(props) {
             <Nav>
               {routes.map((prop, key) => {
                 // if (prop.redirect) return null;
-                console.log(prop.layout + prop.path);
+                // console.log(prop.layout + prop.path);
                 return (
                   // <li
                   //   className={

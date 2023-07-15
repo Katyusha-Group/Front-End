@@ -41,7 +41,7 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setInfo(data);
       })
       .catch((error) => console.error(error));
@@ -51,7 +51,7 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("order data", data);
+        // console.log("order data", data);
         setOrders(data);
       })
       .catch((error) => console.error(error));

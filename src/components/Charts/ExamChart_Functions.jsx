@@ -65,7 +65,6 @@ export function MapTimeToIndex (start_time)
 
 export function MapDateToIndex (date)
 {
-    // console.log("DATE IS: " + date);
     const lastTwoChars = parseInt(date.substring(date.length - 2));
     let DateIndex = lastTwoChars - 13;
     if (DateIndex < 0)

@@ -47,7 +47,7 @@ function Shopping() {
         setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
-    console.log("cart info run");
+    // console.log("cart info run");
   }
   function saveWallet(){
     fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
@@ -107,9 +107,9 @@ function Shopping() {
     })
       .then((response) => {
         
-        console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
+        // console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
         if (response.status == 400) {
-          console.log("status 400 run");
+          // console.log("status 400 run");
           return response.json().then((data) => {
             alert(
               data.telegram +
@@ -121,7 +121,7 @@ function Shopping() {
             // console.log("hello error ridi")
             notify("tl");
             saveWallet();
-            console.log("status 200 run");
+            // console.log("status 200 run");
             let newCart = CartCreator({ setState, setTotalPrice, setAmount });
           });
       })

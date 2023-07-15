@@ -5,7 +5,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 import { showLoading ,closeLoading} from "../LoadingAlert/LoadingAlert";
 const Timeline = (props) => {
-  console.log(props);
+  // console.log(props);
   let course_group = props.show.show.data.complete_course_number.split("_")[0];
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
@@ -58,7 +58,7 @@ const Timeline = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("time_data" + data[0], data);
+        // console.log("time_data" + data[0], data);
         setData(data);
         closeLoading();
       })
@@ -77,7 +77,7 @@ const Timeline = (props) => {
     // const activeRoute = (routeName) => {
     //   return location.pathname === routeName ? "active" : "";
     // };
-    console.log("Data of time", Data);
+    // console.log("Data of time", Data);
     // console.log("data in it ", Object.entries(Data[0].data));
   }, [Data]);
   // console.log("LOGH", Data);
@@ -91,7 +91,7 @@ const Timeline = (props) => {
             ([termid, dorus]) => (
               <>
                 <li>
-                  {console.log("Im here", Object.entries(dorus))}
+                  {/* {console.log("Im here", Object.entries(dorus))} */}
                   {/* <span className="year">{termid}</span> */}
                   <span className="year">
                     {"1" + termid.replace(/(\d{3})/, "$1-")}

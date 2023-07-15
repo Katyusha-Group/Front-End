@@ -37,7 +37,6 @@ function App() {
   );
 
   useEffect(() => {
-    console.log("🚀 ~ file: App.jsx:40 ~ App ~ isLoggedIn:", isLoggedIn)
     setIsLoggedIn(true)
   }, [isLoggedIn]);
 
