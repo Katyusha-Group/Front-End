@@ -4,14 +4,13 @@ import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 import { showLoading ,closeLoading} from "../LoadingAlert/LoadingAlert";
+import { apis } from "../../assets/apis";
 const Timeline = (props) => {
-  // console.log(props);
   let course_group = props.show.show.data.complete_course_number.split("_")[0];
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const [Data, setData] = React.useState();
-  // const [Data, setData] = useState();
   const Data1 = [
     {
       course_number: 2211405,
@@ -53,36 +52,21 @@ const Timeline = (props) => {
   const token = tokenClass.token.access;
   React.useEffect(() => {
     showLoading();
-    fetch(`https://www.katyushaiust.ir/timeline/courses/${course_group}`, {
+    fetch(apis["timeline"]["courses"] + `${course_group}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("time_data" + data[0], data);
         setData(data);
         closeLoading();
       })
 
       .catch((error) => console.error(error));
       
-    // setData(ndata);
-    // changeInfoState("courseChoosed", data);
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
+   
   }, []);
   React.useEffect(() => {
-    // setData(ndata);
-    // changeInfoState("courseChoosed", data);
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
-    // console.log("Data of time", Data);
-    // console.log("data in it ", Object.entries(Data[0].data));
   }, [Data]);
-  // console.log("LOGH", Data);
-  // console.log("LOGH1", Data[0].data);
-  // console.log("LOGH2", Object.entries(Data[0].data));
   return (
     <div className="timelinebox">
       <ul className="timeline">
@@ -91,8 +75,6 @@ const Timeline = (props) => {
             ([termid, dorus]) => (
               <>
                 <li>
-                  {/* {console.log("Im here", Object.entries(dorus))} */}
-                  {/* <span className="year">{termid}</span> */}
                   <span className="year">
                     {"1" + termid.replace(/(\d{3})/, "$1-")}
                   </span>
@@ -105,74 +87,8 @@ const Timeline = (props) => {
               </>
             )
 
-            // {item.map()=>()}
           )}
       </ul>
-      {/* <ul className="timeline">
-        <li>
-          <span className="year">2008</span>
-          <ul className="content">
-            <li>2008-2</li>
-            <li>2008-3</li>
-          </ul>
-        </li> */}
-      {/* <li>
-          <span className="year">2009</span>
-          <ul className="content">
-            <li>2009-1</li>
-            <li>2009-2</li>
-            <li>2009-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2010</span>
-          <ul className="content">
-            <li>2010-1</li>
-            <li>2010-2</li>
-            <li>2010-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2011</span>
-          <ul className="content">
-            <li>2011-1</li>
-            <li>2011-2</li>
-            <li>2011-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2012</span>
-          <ul className="content">
-            <li>2012-1</li>
-            <li>2012-2</li>
-            <li>2012-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2013</span>
-          <ul className="content">
-            <li>2013-1</li>
-            <li>2013-2</li>
-            <li>2013-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2014</span>
-          <ul className="content">
-            <li>2014-1</li>
-            <li>2014-2</li>
-            <li>2014-3</li>
-          </ul>
-        </li>
-        <li>
-          <span className="year">2015</span>
-          <ul className="content">
-            <li>2015-1</li>
-            <li>2015-2</li>
-            <li>2015-3</li>
-          </ul>
-        </li> */}
-      {/* </ul> */}
     </div>
   );
 };

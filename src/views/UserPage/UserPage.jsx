@@ -24,28 +24,20 @@ import ExamChart from "../../components/Charts/ExamChart.jsx";
 import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
 import { timeStringToFloat } from "../../Functions/timeStringToFloat";
 import { reducer } from "../../Functions/reducer";
-import {apis} from "../../assets/apis"
+import { apis } from "../../assets/apis";
+
 const fetchRequest = "FETC_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
 
 export default function UserPage() {
-  // const [datac, setData] = React.useState([]);
   const { info, changeInfo } = useInfo();
-  // const [modalData, setModalData] = React.useState();
-  const [lesson, setLesson] = React.useState({
-    name: "",
-    day: 0,
-    time: 0,
-    long: 0,
-  });
-  //getting token
   const getError = (error) => {
-    // console.log(error.data.message)
     return error.responst && error.response.data
       ? error.response.data
       : error.message;
   };
+
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
     reducer,
     { loading: true, props: {}, error: "" }
@@ -63,7 +55,6 @@ export default function UserPage() {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  const [showX, setShowX] = React.useState("none");
   const [showCourseHover, setShowCourseHover] = React.useState({
     courseChoosed: [],
   });
@@ -104,7 +95,7 @@ export default function UserPage() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
 
-    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+    fetch(apis[("courses", "my_courses")], {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -116,16 +107,11 @@ export default function UserPage() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        // console.log("loading", info.loading);
-      })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
         propsSetter({ type: fetchFail, payload: getError(error) });
       });
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
   }
 
   /**
@@ -136,8 +122,6 @@ export default function UserPage() {
    */
 
   function lessons(infoState, changeInfoState, getapi, classNameHover) {
-    // console.log("hello");
-
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -145,15 +129,12 @@ export default function UserPage() {
     React.useEffect(() => {
       if (getapi == true) {
         showLoading();
-        fetch("https://www.katyushaiust.ir/courses/my_courses", {
+        fetch(apis["courses"]["my_courses"], {
           headers: { Authorization: `Bearer ${token}` },
         })
           .then((response) => response.json())
           .then((data) => {
-            // console.log("get data", data);
-            // setData(data);
             changeInfoState("courseChoosed", data);
-            // console.log("get data after reload", data);
           })
           .catch((error) => console.error(error));
         const activeRoute = (routeName) => {
@@ -165,7 +146,6 @@ export default function UserPage() {
     closeLoading();
 
     return infoState.courseChoosed.map((lessons) => {
-      // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
 
@@ -255,7 +235,8 @@ export default function UserPage() {
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(
-      `https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`,
+      apis["courseCartOrderInfo"] +
+        `?cart_id=${shopId.id}&complete_course_number=${x}`,
       {
         method: "GET",
         headers: {
@@ -271,7 +252,7 @@ export default function UserPage() {
       .catch((error) => {
         console.error(error);
       });
-    fetch(`https://katyushaiust.ir/get-prices/`, {
+    fetch(apis["getPrice"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -285,9 +266,8 @@ export default function UserPage() {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
     showLoading();
-    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
+    fetch(apis["courses"]["my_courses"] + x, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -296,14 +276,11 @@ export default function UserPage() {
     })
       .then((response) => response.json())
       .then((d) => {
-        // console.log(d);
         setModalData(d);
         if (showOrNot) {
           setShowLesson({ flag: true, data: d });
         }
       });
-
-    // const data = await response.json();
   }
 
   return (

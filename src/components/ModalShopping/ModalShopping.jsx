@@ -100,7 +100,7 @@ const ModalShopping = (props) => {
     notificationAlertRef.current.notificationAlert(options);
   };
   function addItemShop(num) {
-    fetch(`https://katyushaiust.ir/carts/${shopId.id}/items/`, {
+    fetch(apis["carts"]+`${shopId.id}/items/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

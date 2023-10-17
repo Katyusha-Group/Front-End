@@ -1,9 +1,9 @@
 import React from "react";
+import { apis } from "../assets/apis";
 export const CartCreator = (props) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access
   const getCart = async () => {
-    // console.log("cartCreator run")
-    const shopId = await fetch("https://katyushaiust.ir/carts/", {
+    const shopId = await fetch(apis["carts"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -6,14 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 import Swal from "sweetalert2";
 import ContextInfo, { useInfo } from "../contexts/InfoContext";
-// reactstrap components
+import { apis } from "../assets/apis";
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
   FormGroup,
   Form,
   Input,
@@ -22,11 +21,9 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-// import { conforms } from "lodash";
 
 function ForgetPassword() {
   const { info, changeInfo } = useInfo();
-  ////////////////////////////// Input errors ///////////////////////
   const [formData, setFormData] = useState({
     email: ""
   });
@@ -46,7 +43,6 @@ function ForgetPassword() {
   
  
   const Navigate = useNavigate();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
     backError: ""
@@ -74,7 +70,7 @@ function ForgetPassword() {
     }
     
     showLoading();
-    const response = await fetch("https://katyushaiust.ir/accounts/reset-password/", {
+    const response = await fetch(apis["accounts"]["resetPassword"], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,17 +80,9 @@ function ForgetPassword() {
       }),
     });
     const data = await response.json();
-    //console.log("response",response);
     closeLoading();
     if (response.status === 200) {
-      // console.log("خوش آمدید");
-      // console.log(info.link);
       localStorage.setItem('link', data.link);
-      // ContextInfo.changeInfo("link",data.link)
-      // setInfo((info) => ({ ...info, [link]: data.link }))
-  
-      //console.log(info.link);
-      //console.log(data.link);
       Swal.fire({
         icon: 'success',
         title: 'کد تایید ارسال شد.',
@@ -104,47 +92,14 @@ function ForgetPassword() {
         width:'25rem',
         confirmButtonText:"باشه"
       }).then((result) => {
-       // console.log(result);
         if(result) {
           window.location="/verificationForgetPassword";
-          // ok click
         } else {
-          // not clicked
         }
       });
-    //   setAuthTokens(data.token);
-    //   console.log(authTokens);
-    //   setShop_caller(true);
-    //   console.log("shop_caller: ", shop_caller)
-    //   localStorage.setItem("authTokens", JSON.stringify(data));
-    //   // localStorage.getItem("authTokens");
-    //   const tokenClass = JSON.parse(JSON.stringify(data));
-    //   const token = tokenClass.token.access;
-    //   const shopId = await fetch("https://katyushaiust.ir/carts/", {
-    //     method: "POST",
-    //     headers: { 
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //      },
-    //   })
-    //   // console.log("shopId", shopId.json())
-    //   idShop = await shopId.json();
-    //   console.log("shopId_data",idShop);
-    //   if (shopId.status == 201 || shopId.status == 200) {
-    //     console.log("shopId.json()",idShop)
-    //     localStorage.setItem("shopId", JSON.stringify(idShop))
-    //     console.log("shopId localstorage ",localStorage.getItem("shopId"))
-    //     let test = localStorage.getItem("shopId")
-    //     console.log("test", JSON.parse(test)[0])
     Navigate("/verificationForgetPassword")
       }
      else{
-    //     console.error("shopId error", shopId.status)
-    //   }
-    //   console.log("shopId: ",shopId)
-    //   Navigate("/admin/page");
-    // } else {
-    //   console.log(data.error);
     if (response.status === 429){
       errors.backError = ". حداکثر تعداد درخواست فراموشی رمز عبور ۵ بار است . شما بیش از ۵ بار درخواست ایمیل کرده اید ";
       setErrorMessage({
@@ -158,19 +113,9 @@ function ForgetPassword() {
         backError: errors.backError,
       });
     }
-      
-    //   // if (data.error === "Invalid credentials") {
-    //   //   //show pop up
-    //   //   swal("Error!", "Invalid credentials!", "error");
-    //   // }
-    //   // if (data.error === "email is not verified") {
-    //   //   swal("Error!", "check your mailbox for verification", "error");
-    //   //   //show pop up with  check your mailbox for verification
-    //   // }
     }
     
   }
-  //////////////////////////// End of input errors //////////////////
   return (
     <>
       <div className="wrapper">
