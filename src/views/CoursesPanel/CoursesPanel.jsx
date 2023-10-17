@@ -2,8 +2,7 @@ import React from "react";
 import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
-import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
-import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import "../../assets/css/nucleo-icons.css";
 import DayRow from './DayRow';
 import { useState, useEffect } from 'react';
@@ -24,26 +23,7 @@ import { addNewLesson } from "../../Functions/addNewLesson";
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-// import HomeIcon from './home.png';
-// import { size } from "lodash";
 export default function CoursesPanel() {
-  // console.log("HELLO WORLD!");
-  // Token
-  // const tokenJson = localStorage.getItem("authTokens") || 'nothing';
-  // const tokenClass = JSON.parse(tokenJson) || 'nothing';
-  // // const token = tokenClass.token.access;
-  // const token = tokenClass.token.access || 'nothing';
-
-  // const [token, setToken] = useState(null);
-
-  // useEffect(() => {
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = tokenJson ? JSON.parse(tokenJson) : null;
-  //   const newToken = tokenClass ? tokenClass.token.access : null;
-  //   setToken(newToken);
-  // }, [localStorage.getItem("authTokens")]);
-
-
   // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -52,10 +32,10 @@ export default function CoursesPanel() {
   // Info
   const { info, changeInfo } = useInfo();
 
-  const [DepartmentOptions, setDepartmentOptions] = React.useState([]);
-  let [SelectedDepartment, setSelectedDepartment] = React.useState([]);
-  let [ChosenCourses, setChosenCourses] = React.useState([]);
-  let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
+  const [DepartmentOptions, setDepartmentOptions] = useState([]);
+  let [SelectedDepartment, setSelectedDepartment] = useState([]);
+  let [ChosenCourses, setChosenCourses] = useState([]);
+  let [ChosenCoursesChanged, setChosenCoursesChanged] = useState(false);
 
   let NumberOfChosenLessons = [];
   let Rows = 5, Cols = 9;
@@ -64,41 +44,19 @@ export default function CoursesPanel() {
   }
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(apis["departmentsAll"]["name"])
       .then((response) => response.json())
       .then((DepartmentOptions) => {
       setDepartmentOptions(DepartmentOptions);
     });
-    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     changeInfo("courseChoosed", data);
-    //     if (Array.isArray(data)) {
-    //       const courses = data.map(course => new Course(course, true));
-    //       setChosenCourses(courses);
-    //       settimetable(courses);
-    //     }
-    //     else {
-    //       console.log("Type of data is: " + typeof data);
-    //     }
-    //   })
-    //   .catch((error) => console.error(error));
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
     changeInfo("courseChoosed", info.courseChoosed);
-    // if (Array.isArray(info.courseChoosed)) {
       const courses = info.courseChoosed.map(course => new Course(course, true));
       setChosenCourses(courses);
       settimetable(courses);
-    // }
-
   }, []);
 
-  React.useEffect ( () => {
+  useEffect ( () => {
     fetch(apis["courses"]["my_courses"], {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -107,13 +65,9 @@ export default function CoursesPanel() {
         changeInfo("courseChoosed", data);
         const courses = data.map(course => new Course(course, true));
         setChosenCourses(courses);
-        // let NewTimeTable = [...courses, ...DepartmentCourses];
-        // settimetable(NewTimeTable);
         if (SwitchChecked)
         {
-          // console.log("DEPPPP COutseSc: " + DepartmentCourses);
           let AllowedDepartmentCourses = DepartmentCourses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
-          // let temp = NewTimeTable.filter(course => course.can_take);
           let NewTimeTable = [...courses, ...AllowedDepartmentCourses];
           settimetable(NewTimeTable);
         }
@@ -130,7 +84,7 @@ export default function CoursesPanel() {
   }, [ChosenCoursesChanged]);
   
   // Department courses
-  let [DepartmentCourses, setDepartmentCourses] = React.useState([]);
+  let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
   const customStyles = {                                              // Select Styles
     input: (defaultStyles) => ({
@@ -172,14 +126,11 @@ export default function CoursesPanel() {
   };
 
   function handleDepartment(selectedOption) {                         // Handle Select
-    // showLoading();
     setSelectedDepartment(selectedOption.value);
-    // closeLoading();
     showLoading();
   }
 
-  React.useEffect(() => {                                             // Set Selected Department courses
-    // showLoading();
+  useEffect(() => {                                             // Set Selected Department courses
     if (SelectedDepartment) {
       fetch(apis["allcoursesBasedDepartment"]+`${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -213,15 +164,13 @@ export default function CoursesPanel() {
   }, [SelectedDepartment]);
 
   // Switch
-  const [SwitchChecked, setSwitchChecked] = React.useState(false);
+  const [SwitchChecked, setSwitchChecked] = useState(false);
   const handleSwitchChange = val => {
     setSwitchChecked(val)
   }
-  React.useEffect(() => { 
-    // showLoading();
+  useEffect(() => {
     if (SwitchChecked) {
       let FilteredDepartmentCourses = DepartmentCourses.filter(course => course.can_take);
-      // let temp = timetable.filter(course => course.can_take);
       let temp = [...ChosenCourses, ...FilteredDepartmentCourses];
       settimetable(temp);
     }
@@ -235,7 +184,6 @@ export default function CoursesPanel() {
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      // this.class_gp = props.group_number;
       this.complete_course_number = props.complete_course_number;
       this.class_gp = this.complete_course_number.substring(this.complete_course_number.length - 2);
       this.course_times = props.course_times;
@@ -250,12 +198,10 @@ export default function CoursesPanel() {
     {
       if (this.IsChosen)
       {
-        // console.log("Want to delete")
         if (!info.courseChoosed.includes(this)) {
           ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
           this.IsChosen = true;
-          // this.IsChosen = false;
         }
       }
       else
@@ -270,13 +216,12 @@ export default function CoursesPanel() {
           )
         );
         this.IsChosen = false;
-        // this.IsChosen = true;
       }
       setChosenCoursesChanged(prev => !prev);
     }
   }
 
-  let [timetable, settimetable] = React.useState([]);
+  let [timetable, settimetable] = useState([]);
   // function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
   //   return arr.filter((item, index) => {
   //       return (
@@ -369,7 +314,7 @@ export default function CoursesPanel() {
     )
   }, [timetable])
   
-  React.useEffect (() => {
+  useEffect (() => {
     closeLoading();
   }, [timetable]);
   
@@ -380,25 +325,8 @@ export default function CoursesPanel() {
       <Row >
         <Col>
           <Card className="TableCard">
-            {/* <CardHeader className="MainCardHeader text-right">
-              <CardTitle style={{fontSize:"25px"}}>
-                پنل دروس
-              </CardTitle> */}
-              {/* <Button //className="HomeButton"
-                // class="HomeButton tim-icons icon-double-right"
-                href="/admin/page"
-                className="HomeButton tim-icons icon-double-right"
-              > */}
-                {/* <img src={HomeIcon} alt="Button Image" /> */}
-                {/* خانه */}
-              {/* </Button> */}
-            {/* </CardHeader> */}
             <CardBody>
               <Row className="CardBodyRow">
-                {/* <Col className="HomePageButtonCol">
-                  
-                </Col> */}
-                
                 <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
@@ -441,14 +369,11 @@ export default function CoursesPanel() {
                   </tr>
                 </thead>
                 <tbody className="CoursesTableBody">
-                  {/* {console.log("hello")} */}
                   <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
                   <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
-                  {/* {console.log("bye")} */}
-                  {/* {closeLoading()} */}
                 </tbody>
               </Table>
             </CardBody>
