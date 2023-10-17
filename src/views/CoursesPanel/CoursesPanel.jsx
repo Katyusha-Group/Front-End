@@ -23,7 +23,6 @@ import { addNewLesson } from "../../Functions/addNewLesson";
 
 import {
   // addNewLesson,
-  mapTimeToIndex,
   createCourseGroupsArray,
   uniquifyArrayByKey,
   Create2DArray,
@@ -314,9 +313,29 @@ export default function CoursesPanel() {
           const day = time.course_day;
 
           let TimeIndex = time.course_time_representation;
-          if (TimeIndex === undefined )
+          if (TimeIndex === undefined)
           {
-            TimeIndex = mapTimeToIndex(time.course_start_time);
+            TimeIndex = -1;
+            // TimeIndex = mapTimeToIndex(time.course_start_time);
+            const timeRanges = [ //map time to index
+              ["07:30:00", "09:00:00"],
+              ["09:00:01", "10:30:00"],
+              ["10:30:01", "12:00:00"],
+              ["13:00:00", "14:30:00"],
+              ["14:30:01", "16:00:00"],
+              ["16:00:01", "17:30:00"],
+              ["17:30:01", "19:00:00"],
+              ["19:00:01", "20:30:00"]
+            ];
+          
+            for (let i = 0; i < timeRanges.length; i++) {
+              const [start, end] = timeRanges[i];
+              console.log("start is: " + start + " and end is: " + end);
+              if (time.course_start_time >= start && time.course_start_time <= end) {
+                console.log("The if is true");
+                TimeIndex = i;
+              }
+            }
           }
 
           NumInEachSlot[day][TimeIndex]++;
@@ -327,13 +346,9 @@ export default function CoursesPanel() {
           }
           catch (error) {
             console.log("ERROR is: " + error);
-            // handleOpenPopup;
           }  
         }
         );
-        // let count = NumInEachSlot[currentPeriod.day][mapTimeToIndex(currentPeriod.time)];
-        // lessonsKeyedByDayAndPeriod[currentPeriod.day][mapTimeToIndex(currentPeriod.time)][count] = currentPeriod
-        // closeLoading();
         return lessonsKeyedByDayAndPeriod
       },
       {
