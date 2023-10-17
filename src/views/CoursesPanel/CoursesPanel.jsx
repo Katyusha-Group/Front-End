@@ -21,10 +21,6 @@ import {
 
 import { addNewLesson } from "../../Functions/addNewLesson";
 
-import {
-  uniquifyArrayByKey,
-} from "./CoursesPanel_Functions";
-
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
@@ -281,7 +277,14 @@ export default function CoursesPanel() {
   }
 
   let [timetable, settimetable] = React.useState([]);
-  timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
+  // function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
+  //   return arr.filter((item, index) => {
+  //       return (
+  //       arr.findIndex((element) => element[key] === item[key]) === index
+  //       );
+  //   });
+  // }
+  // timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
     // showLoading();
     const emptySection = () => ({
