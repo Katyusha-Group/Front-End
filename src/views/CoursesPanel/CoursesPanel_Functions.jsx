@@ -1,4 +1,5 @@
 import Course from './CoursesPanel';
+import { apis } from '../../assets/apis';
 // Token
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
@@ -9,7 +10,7 @@ export function addNewLesson(num) {  // Add a lesson
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
                                      
-    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+    fetch(apis["courses"]["my_courses"], {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
