@@ -22,7 +22,7 @@ import {
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
-
+import { apis } from "../../assets/apis";
 function Shopping() {
   const { info, changeInfo } = useInfo();
   const [state, setState] = React.useState([]);
@@ -37,7 +37,7 @@ function Shopping() {
   const [wallet, setWallet] = React.useState(0);
   function getCartInfo() {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(`https://katyushaiust.ir/carts/${shopId.id}/`, {
+    fetch(apis["carts"] + `${shopId.id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -50,7 +50,7 @@ function Shopping() {
     // console.log("cart info run");
   }
   function saveWallet(){
-    fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
+    fetch(apis["accounts"]["wallet"]["seeWallet"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -70,7 +70,7 @@ function Shopping() {
   const delete_item =(num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(
-      `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
+      apis["carts"]+`${shopId.id}/items/${state[index].id}/`,
       {
         method: "DELETE",
         headers: {
@@ -93,7 +93,7 @@ function Shopping() {
   function order() {
     showLoading();
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(`https://katyushaiust.ir/orders/`, {
+    fetch(apis["orders"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -198,7 +198,7 @@ function Shopping() {
     }
     setState(u);
     fetch(
-      `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
+      apis["carts"]+`${shopId.id}/items/${state[index].id}/`,
       {
         method: "PATCH",
         headers: {

@@ -95,7 +95,7 @@ export default function UserPage() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
 
-    fetch(apis[("courses", "my_courses")], {
+    fetch(apis["courses"]["my_courses"], {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,

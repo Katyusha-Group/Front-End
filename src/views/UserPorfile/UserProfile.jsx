@@ -31,7 +31,7 @@ function UserProfile() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
     showLoading();
-    fetch("https://www.katyushaiust.ir/accounts/profile/", {
+    fetch(apis["account"]["justProfile"], {
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
     })
@@ -118,7 +118,7 @@ function UserProfile() {
       // console.log("no image");
     }
     // console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
-    fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
+    fetch(apis["accounts"]["profile"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",

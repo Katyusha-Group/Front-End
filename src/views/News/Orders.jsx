@@ -24,6 +24,7 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
+import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import "./Orders.css";
 function UserProfile() {
@@ -35,7 +36,7 @@ function UserProfile() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
     showLoading();
-    fetch("https://www.katyushaiust.ir/accounts/profile/", {
+    fetch(apis["accounts"]["profile"]["updateProfile"], {
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
     })
@@ -45,7 +46,7 @@ function UserProfile() {
         setInfo(data);
       })
       .catch((error) => console.error(error));
-    fetch("https://www.katyushaiust.ir/orders/", {
+    fetch(apis["orders"], {
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
     })
@@ -81,7 +82,7 @@ function UserProfile() {
     const startTelegramBot = () => {
       window.location.href = info.telegram_link;
     };
-    fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
+    fetch(apis["accounts"]["profile"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
@@ -136,9 +137,6 @@ function UserProfile() {
         </label>
         <br />
         {images.length !== "" ? images.name : ""}
-        {/* {touched && error && <span>{error}</span>} */}
-        {/* <img src={imageURLs} /> */}
-        {/* {getImageListItemBarUtilityClass.map(imageSrc => (<img src=""/>))} */}
       </div>
     );
   };
@@ -166,11 +164,7 @@ function UserProfile() {
                           className="avatar"
                           src={imageURLs != "" ? imageURLs : info.image}
                         />
-
-                        {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
-                        {/* <h5 className="title">Mike Andrew</h5> */}
                       </a>
-                      {/* <p className="description">Ceo/Co-Founder</p> */}
                     </div>
                     <div className="card-description">
                       {info.email}

@@ -20,7 +20,8 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-import { Link } from "react-router-dom";
+import { apis } from "../../assets/apis";
+
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
@@ -37,7 +38,7 @@ function UserProfile() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
     showLoading();
-    fetch("https://www.katyushaiust.ir/accounts/profile/", {
+    fetch(apis["accounts"]["profile"]["updateProfile"], {
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
     })
@@ -50,7 +51,7 @@ function UserProfile() {
     closeLoading();
     const fetchData = () => {
       // console.log("Fetching data...")
-      fetch("https://katyushaiust.ir/notifications/", {
+      fetch(apis["notification"], {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
         "Content-Type": "application/json",
@@ -96,7 +97,7 @@ function UserProfile() {
       window.location.href = info.telegram_link;
     };
     // console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
-    fetch("https://www.katyushaiust.ir/accounts/profile/update_profile/", {
+    fetch(apis["accounts"]["profile"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",

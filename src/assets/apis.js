@@ -18,6 +18,13 @@ export const apis = {
     changepassword: `${domain}/accounts/changepassword/`,
     resetPassword: `${domain}/accounts/reset-password/`,
     login: `${domain}/accounts/login/`,
+    justProfile:`${domain}/accounts/profile/`,
+    profile:{
+      updateProfile: `${domain}/accounts/profile/update/`,
+    },
+    wallet:{
+      seeWallet: `${domain}/accounts/wallet/see_wallet`,
+    }
   },
   departments: `${domain}/departments/`,
   carts: `${domain}/carts/`,
@@ -29,4 +36,6 @@ export const apis = {
     name: `${domain}/departments/name/`,
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
+  orders: `${domain}/orders/`,
+  notification: `${domain}/notification/`,
 };
