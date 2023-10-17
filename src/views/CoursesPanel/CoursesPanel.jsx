@@ -303,7 +303,11 @@ export default function CoursesPanel() {
       7: emptySection()
     });
 
-    const NumInEachSlot = createCourseGroupsArray(timetable);
+    const courseGroups = [];
+    for (let i = 0; i < 6; i++) {
+        courseGroups[i] = Array(8).fill(0);
+    }
+    const NumInEachSlot = courseGroups;
 
     return timetable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
