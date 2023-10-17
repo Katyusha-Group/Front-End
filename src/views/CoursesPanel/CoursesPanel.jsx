@@ -19,8 +19,10 @@ import {
   Button
 } from "reactstrap";
 
+import { addNewLesson } from "../../Functions/addNewLesson";
+
 import {
-  addNewLesson,
+  // addNewLesson,
   mapTimeToIndex,
   createCourseGroupsArray,
   uniquifyArrayByKey,
@@ -409,11 +411,11 @@ export default function CoursesPanel() {
                     <th className="table-head text-center ">۷:۳۰ تا ۹</th>
                     <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
                     <th className="table-head text-center ">۱۰:۳۰ تا ۱۲</th>
-                    <th className="table-head text-center ">۱۲ تا ۱:۳۰</th>
-                    <th className="table-head text-center ">۱:۳۰ تا ۳</th>
-                    <th className="table-head text-center ">۳ تا ۴:۳۰  </th>
-                    <th className="table-head text-center ">۴:۳۰ تا ۶  </th>
-                    <th className="table-head text-center ">۶ تا ۷:۳۰  </th>
+                    <th className="table-head text-center ">1 تا 2:30</th>
+                    <th className="table-head text-center ">2:30 تا 4</th>
+                    <th className="table-head text-center ">4 تا 5:30</th>
+                    <th className="table-head text-center ">5:30 تا 7  </th>
+                    <th className="table-head text-center ">7 تا 8:30 </th>
                   </tr>
                 </thead>
                 <tbody className="CoursesTableBody">
