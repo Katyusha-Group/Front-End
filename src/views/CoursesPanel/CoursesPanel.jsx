@@ -22,11 +22,7 @@ import {
 import { addNewLesson } from "../../Functions/addNewLesson";
 
 import {
-  // addNewLesson,
-  createCourseGroupsArray,
   uniquifyArrayByKey,
-  Create2DArray,
-  // containsWhitespace
 } from "./CoursesPanel_Functions";
 
 import "./CoursesPanel.css"
@@ -65,7 +61,11 @@ export default function CoursesPanel() {
   let [ChosenCourses, setChosenCourses] = React.useState([]);
   let [ChosenCoursesChanged, setChosenCoursesChanged] = React.useState(false);
 
-  let NumberOfChosenLessons = Create2DArray(5, 9);
+  let NumberOfChosenLessons = [];
+  let Rows = 5, Cols = 9;
+  for (let i = 0; i < Rows; i++) {
+    NumberOfChosenLessons[i] = Array(Cols).fill(0);
+  }
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
