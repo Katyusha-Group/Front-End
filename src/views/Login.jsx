@@ -6,8 +6,6 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
-//import swal from "sweetalert";
-// reactstrap components
 import {
   Button,
   Card,
@@ -28,12 +26,9 @@ import { apis } from "../assets/apis";
 function Login(props) {
   // console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
   let [shop_caller,setShop_caller] = React.useState()
-  // console.log("default gohNakhor",shop_caller)
   let idShop = "ali";
   React.useEffect(() => {
-    // console.log("state", idShop);
   }, [idShop]);
-  // localStorage.clear();
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
     // toggle the type attribute
@@ -70,21 +65,6 @@ function Login(props) {
       [name]: value,
     }));
   }
-  
-  // React.useEffect(() => {
-    
-  //   fetch("https://katyushaiust.ir/carts/", {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // console.log("data all",data);
-  //       console.log("data of shop catched: ", data)
-  //       localStorage.setItem("shopId", data)
-  //     })
-  //     .catch((error) => console.error(error));
-  //   // console.log(data);
-  // }, [shop_caller]);
   function gohNakhor(){
     setShop_caller(true);
     // console.log("gohNakhor:",shop_caller)
@@ -109,11 +89,7 @@ function Login(props) {
     backError: "",
   });
   async function handleSubmit(event) {
-
-    // console.log("toooooken"+localStorage.authTokens)
     event.preventDefault();
-    // const { info } = useInfo();
-    // info.token = "73df55369dcfa58a95428e706f23544fadbe39e0";
 
     const errors = [
       {
@@ -138,8 +114,6 @@ function Login(props) {
     if (errors.emailError || errors.passError) {
       return;
     }
-    // alert("Erfan Googooli!");
-    // console.log("No error in front");
     showLoading();
     const response = await fetch(apis["accounts"]["login"], {
       method: "POST",
@@ -152,18 +126,14 @@ function Login(props) {
       }),
     });
     const data = await response.json();
-    // console.log("response",response);
     closeLoading();
     if (response.status === 200) {
       // props.onLogIn();
       // console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
       
       setAuthTokens(data.token);
-      // console.log(authTokens);
       setShop_caller(true);
-      // console.log("shop_caller: ", shop_caller)
       localStorage.setItem("authTokens", JSON.stringify(data));
-      // localStorage.getItem("authTokens");
       const tokenClass = JSON.parse(JSON.stringify(data));
       const token = tokenClass.token.access;
       const shopId = await fetch(apis["carts"], {
@@ -173,36 +143,21 @@ function Login(props) {
           "Content-Type": "application/json",
          },
       })
-      // console.log("shopId", shopId.json())
       idShop = await shopId.json();
-      // console.log("shopId_data",idShop);
       if (shopId.status == 201 || shopId.status == 200) {
-        // console.log("shopId.json()",idShop)
         localStorage.setItem("shopId", JSON.stringify(idShop))
-        // console.log("shopId localstorage ",localStorage.getItem("shopId"))
         let test = localStorage.getItem("shopId")
-        // console.log("test", JSON.parse(test)[0])
       }
       else{
         console.error("shopId error", shopId.status)
       }
-      // console.log("shopId: ",shopId)
       Navigate("/home/page");
     } else {
-      // console.log(data.error);
       errors.backError = "!رمز عبور اشتباه است و یا حساب کاربری ندارید";
       setErrorMessage({
         ...errorMessage,
         backError: errors.backError,
       });
-      // if (data.error === "Invalid credentials") {
-      //   //show pop up
-      //   swal("Error!", "Invalid credentials!", "error");
-      // }
-      // if (data.error === "email is not verified") {
-      //   swal("Error!", "check your mailbox for verification", "error");
-      //   //show pop up with  check your mailbox for verification
-      // }
     }
   }
   //////////////////////////// End of input errors //////////////////
