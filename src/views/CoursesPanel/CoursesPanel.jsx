@@ -1,21 +1,17 @@
 import React from "react";
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
 import Select from "react-select";
 import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-import "../../assets/css/nucleo-icons.css";
+// import "../../assets/css/nucleo-icons.css";
 import DayRow from './DayRow';
-import { useState, useEffect } from 'react';
 import { apis } from "../../assets/apis";
 import {
   Card,
-  CardHeader,
   CardBody,
-  CardTitle,
   Table,
   Row,
-  Col,
-  Button
+  Col
 } from "reactstrap";
 
 import { addNewLesson } from "../../Functions/addNewLesson";
@@ -45,7 +41,7 @@ export default function CoursesPanel() {
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   useEffect(() => {
-    fetch(apis["departmentsAll"]["name"])
+    fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((DepartmentOptions) => {
       setDepartmentOptions(DepartmentOptions);
@@ -86,44 +82,44 @@ export default function CoursesPanel() {
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
-  const customStyles = {                                              // Select Styles
-    input: (defaultStyles) => ({
-      ...defaultStyles,
-      color: "transparent",
-    }),
-    option: (defaultStyles, state) => ({
-      ...defaultStyles,
-      color: "#9A9A9A",
-      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
-      "&:hover": {
-        backgroundColor: "rgba(222, 222, 222, 0.3)",
-      },
-      transition: "all 150ms linear",
-      margin: "-4px 0px",
-      padding: "0.6rem 24px",
-      fontSize: "0.75rem",
-      fontWeight: "400",
-    }),
+  // const customStyles = {                                              // Select Styles
+  //   input: (defaultStyles) => ({
+  //     ...defaultStyles,
+  //     color: "transparent",
+  //   }),
+  //   option: (defaultStyles, state) => ({
+  //     ...defaultStyles,
+      // color: "#9A9A9A",
+      // backgroundColor: state.isSelected ? "#27293d" : "#27293d",
+      // "&:hover": {
+      //   backgroundColor: "rgba(222, 222, 222, 0.3)",
+      // },
+  //     transition: "all 150ms linear",
+  //     margin: "-4px 0px",
+  //     padding: "0.6rem 24px",
+  //     fontSize: "0.75rem",
+  //     fontWeight: "400",
+  //   }),
 
-    control: (defaultStyles, state) => ({
-      ...defaultStyles,
+  //   control: (defaultStyles, state) => ({
+  //     ...defaultStyles,
 
-      "&:hover": {
-        borderColor: "#e14eca",
-      },
-      backgroundColor: "transparent",
-      boxShadow: "none",
-      color: "rgba(255, 255, 255, 0.8)",
-      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
-      borderRadius: "0.4285rem",
-      fontSize: "1rem",
-      marginTop: "5px",
-      fontWeight: "400",
-      transition:
-        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-    }),
-    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
-  };
+  //     "&:hover": {
+  //       borderColor: "#e14eca",
+  //     },
+  //     backgroundColor: "transparent",
+  //     boxShadow: "none",
+  //     color: "rgba(255, 255, 255, 0.8)",
+  //     borderColor: state.isFocused ? "#e14eca" : "#2b3553",
+  //     borderRadius: "0.4285rem",
+  //     fontSize: "1rem",
+  //     marginTop: "5px",
+  //     fontWeight: "400",
+  //     transition:
+  //       "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
+  //   }),
+  //   singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
+  // };
 
   function handleDepartment(selectedOption) {                         // Handle Select
     setSelectedDepartment(selectedOption.value);
@@ -201,6 +197,7 @@ export default function CoursesPanel() {
         if (!info.courseChoosed.includes(this)) {
           ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
+          console.log("My courses: " + ChosenCourses);
           this.IsChosen = true;
         }
       }
@@ -222,14 +219,14 @@ export default function CoursesPanel() {
   }
 
   let [timetable, settimetable] = useState([]);
-  // function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
-  //   return arr.filter((item, index) => {
-  //       return (
-  //       arr.findIndex((element) => element[key] === item[key]) === index
-  //       );
-  //   });
-  // }
-  // timetable = uniquifyArrayByKey(timetable, "complete_course_number")   // Do we need this?
+  function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
+    return arr.filter((item, index) => {
+        return (
+        arr.findIndex((element) => element[key] === item[key]) === index
+        );
+    });
+  }
+  timetable = uniquifyArrayByKey(timetable, "complete_course_number")
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
     // showLoading();
     const emptySection = () => ({
@@ -265,6 +262,7 @@ export default function CoursesPanel() {
           const day = time.course_day;
 
           let TimeIndex = time.course_time_representation;
+          // console.log("Course: " + currentPeriod.name + " course_time_representation: " + TimeIndex);
           if (TimeIndex === undefined)
           {
             TimeIndex = -1;
@@ -330,7 +328,7 @@ export default function CoursesPanel() {
                 <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
-                    styles={customStyles}
+                    className="input option select singleValue"
                     isRtl
                     placeholder="دانشکده مورد نظر را انتخاب کنید"
                     name="SelectDepartment"
