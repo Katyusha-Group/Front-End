@@ -30,6 +30,7 @@ import { PrivatRoute } from "./global/functions.jsx";
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
+import Profile from "./views/UserPorfile/Profile.jsx";
 
 function App() {
   document.documentElement.dir = "rtl";
@@ -79,62 +80,40 @@ function App() {
                   }
                 ></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
-                <Router.Route
-                  path="/forgetPassword"
-                  element={<ForgetPassword />}
-                ></Router.Route>
-                <Router.Route
-                  path="/loginLms"
-                  element={<LoginLms />}
-                ></Router.Route>
-                <Router.Route
-                  path="/aboutUs"
-                  element={<AboutUs />}
-                ></Router.Route>
-                <Router.Route
-                  path="/landingPage"
-                  element={<LandingPage />}
-                ></Router.Route>
-                <Router.Route
-                  path="/CoursesPanel"
-                  element={
-                    <PrivatRoute>
-                      <CoursesPanel />
-                    </PrivatRoute>
-                  }
-                ></Router.Route>
-                <Router.Route
-                  path="/shopping"
-                  element={
-                    <PrivatRoute>
-                      <Shopping />
-                    </PrivatRoute>
-                  }
-                ></Router.Route>
-                <Router.Route
-                  path="/user"
-                  element={
-                    <PrivatRoute>
-                      <UserProfile />
-                    </PrivatRoute>
-                  }
-                ></Router.Route>
-                <Router.Route
-                  path="/order"
-                  element={
-                    <PrivatRoute>
-                      <News />
-                    </PrivatRoute>
-                  }
-                ></Router.Route>
-                <Router.Route
-                  path="/notification"
-                  element={
-                    <PrivatRoute>
-                      <Notification />
-                    </PrivatRoute>
-                  }
-                ></Router.Route>
+                <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
+                <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
+                <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
+                <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
+                <Router.Route path="/CoursesPanel" element={
+                  <PrivatRoute>
+                    <CoursesPanel />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/shopping" element={
+                  <PrivatRoute>
+                    <Shopping />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/user" element={
+                  <PrivatRoute>
+                    <UserProfile />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/order" element={
+                  <PrivatRoute>
+                    <News />
+                  </PrivatRoute>
+                }></Router.Route>
+                <Router.Route path="/notification" element={
+                  <PrivatRoute>
+                    <Notification />
+                  </PrivatRoute>
+                }></Router.Route>
+              <Router.Route path="/profile" element={
+                  // <PrivatRoute>
+                    <Profile />
+                  // </PrivatRoute>
+                }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
