@@ -44,7 +44,7 @@ function SignUp() {
   const [subjectOptions, setSubjectOptions] = useState();
   // const subjects = [];
   React.useEffect(() => {
-    fetch(apis["departments"]["name"])
+    fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((subjectOptions) => {
         // console.log(subjectOptions);

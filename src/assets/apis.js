@@ -33,7 +33,7 @@ export const apis = {
     courses:`${domain}/timeline/courses/`,
   },
   departmentsAll: {
-    name: `${domain}/departments/name/`,
+    names: `${domain}/departments/names`,
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
   orders: `${domain}/orders/`,
