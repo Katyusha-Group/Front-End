@@ -29,6 +29,7 @@ import { useEffect } from "react";import { PrivatRoute } from "./global/function
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import News from "./views/News/Orders.jsx"
 import Notification from "./views/Notification/Notification.jsx";
+import Profile from "./views/UserPorfile/Profile.jsx";
 
 function App() {
   document.documentElement.dir = 'rtl'
@@ -91,6 +92,11 @@ function App() {
                   <PrivatRoute>
                     <Notification />
                   </PrivatRoute>
+                }></Router.Route>
+              <Router.Route path="/profile" element={
+                  // <PrivatRoute>
+                    <Profile />
+                  // </PrivatRoute>
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
