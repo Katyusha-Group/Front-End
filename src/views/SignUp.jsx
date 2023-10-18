@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
+import { apis } from "../assets/apis";
 // reactstrap components
 import {
   Button,
@@ -43,7 +44,7 @@ function SignUp() {
   const [subjectOptions, setSubjectOptions] = useState();
   // const subjects = [];
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/departments/names")
+    fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((subjectOptions) => {
         // console.log(subjectOptions);
@@ -149,15 +150,6 @@ function SignUp() {
       [name]: value,
     }));
   }
-  // function handleError(event) {
-  //   console.log(event);
-  //   console.log(event.target);
-  //   // const { name, value } = event.target;
-  //   // setFormData((prevFormData) => ({
-  //   //   ...prevFormData,
-  //   //   [name]: value,
-  //   // }));
-  // }
 
   const [gender, setGender] = useState();
   const [subject, setSubject] = useState();

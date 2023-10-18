@@ -28,15 +28,6 @@ const [formData, setFormData] = useState({
     code: ""
   });
 
-// const [subjectOptions, setSubjectOptions] = useState();
-//   React.useEffect(() => {
-//     fetch("https://www.katyushaiust.ir/departments/names")
-//       .then((response) => response.json())
-//       .then((subjectOptions) => {
-//         console.log(subjectOptions);
-//         setSubjectOptions(subjectOptions);
-//       });
-//   }, []);
 const Navigate = useNavigate();
 const { info, changeInfo } = useInfo();
   // localStorage.clear();
@@ -131,18 +122,8 @@ function isValidCode(code) {
   
   async function handleSubmit(event) {
     event.preventDefault();
-    //console.log(code)
-    // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
-    //console.log(localStorage.getItem("link"))
-    //console.log(forgetPasswordVerificationApi(code))
     closeLoading();
-    // Navigate("/setNewPassword")
-    //console.log(showAlert)
-    // verificationApi(code,info.token)
-    
-
-
     const errors = [
       {
         codeError: ""

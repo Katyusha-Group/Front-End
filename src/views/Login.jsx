@@ -24,7 +24,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { conforms } from "lodash";
-
+import { apis } from "../assets/apis";
 function Login(props) {
   // console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
   let [shop_caller,setShop_caller] = React.useState()
@@ -141,7 +141,7 @@ function Login(props) {
     // alert("Erfan Googooli!");
     // console.log("No error in front");
     showLoading();
-    const response = await fetch("https://katyushaiust.ir/accounts/login/", {
+    const response = await fetch(apis["accounts"]["login"], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -166,7 +166,7 @@ function Login(props) {
       // localStorage.getItem("authTokens");
       const tokenClass = JSON.parse(JSON.stringify(data));
       const token = tokenClass.token.access;
-      const shopId = await fetch("https://katyushaiust.ir/carts/", {
+      const shopId = await fetch(apis["carts"], {
         method: "POST",
         headers: { 
           Authorization: `Bearer ${token}`,

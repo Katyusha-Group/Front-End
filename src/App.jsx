@@ -7,15 +7,15 @@ import SignUp from "./views/SignUp.jsx";
 import ForgetPassword from "./views/ForgetPassword.jsx";
 import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
-import ChangePassword from './views/ChangePass.jsx';
-import Admin from './views/Admin.jsx';
+import ChangePassword from "./views/ChangePass.jsx";
+import Admin from "./views/Admin.jsx";
 import "./assets/css/black-dashboard-react.css";
 import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
-import LoginLms from './views/LoginLms.jsx';
-import LandingPage from "./views/LandingPage.jsx"; 
+import LoginLms from "./views/LoginLms.jsx";
+import LandingPage from "./views/LandingPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
 import Verification from "./views/Verification/Verification.jsx";
@@ -25,20 +25,21 @@ import SetNewPassword from "./views/SetNewPassword.jsx";
 import RequireAuth from "./components/RequirAuth/RequirAuth.jsx";
 import PrivateRoute from "./components/RequirAuth/PrivateRoute.jsx";
 import { useState } from "react";
-import { useEffect } from "react";import { PrivatRoute } from "./global/functions.jsx";
+import { useEffect } from "react";
+import { PrivatRoute } from "./global/functions.jsx";
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
-import News from "./views/News/Orders.jsx"
+import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 
 function App() {
-  document.documentElement.dir = 'rtl'
+  document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
-    () => localStorage.getItem('authTokens') !== null
+    () => localStorage.getItem("authTokens") !== null
   );
 
   useEffect(() => {
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
   }, [isLoggedIn]);
 
   const logIn = () => setIsLoggedIn(true);
@@ -53,16 +54,31 @@ function App() {
             <Router.BrowserRouter>
               <Router.Routes>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
-                <Router.Route path="/signup" element={<SignUp />}></Router.Route>
-                <Router.Route path="/verification" element={<Verification />}></Router.Route>
-                <Router.Route path="/verificationForgetPassword" element={<VerificationForgetPassword />}></Router.Route>
-                <Router.Route path="/setNewPassword" element={<SetNewPassword />}></Router.Route>
-                
-                 <Router.Route path="/home/*" element={
-                  <PrivatRoute>
-                  <Admin />
-                  </PrivatRoute>
-                 }></Router.Route> 
+                <Router.Route
+                  path="/signup"
+                  element={<SignUp />}
+                ></Router.Route>
+                <Router.Route
+                  path="/verification"
+                  element={<Verification />}
+                ></Router.Route>
+                <Router.Route
+                  path="/verificationForgetPassword"
+                  element={<VerificationForgetPassword />}
+                ></Router.Route>
+                <Router.Route
+                  path="/setNewPassword"
+                  element={<SetNewPassword />}
+                ></Router.Route>
+
+                <Router.Route
+                  path="/home/*"
+                  element={
+                    <PrivatRoute>
+                      <Admin />
+                    </PrivatRoute>
+                  }
+                ></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
                 <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>

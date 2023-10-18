@@ -2,6 +2,7 @@ import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { containsWhitespace } from "./CoursesPanel_Functions";
+import { apis } from "../../assets/apis";
 // Token
 // const tokenJson = localStorage.getItem("authTokens");
 // const tokenClass = JSON.parse(tokenJson);
@@ -24,7 +25,7 @@ function DayPeriod (Input) {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     showLoading();
     // console.log(x);
-    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
+    fetch(apis["courses"]["id"]+`${x}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

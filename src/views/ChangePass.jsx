@@ -1,7 +1,7 @@
 import React from "react";
 import routes from "../route.jsx";
 import { useInfo } from "../contexts/InfoContext.jsx";
-import "../assets/css/SignUp.css"
+import "../assets/css/SignUp.css";
 import {
   Button,
   Card,
@@ -12,12 +12,15 @@ import {
   Form,
   Input,
   Row,
-  Col
+  Col,
 } from "reactstrap";
-import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert.jsx";
+import {
+  closeLoading,
+  showLoading,
+} from "../components/LoadingAlert/LoadingAlert.jsx";
 import { useState } from "react";
-import Swal from "sweetalert2"; 
-
+import Swal from "sweetalert2";
+import { apis } from "../assets/apis.js";
 function ChangePassword() {
   const [formData, setFormData] = useState({
     oldPassword: "",
@@ -71,9 +74,8 @@ function ChangePassword() {
           "fa fa-eye viewpass mr-4 text-muted");
     confirmPasswordV.setAttribute("type", type);
   }
-  
+
   function isValidPassword(pass) {
-    // console.log(/[a-zA-Z]/.test(pass));
     return /[a-zA-Z]/.test(pass);
   }
   function handleChange(event) {
@@ -85,7 +87,6 @@ function ChangePassword() {
     }));
   }
   const [errorMessage, setErrorMessage] = useState({
-    
     oldPassError: "",
     passError: "",
     passErrorRep: "",
@@ -96,14 +97,14 @@ function ChangePassword() {
     event.preventDefault();
 
     const errors = [
-      {      
+      {
         oldPassError: "",
         passError: "",
         passErrorRep: "",
         backError: "",
       },
     ];
-    
+
     if (formData.oldPassword.trim().length === 0) {
       errors.oldPassError = "!وارد کردن رمز عبور الزامی است";
     }
@@ -125,153 +126,135 @@ function ChangePassword() {
       oldPassError: errors.oldPassError,
       passError: errors.passError,
       passErrorRep: errors.passErrorRep,
-      
     });
-    if (
-      errors.passError ||
-      errors.passErrorRep ||
-      errors.oldPassError
-    ) {
+    if (errors.passError || errors.passErrorRep || errors.oldPassError) {
       return;
     }
     showLoading();
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
-  
-    const response = await fetch(`https://www.katyushaiust.ir/accounts/changepassword/`, {
+
+    const response = await fetch(apis["accounts"]["changepassword"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         // Accept: "application/json",
         "Content-Type": "application/json",
-        "accept": "application/json"
+        accept: "application/json",
       },
 
       body: JSON.stringify({
         new_password1: formData.newPasswordConfirm,
-        old_password:formData.oldPassword ,
+        old_password: formData.oldPassword,
         new_password: formData.newPassword,
-        
       }),
     });
     const data = await response.json();
-    // console.log(data);
     closeLoading();
-    if ( response.status===200){
-
+    if (response.status === 200) {
       Swal.fire({
-        // position: 'top-end',
-        icon: 'success',
-        title: 'رمز عبور با موفقیت تغیر کرد   ',
-        background: '#3c3e5d',
-        color:'#ceccc0',
-        width:'25rem',
-        confirmButtonText:"باشه"
-      })
+        icon: "success",
+        title: "رمز عبور با موفقیت تغیر کرد   ",
+        background: "#3c3e5d",
+        color: "#ceccc0",
+        width: "25rem",
+        confirmButtonText: "باشه",
+      });
+    } else {
+      errors.backError = "!رمز عبور قابل قبول نیست";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
     }
-    else {
-        
-        errors.backError = "!رمز عبور قابل قبول نیست";
-        setErrorMessage({
-          ...errorMessage,
-          backError: errors.backError,
-        });
-        }   
   }
   return (
     <>
-            <Card >
-              <CardHeader>
-                <h5 className="title">تغییر رمز عبور</h5>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="text-right" md="6">
-                      <FormGroup>
-                        <label>رمز عبور فعلی</label>
-                        <Input
-                          placeholder="رمز عبور فعلی را وارد کنید"
-                          type="password"
-                          name="oldPassword"
-                          id="password_field"
-                          onChange={handleChange}
-                          value={formData.oldPassword}
-                        />
-                        <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={PasCloseEyeIcon}
-                              id="togglePassword"
-                            ></i>
-                            {errorMessage.oldPassError && (
-                              <div className="error" >
-                                {errorMessage.oldPassError}
-                              </div>
-                            )}
-                      </FormGroup>
-                      <FormGroup>
-                        <Button className="btn-fill" color="primary" type="submit"
-                        onClick={handleSubmit}
-                        >
-                  تغییر رمز عبور
-                </Button>
-                      </FormGroup>
-                      
-                    </Col>
-                    <Col className="text-right" md="6">
-                      <FormGroup>
-                        <label>رمز عبور جدید</label>
-                        <Input
-                          placeholder="رمز عبور جدید را وارد کنید"
-                          type="password"
-                          name="newPassword"
-                              id="newpassword_field"
-                              onChange={handleChange}
-                              value={formData.newPassword}
-                        />
-                        <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={newPasCloseEyeIcon}
-                              id="newtogglePassword"
-                            ></i>
-                            {errorMessage.passError && (
-                              <div className="error">
-                                {errorMessage.passError}
-                              </div>
-                            )}
-                      </FormGroup>
-                      <FormGroup>
-                        <label>تکرار رمز عبور جدید</label>
-                        <Input
-                          placeholder="رمز عبور جدید را دوباره وارد کنید"
-                          type="password"
-                          name="newPasswordConfirm"
-                              id="confirm_password_field"
-                              onChange={handleChange}
-                              value={formData.newPasswordConfirm}
-                        />
-                        <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={ConfirmPasCloseEyeIcon}
-                              id="toggleConfirmPassword"
-                            ></i>
-                            {errorMessage.passErrorRep && (
-                              <div className="error">
-                                {errorMessage.passErrorRep}
-                              </div>
-                            )}
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                </Form>
-              </CardBody>
-              <CardFooter>
-              </CardFooter>
-            </Card>
+      <Card>
+        <CardHeader>
+          <h5 className="title">تغییر رمز عبور</h5>
+        </CardHeader>
+        <CardBody>
+          <Form>
+            <Row>
+              <Col className="text-right" md="6">
+                <FormGroup>
+                  <label>رمز عبور فعلی</label>
+                  <Input
+                    placeholder="رمز عبور فعلی را وارد کنید"
+                    type="password"
+                    name="oldPassword"
+                    id="password_field"
+                    onChange={handleChange}
+                    value={formData.oldPassword}
+                  />
+                  <i
+                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                    onClick={PasCloseEyeIcon}
+                    id="togglePassword"
+                  ></i>
+                  {errorMessage.oldPassError && (
+                    <div className="error">{errorMessage.oldPassError}</div>
+                  )}
+                </FormGroup>
+                <FormGroup>
+                  <Button
+                    className="btn-fill"
+                    color="primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    تغییر رمز عبور
+                  </Button>
+                </FormGroup>
+              </Col>
+              <Col className="text-right" md="6">
+                <FormGroup>
+                  <label>رمز عبور جدید</label>
+                  <Input
+                    placeholder="رمز عبور جدید را وارد کنید"
+                    type="password"
+                    name="newPassword"
+                    id="newpassword_field"
+                    onChange={handleChange}
+                    value={formData.newPassword}
+                  />
+                  <i
+                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                    onClick={newPasCloseEyeIcon}
+                    id="newtogglePassword"
+                  ></i>
+                  {errorMessage.passError && (
+                    <div className="error">{errorMessage.passError}</div>
+                  )}
+                </FormGroup>
+                <FormGroup>
+                  <label>تکرار رمز عبور جدید</label>
+                  <Input
+                    placeholder="رمز عبور جدید را دوباره وارد کنید"
+                    type="password"
+                    name="newPasswordConfirm"
+                    id="confirm_password_field"
+                    onChange={handleChange}
+                    value={formData.newPasswordConfirm}
+                  />
+                  <i
+                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                    onClick={ConfirmPasCloseEyeIcon}
+                    id="toggleConfirmPassword"
+                  ></i>
+                  {errorMessage.passErrorRep && (
+                    <div className="error">{errorMessage.passErrorRep}</div>
+                  )}
+                </FormGroup>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+        <CardFooter></CardFooter>
+      </Card>
     </>
   );
 }
 export default ChangePassword;
-
-

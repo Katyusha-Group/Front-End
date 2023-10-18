@@ -7,6 +7,7 @@ import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import "../../assets/css/nucleo-icons.css";
 import DayRow from './DayRow';
 import { useState, useEffect } from 'react';
+import { apis } from "../../assets/apis";
 import {
   Card,
   CardHeader,
@@ -67,7 +68,7 @@ export default function CoursesPanel() {
 
   // Already Chosen Lessons and Set Department Options and AllowedLessons
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/departments/names")
+    fetch(apis["departmentsAll"]["name"])
       .then((response) => response.json())
       .then((DepartmentOptions) => {
       setDepartmentOptions(DepartmentOptions);
@@ -101,7 +102,7 @@ export default function CoursesPanel() {
   }, []);
 
   React.useEffect ( () => {
-    fetch("https://www.katyushaiust.ir/courses/my_courses", {
+    fetch(apis["courses"]["my_courses"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
@@ -183,7 +184,7 @@ export default function CoursesPanel() {
   React.useEffect(() => {                                             // Set Selected Department courses
     // showLoading();
     if (SelectedDepartment) {
-      fetch(`https://katyushaiust.ir/allcourses-based-department/${SelectedDepartment}`, {
+      fetch(apis["allcoursesBasedDepartment"]+`${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())

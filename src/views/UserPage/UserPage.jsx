@@ -4,89 +4,40 @@ import {
   Button,
   ButtonGroup,
   Card,
-  CardHeader,
   CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Form,
-  FormGroup,
-  Input,
-  Table,
   Row,
   Col,
-  UncontrolledTooltip,
   CardFooter,
 } from "reactstrap";
 import "./UserPage.css";
 import Spinner from "react-bootstrap/Spinner";
-import * as chart from "../../assets/img/chart.png";
-import dataJson from "../../assets/data/week.json";
-import HomeCardBar from "../../components/HomePageItems/HomeCardBar";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
-import courseGroups from "./courseGroups.json";
-//import sampleProfile from "./image1.png";
 import fullLogo from "./full.png";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
-import colorpaletHey from "./colors.json";
-import { dayOfWeek } from "../../global/functions";
-import { json } from "react-router-dom";
-import cartlogo from "./cart.png";
 import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
-import { sum } from "lodash";
-import axios from "axios";
 import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
-import AdminNavbar from "../../components/Navbars/AdminNavbar";
-function timeStringToFloat(time) {
-  var hoursMinutes = time.split(/[.:]/);
-  var hours = parseInt(hoursMinutes[0], 10);
-  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-  return hours + minutes / 60;
-}
+import { timeStringToFloat } from "../../Functions/timeStringToFloat";
+import { reducer } from "../../Functions/reducer";
+import { apis } from "../../assets/apis";
+
 const fetchRequest = "FETC_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
-const reducer = (state, action) => {
-  switch (action.type) {
-    case fetchRequest:
-      // changeInfo("loading" , true)
-      return { ...state, loading: true };
-    case fetchSuccess:
-      return { ...state, loading: false, props: action.payload };
-    case fetchFail:
-      // changeInfo("loading" , false)
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+
 export default function UserPage() {
-  // const [datac, setData] = React.useState([]);
   const { info, changeInfo } = useInfo();
-  // const [modalData, setModalData] = React.useState();
-  const [lesson, setLesson] = React.useState({
-    name: "",
-    day: 0,
-    time: 0,
-    long: 0,
-  });
-  //getting token
   const getError = (error) => {
-    // console.log(error.data.message)
     return error.responst && error.response.data
       ? error.response.data
       : error.message;
   };
-  const token = localStorage.getItem("authTokens");
+
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
     reducer,
     { loading: true, props: {}, error: "" }
@@ -104,16 +55,15 @@ export default function UserPage() {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  const [showX, setShowX] = React.useState("none");
   const [showCourseHover, setShowCourseHover] = React.useState({
     courseChoosed: [],
   });
   const [OrderInfo, SetOrderInfo] = React.useState({
-  name: "",
-  price: 0,
-  contain_telegram: "O",
-  contain_sms: "N",
-  contain_email:"N",
+    name: "",
+    price: 0,
+    contain_telegram: "O",
+    contain_sms: "N",
+    contain_email: "N",
   });
 
   const [prices, setPrices] = React.useState({
@@ -121,11 +71,7 @@ export default function UserPage() {
     E: 0,
     T: 0,
   });
-  const [modalData, setModalData] = React.useState(
-    []
-  );
-
-
+  const [modalData, setModalData] = React.useState([]);
 
   function setShowCourseHoverFunc(name, value) {
     setShowCourseHover((info) => ({ [name]: value }));
@@ -147,10 +93,9 @@ export default function UserPage() {
   function addNewLesson(num) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
-
     const token = tokenClass.token.access;
 
-    fetch("https://www.katyushaiust.ir/courses/my_courses/", {
+    fetch(apis["courses"]["my_courses"], {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -162,16 +107,11 @@ export default function UserPage() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        // console.log("loading", info.loading);
-      })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
         propsSetter({ type: fetchFail, payload: getError(error) });
       });
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
   }
 
   /**
@@ -182,8 +122,6 @@ export default function UserPage() {
    */
 
   function lessons(infoState, changeInfoState, getapi, classNameHover) {
-    // console.log("hello");
-
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -191,31 +129,26 @@ export default function UserPage() {
     React.useEffect(() => {
       if (getapi == true) {
         showLoading();
-        fetch("https://www.katyushaiust.ir/courses/my_courses", {
+        fetch(apis["courses"]["my_courses"], {
           headers: { Authorization: `Bearer ${token}` },
         })
           .then((response) => response.json())
           .then((data) => {
-            // console.log("get data", data);
-            // setData(data);
             changeInfoState("courseChoosed", data);
-            // console.log("get data after reload", data);
           })
           .catch((error) => console.error(error));
         const activeRoute = (routeName) => {
           return location.pathname === routeName ? "active" : "";
         };
       }
-      
     }, []);
 
     closeLoading();
 
     return infoState.courseChoosed.map((lessons) => {
-      // console.log("lessons", lessons);
       return lessons.course_times.map((lesson, index) => {
         let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
-        
+
         let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
 
         return (
@@ -271,7 +204,9 @@ export default function UserPage() {
               </button>
               <div
                 style={{ height: "100%" }}
-                onClick={() => apiForModalData(lessons.complete_course_number,true)}
+                onClick={() =>
+                  apiForModalData(lessons.complete_course_number, true)
+                }
                 className="d-flex align-items-center justify-content-center"
               >
                 <div className="m-1">
@@ -299,7 +234,40 @@ export default function UserPage() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(`https://katyushaiust.ir/course-cart-order-info/?cart_id=${shopId.id}&complete_course_number=${x}`, {
+    fetch(
+      apis["courseCartOrderInfo"] +
+        `?cart_id=${shopId.id}&complete_course_number=${x}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        SetOrderInfo(data[0]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    fetch(apis["getPrice"], {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPrices(data);
+        // console.log("prices", data);
+      })
+      .catch((error) => console.error(error));
+  }
+  function apiForModalData(x, showOrNot) {
+    const tokenJson = localStorage.getItem("authTokens");
+    const tokenClass = JSON.parse(tokenJson);
+    const token = tokenClass.token.access;
+    showLoading();
+    fetch(apis["courses"]["my_courses"] + x, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -307,54 +275,13 @@ export default function UserPage() {
       },
     })
       .then((response) => response.json())
-      .then((data) => {
-        SetOrderInfo(data[0])
-      })
-      .catch((error) => {
-        console.error(error);
+      .then((d) => {
+        setModalData(d);
+        if (showOrNot) {
+          setShowLesson({ flag: true, data: d });
+        }
       });
-      fetch(`https://katyushaiust.ir/get-prices/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setPrices(data);
-          // console.log("prices", data);
-        })
-        .catch((error) => console.error(error));
   }
-  function apiForModalData(x ,showOrNot){
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    showLoading();
-    // const response = await fetch(`https://www.katyushaiust.ir/courses/${x.complete_course_number}`,  {
-    //   method: "GET"
-
-      
-    // });
-    // console.log(x);
-    fetch(`https://www.katyushaiust.ir/courses/${x}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-    }).then((response) => response.json())
-    .then((d) => {
-      // console.log(d);
-      setModalData(d);
-      if(showOrNot){
-        setShowLesson({ flag: true, data: d })
-      }
-      
-    });
-    
-    
-    // const data = await response.json();
-    
-   }
 
   return (
     <>
@@ -412,7 +339,7 @@ export default function UserPage() {
                   >
                     <Button
                       tag="label"
-                      className={classNames("btn-simple","week_chart-btn", {
+                      className={classNames("btn-simple", "week_chart-btn", {
                         active: bigChartData === "data1",
                       })}
                       // color="primary"
@@ -432,7 +359,7 @@ export default function UserPage() {
                       id="1"
                       size="sm"
                       tag="label"
-                      className={classNames("btn-simple","week_chart-btn", {
+                      className={classNames("btn-simple", "week_chart-btn", {
                         active: bigChartData === "data2",
                       })}
                       onClick={() => setBgChartData("data2")}
@@ -449,7 +376,7 @@ export default function UserPage() {
                       id="2"
                       size="sm"
                       tag="label"
-                      className={classNames("btn-simple","week_chart-btn", {
+                      className={classNames("btn-simple", "week_chart-btn", {
                         active: bigChartData === "data3",
                       })}
                       onClick={() => setBgChartData("data3")}
@@ -470,7 +397,9 @@ export default function UserPage() {
                 >
                   <span
                     style={{
-                      display: bigChartData == "data2" ? "block" : "none", marginLeft:"0px" ,textAlign:"left"
+                      display: bigChartData == "data2" ? "block" : "none",
+                      marginLeft: "0px",
+                      textAlign: "left",
                     }}
                   >
                     {info.courseChoosed.reduce(
@@ -532,43 +461,52 @@ export default function UserPage() {
                           // console.log("includes------------------");
 
                           addNewLesson(x.complete_course_number);
-                          
+
                           changeInfo("courseChoosed", [
                             ...info.courseChoosed,
                             x,
                           ]);
-                          } 
+                        }
                       }}
                     >
                       <CardBody className="courseCardBody">
                         <img
                           className="professorImage"
-                          src={
-                            x.teachers[0].teacher_image
-                              
-                          }
+                          src={x.teachers[0].teacher_image}
                           alt="professorImage"
                         />
                         <div className="infoPart">
-                          
-                          <p style={{ textAlign: 'right'}} title={`${x.name} (گروه ${x.group_number})`}>
-              {x.name} (گروه {x.group_number})
-                           
+                          <p
+                            style={{ textAlign: "right" }}
+                            title={`${x.name} (گروه ${x.group_number})`}
+                          >
+                            {x.name} (گروه {x.group_number})
                           </p>
-                          <p style={{ fontSize: 12 , textAlign: 'right', marginRight :'10px'}} title={`"استاد:  "
-                            ${x.teachers.map((y)=>(y.name)).join(" , ")}`}>
-                              {`استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`.length<35 ? `استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`
-                             : `استاد:  ${x.teachers.map((y)=>(y.name)).join(" , ")}`.slice(0,35)+"..."}
-                            
+                          <p
+                            style={{
+                              fontSize: 12,
+                              textAlign: "right",
+                              marginRight: "10px",
+                            }}
+                            title={`"استاد:  "
+                            ${x.teachers.map((y) => y.name).join(" , ")}`}
+                          >
+                            {`استاد:  ${x.teachers
+                              .map((y) => y.name)
+                              .join(" , ")}`.length < 35
+                              ? `استاد:  ${x.teachers
+                                  .map((y) => y.name)
+                                  .join(" , ")}`
+                              : `استاد:  ${x.teachers
+                                  .map((y) => y.name)
+                                  .join(" , ")}`.slice(0, 35) + "..."}
                           </p>
 
                           <div className="courseCardDownSide">
-                            
-                              <p>
-                                ثبت نام شده: {x.registered_count} از{" "}
-                                {x.capacity}{" "}
-                              </p>
-                            
+                            <p>
+                              ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
+                            </p>
+
                             <img
                               className="fullLogo"
                               src={fullLogo}
@@ -598,8 +536,8 @@ export default function UserPage() {
                             : "large",
                         }}
                         onClick={() => {
-                        apiForModalData(x.complete_course_number,true)
-                        // setShowLesson({ flag: true, data: modalData });
+                          apiForModalData(x.complete_course_number, true);
+                          // setShowLesson({ flag: true, data: modalData });
                         }}
                       >
                         <i className="tim-icons icon-badge ml-0" />
@@ -614,7 +552,7 @@ export default function UserPage() {
                         }}
                         onClick={() => {
                           if (true) {
-                            getShopData(x.complete_course_number)
+                            getShopData(x.complete_course_number);
                             funcSetShowShoppingModal(true, x);
                           }
                         }}
