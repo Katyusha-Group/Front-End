@@ -19,6 +19,7 @@ export default defineConfig({
     environment: 'jsdom',
     css: true,
     setupFiles: './src/test/setup.ts',
+    setupFiles: './setupTest.js' ///////////???????????
   },
   css: {
     preprocessorOptions: {
