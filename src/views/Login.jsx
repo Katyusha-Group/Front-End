@@ -1,10 +1,7 @@
 import React from "react";
 import "../assets/css/Login.css";
-import * as log from "../assets/img/LoginRocket.svg";
-import { createContext, useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 import {
   Button,
@@ -12,7 +9,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
   FormGroup,
   Form,
   Input,
@@ -21,10 +17,8 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { conforms } from "lodash";
 import { apis } from "../assets/apis";
 function Login(props) {
-  // console.log("🚀 ~ file: Login.jsx:29 ~ Login ~ props:", props)
   let [shop_caller,setShop_caller] = React.useState()
   let idShop = "ali";
   React.useEffect(() => {
@@ -44,7 +38,6 @@ function Login(props) {
           "fa fa-eye viewpass mr-4 text-muted");
     passwordV.setAttribute("type", type);
   }
-
   //////////////////////////// End of Close eye Icon //////////////////
 
   ////////////////////////////// Input errors ///////////////////////
@@ -65,24 +58,14 @@ function Login(props) {
       [name]: value,
     }));
   }
-  function gohNakhor(){
-    setShop_caller(true);
-    // console.log("gohNakhor:",shop_caller)
-  }
+
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
-  const [user, setUser] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
-  );
-  const [loading, setloading] = useState(true);
 
   const Navigate = useNavigate();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
     passError: "",
@@ -90,7 +73,6 @@ function Login(props) {
   });
   async function handleSubmit(event) {
     event.preventDefault();
-
     const errors = [
       {
         emailError: "",
@@ -128,9 +110,6 @@ function Login(props) {
     const data = await response.json();
     closeLoading();
     if (response.status === 200) {
-      // props.onLogIn();
-      // console.log("🚀 ~ file: Login.jsx:158 ~ handleSubmit ~ onLogIn:", props.onLogIn)
-      
       setAuthTokens(data.token);
       setShop_caller(true);
       localStorage.setItem("authTokens", JSON.stringify(data));
@@ -174,15 +153,6 @@ function Login(props) {
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center">ورود به سایت</h5>
-                    <Row>
-                      <Col md="12">
-                        {/* <img
-                          alt="LoginImage"
-                          className="pl-5 pr-5"
-                          src={log.default}
-                        /> */}
-                      </Col>
-                    </Row>
                   </CardHeader>
                   <br></br>
                   <CardBody>
@@ -196,7 +166,6 @@ function Login(props) {
                               placeholder="ایمیل خود را وارد کنید"
                               type="email"
                               name="email"
-                              // autoComplete="off"
                               onChange={handleChange}
                               value={formData.email}
                             />
@@ -217,7 +186,6 @@ function Login(props) {
                               placeholder="رمز عبور خود را وارد کنید"
                               type="password"
                               id="password_field"
-                              //id="message"
                               name="password"
                               onChange={handleChange}
                               value={formData.password}
@@ -262,7 +230,6 @@ function Login(props) {
                   <CardFooter className="text-center">
                     <Button
                       onClick={handleSubmit}
-                      //onChange={handleClick}
                       className="btn-fill"
                       color="primary"
                       type="submit"
@@ -280,5 +247,4 @@ function Login(props) {
     </>
   );
 }
-
 export default Login;
