@@ -92,10 +92,8 @@ function DayPeriod (Input) {
 }
 
 const DayRow = ({ periods, dayName }) => {
-  // showLoading();
     return (
     <>
-      {/* {showLoading()} */}
       <tr className="TableROW">
       <td className="CoursesPanel_column text-center">{dayName}</td>
       {Object.entries(periods).map(([time, entry]) => {
@@ -106,9 +104,7 @@ const DayRow = ({ periods, dayName }) => {
           )
       })}
       </tr>
-      {/* {closeLoading()} */}
     </>
     );
-    // closeLoading();
 };
 export default DayRow;
