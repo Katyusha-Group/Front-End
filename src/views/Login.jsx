@@ -33,7 +33,6 @@ function Login(props) {
     password: "",
   });
 
-
   function handleChange(event) {
     setErrorMessage("");
     const { name, value } = event.target;
@@ -55,6 +54,7 @@ function Login(props) {
     passError: "",
     backError: "",
   });
+
   async function handleSubmit(event) {
     event.preventDefault();
     const errors = [
@@ -154,7 +154,7 @@ function Login(props) {
                               value={formData.email}
                             />
                             {errorMessage.emailError && (
-                              <div className="error">
+                              <div className="error" style={{direction: 'ltr'}}>
                                 {errorMessage.emailError}
                               </div>
                             )}
@@ -180,7 +180,7 @@ function Login(props) {
                               id="togglePassword"
                             ></i>
                             {errorMessage.passError && (
-                              <div className="error">
+                              <div className="error" style={{direction: 'ltr'}}>
                                 {errorMessage.passError}
                               </div>
                             )}
