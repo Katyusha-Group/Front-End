@@ -8,8 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:unit": "vitest --root src/"
+    "test": "vitest"
   },
   "dependencies": {
     "@esbuild/win32-x64": "^0.17.18",
