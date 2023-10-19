@@ -4,8 +4,8 @@ import { ThemeContext, themes } from "../../contexts/ThemeContext.jsx";
 export default function ThemeContextWrapper(props) {
   const [theme, setTheme] = useState(themes.dark);
 
-  function changeTheme(theme) {
-    setTheme(theme);
+  function changeTheme(newTheme) {
+    setTheme(newTheme);
   }
 
   useEffect(() => {
