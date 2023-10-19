@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 
 import { addNewLesson } from "../../Functions/addNewLesson";
+import SelectStyles from "./SelectStyles";
 
 import "./CoursesPanel.css"
 import ReactSwitch from "react-switch";
@@ -82,44 +83,7 @@ export default function CoursesPanel() {
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
-  // const customStyles = {                                              // Select Styles
-  //   input: (defaultStyles) => ({
-  //     ...defaultStyles,
-  //     color: "transparent",
-  //   }),
-  //   option: (defaultStyles, state) => ({
-  //     ...defaultStyles,
-      // color: "#9A9A9A",
-      // backgroundColor: state.isSelected ? "#27293d" : "#27293d",
-      // "&:hover": {
-      //   backgroundColor: "rgba(222, 222, 222, 0.3)",
-      // },
-  //     transition: "all 150ms linear",
-  //     margin: "-4px 0px",
-  //     padding: "0.6rem 24px",
-  //     fontSize: "0.75rem",
-  //     fontWeight: "400",
-  //   }),
-
-  //   control: (defaultStyles, state) => ({
-  //     ...defaultStyles,
-
-  //     "&:hover": {
-  //       borderColor: "#e14eca",
-  //     },
-  //     backgroundColor: "transparent",
-  //     boxShadow: "none",
-  //     color: "rgba(255, 255, 255, 0.8)",
-  //     borderColor: state.isFocused ? "#e14eca" : "#2b3553",
-  //     borderRadius: "0.4285rem",
-  //     fontSize: "1rem",
-  //     marginTop: "5px",
-  //     fontWeight: "400",
-  //     transition:
-  //       "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-  //   }),
-  //   singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
-  // };
+  
 
   function handleDepartment(selectedOption) {                         // Handle Select
     setSelectedDepartment(selectedOption.value);
@@ -328,7 +292,8 @@ export default function CoursesPanel() {
                 <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
-                    className="input option select singleValue"
+                    // className="input option select singleValue"
+                    styles={SelectStyles}
                     isRtl
                     placeholder="دانشکده مورد نظر را انتخاب کنید"
                     name="SelectDepartment"
