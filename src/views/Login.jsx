@@ -18,11 +18,13 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { apis } from "../assets/apis";
+import {IsValidEmail} from "../Functions/IsValidEmail"
 function Login(props) {
   let [shop_caller,setShop_caller] = React.useState()
   let idShop = "ali";
   React.useEffect(() => {
   }, [idShop]);
+
   ////////////////////////////// Close eye Icon //////////////////////
   function PasCloseEyeIcon() {
     // toggle the type attribute
@@ -46,9 +48,6 @@ function Login(props) {
     password: "",
   });
 
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
 
   function handleChange(event) {
     setErrorMessage("");
@@ -83,7 +82,7 @@ function Login(props) {
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-    if (!isValidEmail(formData.email) && !errors.emailError) {
+    if (!IsValidEmail(formData.email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
     if (formData.password.trim().length === 0) {
