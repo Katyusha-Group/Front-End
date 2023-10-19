@@ -19,28 +19,13 @@ import {
 import { Link } from "react-router-dom";
 import { apis } from "../assets/apis";
 import {IsValidEmail} from "../Functions/IsValidEmail"
+import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
+
 function Login(props) {
   let [shop_caller,setShop_caller] = React.useState()
   let idShop = "ali";
   React.useEffect(() => {
   }, [idShop]);
-
-  ////////////////////////////// Close eye Icon //////////////////////
-  function PasCloseEyeIcon() {
-    // toggle the type attribute
-    const togglePassword = document.querySelector("#togglePassword");
-    const passwordV = document.querySelector("#password_field");
-    const type =
-      passwordV.getAttribute("type") === "password" ? "text" : "password";
-
-    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.localStoragegetElementById("togglePassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("togglePassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    passwordV.setAttribute("type", type);
-  }
-  //////////////////////////// End of Close eye Icon //////////////////
 
   ////////////////////////////// Input errors ///////////////////////
   const [formData, setFormData] = useState({
