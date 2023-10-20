@@ -28,7 +28,7 @@ const SelectStyles = {                                              // Select St
       color: "rgba(255, 255, 255, 0.8)",
       borderColor: state.isFocused ? "#e14eca" : "#2b3553",
       borderRadius: "0.4285rem",
-      fontSize: "1rem",
+      fontSize: "0.75rem",
       marginTop: "5px",
       fontWeight: "400",
       transition:
