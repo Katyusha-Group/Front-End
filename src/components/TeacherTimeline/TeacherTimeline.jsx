@@ -3,6 +3,7 @@ import "./TeacherTimeline.module.css";
 import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
+import { apis } from "../../assets/apis";
 const TeacherTimeline = (props) => {
   let teacher_id = props.show.show.data.teachers[0].id;
   const { info, changeInfoState } = useInfo();
@@ -49,7 +50,7 @@ const TeacherTimeline = (props) => {
   ];
   const token = tokenClass.token.access;
   React.useEffect(() => {
-    fetch(apis["timeline"]["teachers"]`${teacher_id}`, {
+    fetch(apis["timeline"]["teachers"]+`${teacher_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
