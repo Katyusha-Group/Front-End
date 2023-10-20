@@ -1,11 +1,13 @@
 import React from "react";
 import { useMemo, useState, useEffect } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
-import Select from "react-select";
-import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-// import "../../assets/css/nucleo-icons.css";
-import DayRow from './DayRow';
 import { apis } from "../../assets/apis";
+
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import Select from "react-select";
+import DayRow from './DayRow';
+import ReactSwitch from "react-switch";
 import {
   Card,
   CardBody,
@@ -14,12 +16,17 @@ import {
   Col
 } from "reactstrap";
 
+// Functions
 import { addNewLesson } from "../../Functions/addNewLesson";
-import SelectStyles from "./SelectStyles";
+import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
+import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
+import GenerateKeyedTimetable from "./KeyedTimetable";
+// import Course from "./Course_Class";
 
+// Styles
 import "./CoursesPanel.css"
-import ReactSwitch from "react-switch";
-import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import SelectStyles from "../../assets/styles/SelectStyles";
+
 export default function CoursesPanel() {
   // Token
   const tokenJson = localStorage.getItem("authTokens");
@@ -83,8 +90,6 @@ export default function CoursesPanel() {
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
-  
-
   function handleDepartment(selectedOption) {                         // Handle Select
     setSelectedDepartment(selectedOption.value);
     showLoading();
@@ -97,13 +102,8 @@ export default function CoursesPanel() {
       })
         .then((response) => response.json())
         .then((data) => {
-          // settimetable(data);
           const courses = data.map(course => new Course(course, false));
-          // settimetable(courses);
           setDepartmentCourses(courses); //Do we need this?
-          // let NewTimeTable = [...ChosenCourses, ...courses];
-          // settimetable(NewTimeTable);
-          // setSwitchChecked(false);
           if (SwitchChecked)
           {
             let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
@@ -138,7 +138,6 @@ export default function CoursesPanel() {
     {
       setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
     }
-    // closeLoading();
   }, [SwitchChecked]);
 
   class Course {
@@ -183,98 +182,12 @@ export default function CoursesPanel() {
   }
 
   let [timetable, settimetable] = useState([]);
-  function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
-    return arr.filter((item, index) => {
-        return (
-        arr.findIndex((element) => element[key] === item[key]) === index
-        );
-    });
-  }
+  
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")
-  const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
-    // showLoading();
-    const emptySection = () => ({
-      0: null,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null
-    });
-    const emptyDay = () => ({
-      0: emptySection(),
-      1: emptySection(),
-      2: emptySection(),
-      3: emptySection(),
-      4: emptySection(),
-      5: emptySection(),
-      6: emptySection(),
-      7: emptySection()
-    });
 
-    const courseGroups = [];
-    for (let i = 0; i < 6; i++) {
-        courseGroups[i] = Array(8).fill(0);
-    }
-    const NumInEachSlot = courseGroups;
-
-    return timetable.reduce(
-      (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        // showLoading();
-        currentPeriod.course_times.forEach(time => {
-
-          const day = time.course_day;
-
-          let TimeIndex = time.course_time_representation;
-          // console.log("Course: " + currentPeriod.name + " course_time_representation: " + TimeIndex);
-          if (TimeIndex === undefined)
-          {
-            TimeIndex = -1;
-            // TimeIndex = mapTimeToIndex(time.course_start_time);
-            const timeRanges = [ //map time to index
-              ["07:30:00", "09:00:00"],
-              ["09:00:01", "10:30:00"],
-              ["10:30:01", "12:00:00"],
-              ["13:00:00", "14:30:00"],
-              ["14:30:01", "16:00:00"],
-              ["16:00:01", "17:30:00"],
-              ["17:30:01", "19:00:00"],
-              ["19:00:01", "20:30:00"]
-            ];
-          
-            for (let i = 0; i < timeRanges.length; i++) {
-              const [start, end] = timeRanges[i];
-              console.log("start is: " + start + " and end is: " + end);
-              if (time.course_start_time >= start && time.course_start_time <= end) {
-                console.log("The if is true");
-                TimeIndex = i;
-              }
-            }
-          }
-
-          NumInEachSlot[day][TimeIndex]++;
-
-          let count = NumInEachSlot[day][TimeIndex];
-          try {
-            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          }
-          catch (error) {
-            console.log("ERROR is: " + error);
-          }  
-        }
-        );
-        return lessonsKeyedByDayAndPeriod
-      },
-      {
-        0: emptyDay(),
-        1: emptyDay(),
-        2: emptyDay(),
-        3: emptyDay(),
-        4: emptyDay(),
-        5: emptyDay(),
-      }
-    )
-  }, [timetable])
+  const keyedTimetable = useMemo(() => {
+    return GenerateKeyedTimetable(timetable);
+  }, [timetable]);
   
   useEffect (() => {
     closeLoading();
@@ -282,7 +195,6 @@ export default function CoursesPanel() {
   
   return (
     <>
-
     <AdminNavbar></AdminNavbar>
       <Row >
         <Col>
@@ -292,7 +204,6 @@ export default function CoursesPanel() {
                 <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
-                    // className="input option select singleValue"
                     styles={SelectStyles}
                     isRtl
                     placeholder="دانشکده مورد نظر را انتخاب کنید"
