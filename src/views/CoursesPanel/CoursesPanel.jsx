@@ -1,11 +1,13 @@
 import React from "react";
 import { useMemo, useState, useEffect } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
-import Select from "react-select";
-import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-// import "../../assets/css/nucleo-icons.css";
-import DayRow from './DayRow';
 import { apis } from "../../assets/apis";
+
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
+import Select from "react-select";
+import DayRow from './DayRow';
+import ReactSwitch from "react-switch";
 import {
   Card,
   CardBody,
@@ -14,12 +16,18 @@ import {
   Col
 } from "reactstrap";
 
+// Functions
 import { addNewLesson } from "../../Functions/addNewLesson";
+import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
+import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
+// import Course from "./Course_Class";
+
+// Styles
+import "./CoursesPanel.css"
 import SelectStyles from "./SelectStyles";
 
-import "./CoursesPanel.css"
-import ReactSwitch from "react-switch";
-import AdminNavbar from "../../components/Navbars/AdminNavbar";
+
+
 export default function CoursesPanel() {
   // Token
   const tokenJson = localStorage.getItem("authTokens");
@@ -183,13 +191,7 @@ export default function CoursesPanel() {
   }
 
   let [timetable, settimetable] = useState([]);
-  function uniquifyArrayByKey(arr, key) {                             // Removing duplicate keys (uniquify by key)
-    return arr.filter((item, index) => {
-        return (
-        arr.findIndex((element) => element[key] === item[key]) === index
-        );
-    });
-  }
+  
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")
   const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
     // showLoading();
@@ -229,27 +231,7 @@ export default function CoursesPanel() {
           // console.log("Course: " + currentPeriod.name + " course_time_representation: " + TimeIndex);
           if (TimeIndex === undefined)
           {
-            TimeIndex = -1;
-            // TimeIndex = mapTimeToIndex(time.course_start_time);
-            const timeRanges = [ //map time to index
-              ["07:30:00", "09:00:00"],
-              ["09:00:01", "10:30:00"],
-              ["10:30:01", "12:00:00"],
-              ["13:00:00", "14:30:00"],
-              ["14:30:01", "16:00:00"],
-              ["16:00:01", "17:30:00"],
-              ["17:30:01", "19:00:00"],
-              ["19:00:01", "20:30:00"]
-            ];
-          
-            for (let i = 0; i < timeRanges.length; i++) {
-              const [start, end] = timeRanges[i];
-              console.log("start is: " + start + " and end is: " + end);
-              if (time.course_start_time >= start && time.course_start_time <= end) {
-                console.log("The if is true");
-                TimeIndex = i;
-              }
-            }
+            TimeIndex = mapTimeToIndex(time.course_start_time);
           }
 
           NumInEachSlot[day][TimeIndex]++;
@@ -282,7 +264,6 @@ export default function CoursesPanel() {
   
   return (
     <>
-
     <AdminNavbar></AdminNavbar>
       <Row >
         <Col>

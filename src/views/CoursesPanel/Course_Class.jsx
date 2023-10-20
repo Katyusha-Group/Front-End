@@ -1,5 +1,8 @@
-import { addNewLesson } from "../../Functions/addNewLesson";
+import React from "react";
+import { useMemo, useState, useEffect } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
+import { apis } from "../../assets/apis";
+import { addNewLesson } from "../../Functions/addNewLesson";
 // Info
 const { info, changeInfo } = useInfo();
 class Course {

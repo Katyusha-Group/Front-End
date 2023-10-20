@@ -2,10 +2,6 @@ import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
-// Token
-// const tokenJson = localStorage.getItem("authTokens");
-// const tokenClass = JSON.parse(tokenJson);
-// const token = tokenClass.token.access;
 import ModalLessons from "../../components/ModalLessons/ModalLessons";
 
 
@@ -23,7 +19,6 @@ function DayPeriod (Input) {
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     showLoading();
-    // console.log(x);
     fetch(apis["courses"]["id"]+`${x}`, {
       method: "GET",
       headers: {
@@ -36,14 +31,9 @@ function DayPeriod (Input) {
       setModalData(d);
       if(showOrNot){
         setShowLesson({ flag: true, data: d })
-        // console.log("modal is shown");
       }
-      // console.log(d);
     });
-    
     closeLoading();
-    // const data = await response.json();
-    
    }
 
   return (
@@ -52,14 +42,11 @@ function DayPeriod (Input) {
         return (
           <div className="CourseListContainer">
             {entry !== null && (
-              <div className="CourseContainer">
+              <div className="CourseContainer" key={entry.complete_course_number}>
                 <div className="Course"
                   style={{ backgroundColor: entry.backgColor, fontSize: /\s/.test(entry.name) ? "x-small" : "xx-small" }}
                   onClick={() => apiForModalData(entry.complete_course_number, true)}
                 >
-                  {/* <div style={{ margin: '5px' }}>
-                    {entry.name} ({entry.class_gp})
-                  </div> */}
                   <div title= {entry.name}>
                     {entry.name.length < 17 ? entry.name : entry.name.slice(0, 17) + "..."} ({entry.class_gp})
                   </div>
