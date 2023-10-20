@@ -191,3 +191,53 @@
 .Course:hover {
     cursor: pointer;
 }
+
+
+/* selectStyles.css */
+
+/* Select Styles */
+input {
+    color: transparent;
+  }
+  
+  option {
+    color: #9a9a9a;
+    background-color: #27293d;
+  }
+  
+  option:hover {
+    background-color: rgba(222, 222, 222, 0.3);
+  }
+  
+  select {
+    background-color: transparent;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #2b3553;
+    border-radius: 0.4285rem;
+    font-size: 1rem;
+    margin-top: 5px;
+    font-weight: 400;
+    transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  select:hover {
+    border-color: #e14eca;
+  }
+  
+  select:focus {
+    border-color: #e14eca;
+  }
+  
+  select option:checked {
+    background-color: #27293d;
+    color: #9a9a9a;
+  }
+  
+  select option:checked:hover {
+    background-color: rgba(222, 222, 222, 0.3);
+  }
+  
+  select::-ms-expand {
+    display: none;
+  }

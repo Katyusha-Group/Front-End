@@ -1,7 +1,6 @@
 import React from "react";
 import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
-import { containsWhitespace } from "./CoursesPanel_Functions";
 import { apis } from "../../assets/apis";
 // Token
 // const tokenJson = localStorage.getItem("authTokens");
@@ -55,7 +54,7 @@ function DayPeriod (Input) {
             {entry !== null && (
               <div className="CourseContainer">
                 <div className="Course"
-                  style={{ backgroundColor: entry.backgColor, fontSize: containsWhitespace(entry.name) ? "x-small" : "xx-small" }}
+                  style={{ backgroundColor: entry.backgColor, fontSize: /\s/.test(entry.name) ? "x-small" : "xx-small" }}
                   onClick={() => apiForModalData(entry.complete_course_number, true)}
                 >
                   {/* <div style={{ margin: '5px' }}>
@@ -93,10 +92,8 @@ function DayPeriod (Input) {
 }
 
 const DayRow = ({ periods, dayName }) => {
-  // showLoading();
     return (
     <>
-      {/* {showLoading()} */}
       <tr className="TableROW">
       <td className="CoursesPanel_column text-center">{dayName}</td>
       {Object.entries(periods).map(([time, entry]) => {
@@ -107,9 +104,7 @@ const DayRow = ({ periods, dayName }) => {
           )
       })}
       </tr>
-      {/* {closeLoading()} */}
     </>
     );
-    // closeLoading();
 };
 export default DayRow;
