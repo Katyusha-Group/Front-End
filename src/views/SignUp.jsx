@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
-
+import {IsValidEmail} from "../Functions/IsValidEmail"
+import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
+import {ConfirmPasCloseEyeIcon} from "../Functions/ConfirmPasCloseEyeIcon"
 // reactstrap components
 import {
   Button,
@@ -85,49 +87,7 @@ function SignUp() {
   };
   /////////////////////////////// End of Select //////////////////////
 
-  /////////////////////////////// Close eye Icon /////////////////////
-
-  function PasCloseEyeIcon() {
-    // toggle the type attribute
-    const togglePassword = document.querySelector("#togglePassword");
-    const passwordV = document.querySelector("#password_field");
-    const type =
-      passwordV.getAttribute("type") === "password" ? "text" : "password";
-
-    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("togglePassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    passwordV.setAttribute("type", type);
-  }
-
-  function ConfirmPasCloseEyeIcon() {
-    // toggle the type attribute
-    const toggleConfirmPassword = document.querySelector(
-      "#toggleConfirmPassword"
-    );
-    const confirmPasswordV = document.querySelector("#confirm_password_field");
-    const type =
-      confirmPasswordV.getAttribute("type") === "password"
-        ? "text"
-        : "password";
-
-    toggleConfirmPassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    confirmPasswordV.setAttribute("type", type);
-  }
-  //////////////////////////// End of Close eye Icon //////////////////
-
   //////////////////////////// Input errors //////////////////
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-
   function handleChange(event) {
     setErrorMessage("");
     const { name, value } = event.target;
@@ -172,7 +132,7 @@ function SignUp() {
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-    if (!isValidEmail(formData.email) && !errors.emailError) {
+    if (!IsValidEmail(formData.email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
     if (formData.password.trim().length === 0) {
