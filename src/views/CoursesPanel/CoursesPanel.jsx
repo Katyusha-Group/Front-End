@@ -25,7 +25,7 @@ import GenerateKeyedTimetable from "./KeyedTimetable";
 
 // Styles
 import "./CoursesPanel.css"
-import SelectStyles from "./SelectStyles";
+import SelectStyles from "../../assets/styles/SelectStyles";
 
 export default function CoursesPanel() {
   // Token
@@ -138,7 +138,6 @@ export default function CoursesPanel() {
     {
       setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
     }
-    // closeLoading();
   }, [SwitchChecked]);
 
   class Course {
