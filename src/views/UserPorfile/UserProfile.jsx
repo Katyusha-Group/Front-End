@@ -20,7 +20,7 @@ import {
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import NotificationAlert from "react-notification-alert";
-
+import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
 function UserProfile() {
@@ -31,7 +31,7 @@ function UserProfile() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
     showLoading();
-    fetch(apis["account"]["justProfile"], {
+    fetch(apis["accounts"]["justProfile"], {
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
     })
