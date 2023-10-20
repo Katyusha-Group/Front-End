@@ -20,13 +20,12 @@ import {
 import { addNewLesson } from "../../Functions/addNewLesson";
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
 import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
+import GenerateKeyedTimetable from "./KeyedTimetable";
 // import Course from "./Course_Class";
 
 // Styles
 import "./CoursesPanel.css"
 import SelectStyles from "./SelectStyles";
-
-
 
 export default function CoursesPanel() {
   // Token
@@ -91,8 +90,6 @@ export default function CoursesPanel() {
   // Department courses
   let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
-  
-
   function handleDepartment(selectedOption) {                         // Handle Select
     setSelectedDepartment(selectedOption.value);
     showLoading();
@@ -105,13 +102,8 @@ export default function CoursesPanel() {
       })
         .then((response) => response.json())
         .then((data) => {
-          // settimetable(data);
           const courses = data.map(course => new Course(course, false));
-          // settimetable(courses);
           setDepartmentCourses(courses); //Do we need this?
-          // let NewTimeTable = [...ChosenCourses, ...courses];
-          // settimetable(NewTimeTable);
-          // setSwitchChecked(false);
           if (SwitchChecked)
           {
             let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
@@ -193,70 +185,10 @@ export default function CoursesPanel() {
   let [timetable, settimetable] = useState([]);
   
   timetable = uniquifyArrayByKey(timetable, "complete_course_number")
-  const keyedTimetable = useMemo(() => {                             // Mapping the courses into keyedTimetable
-    // showLoading();
-    const emptySection = () => ({
-      0: null,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null
-    });
-    const emptyDay = () => ({
-      0: emptySection(),
-      1: emptySection(),
-      2: emptySection(),
-      3: emptySection(),
-      4: emptySection(),
-      5: emptySection(),
-      6: emptySection(),
-      7: emptySection()
-    });
 
-    const courseGroups = [];
-    for (let i = 0; i < 6; i++) {
-        courseGroups[i] = Array(8).fill(0);
-    }
-    const NumInEachSlot = courseGroups;
-
-    return timetable.reduce(
-      (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        // showLoading();
-        currentPeriod.course_times.forEach(time => {
-
-          const day = time.course_day;
-
-          let TimeIndex = time.course_time_representation;
-          // console.log("Course: " + currentPeriod.name + " course_time_representation: " + TimeIndex);
-          if (TimeIndex === undefined)
-          {
-            TimeIndex = mapTimeToIndex(time.course_start_time);
-          }
-
-          NumInEachSlot[day][TimeIndex]++;
-
-          let count = NumInEachSlot[day][TimeIndex];
-          try {
-            lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
-          }
-          catch (error) {
-            console.log("ERROR is: " + error);
-          }  
-        }
-        );
-        return lessonsKeyedByDayAndPeriod
-      },
-      {
-        0: emptyDay(),
-        1: emptyDay(),
-        2: emptyDay(),
-        3: emptyDay(),
-        4: emptyDay(),
-        5: emptyDay(),
-      }
-    )
-  }, [timetable])
+  const keyedTimetable = useMemo(() => {
+    return GenerateKeyedTimetable(timetable);
+  }, [timetable]);
   
   useEffect (() => {
     closeLoading();
@@ -273,7 +205,6 @@ export default function CoursesPanel() {
                 <Col className="SelectCol" md="4">
                   <Select
                     options={DepartmentOptions}
-                    // className="input option select singleValue"
                     styles={SelectStyles}
                     isRtl
                     placeholder="دانشکده مورد نظر را انتخاب کنید"
