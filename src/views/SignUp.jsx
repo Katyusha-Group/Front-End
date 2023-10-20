@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
+
 // reactstrap components
 import {
   Button,
@@ -14,11 +14,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   FormGroup,
   Form,
   Input,
@@ -42,19 +37,14 @@ function SignUp() {
   ];
 
   const [subjectOptions, setSubjectOptions] = useState();
-  // const subjects = [];
   React.useEffect(() => {
     fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((subjectOptions) => {
-        // console.log(subjectOptions);
         setSubjectOptions(subjectOptions);
       });
   }, []);
 
-  // this.setState({selectOptions: options})
-  // const subs = {};
-  // subs = subject.map()
   const customStyles = {
     input: (defaultStyles) => ({
       ...defaultStyles,
@@ -137,10 +127,6 @@ function SignUp() {
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
-  function isValidPassword(pass) {
-    //console.log(/[a-zA-Z]/.test(pass));
-    return /[a-zA-Z]/.test(pass);
-  }
 
   function handleChange(event) {
     setErrorMessage("");
@@ -205,11 +191,6 @@ function SignUp() {
     ) {
       errors.passErrorRep = "!تکرار رمز عبور و رمز عبور یکسان نیست";
     }
-
-    // if (formData.subject.trim().length === 0) {
-    //   console.log("وارد کردن رشته الزامی می‌باشد");
-    //   return;
-    // }
     if (!gender) {
       errors.genderError = "!وارد کردن جنسیت الزامی است";
     }
@@ -276,21 +257,11 @@ function SignUp() {
       }),
     });
     const data = await response.json();
-    // console.log(data);
     Swal.close()
-    if ( response.status===201){
-
-    // if ( data.message.includes("created successfully")){
-      
+    if ( response.status===201){      
       localStorage.setItem("token",data.token)
       localStorage.setItem("verificationLink",data.url)
-      //console.log(data.url);
-      //console.log(data.token)
-
-      //console.log("خوش آمدید");
-      // console.log(info.token)
       Swal.fire({
-        // position: 'top-end',
         icon: 'success',
         title: ' کد تایید ارسال شد',
         html:'لطفا ایمیلتان را چک کنید',
@@ -308,9 +279,7 @@ function SignUp() {
         backError: errors.backError,
       });
     }
-    // console.log(formData);
   }
-
   return (
     <>
       <div className="wrapper">
