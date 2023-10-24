@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
 import "../assets/css/SignUp.css";
-import axios from "axios";
+import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
+import {IsValidEmail} from "../Functions/IsValidEmail"
+import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
+import {ConfirmPasCloseEyeIcon} from "../Functions/ConfirmPasCloseEyeIcon"
 // reactstrap components
 import {
   Button,
@@ -14,11 +17,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   FormGroup,
   Form,
   Input,
@@ -42,106 +40,15 @@ function SignUp() {
   ];
 
   const [subjectOptions, setSubjectOptions] = useState();
-  // const subjects = [];
   React.useEffect(() => {
     fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((subjectOptions) => {
-        // console.log(subjectOptions);
         setSubjectOptions(subjectOptions);
       });
   }, []);
 
-  // this.setState({selectOptions: options})
-  // const subs = {};
-  // subs = subject.map()
-  const customStyles = {
-    input: (defaultStyles) => ({
-      ...defaultStyles,
-      color: "transparent",
-    }),
-    option: (defaultStyles, state) => ({
-      ...defaultStyles,
-      color: "#9A9A9A",
-      backgroundColor: state.isSelected ? "#27293d" : "#27293d",
-      "&:hover": {
-        backgroundColor: "rgba(222, 222, 222, 0.3)",
-      },
-      transition: "all 150ms linear",
-      margin: "-4px 0px",
-      padding: "0.6rem 24px",
-      fontSize: "0.75rem",
-      fontWeight: "400",
-    }),
-
-    control: (defaultStyles, state) => ({
-      ...defaultStyles,
-
-      "&:hover": {
-        borderColor: "#e14eca",
-      },
-      backgroundColor: "transparent",
-      boxShadow: "none",
-      color: "rgba(255, 255, 255, 0.8)",
-      borderColor: state.isFocused ? "#e14eca" : "#2b3553",
-      borderRadius: "0.4285rem",
-      fontSize: "0.75rem",
-      marginTop: "5px",
-      fontWeight: "400",
-      transition:
-        "color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-    }),
-    singleValue: (defaultStyles) => ({ ...defaultStyles, color: "#fff" }),
-  };
-  /////////////////////////////// End of Select //////////////////////
-
-  /////////////////////////////// Close eye Icon /////////////////////
-
-  function PasCloseEyeIcon() {
-    // toggle the type attribute
-    const togglePassword = document.querySelector("#togglePassword");
-    const passwordV = document.querySelector("#password_field");
-    const type =
-      passwordV.getAttribute("type") === "password" ? "text" : "password";
-
-    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("togglePassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    passwordV.setAttribute("type", type);
-  }
-
-  function ConfirmPasCloseEyeIcon() {
-    // toggle the type attribute
-    const toggleConfirmPassword = document.querySelector(
-      "#toggleConfirmPassword"
-    );
-    const confirmPasswordV = document.querySelector("#confirm_password_field");
-    const type =
-      confirmPasswordV.getAttribute("type") === "password"
-        ? "text"
-        : "password";
-
-    toggleConfirmPassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    confirmPasswordV.setAttribute("type", type);
-  }
-  //////////////////////////// End of Close eye Icon //////////////////
-
   //////////////////////////// Input errors //////////////////
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-  function isValidPassword(pass) {
-    //console.log(/[a-zA-Z]/.test(pass));
-    return /[a-zA-Z]/.test(pass);
-  }
-
   function handleChange(event) {
     setErrorMessage("");
     const { name, value } = event.target;
@@ -186,7 +93,7 @@ function SignUp() {
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-    if (!isValidEmail(formData.email) && !errors.emailError) {
+    if (!IsValidEmail(formData.email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
     if (formData.password.trim().length === 0) {
@@ -205,11 +112,6 @@ function SignUp() {
     ) {
       errors.passErrorRep = "!تکرار رمز عبور و رمز عبور یکسان نیست";
     }
-
-    // if (formData.subject.trim().length === 0) {
-    //   console.log("وارد کردن رشته الزامی می‌باشد");
-    //   return;
-    // }
     if (!gender) {
       errors.genderError = "!وارد کردن جنسیت الزامی است";
     }
@@ -276,21 +178,11 @@ function SignUp() {
       }),
     });
     const data = await response.json();
-    // console.log(data);
     Swal.close()
-    if ( response.status===201){
-
-    // if ( data.message.includes("created successfully")){
-      
+    if ( response.status===201){      
       localStorage.setItem("token",data.token)
       localStorage.setItem("verificationLink",data.url)
-      //console.log(data.url);
-      //console.log(data.token)
-
-      //console.log("خوش آمدید");
-      // console.log(info.token)
       Swal.fire({
-        // position: 'top-end',
         icon: 'success',
         title: ' کد تایید ارسال شد',
         html:'لطفا ایمیلتان را چک کنید',
@@ -308,9 +200,7 @@ function SignUp() {
         backError: errors.backError,
       });
     }
-    // console.log(formData);
   }
-
   return (
     <>
       <div className="wrapper">
@@ -408,7 +298,7 @@ function SignUp() {
 
                             <Select
                               options={subjectOptions}
-                              styles={customStyles}
+                              styles={SelectStyles}
                               isRtl
                               placeholder="انتخاب کنید "
                               name="subject"
@@ -429,7 +319,7 @@ function SignUp() {
 
                             <Select
                               options={genderOptions}
-                              styles={customStyles}
+                              styles={SelectStyles}
                               isRtl
                               placeholder="انتخاب کنید "
                               name="gender"

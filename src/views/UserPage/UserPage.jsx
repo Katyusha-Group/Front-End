@@ -128,7 +128,7 @@ export default function UserPage() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     showLoading();
-    fetch(apis["courses"]["my_courses"] + x, {
+    fetch(apis["courses"]["id"] + x, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
