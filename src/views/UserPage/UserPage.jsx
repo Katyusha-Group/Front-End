@@ -22,14 +22,10 @@ import {
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
-import { timeStringToFloat } from "../../Functions/timeStringToFloat";
 import { reducer } from "../../Functions/reducer";
-import { apis } from "../../assets/apis";
 import {lessons} from './Lessons'
 import { getShopData } from "../../Functions/getData/getShopData";
-const fetchRequest = "FETC_REQUEST";
-const fetchSuccess = "FETCH_SUCCESS";
-const fetchFail = "FETCH_FAIL";
+import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
 
 export default function UserPage() {
   const { info, changeInfo } = useInfo();
@@ -77,10 +73,6 @@ export default function UserPage() {
   function setShowCourseHoverFunc(name, value) {
     setShowCourseHover((info) => ({ [name]: value }));
   }
-  let defu = 13.3;
-  let length = 17.1;
-  let top_right = 9.6;
-  let top_defu = 11.7;
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
   }
@@ -88,61 +80,6 @@ export default function UserPage() {
     setShowShoppingModal({ flag: flag, data: data });
   }
 
-
-
-
-  // function getShopData(x) {
-  //   const tokenJson = localStorage.getItem("authTokens");
-  //   const tokenClass = JSON.parse(tokenJson);
-  //   const token = tokenClass.token.access;
-  //   const shopId = JSON.parse(localStorage.getItem("shopId"));
-  //   fetch(
-  //     apis["courseCartOrderInfo"] +
-  //       `?cart_id=${shopId.id}&complete_course_number=${x}`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       SetOrderInfo(data[0]);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  //   fetch(apis["getPrice"], {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setPrices(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }
-  function apiForModalData(x, showOrNot) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    showLoading();
-    fetch(apis["courses"]["id"] + x, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((d) => {
-        setModalData(d);
-        if (showOrNot) {
-          setShowLesson({ flag: true, data: d });
-        }
-      });
-  }
 
   return (
     <>
@@ -176,7 +113,6 @@ export default function UserPage() {
                 <div
                   style={{
                     display: bigChartData == "data2" ? "block" : "none",
-                    // maxHeight: "400px",
                     overflowX: "auto",
                     overflowY: "scroll",
                     minWidth: "100%",
@@ -313,14 +249,7 @@ export default function UserPage() {
 
                           return false;
                         });
-                        // console.log(
-                        //   "all the courses in group",
-                        //   info.courseGroupsListInContext
-                        // );
-                        // console.log("clicked");
                         if (isFound != true) {
-                          // console.log("includes------------------");
-
                           addNewLesson(x.complete_course_number,propsSetter);
 
                           changeInfo("courseChoosed", [
@@ -397,8 +326,7 @@ export default function UserPage() {
                             : "large",
                         }}
                         onClick={() => {
-                          apiForModalData(x.complete_course_number, true);
-                          // setShowLesson({ flag: true, data: modalData });
+                          apiForModalData(x.complete_course_number, true,showLoading,setModalData, setShowLesson);
                         }}
                       >
                         <i className="tim-icons icon-badge ml-0" />
