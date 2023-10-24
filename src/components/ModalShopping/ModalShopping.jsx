@@ -19,7 +19,7 @@ import {
   Label,
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-
+import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();

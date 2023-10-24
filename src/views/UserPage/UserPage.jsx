@@ -25,7 +25,8 @@ import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
 import { timeStringToFloat } from "../../Functions/timeStringToFloat";
 import { reducer } from "../../Functions/reducer";
 import { apis } from "../../assets/apis";
-
+import {lessons} from './Lessons'
+import { getShopData } from "../../Functions/getData/getShopData";
 const fetchRequest = "FETC_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
@@ -86,182 +87,42 @@ export default function UserPage() {
   function funcSetShowShoppingModal(flag, data) {
     setShowShoppingModal({ flag: flag, data: data });
   }
-  /**
-   * send course number to save in database
-   * @param {} num
-   */
-  function addNewLesson(num) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
 
-    fetch(apis["courses"]["my_courses"], {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        complete_course_number: num,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {})
-      .catch((error) => {
-        console.error(error);
-        propsSetter({ type: fetchFail, payload: getError(error) });
-      });
-  }
 
-  /**
-   * To get data of lessons from back and save it to infoState with changeInfoState
-   * @param {*} infoState
-   * @param {*} changeInfoState
-   * @returns
-   */
 
-  function lessons(infoState, changeInfoState, getapi, classNameHover) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
 
-    React.useEffect(() => {
-      if (getapi == true) {
-        showLoading();
-        fetch(apis["courses"]["my_courses"], {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            changeInfoState("courseChoosed", data);
-          })
-          .catch((error) => console.error(error));
-        const activeRoute = (routeName) => {
-          return location.pathname === routeName ? "active" : "";
-        };
-      }
-    }, []);
-
-    closeLoading();
-
-    return infoState.courseChoosed.map((lessons) => {
-      return lessons.course_times.map((lesson, index) => {
-        let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
-
-        let time = (timeStringToFloat(lesson.course_start_time) - 7.5) / 1.5;
-
-        return (
-          <div key={lessonBoxId}>
-            <div
-              id={lessonBoxId}
-              className={`course text-center ${classNameHover} course-hover`}
-              style={{
-                top: `${defu + length * lesson.course_day}%`, //TODO
-                right: `${top_defu + top_right * time}%`,
-                width: `${
-                  timeStringToFloat(lesson.course_end_time) -
-                    timeStringToFloat(lesson.course_start_time) ==
-                  1.5
-                    ? 9.5
-                    : 13
-                }%`,
-              }}
-              onMouseOver={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "block")
-              }
-              onMouseOut={() =>
-                (document.getElementById(lessonBoxId + "x").style.display =
-                  "none")
-              }
-            >
-              <button
-                className="lesson_button"
-                onClick={() => {
-                  addNewLesson(lessons.complete_course_number);
-                  // console.log("delete lesson", lessons.complete_course_number);
-                  changeInfo(
-                    "courseChoosed",
-                    infoState.courseChoosed.filter(
-                      (item) =>
-                        item.complete_course_number !==
-                        lessons.complete_course_number
-                    )
-                  );
-                  closeLesson(false, lessons);
-                  // console.log("delete info", infoState);
-                }}
-                id={lessonBoxId + "x"}
-              >
-                <strong>
-                  <i
-                    className="tim-icons icon-simple-remove"
-                    style={{ margin: "auto" }}
-                  ></i>
-                </strong>
-                {/* x */}
-              </button>
-              <div
-                style={{ height: "100%" }}
-                onClick={() =>
-                  apiForModalData(lessons.complete_course_number, true)
-                }
-                className="d-flex align-items-center justify-content-center"
-              >
-                <div className="m-1">
-                  <strong title={lessons.name}>
-                    {lessons.name.length < 27
-                      ? lessons.name
-                      : lessons.name.slice(0, 27) + "..."}
-                  </strong>
-                  <br />
-                  {lessons.registered_count} از {lessons.capacity}
-                  <br />
-                  <p className="id_code"> {lessons.complete_course_number}</p>
-                  {/* {console.log("lessons click", lessons)}n */}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      });
-    });
-  }
-
-  function getShopData(x) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(
-      apis["courseCartOrderInfo"] +
-        `?cart_id=${shopId.id}&complete_course_number=${x}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        SetOrderInfo(data[0]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    fetch(apis["getPrice"], {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setPrices(data);
-        // console.log("prices", data);
-      })
-      .catch((error) => console.error(error));
-  }
+  // function getShopData(x) {
+  //   const tokenJson = localStorage.getItem("authTokens");
+  //   const tokenClass = JSON.parse(tokenJson);
+  //   const token = tokenClass.token.access;
+  //   const shopId = JSON.parse(localStorage.getItem("shopId"));
+  //   fetch(
+  //     apis["courseCartOrderInfo"] +
+  //       `?cart_id=${shopId.id}&complete_course_number=${x}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       SetOrderInfo(data[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  //   fetch(apis["getPrice"], {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setPrices(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }
   function apiForModalData(x, showOrNot) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
@@ -296,12 +157,14 @@ export default function UserPage() {
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
                 >
-                  {lessons(info, changeInfo, true, null)}
+                  {lessons(info, changeInfo, true, null,showLoading, closeLoading)}
                   {lessons(
                     showCourseHover,
                     setShowCourseHoverFunc,
                     false,
                     "classNameHover"
+                    ,showLoading,
+                    closeLoading
                   )}
                   <ModalLessons
                     show={showLesson}
@@ -342,7 +205,6 @@ export default function UserPage() {
                       className={classNames("btn-simple", "week_chart-btn", {
                         active: bigChartData === "data1",
                       })}
-                      // color="primary"
                       id="0"
                       size="sm"
                       onClick={() => setBgChartData("data1")}
@@ -355,7 +217,6 @@ export default function UserPage() {
                       </span>
                     </Button>
                     <Button
-                      // color="primary"
                       id="1"
                       size="sm"
                       tag="label"
@@ -460,7 +321,7 @@ export default function UserPage() {
                         if (isFound != true) {
                           // console.log("includes------------------");
 
-                          addNewLesson(x.complete_course_number);
+                          addNewLesson(x.complete_course_number,propsSetter);
 
                           changeInfo("courseChoosed", [
                             ...info.courseChoosed,
@@ -552,7 +413,7 @@ export default function UserPage() {
                         }}
                         onClick={() => {
                           if (true) {
-                            getShopData(x.complete_course_number);
+                            getShopData(x.complete_course_number ,SetOrderInfo, setPrices);
                             funcSetShowShoppingModal(true, x);
                           }
                         }}

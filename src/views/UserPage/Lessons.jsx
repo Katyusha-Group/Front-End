@@ -5,7 +5,10 @@ let defu = 13.3;
 let length = 17.1;
 let top_right = 9.6;
 let top_defu = 11.7;
-function lessons(infoState, changeInfoState, getapi, classNameHover,showLoading,closeLoading) {
+function closeLesson(flag, data) {
+  setShowLesson({ flag: flag, data: data });
+}
+export function lessons(infoState, changeInfoState, getapi, classNameHover,showLoading,closeLoading) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
