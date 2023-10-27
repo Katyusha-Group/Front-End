@@ -9,6 +9,6 @@ RUN npm run build
 #Stage 2
 FROM nginx:1.24.0
 WORKDIR /usr/share/nginx/html
-RUN rm -ft ./*
-COPY --from=builder /app/build .
-ENTRYPOINT ["nginx", "-g", "deamon off;"]
+RUN rm -rf ./*
+COPY --from=builder /app/dist .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

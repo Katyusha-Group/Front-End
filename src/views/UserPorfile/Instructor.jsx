@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from "../../assets/css/Instructor.module.css"
+import * as styles from "../../assets/css/instructor.module.css"
 
 function Instructor() {
     return (
