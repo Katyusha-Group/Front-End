@@ -1,16 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  Row,
-  Col,
-  CardFooter,
-} from "reactstrap";
+import { Card, CardBody, Row, Col } from "reactstrap";
 import "./UserPage.css";
-import Spinner from "react-bootstrap/Spinner";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
@@ -26,7 +17,7 @@ import { lessons } from "./Lessons";
 import { getShopData } from "../../Functions/getData/getShopData";
 import { addNewLesson } from "../../Functions/addNewLesson";
 import CourseGroupCard from "../../components/Userpage/CourseGroupCard";
-import CardFooterChart  from "../../components/Userpage/CardFooterChart";
+import CardFooterChart from "../../components/Userpage/CardFooterChart";
 export default function UserPage() {
   const { info, changeInfo } = useInfo();
   const getError = (error) => {
