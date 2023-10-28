@@ -7,6 +7,7 @@ import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAle
 import Swal from "sweetalert2";
 import ContextInfo, { useInfo } from "../contexts/InfoContext";
 import { apis } from "../assets/apis";
+import { IsValidEmail } from "../Functions/IsValidEmail";
 import {
   Button,
   Card,
@@ -28,10 +29,6 @@ function ForgetPassword() {
     email: ""
   });
 
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-
   function handleChange(event) {
     setErrorMessage("");
     const { name, value } = event.target;
@@ -41,7 +38,6 @@ function ForgetPassword() {
     }));
   }
   
- 
   const Navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
@@ -57,7 +53,7 @@ function ForgetPassword() {
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-    if (!isValidEmail(formData.email) && !errors.emailError) {
+    if (!IsValidEmail(formData.email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
     
