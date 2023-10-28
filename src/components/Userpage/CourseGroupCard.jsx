@@ -32,7 +32,6 @@ export default function CourseGroupCard({
   }
   return (
     <Col sm="12">
-      {/*TODO  */}
       <Card className="dir-right groups_card" style={{ marginBottom: "0" }}>
         <CardBody className="courseGroupCard">
           {info.loading == 0 ? (

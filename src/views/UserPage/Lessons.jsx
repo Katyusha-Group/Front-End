@@ -1,6 +1,7 @@
 import React from "react";
 import { apis } from "../../assets/apis"
 import {timeStringToFloat} from "../../Functions/timeStringToFloat"
+import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
 let defu = 13.3;
 let length = 17.1;
 let top_right = 9.6;
@@ -8,7 +9,7 @@ let top_defu = 11.7;
 function closeLesson(flag, data) {
   setShowLesson({ flag: flag, data: data });
 }
-export function lessons(infoState, changeInfoState, getapi, classNameHover,showLoading,closeLoading) {
+export function lessons(infoState, changeInfoState, getapi, classNameHover,showLoading,closeLoading, setModalData, setShowLesson) {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
@@ -90,7 +91,7 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
               <div
                 style={{ height: "100%" }}
                 onClick={() =>
-                  apiForModalData(lessons.complete_course_number, true)
+                  apiForModalData(lessons.complete_course_number, true, showLoading,setModalData, setShowLesson)
                 }
                 className="d-flex align-items-center justify-content-center"
               >
@@ -104,7 +105,6 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
                   {lessons.registered_count} از {lessons.capacity}
                   <br />
                   <p className="id_code"> {lessons.complete_course_number}</p>
-                  {/* {console.log("lessons click", lessons)}n */}
                 </div>
               </div>
             </div>

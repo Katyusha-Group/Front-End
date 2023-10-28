@@ -84,7 +84,9 @@ export default function UserPage() {
                     true,
                     null,
                     showLoading,
-                    closeLoading
+                    closeLoading,
+                    setModalData,
+                    setShowLesson
                   )}
                   {lessons(
                     showCourseHover,
