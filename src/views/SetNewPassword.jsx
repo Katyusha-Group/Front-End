@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Select from "react-select";
 import "../assets/css/SignUp.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon";
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon";
-import { isValidPassword } from "../Functions/isValidPassword";
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -25,14 +21,11 @@ import {
 import { Link } from "react-router-dom";
 
 function SetNewPassword() {
-  // const { info, changeInfo } = useInfo();
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
     passwordConfirm: "",
   });
-
-  const [subjectOptions, setSubjectOptions] = useState();
 
   function handleChange(event) {
     setErrorMessage("");
@@ -44,11 +37,11 @@ function SetNewPassword() {
   }
   
   const [errorMessage, setErrorMessage] = useState({
-    
     passError: "",
     passErrorRep: "",
     backError: "",
   });
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -97,8 +90,7 @@ function SetNewPassword() {
       timerProgressBar: true,
       showConfirmButton: false,
       background: '#3c3e5d',
-        color:'#ceccc0',
-      // timer: 2000,
+      color:'#ceccc0',
       width:'25rem',
       timerProgressBar: true,
       didOpen: () => {
@@ -134,13 +126,12 @@ function SetNewPassword() {
     Navigate("/login")
     }
     else {
-        
         errors.backError = "!رمز عبور قابل قبول نیست";
         setErrorMessage({
           ...errorMessage,
           backError: errors.backError,
         });
-        }
+    }
   }
 
   return (
