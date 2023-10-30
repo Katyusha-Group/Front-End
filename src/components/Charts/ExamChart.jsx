@@ -5,14 +5,7 @@ import "../../assets/css/nucleo-icons.css";
 import TimeRow from './TimeRow';
 import { useState, useEffect } from 'react';
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
-  Row,
-  Col,
-  Button
+  Table
 } from "reactstrap";
 
 import {
@@ -23,12 +16,39 @@ import {
 } from "./ExamChart_Functions";
 
 import "./ExamChart.css"
-import AdminNavbar from "../../components/Navbars/AdminNavbar";
 
+export default function ExamChart() {
+  // Token
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
 
-function Exams (ExamTable)
-{
+  // Info
+  const { info, changeInfo } = useInfo();
+
+  let [ExamTable, setExamTable] = React.useState([]);
+  let [ExamDates, setExamDates] = React.useState([]);
+  React.useEffect(() => {
+    const courses = info.courseChoosed.map(course => new Course(course, true));
+    setExamTable(courses);
+    const ExamTimes = courses.map(course => course.exam_times[0].date);
+    setExamDates (ExamTimes);
+    // console.log ("Exam time is: " + ExamTimes);
+  }, [info.courseChoosed]);
+
+  class Course {
+    constructor(props) {
+      this.name = props.name;
+      this.complete_course_number = props.complete_course_number;
+      this.class_gp = props.class_gp;
+      this.course_times = props.course_times;
+      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+      this.exam_times = props.exam_times;
+    }
+  }
+
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
+  
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     const emptySection = () => ({
       0: null,
@@ -88,8 +108,11 @@ function Exams (ExamTable)
         let ExamDay = currentPeriod.exam_times[0].date;
         
         let time = MapTimeToIndex(ExamTime);
-        let day = MapDateToIndex(ExamDay);
+        let day = MapDateToIndex(ExamDay, ExamDates);
+        
+        // setExamDates((prevExamDates) => [...prevExamDates, day]);
 
+        // console.log("Pushed " + day + " to temp");
         try
         {
           NumInEachSlot[time][day] ++;
@@ -122,12 +145,14 @@ function Exams (ExamTable)
   }, [ExamTable])
   
   
+  // console.log("Exam Dates are: " + ExamDates);
+
   return (
     <>
       <Table className="ExamsTable">
         <thead className="text-primary TableHead">
           <tr>
-            <th className="table-head text-center "></th>
+            {/* <th className="table-head text-center "></th>
             <th className="table-head text-center ">13 خرداد</th>
             <th className="table-head text-center ">14</th>
             <th className="table-head text-center ">15</th>
@@ -149,7 +174,14 @@ function Exams (ExamTable)
             <th className="table-head text-center ">1 تیر</th>
             <th className="table-head text-center ">2</th>
             <th className="table-head text-center ">3</th>
-            <th className="table-head text-center ">4</th>
+            <th className="table-head text-center ">4</th> */}
+            {
+              Object.entries(ExamDates).map( (entry) => {
+                return (
+                  <th className="table-head text-center ">{entry}</th>
+                )
+              })
+            }
           </tr>
         </thead>
         <tbody className="ExamChartTableBody">
@@ -161,71 +193,6 @@ function Exams (ExamTable)
           <TimeRow ExamT="18-20" periods={keyedExamTable[5]} />
         </tbody>
       </Table>
-    </>
-  );
-}
-
-export default function ExamChart() {
-  // Token
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
-
-  // Info
-  const { info, changeInfo } = useInfo();
-
-  let [ExamTable, setExamTable] = React.useState([]);
-
-  React.useEffect(() => {
-    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("fetched data");
-    //     changeInfo("courseChoosed", data);
-    //     const courses = data.map(course => new Course(course, true));
-    //     setExamTable(courses);
-
-    //   })
-    //   .catch((error) => console.error(error));
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
-    setExamTable(info.courseChoosed);
-  }, [info.courseChoosed]);
-  // setExamTable(info.courseChoosed);
-
-  class Course {
-    constructor(props, IsFromChosencourses) {
-      this.name = props.name;
-      // console.log ("Name: " + this.name);
-
-      this.complete_course_number = props.complete_course_number;
-      
-
-      this.class_gp = props.class_gp;
-      this.complete_course_number = props.complete_course_number;
-      this.course_times = props.course_times;
-      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
-      this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
-      this.can_take = props.is_allowed;
-
-
-
-      this.exam_times = props.exam_times;
-
-      this.IsChosen = IsFromChosencourses;
-      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-    }
-  }
-
-  return (
-    <>
-      <div>
-        {/* {console.log("Exams called")} */}
-        {Exams(ExamTable)}
-      </div>
     </>
   );
 }

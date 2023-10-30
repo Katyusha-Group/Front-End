@@ -63,13 +63,23 @@ export function MapTimeToIndex (start_time)
       return index;
 }
 
-export function MapDateToIndex (date)
+export function MapDateToIndex (date, ExamDates)
 {
-    const lastTwoChars = parseInt(date.substring(date.length - 2));
-    let DateIndex = lastTwoChars - 13;
-    if (DateIndex < 0)
-    {
-        DateIndex += 30;
-    }
-    return DateIndex;
+    // const lastTwoChars = parseInt(date.substring(date.length - 2));
+    // let DateIndex = lastTwoChars - 13;
+    // if (DateIndex < 0)
+    // {
+    //     DateIndex += 30;
+    // }
+    // return DateIndex;
+    return ExamDates.findIndex(day => day === date)
 }
+
+// export function DatesList (date)
+// {
+//     let Dates = new Array();
+//     for (let i=0; i<courses.length; i++)
+//     {
+//         Dates.push(MapDateToIndex(courses[i]))
+//     }
+// }
