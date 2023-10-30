@@ -83,3 +83,4 @@ export function MapDateToIndex (date, ExamDates)
 //         Dates.push(MapDateToIndex(courses[i]))
 //     }
 // }
+

@@ -31,9 +31,18 @@ export default function ExamChart() {
   React.useEffect(() => {
     const courses = info.courseChoosed.map(course => new Course(course, true));
     setExamTable(courses);
-    const ExamTimes = courses.map(course => course.exam_times[0].date);
+    let ExamTimes = courses.map(course => course.exam_times[0].date);
+    // Remove Indexes appearing at the beginning of the dates
+    // if (ExamTimes.length < 10)
+    // {
+    //   ExamTimes = ExamTimes.map((item) => item.substring(1));
+    // }
+    // else 
+    // {
+    //   ExamTimes = ExamTimes.map((item) => item.substring(2));
+    // }
     setExamDates (ExamTimes);
-    // console.log ("Exam time is: " + ExamTimes);
+    console.log ("Exam time is: " + ExamTimes);
   }, [info.courseChoosed]);
 
   class Course {
@@ -48,8 +57,12 @@ export default function ExamChart() {
   }
 
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
+  // ExamDates = uniquifyArrayByKey(ExamDates, Exam)
   
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
+    const numSections = ExamDates.length;
+    console.log ("Number of sections is: " + numSections)
+    
     const emptySection = () => ({
       0: null,
       1: null,
@@ -58,31 +71,15 @@ export default function ExamChart() {
       4: null,
       5: null
     });
-    const emptyTime = () => ({
-      0: emptySection(),
-      1: emptySection(),
-      2: emptySection(),
-      3: emptySection(),
-      4: emptySection(),
-      5: emptySection(),
-      6: emptySection(),
-      7: emptySection(),
-      8: emptySection(),
-      9: emptySection(),
-      10: emptySection(),
-      11: emptySection(),
-      12: emptySection(),
-      13: emptySection(),
-      14: emptySection(),
-      15: emptySection(),
-      16: emptySection(),
-      17: emptySection(),
-      18: emptySection(),
-      19: emptySection(),
-      20: emptySection(),
-      21: emptySection()
-    });
-
+  
+    const emptyTime = (numSections) => {
+      const sections = {};
+      for (let i = 0; i < numSections; i++) {
+        sections[i] = emptySection();
+      }
+      return sections;
+    };
+    console.log("Number of sections made is: " + emptyTime)
     const NumInEachSlot = Create2DArray(6, 22);
 
     return ExamTable.reduce(
@@ -134,12 +131,12 @@ export default function ExamChart() {
         return lessonsKeyedByDayAndPeriod
       },
       {
-        0: emptyTime(),
-        1: emptyTime(),
-        2: emptyTime(),
-        3: emptyTime(),
-        4: emptyTime(),
-        5: emptyTime(),
+        0: emptyTime(numSections),
+        1: emptyTime(numSections),
+        2: emptyTime(numSections),
+        3: emptyTime(numSections),
+        4: emptyTime(numSections),
+        5: emptyTime(numSections),
       }
     )
   }, [ExamTable])
