@@ -74,11 +74,6 @@ const { info, changeInfo } = useInfo();
   };
 
 
-  /////////////////////////////// End of Select //////////////////////
-
-  //////////////////////////// Input  //////////////////
-//   const CODE_LENGTH = new Array(4).fill(0)
-  
    const values = formData.code.split("");
 const [code, setCode] = useState("");
 const [showAlert, setShowAlert] = useState(false);
@@ -91,15 +86,11 @@ const [showAlert, setShowAlert] = useState(false);
 
   const handleCodeChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, '');
-
-    // Move focus to next input field if value is entered
     if (value !== "") {
       if (index < codeInputRefs.length - 1) {
         document.getElementById(index+1).focus();
       }
     }
-
-    // Update code state
     const newCode = [...code];
     newCode[index] = value.charAt(value.length - 1);
     setCode(newCode.join(""));
@@ -160,7 +151,6 @@ function isValidCode(code) {
                     <div class="alert alert-primary alert-dismissible fade show" role="alert" >
                       <strong>.کد با موفقیت ثبت شد</strong>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          {/* <i class="tim-icons icon-simple-remove"></i> */}
                       </button>
                     </div>}
                       <Row>
@@ -207,9 +197,6 @@ function isValidCode(code) {
                     </Button>
                   </CardFooter>
                   <CardBody>
-                  {/* <Link to="/login" color="primary">
-                            ورود به حساب کاربری
-                    </Link> */}
                   </CardBody>
                   
                 </Card>

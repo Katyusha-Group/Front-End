@@ -1,4 +1,4 @@
-const SelectStyles = {                                              // Select Styles
+const SelectStyles = {                                              
     input: (defaultStyles) => ({
       ...defaultStyles,
       color: "transparent",

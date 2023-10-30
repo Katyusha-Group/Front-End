@@ -10,7 +10,6 @@ import { apis } from "../assets/apis";
 import {IsValidEmail} from "../Functions/IsValidEmail"
 import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
 import {ConfirmPasCloseEyeIcon} from "../Functions/ConfirmPasCloseEyeIcon"
-// reactstrap components
 import {
   Button,
   Card,
@@ -48,7 +47,6 @@ function SignUp() {
       });
   }, []);
 
-  //////////////////////////// Input errors //////////////////
   function handleChange(event) {
     setErrorMessage("");
     const { name, value } = event.target;
@@ -142,24 +140,13 @@ function SignUp() {
       showConfirmButton: false,
       background: '#3c3e5d',
         color:'#ceccc0',
-      // timer: 2000,
       width:'25rem',
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
-        // const b = Swal.getHtmlContainer().querySelector('b')
-        // timerInterval = setInterval(() => {
-        //   b.textContent = Swal.getTimerLeft()
-        // }, 100)
       },
-      // willClose: () => {
-      //   clearInterval(timerInterval)
-      // }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        //console.log('I was closed by the timer')
-        /////has to be changed to no internet
       }
     })
   

@@ -14,27 +14,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 // reactstrap components
 import {
-  Button,
   Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Input,
-  InputGroup,
-  NavbarBrand,
   Navbar,
   NavLink,
-  Container,
-  Modal,
-  ModalHeader,
-  NavbarToggler,
   NavItem,
-  Card,
-  CardHeader,
-  CardBody,
-  Row,
-  FormGroup,
 } from "reactstrap";
 
 function AdminNavbar(props) {
@@ -47,7 +30,6 @@ function AdminNavbar(props) {
   const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    // Set the selected state based on the current URL path
     const path = location.pathname;
     const newSelected = {};
     routes.forEach((route) => {
@@ -60,13 +42,11 @@ function AdminNavbar(props) {
     setSelected(newSelected);
 
     window.addEventListener("resize", updateColor);
-    // Specify how to clean up after this effect:
     return function cleanup() {
       window.removeEventListener("resize", updateColor);
     };
   }, [location]);
 
-  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   const updateColor = () => {
     if (window.innerWidth < 993 && collapseOpen) {
       setcolor("bg-white");
@@ -74,7 +54,6 @@ function AdminNavbar(props) {
       setcolor("navbar-transparent");
     }
   };
-  // this function opens and closes the collapse on small devices
   const toggleCollapse = () => {
     if (collapseOpen) {
       setcolor("navbar-transparent");
@@ -96,7 +75,6 @@ function AdminNavbar(props) {
           <Nav className="wideNavbar" navbar>
           <NavLink href="/home/page" className="nav-header nav-link-icon">
                     <img src={logo} alt=""  style={{height:"34px" , width:"300px"}}/>
-                    {/* <i className="tim-icons icon-atom ml-0" /> */}
                   </NavLink>
             {routes.map(
               (route) => (
@@ -118,7 +96,6 @@ function AdminNavbar(props) {
               <NavLink href="/landingPage"
                 onClick={() => {
                   localStorage.removeItem("authTokens");
-                  //localStorage.setItem('authTokens', "");
                   
                 }}
               >

@@ -4,18 +4,15 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import "../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// reactstrap components
 import {Button,Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col} from "reactstrap";
 import CloseButton from "react-bootstrap/CloseButton";
 
 const LoginModal = (props) => {
 
-  // console.log("PROPS in MODAL", props);
   return (
     <>
       <Modal 
         show={props.show}cancel={props.close}
-        // centered
         >
         <div className="loginLmsModal">
           <Modal.Header className="ModalHeader"> 

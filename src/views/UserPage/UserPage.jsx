@@ -18,6 +18,8 @@ import { getShopData } from "../../Functions/getData/getShopData";
 import { addNewLesson } from "../../Functions/addNewLesson";
 import CourseGroupCard from "../../components/Userpage/CourseGroupCard";
 import CardFooterChart from "../../components/Userpage/CardFooterChart";
+
+
 export default function UserPage() {
   const { info, changeInfo } = useInfo();
   const getError = (error) => {

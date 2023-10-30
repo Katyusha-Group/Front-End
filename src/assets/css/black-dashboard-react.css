@@ -12575,7 +12575,6 @@ code {
 
 @media screen and (max-width: 991px) {
   .rtl .sidebar {
-    /* TODO change margin*/
     margin-right: -70px; }
   .rtl .main-panel .content {
     padding-right: 50px;

@@ -1,10 +1,8 @@
 import {useState} from 'react';
 import React from "react";
-// import routes from "../route.jsx";
 import { useInfo } from "../../../contexts/InfoContext";
 import '../CoursesCard/CoursesCard.css';
 
-// reactstrap components
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col} from "reactstrap";
 import Button from 'react-bootstrap/Button';
 import data from "../courses.json";
@@ -14,7 +12,6 @@ const coursesItems=data.map(course => <li >{course.name}</li>)
 function CoursesCard() {
   const [addPartIsShown, setAddPartIsShown] = useState(false);
   const hideAddPart=()=>{
-    //course has to be added here
     setAddPartIsShown(false);
   }
   const changeAddPartState=()=>{

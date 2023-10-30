@@ -7,15 +7,6 @@ import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
 var routes = [
-    
-    // {
-    //     path: '/change',
-    //     name:"ChangePassword",
-    //     component: ChangePassword,
-    //     rtlName: "تغییر رمز",
-    //     icon: "icon-key-25",
-    //     layout: "/admin"
-    // },
     {
         path: '/page',
         name:"UserPage",
@@ -55,7 +46,6 @@ var routes = [
         name:"AboutUs",
         component: AboutUs,
         rtlName: "درباره ما",
-        // icon: "icon-alert-circle-exc",
         icon: "icon-send",
         layout: ""
     }

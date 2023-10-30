@@ -42,7 +42,6 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setInfo(data);
       })
       .catch((error) => console.error(error));
@@ -52,7 +51,6 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("order data", data);
         setOrders(data);
       })
       .catch((error) => console.error(error));
@@ -63,7 +61,6 @@ function UserProfile() {
   useEffect(() => {}, [info]);
 
   function handleChange(event) {
-    // setErrorMessage("");
     const { name, value } = event.target;
     setInfo((prevFormData) => ({
       ...prevFormData,
@@ -104,25 +101,20 @@ function UserProfile() {
   }, [images]);
   function onImageChangeForm(event) {
     if (event.target.files && event.target.files) {
-      //console.log("event.target.files", event.target.files);
       const fileList = Array.from(event.target.files);
       setImages(fileList);
-      // onChangeImage(event.target.files[0]);
     }
   }
   const renderImageField = () => {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
-    // const { touched, error } = meta;
     return (
       <div>
         <input
           className="btn"
           name="Image"
-          // type="file"
           label="Image"
-          // {...input}
           id="file-input"
           type="file"
           onChange={onChange}
@@ -180,7 +172,6 @@ function UserProfile() {
                   <CardFooter>
                     <Button
                       onClick={startTelegramBot}
-                      // color="primary"
                       className="btn-icon btn-round"
                     >
                       <i className="fab fa-telegram" />
@@ -197,7 +188,6 @@ function UserProfile() {
                   </Card>
                 </Row>
 
-                {/* ----------------------------------------------------------- */}
                 <Row style={{ maxHeight: "70vh" }} className="overflow-auto">
                   <UncontrolledAccordion
                     defaultOpen={["1", "2"]}
@@ -250,27 +240,6 @@ function UserProfile() {
                     })}
                   </UncontrolledAccordion>
                 </Row>
-
-                {/* <UncontrolledAccordion
-                  defaultOpen={["1", "2"]}
-                  stayOpen
-                  className="card mb-0"
-                  >
-                  <AccordionItem className="card mb-0">
-                  <AccordionHeader targetId="1" className="card mb-0">
-                      1402-04-16 خرید
-                    </AccordionHeader>
-                    <AccordionBody accordionId="1" className="category">
-                      <strong>This is the first item's accordion body.</strong>
-                      You can modify any of this with custom CSS or overriding
-                      our default variables. It's also worth noting that just
-                      about any HTML can go within the{" "}
-                      <code>.accordion-body</code>, though the transition does
-                      limit overflow.
-                    </AccordionBody>
-                  </AccordionItem>
-                </UncontrolledAccordion> */}
-                {/* ----------------------------------------------------------- */}
               </Col>
             </Row>
           </div>

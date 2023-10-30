@@ -4,10 +4,7 @@ import routes from "../route.jsx";
 import {Link} from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext.jsx";
 import styles from "../assets/css/LandingPage.css";
-// import BGImage from "../assets/img/Landing.jpg";
 import lottie from 'lottie-web';
-// import BGImage from "../assets/img/28893-book-loading.json";
-
 import {
   Button,
   Row,
@@ -17,11 +14,6 @@ import {
 } from "reactstrap";
 
 
-// var sectionStyle = {
-//   width: "100%",
-//   height: "400px",
-//   backgroundImage: `url(${BGImage})`
-// };
 
 
 function LandingPage() {
@@ -38,12 +30,6 @@ function LandingPage() {
       loop: true,
       autoplay: true,
       path: "https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json"
-      // path: "../src/assets/img/28893-book-loading.json"
-      // path: "../src/assets/img/92377-quiz-mode.json"
-      // path: "../src/assets/img/133116-education-edit.json"
-      // path: "../src/assets/img/132921-education-services.json"
-      // path: "../src/assets/img/74130-education.json"
-      // path: "../src/assets/img/88025-smart-owl-education-animation-icons.json"
     });
 
     return () => {
@@ -67,9 +53,6 @@ function LandingPage() {
                 <li>
                   برنامه هفتگی و لیست واحدها و امتحاناتون رو ببینین 📆
                 </li>
-                {/* <li>
-                  شرایط دروس در ترم های گذشته رو بررسی کنین
-                </li> */}
                 <li>
                  برای ترم آینده برنامه ریزی کنین 📒
                 </li>
@@ -82,9 +65,6 @@ function LandingPage() {
                 <Col>
                   <Link to="../Signup">
                     <button 
-                      // className="btn-fill-landingPage" 
-                      // color="primary"
-                      // color="#FF365B"
                       className="Buttons"
                     > 
                       ثبت نام
@@ -94,8 +74,6 @@ function LandingPage() {
                 <Col>
                 <Link to="../Login">
                     <button 
-                      // className="btn-fill-landingPage" 
-                      // color="primary"
                       className="Buttons"
                     >
                       ورود
@@ -116,7 +94,6 @@ function LandingPage() {
         </Card>
       </Col>
       <Col className="BGimgCol">
-        {/* <img className="BGimg" src={BGImage}/> */}
         <div id="animation"></div>
       </Col>
     </Row>

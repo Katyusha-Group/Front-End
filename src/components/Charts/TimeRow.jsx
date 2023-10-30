@@ -21,11 +21,6 @@ function timeStringToFloat(time) {
 function DayPeriod (Input) {
   const [hoveredCourse, setHoveredCourse] = useState(null);
   const [isHovered, setisHovered] = useState(false);
-  // const handleMouseOver = (event, entry) => {
-  //   // console.log("Hovered Course is: " + hoveredCourse.name)
-  //   document.getElementById(entry.complete_course_number + "x").style.display ="block";
-  //   setHoveredCourse(entry);
-  // };
 
   const handleMouseOver = (event, entry) => {
     if (isHovered)
@@ -57,15 +52,10 @@ function DayPeriod (Input) {
                 <div  className="ExamContainer">
                     <div 
                       id = {entry.complete_course_number}
-                      // className="Course"
                       className="exam text-center"
-                      // onMouseOver={(e) => handleMouseOver(e, entry)}
-                      // onMouseOut={(e) => handleMouseOut (e, entry)}
                       onClick={(e) => handleMouseOver(e, entry)}
                     >
                         <div>
-                          {/* {entry.name} */}
-                        {/* <strong title= {entry.name}>{entry.name.length < 13 ? entry.name : entry.name.slice(0, 13) + "..."}</strong> */}
                           <strong title= {entry.name}>
                               {
                                 hoveredCourse === null ?
@@ -78,7 +68,6 @@ function DayPeriod (Input) {
                           <div className="dir-left">
                             {entry.complete_course_number}
                           </div>
-                          {/* <div>{entry.teachers[0].map((y)=>(y.name)).join(" , ")}</div> */}
                           <div>
                             {weekday[parseInt(entry.course_times[0].course_day)]}
                           </div>

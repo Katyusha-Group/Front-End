@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
@@ -208,7 +207,6 @@ function LessonSidebar(props) {
                             Navigate("/order");
                           }}
                         >
-                          {/* <span className="tim-icons icon-email-85" /> */}
                           <span className="tim-icons icon-bag-16" />
                           {"  "}
                           سفارش ها

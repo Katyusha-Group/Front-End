@@ -59,7 +59,6 @@ const DayPeriod = (Input) => {
                   }}>
                   {entry.IsChosen ? 'x' : '+'}
                 </button>
-                {/* <br/> */}
               </div>
             )}
             <ModalLessons

@@ -1,7 +1,6 @@
 import React from "react";
 import { useInfo } from "../../contexts/InfoContext";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-// reactstrap components
 import {
   Button,
   Card,
@@ -47,7 +46,6 @@ function Shopping() {
         setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
-    // console.log("cart info run");
   }
   function saveWallet(){
     fetch(apis["accounts"]["wallet"]["seeWallet"], {
@@ -107,9 +105,7 @@ function Shopping() {
     })
       .then((response) => {
         
-        // console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
         if (response.status == 400) {
-          // console.log("status 400 run");
           return response.json().then((data) => {
             alert(
               data.telegram +
@@ -118,10 +114,8 @@ function Shopping() {
           });
         } else
           return response.json().then((data) => {
-            // console.log("hello error ridi")
             notify("tl");
             saveWallet();
-            // console.log("status 200 run");
             let newCart = CartCreator({ setState, setTotalPrice, setAmount });
           });
       })
@@ -165,7 +159,6 @@ function Shopping() {
         </div>
       ),
       type: type,
-      // icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
@@ -244,7 +237,6 @@ function Shopping() {
           <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
-              {/* <NotificationAlert ref={notificationAlertRef} /> */}
             </div>
 
             <Row>
@@ -311,8 +303,6 @@ function Shopping() {
                 </Card>
               </Col>
               <Col md="9" >
-                {/* <CardHeader>
-                </CardHeader> */}
                 <Card className="shop_card " style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
@@ -358,8 +348,6 @@ function Shopping() {
                                     changeChecked(1, index);
                                   }}
                                   checked={state[index].contain_email}
-                                  // checked={false}
-                                  // checked={s}
                                   type="checkbox"
                                 />
                                 <span className="form-check-sign">
@@ -371,7 +359,6 @@ function Shopping() {
                             <FormGroup className="shopping_form" check disabled>
                               <Label check className="shoping_label">
                                 <Input
-                                  // checked={x.contain_sms}
                                   checked={false}
                                   type="checkbox"
                                   valid={false}

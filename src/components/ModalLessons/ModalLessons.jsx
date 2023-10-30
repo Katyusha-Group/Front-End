@@ -13,7 +13,6 @@ import {
   sexTostring,
   convertTime,
 } from "../../global/functions";
-// reactstrap components
 import {
   Button,
   ButtonGroup,
@@ -29,12 +28,7 @@ import {
   Col,
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
-// const [bigChartData, setbigChartData] = React.useState("data1");
-// const setBgChartData = (name) => {
-//   setbigChartData(name);
-// };
 const ModalLessons = (props) => {
-  // console.log("PROPS in MODAL", props);
   const { info, changeInfo } = useInfo();
   const x = props.show.data;
 
@@ -42,7 +36,6 @@ const ModalLessons = (props) => {
   const setTimeData = (name) => {
     setTimelineData(name);
   };
-  // console.log("Info x", x);
   if (Object.keys(x).length != 0) {
     return (
       <Modal
@@ -52,7 +45,6 @@ const ModalLessons = (props) => {
         cancel={props.close}
         onHide={props.close}
         className="ModalLessonCourse"
-        // centered
       >
         <div>
           <Modal.Header>
@@ -68,17 +60,9 @@ const ModalLessons = (props) => {
             </button>
           </Modal.Header>
           <Modal.Body className="loginLmsModalBody">
-            {/* //////////////////////////////////////////////////////// */}
-
-            {/* //////////////////////////////////////////////////////// */}
-            {/* <CardHeader>{props.show.data.name}</CardHeader>
-            <CardHeader className="modalHeader">{x.name} (گروه {x.class_gp})</CardHeader> */}
             <CardBody>
               <Card
                 className="ModalLessonCourseCard"
-                // style={{
-                //   backgroundColor: "rgb(75 49 78)",
-                // }}
               >
                 <CardBody className="ModalCourseCardBody">
                   <img
@@ -138,9 +122,6 @@ const ModalLessons = (props) => {
                             {"  "}
                             {sexTostring(x.sex)}
                           </Col>
-                          {/* <text>
-                        &nbsp;
-                        </text> */}
                         </Card>
                       </Col>
                       <Col md="6">
@@ -249,58 +230,7 @@ const ModalLessons = (props) => {
                         )}
                       </Row>
                     </Row>
-                    {/* <Card className="ModalLessondataCard1">
                    
-                   
-                    <Row>
-                      <Col className="text-right" md="6">
-                        <div style={{ display: "flex" }}>
-                          کد درس:
-                          <p
-                            style={{
-                              direction: "ltr",
-                              color: "rgb(199, 193, 193)",
-                            }}
-                          >
-                            {x.complete_course_number}
-                          </p>{" "}
-                        </div>
-                      </Col>
-                      <Col className="text-right" md="6" dir="ltr">
-                        تاریخ امتحان پایانی: {x.exam_times[0].date}
-                        <text>
-                          {" "}
-                          ساعت
-                          {timeStringToFloat(
-                            x.exam_times[0].exam_start_time
-                          )}{" "}
-                          تا {timeStringToFloat(x.exam_times[0].exam_end_time)}
-                        </text>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="text-right" md="6">
-                        ثبت نام شده: {x.registered_count} از {x.capacity}
-                      </Col>
-                      <Col className="text-right" md="6">
-                        تعداد واحد های عملی:{x.practical_unit}
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col className="text-right" md="6">
-                        تعداد در صف انتظار: {x.waiting_count}
-                      </Col>
-
-                      <Col className="text-right" md="6">
-                        تعداد کل واحد ها:{x.total_unit}
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="text-right" md="6">
-                        تعداد اخذ شده در کاتیوشا: {x.added_to_calendar_count}
-                      </Col>
-                    </Row> */}
                   </div>
                 </CardBody>
               </Card>
@@ -315,7 +245,6 @@ const ModalLessons = (props) => {
                       className={classNames("btn-simple", "week_chart-btn", {
                         active: timelineData === "data1",
                       })}
-                      // color="primary"
                       id="0"
                       size="sm"
                       onClick={() => setTimeData("data1")}
@@ -330,10 +259,8 @@ const ModalLessons = (props) => {
                       </span>
                     </Button>
                     <Button
-                      // color="primary"
                       id="1"
                       size="sm"
-                      // tag="label"
                       className={classNames("btn-simple", "week_chart-btn", {
                         active: timelineData === "data2",
                       })}

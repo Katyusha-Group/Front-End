@@ -86,7 +86,6 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
                     style={{ margin: "auto" }}
                   ></i>
                 </strong>
-                {/* x */}
               </button>
               <div
                 style={{ height: "100%" }}

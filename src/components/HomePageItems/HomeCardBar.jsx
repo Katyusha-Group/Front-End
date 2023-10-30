@@ -1,8 +1,6 @@
 
 import React from "react";
-// import routes from "../route.jsx";
 import "../HomePageItems/HomeCardBar.css"
-// reactstrap components
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col, Table} from "reactstrap";
 import {DateTimePicker} from "react-advance-jalaali-datepicker";
 import CoursesCard from "./CoursesCard/CoursesCard";

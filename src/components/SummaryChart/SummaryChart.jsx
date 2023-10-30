@@ -30,7 +30,6 @@ export default function SummaryChart(props) {
         <td>{table_row.name}</td>
         <td>
         {table_row.teachers.map((y)=>(y.name)).join(" , ")}</td>
-        {/* needs all teachers name */}
         <td>{table_row.exam_times[0]?.date}</td>
         <td>{table_row.capacity}</td>
         <td>{table_row.registered_count}</td>

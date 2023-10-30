@@ -143,7 +143,6 @@ function ForgetPassword() {
                               placeholder="ایمیل خود را وارد کنید"
                               type="email"
                               name="email"
-                              // autoComplete="off"
                               onChange={handleChange}
                               value={formData.email}
                             />

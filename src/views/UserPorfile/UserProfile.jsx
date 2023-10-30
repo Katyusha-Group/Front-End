@@ -37,7 +37,6 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setInfo(data);
       })
       .catch((error) => console.error(error));
@@ -46,10 +45,6 @@ function UserProfile() {
     };
     closeLoading();
   }, []);
-
-  useEffect(() => {
-    // console.log("🚀 ~ file: UserProfile.jsx:45 ~ UserProfile ~ info:", info);
-  }, [info]);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -98,7 +93,6 @@ function UserProfile() {
       ),
       type: type,
       color: "white",
-      // icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
@@ -106,18 +100,12 @@ function UserProfile() {
   function save() {
     var formData = new FormData();
     formData.append("first_name", info.first_name);
-    // console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
     if (images.length > 0) {
       formData.append("image", images[0]);
-      // console.log(
-      //   "🚀 ~ file: UserProfile.jsx:73 ~ save ~ images[0]:",
-      //   images[0]
-      // );
+
     } else {
-      // console.log("no image");
     }
-    // console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
     fetch(apis["accounts"]["profile"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
@@ -142,19 +130,14 @@ function UserProfile() {
   }, [images]);
   function onImageChangeForm(event) {
     if (event.target.files && event.target.files) {
-      //console.log("event.target.files", event.target.files);
       const fileList = Array.from(event.target.files);
       setImages(fileList);
-      // onChangeImage(event.target.files[0]);
     }
   }
   const renderImageField = () => {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
-    
-
-    // const { touched, error } = meta;
     return (
       <div>
         <NotificationAlert ref={notificationAlertRef} />
@@ -162,9 +145,7 @@ function UserProfile() {
         <input
           className="btn"
           name="Image"
-          // type="file"
           label="Image"
-          // {...input}
           id="file-input"
           type="file"
           onChange={onChange}
@@ -179,13 +160,6 @@ function UserProfile() {
         </label>
         <br />
         {images.length !== "" ? images.name : ""}
-        {/* {touched && error && <span>{error}</span>} */}
-        {/* <img src={imag  eURLs} /> */}
-        {/* {console.log(
-          "🚀 ~ file: UserProfile.jsx:94 ~ renderImageField ~ imageURLs:",
-          imageURLs
-        )} */}
-        {/* {getImageListItemBarUtilityClass.map(imageSrc => (<img src=""/>))} */}
       </div>
     );
   };
@@ -273,7 +247,7 @@ function UserProfile() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup>{/* <label>تلگرام</label> */}</FormGroup>
+                          <FormGroup></FormGroup>
                         </Col>
                       </Row>
                     </Form>
@@ -306,14 +280,7 @@ function UserProfile() {
                           className="avatar"
                           src={imageURLs != "" ? imageURLs : info.image}
                         />
-                        {/* {console.log(
-                          "🚀 ~ file: UserProfile.jsx:223 ~ UserProfile ~ imageURLs:",
-                          imageURLs != "" ? imageURLs : info.image
-                        )} */}
-                        {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
-                        {/* <h5 className="title">Mike Andrew</h5> */}
                       </a>
-                      {/* <p className="description">Ceo/Co-Founder</p> */}
                     </div>
                     <div className="card-description">
                       برای پروفایل خود عکس انتخاب کنید
@@ -329,7 +296,6 @@ function UserProfile() {
                     <div className="button-container">
                       <Button
                         onClick={startTelegramBot}
-                        // color="primary"
                         className="btn-icon btn-round"
                       >
                         <i className="fab fa-telegram" />

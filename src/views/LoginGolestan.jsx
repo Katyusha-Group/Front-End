@@ -4,7 +4,6 @@ import { useInfo } from "../contexts/InfoContext.jsx";
 import "../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// reactstrap components
 import {
   Button,
   Card,
@@ -21,13 +20,11 @@ import {
 import CloseButton from "react-bootstrap/CloseButton";
 
 const LoginModalGolestan = (props) => {
-  // console.log("PROPS in MODAL", props);
   return (
     <>
       <Modal
         show={props.show}
         cancel={props.close}
-        // centered
         className="loginLmsModal"
         style={{ background: "#27293d" }}
       >

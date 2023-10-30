@@ -52,7 +52,6 @@ export default function CardFooterChart({bigChartData, setBgChartData,classNames
             </span>
           </Button>
           <Button
-            // color="primary"
             id="2"
             size="sm"
             tag="label"

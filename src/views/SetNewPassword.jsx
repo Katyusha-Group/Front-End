@@ -6,7 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
-// reactstrap components
 import {
   Button,
   Card,
@@ -28,25 +27,13 @@ import {
 import { Link } from "react-router-dom";
 
 function SetNewPassword() {
-  // const { info, changeInfo } = useInfo();
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
     passwordConfirm: "",
   });
-  
-
   const [subjectOptions, setSubjectOptions] = useState();
-  // const subjects = [];
- 
-
-  // this.setState({selectOptions: options})
-  // const subs = {};
- 
-  /////////////////////////////// Close eye Icon /////////////////////
-
   function PasCloseEyeIcon() {
-    // toggle the type attribute
     const togglePassword = document.querySelector("#togglePassword");
     const passwordV = document.querySelector("#password_field");
     const type =
@@ -61,7 +48,6 @@ function SetNewPassword() {
   }
 
   function ConfirmPasCloseEyeIcon() {
-    // toggle the type attribute
     const toggleConfirmPassword = document.querySelector(
       "#toggleConfirmPassword"
     );
@@ -78,12 +64,8 @@ function SetNewPassword() {
           "fa fa-eye viewpass mr-4 text-muted");
     confirmPasswordV.setAttribute("type", type);
   }
-  //////////////////////////// End of Close eye Icon //////////////////
-
-  //////////////////////////// Input errors //////////////////
 
   function isValidPassword(pass) {
-    //console.log(/[a-zA-Z]/.test(pass));
     return /[a-zA-Z]/.test(pass);
   }
 
@@ -153,24 +135,13 @@ function SetNewPassword() {
       showConfirmButton: false,
       background: '#3c3e5d',
         color:'#ceccc0',
-      // timer: 2000,
       width:'25rem',
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
-        // const b = Swal.getHtmlContainer().querySelector('b')
-        // timerInterval = setInterval(() => {
-        //   b.textContent = Swal.getTimerLeft()
-        // }, 100)
       },
-      // willClose: () => {
-      //   clearInterval(timerInterval)
-      // }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        //console.log('I was closed by the timer')
-        /////has to be changed to no internet
       }
     })
   
@@ -183,28 +154,12 @@ function SetNewPassword() {
       body: JSON.stringify({
         new_password:formData.password ,
         confirm_password: formData.passwordConfirm
-        // email: formData.email,
-        // password: ,
-        // password2: ,
-        // department: subject,
-        // gender: gender,
       }),
     });
     const data = await response.json();
-    //console.log(data);
     Swal.close()
     if ( data.detail==="Password successfully changed."){
-
-    // // if ( data.message.includes("created successfully")){
-      
-    //   changeInfo("token",data.token)
-    //   // console.log(info.token);
-    //   // console.log(data.token)
-
-    //   console.log("خوش آمدید");
-    //   // console.log(info.token)
       Swal.fire({
-        // position: 'top-end',
         icon: 'success',
         title: 'رمز عبور با موفقیت تغیر کرد   ',
         background: '#3c3e5d',
@@ -212,14 +167,6 @@ function SetNewPassword() {
         width:'25rem',
         confirmButtonText:"باشه"
       })
-    //   Navigate("/verification");
-    // } else {
-    //   if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
-    //   if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
-    //   setErrorMessage({
-    //     ...errorMessage,
-    //     backError: errors.backError,
-    //   });
     Navigate("/login")
     }
     else {
@@ -230,7 +177,6 @@ function SetNewPassword() {
           backError: errors.backError,
         });
         }
-    // console.log(formData);
     
   }
 

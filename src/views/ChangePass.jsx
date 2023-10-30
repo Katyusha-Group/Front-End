@@ -29,7 +29,6 @@ function ChangePassword() {
   });
 
   function PasCloseEyeIcon() {
-    // toggle the type attribute
     const togglePassword = document.querySelector("#togglePassword");
     const passwordV = document.querySelector("#password_field");
     const type =
@@ -43,7 +42,6 @@ function ChangePassword() {
     passwordV.setAttribute("type", type);
   }
   function newPasCloseEyeIcon() {
-    // toggle the type attribute
     const togglePassword = document.querySelector("#newtogglePassword");
     const passwordV = document.querySelector("#newpassword_field");
     const type =
@@ -57,7 +55,6 @@ function ChangePassword() {
     passwordV.setAttribute("type", type);
   }
   function ConfirmPasCloseEyeIcon() {
-    // toggle the type attribute
     const toggleConfirmPassword = document.querySelector(
       "#toggleConfirmPassword"
     );
@@ -139,7 +136,6 @@ function ChangePassword() {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        // Accept: "application/json",
         "Content-Type": "application/json",
         accept: "application/json",
       },

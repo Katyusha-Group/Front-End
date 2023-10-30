@@ -3,7 +3,6 @@ import "../../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
-// reactstrap components
 import {
   Button,
   Card,
@@ -23,8 +22,12 @@ import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
-  const [email, setEmail] = React.useState(props.order.contain_email == "C" ? true:false);
-  const [telegram, setTelegram] = React.useState(props.order.contain_telegram == "C" ? true:false);
+  const [email, setEmail] = React.useState(
+    props.order.contain_email == "C" ? true : false
+  );
+  const [telegram, setTelegram] = React.useState(
+    props.order.contain_telegram == "C" ? true : false
+  );
   const [sms, setSms] = React.useState(false);
   const [enableBotton, setEnableBotton] = React.useState(false);
   const tokenJson = localStorage.getItem("authTokens");
@@ -48,15 +51,14 @@ const ModalShopping = (props) => {
   }
 
   React.useEffect(() => {
-    calPrice()
-  }, [telegram,email,sms]);
+    calPrice();
+  }, [telegram, email, sms]);
 
   React.useEffect(() => {
-    setTelegram(()=>props.order.contain_telegram == "C" ? true:false);
-    setEmail(()=>props.order.contain_email == "C" ? true:false);
-    calPrice()
+    setTelegram(() => (props.order.contain_telegram == "C" ? true : false));
+    setEmail(() => (props.order.contain_email == "C" ? true : false));
+    calPrice();
   }, [props]);
-
 
   const notificationAlertRef = React.useRef(null);
 
@@ -94,13 +96,12 @@ const ModalShopping = (props) => {
       ),
       type: type,
       color: "white",
-      // icon: "tim-icons icon-bell-55",
-      autoDismiss: 7
+      autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
   };
   function addItemShop(num) {
-    fetch(apis["carts"]+`${shopId.id}/items/`, {
+    fetch(apis["carts"] + `${shopId.id}/items/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -113,148 +114,131 @@ const ModalShopping = (props) => {
         contain_email: email,
       }),
     })
-      .then((response) =>{ 
-        
-        // console.log("🚀 ~ file: ModalShopping.jsx:120 ~ addItemShop ~ response:", response.status)
-        return response.json()})
-      .then((data) => {
+      .then((response) => {
+        return response.json();
       })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
       });
-    }
-    return (
-      <>
-              <div className="react-notification-alert-container">
-                <NotificationAlert ref={notificationAlertRef} />
-              </div>
-        <Modal
-          show={props.show.flag}
-          cancel={props.close}
-          style={{ background: "rgba(0,0,0,0.2)" }}
-          onHide={props.close}
-          // centered
-        >
-          <div className="loginLmsModal">
-            <Modal.Header className="ModalHeader">
-              <button
-                type="button"
-                class="close close-btn"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span class="" aria-hidden="true" onClick={props.close}>
-                  &times;
-                </span>
-              </button>
-            </Modal.Header>
-            <Modal.Body className="loginLmsModalBody">
-              <CardHeader>{props.show.data.name}</CardHeader>
-              <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="text-center" md="12">
-                      گزینه های مورد نظر را انتخاب کنید
-                    </Col>
-                    <Col className="text-center" md="12">
-                      قیمت: {totalPrices} تومان
-                    </Col>
-                  </Row>
-                  <Col className="m-auto text-center category">
-                    <Form className="d-flex justify-content-center">
-                      <FormGroup
-                        className="shopping_form_userpage"
-                        check
-                        
-                      >
-                        <Label check className="shoping_label">
-                          <Input
-                            onChange={() => {
-                              if (props.order.contain_email != "O") {
-                                setEmail(!email);
-                              }
-                            }}
-                            checked={
-                              props.order.contain_email == "O"
-                                ? true
-                                : email
-                            }
-                            type="checkbox"
-                          />
-                          <span className="form-check-sign">
-                            <span className="check" />
-                          </span>
-                          ایمیل
-                        </Label>
-                      </FormGroup>
-                      <FormGroup
-                        className="shopping_form_userpage"
-                        check
-                        disabled
-                      >
-                        <Label check className="shoping_label">
-                          <Input
-                            checked={false}
-                            type="checkbox"
-                            // onChange={() => {
-                            //   if (props.order.contain_sms != "O") {
-                            //     setSms(!sms);
-                            //   }
-                            // }}
-                          />
-                          <span className="form-check-sign">
-                            <span className="check" />
-                          </span>
-                          sms
-                        </Label>
-                      </FormGroup>
-                      <FormGroup className="shopping_form_userpage" check>
-                        <Label check className="shoping_label">
-                          <Input
-                            checked={
-                              props.order.contain_telegram == "O"
-                                ? true
-                                : telegram
-                            }
-                            type="checkbox"
-                            onChange={() => {
-                              if (props.order.contain_telegram != "O") {
-                                setTelegram(!telegram);
-                              }
-                            }}
-                          />
-                          <span className="form-check-sign">
-                            <span className="check" />
-                          </span>
-                          تلگرام
-                        </Label>
-                      </FormGroup>
-                    </Form>
+  }
+  return (
+    <>
+      <div className="react-notification-alert-container">
+        <NotificationAlert ref={notificationAlertRef} />
+      </div>
+      <Modal
+        show={props.show.flag}
+        cancel={props.close}
+        style={{ background: "rgba(0,0,0,0.2)" }}
+        onHide={props.close}
+      >
+        <div className="loginLmsModal">
+          <Modal.Header className="ModalHeader">
+            <button
+              type="button"
+              class="close close-btn"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span class="" aria-hidden="true" onClick={props.close}>
+                &times;
+              </span>
+            </button>
+          </Modal.Header>
+          <Modal.Body className="loginLmsModalBody">
+            <CardHeader>{props.show.data.name}</CardHeader>
+            <CardBody>
+              <Form>
+                <Row>
+                  <Col className="text-center" md="12">
+                    گزینه های مورد نظر را انتخاب کنید
                   </Col>
-                  <Col></Col>
-                </Form>
-              </CardBody>
-              <Link to="/shopping">رفتن به سبد خرید</Link>
-              <CardFooter>
-                <Button
-                  className="btn-fill"
-                  color="primary"
-                  type="submit"
-                  disabled={!sms && !email && !telegram}
-                  onClick={() => {
-                    addItemShop(props.show.data.complete_course_number);
-                    notify("tl");
-                    props.close();
-                  }}
-                >
-                  اضافه کردن به سبد خرید
-                </Button>
-              </CardFooter>
-            </Modal.Body>
-          </div>
-        </Modal>
-      </>
-    );
+                  <Col className="text-center" md="12">
+                    قیمت: {totalPrices} تومان
+                  </Col>
+                </Row>
+                <Col className="m-auto text-center category">
+                  <Form className="d-flex justify-content-center">
+                    <FormGroup className="shopping_form_userpage" check>
+                      <Label check className="shoping_label">
+                        <Input
+                          onChange={() => {
+                            if (props.order.contain_email != "O") {
+                              setEmail(!email);
+                            }
+                          }}
+                          checked={
+                            props.order.contain_email == "O" ? true : email
+                          }
+                          type="checkbox"
+                        />
+                        <span className="form-check-sign">
+                          <span className="check" />
+                        </span>
+                        ایمیل
+                      </Label>
+                    </FormGroup>
+                    <FormGroup
+                      className="shopping_form_userpage"
+                      check
+                      disabled
+                    >
+                      <Label check className="shoping_label">
+                        <Input checked={false} type="checkbox" />
+                        <span className="form-check-sign">
+                          <span className="check" />
+                        </span>
+                        sms
+                      </Label>
+                    </FormGroup>
+                    <FormGroup className="shopping_form_userpage" check>
+                      <Label check className="shoping_label">
+                        <Input
+                          checked={
+                            props.order.contain_telegram == "O"
+                              ? true
+                              : telegram
+                          }
+                          type="checkbox"
+                          onChange={() => {
+                            if (props.order.contain_telegram != "O") {
+                              setTelegram(!telegram);
+                            }
+                          }}
+                        />
+                        <span className="form-check-sign">
+                          <span className="check" />
+                        </span>
+                        تلگرام
+                      </Label>
+                    </FormGroup>
+                  </Form>
+                </Col>
+                <Col></Col>
+              </Form>
+            </CardBody>
+            <Link to="/shopping">رفتن به سبد خرید</Link>
+            <CardFooter>
+              <Button
+                className="btn-fill"
+                color="primary"
+                type="submit"
+                disabled={!sms && !email && !telegram}
+                onClick={() => {
+                  addItemShop(props.show.data.complete_course_number);
+                  notify("tl");
+                  props.close();
+                }}
+              >
+                اضافه کردن به سبد خرید
+              </Button>
+            </CardFooter>
+          </Modal.Body>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
 export default ModalShopping;

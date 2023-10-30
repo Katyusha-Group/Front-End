@@ -27,13 +27,7 @@ function UserProfile() {
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
   const [notifs, setNotifs] = React.useState([
-    // {
-    //   id: 48,
-    //   title: "ویرایش درس",
-    //   text: "تعداد ثبت نام شده: 11 \n درس آمایشگاه مدارهای منطقی با شاره 1211012_03 ویرایش شد",
-    //   applied_at: "1402-04-16T11:49:05.750282+0000",
-    //   is_read: false,
-    // },
+
   ]);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   useEffect(() => {
@@ -44,13 +38,11 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setInfo(data);
       })
       .catch((error) => console.error(error));
     closeLoading();
     const fetchData = () => {
-      // console.log("Fetching data...")
       fetch(apis["notification"], {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -58,25 +50,20 @@ function UserProfile() {
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log("order data", data);
           setNotifs(data);
         })
         .catch((error) => console.error(error));
     };
 
-    // Fetch data initially
     fetchData();
 
-    // Fetch data every second using setInterval
     const intervalId = setInterval(fetchData, 2000);
   }, []);
 
   useEffect(() => {
-    // console.log("🚀 ~ file: UserProfile.jsx:45 ~ UserProfile ~ info:", info);
   }, [info]);
 
   function handleChange(event) {
-    // setErrorMessage("");
     const { name, value } = event.target;
     setInfo((prevFormData) => ({
       ...prevFormData,
@@ -91,12 +78,10 @@ function UserProfile() {
   function save() {
     var formData = new FormData();
     formData.append("first_name", info.first_name);
-    // console.log("🚀 ~ file: UserProfile.jsx:59 ~ save ~ info:", info);
     formData.append("last_name", info.last_name);
     const startTelegramBot = () => {
       window.location.href = info.telegram_link;
     };
-    // console.log("🚀 ~ file: UserProfile.jsx:61 ~ save ~ formData:", formData);
     fetch(apis["accounts"]["profile"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
@@ -119,25 +104,20 @@ function UserProfile() {
   }, [images]);
   function onImageChangeForm(event) {
     if (event.target.files && event.target.files) {
-      //console.log("event.target.files", event.target.files);
       const fileList = Array.from(event.target.files);
       setImages(fileList);
-      // onChangeImage(event.target.files[0]);
     }
   }
   const renderImageField = () => {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
-    // const { touched, error } = meta;
     return (
       <div>
         <input
           className="btn"
           name="Image"
-          // type="file"
           label="Image"
-          // {...input}
           id="file-input"
           type="file"
           onChange={onChange}
@@ -146,13 +126,6 @@ function UserProfile() {
       
         <br />
         {images.length !== "" ? images.name : ""}
-        {/* {touched && error && <span>{error}</span>} */}
-        {/* <img src={imageURLs} /> */}
-        {/* {console.log(
-          "🚀 ~ file: UserProfile.jsx:94 ~ renderImageField ~ imageURLs:",
-          imageURLs
-        )} */}
-        {/* {getImageListItemBarUtilityClass.map(imageSrc => (<img src=""/>))} */}
       </div>
     );
   };
@@ -180,11 +153,7 @@ function UserProfile() {
                           className="avatar"
                           src={imageURLs != "" ? imageURLs : info.image}
                         />
-
-                        {/* {console.log("🚀 ~ file: UserProfile.jsx:199 ~ UserProfile ~ info.image:", info.image)} */}
-                        {/* <h5 className="title">Mike Andrew</h5> */}
                       </a>
-                      {/* <p className="description">Ceo/Co-Founder</p> */}
                     </div>
                     <div className="card-description">
                       {info.email}
@@ -200,7 +169,6 @@ function UserProfile() {
                   <CardFooter>
                     <Button
                       onClick={startTelegramBot}
-                      // color="primary"
                       className="btn-icon btn-round"
                     >
                       <i className="fab fa-telegram" />
