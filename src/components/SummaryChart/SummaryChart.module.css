@@ -1,14 +1,14 @@
 .table {
   margin: 1rem 0;
 }
-.summary-table {
+.summary_table {
   overflow: auto !important;
   max-height: 380px !important;
 }
 .table td {
   border-bottom: none;
 }
-.dir-left {
+.dir_left {
   direction: ltr;
 }
 ::-webkit-scrollbar-corner {
