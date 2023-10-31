@@ -13,7 +13,6 @@
    overflow: auto;
 }
 
-
 .ModalLessonCourseCard {
    background-color: #382e53 !important;
    border-color: #ab69b1 !important;
@@ -30,7 +29,7 @@
    font-size: 15px;
 }
 
-.ModalprofessorImage {
+.ModalProfessorImage {
    margin-top: 70px;
    margin-right: 5px;
    width: 120px;
@@ -40,7 +39,6 @@
    border-width: 0.1875rem;
    border-radius: 4.6875rem;
 }
-
 
 .courseTitle {
    display: inline-block;
@@ -53,7 +51,7 @@
    font-weight: 300;
 }
 
-.ModalLessondataCard1 {
+.ModalLessonDataCard1 {
    padding-top: 5px;
    margin-top: 10px;
    background-color: #8f7ebe !important;
@@ -62,7 +60,7 @@
    height: 130px;
 }
 
-.ModalLessondataCard2 {
+.ModalLessonDataCard2 {
    margin-top: 10px;
    background-color: #8f7ebe !important;
    width: 100% !important;
@@ -70,14 +68,14 @@
    height: 130px;
 }
 
-.ModalLessondataCard3 {
+.ModalLessonDataCard3 {
    margin-top: -5px;
    background-color: #8f7ebe !important;
    width: 100% !important;
    margin-right: 0px !important;
 }
 
-.ModalLessoninfoPart {
+.ModalLessonInfoPart {
    width: 90%;
    justify-content: right;
    padding-right: 0px;

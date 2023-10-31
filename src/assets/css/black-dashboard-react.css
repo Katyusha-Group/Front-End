@@ -13696,3 +13696,11 @@ select.form-control option {
   padding:0 1vh ;
 }
 
+.ModalLessonCourse .modal-dialog {
+  margin: -27vh auto !important;
+}
+
+.ModalLessonCourse .card-body{
+  height: 80vh;
+  overflow: auto;
+}
