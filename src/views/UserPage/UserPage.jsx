@@ -96,7 +96,9 @@ export default function UserPage() {
                     false,
                     style.classNameHover,
                     showLoading,
-                    closeLoading
+                    closeLoading,
+                    setModalData,
+                    setShowLesson
                   )}
                   <ModalLessons
                     show={showLesson}
