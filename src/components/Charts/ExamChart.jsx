@@ -33,15 +33,8 @@ export default function ExamChart() {
     setExamTable(courses);
     let ExamTimes = courses.map(course => course.exam_times[0].date);
     // Remove Indexes appearing at the beginning of the dates
-    // if (ExamTimes.length < 10)
-    // {
-    //   ExamTimes = ExamTimes.map((item) => item.substring(1));
-    // }
-    // else 
-    // {
-    //   ExamTimes = ExamTimes.map((item) => item.substring(2));
-    // }
-    setExamDates (ExamTimes);
+    ExamTimes = ExamTimes.map((item) => item.substring(item.length - 8));
+    setExamDates(ExamTimes)
     console.log ("Exam time is: " + ExamTimes);
   }, [info.courseChoosed]);
 
@@ -106,6 +99,7 @@ export default function ExamChart() {
         
         let time = MapTimeToIndex(ExamTime);
         let day = MapDateToIndex(ExamDay, ExamDates);
+        console.log("Mapped date is: " + day);
         
         // setExamDates((prevExamDates) => [...prevExamDates, day]);
 
@@ -149,8 +143,8 @@ export default function ExamChart() {
       <Table className="ExamsTable">
         <thead className="text-primary TableHead">
           <tr>
-            {/* <th className="table-head text-center "></th>
-            <th className="table-head text-center ">13 خرداد</th>
+            <th className="table-head text-center "></th>
+            {/* <th className="table-head text-center ">13 خرداد</th>
             <th className="table-head text-center ">14</th>
             <th className="table-head text-center ">15</th>
             <th className="table-head text-center ">16</th>
@@ -174,8 +168,9 @@ export default function ExamChart() {
             <th className="table-head text-center ">4</th> */}
             {
               Object.entries(ExamDates).map( (entry) => {
+                // console.log("Entry is: " + entry.toString().substring(2))
                 return (
-                  <th className="table-head text-center ">{entry}</th>
+                  <th className="table-head text-center ">{entry.toString().substring(2)}</th>
                 )
               })
             }
