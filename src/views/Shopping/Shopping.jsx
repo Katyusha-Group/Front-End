@@ -15,7 +15,7 @@ import {
   CardFooter,
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-import "./Shopping.css";
+import * as style from  "./Shopping.module.css";
 import {
   closeLoading,
   showLoading,
@@ -256,7 +256,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         قیمت {totalPrice} تومان
@@ -266,7 +266,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         کیف پول شما: {wallet} تومان
@@ -276,13 +276,13 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         تعداد {amount}
                       </Col>
                     </Row>
-                    <div className="d-flex justify-content-center align-items-center price">
+                    <div className={"d-flex justify-content-center align-items-center " + style.price}>
                       <h2>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
@@ -304,7 +304,7 @@ function Shopping() {
                 </Card>
               </Col>
               <Col md="9" >
-                <Card className="shop_card " style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
+                <Card className={style.shop_card} style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
@@ -316,7 +316,7 @@ function Shopping() {
                         md="6"
                         sm="2"
                         xs="1"
-                        className="places-buttons shop_row"
+                        className={`${style.places_buttons} ${style.shop_row}`}
                         key={index}
                       >
                         <Col className="m-auto">
@@ -341,8 +341,8 @@ function Shopping() {
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
-                            <FormGroup className="shopping_form" check>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
@@ -357,8 +357,8 @@ function Shopping() {
                                 ایمیل
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check disabled>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check disabled>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   checked={false}
                                   type="checkbox"
@@ -374,8 +374,8 @@ function Shopping() {
                                 sms
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   checked={x.contain_telegram}
                                   key={x.contain_telegram}

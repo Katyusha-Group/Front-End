@@ -59,32 +59,17 @@
 
 .HomePageButtonCol
 {
-    /* background-color: red; */
     flex: 1;
     width: 2px;
 }
 
 .SwitchCard {
-    /* background-color: hsl(235, 22%, 30%); */
-    /* margin-right: 40%; */
-    /* margin-left: 40%; */
     border-radius: 10px;
     font-size: small;
     padding: 5px;
     width: 240px;
     padding-top: 15px !important;
 }
-
-/* .Switch div
-{
-    background-color: azure;
-} */
-
-/* .react-switch-bg
-{
-    background-color: black; 
-} */
-
 
 .Switch svg {
     width: 100%;
@@ -94,57 +79,25 @@
 
 .SwitchCol
 {
-    /* background-color: blue; */
-    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: 2;
     padding-right: 100px !important;
-    /* padding-left: 100px !important; */
-    /* padding: 100px; */
 }
 
 .SelectCol
 {
-    /* background-color: green; */
     flex: 4;
 }
-/* @media only screen and (max-width: 1600px ) {
-    .CourseContainer
-    {
-        height: 30px;
-    }
-} */
-/* @media only screen and (max-width: 800px ) {
-    .CourseContainer
-    {
-        height: 30px;
-        width: 100px;
-    }
-} */
-
-/* .ClassesTable
-{
-    border: 1px solid;
-} */
-/* 
-.table-head
-{
-    border: 1px solid;
-} */
 .TableROW {
     border: 3px solid;
-    /* color: rgb(82,95,127); */
     color: rgb(61, 63, 81);
 }
 
 .CoursesPanel_column2 {
-    /* column-width: 1000px; */
     border: 3px solid;
-    /* color: rgb(82,95,127); */
     vertical-align: top !important;
-    /* padding: 1000px; */
 }
 
 
@@ -156,10 +109,6 @@
 .HomeButton
 {
     width: 100px;
-    /* color: aliceblue; */
-    /* background-color: rgb(102, 83, 160); */
-    /* background-color: transparent; */
-    /* border-color: rgb(200, 78, 202); */
     border-radius: 5px;
     background-color: transparent;
     border: none;
@@ -192,10 +141,6 @@
     cursor: pointer;
 }
 
-
-/* selectStyles.css */
-
-/* Select Styles */
 input {
     color: transparent;
   }

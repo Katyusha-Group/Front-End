@@ -1,9 +1,5 @@
-.main-panel > .content_without_sidebar {
-  padding: 78px 30px 30px 30px;
-  min-height: calc(100vh - 70px);
-}
 
-.shoping_label {
+.shopping_label {
   margin: 0.5rem 1rem;
 }
 
@@ -14,16 +10,12 @@
   min-width: 100px;
 }
 
-.shopping_professorImage {
-  margin: auto;
-}
-
 .shop_card {
   height: 80vh;
   overflow: auto;
 }
 
-.places-buttons {
+.places_buttons {
   padding: 10px 0;
 }
 

@@ -13704,3 +13704,8 @@ select.form-control option {
   height: 80vh;
   overflow: auto;
 }
+
+.main-panel > .content_without_sidebar {
+  padding: 78px 30px 30px 30px;
+  min-height: calc(100vh - 70px);
+}
