@@ -4,7 +4,6 @@ import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 import logo1 from "../../assets/img/Logo1.png";
 import {
-  Button,
   Col,
   Nav,
   NavLink as ReactstrapNavLink,
@@ -17,15 +16,13 @@ import {
 import { apis } from "../../assets/apis";
 import {
   BackgroundColorContext,
-  backgroundColors,
 } from "../../contexts/BackgroundColorContext";
-import "./LessonSidebar.css";
+import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
 
 import Spinner from "react-bootstrap/Spinner";
-import { useInfo } from "../../contexts/InfoContext";
 var ps;
-const fetchRequest = "FETC_REQUEST";
+const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
 const reducer = (state, action) => {
@@ -43,13 +40,13 @@ const reducer = (state, action) => {
 
 function LessonSidebar(props) {
   const getError = (error) => {
-    return error.responst && error.response.data
+    return error.response && error.response.data
       ? error.response.data
       : error.message;
   };
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
-  const [departeman, setDeparteman] = React.useState([]);
+  const [department, setDepartment] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   const [selectedDep, setSelectedDep] = React.useState([]);
   const Navigate = useNavigate();
@@ -68,7 +65,7 @@ function LessonSidebar(props) {
       .then((response) => response.json())
       .then((data) => {
         propsSetter({ type: fetchSuccess, payload: data.data });
-        setDeparteman(data);
+        setDepartment(data);
       })
       .catch((error) => {
         propsSetter({ type: fetchFail, payload: getError(error) });
@@ -262,19 +259,19 @@ function LessonSidebar(props) {
                   </div>
                 </Col>
               </Row>
-              <div className="lessonSidebar_component">
+              <div className={style.lessonSidebar_component}>
                 {loading ? (
                   <Spinner />
                 ) : error ? (
                   "error"
                 ) : (
-                  departeman.map((prop, index) => {
+                  department.map((prop, index) => {
                     if (prop.base_courses.length > 0) {
                       return (
                         <NavLink
                           className={
                             prop === selectedDep
-                              ? "nav-link nav-link-lessonSidebar selecteddItem"
+                              ? "nav-link nav-link-lessonSidebar "+style.selectedItem
                               : "nav-link nav-link-lessonSidebar"
                           }
                           onClick={() => {
@@ -310,7 +307,7 @@ function LessonSidebar(props) {
                   </NavLink>
                 )}
               </div>
-              <div className="lessonSidebar_component-lessons">
+              <div className={style.lessonSidebar_component_lessons}>
                 {lessonState ? <SearchBox data={lessonState} /> : null}
               </div>
             </Nav>

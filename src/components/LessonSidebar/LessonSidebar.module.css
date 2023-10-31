@@ -1,0 +1,24 @@
+.lessonSidebar_component {
+  height: 30vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #27293d;
+  border-radius: .2rem;
+  padding-top: .8rem;
+  margin-top: 2vh;
+
+}
+
+.lessonSidebar_component_lessons 
+{
+  overflow-y: hidden;
+  background-color: #27293d;
+  border-radius: .2rem;
+  padding-top: .8rem;
+  margin-top: 2vh;
+  height: 52.2vh;
+}
+
+.selectedItem{
+ background-color: #2c3857;
+}
