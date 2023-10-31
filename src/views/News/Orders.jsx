@@ -26,11 +26,10 @@ import {
 } from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
-import "./Orders.css";
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
-  const [imageURLs, setlmageURLs] = React.useState("");
+  const [imageURLs, setImageURLs] = React.useState("");
   const [orders, setOrders] = React.useState([]);
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
@@ -97,7 +96,7 @@ function UserProfile() {
   React.useEffect(() => {
     if (images.length < 1) return;
     const newImageUrls = images.map((image) => URL.createObjectURL(image));
-    setlmageURLs(newImageUrls);
+    setImageURLs(newImageUrls);
   }, [images]);
   function onImageChangeForm(event) {
     if (event.target.files && event.target.files) {
