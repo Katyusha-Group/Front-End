@@ -240,7 +240,7 @@ function Shopping() {
             <div className="react-notification-alert-container">
             </div>
 
-            <Row>
+            <Row style={{height:'80vh'}}>
               <Col md="3" >
                 <Card className="" style={{height: "100%", marginBottom: "0"}}>
                   <CardHeader
