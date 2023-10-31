@@ -1,12 +1,11 @@
 import React from "react";
 import "../assets/css/Login.css";
-import { createContext, useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 import Swal from "sweetalert2";
-import ContextInfo, { useInfo } from "../contexts/InfoContext";
 import { apis } from "../assets/apis";
+import { IsValidEmail } from "../Functions/IsValidEmail";
 import {
   Button,
   Card,
@@ -23,14 +22,9 @@ import {
 import { Link } from "react-router-dom";
 
 function ForgetPassword() {
-  const { info, changeInfo } = useInfo();
   const [formData, setFormData] = useState({
     email: ""
   });
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
 
   function handleChange(event) {
     setErrorMessage("");
@@ -41,7 +35,6 @@ function ForgetPassword() {
     }));
   }
   
- 
   const Navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState({
     emailError: "",
@@ -57,18 +50,15 @@ function ForgetPassword() {
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
-    if (!isValidEmail(formData.email) && !errors.emailError) {
+    if (!IsValidEmail(formData.email) && !errors.emailError) {
       errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
-    
     setErrorMessage({
-      emailError: errors.emailError,
-      
+      emailError: errors.emailError,  
     });
     if (errors.emailError || errors.passError) {
       return;
     }
-    
     showLoading();
     const response = await fetch(apis["accounts"]["resetPassword"], {
       method: "POST",
@@ -114,7 +104,6 @@ function ForgetPassword() {
       });
     }
     }
-    
   }
   return (
     <>
@@ -129,7 +118,6 @@ function ForgetPassword() {
                 <Card>
                   <CardHeader>
                     <h5 className="title text-center"> فراموشی رمز عبور </h5>
-                    
                   </CardHeader>
                   <br></br>
                   <CardBody>
@@ -163,7 +151,6 @@ function ForgetPassword() {
                           <Link to="../login" color="primary">
                             &nbsp;ورود به حساب کاربری&nbsp;
                           </Link>
-                          
                         </Col>
                       </Row>
                     </Container>

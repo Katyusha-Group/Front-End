@@ -1,28 +1,22 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Select from "react-select";
 import "../assets/css/SignUp.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
+import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon";
+import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon";
+
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   FormGroup,
   Form,
   Input,
   Row,
   Col,
-  Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -32,42 +26,6 @@ function SetNewPassword() {
     password: "",
     passwordConfirm: "",
   });
-  const [subjectOptions, setSubjectOptions] = useState();
-  function PasCloseEyeIcon() {
-    const togglePassword = document.querySelector("#togglePassword");
-    const passwordV = document.querySelector("#password_field");
-    const type =
-      passwordV.getAttribute("type") === "password" ? "text" : "password";
-
-    togglePassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("togglePassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("togglePassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    passwordV.setAttribute("type", type);
-  }
-
-  function ConfirmPasCloseEyeIcon() {
-    const toggleConfirmPassword = document.querySelector(
-      "#toggleConfirmPassword"
-    );
-    const confirmPasswordV = document.querySelector("#confirm_password_field");
-    const type =
-      confirmPasswordV.getAttribute("type") === "password"
-        ? "text"
-        : "password";
-
-    toggleConfirmPassword.className === "fa fa-eye viewpass mr-4 text-muted"
-      ? (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye-slash viewpass mr-4 text-muted")
-      : (document.getElementById("toggleConfirmPassword").className =
-          "fa fa-eye viewpass mr-4 text-muted");
-    confirmPasswordV.setAttribute("type", type);
-  }
-
-  function isValidPassword(pass) {
-    return /[a-zA-Z]/.test(pass);
-  }
 
   function handleChange(event) {
     setErrorMessage("");
@@ -78,14 +36,12 @@ function SetNewPassword() {
     }));
   }
   
-
- 
   const [errorMessage, setErrorMessage] = useState({
-    
     passError: "",
     passErrorRep: "",
     backError: "",
   });
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -134,7 +90,7 @@ function SetNewPassword() {
       timerProgressBar: true,
       showConfirmButton: false,
       background: '#3c3e5d',
-        color:'#ceccc0',
+      color:'#ceccc0',
       width:'25rem',
       timerProgressBar: true,
       didOpen: () => {
@@ -170,14 +126,12 @@ function SetNewPassword() {
     Navigate("/login")
     }
     else {
-        
         errors.backError = "!رمز عبور قابل قبول نیست";
         setErrorMessage({
           ...errorMessage,
           backError: errors.backError,
         });
-        }
-    
+    }
   }
 
   return (
