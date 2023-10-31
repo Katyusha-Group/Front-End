@@ -1,4 +1,3 @@
-// import './App.css'
 import React from "react";
 import * as Router from "react-router-dom";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
@@ -110,9 +109,7 @@ function App() {
                   </PrivatRoute>
                 }></Router.Route>
               <Router.Route path="/profile" element={
-                  // <PrivatRoute>
                     <Profile />
-                  // </PrivatRoute>
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>

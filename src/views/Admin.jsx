@@ -35,7 +35,6 @@ export default function Admin() {
     document.documentElement.className.indexOf("nav-open") !== -1
   );
   const toggleSidebar = () => {
-    // console.log("toggle");
     document.documentElement.classList.toggle("nav-open");
     setsidebarOpened(!sidebarOpened);
   };
@@ -58,7 +57,6 @@ export default function Admin() {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/home") {
-        // console.log(prop.component);
         return (
           <Router.Route
             path={prop.path}
@@ -70,11 +68,9 @@ export default function Admin() {
         return null;
       }
     });
-    // return <Router.Route path="/admin/change" element={<ChangePassword/>}></Router.Route>
   };
   return (
     <>
-      {/* <AdminNavbar/> */}
 
       <div className="wrapper">
         <LessonSidebar
@@ -88,11 +84,6 @@ export default function Admin() {
           toggleSidebar={toggleSidebar}
         />
         <div className="main-panel">
-          {/* <AdminNavbar
-            brandText={getBrandText(location.pathname)}
-            toggleSidebar={toggleSidebar}
-            sidebarOpened={sidebarOpened}
-          /> */}
           <div className="content admin-content" style={{}}>
             <Navbar className="px-0 navbar-admin">
               <Container className="m-0">

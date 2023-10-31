@@ -68,11 +68,6 @@ function Exams (ExamTable)
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         
-        // if (!currentPeriod.exam_times[0].exam_start_time || !currentPeriod.exam_times[0].date) {
-        //   // Skip the iteration if either ExamTime or ExamDay is undefined
-        //   return lessonsKeyedByDayAndPeriod;
-        // }
-        
         try
         {
           let ExamTime = currentPeriod.exam_times[0].exam_start_time;
@@ -80,7 +75,6 @@ function Exams (ExamTable)
         }
         catch 
         {
-          // console.log("First Error");
           return lessonsKeyedByDayAndPeriod;
         }
 
@@ -96,7 +90,6 @@ function Exams (ExamTable)
         }
         catch 
         {
-          // console.log("Second Error");
           return lessonsKeyedByDayAndPeriod;
         }
 
@@ -106,7 +99,6 @@ function Exams (ExamTable)
           lessonsKeyedByDayAndPeriod[time][day][count] = currentPeriod;
         }
         catch (error) {
-          // console.log("ERROR is: " + error);
         }
         return lessonsKeyedByDayAndPeriod
       },
@@ -166,55 +158,28 @@ function Exams (ExamTable)
 }
 
 export default function ExamChart() {
-  // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
-
-  // Info
   const { info, changeInfo } = useInfo();
 
   let [ExamTable, setExamTable] = React.useState([]);
 
   React.useEffect(() => {
-    // fetch("https://www.katyushaiust.ir/courses/my_courses", {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("fetched data");
-    //     changeInfo("courseChoosed", data);
-    //     const courses = data.map(course => new Course(course, true));
-    //     setExamTable(courses);
-
-    //   })
-    //   .catch((error) => console.error(error));
-    // const activeRoute = (routeName) => {
-    //   return location.pathname === routeName ? "active" : "";
-    // };
     setExamTable(info.courseChoosed);
   }, [info.courseChoosed]);
-  // setExamTable(info.courseChoosed);
 
   class Course {
     constructor(props, IsFromChosencourses) {
       this.name = props.name;
-      // console.log ("Name: " + this.name);
-
       this.complete_course_number = props.complete_course_number;
-      
-
       this.class_gp = props.class_gp;
       this.complete_course_number = props.complete_course_number;
       this.course_times = props.course_times;
       this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
       this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
       this.can_take = props.is_allowed;
-
-
-
       this.exam_times = props.exam_times;
-
       this.IsChosen = IsFromChosencourses;
       this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
     }
@@ -223,7 +188,6 @@ export default function ExamChart() {
   return (
     <>
       <div>
-        {/* {console.log("Exams called")} */}
         {Exams(ExamTable)}
       </div>
     </>

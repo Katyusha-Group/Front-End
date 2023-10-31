@@ -1,36 +1,17 @@
 import React from "react";
 import classNames from "classnames";
-import "./SummaryChart.css";
+import * as style from "./SummaryChart.module.css";
 import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Form,
-  FormGroup,
-  Input,
   Table,
-  Row,
-  Col,
-  UncontrolledTooltip,
 } from "reactstrap";
-// import * as chart from "../../assets/img/schedule_table.png"
 export default function SummaryChart(props) {
   function summar(data) {
     return data.map((table_row, index) => (
       <tr key={index}>
-        <td className="dir-left">{table_row.complete_course_number}</td>
+        <td className={style.dir_left}>{table_row.complete_course_number}</td>
         <td>{table_row.name}</td>
         <td>
         {table_row.teachers.map((y)=>(y.name)).join(" , ")}</td>
-        {/* needs all teachers name */}
         <td>{table_row.exam_times[0]?.date}</td>
         <td>{table_row.capacity}</td>
         <td>{table_row.registered_count}</td>
@@ -40,7 +21,7 @@ export default function SummaryChart(props) {
   }
   return (
     <>
-      <Table className="tablesorter summary-table">
+      <Table className={style.summary_table}>
         <thead className="text-primary ">
           <tr>
             <th className="text-center ">کد</th>

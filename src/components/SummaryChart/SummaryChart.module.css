@@ -1,0 +1,16 @@
+.table {
+  margin: 1rem 0;
+}
+.summary_table {
+  overflow: auto !important;
+  max-height: 380px !important;
+}
+.table td {
+  border-bottom: none;
+}
+.dir_left {
+  direction: ltr;
+}
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}

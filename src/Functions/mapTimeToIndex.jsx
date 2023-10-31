@@ -18,5 +18,5 @@ export function mapTimeToIndex (InputTime)
         }
     }
 
-    return i; // Invalid Time
+    return i; 
 }

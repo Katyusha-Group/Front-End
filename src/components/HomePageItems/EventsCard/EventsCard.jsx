@@ -1,17 +1,11 @@
 import {useState} from 'react';
 import React from "react";
-// import routes from "../route.jsx";
 import { useInfo } from "../../../contexts/InfoContext";
 import '../EventsCard/EventsCard.css'
-
-// reactstrap components
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col, Table} from "reactstrap";
 import Button from 'react-bootstrap/Button';
 import {DateTimePicker} from "react-advance-jalaali-datepicker";
 import d from "../events.json"
-
-
-//const events = [{name:"تمرین ساختمان داده",date:"1402.2.2",time:"23:59"},{name:"  کوییز مدار منطقی",date:"1402.2.8",time:"11:00"}];
 const eventsItems=d.map(event => 
 <tr>
     <td >{event.name}</td>
@@ -24,7 +18,6 @@ const eventsItems=d.map(event =>
 function EventsCard() {
   const [addPartIsShown, setAddPartIsShown] = useState(false);
   const hideAddPart=()=>{
-    //event has to be added here
     setAddPartIsShown(false);
   }
   const changeAddPartState=()=>{
@@ -47,16 +40,11 @@ function EventsCard() {
                   <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}} onClick={hideAddPart} >+</Button>
                   </div>
                   
-                  {/* <label>
-                     تاریخ امتحان جدید را وارد کنید:
-                  </label> */}
+                
                   <DateTimePicker
                   placeholder="انتخاب تاریخ و ساعت"
                   format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm"
                   id="dateTimePicker"
-                  // onChange={this.changeTimeDate}
-                  // preSelected="تاریخ: 1402/04/01 ساعت: 18:30"
-                  //inputComponent={this.DatePickerInput}
                   />
                   
               </div>

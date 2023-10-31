@@ -1,4 +1,3 @@
-//import { info } from "sass";
 import React from 'react';
 import Swal from 'sweetalert2';
 import { apis } from '../../assets/apis';
@@ -43,12 +42,9 @@ export function takeLessonsGroups(token){
         width:'25rem',
         confirmButtonText:"باشه"
       }).then((result) => {
-        // console.log(result);
         if(result) {
           window.location="/setNewPassword";
-          // ok click
         } else {
-          // not clicked
         }
       });
       

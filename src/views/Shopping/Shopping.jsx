@@ -1,7 +1,6 @@
 import React from "react";
 import { useInfo } from "../../contexts/InfoContext";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-// reactstrap components
 import {
   Button,
   Card,
@@ -16,13 +15,14 @@ import {
   CardFooter,
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-import "./Shopping.css";
+import * as style from  "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
+import * as UserPageStyle from "../../assets/css/UserPage.module.css"
 function Shopping() {
   const { info, changeInfo } = useInfo();
   const [state, setState] = React.useState([]);
@@ -47,7 +47,6 @@ function Shopping() {
         setAmount(data.total_number);
       })
       .catch((error) => console.error(error));
-    // console.log("cart info run");
   }
   function saveWallet(){
     fetch(apis["accounts"]["wallet"]["seeWallet"], {
@@ -107,9 +106,7 @@ function Shopping() {
     })
       .then((response) => {
         
-        // console.log("🚀 ~ file: Shopping.jsx:107 ~ .then ~ response.status:", response.status)
         if (response.status == 400) {
-          // console.log("status 400 run");
           return response.json().then((data) => {
             alert(
               data.telegram +
@@ -118,10 +115,8 @@ function Shopping() {
           });
         } else
           return response.json().then((data) => {
-            // console.log("hello error ridi")
             notify("tl");
             saveWallet();
-            // console.log("status 200 run");
             let newCart = CartCreator({ setState, setTotalPrice, setAmount });
           });
       })
@@ -165,7 +160,6 @@ function Shopping() {
         </div>
       ),
       type: type,
-      // icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
@@ -244,10 +238,9 @@ function Shopping() {
           <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
             <div className="react-notification-alert-container">
-              {/* <NotificationAlert ref={notificationAlertRef} /> */}
             </div>
 
-            <Row>
+            <Row style={{height:'80vh'}}>
               <Col md="3" >
                 <Card className="" style={{height: "100%", marginBottom: "0"}}>
                   <CardHeader
@@ -263,7 +256,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         قیمت {totalPrice} تومان
@@ -273,7 +266,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         کیف پول شما: {wallet} تومان
@@ -283,13 +276,13 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         تعداد {amount}
                       </Col>
                     </Row>
-                    <div className="d-flex justify-content-center align-items-center price">
+                    <div className={"d-flex justify-content-center align-items-center " + style.price}>
                       <h2>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
@@ -311,9 +304,7 @@ function Shopping() {
                 </Card>
               </Col>
               <Col md="9" >
-                {/* <CardHeader>
-                </CardHeader> */}
-                <Card className="shop_card " style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
+                <Card className={style.shop_card} style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
@@ -325,12 +316,12 @@ function Shopping() {
                         md="6"
                         sm="2"
                         xs="1"
-                        className="places-buttons shop_row"
+                        className={`${style.places_buttons} ${style.shop_row}`}
                         key={index}
                       >
                         <Col className="m-auto">
                           <img
-                            className="professorImage"
+                            className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
                                 ? x.course.teachers[0].teacher_image
@@ -350,16 +341,14 @@ function Shopping() {
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
-                            <FormGroup className="shopping_form" check>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
                                     changeChecked(1, index);
                                   }}
                                   checked={state[index].contain_email}
-                                  // checked={false}
-                                  // checked={s}
                                   type="checkbox"
                                 />
                                 <span className="form-check-sign">
@@ -368,10 +357,9 @@ function Shopping() {
                                 ایمیل
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check disabled>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check disabled>
+                              <Label check className={style.shopping_label}>
                                 <Input
-                                  // checked={x.contain_sms}
                                   checked={false}
                                   type="checkbox"
                                   valid={false}
@@ -386,8 +374,8 @@ function Shopping() {
                                 sms
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   checked={x.contain_telegram}
                                   key={x.contain_telegram}

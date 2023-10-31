@@ -11,7 +11,7 @@ export const apis = {
     my_courses: `${domain}/courses/my_courses/`,
   },
   courseCartOrderInfo: `${domain}/course-cart-order-info/`,
-  getPrice: `${domain}/get-price/`,
+  getPrice: `${domain}/get-prices/`,
   coursegroups: `${domain}/coursegroups/`,
   accounts:{
     activationConfirm: `${domain}/accounts/activation-confirm/`,

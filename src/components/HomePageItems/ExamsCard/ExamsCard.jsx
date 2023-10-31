@@ -1,10 +1,7 @@
 import {useState} from 'react';
 import React from "react";
-// import routes from "../route.jsx";
 import { useInfo } from "../../../contexts/InfoContext";
 import '../ExamsCard/ExamsCard.css'
-
-// reactstrap components
 import {Card,CardHeader,CardBody,CardFooter,CardText,FormGroup,Form,Input,Row,Col, Table} from "reactstrap";
 import Button from 'react-bootstrap/Button';
 import {DateTimePicker} from "react-advance-jalaali-datepicker";
@@ -24,7 +21,6 @@ const examsItems=exams.map(exam =>
 function ExamsCard() {
   const [addPartIsShown, setAddPartIsShown] = useState(false);
   const hideAddPart=()=>{
-    //exam has to be added here
     setAddPartIsShown(false);
   }
   const changeAddPartState=()=>{
@@ -46,17 +42,10 @@ function ExamsCard() {
                   <Input placeholder="ریاضی ۱" />
                   <Button variant="secondary"size="sm" style={{color:"aqua",fontSize:"medium"}} onClick={hideAddPart} >+</Button>
                   </div>
-                  
-                  {/* <label>
-                     تاریخ امتحان جدید را وارد کنید:
-                  </label> */}
                   <DateTimePicker
                   placeholder="انتخاب تاریخ و ساعت"
                   format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm"
                   id="dateTimePicker"
-                  // onChange={this.changeTimeDate}
-                  // preSelected="تاریخ: 1402/04/01 ساعت: 18:30"
-                  //inputComponent={this.DatePickerInput}
                   />
                   
               </div>

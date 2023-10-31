@@ -16,24 +16,18 @@ import {
   Col
 } from "reactstrap";
 
-// Functions
 import { addNewLesson } from "../../Functions/addNewLesson";
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
 import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 import GenerateKeyedTimetable from "./KeyedTimetable";
-// import Course from "./Course_Class";
-
-// Styles
 import "./CoursesPanel.css"
 import SelectStyles from "../../assets/styles/SelectStyles";
 
 export default function CoursesPanel() {
-  // Token
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
 
-  // Info
   const { info, changeInfo } = useInfo();
 
   const [DepartmentOptions, setDepartmentOptions] = useState([]);
@@ -47,7 +41,6 @@ export default function CoursesPanel() {
     NumberOfChosenLessons[i] = Array(Cols).fill(0);
   }
 
-  // Already Chosen Lessons and Set Department Options and AllowedLessons
   useEffect(() => {
     fetch(apis["departmentsAll"]["names"])
       .then((response) => response.json())
@@ -87,15 +80,14 @@ export default function CoursesPanel() {
     };
   }, [ChosenCoursesChanged]);
   
-  // Department courses
   let [DepartmentCourses, setDepartmentCourses] = useState([]);
 
-  function handleDepartment(selectedOption) {                         // Handle Select
+  function handleDepartment(selectedOption) {                         
     setSelectedDepartment(selectedOption.value);
     showLoading();
   }
 
-  useEffect(() => {                                             // Set Selected Department courses
+  useEffect(() => {                                             
     if (SelectedDepartment) {
       fetch(apis["allcoursesBasedDepartment"]+`${SelectedDepartment}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -103,10 +95,10 @@ export default function CoursesPanel() {
         .then((response) => response.json())
         .then((data) => {
           const courses = data.map(course => new Course(course, false));
-          setDepartmentCourses(courses); //Do we need this?
+          setDepartmentCourses(courses); 
           if (SwitchChecked)
           {
-            let AllowedDepartmentCourses = courses.filter(course => course.can_take);   // Only filter department courses (do not filter chosen courses)
+            let AllowedDepartmentCourses = courses.filter(course => course.can_take);  
             let NewTimeTable = [...ChosenCourses, ...AllowedDepartmentCourses];
             settimetable(NewTimeTable);
             setSwitchChecked(true);
@@ -120,10 +112,7 @@ export default function CoursesPanel() {
         })
         .catch((error) => console.error(error));
     }
-    // closeLoading();
   }, [SelectedDepartment]);
-
-  // Switch
   const [SwitchChecked, setSwitchChecked] = useState(false);
   const handleSwitchChange = val => {
     setSwitchChecked(val)
@@ -136,7 +125,7 @@ export default function CoursesPanel() {
     }
     else
     {
-      setChosenCoursesChanged(prev => !prev);         // Set the courses as before (= Chosen courses and Department Courses)
+      setChosenCoursesChanged(prev => !prev);        
     }
   }, [SwitchChecked]);
 
@@ -160,7 +149,6 @@ export default function CoursesPanel() {
         if (!info.courseChoosed.includes(this)) {
           ChosenCourses = addNewLesson(this.complete_course_number, NumberOfChosenLessons);
           changeInfo("courseChoosed", [...info.courseChoosed, this]);
-          console.log("My courses: " + ChosenCourses);
           this.IsChosen = true;
         }
       }

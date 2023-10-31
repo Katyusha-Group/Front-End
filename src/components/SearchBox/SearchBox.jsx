@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Input } from "reactstrap";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useInfo } from "../../contexts/InfoContext";
-import "./SearchBox.css";
+import * as style from "./SearchBox.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { apis } from "../../assets/apis";
-const fetchRequest = "FETC_REQUEST";
+const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
 const reducer = (state, action) => {
@@ -60,9 +60,9 @@ const SearchBox = ( data ) => {
         placeholder="جستجو   "
         value={query}
         onChange={handleQueryChange}
-        className="search_box"
+        className={style.search_box}
       />
-      <div className="lessons_in_searchBox">
+      <div className={style.lessons_in_searchBox}>
         {
           nameList
           ?.filter((item, index) =>
@@ -70,7 +70,7 @@ const SearchBox = ( data ) => {
           )
           .map((item, index) => (
             <a
-              className={item===selectedL?"nav-link button_lessons selectedL":"nav-link button_lessons"}
+              className={item===selectedL?`nav-link ${style.selectedL} ${style.button_lessons}`:"nav-link " + style.button_lessons}
               activeClassName="active"
               onClick={() => {
                 changeInfo("courseGroupID", item.course_number);

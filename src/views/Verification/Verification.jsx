@@ -7,8 +7,6 @@ import {
   closeLoading,
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-// import axios from "axios";
-// reactstrap components
 import {
   Button,
   Card,
@@ -117,13 +115,8 @@ function Verification() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    //console.log(code)
-    // setShowAlert(verificationApi(code,info.token,setShowAlert))
     showLoading();
-    //console.log(showAlert)
-    //console.log(verificationApi(code))
     closeLoading();
-    //console.log(showAlert)
     verificationApi(code, info.token);
 
     const errors = [
@@ -168,7 +161,6 @@ function Verification() {
                             data-dismiss="alert"
                             aria-label="Close"
                           >
-                            {/* <i class="tim-icons icon-simple-remove"></i> */}
                           </button>
                         </div>
                       )}

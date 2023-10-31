@@ -27,7 +27,6 @@ function Login(props) {
   React.useEffect(() => {
   }, [idShop]);
 
-  ////////////////////////////// Input errors ///////////////////////
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -123,7 +122,6 @@ function Login(props) {
       });
     }
   }
-  //////////////////////////// End of input errors //////////////////
   return (
     <>
       <div className="wrapper">

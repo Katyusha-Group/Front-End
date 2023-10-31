@@ -12575,7 +12575,6 @@ code {
 
 @media screen and (max-width: 991px) {
   .rtl .sidebar {
-    /* TODO change margin*/
     margin-right: -70px; }
   .rtl .main-panel .content {
     padding-right: 50px;
@@ -13697,3 +13696,109 @@ select.form-control option {
   padding:0 1vh ;
 }
 
+.ModalLessonCourse .modal-dialog {
+  margin: -27vh auto !important;
+}
+
+.ModalLessonCourse .card-body{
+  height: 80vh;
+  overflow: auto;
+}
+
+.main-panel > .content_without_sidebar {
+  padding: 78px 30px 30px 30px;
+  min-height: calc(100vh - 70px);
+}
+
+/* LessonSidebar */
+
+.sidebar[data="normal"],
+.off-canvas-sidebar[data="normal"] {
+  background: none;
+  box-shadow: none;
+
+}
+
+.nav-link-lessonSidebar:hover{
+  background-color: #32325d;
+}
+
+.nav-lessonSidebar{
+  
+  height: 7.8vh ;
+  background-color: #27293d;
+  border-radius: .5rem;
+  justify-content: center;
+}
+.nav-header{
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.nav-header > a{
+  margin-left: 0;
+}
+.pp-4{
+  padding: 2px !important;
+}
+.nav-link-icon{
+  font-size: x-large;
+}
+
+.nav-link-course{
+  color: rgba(255, 255, 255, 0.8);
+  border: solid 2px;
+  border-color: #484b7262;
+  border-radius: .5rem;
+  margin: 10px 0px;
+  padding: 5px 0px ;
+  background-color: #484b7262;
+}
+a.nav-link-course:hover{
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 40%;
+}
+.nav-link-profile{
+  font-size: x-large;
+  color:rgba(255, 255, 255, 0.8) ;
+  justify-content: center;
+  display: flex;
+}
+
+.btn.btn-link, .navbar .navbar-nav > a.btn.btn-link{
+  background-color: #484b7262;
+}
+.br-7{
+  border-radius: .7rem !important;
+}
+.dropdown-menu:before{
+  left: 21px !important;
+}
+.nav-img{
+  border-radius: 50%;
+  width: 35px;
+  float: right;
+}
+.brand-name{
+  float: right;
+}
+
+/* Order */
+
+.accordion-header .accordion-button{
+  background: #27293d;
+  border: 0;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.accordion-button::after{
+  color: white;
+  display: none;
+}
+
+.accordion-body .row{
+  margin: 3rem 0 0 0;
+}

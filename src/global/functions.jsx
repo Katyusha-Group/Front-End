@@ -1,5 +1,4 @@
 import React from "react";
-import { Children } from "react";
 import { Navigate } from "react-router-dom";
 
 export const PrivatRoute = ({ children }) =>{
@@ -7,7 +6,6 @@ export const PrivatRoute = ({ children }) =>{
 };
 
 export function convertPercentagetoLigtness(num){
-    // console.log(`percentage is ${num}`)
     return( 30+ num*55/100) ///frist was  60 - num*55/100)
 }
 
@@ -43,13 +41,10 @@ export function timeStringToFloat(time) {
   return hours + minutes / 60;
 }
 export function convertTime(time) {
-  // Split the time string into individual components
   const [hours, minutes, seconds] = time.split(':');
 
-  // Convert the hours string to a number
   const hoursNum = parseInt(hours);
 
-  // Combine the hours and minutes into the final string
   const finalTime = `${hoursNum}:${minutes}`;
 
   return finalTime;

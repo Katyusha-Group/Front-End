@@ -1,5 +1,4 @@
 export function ConfirmPasCloseEyeIcon() {
-    // toggle the type attribute
     const toggleConfirmPassword = document.querySelector(
       "#toggleConfirmPassword"
     );

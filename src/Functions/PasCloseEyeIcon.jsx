@@ -1,5 +1,4 @@
 export function PasCloseEyeIcon() {
-    // toggle the type attribute
     const togglePassword = document.querySelector("#togglePassword");
     const passwordV = document.querySelector("#password_field");
     const type = passwordV.getAttribute("type") === "password" ? "text" : "password";

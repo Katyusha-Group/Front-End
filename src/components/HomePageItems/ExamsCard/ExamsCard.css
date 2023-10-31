@@ -98,7 +98,6 @@ td{
 option{
     background:#2b3553!important;
 }
-/* warning !! style effects all scrolls in project */
 ::-webkit-scrollbar {
    background-color: #2b3553;
 }
