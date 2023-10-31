@@ -15,7 +15,7 @@ import {
   CardFooter,
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-import * as style from  "./Shopping.module.css";
+import * as style from  "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
   showLoading,

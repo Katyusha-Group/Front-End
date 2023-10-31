@@ -21,6 +21,7 @@ import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 import * as style from "../../assets/css/UserPage.module.css"
+import * as shopStyle from "../../assets/css/Shopping.module.css"
 
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
@@ -31,7 +32,7 @@ const ModalShopping = (props) => {
     props.order.contain_telegram == "C" ? true : false
   );
   const [sms, setSms] = React.useState(false);
-  const [enableBotton, setEnableBotton] = React.useState(false);
+  const [enableButton, setEnableButton] = React.useState(false);
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
@@ -162,8 +163,8 @@ const ModalShopping = (props) => {
                 </Row>
                 <Col className="m-auto text-center category">
                   <Form className="d-flex justify-content-center">
-                    <FormGroup className={style.shopping_form_userpage} check>
-                      <Label check className="shoping_label">
+                    <FormGroup className={shopStyle.shopping_label} check>
+                      <Label check className={style.shopping_label}>
                         <Input
                           onChange={() => {
                             if (props.order.contain_email != "O") {
@@ -182,11 +183,11 @@ const ModalShopping = (props) => {
                       </Label>
                     </FormGroup>
                     <FormGroup
-                      className={style.shopping_form_userpage}
+                      className={shopStyle.shopping_label}
                       check
                       disabled
                     >
-                      <Label check className="shoping_label">
+                      <Label check className={style.shopping_label}>
                         <Input checked={false} type="checkbox" />
                         <span className="form-check-sign">
                           <span className="check" />
@@ -194,8 +195,8 @@ const ModalShopping = (props) => {
                         sms
                       </Label>
                     </FormGroup>
-                    <FormGroup className={style.shopping_form_userpage} check>
-                      <Label check className="shoping_label">
+                    <FormGroup className={shopStyle.shopping_label} check>
+                      <Label check className={style.shopping_label}>
                         <Input
                           checked={
                             props.order.contain_telegram == "O"
