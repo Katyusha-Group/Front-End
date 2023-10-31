@@ -2,6 +2,7 @@ import React from "react";
 import { apis } from "../../assets/apis"
 import {timeStringToFloat} from "../../Functions/timeStringToFloat"
 import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
+import * as style from "../../assets/css/UserPage.module.css"
 let defu = 13.3;
 let length = 17.1;
 let top_right = 9.6;
@@ -43,7 +44,7 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
           <div key={lessonBoxId}>
             <div
               id={lessonBoxId}
-              className={`course text-center ${classNameHover} course-hover`}
+              className={`${style.course} text-center ${classNameHover} ${style.courseـhover}`}
               style={{
                 top: `${defu + length * lesson.course_day}%`, 
                 right: `${top_defu + top_right * time}%`,
@@ -65,7 +66,7 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
               }
             >
               <button
-                className="lesson_button"
+                className={style.lesson_button}
                 onClick={() => {
                   addNewLesson(lessons.complete_course_number);
                   changeInfo(
@@ -103,7 +104,7 @@ export function lessons(infoState, changeInfoState, getapi, classNameHover,showL
                   <br />
                   {lessons.registered_count} از {lessons.capacity}
                   <br />
-                  <p className="id_code"> {lessons.complete_course_number}</p>
+                  <p className={style.id_code}> {lessons.complete_course_number}</p>
                 </div>
               </div>
             </div>

@@ -2,26 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import "./SummaryChart.css";
 import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  Form,
-  FormGroup,
-  Input,
   Table,
-  Row,
-  Col,
-  UncontrolledTooltip,
 } from "reactstrap";
-// import * as chart from "../../assets/img/schedule_table.png"
 export default function SummaryChart(props) {
   function summar(data) {
     return data.map((table_row, index) => (

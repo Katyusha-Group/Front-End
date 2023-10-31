@@ -20,6 +20,8 @@ import {
 import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
+import * as style from "../../assets/css/UserPage.module.css"
+
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
   const [email, setEmail] = React.useState(
@@ -160,7 +162,7 @@ const ModalShopping = (props) => {
                 </Row>
                 <Col className="m-auto text-center category">
                   <Form className="d-flex justify-content-center">
-                    <FormGroup className="shopping_form_userpage" check>
+                    <FormGroup className={style.shopping_form_userpage} check>
                       <Label check className="shoping_label">
                         <Input
                           onChange={() => {
@@ -180,7 +182,7 @@ const ModalShopping = (props) => {
                       </Label>
                     </FormGroup>
                     <FormGroup
-                      className="shopping_form_userpage"
+                      className={style.shopping_form_userpage}
                       check
                       disabled
                     >
@@ -192,7 +194,7 @@ const ModalShopping = (props) => {
                         sms
                       </Label>
                     </FormGroup>
-                    <FormGroup className="shopping_form_userpage" check>
+                    <FormGroup className={style.shopping_form_userpage} check>
                       <Label check className="shoping_label">
                         <Input
                           checked={

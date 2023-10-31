@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Card, CardBody, Row, Col } from "reactstrap";
-import "./UserPage.css";
+// import "./UserPage.css";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
@@ -18,7 +18,7 @@ import { getShopData } from "../../Functions/getData/getShopData";
 import { addNewLesson } from "../../Functions/addNewLesson";
 import CourseGroupCard from "../../components/Userpage/CourseGroupCard";
 import CardFooterChart from "../../components/Userpage/CardFooterChart";
-
+import * as style from "../../assets/css/UserPage.module.css"
 
 export default function UserPage() {
   const { info, changeInfo } = useInfo();
@@ -71,11 +71,11 @@ export default function UserPage() {
     <>
       <Row>
         <Col className="" sm="12">
-          <Card className="week-card card-body">
-            <CardBody className="week-card-body">
+          <Card className={`${style.week_card} card-body`}>
+            <CardBody className={style.week_card_body}>
               <div className="">
                 <div
-                  className="chart"
+                  className={style.chart}
                   style={{
                     display: bigChartData == "data1" ? "block" : "none",
                   }}
@@ -94,7 +94,7 @@ export default function UserPage() {
                     showCourseHover,
                     setShowCourseHoverFunc,
                     false,
-                    "classNameHover",
+                    style.classNameHover,
                     showLoading,
                     closeLoading
                   )}

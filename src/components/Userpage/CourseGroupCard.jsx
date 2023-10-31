@@ -12,6 +12,8 @@ import {
 import fullLogo from "../../assets/img/full.png";
 import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
 import { useInfo } from "../../contexts/InfoContext";
+import * as style from "../../assets/css/UserPage.module.css"
+
 export default function CourseGroupCard({
   convertPercentagetoLigtness,
   setShowCourseHoverFunc,
@@ -32,17 +34,17 @@ export default function CourseGroupCard({
   }
   return (
     <Col sm="12">
-      <Card className="dir-right groups_card" style={{ marginBottom: "0" }}>
-        <CardBody className="courseGroupCard">
+      <Card className={`${style.dir_right} groups_card`} style={{ marginBottom: "0" }}>
+        <CardBody className={style.courseGroupCard}>
           {info.loading == 0 ? (
             "گروهی انتخاب نشده"
           ) : info.loading == 1 ? (
             <Spinner />
           ) : (
             info.courseGroupsListInContext.map((x, index) => (
-              <div className="coursCardContainer" key={index}>
+              <div className={style.coursCardContainer} key={index}>
                 <Card
-                  className="courseCard"
+                  className={style.courseCard}
                   key={index}
                   style={{
                     backgroundColor:
@@ -76,13 +78,13 @@ export default function CourseGroupCard({
                     }
                   }}
                 >
-                  <CardBody className="courseCardBody">
+                  <CardBody className={style.courseCardBody}>
                     <img
-                      className="professorImage"
+                      className={style.professorImage}
                       src={x.teachers[0].teacher_image}
                       alt="professorImage"
                     />
-                    <div className="infoPart">
+                    <div className={style.infoPart}>
                       <p
                         style={{ textAlign: "right" }}
                         title={`${x.name} (گروه ${x.group_number})`}
@@ -108,13 +110,13 @@ export default function CourseGroupCard({
                               .join(" , ")}`.slice(0, 35) + "..."}
                       </p>
 
-                      <div className="courseCardDownSide">
+                      <div className={`${style.courseCardDownSide}`}>
                         <p>
                           ثبت نام شده: {x.registered_count} از {x.capacity}{" "}
                         </p>
 
                         <img
-                          className="fullLogo"
+                          className={style.fullLogo}
                           src={fullLogo}
                           alt="fullLogo"
                           style={{
@@ -128,9 +130,9 @@ export default function CourseGroupCard({
                     </div>
                   </CardBody>
                 </Card>
-                <div className="buttonBar">
+                <div className={style.buttonBar}>
                   <Button
-                    className="courseCardButton"
+                    className={`${style.courseCardButton}`}
                     variant="secondary"
                     size="sm"
                     style={{
@@ -154,7 +156,7 @@ export default function CourseGroupCard({
                     <i className="tim-icons icon-badge ml-0" />
                   </Button>
                   <Button
-                    className="courseCardButton"
+                    className={`${style.courseCardButton}`}
                     variant="secondary"
                     size="sm"
                     style={{

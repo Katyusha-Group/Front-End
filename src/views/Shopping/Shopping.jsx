@@ -22,6 +22,7 @@ import {
 } from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
+import * as UserPageStyle from "../../assets/css/UserPage.module.css"
 function Shopping() {
   const { info, changeInfo } = useInfo();
   const [state, setState] = React.useState([]);
@@ -320,7 +321,7 @@ function Shopping() {
                       >
                         <Col className="m-auto">
                           <img
-                            className="professorImage"
+                            className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
                                 ? x.course.teachers[0].teacher_image

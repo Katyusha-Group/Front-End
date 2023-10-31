@@ -1,18 +1,16 @@
-.table{
-    margin: 1rem 0;
+.table {
+  margin: 1rem 0;
 }
-.summary-table{
-    overflow: auto !important;
-    max-height: 380px !important;
+.summary-table {
+  overflow: auto !important;
+  max-height: 380px !important;
 }
-.table td{
-    /* border-right: none; */
-    border-bottom: none;
+.table td {
+  border-bottom: none;
 }
-.dir-left{
-    direction: ltr;
+.dir-left {
+  direction: ltr;
 }
 ::-webkit-scrollbar-corner {
-    background: rgba(0,0,0,0);
-  }
-  
+  background: rgba(0, 0, 0, 0);
+}
