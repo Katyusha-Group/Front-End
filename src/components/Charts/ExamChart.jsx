@@ -31,9 +31,11 @@ export default function ExamChart() {
   React.useEffect(() => {
     const courses = info.courseChoosed.map(course => new Course(course, true));
     setExamTable(courses);
+    ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")    // Uniquify
     let ExamTimes = courses.map(course => course.exam_times[0].date);
-    // Remove Indexes appearing at the beginning of the dates
-    ExamTimes = ExamTimes.map((item) => item.substring(item.length - 8));
+    ExamTimes = ExamTimes.map((item) => item.substring(item.length - 8)); // Remove Indexes appearing at the beginning of the dates
+    ExamTimes = [...new Set(ExamTimes)];                                  // Uniquify
+    ExamTimes = ExamTimes.sort();                                         // Sort
     setExamDates(ExamTimes)
     console.log ("Exam time is: " + ExamTimes);
   }, [info.courseChoosed]);
@@ -49,13 +51,8 @@ export default function ExamChart() {
     }
   }
 
-  ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
-  // ExamDates = uniquifyArrayByKey(ExamDates, Exam)
-  
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     const numSections = ExamDates.length;
-    console.log ("Number of sections is: " + numSections)
-    
     const emptySection = () => ({
       0: null,
       1: null,
@@ -64,7 +61,6 @@ export default function ExamChart() {
       4: null,
       5: null
     });
-  
     const emptyTime = (numSections) => {
       const sections = {};
       for (let i = 0; i < numSections; i++) {
@@ -72,8 +68,8 @@ export default function ExamChart() {
       }
       return sections;
     };
-    console.log("Number of sections made is: " + emptyTime)
-    const NumInEachSlot = Create2DArray(6, 22);
+
+    const NumInEachSlot = Create2DArray(6, numSections);
 
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
@@ -100,17 +96,12 @@ export default function ExamChart() {
         let time = MapTimeToIndex(ExamTime);
         let day = MapDateToIndex(ExamDay, ExamDates);
         console.log("Mapped date is: " + day);
-        
-        // setExamDates((prevExamDates) => [...prevExamDates, day]);
-
-        // console.log("Pushed " + day + " to temp");
         try
         {
           NumInEachSlot[time][day] ++;
         }
         catch 
         {
-          // console.log("Second Error");
           return lessonsKeyedByDayAndPeriod;
         }
 

@@ -73,7 +73,7 @@ export function MapDateToIndex (date, ExamDates)
     // }
     // return DateIndex;
     console.log ("Exam dates are: "  + ExamDates)
-    return ExamDates.findIndex(day => day === date)
+    return ExamDates.findIndex(day => date.includes(day))
 }
 
 // export function DatesList (date)
