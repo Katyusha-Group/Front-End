@@ -1,6 +1,6 @@
-export function mapTimeToIndex (InputTime) 
+export function mapTimeToIndex (InputTime, IsExam) 
 {
-    const timeRanges = [
+    const timeRanges_Class = [
         ["07:30:00", "09:00:00"],
         ["09:00:01", "10:30:00"],
         ["10:30:01", "12:00:00"],
@@ -11,12 +11,33 @@ export function mapTimeToIndex (InputTime)
         ["19:00:01", "20:30:00"]
     ];
     
-    for (let i = 0; i < timeRanges.length; i++) {
-        const [start, end] = timeRanges[i];
-        if (InputTime >= start && InputTime <= end) {
-            return i;
+    const timeRanges_Exam = [
+        ["08:00:00", "10:00:00"],
+        ["10:00:01", "12:00:00"],
+        ["12:00:01", "14:00:00"],
+        ["14:00:01", "16:00:00"],
+        ["16:00:01", "18:00:00"],
+        ["18:00:01", "20:00:00"]
+    ];
+
+    if (!IsExam)
+    {
+        for (let i = 0; i < timeRanges_Class.length; i++) {
+            const [start, end] = timeRanges_Class[i];
+            if (InputTime >= start && InputTime <= end) {
+                return i;
+            }
+        }
+    }
+    else 
+    {
+        for (let i = 0; i < timeRanges_Exam.length; i++) {
+            const [start, end] = timeRanges_Exam[i];
+            if (InputTime >= start && InputTime <= end) {
+                return i;
+            }
         }
     }
 
-    return i; // Invalid Time
+    return -1; // Invalid Time
 }

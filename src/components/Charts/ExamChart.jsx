@@ -9,13 +9,13 @@ import {
 } from "reactstrap";
 
 import {
-  MapTimeToIndex,
   MapDateToIndex,
   Create2DArray,
   uniquifyArrayByKey
 } from "./ExamChart_Functions";
 
 import "./ExamChart.css"
+import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 
 export default function ExamChart() {
   // Token
@@ -93,7 +93,7 @@ export default function ExamChart() {
         let ExamTime = currentPeriod.exam_times[0].exam_start_time;
         let ExamDay = currentPeriod.exam_times[0].date;
         
-        let time = MapTimeToIndex(ExamTime);
+        let time = mapTimeToIndex(ExamTime, true);
         let day = MapDateToIndex(ExamDay, ExamDates);
         console.log("Mapped date is: " + day);
         try
