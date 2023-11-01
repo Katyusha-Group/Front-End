@@ -1,0 +1,29 @@
+.tweet {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #1da1f2;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .text {
+    margin-top: 10px;
+    word-wrap: break-word;
+  }
+  
+  /* Add more styles as needed */
+  

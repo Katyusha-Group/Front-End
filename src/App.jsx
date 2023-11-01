@@ -30,6 +30,7 @@ import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
+import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 
 function App() {
   document.documentElement.dir = "rtl";
@@ -110,6 +111,9 @@ function App() {
                 }></Router.Route>
               <Router.Route path="/profile" element={
                     <Profile />
+                }></Router.Route>
+              <Router.Route path="/timeline" element={
+                    <Timelinepage />
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>

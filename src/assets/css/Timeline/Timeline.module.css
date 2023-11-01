@@ -1,0 +1,40 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+.tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.tweet {
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #e1e8ed;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.activeTab {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1da1f2;
+  color: red;
+}
+.tab {
+    
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+
+  background-color: #1da1f2;
+  color: red;
+}
+
+/* Add more styles as needed */
