@@ -2,7 +2,8 @@ import {
     FormGroup,
     Input,
 } from "reactstrap";
-export function PasswordFormGroup({value, onChange, error,onClick}) {
+import * as style from "../css/SignUp.module.css";
+export function PasswordFormGroup({ value, onChange, error, onClick }) {
     return (
         <FormGroup className="text-right">
             <label>رمز عبور</label>
@@ -16,7 +17,7 @@ export function PasswordFormGroup({value, onChange, error,onClick}) {
                 value={value}
             ></Input>
             <i
-                className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                className={`tim-icons fa fa-eye-slash ${style.viewpass} mr-4 text-muted`}
                 onClick={onClick}
                 id="togglePassword"
             ></i>

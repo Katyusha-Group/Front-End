@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
-import "../assets/css/SignUp.css";
+import * as style from  "../assets/css/SignUp.module.css";
 import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -206,50 +206,21 @@ function SignUp() {
                     <Form >
                       <Row>
                         <Col md="12">
-                          <EmailFormGroup value={formData.email} onChange={handleChange} error={errorMessage.emailError}></EmailFormGroup>
-                          {/* <FormGroup className="text-right">
-                            <label htmlFor="exampleInputEmail1">ایمیل</label>
-                            <Input
-                              className="text-right"
-                              placeholder="ایمیل خود را وارد کنید"
-                              type="email"
-                              name="email"
-                              onChange={handleChange}
-                              value={formData.email}
-                            />
-                            {errorMessage.emailError && (
-                              <div className="error" >
-                                {errorMessage.emailError}
-                              </div>
-                            )}
-                          </FormGroup> */}
+                          <EmailFormGroup
+                            value={formData.email}
+                            onChange={handleChange}
+                            error={errorMessage.emailError}>
+                          </EmailFormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col md="12">
-                        <PasswordFormGroup value={formData.password} onChange={handleChange} error={errorMessage.passError} onClick={PasCloseEyeIcon}></PasswordFormGroup>
-                          {/* <FormGroup className="text-right">
-                            <label>رمز عبور</label>
-                            <Input
-                              className="text-right"
-                              placeholder="رمز عبور را وارد کنید"
-                              type="password"
-                              name="password"
-                              id="password_field"
-                              onChange={handleChange}
-                              value={formData.password}
-                            ></Input>
-                            <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={PasCloseEyeIcon}
-                              id="togglePassword"
-                            ></i>
-                            {errorMessage.passError && (
-                              <div className="error">
-                                {errorMessage.passError}
-                              </div>
-                            )}
-                          </FormGroup> */}
+                          <PasswordFormGroup
+                            value={formData.password}
+                            onChange={handleChange}
+                            error={errorMessage.passError}
+                            onClick={PasCloseEyeIcon}>
+                          </PasswordFormGroup>
                         </Col>
                       </Row>
                       <Row>
@@ -266,7 +237,7 @@ function SignUp() {
                               value={formData.passwordConfirm}
                             />
                             <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
+                              className={`tim-icons fa fa-eye-slash ${style.viewpass} mr-4 text-muted`}
                               onClick={ConfirmPasCloseEyeIcon}
                               id="toggleConfirmPassword"
                             ></i>
