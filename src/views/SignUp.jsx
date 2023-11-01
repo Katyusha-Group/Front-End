@@ -204,7 +204,26 @@ function SignUp() {
                   </CardHeader>
                   <CardBody>
                     <Form >
-                      <Row>
+                    <Row>
+                        <Col md="12">
+                          <FormGroup className="text-right">
+                            <label htmlFor="exampleInputEmail1">نام پروفایل</label>
+                            <Input
+                              className="text-right"
+                              placeholder="نام پروفایل خود را وارد کنید"
+                              type="text"
+                              name="profileName"
+                              onChange={handleChange}
+                              value={formData.email}
+                            />
+                            {errorMessage.emailError && (
+                              <div className="error" >
+                                {errorMessage.emailError}
+                              </div>
+                            )}
+                          </FormGroup>
+                        </Col>
+                      </Row><Row>
                         <Col md="12">
                           <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
