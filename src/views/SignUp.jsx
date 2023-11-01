@@ -24,6 +24,7 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
 
 function SignUp() {
   const Navigate = useNavigate();
@@ -226,7 +227,8 @@ function SignUp() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
+                        <PasswordFormGroup value={formData.password} onChange={handleChange} error={errorMessage.passError} onClick={PasCloseEyeIcon}></PasswordFormGroup>
+                          {/* <FormGroup className="text-right">
                             <label>رمز عبور</label>
                             <Input
                               className="text-right"
@@ -247,7 +249,7 @@ function SignUp() {
                                 {errorMessage.passError}
                               </div>
                             )}
-                          </FormGroup>
+                          </FormGroup> */}
                         </Col>
                       </Row>
                       <Row>
