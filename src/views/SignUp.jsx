@@ -4,9 +4,9 @@ import Select from "react-select";
 import "../assets/css/SignUp.css";
 import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import {IsValidEmail} from "../Functions/IsValidEmail"
 import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
 import {ConfirmPasCloseEyeIcon} from "../Functions/ConfirmPasCloseEyeIcon"
@@ -26,7 +26,6 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const { info, changeInfo } = useInfo();
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -206,7 +205,8 @@ function SignUp() {
                     <Form >
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
+                          <EmailFormGroup value={formData.email} onChange={handleChange} error={errorMessage.emailError}></EmailFormGroup>
+                          {/* <FormGroup className="text-right">
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             <Input
                               className="text-right"
@@ -221,7 +221,7 @@ function SignUp() {
                                 {errorMessage.emailError}
                               </div>
                             )}
-                          </FormGroup>
+                          </FormGroup> */}
                         </Col>
                       </Row>
                       <Row>
