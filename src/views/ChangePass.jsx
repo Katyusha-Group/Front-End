@@ -1,6 +1,4 @@
 import React from "react";
-import routes from "../route.jsx";
-import { useInfo } from "../contexts/InfoContext.jsx";
 import * as style from "../assets/css/SignUp.module.css";
 import {
   Button,
@@ -23,13 +21,14 @@ import Swal from "sweetalert2";
 import { apis } from "../assets/apis.js";
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon.jsx";
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon.jsx";
-import { newPasCloseEyeIcon } from "../Functions/newPasCloseEyeIcon.jsx";
-import { isValidPassword } from "../Functions/isValidPassword.jsx";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
+import { OldPasCloseEyeIcon } from "../Functions/OldPasCloseEyeIcon.jsx";
 function ChangePassword() {
   const [formData, setFormData] = useState({
     oldPassword: "",
-    newPassword: "",
-    newPasswordConfirm: "",
+    password: "",
+    passwordConfirm: "",
   });
 
   function handleChange(event) {
@@ -62,14 +61,14 @@ function ChangePassword() {
     if (formData.oldPassword.trim().length === 0) {
       errors.oldPassError = "!وارد کردن رمز عبور الزامی است";
     }
-    if (formData.newPassword.length < 8 && formData.newPassword) {
+    if (formData.password.length < 8 && formData.password) {
       errors.passError = "!رمز عبور باید حداقل شامل هشت کاراکتر باشد";
     }
-    if (formData.newPasswordConfirm.trim().length === 0) {
+    if (formData.passwordConfirm.trim().length === 0) {
       errors.passErrorRep = "!وارد کردن تکرار رمز عبور الزامی است";
     }
     if (
-      formData.newPassword !== formData.newPasswordConfirm &&
+      formData.password !== formData.passwordConfirm &&
       !errors.passError &&
       !errors.passErrorRep
     ) {
@@ -98,9 +97,9 @@ function ChangePassword() {
       },
 
       body: JSON.stringify({
-        new_password1: formData.newPasswordConfirm,
+        new_password1: formData.passwordConfirm,
         old_password: formData.oldPassword,
-        new_password: formData.newPassword,
+        new_password: formData.password,
       }),
     });
     const data = await response.json();
@@ -138,14 +137,14 @@ function ChangePassword() {
                     placeholder="رمز عبور فعلی را وارد کنید"
                     type="password"
                     name="oldPassword"
-                    id="password_field"
+                    id="old_password_field"
                     onChange={handleChange}
                     value={formData.oldPassword}
                   />
                   <i
-                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                    onClick={PasCloseEyeIcon}
-                    id="togglePassword"
+                    className={`tim-icons fa fa-eye-slash ${style.viewpass} mr-4 text-muted`}
+                    onClick={OldPasCloseEyeIcon}
+                    id="oldTogglePassword"
                   ></i>
                   {errorMessage.oldPassError && (
                     <div className="error">{errorMessage.oldPassError}</div>
@@ -163,44 +162,19 @@ function ChangePassword() {
                 </FormGroup>
               </Col>
               <Col className="text-right" md="6">
-                <FormGroup>
-                  <label>رمز عبور جدید</label>
-                  <Input
-                    placeholder="رمز عبور جدید را وارد کنید"
-                    type="password"
-                    name="newPassword"
-                    id="newpassword_field"
-                    onChange={handleChange}
-                    value={formData.newPassword}
-                  />
-                  <i
-                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                    onClick={newPasCloseEyeIcon}
-                    id="newtogglePassword"
-                  ></i>
-                  {errorMessage.passError && (
-                    <div className="error">{errorMessage.passError}</div>
-                  )}
-                </FormGroup>
-                <FormGroup>
-                  <label>تکرار رمز عبور جدید</label>
-                  <Input
-                    placeholder="رمز عبور جدید را دوباره وارد کنید"
-                    type="password"
-                    name="newPasswordConfirm"
-                    id="confirm_password_field"
-                    onChange={handleChange}
-                    value={formData.newPasswordConfirm}
-                  />
-                  <i
-                    className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                    onClick={ConfirmPasCloseEyeIcon}
-                    id="toggleConfirmPassword"
-                  ></i>
-                  {errorMessage.passErrorRep && (
-                    <div className="error">{errorMessage.passErrorRep}</div>
-                  )}
-                </FormGroup>
+                <PasswordFormGroup
+                  value={formData.password}
+                  onChange={handleChange}
+                  error={errorMessage.passError}
+                  onClick={PasCloseEyeIcon}>
+                </PasswordFormGroup>
+
+                <ConfirmPasswordFormGroup
+                  value={formData.passwordConfirm}
+                  onChange={handleChange}
+                  error={errorMessage.passErrorRep}
+                  onClick={ConfirmPasCloseEyeIcon}>
+                </ConfirmPasswordFormGroup>
               </Col>
             </Row>
           </Form>
