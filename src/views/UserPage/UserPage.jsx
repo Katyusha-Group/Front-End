@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 import { Card, CardBody, Row, Col } from "reactstrap";
-// import "./UserPage.css";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
@@ -63,7 +62,7 @@ export default function UserPage() {
   });
   const [modalData, setModalData] = React.useState([]);
 
-  function setShowCourseHoverFunc(name, value) {
+  const setShowCourseHoverFunc = (name, value) => {
     setShowCourseHover((info) => ({ [name]: value }));
   }
 
