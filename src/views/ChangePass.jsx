@@ -43,7 +43,6 @@ function ChangePassword() {
     oldPassError: "",
     passError: "",
     passErrorRep: "",
-    backError: "",
   });
 
   async function handleSubmit(event) {
@@ -54,18 +53,17 @@ function ChangePassword() {
         oldPassError: "",
         passError: "",
         passErrorRep: "",
-        backError: "",
       },
     ];
 
     if (formData.oldPassword.trim().length === 0) {
-      errors.oldPassError = "!وارد کردن رمز عبور الزامی است";
+      errors.oldPassError = "!وارد کردن رمز عبور فعلی الزامی است";
     }
-    if (formData.password.length < 8 && formData.password) {
-      errors.passError = "!رمز عبور باید حداقل شامل هشت کاراکتر باشد";
+    if (formData.password.trim().length === 0) {
+      errors.passError = "!وارد کردن رمز عبور جدید الزامی است";
     }
     if (formData.passwordConfirm.trim().length === 0) {
-      errors.passErrorRep = "!وارد کردن تکرار رمز عبور الزامی است";
+      errors.passErrorRep = "!وارد کردن تکرار رمز عبور جدید الزامی است";
     }
     if (
       formData.password !== formData.passwordConfirm &&
@@ -107,17 +105,21 @@ function ChangePassword() {
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "رمز عبور با موفقیت تغیر کرد   ",
+        title: "رمز عبور با موفقیت تغییر کرد",
         background: "#3c3e5d",
         color: "#ceccc0",
-        width: "25rem",
+        width: "26rem",
         confirmButtonText: "باشه",
       });
     } else {
-      errors.backError = "!رمز عبور قابل قبول نیست";
-      setErrorMessage({
-        ...errorMessage,
-        backError: errors.backError,
+      Swal.fire({
+        icon: "error",
+        title: "رمز عبور اشتباه است!",
+        background: "#3c3e5d",
+        color: "#ceccc0",
+        width: "25rem",
+        direction: "ltr",
+        confirmButtonText: "باشه",
       });
     }
   }
@@ -147,7 +149,7 @@ function ChangePassword() {
                     id="oldTogglePassword"
                   ></i>
                   {errorMessage.oldPassError && (
-                    <div className="error">{errorMessage.oldPassError}</div>
+                    <div className={style.error}>{errorMessage.oldPassError}</div>
                   )}
                 </FormGroup>
                 <FormGroup>

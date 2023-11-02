@@ -22,6 +22,7 @@
   height: 1px;
   position: relative;
   top: -10px;
+  direction: ltr;
 }
 
 .selectError {
