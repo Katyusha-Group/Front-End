@@ -3,9 +3,10 @@ import Tweet from './Tweet';
 import styles from '../../assets/css/Timeline/Timeline.module.css';
 import { useState } from 'react';
 
+
 const tweets = [
-  { id: 1, text: 'Hello Twitter!', username: 'jett White',name: 'جت وایت' },
-  { id: 2, text: 'This is a tweet.', username: 'white Jett',name: 'وایت جت' },
+  { id: 1, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
+  { id: 2, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
   // Add more tweets as needed
 ];
 
@@ -17,19 +18,20 @@ function Timeline() {
   };
 
   return (
+    <>
     <div className={styles.timeline}>
       <div className={styles.tabs}>
         <button
           className={activeTab === 'tweets' ? styles.activeTab : styles.tab}
           onClick={() => handleTabClick('tweets')}
         >
-          Tweets
+          دنبال کننده ها
         </button>
         <button
           className={activeTab === 'media' ? styles.activeTab : styles.tab}
           onClick={() => handleTabClick('media')}
         >
-          Media
+          برای شما
         </button>
       </div>
       <div className={styles.content}>
@@ -47,7 +49,8 @@ function Timeline() {
         )}
       </div>
     </div>
+    </>
   );
-}
+  }
 
 export default Timeline;

@@ -1,47 +1,57 @@
 .timeline {
   display: flex;
   flex-direction: column;
+  margin-top: 100px;
+  width: 65vw;
+  min-height: 100vh;
+  height: fit-content;
+  margin: 100px auto;
+  border-radius: 15px;
+  background-color: #272A3D;
 }
 .tabs {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 800px;
   margin: 0 auto;
+  
 
-  /* background-color: #373C57; */
+  background-color: #373C57; */
+  border-radius: 15px;
+
 }
 .tweet {
-  display: flex;
+  /* display: flex;
   background-color: #ffffff;
   border: 1px solid #e1e8ed;
   margin: 10px;
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 800px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 800px; */ 
 }
 .tweetContainer{
-  width: 800px;
+  /*  width: 800px; */
 }
 .activeTab {
-  width: 400px;
+  width: 20vw;
   height: 40px;
   border: none;
-  /* border-bottom: 3px solid #67539E ; */
-  background-color: #373c57;
+  border-bottom: 3px solid #67539E ;
+  background-color: #272A3D;
   color: white;
-  text-decoration: underline 3px #67539E dashed ;
 }
 
 .tab {
-  width: 400px;
+  width: 20vw;
   height: 40px;
   border: none;
-  background-color: #373c57;
+  background-color: #272A3D;
   color: white;
+  margin: 30px 20px;
 }
 
 /* Add more styles as needed */

@@ -7,7 +7,7 @@ function Tweet({ tweet }) {
       <div className={styles.header}>
         <div className={styles.avatar}></div>
         <div className={styles.name}>{tweet.name}</div>
-        <div className={styles.username}>@{tweet.username}</div>
+        {/* <div className={styles.username}>@{tweet.username}</div> */}
       </div>
       <div className={styles.content}>
         <div className={styles.text}>{tweet.text}</div>
