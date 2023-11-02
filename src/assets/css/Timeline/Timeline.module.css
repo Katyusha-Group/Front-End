@@ -2,12 +2,16 @@
   display: flex;
   flex-direction: column;
 }
-.tabs{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 800px;
+  margin: 0 auto;
+
+  /* background-color: #373C57; */
 }
 .tweet {
   display: flex;
@@ -17,24 +21,27 @@
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 800px;
+}
+.tweetContainer{
+  width: 800px;
 }
 .activeTab {
-  width: 100px;
+  width: 400px;
   height: 40px;
-  border-radius: 10px;
   border: none;
-  background-color: #1da1f2;
-  color: red;
+  /* border-bottom: 3px solid #67539E ; */
+  background-color: #373c57;
+  color: white;
+  text-decoration: underline 3px #67539E dashed ;
 }
-.tab {
-    
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;
 
-  background-color: #1da1f2;
-  color: red;
+.tab {
+  width: 400px;
+  height: 40px;
+  border: none;
+  background-color: #373c57;
+  color: white;
 }
 
 /* Add more styles as needed */

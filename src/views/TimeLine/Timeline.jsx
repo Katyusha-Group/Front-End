@@ -4,8 +4,8 @@ import styles from '../../assets/css/Timeline/Timeline.module.css';
 import { useState } from 'react';
 
 const tweets = [
-  { id: 1, text: 'Hello Twitter!', username: 'user1' },
-  { id: 2, text: 'This is a tweet.', username: 'user2' },
+  { id: 1, text: 'Hello Twitter!', username: 'jett White',name: 'جت وایت' },
+  { id: 2, text: 'This is a tweet.', username: 'white Jett',name: 'وایت جت' },
   // Add more tweets as needed
 ];
 
