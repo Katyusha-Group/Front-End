@@ -11,8 +11,9 @@
   opacity: 80% !important;
 }
 
-.card {
+.cardStyle {
   border-radius: 0.3rem !important;
+  direction: ltr !important;
 }
 
 .error {
@@ -27,11 +28,11 @@
   margin-top: 10px;
   color: red;
   font-size: smaller;
-  white-space: 'nowrap' !important;
+  white-space: nowrap !important;
 }
 
 .backError {
-  direction: ltr;
+  direction: ltr !important;
   background-color: #e14eca;
   border-radius: 1.3rem;
   color: #ffffff;
@@ -39,6 +40,7 @@
   margin-bottom: 1rem;
   border-radius: 0.2857rem;
   text-align: center !important;
+  white-space: nowrap !important;
 }
 
 .signUpContainer {

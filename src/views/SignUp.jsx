@@ -196,9 +196,9 @@ function SignUp() {
             <Row className="justify-content-center">
               <Col className="text-right" md="4" >
                 {errorMessage.backError && (
-                  <div className={style.backError} style={{ direction: 'ltr', whiteSpace: 'nowrap' }}>{errorMessage.backError}</div>
+                  <div className={style.backError}>{errorMessage.backError}</div>
                 )}
-                <Card style={{ direction: 'ltr' }}>
+                <Card className={style.cardStyle}>
                   <CardHeader>
                     <h5 className="title text-center">ثبت نام</h5>
                   </CardHeader>
@@ -287,7 +287,7 @@ function SignUp() {
                             />
 
                             {errorMessage.genderError && (
-                              <div className={style.selectError} style={{ whiteSpace: 'nowrap' }}>
+                              <div className={style.selectError}>
                                 {errorMessage.genderError}
                               </div>
                             )}
@@ -320,7 +320,7 @@ function SignUp() {
             </Row>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }
