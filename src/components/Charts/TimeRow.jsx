@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
-import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import "./ExamChart.css"
 var weekday = new Array(7);
 weekday[0] = "شنبه";
@@ -10,13 +8,8 @@ weekday[3] = "سه‌شنبه";
 weekday[4] = "چهارشنبه";
 weekday[5] = "پنج‌شنبه";
 weekday[6] = "جمعه";
-function timeStringToFloat(time) {
-  var hoursMinutes = time.split(/[.:]/);
-  var hours = parseInt(hoursMinutes[0], 10);
-  var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-  return hours + minutes / 60;
-}
 
+import {timeStringToFloat} from "../../Functions/timeStringToFloat"
 
 function DayPeriod (Input) {
   const [hoveredCourse, setHoveredCourse] = useState(null);
