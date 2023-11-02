@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { verificationApi } from "../../components/LessonSidebar/ApiCalls";
 import "./Verification.css";
@@ -30,7 +30,6 @@ function Verification() {
 
   const Navigate = useNavigate();
   const { info, changeInfo } = useInfo();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     codeError: "",
   });

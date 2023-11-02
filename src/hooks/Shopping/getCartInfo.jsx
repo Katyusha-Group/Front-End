@@ -21,6 +21,7 @@ export const getCartInfo = () => {
         setState(data.items);
         setTotalPrice(data.total_price);
         setAmount(data.total_number);
+        closeLoading();
       })
       .catch((error) => console.error(error));
     closeLoading();
@@ -29,7 +30,6 @@ export const getCartInfo = () => {
   useEffect(() => {
     showLoading();
     getCartInfo()
-    closeLoading();
   }, []);
   return {state,setState, amount, setAmount, totalPrice, setTotalPrice};
 };

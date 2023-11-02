@@ -5,8 +5,6 @@ import { forgetPasswordVerificationApi } from "../../components/LessonSidebar/Ap
 import "./Verification.css"
 import { useInfo } from "../../contexts/InfoContext";
 import { closeLoading, showLoading } from "../../components/LoadingAlert/LoadingAlert";
-// import axios from "axios";
-// reactstrap components
 import {
   Button,
   Card,
@@ -30,7 +28,6 @@ const [formData, setFormData] = useState({
 
 const Navigate = useNavigate();
 const { info, changeInfo } = useInfo();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     codeError: ""
   });
@@ -185,7 +182,6 @@ function isValidCode(code) {
                       </Row>
                     </Form>
                   </CardBody>
-                  
                   <CardFooter className="text-center">
                     <Button
                       onClick={handleSubmit}
@@ -198,7 +194,6 @@ function isValidCode(code) {
                   </CardFooter>
                   <CardBody>
                   </CardBody>
-                  
                 </Card>
               </Col>
             </Row>

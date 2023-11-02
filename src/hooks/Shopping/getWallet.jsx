@@ -16,13 +16,13 @@ export const saveWallet = () => {
       .then((response) => response.json())
       .then((data) => {
         setWallet(data.balance);
+        closeLoading();
       })
       .catch((error) => console.error(error));
   }
   useEffect(() => {
     showLoading();
     saveWallet();
-    closeLoading();
   }, []);
   return { wallet, setWallet };
 };
