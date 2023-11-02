@@ -1,3 +1,5 @@
+
+import * as style from "../css/SignUp.module.css";
 import {
     FormGroup,
     Input,
@@ -15,7 +17,7 @@ export function EmailFormGroup({value, onChange, error}) {
                 value={value}
             />
             {error && (
-                <div className="error" >
+                <div className={style.error} >
                     {error}
                 </div>
             )}

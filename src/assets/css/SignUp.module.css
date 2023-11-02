@@ -1,45 +1,46 @@
-.viewpass{
-    float: left;
-    margin-left: 18px;
-    margin-top: -47px;
-    position: relative;
-    z-index: 2;
-  }
-
-/* #togglePassword:hover{
-    cursor: pointer;
-    opacity: 80%;
-} */
+.viewpass {
+  float: left;
+  margin-left: 18px;
+  margin-top: -47px;
+  position: relative;
+  z-index: 2;
+}
 
 .viewpass:hover {
-    cursor: pointer !important;
-    opacity: 80% !important;
+  cursor: pointer !important;
+  opacity: 80% !important;
 }
-.card {
-    border-radius: 0.3rem !important;
-}
-.error{
-    color: red;
-    font-size: smaller;
-    height: 1px;
-    position: relative;
-    top : -10px;
-  }
-.select-error{
-    margin-top: 10px;
-    color: red;
-    font-size: smaller;
-}
-.back-error{
-    background-color: #e14eca;
-    border-radius: 1.3rem;
-    color: #ffffff;
-    padding: 0.5rem 1.25rem;
-    margin-bottom: 1rem;
-    border-radius: 0.2857rem;
-    text-align: center !important;
-  } 
 
-  .signUpContainer{
-    margin-top: 120px !important;
-  }
+.card {
+  border-radius: 0.3rem !important;
+}
+
+.error {
+  color: red;
+  font-size: smaller;
+  height: 1px;
+  position: relative;
+  top: -10px;
+}
+
+.selectError {
+  margin-top: 10px;
+  color: red;
+  font-size: smaller;
+  white-space: 'nowrap' !important;
+}
+
+.backError {
+  direction: ltr;
+  background-color: #e14eca;
+  border-radius: 1.3rem;
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.2857rem;
+  text-align: center !important;
+}
+
+.signUpContainer {
+  margin-top: 120px !important;
+}

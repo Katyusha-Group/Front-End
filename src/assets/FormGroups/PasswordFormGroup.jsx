@@ -22,7 +22,7 @@ export function PasswordFormGroup({ value, onChange, error, onClick }) {
                 id="togglePassword"
             ></i>
             {error && (
-                <div className="error">
+                <div className={style.error}>
                     {error}
                 </div>
             )}

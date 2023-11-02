@@ -10,7 +10,7 @@ export function ConfirmPasCloseEyeIcon() {
       ? "text"
       : "password";
 
-  toggleConfirmPassword.className === "fa fa-eye viewpass mr-4 text-muted"
+  toggleConfirmPassword.className === `fa fa-eye ${style.viewpass} mr-4 text-muted`
     ? (document.getElementById("toggleConfirmPassword").className =
       `fa fa-eye-slash ${style.viewpass} mr-4 text-muted`)
     : (document.getElementById("toggleConfirmPassword").className =
