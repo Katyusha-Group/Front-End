@@ -12,8 +12,8 @@
 } */
 
 .viewpass:hover {
-    cursor: pointer;
-    opacity: 80%;
+    cursor: pointer !important;
+    opacity: 80% !important;
 }
 .card {
     border-radius: 0.3rem !important;

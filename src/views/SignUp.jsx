@@ -237,7 +237,7 @@ function SignUp() {
                               value={formData.passwordConfirm}
                             />
                             <i
-                              className={`tim-icons fa fa-eye-slash ${style.viewpass} mr-4 text-muted`}
+                              className={`${style.viewpass} tim-icons fa fa-eye-slash mr-4 text-muted`}
                               onClick={ConfirmPasCloseEyeIcon}
                               id="toggleConfirmPassword"
                             ></i>
