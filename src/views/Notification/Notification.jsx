@@ -60,9 +60,6 @@ function UserProfile() {
     const intervalId = setInterval(fetchData, 2000);
   }, []);
 
-  useEffect(() => {
-  }, [info]);
-
   function handleChange(event) {
     const { name, value } = event.target;
     setInfo((prevFormData) => ({

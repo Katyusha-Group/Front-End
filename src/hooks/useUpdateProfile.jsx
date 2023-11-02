@@ -8,7 +8,6 @@ import {
 } from "../components/LoadingAlert/LoadingAlert";
 export const useUpdateProfile = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-
   const [info, setInfo] = useState({});
   const [orders, setOrders] = useState([]);
   useEffect(() => {
