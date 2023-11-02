@@ -6,7 +6,6 @@ import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
-import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
@@ -24,7 +23,10 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
 
 function SignUp() {
   const Navigate = useNavigate();
@@ -225,28 +227,12 @@ function SignUp() {
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label>تکرار رمز عبور</label>
-                            <Input
-                              className="text-right"
-                              placeholder="تکرار رمز عبور را وارد کنید"
-                              type="password"
-                              name="passwordConfirm"
-                              id="confirm_password_field"
-                              onChange={handleChange}
-                              value={formData.passwordConfirm}
-                            />
-                            <i
-                              className={`${style.viewpass} tim-icons fa fa-eye-slash mr-4 text-muted`}
-                              onClick={ConfirmPasCloseEyeIcon}
-                              id="toggleConfirmPassword"
-                            ></i>
-                            {errorMessage.passErrorRep && (
-                              <div className={style.error}>
-                                {errorMessage.passErrorRep}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <ConfirmPasswordFormGroup
+                            value={formData.passwordConfirm}
+                            onChange={handleChange}
+                            error={errorMessage.passErrorRep}
+                            onClick={ConfirmPasCloseEyeIcon}>
+                          </ConfirmPasswordFormGroup>
                         </Col>
                       </Row>
 

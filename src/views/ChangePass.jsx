@@ -1,7 +1,7 @@
 import React from "react";
 import routes from "../route.jsx";
 import { useInfo } from "../contexts/InfoContext.jsx";
-import "../assets/css/SignUp.css";
+import * as style from "../assets/css/SignUp.module.css";
 import {
   Button,
   Card,
