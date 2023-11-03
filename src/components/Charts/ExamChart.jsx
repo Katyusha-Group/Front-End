@@ -4,10 +4,10 @@ import { useInfo } from "../../contexts/InfoContext";
 import "../../assets/css/nucleo-icons.css";
 import TimeRow from './TimeRow';
 import { Table } from "reactstrap";
-import "./ExamChart.css"
+import * as style from "./ExamChart.module.css"
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
-
 import GeneratekeyedExamTable from "./keyedExamTable";
+
 export default function ExamChart() {
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -42,7 +42,7 @@ export default function ExamChart() {
 
   return (
     <>
-      <Table className="ExamsTable">
+      <Table className={style.ExamsTable}>
         <thead className="text-primary TableHead">
           <tr>
             <th className="table-head text-center "></th>
@@ -70,7 +70,7 @@ export default function ExamChart() {
             <th className="table-head text-center ">4</th>
           </tr>
         </thead>
-        <tbody className="ExamChartTableBody">
+        <tbody className={style.ExamChartTableBody}>
           <TimeRow ExamT="8-10"  periods={keyedExamTable[0]} />
           <TimeRow ExamT="10-12" periods={keyedExamTable[1]} />
           <TimeRow ExamT="12-14" periods={keyedExamTable[2]} />

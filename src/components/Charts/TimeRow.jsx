@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./ExamChart.css"
+import * as style from "./ExamChart.module.css"
 var weekday = new Array(7);
 weekday[0] = "شنبه";
 weekday[1] = "یکشنبه";
@@ -39,13 +39,13 @@ function DayPeriod (Input) {
     <div>
       {Object.entries(Input).map(([count, entry]) => {
         return (
-          <div className="ExamListContainer">
+          <div className={style.ExamListContainer}>
             {entry !== null && (
               <div key={entry.complete_course_number}>
-                <div  className="ExamContainer">
+                <div  className={style.ExamContainer}>
                     <div 
                       id = {entry.complete_course_number}
-                      className="exam text-center"
+                      className={`${style.exam} text-center`}
                       onClick={(e) => handleMouseOver(e, entry)}
                     >
                         <div>
@@ -57,7 +57,7 @@ function DayPeriod (Input) {
                               }
                           </strong>
                         </div>
-                        <div className="exam_hover" id={entry.complete_course_number + "x"}>
+                        <div className={style.exam_hover} id={entry.complete_course_number + "x"}>
                           <div className="dir-left">
                             {entry.complete_course_number}
                           </div>
@@ -85,11 +85,11 @@ function DayPeriod (Input) {
 const TimeRow = ({ periods, ExamT }) => {
     return (
     <>
-        <tr className="TableROW">
-        <td className="ExamsTable_column text-center" style = {{fontSize : "x-small"}}>{ExamT}</td>
+        <tr className={style.TableROW}>
+        <td className={`${style.ExamsTable_column} text-center`} style = {{fontSize : "x-small"}}>{ExamT}</td>
         {Object.entries(periods).map(([time, entry]) => {
             return (
-            <td className="ExamsTable_column2" key={time}>
+            <td className={style.ExamsTable_column2} key={time}>
                 {DayPeriod(entry)}
             </td>
             )
