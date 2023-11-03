@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import "../assets/css/SignUp.css";
+import * as style from "../assets/css/SignUp.module.css";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon";
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
 
 import {
   Button,
@@ -12,13 +14,10 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  FormGroup,
   Form,
-  Input,
   Row,
   Col,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 function SetNewPassword() {
   const Navigate = useNavigate();
@@ -35,7 +34,7 @@ function SetNewPassword() {
       [name]: value,
     }));
   }
-  
+
   const [errorMessage, setErrorMessage] = useState({
     passError: "",
     passErrorRep: "",
@@ -46,13 +45,13 @@ function SetNewPassword() {
     event.preventDefault();
 
     const errors = [
-      {      
+      {
         passError: "",
         passErrorRep: "",
         backError: "",
       },
     ];
-    
+
     if (formData.password.trim().length === 0) {
       errors.passError = "!وارد کردن رمز عبور الزامی است";
     }
@@ -79,7 +78,7 @@ function SetNewPassword() {
     });
     if (
       errors.passError ||
-      errors.passErrorRep 
+      errors.passErrorRep
     ) {
       return;
     }
@@ -90,8 +89,8 @@ function SetNewPassword() {
       timerProgressBar: true,
       showConfirmButton: false,
       background: '#3c3e5d',
-      color:'#ceccc0',
-      width:'25rem',
+      color: '#ceccc0',
+      width: '25rem',
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -100,7 +99,7 @@ function SetNewPassword() {
       if (result.dismiss === Swal.DismissReason.timer) {
       }
     })
-  
+
     const response = await fetch(`${localStorage.getItem("link")}`, {
       method: "POST",
       headers: {
@@ -108,43 +107,43 @@ function SetNewPassword() {
       },
 
       body: JSON.stringify({
-        new_password:formData.password ,
+        new_password: formData.password,
         confirm_password: formData.passwordConfirm
       }),
     });
     const data = await response.json();
     Swal.close()
-    if ( data.detail==="Password successfully changed."){
+    if (data.detail === "Password successfully changed.") {
       Swal.fire({
         icon: 'success',
         title: 'رمز عبور با موفقیت تغیر کرد   ',
         background: '#3c3e5d',
-        color:'#ceccc0',
-        width:'25rem',
-        confirmButtonText:"باشه"
+        color: '#ceccc0',
+        width: '25rem',
+        confirmButtonText: "باشه"
       })
-    Navigate("/login")
+      Navigate("/login")
     }
     else {
-        errors.backError = "!رمز عبور قابل قبول نیست";
-        setErrorMessage({
-          ...errorMessage,
-          backError: errors.backError,
-        });
+      errors.backError = "!رمز عبور قابل قبول نیست";
+      setErrorMessage({
+        ...errorMessage,
+        backError: errors.backError,
+      });
     }
   }
 
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer">
+        <div className={style.signUpContainer}>
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4" >
                 {errorMessage.backError && (
-                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
+                  <div className={style.backError}>{errorMessage.backError}</div>
                 )}
-                <Card style={{direction: 'ltr'}}>
+                <Card className="cardStyle">
                   <CardHeader>
                     <h5 className="title text-center"> تغیر رمز عبور</h5>
                   </CardHeader>
@@ -152,60 +151,25 @@ function SetNewPassword() {
                     <Form >
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label>رمز عبور جدید</label>
-                            <Input
-                              className="text-right"
-                              placeholder="رمز عبور جدید را وارد کنید"
-                              type="password"
-                              name="password"
-                              id="password_field"
-                              onChange={handleChange}
-                              value={formData.password}
-                            ></Input>
-                            <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={PasCloseEyeIcon}
-                              id="togglePassword"
-                            ></i>
-                            {errorMessage.passError && (
-                              <div className="error">
-                                {errorMessage.passError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <PasswordFormGroup
+                            value={formData.password}
+                            onChange={handleChange}
+                            error={errorMessage.passError}
+                            onClick={PasCloseEyeIcon}>
+                          </PasswordFormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label>تکرار رمز عبور</label>
-                            <Input
-                              className="text-right"
-                              placeholder=" رمز عبور جدید را دوباره وارد کنید"
-                              type="password"
-                              name="passwordConfirm"
-                              id="confirm_password_field"
-                              onChange={handleChange}
-                              value={formData.passwordConfirm}
-                            />
-                            <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={ConfirmPasCloseEyeIcon}
-                              id="toggleConfirmPassword"
-                            ></i>
-                            {errorMessage.passErrorRep && (
-                              <div className="error">
-                                {errorMessage.passErrorRep}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <ConfirmPasswordFormGroup
+                            value={formData.passwordConfirm}
+                            onChange={handleChange}
+                            error={errorMessage.passErrorRep}
+                            onClick={ConfirmPasCloseEyeIcon}>
+                          </ConfirmPasswordFormGroup>
                         </Col>
                       </Row>
-
-                      
                     </Form>
-                    
                   </CardBody>
                   <CardFooter className="text-center">
                     <Button
