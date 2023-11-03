@@ -216,7 +216,7 @@ export default function CoursesPanel() {
                   </Row>
                 </Col>
               </Row>
-              <Table className={style.ClassesTable}>
+              <Table className={style.ClassesTable} id ="CoursesPanelTable">
                 {/* <thead className={`${style.text-primary} TableHead`}> */}
                 <thead className="text-primary TableHead">
                   <tr>
@@ -241,7 +241,7 @@ export default function CoursesPanel() {
                   </tr>
                 </thead>
                 <tbody className={style.CoursesTableBody}>
-                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
+                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} id="CoursesPanelDayRow"/>
                   <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
