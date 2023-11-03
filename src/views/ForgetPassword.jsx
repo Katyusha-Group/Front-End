@@ -1,20 +1,19 @@
 import React from "react";
-// import "../assets/css/Login.css";
+import * as style from "../assets/css/Login.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
 import Swal from "sweetalert2";
 import { apis } from "../assets/apis";
 import { IsValidEmail } from "../Functions/IsValidEmail";
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  FormGroup,
   Form,
-  Input,
   Row,
   Col,
   Container,
@@ -108,14 +107,14 @@ function ForgetPassword() {
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer">
+        <div className={style.signUpContainer}>
           <div className="content contentLogin">
             <Row className="just-center">
               <Col className="text-right" md="4">
                 {errorMessage.backError && (
-                  <div className="back-error" style={{ direction: 'ltr' }}>{errorMessage.backError}</div>
+                  <div className={style.backError}>{errorMessage.backError}</div>
                 )}
-                <Card>
+                <Card className={style.cardStyle}>
                   <CardHeader>
                     <h5 className="title text-center"> فراموشی رمز عبور </h5>
                   </CardHeader>
@@ -124,22 +123,11 @@ function ForgetPassword() {
                     <Form>
                       <Row style={{ justifyContent: 'center' }}>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label htmlFor="exampleInputEmail1">ایمیل</label>
-                            <Input
-                              className="text-right"
-                              placeholder="ایمیل خود را وارد کنید"
-                              type="email"
-                              name="email"
-                              onChange={handleChange}
-                              value={formData.email}
-                            />
-                            {errorMessage.emailError && (
-                              <div className="error" style={{ direction: 'ltr' }}>
-                                {errorMessage.emailError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <EmailFormGroup
+                            value={formData.email}
+                            onChange={handleChange}
+                            error={errorMessage.emailError}>
+                          </EmailFormGroup>
                         </Col>
                       </Row>
                     </Form>
@@ -187,5 +175,4 @@ function ForgetPassword() {
     </>
   );
 }
-
 export default ForgetPassword;
