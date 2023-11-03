@@ -1,0 +1,33 @@
+.main{
+    border-radius: 15px;
+    width: 20vw;
+    background-color:#272a3d ;
+    margin-top: 100px;
+    margin-left: 20px;
+    
+}
+.searchbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    /* background-color: red; */
+    border-radius: 15px;
+    /* background-color:rgba(39, 42, 61,0.2); */
+    margin-top: 50px;
+    width: 18px;
+    margin-bottom: 30px;
+}
+.field{
+    display: flex;
+    background-color:#444862;
+    border: none;
+    border-radius: 15px; 
+    width: 16vw;
+    height: 4vh;
+    padding-right: 30px;
+    margin-right: 20px;
+}
+.field ::placeholder{
+    margin-right: 20px;
+}
