@@ -13802,3 +13802,7 @@ a.nav-link-course:hover{
 .accordion-body .row{
   margin: 3rem 0 0 0;
 }
+
+.row{
+  margin: 0 0px !important;
+}
