@@ -42,7 +42,7 @@ export default function ExamChart() {
 
   return (
     <>
-      <Table className={style.ExamsTable}>
+      <Table className={style.ExamsTable} id="ExamChartTable">
         <thead className="text-primary TableHead">
           <tr>
             <th className="table-head text-center "></th>
@@ -71,7 +71,7 @@ export default function ExamChart() {
           </tr>
         </thead>
         <tbody className={style.ExamChartTableBody}>
-          <TimeRow ExamT="8-10"  periods={keyedExamTable[0]} />
+          <TimeRow ExamT="8-10"  periods={keyedExamTable[0]} id="ExamChartTimeRow"/>
           <TimeRow ExamT="10-12" periods={keyedExamTable[1]} />
           <TimeRow ExamT="12-14" periods={keyedExamTable[2]} />
           <TimeRow ExamT="14-16" periods={keyedExamTable[3]} />

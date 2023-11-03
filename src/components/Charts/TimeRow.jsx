@@ -85,8 +85,8 @@ function DayPeriod (Input) {
 const TimeRow = ({ periods, ExamT }) => {
     return (
     <>
-        <tr className={style.TableROW}>
-        <td className={`${style.ExamsTable_column} text-center`} style = {{fontSize : "x-small"}}>{ExamT}</td>
+        <tr className={style.TableROW} id="ExamChartRow">
+        <td className={`${style.ExamsTable_column} text-center`} style = {{fontSize : "x-small"}} id="ExamChartTimeName">{ExamT}</td>
         {Object.entries(periods).map(([time, entry]) => {
             return (
             <td className={style.ExamsTable_column2} key={time}>
