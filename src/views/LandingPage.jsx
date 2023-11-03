@@ -1,20 +1,13 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import routes from "../route.jsx";
 import {Link} from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext.jsx";
-import styles from "../assets/css/LandingPage.css";
+import * as style from "../assets/css/LandingPage.module.css";
 import lottie from 'lottie-web';
 import {
-  Button,
   Row,
   Col,
   Card,
   Container
 } from "reactstrap";
-
-
-
 
 function LandingPage() {
   React.useEffect(() => {
@@ -38,17 +31,17 @@ function LandingPage() {
   }, []);
   return (
     <>
-    <Container className="landing">
+    <Container className={style.landing}>
     <Row>
-      <Col className="LandingPageCardCol">
-        <Card className="LandingPageCard">
-          <div className="div-1">
+      <Col className={style.LandingPageCardCol}>
+        <Card className={style.LandingPageCard}>
+          <div className={style.div1}>
             <span >
-              <div className="div-2">
+              <div className={style.div2}>
                 به کاتیوشا خوش اومدین!
               </div>
               <br/>
-              <div className="div-3" style={{textAlign: "right"}} >
+              <div className={style.div3} style={{textAlign: "right"}} >
                 این سامانه به شما کمک می کنه که:
                 <li>
                   برنامه هفتگی و لیست واحدها و امتحاناتون رو ببینین 📆
@@ -61,11 +54,11 @@ function LandingPage() {
                 </li>
               </div>
               <br/>
-              <Row className="LandingPageRow">
+              <Row className={style.LandingPageRow}>
                 <Col>
                   <Link to="../Signup">
                     <button 
-                      className="Buttons"
+                      className={style.Buttons}
                     > 
                       ثبت نام
                     </button>
@@ -74,7 +67,7 @@ function LandingPage() {
                 <Col>
                 <Link to="../Login">
                     <button 
-                      className="Buttons"
+                      className={style.Buttons}
                     >
                       ورود
                     </button>
@@ -84,7 +77,7 @@ function LandingPage() {
             </span>
           </div>
           <span>
-            <div className="div-4">
+            <div className={style.div4}>
               <Row style={{fontSize:"15px",color:"#494f5d"}}>
                 کنجکاویم که نظرات و پیشنهاداتتون رو درباره کاتیوشا بدونیم:
                 katyushaiust@gmail.com
@@ -93,7 +86,7 @@ function LandingPage() {
           </span>
         </Card>
       </Col>
-      <Col className="BGimgCol">
+      <Col className={style.BGimgCol}>
         <div id="animation"></div>
       </Col>
     </Row>
