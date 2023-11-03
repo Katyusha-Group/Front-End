@@ -6,101 +6,40 @@ import TimeRow from './TimeRow';
 import { Table } from "reactstrap";
 import "./ExamChart.css"
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
-import { MapDateToIndex } from "../../Functions/ExamChart/MapDateToIndex";
-import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 
-function Exams (ExamTable)
-{
+import GeneratekeyedExamTable from "./keyedExamTable";
+export default function ExamChart() {
+  const tokenJson = localStorage.getItem("authTokens");
+  const tokenClass = JSON.parse(tokenJson);
+  const token = tokenClass.token.access;
+  const { info, changeInfo } = useInfo();
+
+  let [ExamTable, setExamTable] = React.useState([]);
+
+  React.useEffect(() => {
+    setExamTable(info.courseChoosed);
+  }, [info.courseChoosed]);
+
+  // class Course {
+  //   constructor(props, IsFromChosencourses) {
+  //     this.name = props.name;
+  //     this.complete_course_number = props.complete_course_number;
+  //     this.class_gp = props.class_gp;
+  //     this.complete_course_number = props.complete_course_number;
+  //     this.course_times = props.course_times;
+  //     this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
+  //     this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
+  //     this.can_take = props.is_allowed;
+  //     this.exam_times = props.exam_times;
+  //     this.IsChosen = IsFromChosencourses;
+  //     this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
+  //   }
+  // }
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
-    const emptySection = () => ({
-      0: null,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null
-    });
-    const emptyTime = () => ({
-      0: emptySection(),
-      1: emptySection(),
-      2: emptySection(),
-      3: emptySection(),
-      4: emptySection(),
-      5: emptySection(),
-      6: emptySection(),
-      7: emptySection(),
-      8: emptySection(),
-      9: emptySection(),
-      10: emptySection(),
-      11: emptySection(),
-      12: emptySection(),
-      13: emptySection(),
-      14: emptySection(),
-      15: emptySection(),
-      16: emptySection(),
-      17: emptySection(),
-      18: emptySection(),
-      19: emptySection(),
-      20: emptySection(),
-      21: emptySection()
-    });
-
-    // const NumInEachSlot = Create2DArray(6, 22);
-    let NumInEachSlot = [];
-    let Rows = 6, Cols = 22;
-    for (let i = 0; i < Rows; i++) {
-      NumInEachSlot[i] = Array(Cols).fill(0);
-    }
-    return ExamTable.reduce(
-      (lessonsKeyedByDayAndPeriod, currentPeriod) => {
-        
-        try
-        {
-          let ExamTime = currentPeriod.exam_times[0].exam_start_time;
-          let ExamDay = currentPeriod.exam_times[0].date;
-        }
-        catch 
-        {
-          return lessonsKeyedByDayAndPeriod;
-        }
-
-        let ExamTime = currentPeriod.exam_times[0].exam_start_time;
-        let ExamDay = currentPeriod.exam_times[0].date;
-        
-        let time = mapTimeToIndex(ExamTime, true);
-        let day = MapDateToIndex(ExamDay);
-
-        try
-        {
-          NumInEachSlot[time][day] ++;
-        }
-        catch 
-        {
-          return lessonsKeyedByDayAndPeriod;
-        }
-
-        NumInEachSlot[time][day] ++;
-        let count = NumInEachSlot[time][day];
-        try {
-          lessonsKeyedByDayAndPeriod[time][day][count] = currentPeriod;
-        }
-        catch (error) {
-        }
-        return lessonsKeyedByDayAndPeriod
-      },
-      {
-        0: emptyTime(),
-        1: emptyTime(),
-        2: emptyTime(),
-        3: emptyTime(),
-        4: emptyTime(),
-        5: emptyTime(),
-      }
-    )
+    return GeneratekeyedExamTable(ExamTable);
   }, [ExamTable])
-  
-  
+
   return (
     <>
       <Table className="ExamsTable">
@@ -140,43 +79,6 @@ function Exams (ExamTable)
           <TimeRow ExamT="18-20" periods={keyedExamTable[5]} />
         </tbody>
       </Table>
-    </>
-  );
-}
-
-export default function ExamChart() {
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
-  const { info, changeInfo } = useInfo();
-
-  let [ExamTable, setExamTable] = React.useState([]);
-
-  React.useEffect(() => {
-    setExamTable(info.courseChoosed);
-  }, [info.courseChoosed]);
-
-  class Course {
-    constructor(props, IsFromChosencourses) {
-      this.name = props.name;
-      this.complete_course_number = props.complete_course_number;
-      this.class_gp = props.class_gp;
-      this.complete_course_number = props.complete_course_number;
-      this.course_times = props.course_times;
-      this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
-      this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
-      this.can_take = props.is_allowed;
-      this.exam_times = props.exam_times;
-      this.IsChosen = IsFromChosencourses;
-      this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-    }
-  }
-
-  return (
-    <>
-      <div>
-        {Exams(ExamTable)}
-      </div>
     </>
   );
 }
