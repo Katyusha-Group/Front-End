@@ -1,5 +1,6 @@
 import React from "react";
-import "../assets/css/Login.css";
+// import "../assets/css/Login.css";
+import * as style from "../assets/css/Login.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { closeLoading, showLoading } from "../components/LoadingAlert/LoadingAlert";
@@ -124,21 +125,21 @@ function Login(props) {
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer" >
+        <div className={style.signUpContainer}>
           <div className="content contentLogin" style={{ direction: "rtl" }}>
             <Row className="just-center">
               <Col className="text-right" md="4">
                 {errorMessage.backError && (
-                  <div className="back-error" style={{ direction: 'ltr' }}>{errorMessage.backError}</div>
+                  <div className={style.backError}>{errorMessage.backError}</div>
                 )}
-                <Card>
+                <Card className={style.cardStyle}>
                   <CardHeader>
                     <h5 className="title text-center">ورود به سایت</h5>
                   </CardHeader>
                   <br></br>
                   <CardBody>
                     <Form>
-                      <Row style={{ justifyContent: 'center' }}>
+                      <Row>
                         <Col md="12">
                           <EmailFormGroup
                             value={formData.email}
@@ -147,7 +148,7 @@ function Login(props) {
                           </EmailFormGroup>
                         </Col>
                       </Row>
-                      <Row style={{ justifyContent: 'center' }}>
+                      <Row >
                         <Col md="12">
                           <PasswordFormGroup
                             value={formData.password}
