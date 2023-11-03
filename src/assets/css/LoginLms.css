@@ -1,0 +1,27 @@
+.loginLmsModal{
+    background: #27293d;
+    border-radius: 1rem;
+}
+.card-header{
+    background-color: transparent!important;
+    direction: ltr;
+}
+.card-footer{
+    background-color: transparent!important;
+}
+.loginLmsModalBody{
+    padding: 0 !important;
+}
+.close-btn
+{
+  display:inline-block;
+  padding:4px;
+  /* border:1px solid pink; */
+  z-index:500;
+}
+
+.modal-content{
+    background-color: #27293d!important;
+    width: 100%;
+    box-shadow: none!important;
+}
