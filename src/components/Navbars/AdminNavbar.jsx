@@ -6,7 +6,8 @@ import LoginModal from "../../views/LoginLms";
 import LoginModalGolestan from "../../views/LoginGolestan";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
-import "../Navbars/AdminNavbar.css";
+import * as style from "../Navbars/AdminNavbar.module.css";
+// import "../Navbars/AdminNavbar.module.css";
 import logo from "./Logo1.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -70,11 +71,11 @@ function AdminNavbar(props) {
 
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color, "rtl")} expand="xl">
+      <Navbar className={classNames("navbar-absolute", color, `${style.rtl}`)} expand="xl">
         <Collapse navbar isOpen={collapseOpen}>
-          <Nav className="wideNavbar" navbar>
+          <Nav className={style.wideNavbar} navbar>
           <NavLink href="/home/page" className="nav-header nav-link-icon">
-                    <img src={logo} alt=""  style={{height:"34px" , width:"300px"}}/>
+                    <img src={logo} alt=""  style={{height:"34px" , width:"40px"}}/>
                   </NavLink>
             {routes.map(
               (route) => (
@@ -92,7 +93,7 @@ function AdminNavbar(props) {
                 </NavItem>
               )
             )}
-            <NavItem className="logoutLink">
+            <NavItem className={style.logoutLink}>
               <NavLink href="/landingPage"
                 onClick={() => {
                   localStorage.removeItem("authTokens");
