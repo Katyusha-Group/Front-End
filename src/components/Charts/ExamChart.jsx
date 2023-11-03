@@ -3,28 +3,11 @@ import { useMemo } from 'react';
 import { useInfo } from "../../contexts/InfoContext";
 import "../../assets/css/nucleo-icons.css";
 import TimeRow from './TimeRow';
-import { useState, useEffect } from 'react';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
-  Row,
-  Col,
-  Button
-} from "reactstrap";
-
-import {
-  MapTimeToIndex,
-  MapDateToIndex,
-  Create2DArray,
-  uniquifyArrayByKey
-} from "./ExamChart_Functions";
-
+import { Table } from "reactstrap";
 import "./ExamChart.css"
-import AdminNavbar from "../../components/Navbars/AdminNavbar";
-
+import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
+import { MapDateToIndex } from "../../Functions/ExamChart/MapDateToIndex";
+import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 
 function Exams (ExamTable)
 {
@@ -63,8 +46,12 @@ function Exams (ExamTable)
       21: emptySection()
     });
 
-    const NumInEachSlot = Create2DArray(6, 22);
-
+    // const NumInEachSlot = Create2DArray(6, 22);
+    let NumInEachSlot = [];
+    let Rows = 6, Cols = 22;
+    for (let i = 0; i < Rows; i++) {
+      NumInEachSlot[i] = Array(Cols).fill(0);
+    }
     return ExamTable.reduce(
       (lessonsKeyedByDayAndPeriod, currentPeriod) => {
         
@@ -81,7 +68,7 @@ function Exams (ExamTable)
         let ExamTime = currentPeriod.exam_times[0].exam_start_time;
         let ExamDay = currentPeriod.exam_times[0].date;
         
-        let time = MapTimeToIndex(ExamTime);
+        let time = mapTimeToIndex(ExamTime, true);
         let day = MapDateToIndex(ExamDay);
 
         try
