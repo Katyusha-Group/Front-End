@@ -1,9 +1,35 @@
 .bg{
     background-color: red;
-    width: 30vw;
+    width: 22vw;
     margin-top: 100px;
     margin-right: 20px;
     border-radius: 15px;
     background-color:#272a3d ;
 
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    margin-right: 50px;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 80px;
+}
+.headertext{
+    margin-top: 40px;
+    font-size: 20px;
+}
+.sidebarmenuItems{
+    display: flex;
+    flex-direction: row;
+    margin: 40px;
+    margin-right: 50px;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 80px;
+}
+.itemtext{
+    margin-top: 20px;
+    font-size: 16px;
 }
