@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  width: 65vw;
+  width: 50vw;
   min-height: 100vh;
   height: fit-content;
-  margin: 100px auto;
+  margin: 0px auto;
   border-radius: 15px;
   background-color: #272A3D;
 }

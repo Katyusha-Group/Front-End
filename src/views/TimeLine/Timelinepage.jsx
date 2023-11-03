@@ -1,20 +1,18 @@
-import React from 'react'
-import Timeline from './Timeline';
+import React from "react";
+import Timeline from "./Timeline";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.jsx";
-import styles from '../../assets/css/Timeline/Timelinepage.module.css';
-
-
-
+import styles from "../../assets/css/Timeline/Timelinepage.module.css";
+import Sidebar from "../Sidebar/Sidebar.jsx";
 
 const Timelinepage = () => {
   return (
     <div className={styles.bg}>
-    <div className={styles.navbar}> 
-    <AdminNavbar/>
+        <Sidebar />
+      <div className={styles.items}>
+        <Timeline />
+      </div>
     </div>
-    <Timeline />
-    </div>
-  )
-}
+  );
+};
 
-export default Timelinepage
+export default Timelinepage;
