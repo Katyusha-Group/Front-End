@@ -4,7 +4,6 @@ import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper.jsx";
 import SignUp from "./views/SignUp.jsx";
 import ForgetPassword from "./views/ForgetPassword.jsx";
-import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import ChangePassword from "./views/ChangePass.jsx";
 import Admin from "./views/Admin.jsx";

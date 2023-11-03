@@ -33,7 +33,7 @@ const GenerateKeyedTimetable = (timetable) => {                             // M
           let TimeIndex = time.course_time_representation;
           if (TimeIndex === undefined)
           {
-            TimeIndex = mapTimeToIndex(time.course_start_time);
+            TimeIndex = mapTimeToIndex(time.course_start_time, false);
           }
 
           NumInEachSlot[day][TimeIndex]++;

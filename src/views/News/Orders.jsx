@@ -5,133 +5,19 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardText,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col,
-  Label,
   UncontrolledAccordion,
   AccordionItem,
   AccordionHeader,
   AccordionBody,
 } from "reactstrap";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
-import { apis } from "../../assets/apis";
-import { Link } from "react-router-dom";
+import { useUpdateProfile } from "../../hooks/useUpdateProfile";
 function UserProfile() {
-  const [info, setInfo] = useState({});
-  const [images, setImages] = React.useState([]);
-  const [imageURLs, setImageURLs] = React.useState("");
-  const [orders, setOrders] = React.useState([]);
-
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  useEffect(() => {
-    showLoading();
-    fetch(apis["accounts"]["profile"]["updateProfile"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((error) => console.error(error));
-    fetch(apis["orders"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setOrders(data);
-      })
-      .catch((error) => console.error(error));
-
-    closeLoading();
-  }, []);
-
-  useEffect(() => {}, [info]);
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setInfo((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  }
-
-  const startTelegramBot = () => {
-    window.location.href = info.telegram_link;
-  };
-
-  function save() {
-    var formData = new FormData();
-    formData.append("first_name", info.first_name);
-    formData.append("last_name", info.last_name);
-    const startTelegramBot = () => {
-      window.location.href = info.telegram_link;
-    };
-    fetch(apis["accounts"]["profile"]["updateProfile"], {
-      method: "PATCH",
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-      body: formData,
-      redirect: "follow",
-    })
-      .then((response) => response.json())
-      .then((data) => {})
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-  }
-
-  React.useEffect(() => {
-    if (images.length < 1) return;
-    const newImageUrls = images.map((image) => URL.createObjectURL(image));
-    setImageURLs(newImageUrls);
-  }, [images]);
-  function onImageChangeForm(event) {
-    if (event.target.files && event.target.files) {
-      const fileList = Array.from(event.target.files);
-      setImages(fileList);
-    }
-  }
-  const renderImageField = () => {
-    const onChange = (event) => {
-      onImageChangeForm(event);
-    };
-    return (
-      <div>
-        <input
-          className="btn"
-          name="Image"
-          label="Image"
-          id="file-input"
-          type="file"
-          onChange={onChange}
-          style={{ display: "none" }}
-        />
-        <label
-          id="file-input-label"
-          for="file-input"
-          className="btn btn-primary mt-3"
-        >
-          انتخاب عکس
-        </label>
-        <br />
-        {images.length !== "" ? images.name : ""}
-      </div>
-    );
-  };
-
+  const { info, orders } = useUpdateProfile();
   return (
     <>
       <div className="wrapper" style={{ direction: "rtl" }}>
@@ -153,7 +39,7 @@ function UserProfile() {
                         <img
                           alt="..."
                           className="avatar"
-                          src={imageURLs != "" ? imageURLs : info.image}
+                          src={ info.image}
                         />
                       </a>
                     </div>
@@ -170,7 +56,9 @@ function UserProfile() {
                   </CardBody>
                   <CardFooter>
                     <Button
-                      onClick={startTelegramBot}
+                      onClick={() => {
+                        window.location.href = info.telegram_link;
+                      }}
                       className="btn-icon btn-round"
                     >
                       <i className="fab fa-telegram" />
@@ -231,7 +119,11 @@ function UserProfile() {
                             </Row>
                             <Row className="mb-2">
                               <Col>وضعیت</Col>
-                              <Col>{order.payment_status === "C" ?"پرداخت نشده" : "پرداخت شده"}</Col>
+                              <Col>
+                                {order.payment_status === "C"
+                                  ? "پرداخت نشده"
+                                  : "پرداخت شده"}
+                              </Col>
                             </Row>
                           </AccordionBody>
                         </AccordionItem>
