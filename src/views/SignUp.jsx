@@ -32,7 +32,7 @@ function SignUp() {
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     profileName: "",
-    Username: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -98,10 +98,10 @@ function SignUp() {
     ];
 
     if (formData.profileName.trim().length === 0) {
-      errors.profileName = "!وارد کردن نام پروفایل الزامی است";
+      errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
     }
     if (formData.username.trim().length === 0) {
-      errors.username = "!وارد کردن نام کاربری الزامی است";
+      errors.usernameError = "!وارد کردن نام کاربری الزامی است";
     }
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
@@ -132,7 +132,7 @@ function SignUp() {
       errors.subjectError = "!وارد کردن رشته الزامی است";
     }
     setErrorMessage({
-      profileNameError: errors.profileName,
+      profileNameError: errors.profileNameError,
       usernameError: errors.usernameError,
       emailError: errors.emailError,
       passError: errors.passError,
@@ -229,6 +229,7 @@ function SignUp() {
                             label={"نام پروفایل"}
                             placeHolder={"نام پروفایل خود را وارد کنید"}
                             value={formData.profileName}
+                            name={"profileName"}
                             onChange={handleChange}
                             error={errorMessage.profileNameError}>
                           </TextFormGroup>
@@ -240,6 +241,7 @@ function SignUp() {
                             label={"نام کاربری"}
                             placeHolder={"نام کاربری خود را وارد کنید"}
                             value={formData.username}
+                            name={"username"}
                             onChange={handleChange}
                             error={errorMessage.usernameError}>
                           </TextFormGroup>
