@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { setLoginModalShow } from "./commonLogin";
-import LoginModal from "../../views/LoginLms";
-import LoginModalGolestan from "../../views/LoginGolestan";
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import routes from "../../route.jsx";
 import * as style from "../Navbars/AdminNavbar.module.css";
@@ -74,9 +71,9 @@ function AdminNavbar(props) {
       <Navbar className={classNames("navbar-absolute", color, `${style.rtl}`)} expand="xl">
         <Collapse navbar isOpen={collapseOpen}>
           <Nav className={style.wideNavbar} navbar>
-          <NavLink href="/home/page" className="nav-header nav-link-icon">
-                    <img src={logo} alt=""  style={{height:"34px" , width:"40px"}}/>
-                  </NavLink>
+            <NavLink href="/home/page" className="nav-header nav-link-icon">
+              <img src={logo} alt="" style={{ height: "34px", width: "40px" }} />
+            </NavLink>
             {routes.map(
               (route) => (
                 <NavItem key={route.rtlName}>
@@ -97,7 +94,7 @@ function AdminNavbar(props) {
               <NavLink href="/landingPage"
                 onClick={() => {
                   localStorage.removeItem("authTokens");
-                  
+
                 }}
               >
                 <i className={"tim-icons icon-button-power"} />
