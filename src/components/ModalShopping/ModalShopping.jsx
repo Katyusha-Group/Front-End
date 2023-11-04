@@ -120,7 +120,7 @@ const ModalShopping = (props) => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {})
+      .then((data) => { })
       .catch((error) => {
         console.error(error);
       });
@@ -136,7 +136,7 @@ const ModalShopping = (props) => {
         style={{ background: "rgba(0,0,0,0.2)" }}
         onHide={props.close}
       >
-        <div className="loginLmsModal">
+        <div className={shopStyle.loginLmsModal}>
           <Modal.Header className="ModalHeader">
             <button
               type="button"
@@ -149,7 +149,7 @@ const ModalShopping = (props) => {
               </span>
             </button>
           </Modal.Header>
-          <Modal.Body className="loginLmsModalBody">
+          <Modal.Body className={shopStyle.loginLmsModalBody}>
             <CardHeader>{props.show.data.name}</CardHeader>
             <CardBody>
               <Form>
