@@ -124,6 +124,7 @@ function ForgetPassword() {
                       <Row style={{ justifyContent: 'center' }}>
                         <Col md="12">
                           <EmailFormGroup
+                            placeHolder={"ایمیل خود را وارد کنید"}
                             value={formData.email}
                             onChange={handleChange}
                             error={errorMessage.emailError}>
