@@ -6,6 +6,10 @@ import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
+import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
@@ -24,13 +28,11 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
-import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
-import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
-
 function SignUp() {
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
+    profileName: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -70,6 +72,8 @@ function SignUp() {
     setGender(selectedOption.value);
   }
   const [errorMessage, setErrorMessage] = useState({
+    profileNameError: "",
+    usernameError: "",
     emailError: "",
     passError: "",
     passErrorRep: "",
@@ -82,6 +86,8 @@ function SignUp() {
 
     const errors = [
       {
+        profileNameError: "",
+        usernameError: "",
         emailError: "",
         passError: "",
         passErrorRep: "",
@@ -90,6 +96,13 @@ function SignUp() {
         backError: "",
       },
     ];
+
+    if (formData.profileName.trim().length === 0) {
+      errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
+    }
+    if (formData.username.trim().length === 0) {
+      errors.usernameError = "!وارد کردن نام کاربری الزامی است";
+    }
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
@@ -119,6 +132,8 @@ function SignUp() {
       errors.subjectError = "!وارد کردن رشته الزامی است";
     }
     setErrorMessage({
+      profileNameError: errors.profileNameError,
+      usernameError: errors.usernameError,
       emailError: errors.emailError,
       passError: errors.passError,
       passErrorRep: errors.passErrorRep,
@@ -126,6 +141,8 @@ function SignUp() {
       subjectError: errors.subjectError,
     });
     if (
+      errors.profileName ||
+      errors.usernameError ||
       errors.emailError ||
       errors.passError ||
       errors.passErrorRep ||
@@ -206,6 +223,30 @@ function SignUp() {
                   </CardHeader>
                   <CardBody>
                     <Form >
+                      <Row>
+                        <Col md="12">
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
+                          </TextFormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md="12">
+                          <TextFormGroup
+                            label={"نام کاربری"}
+                            placeHolder={"نام کاربری خود را وارد کنید"}
+                            value={formData.username}
+                            name={"username"}
+                            onChange={handleChange}
+                            error={errorMessage.usernameError}>
+                          </TextFormGroup>
+                        </Col>
+                      </Row>
                       <Row>
                         <Col md="12">
                           <EmailFormGroup
