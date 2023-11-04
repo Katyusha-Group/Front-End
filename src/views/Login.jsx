@@ -16,7 +16,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { apis } from "../assets/apis";
-import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
@@ -64,9 +63,6 @@ function Login(props) {
     ];
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
-    }
-    if (!IsValidEmail(formData.email) && !errors.emailError) {
-      errors.emailError = "!قالب ایمیل قابل قبول نیست";
     }
     if (formData.password.trim().length === 0) {
       errors.passError = "!وارد کردن رمز عبور الزامی است";
@@ -141,6 +137,7 @@ function Login(props) {
                       <Row>
                         <Col md="12">
                           <EmailFormGroup
+                            placeHolder={"ایمیل یا نام کاربری خود را وارد کنید"}
                             value={formData.email}
                             onChange={handleChange}
                             error={errorMessage.emailError}>
