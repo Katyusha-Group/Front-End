@@ -1,7 +1,6 @@
 import React from "react";
 import routes from "../route.jsx";
 import { useInfo } from "../contexts/InfoContext.jsx";
-import "../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
