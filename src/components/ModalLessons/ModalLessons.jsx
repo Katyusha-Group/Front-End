@@ -1,5 +1,5 @@
 import React from "react";
-import * as style from  "./ModalLesson.module.css";
+import * as style from "./ModalLesson.module.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
@@ -54,7 +54,7 @@ const ModalLessons = (props) => {
               </span>
             </button>
           </Modal.Header>
-          <Modal.Body className="loginLmsModalBody">
+          <Modal.Body className={style.loginLmsModalBody}>
             <CardBody>
               <Card
                 className={style.ModalLessonCourseCard}
@@ -225,7 +225,7 @@ const ModalLessons = (props) => {
                         )}
                       </Row>
                     </Row>
-                   
+
                   </div>
                 </CardBody>
               </Card>
