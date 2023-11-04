@@ -1,5 +1,4 @@
 import React from "react";
-import "../../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";

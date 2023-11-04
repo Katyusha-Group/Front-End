@@ -32,16 +32,6 @@
 }
 
 
-.card-header {
-  background-color: transparent !important;
-  direction: ltr;
-}
-
-.card-footer {
-  background-color: transparent !important;
-}
-
-
 .loginLmsModalBody {
   padding: 24px 24px 16px 24px !important;
 }
