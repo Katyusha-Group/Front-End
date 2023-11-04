@@ -1,5 +1,5 @@
 import React from "react";
-// import * as style from "../../assets/css/ModalShopping.module.css";
+import "../../assets/css/LoginLms.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
@@ -120,7 +120,7 @@ const ModalShopping = (props) => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => { })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
       });
@@ -136,11 +136,11 @@ const ModalShopping = (props) => {
         style={{ background: "rgba(0,0,0,0.2)" }}
         onHide={props.close}
       >
-        <div className={shopStyle.loginLmsModal}>
+        <div className="loginLmsModal">
           <Modal.Header className="ModalHeader">
             <button
               type="button"
-              class={`close ${shopStyle.close - btn}`}
+              class="close close-btn"
               data-dismiss="modal"
               aria-label="Close"
             >
@@ -149,7 +149,7 @@ const ModalShopping = (props) => {
               </span>
             </button>
           </Modal.Header>
-          <Modal.Body className={shopStyle.loginLmsModalBody}>
+          <Modal.Body className="loginLmsModalBody">
             <CardHeader>{props.show.data.name}</CardHeader>
             <CardBody>
               <Form>

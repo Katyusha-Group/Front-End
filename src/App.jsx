@@ -12,6 +12,7 @@ import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
+import LoginLms from "./views/LoginLms.jsx";
 import LandingPage from "./views/LandingPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
@@ -78,6 +79,7 @@ function App() {
                 ></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
+                <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/CoursesPanel" element={
@@ -105,8 +107,8 @@ function App() {
                     <Notification />
                   </PrivatRoute>
                 }></Router.Route>
-                <Router.Route path="/profile" element={
-                  <Profile />
+              <Router.Route path="/profile" element={
+                    <Profile />
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
