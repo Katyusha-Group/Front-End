@@ -5,6 +5,8 @@ import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
 import { addNewLesson } from "../../Functions/addNewLesson";
 import { useInfo } from "../../contexts/InfoContext";
 import * as style from "../../assets/css/UserPage.module.css";
+import { useMyClass } from "../../hooks/useMyClass";
+
 let defu = 13.3;
 let length = 17.1;
 let top_right = 9.6;
@@ -26,25 +28,7 @@ export function lessons(
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
   const { info, changeInfo } = useInfo();
-
-  React.useEffect(() => {
-    if (getapi == true) {
-      showLoading();
-      fetch(apis["courses"]["my_courses"], {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          changeInfoState("courseChoosed", data);
-        })
-        .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    }
-  }, []);
-
-  closeLoading();
+  useMyClass(getapi, showLoading,closeLoading)
 
   return infoState.courseChoosed.map((lessons) => {
     return lessons.course_times.map((lesson, index) => {

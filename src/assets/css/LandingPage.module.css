@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .loanding .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .landingCol {
+    padding: 10px;
+  }
+  
+  /* Card */
+  .LandingPageCard {
+    background-color: rgb(39, 41, 61);
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: right;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 80px;
+    direction: rtl;
+  }
+  
+  /* Headings */
+  .div2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  
+  .div3 {
+    font-size: 24px;
+    margin-bottom: 0px;
+  }
+  
+  /* List items */
+  .div3 li {
+    font-size: 20px;
+    line-height: 1.5;
+    list-style: none;
+    padding: 10px 0;
+  }
+  
+  /* Buttons */
+  .btn-fill-landingPage {
+    background-color: #FF365B;
+    border-color: #007bff;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+  
+  .btn-fill-landingPage:hover {
+    background-color: #114984;
+    border-color: #0062cc;
+    color: #fff;
+  }
+  
+  /* Contact info */
+  .div4 {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .div4 a {
+    color: #007bff;
+  }
+  .BGimg {
+    margin-left: 0px;
+    width: 100%;
+    height: auto;
+    margin-top: 80px;
+    margin-left: 0;
+  }
+
+  .Buttons {
+    background-color: #8194EF;
+    border-color: #8194EF;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+  

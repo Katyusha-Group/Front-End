@@ -20,7 +20,7 @@ import { addNewLesson } from "../../Functions/addNewLesson";
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
 import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 import GenerateKeyedTimetable from "./KeyedTimetable";
-import "./CoursesPanel.css"
+import * as style from  "./CoursesPanel.module.css";
 import SelectStyles from "../../assets/styles/SelectStyles";
 
 export default function CoursesPanel() {
@@ -186,10 +186,10 @@ export default function CoursesPanel() {
     <AdminNavbar></AdminNavbar>
       <Row >
         <Col>
-          <Card className="TableCard">
+          <Card className={style.TableCard}>
             <CardBody>
-              <Row className="CardBodyRow">
-                <Col className="SelectCol" md="4">
+              <Row className={style.CardBodyRow}>
+                <Col className={style.SelectCol} md="4">
                   <Select
                     options={DepartmentOptions}
                     styles={SelectStyles}
@@ -200,15 +200,15 @@ export default function CoursesPanel() {
                     onChange={handleDepartment}
                   />
                 </Col>
-                <Col className="SwitchCol" md="1">
-                  <Row className="SwitchCard">
-                    <Col className="SwitchCardCol">
-                      <ReactSwitch className="Switch"
+                <Col className={style.SwitchCol} md="1">
+                  <Row className={style.SwitchCard}>
+                    <Col className={style.SwitchCardCol}>
+                      <ReactSwitch className={style.Switch}
                         checked={SwitchChecked}
                         onChange={handleSwitchChange}
                       />
                     </Col>
-                    <Col className="SwitchCardCol">
+                    <Col className={style.SwitchCardCol}>
                       <p>
                         فقط دروس قابل اخذ
                       </p>
@@ -216,9 +216,19 @@ export default function CoursesPanel() {
                   </Row>
                 </Col>
               </Row>
-              <Table className="ClassesTable">
+              <Table className={style.ClassesTable} id ="CoursesPanelTable">
+                {/* <thead className={`${style.text-primary} TableHead`}> */}
                 <thead className="text-primary TableHead">
                   <tr>
+                    {/* <th className={`${style.table-head} text-center`}></th>
+                    <th className={`${style.table-head} text-center`}>۷:۳۰ تا ۹</th>
+                    <th className={`${style.table-head} text-center`}>۹ تا ۱۰:۳۰</th>
+                    <th className={`${style.table-head} text-center`}>۱۰:۳۰ تا ۱۲</th>
+                    <th className={`${style.table-head} text-center`}>1 تا 2:30</th>
+                    <th className={`${style.table-head} text-center`}>2:30 تا 4</th>
+                    <th className={`${style.table-head} text-center`}>4 تا 5:30</th>
+                    <th className={`${style.table-head} text-center`}>5:30 تا 7  </th>
+                    <th className={`${style.table-head} text-center`}>7 تا 8:30 </th> */}
                     <th className="table-head text-center "></th>
                     <th className="table-head text-center ">۷:۳۰ تا ۹</th>
                     <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
@@ -230,8 +240,8 @@ export default function CoursesPanel() {
                     <th className="table-head text-center ">7 تا 8:30 </th>
                   </tr>
                 </thead>
-                <tbody className="CoursesTableBody">
-                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} />
+                <tbody className={style.CoursesTableBody}>
+                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} id="CoursesPanelDayRow"/>
                   <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
                   <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
                   <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />

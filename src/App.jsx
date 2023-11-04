@@ -4,7 +4,6 @@ import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper.jsx";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper.jsx";
 import SignUp from "./views/SignUp.jsx";
 import ForgetPassword from "./views/ForgetPassword.jsx";
-import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import ChangePassword from "./views/ChangePass.jsx";
 import Admin from "./views/Admin.jsx";
@@ -13,7 +12,6 @@ import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
-import LoginLms from "./views/LoginLms.jsx";
 import LandingPage from "./views/LandingPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
@@ -30,6 +28,7 @@ import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
+import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 
 function App() {
   document.documentElement.dir = "rtl";
@@ -80,7 +79,6 @@ function App() {
                 ></Router.Route>
                 <Router.Route path="/login" element={<Login />}></Router.Route>
                 <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
-                <Router.Route path="/loginLms" element={<LoginLms />}></Router.Route>
                 <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
                 <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
                 <Router.Route path="/CoursesPanel" element={
@@ -108,8 +106,11 @@ function App() {
                     <Notification />
                   </PrivatRoute>
                 }></Router.Route>
-              <Router.Route path="/profile" element={
-                    <Profile />
+                <Router.Route path="/profile" element={
+                  <Profile />
+                }></Router.Route>
+                <Router.Route path="/timeline" element={
+                  <Timelinepage />
                 }></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>

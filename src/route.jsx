@@ -1,4 +1,3 @@
-import Home from "./views/Home.jsx";
 import Admin from "./views/Admin.jsx";
 import ChangePassword from './views/ChangePass.jsx';
 import UserPage from "./views/UserPage/UserPage.jsx";

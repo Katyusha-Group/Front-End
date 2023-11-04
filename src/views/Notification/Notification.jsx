@@ -5,63 +5,24 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardText,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
+import { useNotifications } from "../../hooks/useNotifications";
 
 function UserProfile() {
-  const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
-  const [notifs, setNotifs] = React.useState([
-
-  ]);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  useEffect(() => {
-    showLoading();
-    fetch(apis["accounts"]["profile"]["updateProfile"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((error) => console.error(error));
-    closeLoading();
-    const fetchData = () => {
-      fetch(apis["notification"], {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "application/json",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setNotifs(data);
-        })
-        .catch((error) => console.error(error));
-    };
-
-    fetchData();
-
-    const intervalId = setInterval(fetchData, 2000);
-  }, []);
-
-  useEffect(() => {
-  }, [info]);
+  const  { info, setInfo, notifs, setNotifs } = useNotifications();
 
   function handleChange(event) {
     const { name, value } = event.target;

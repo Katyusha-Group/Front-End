@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { verificationApi } from "../../components/LessonSidebar/ApiCalls";
-import "./Verification.css";
+import * as style from "./Verification.module.css";
 import { useInfo } from "../../contexts/InfoContext";
 import {
   closeLoading,
@@ -30,7 +30,6 @@ function Verification() {
 
   const Navigate = useNavigate();
   const { info, changeInfo } = useInfo();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     codeError: "",
   });
@@ -139,7 +138,7 @@ function Verification() {
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer">
+        <div className={style.signUpContainer}>
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4">
@@ -172,11 +171,11 @@ function Verification() {
                             </label>
                           </FormGroup>
                           <Row>
-                            <div className="verification-code-box">
+                            <div className={style.verification_code_box}>
                               {codeInputRefs.map((ref, i) => (
                                 <Input
                                   id={i}
-                                  className="codeSpot"
+                                  className={style.codeSpot}
                                   key={i}
                                   type="text"
                                   maxLength="1"

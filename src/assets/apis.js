@@ -38,4 +38,10 @@ export const apis = {
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
   orders: `${domain}/orders/`,
   notification: `${domain}/notification/`,
+  profiles: {
+    me: `${domain}/profiles/me/`,
+  }
+
 };
+
+

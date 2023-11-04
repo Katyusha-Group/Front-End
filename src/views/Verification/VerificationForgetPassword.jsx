@@ -2,26 +2,21 @@
 import React, { useState, useRef ,useEffect} from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { forgetPasswordVerificationApi } from "../../components/LessonSidebar/ApiCalls";
-import "./Verification.css"
+import * as style from "./Verification.module.css"
 import { useInfo } from "../../contexts/InfoContext";
 import { closeLoading, showLoading } from "../../components/LoadingAlert/LoadingAlert";
-// import axios from "axios";
-// reactstrap components
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
   FormGroup,
   Form,
   Input,
   Row,
   Col,
-  Container,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 function VerificationForgetPassword() {
 const [formData, setFormData] = useState({
@@ -30,7 +25,6 @@ const [formData, setFormData] = useState({
 
 const Navigate = useNavigate();
 const { info, changeInfo } = useInfo();
-  // localStorage.clear();
   const [errorMessage, setErrorMessage] = useState({
     codeError: ""
   });
@@ -137,7 +131,7 @@ function isValidCode(code) {
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer">
+        <div className={style.signUpContainer}>
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4">
@@ -159,11 +153,11 @@ function isValidCode(code) {
                             <label style={{"fontSize":"0.9375rem"}}>لطفا کد ارسال شده به ایمیل تان را وارد کنید:</label>
                           </FormGroup>
                           <Row>
-                          <div className="verification-code-box">
+                          <div className={style.verification_code_box}>
                             {codeInputRefs.map((ref, i) => (
                                 <Input
                                 id={i}
-                                className="codeSpot"
+                                className={style.codeSpot}
                                 key={i}
                                 type="text"
                                 maxLength="1"
@@ -185,7 +179,6 @@ function isValidCode(code) {
                       </Row>
                     </Form>
                   </CardBody>
-                  
                   <CardFooter className="text-center">
                     <Button
                       onClick={handleSubmit}
@@ -198,7 +191,6 @@ function isValidCode(code) {
                   </CardFooter>
                   <CardBody>
                   </CardBody>
-                  
                 </Card>
               </Col>
             </Row>
