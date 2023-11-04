@@ -1,20 +1,23 @@
 .bg{
     background-color: red;
     width: 22vw;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-right: 20px;
     border-radius: 15px;
     background-color:#272a3d ;
+    height: 80vh;
+    position: fixed;
+    
 
 }
 .header{
     display: flex;
     flex-direction: row;
     margin: 10px;
-    margin-right: 50px;
+    margin-right: 2vw;
     justify-content: flex-start;
     align-items: flex-end;
-    gap: 80px;
+    gap: 2.5vw;
 }
 .headertext{
     margin-top: 40px;
@@ -23,13 +26,19 @@
 .sidebarmenuItems{
     display: flex;
     flex-direction: row;
-    margin: 40px;
-    margin-right: 50px;
+    margin: 1.5vw;
+    margin-right: 2.5vw;
     justify-content: flex-start;
     align-items: flex-end;
-    gap: 80px;
+    gap: 4vw;
+}
+.click{
+    cursor: pointer;
+
 }
 .itemtext{
     margin-top: 20px;
     font-size: 16px;
+    cursor: pointer;
+
 }

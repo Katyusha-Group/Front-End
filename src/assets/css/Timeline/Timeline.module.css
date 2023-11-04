@@ -1,13 +1,14 @@
 .timeline {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: 50vw;
-  min-height: 100vh;
-  height: fit-content;
-  margin: 0px auto;
+  margin-right: 26vw;
+  height: 90vh;
+  /* margin: 0px auto; */
   border-radius: 15px;
   background-color: #272A3D;
+  position: fixed;
 }
 .tabs {
   /* display: flex;

@@ -1,9 +1,11 @@
 .main{
     border-radius: 15px;
-    width: 20vw;
+    width: 21vw;
+    margin-right: 79vw;
     background-color:#272a3d ;
-    margin-top: 100px;
-    margin-left: 20px;
+    margin-top: 70px;
+    height: 85vh;
+    margin-left: 1.5vw;
     
 }
 .searchbar{
