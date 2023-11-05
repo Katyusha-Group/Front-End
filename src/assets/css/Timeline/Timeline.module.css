@@ -1,13 +1,14 @@
 .timeline {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: 50vw;
-  min-height: 100vh;
-  height: fit-content;
-  margin: 0px auto;
+  margin-right: 4vw;
+  height: 90vh;
+  /* margin: 0px auto; */
   border-radius: 15px;
   background-color: #272A3D;
+  position: sticky;
 }
 .tabs {
   /* display: flex;
@@ -33,7 +34,12 @@
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 800px; */ 
 }
-.tweetContainer{
+.tweetsContainer{
+  display: flex;
+  flex-direction: column;
+  max-height: 74vh;
+  overflow-y: scroll;
+  
   /*  width: 800px; */
 }
 .activeTab {

@@ -5,6 +5,8 @@ import ProfileHeader from "./ProfileHeader";
 import Instructorall from "./Instructorall";
 import { apis } from "../../assets/apis";
 import { usesProfileMe } from "../../hooks/useProfileMe";
+import Sidebar from "../Sidebar/Sidebar.jsx";
+
 export default function Profile() {
   const {profile, setProfile, loading} = usesProfileMe()
   if(loading){
@@ -12,6 +14,7 @@ export default function Profile() {
   }
   return (
     <div className={styles.main}>
+      <Sidebar />
       <div className={styles.rightpart}>
         <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
