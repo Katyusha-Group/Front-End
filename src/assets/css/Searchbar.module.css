@@ -1,10 +1,12 @@
 .main{
     border-radius: 15px;
     width: 21vw;
-    margin-right: 79vw;
+    /* margin-right: 79vw; */
+    margin-right: 2.5vw;
+    position: sticky;
     background-color:#272a3d ;
-    margin-top: 70px;
-    height: 85vh;
+    margin-top: 5vh;
+    height: 90vh;
     margin-left: 1.5vw;
     
 }
