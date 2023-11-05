@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Select from "react-select";
 import * as style from "../assets/css/SignUp.module.css";
-import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
@@ -10,6 +8,7 @@ import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
 import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
+import { SelectBoxFormGroup } from "../assets/FormGroups/SelectBoxFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
@@ -19,9 +18,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  FormGroup,
   Form,
-  Input,
   Row,
   Col,
   Container,
@@ -169,7 +166,7 @@ function SignUp() {
       }
     })
 
-    const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
+    const response = await fetch(apis["accounts"]["signup"], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -280,46 +277,22 @@ function SignUp() {
 
                       <Row>
                         <Col lg="6">
-                          <FormGroup className="text-right">
-                            <label>رشته</label>
-                            <br />
-
-                            <Select
-                              options={subjectOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="subject"
-                              onChange={handleSubject}
-                            />
-
-                            {errorMessage.subjectError && (
-                              <div className={style.selectError}>
-                                {errorMessage.subjectError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <SelectBoxFormGroup
+                            label={"رشته"}
+                            options={subjectOptions}
+                            name={subject}
+                            onChange={handleSubject}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
                         <Col lg="5" className="offset-lg-1">
-                          <FormGroup className="text-right">
-                            <label>جنسیت</label>
-                            <br />
-
-                            <Select
-                              options={genderOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="gender"
-                              onChange={handleGender}
-                            />
-
-                            {errorMessage.genderError && (
-                              <div className={style.selectError}>
-                                {errorMessage.genderError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <SelectBoxFormGroup
+                            label={"جنسیت"}
+                            options={genderOptions}
+                            name={gender}
+                            onChange={handleGender}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
                       </Row>
                     </Form>
