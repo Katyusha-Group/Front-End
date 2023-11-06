@@ -19,6 +19,11 @@ const tweets = [
   // Add more tweets as needed
 ];
 
+let tabsList = [
+  ["tweets", "دنبال کننده ها"],
+  ["media", "برای شما"]
+];
+
 function Timeline({tabsList}) {
   console.log("Tabs are: " + tabsList);
   const [activeTab, setActiveTab] = useState('tweets');
@@ -26,6 +31,14 @@ function Timeline({tabsList}) {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  if (tabsList == undefined)
+  {
+    tabsList = [
+      ["Tweets", "دنبال کننده ها"],
+      ["media", "برای شما"]
+    ];
+  }
 
   return (
     <>
