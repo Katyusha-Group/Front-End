@@ -6,9 +6,15 @@ import Instructorall from "./Instructorall";
 import { apis } from "../../assets/apis";
 import { usesProfileMe } from "../../hooks/useProfileMe";
 import Sidebar from "../Sidebar/Sidebar.jsx";
-
+import Timeline from "../../views/TimeLine/Timeline.jsx";
+// class Tab {
+//   constructor(props) {
+//     this.name = props.name;
+//   }
+// }
 export default function Profile() {
-  const {profile, setProfile, loading} = usesProfileMe()
+  const {profile, setProfile, loading} = usesProfileMe();
+  // let tabs = 
   if(loading){
     return <></>
   }
@@ -22,9 +28,10 @@ export default function Profile() {
         </div>
       </div>
       <div className={styles.leftpart}>
-        <div className={styles.table}>برنامه هفتگی </div>
-        <div className={styles.div}></div>
-        <div className={styles.div}></div>
+        {/* <div className={styles.table}>برنامه هفتگی </div> */}
+        <div><Timeline/></div>
+        {/* <div className={styles.div}></div>
+        <div className={styles.div}></div> */}
       </div>
     </div>
   );

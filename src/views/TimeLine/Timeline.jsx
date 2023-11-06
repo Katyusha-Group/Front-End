@@ -31,27 +31,59 @@ function Timeline() {
     <div className={styles.timeline}>
       <div className={styles.tabs}>
         <button
-          className={activeTab === 'tweets' ? styles.activeTab : styles.tab}
-          onClick={() => handleTabClick('tweets')}
+          className={activeTab === 'Main' ? styles.activeTab : styles.tab}
+          onClick={() => handleTabClick('Main')}
         >
-          دنبال کننده ها
+          صفحه اصلی
         </button>
         <button
-          className={activeTab === 'media' ? styles.activeTab : styles.tab}
-          onClick={() => handleTabClick('media')}
+          className={activeTab === 'Tweets' ? styles.activeTab : styles.tab}
+          onClick={() => handleTabClick('Tweets')}
         >
-          برای شما
+          پست ها
         </button>
+        <button
+          className={activeTab === 'Likes' ? styles.activeTab : styles.tab}
+          onClick={() => handleTabClick('Likes')}
+        >
+          Likes
+        </button>
+        <button
+          className={activeTab === 'Comments' ? styles.activeTab : styles.tab}
+          onClick={() => handleTabClick('Comments')}
+        >
+          Comments
+        </button>
+        {/* {Object.entries(tabs).map ( (entry) => {
+          return (
+            <button
+              className={activeTab === entry.name ? styles.activeTab : styles.tab}
+              onClick={() => handleTabClick(entry.name)}
+            >
+              {entry.name}
+            </button> 
+          )})
+        } */}
       </div>
       <div className={styles.content}>
-        {activeTab === 'tweets' && (
+        {activeTab === 'Main' && (
+          <div className={styles.tweetsContainer}>
+            {/* Render media content here */}
+          </div>
+        )}
+        {activeTab === 'Tweets' && (
           <div className={styles.tweetsContainer}>
             {tweets.map((tweet) => (
               <Tweet key={tweet.id} tweet={tweet} />
             ))}
           </div>
         )}
-        {activeTab === 'media' && (
+        {activeTab === 'Likes' && (
+          <div className={styles.tweetsContainer}>
+            {/* Render media content here */}
+          </div>
+        )}
+        {activeTab === 'Comments' && (
           <div className={styles.tweetsContainer}>
             {/* Render media content here */}
           </div>

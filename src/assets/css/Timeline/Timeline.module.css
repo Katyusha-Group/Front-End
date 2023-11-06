@@ -1,6 +1,7 @@
 .timeline {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   /* margin-top: 100px; */
   width: 50vw;
   margin-right: 4vw;
@@ -43,21 +44,22 @@
   /*  width: 800px; */
 }
 .activeTab {
-  width: 20vw;
+  width: 10vw;
   height: 40px;
   border: none;
   border-bottom: 3px solid #67539E ;
   background-color: #272A3D;
   color: white;
+  margin: 20px 10px;
 }
 
 .tab {
-  width: 20vw;
+  width: 10vw;
   height: 40px;
   border: none;
   background-color: #272A3D;
   color: white;
-  margin: 30px 20px;
+  margin: 20px 10px;
 }
 
 /* Add more styles as needed */
