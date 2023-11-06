@@ -20,21 +20,6 @@ export default function ExamChart() {
     setExamTable(info.courseChoosed);
   }, [info.courseChoosed]);
 
-  // class Course {
-  //   constructor(props, IsFromChosencourses) {
-  //     this.name = props.name;
-  //     this.complete_course_number = props.complete_course_number;
-  //     this.class_gp = props.class_gp;
-  //     this.complete_course_number = props.complete_course_number;
-  //     this.course_times = props.course_times;
-  //     this.base_course_number = parseInt(this.complete_course_number.substring(0, this.complete_course_number.length - 3));
-  //     this.DepartmentID = parseInt(this.complete_course_number.substring(0, 2));
-  //     this.can_take = props.is_allowed;
-  //     this.exam_times = props.exam_times;
-  //     this.IsChosen = IsFromChosencourses;
-  //     this.backgColor = (this.IsChosen) ? "rgb(29, 113, 236)" : "hsl(235, 22%, 30%)";
-  //   }
-  // }
   ExamTable = uniquifyArrayByKey(ExamTable, "complete_course_number")
   const keyedExamTable = useMemo(() => {                             // Mapping the courses into keyedExamTable
     return GeneratekeyedExamTable(ExamTable);

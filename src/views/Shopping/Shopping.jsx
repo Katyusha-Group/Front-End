@@ -25,6 +25,9 @@ import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
 import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
 import { saveWallet } from "../../hooks/Shopping/getWallet";
+import { changeChecked } from "../../Functions/Shopping/changeChecked";
+import { order } from "../../Functions/Shopping/order";
+
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -58,138 +61,6 @@ function Shopping() {
     });
   };
 
-  function order() {
-    showLoading();
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["orders"], {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cart_id: shopId.id,
-        payment_method: "W",
-      }),
-    })
-      .then((response) => {
-        if (response.status == 400) {
-          return response.json().then((data) => {
-            alert(
-              data.telegram +
-                "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
-            );
-          });
-        } else
-          return response.json().then((data) => {
-            notify("tl");
-            saveWallet();
-            let newCart = CartCreator({ setState, setTotalPrice, setAmount });
-          });
-      })
-
-      .catch((error) => {
-        console.error(error);
-      });
-    closeLoading();
-  }
-
-  const notify = (place) => {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>خرید شما با موفقیت انجام شد</div>
-        </div>
-      ),
-      type: type,
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
-
-  /**
-   * Change the checkbox
-   * @param {number} num 1 is email 2 is sms 3 is telegram
-   * @param {number} index index of list of state you need to change
-   */
-  function changeChecked(num, index) {
-    const tokenJson = localStorage.getItem("authTokens");
-    const tokenClass = JSON.parse(tokenJson);
-    const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    let u = state;
-    switch (num) {
-      case 1:
-        u[index].contain_email = !u[index].contain_email;
-        break;
-      case 2:
-        u[index].contain_sms = !u[index].contain_sms;
-        break;
-      case 3:
-        u[index].contain_telegram = !u[index].contain_telegram;
-        break;
-
-      default:
-        break;
-    }
-    setState(u);
-    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        complete_course_number: num,
-        contain_telegram: u[index].contain_telegram,
-        contain_sms: u[index].contain_sms,
-        contain_email: u[index].contain_email,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        let newData = state[index];
-        if (data.total_price !== undefined) {
-          newData.price = data.total_price;
-        }
-        let newList = state.map((item) => {
-          if (item.id === newData.id) {
-            return newData;
-          }
-          return item;
-        });
-        setState([...newList]);
-      })
-      .then((error) => {
-        console.error(error);
-      });
-  }
-
-  function deleteItem(index) {}
   return (
     <>
       <div>
@@ -262,7 +133,7 @@ function Shopping() {
                       "کالایی انتخاب نشده"
                     ) : (
                       <Button
-                        onClick={order}
+                        onClick={()=>order(notificationAlertRef,saveWallet, CartCreator, setState,setTotalPrice, setAmount)}
                         color="primary"
                         className="buy_button"
                       >
@@ -322,7 +193,7 @@ function Shopping() {
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
-                                    changeChecked(1, index);
+                                    changeChecked(1, index, state, setState);
                                   }}
                                   checked={state[index].contain_email}
                                   type="checkbox"
@@ -345,7 +216,7 @@ function Shopping() {
                                   valid={false}
                                   onChange={() => {
                                     ss2(() => !s2);
-                                    changeChecked(2, index);
+                                    changeChecked(2, index, state, setState);
                                   }}
                                 />
                                 <span className="form-check-sign">
@@ -362,7 +233,7 @@ function Shopping() {
                                   type="checkbox"
                                   onChange={() => {
                                     ss3(() => !s3);
-                                    changeChecked(3, index);
+                                    changeChecked(3, index, state, setState);
                                   }}
                                 />
                                 <span className="form-check-sign">
