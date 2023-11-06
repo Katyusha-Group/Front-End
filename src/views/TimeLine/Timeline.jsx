@@ -19,7 +19,8 @@ const tweets = [
   // Add more tweets as needed
 ];
 
-function Timeline() {
+function Timeline({tabsList}) {
+  console.log("Tabs are: " + tabsList);
   const [activeTab, setActiveTab] = useState('tweets');
 
   const handleTabClick = (tab) => {
@@ -30,7 +31,7 @@ function Timeline() {
     <>
     <div className={styles.timeline}>
       <div className={styles.tabs}>
-        <button
+        {/* <button
           className={activeTab === 'Main' ? styles.activeTab : styles.tab}
           onClick={() => handleTabClick('Main')}
         >
@@ -53,17 +54,17 @@ function Timeline() {
           onClick={() => handleTabClick('Comments')}
         >
           Comments
-        </button>
-        {/* {Object.entries(tabs).map ( (entry) => {
-          return (
+        </button> */}
+        {tabsList.map ( (entry, index) => (
             <button
-              className={activeTab === entry.name ? styles.activeTab : styles.tab}
-              onClick={() => handleTabClick(entry.name)}
+              key={index}
+              className={activeTab === entry[0] ? styles.activeTab : styles.tab}
+              onClick={() => handleTabClick(entry[0])}
             >
-              {entry.name}
-            </button> 
-          )})
-        } */}
+              {entry[1]}
+            </button>
+          ))
+        }
       </div>
       <div className={styles.content}>
         {activeTab === 'Main' && (

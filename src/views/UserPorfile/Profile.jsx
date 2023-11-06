@@ -7,14 +7,19 @@ import { apis } from "../../assets/apis";
 import { usesProfileMe } from "../../hooks/useProfileMe";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import Timeline from "../../views/TimeLine/Timeline.jsx";
-// class Tab {
-//   constructor(props) {
-//     this.name = props.name;
-//   }
-// }
+import { useState } from 'react';
+
 export default function Profile() {
   const {profile, setProfile, loading} = usesProfileMe();
-  // let tabs = 
+  // let [tabs, setTabs] = useState([]);
+  const tabs = [
+    ["Main", "صفحه اصلی"],
+    ["Tweets", "پست ها"],
+    ["Likes", "Likes"],
+    ["Comments", "Comments"]
+  ];
+  // setTabs(tempTab);
+  console.log("Tabs: " + tabs[0][0]);
   if(loading){
     return <></>
   }
@@ -29,7 +34,7 @@ export default function Profile() {
       </div>
       <div className={styles.leftpart}>
         {/* <div className={styles.table}>برنامه هفتگی </div> */}
-        <div><Timeline/></div>
+        <div><Timeline tabsList={tabs}/></div>
         {/* <div className={styles.div}></div>
         <div className={styles.div}></div> */}
       </div>
