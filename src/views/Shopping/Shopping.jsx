@@ -23,7 +23,7 @@ import {
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
-import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
+import { useGetCartInfo } from "../../hooks/Shopping/useGetCartInfo";
 import { saveWallet } from "../../hooks/Shopping/getWallet";
 import { changeChecked } from "../../Functions/Shopping/changeChecked";
 import { order } from "../../Functions/Shopping/order";
@@ -35,10 +35,8 @@ function Shopping() {
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-
-
-  const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
-    getCartInfo();
+  const { state, setState, amount, setAmount, totalPrice, setTotalPrice,loading } =
+  useGetCartInfo();
   const {wallet,setWallet} = saveWallet();
 
   closeLoading();

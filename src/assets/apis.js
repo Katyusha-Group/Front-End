@@ -41,7 +41,6 @@ export const apis = {
   profiles: {
     me: `${domain}/profiles/me/`,
   }
-
 };
 
 

@@ -6,18 +6,19 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-export const getCartInfo = () => {
+import axios from "axios";
+export const useGetCartInfo = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [state, setState] = useState([]);
   const [amount, setAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   function getCartInfo() {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/`, {
+    axios(apis["carts"] + `${shopId.id}/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) =>{
+        const data =  response.json()
         setState(data.items);
         setTotalPrice(data.total_price);
         setAmount(data.total_number);
