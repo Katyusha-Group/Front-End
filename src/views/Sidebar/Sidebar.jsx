@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
+import { Card } from "reactstrap";
 
 const Sidebar = () => {
   return (
-    <div className={styles.bg}>
+    <Card className={styles.bg}>
       <div>
         <div className={styles.header}>
           <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
@@ -48,7 +49,7 @@ const Sidebar = () => {
         </div>
        
       </div>
-    </div>
+    </Card>
   );
 };
 

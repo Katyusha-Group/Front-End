@@ -1,10 +1,9 @@
 .bg{
-    background-color: #1e1e1e;
     width: 100vw;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: row;
 }
 .items{
-    margin: 5vh 0px;
+    margin: 5vh 0 0 0;
 }

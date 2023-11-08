@@ -1,53 +1,30 @@
+@import './../../css/black-dashboard-react.css';
+
 .timeline {
   display: flex;
   flex-direction: column;
-  /* margin-top: 100px; */
   width: 50vw;
-  margin-right: 4vw;
+  margin: 0 4vw 0 0;
   height: 90vh;
-  /* margin: 0px auto; */
   border-radius: 15px;
-  background-color: #272A3D;
   position: sticky;
 }
 .tabs {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   border-radius: 15px;
-  width: 800px;
-  margin: 0 auto;
-  
-
-  background-color: #373C57; */
-  border-radius: 15px;
-
 }
-.tweet {
-  /* display: flex;
-  background-color: #ffffff;
-  border: 1px solid #e1e8ed;
-  margin: 10px;
-  padding: 10px;
-  /* border-radius: 10px; */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 800px; */ 
-}
+
 .tweetsContainer{
   display: flex;
   flex-direction: column;
   max-height: 74vh;
-  overflow-y: scroll;
-  
-  /*  width: 800px; */
+  overflow-y: hidden;
 }
 .activeTab {
   width: 20vw;
   height: 40px;
   border: none;
-  border-bottom: 3px solid #67539E ;
-  background-color: #272A3D;
+  border-bottom: 3px solid var(--purple) ;
+  background-color: initial;
   color: white;
 }
 
@@ -55,7 +32,7 @@
   width: 20vw;
   height: 40px;
   border: none;
-  background-color: #272A3D;
+  background-color: initial;
   color: white;
   margin: 30px 20px;
 }
