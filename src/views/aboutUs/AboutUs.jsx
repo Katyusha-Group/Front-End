@@ -1,6 +1,6 @@
 import React from "react";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-import "../aboutUs/AboutUs.css";
+import * as style from "../aboutUs/AboutUs.module.css";
 import im from "../../assets/img/About us page-bro.png";
 import {
   Col,
@@ -13,11 +13,11 @@ export function AboutUs() {
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
           <div className="mt-5"></div>
-          <div className="aboutUs_content_without_sidebar">
-            <Col className="aboutUs_BGimgCol">
-              <img className="aboutUs_BGimg" src={im} />
+          <div className={style.aboutUs_content_without_sidebar}>
+            <Col className={style.aboutUs_BGimgCol}>
+              <img className={style.aboutUs_BGimg} src={im} />
               <div
-                className="infoDivAboutUs"
+                className={style.infoDivAboutUs}
                 style={{ textAlign: "right", color: "#999aa3" }}
               >
                 {`این سامانه توسط جمعی از دانشجویان مهندسی کامپیوتر ورودی ۹۹ دانشگاه علم و صنعت طراحی شده است . خوشحال می شویم اگر نظراتتان را با ما در میان بگذارید.  

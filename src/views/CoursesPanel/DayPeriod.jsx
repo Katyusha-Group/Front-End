@@ -3,7 +3,7 @@ import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
 import ModalLessons from "../../components/ModalLessons/ModalLessons";
-
+import * as style from  "./CoursesPanel.module.css";
 const DayPeriod = (Input) => {
   const [showLesson, setShowLesson] = React.useState({
     flag: false,
@@ -38,10 +38,10 @@ const DayPeriod = (Input) => {
     <div>
       {Object.entries(Input).map(([count, entry]) => {
         return (
-          <div className="CourseListContainer">
+          <div className={style.CourseListContainer}>
             {entry !== null && (
-              <div className="CourseContainer" key={entry.complete_course_number}>
-                <div className="Course"
+              <div className={style.CourseContainer} key={entry.complete_course_number}>
+                <div className={style.Course}
                   style={{ backgroundColor: entry.backgColor, fontSize: /\s/.test(entry.name) ? "x-small" : "xx-small" }}
                   onClick={() => apiForModalData(entry.complete_course_number, true)}
                 >
@@ -49,7 +49,7 @@ const DayPeriod = (Input) => {
                     {entry.name.length < 17 ? entry.name : entry.name.slice(0, 17) + "..."} ({entry.class_gp})
                   </div>
                 </div>
-                <button className="btn-fill-AddCourseButton"
+                <button className={style.AddCourseButton}
                   name="AddOrRemoveCourseButton"
                   style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
                   onClick={() => {

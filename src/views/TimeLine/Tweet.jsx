@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
+import { Card } from "reactstrap";
 function Tweet({ tweet }) {
   return (
     <Card className={styles.tweet}>
@@ -11,7 +12,6 @@ function Tweet({ tweet }) {
       <div className={styles.reply}>
         سلام
       </div>
-      
       <div className={styles.content}>
         <div className={styles.text}>{tweet.text}</div>
       </div>
@@ -21,7 +21,6 @@ function Tweet({ tweet }) {
           <button className={styles.button}><span className={styles.icon_text}>500</span><i className={`far fa-comment ${styles.icon }`}></i></button>
         </ButtonGroup>
       </div>
-      
     </Card>
   );
 }

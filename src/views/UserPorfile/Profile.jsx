@@ -3,12 +3,20 @@ import React from "react";
 import * as styles from "../../assets/css/Profile.module.css";
 import ProfileHeader from "./ProfileHeader";
 import Instructorall from "./Instructorall";
+import { apis } from "../../assets/apis";
+import { usesProfileMe } from "../../hooks/useProfileMe";
+import Sidebar from "../Sidebar/Sidebar.jsx";
 
 export default function Profile() {
+  const {profile, setProfile, loading} = usesProfileMe()
+  if(loading){
+    return <></>
+  }
   return (
     <div className={styles.main}>
+      <Sidebar />
       <div className={styles.rightpart}>
-        <ProfileHeader />
+        <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
           <Instructorall />
         </div>

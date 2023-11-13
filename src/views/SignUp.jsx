@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Select from "react-select";
-import "../assets/css/SignUp.css";
+import * as style from "../assets/css/SignUp.module.css";
 import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
-import { useInfo } from "../contexts/InfoContext";
 import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
-import {IsValidEmail} from "../Functions/IsValidEmail"
-import {PasCloseEyeIcon} from "../Functions/PasCloseEyeIcon"
-import {ConfirmPasCloseEyeIcon} from "../Functions/ConfirmPasCloseEyeIcon"
+import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
+import { IsValidEmail } from "../Functions/IsValidEmail"
+import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
+import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
 import {
   Button,
   Card,
@@ -26,9 +29,10 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const { info, changeInfo } = useInfo();
   const Navigate = useNavigate();
   const [formData, setFormData] = useState({
+    profileName: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -68,6 +72,8 @@ function SignUp() {
     setGender(selectedOption.value);
   }
   const [errorMessage, setErrorMessage] = useState({
+    profileNameError: "",
+    usernameError: "",
     emailError: "",
     passError: "",
     passErrorRep: "",
@@ -80,6 +86,8 @@ function SignUp() {
 
     const errors = [
       {
+        profileNameError: "",
+        usernameError: "",
         emailError: "",
         passError: "",
         passErrorRep: "",
@@ -88,6 +96,13 @@ function SignUp() {
         backError: "",
       },
     ];
+
+    if (formData.profileName.trim().length === 0) {
+      errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
+    }
+    if (formData.username.trim().length === 0) {
+      errors.usernameError = "!وارد کردن نام کاربری الزامی است";
+    }
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
@@ -117,6 +132,8 @@ function SignUp() {
       errors.subjectError = "!وارد کردن رشته الزامی است";
     }
     setErrorMessage({
+      profileNameError: errors.profileNameError,
+      usernameError: errors.usernameError,
       emailError: errors.emailError,
       passError: errors.passError,
       passErrorRep: errors.passErrorRep,
@@ -124,6 +141,8 @@ function SignUp() {
       subjectError: errors.subjectError,
     });
     if (
+      errors.profileName ||
+      errors.usernameError ||
       errors.emailError ||
       errors.passError ||
       errors.passErrorRep ||
@@ -139,8 +158,8 @@ function SignUp() {
       timerProgressBar: true,
       showConfirmButton: false,
       background: '#3c3e5d',
-        color:'#ceccc0',
-      width:'25rem',
+      color: '#ceccc0',
+      width: '25rem',
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -149,7 +168,7 @@ function SignUp() {
       if (result.dismiss === Swal.DismissReason.timer) {
       }
     })
-  
+
     const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
       method: "POST",
       headers: {
@@ -166,17 +185,17 @@ function SignUp() {
     });
     const data = await response.json();
     Swal.close()
-    if ( response.status===201){      
-      localStorage.setItem("token",data.token)
-      localStorage.setItem("verificationLink",data.url)
+    if (response.status === 201) {
+      localStorage.setItem("token", data.token)
+      localStorage.setItem("verificationLink", data.url)
       Swal.fire({
         icon: 'success',
         title: ' کد تایید ارسال شد',
-        html:'لطفا ایمیلتان را چک کنید',
+        html: 'لطفا ایمیلتان را چک کنید',
         background: '#3c3e5d',
-        color:'#ceccc0',
-        width:'25rem',
-        confirmButtonText:"باشه"
+        color: '#ceccc0',
+        width: '25rem',
+        confirmButtonText: "باشه"
       })
       Navigate("/verification");
     } else {
@@ -191,14 +210,14 @@ function SignUp() {
   return (
     <>
       <div className="wrapper">
-        <div className="signUpContainer">
+        <div className={style.signUpContainer}>
           <div className="content contentLogin">
             <Row className="justify-content-center">
               <Col className="text-right" md="4" >
                 {errorMessage.backError && (
-                  <div className="back-error" style={{direction: 'ltr'}}>{errorMessage.backError}</div>
+                  <div className={style.backError}>{errorMessage.backError}</div>
                 )}
-                <Card style={{direction: 'ltr'}}>
+                <Card className={style.cardStyle}>
                   <CardHeader>
                     <h5 className="title text-center">ثبت نام</h5>
                   </CardHeader>
@@ -206,74 +225,56 @@ function SignUp() {
                     <Form >
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label htmlFor="exampleInputEmail1">ایمیل</label>
-                            <Input
-                              className="text-right"
-                              placeholder="ایمیل خود را وارد کنید"
-                              type="email"
-                              name="email"
-                              onChange={handleChange}
-                              value={formData.email}
-                            />
-                            {errorMessage.emailError && (
-                              <div className="error" >
-                                {errorMessage.emailError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
+                          </TextFormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label>رمز عبور</label>
-                            <Input
-                              className="text-right"
-                              placeholder="رمز عبور را وارد کنید"
-                              type="password"
-                              name="password"
-                              id="password_field"
-                              onChange={handleChange}
-                              value={formData.password}
-                            ></Input>
-                            <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={PasCloseEyeIcon}
-                              id="togglePassword"
-                            ></i>
-                            {errorMessage.passError && (
-                              <div className="error">
-                                {errorMessage.passError}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <TextFormGroup
+                            label={"نام کاربری"}
+                            placeHolder={"نام کاربری خود را وارد کنید"}
+                            value={formData.username}
+                            name={"username"}
+                            onChange={handleChange}
+                            error={errorMessage.usernameError}>
+                          </TextFormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col md="12">
-                          <FormGroup className="text-right">
-                            <label>تکرار رمز عبور</label>
-                            <Input
-                              className="text-right"
-                              placeholder="تکرار رمز عبور را وارد کنید"
-                              type="password"
-                              name="passwordConfirm"
-                              id="confirm_password_field"
-                              onChange={handleChange}
-                              value={formData.passwordConfirm}
-                            />
-                            <i
-                              className="tim-icons fa fa-eye-slash viewpass mr-4 text-muted"
-                              onClick={ConfirmPasCloseEyeIcon}
-                              id="toggleConfirmPassword"
-                            ></i>
-                            {errorMessage.passErrorRep && (
-                              <div className="error">
-                                {errorMessage.passErrorRep}
-                              </div>
-                            )}
-                          </FormGroup>
+                          <EmailFormGroup
+                            placeHolder={"ایمیل خود را وارد کنید"}
+                            value={formData.email}
+                            onChange={handleChange}
+                            error={errorMessage.emailError}>
+                          </EmailFormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md="12">
+                          <PasswordFormGroup
+                            value={formData.password}
+                            onChange={handleChange}
+                            error={errorMessage.passError}
+                            onClick={PasCloseEyeIcon}>
+                          </PasswordFormGroup>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md="12">
+                          <ConfirmPasswordFormGroup
+                            value={formData.passwordConfirm}
+                            onChange={handleChange}
+                            error={errorMessage.passErrorRep}
+                            onClick={ConfirmPasCloseEyeIcon}>
+                          </ConfirmPasswordFormGroup>
                         </Col>
                       </Row>
 
@@ -293,7 +294,7 @@ function SignUp() {
                             />
 
                             {errorMessage.subjectError && (
-                              <div className="select-error">
+                              <div className={style.selectError}>
                                 {errorMessage.subjectError}
                               </div>
                             )}
@@ -314,7 +315,7 @@ function SignUp() {
                             />
 
                             {errorMessage.genderError && (
-                              <div className="select-error" style={{whiteSpace: 'nowrap'}}>
+                              <div className={style.selectError}>
                                 {errorMessage.genderError}
                               </div>
                             )}
@@ -347,7 +348,7 @@ function SignUp() {
             </Row>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }

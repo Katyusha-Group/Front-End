@@ -1,4 +1,3 @@
-
 .shopping_label {
   margin: 0.5rem 1rem;
 }
@@ -25,4 +24,14 @@
 
 .price {
   height: 60%;
+}
+
+.loginLmsModal {
+  background: #27293d;
+  border-radius: 1rem;
+}
+
+
+.loginLmsModalBody {
+  padding: 0 !important;
 }

@@ -15,79 +15,48 @@ import {
   CardFooter,
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
-import * as style from  "../../assets/css/Shopping.module.css";
+import * as style from "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
-import * as UserPageStyle from "../../assets/css/UserPage.module.css"
+import * as UserPageStyle from "../../assets/css/UserPage.module.css";
+import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
+import { saveWallet } from "../../hooks/Shopping/getWallet";
 function Shopping() {
-  const { info, changeInfo } = useInfo();
-  const [state, setState] = React.useState([]);
-  const [totalPrice, setTotalPrice] = React.useState(0);
-  const [amount, setAmount] = React.useState(0);
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-  const [wallet, setWallet] = React.useState(0);
-  function getCartInfo() {
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setState(data.items);
-        setTotalPrice(data.total_price);
-        setAmount(data.total_number);
-      })
-      .catch((error) => console.error(error));
-  }
-  function saveWallet(){
-    fetch(apis["accounts"]["wallet"]["seeWallet"], {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setWallet(data.balance);
-      })
-      .catch((error) => console.error(error));
-  }
-  React.useEffect(() => {
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    showLoading();
+
+
+  const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
     getCartInfo();
-    saveWallet();
-  }, []);
+  const {wallet,setWallet} = saveWallet();
 
   closeLoading();
-  const delete_item =(num, index) => {
+  const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(
-      apis["carts"]+`${shopId.id}/items/${state[index].id}/`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          complete_course_number: num,
-          contain_telegram: true,
-          contain_sms: true,
-          contain_email: true,
-        }),
-      }
-    ).then((response) =>{
+    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      }),
+    }).then((response) => {
       getCartInfo();
-
     });
-  }
+  };
 
   function order() {
     showLoading();
@@ -105,7 +74,6 @@ function Shopping() {
       }),
     })
       .then((response) => {
-        
         if (response.status == 400) {
           return response.json().then((data) => {
             alert(
@@ -120,11 +88,11 @@ function Shopping() {
             let newCart = CartCreator({ setState, setTotalPrice, setAmount });
           });
       })
-      
+
       .catch((error) => {
         console.error(error);
       });
-      closeLoading ();
+    closeLoading();
   }
 
   const notify = (place) => {
@@ -154,9 +122,7 @@ function Shopping() {
       place: place,
       message: (
         <div>
-          <div>
-            خرید شما با موفقیت انجام شد
-          </div>
+          <div>خرید شما با موفقیت انجام شد</div>
         </div>
       ),
       type: type,
@@ -167,8 +133,8 @@ function Shopping() {
 
   /**
    * Change the checkbox
-   * @param {int} num 1 is email 2 is sms 3 is telegram
-   * @param {int} index index of list of state you need to change
+   * @param {number} num 1 is email 2 is sms 3 is telegram
+   * @param {number} index index of list of state you need to change
    */
   function changeChecked(num, index) {
     const tokenJson = localStorage.getItem("authTokens");
@@ -191,22 +157,19 @@ function Shopping() {
         break;
     }
     setState(u);
-    fetch(
-      apis["carts"]+`${shopId.id}/items/${state[index].id}/`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          complete_course_number: num,
-          contain_telegram: u[index].contain_telegram,
-          contain_sms: u[index].contain_sms,
-          contain_email: u[index].contain_email,
-        }),
-      }
-    )
+    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: u[index].contain_telegram,
+        contain_sms: u[index].contain_sms,
+        contain_email: u[index].contain_email,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         let newData = state[index];
@@ -229,20 +192,21 @@ function Shopping() {
   function deleteItem(index) {}
   return (
     <>
-    <div>
-          <NotificationAlert ref={notificationAlertRef} />
-
-    </div>
+      <div>
+        <NotificationAlert ref={notificationAlertRef} />
+      </div>
       <div className="wrapper" style={{ direction: "ltr" }}>
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
-            <div className="react-notification-alert-container">
-            </div>
+            <div className="react-notification-alert-container"></div>
 
-            <Row style={{height:'80vh'}}>
-              <Col md="3" >
-                <Card className="" style={{height: "100%", marginBottom: "0"}}>
+            <Row style={{ height: "80vh" }}>
+              <Col md="3">
+                <Card
+                  className=""
+                  style={{ height: "100%", marginBottom: "0" }}
+                >
                   <CardHeader
                     className="shop_row m-1"
                     style={{
@@ -282,7 +246,12 @@ function Shopping() {
                         تعداد {amount}
                       </Col>
                     </Row>
-                    <div className={"d-flex justify-content-center align-items-center " + style.price}>
+                    <div
+                      className={
+                        "d-flex justify-content-center align-items-center " +
+                        style.price
+                      }
+                    >
                       <h2>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
@@ -303,8 +272,15 @@ function Shopping() {
                   </CardFooter>
                 </Card>
               </Col>
-              <Col md="9" >
-                <Card className={style.shop_card} style={{height: "100%", marginBottom: "0" ,justifyContent: `${state.length == 0 ? "center" : ""}`}}>
+              <Col md="9">
+                <Card
+                  className={style.shop_card}
+                  style={{
+                    height: "100%",
+                    marginBottom: "0",
+                    justifyContent: `${state.length == 0 ? "center" : ""}`,
+                  }}
+                >
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
@@ -357,7 +333,11 @@ function Shopping() {
                                 ایمیل
                               </Label>
                             </FormGroup>
-                            <FormGroup className={style.shopping_form} check disabled>
+                            <FormGroup
+                              className={style.shopping_form}
+                              check
+                              disabled
+                            >
                               <Label check className={style.shopping_label}>
                                 <Input
                                   checked={false}

@@ -34,7 +34,7 @@
     padding: 2px;
 }
 
-.btn-fill-AddCourseButton {             /* Add or remove course button */
+.AddCourseButton {             /* Add or remove course button */
     height: 100%;
     border: none;
     color: white;

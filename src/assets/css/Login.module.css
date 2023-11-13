@@ -1,0 +1,64 @@
+.viewpass {
+  float: left;
+  margin-left: 18px;
+  margin-top: -47px;
+  position: relative;
+  z-index: 2;
+}
+
+.viewpass:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.cardStyle {
+  border-radius: 0.3rem !important;
+  direction: ltr !important;
+}
+
+.error {
+  color: red;
+  font-size: small;
+  height: 1px;
+  position: relative;
+  top: -10px;
+  direction: ltr;
+}
+
+.backError {
+  direction: ltr !important;
+  background-color: #e14eca;
+  border-radius: 1.3rem;
+  color: #ffffff;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 0.2857rem;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+@keyframes signup-response {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes signup-response {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.signUpContainer {
+  margin-top: 120px !important;
+  direction: rtl;
+  padding: 0px;
+}
