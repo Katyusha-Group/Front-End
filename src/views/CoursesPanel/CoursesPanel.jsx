@@ -22,6 +22,7 @@ import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 import GenerateKeyedTimetable from "./KeyedTimetable";
 import "./CoursesPanel.css"
 import SelectStyles from "../../assets/styles/SelectStyles";
+import axios from "axios";
 
 export default function CoursesPanel() {
   const tokenJson = localStorage.getItem("authTokens");
@@ -42,7 +43,7 @@ export default function CoursesPanel() {
   }
 
   useEffect(() => {
-    fetch(apis["departmentsAll"]["names"])
+    axios(apis["departmentsAll"]["names"])
       .then((response) => response.json())
       .then((DepartmentOptions) => {
       setDepartmentOptions(DepartmentOptions);
@@ -54,7 +55,7 @@ export default function CoursesPanel() {
   }, []);
 
   useEffect ( () => {
-    fetch(apis["courses"]["my_courses"], {
+    axios(apis["courses"]["my_courses"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
