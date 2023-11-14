@@ -12,6 +12,7 @@ import { SelectBoxFormGroup } from "../assets/FormGroups/SelectBoxFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
+import { postSignUp } from "../Functions/postData/postSignUp";
 import {
   Button,
   Card,
@@ -166,20 +167,24 @@ function SignUp() {
       }
     })
 
-    const response = await fetch(apis["accounts"]["signup"], {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response =
+      // postSignUp(formData, subject, gender);
+      await fetch(apis["accounts"]["signup"], {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({
-        email: formData.email,
-        password1: formData.password,
-        password2: formData.passwordConfirm,
-        department: subject,
-        gender: gender,
-      }),
-    });
+        body: JSON.stringify({
+          email: formData.email,
+          username: formData.username,
+          name: formData.profileName,
+          password1: formData.password,
+          password2: formData.passwordConfirm,
+          department: subject,
+          gender: gender,
+        }),
+      });
     const data = await response.json();
     Swal.close()
     if (response.status === 201) {
@@ -282,6 +287,7 @@ function SignUp() {
                             options={subjectOptions}
                             name={subject}
                             onChange={handleSubject}
+                            error={errorMessage.subjectError}
                           >
                           </SelectBoxFormGroup>
                         </Col>
@@ -291,6 +297,7 @@ function SignUp() {
                             options={genderOptions}
                             name={gender}
                             onChange={handleGender}
+                            error={errorMessage.genderError}
                           >
                           </SelectBoxFormGroup>
                         </Col>
