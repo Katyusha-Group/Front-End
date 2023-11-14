@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
-import { Card } from "reactstrap";
 function Tweet({ tweet }) {
   return (
     <Card className={styles.tweet}>
