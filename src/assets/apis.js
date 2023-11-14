@@ -13,24 +13,25 @@ export const apis = {
   courseCartOrderInfo: `${domain}/course-cart-order-info/`,
   getPrice: `${domain}/get-prices/`,
   coursegroups: `${domain}/coursegroups/`,
-  accounts:{
+  accounts: {
     activationConfirm: `${domain}/accounts/activation-confirm/`,
     changepassword: `${domain}/accounts/changepassword/`,
     resetPassword: `${domain}/accounts/reset-password/`,
     login: `${domain}/accounts/login/`,
-    justProfile:`${domain}/accounts/profile/`,
-    profile:{
+    signup: `${domain}/accounts/signup/`,
+    justProfile: `${domain}/accounts/profile/`,
+    profile: {
       updateProfile: `${domain}/accounts/profile/update/`,
     },
-    wallet:{
+    wallet: {
       seeWallet: `${domain}/accounts/wallet/see_wallet`,
     }
   },
   departments: `${domain}/departments/`,
   carts: `${domain}/carts/`,
-  timeline:{
-    teachers:`${domain}/timeline/teachers/`,
-    courses:`${domain}/timeline/courses/`,
+  timeline: {
+    teachers: `${domain}/timeline/teachers/`,
+    courses: `${domain}/timeline/courses/`,
   },
   departmentsAll: {
     names: `${domain}/departments/names`,
