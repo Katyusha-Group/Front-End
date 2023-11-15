@@ -10,24 +10,33 @@ import Timeline from "../../views/TimeLine/Timeline.jsx";
 import { useState } from 'react';
 
 export default function Profile() {
-  const {profile, setProfile, loading} = usesProfileMe();
+  // const {profile, setProfile, loading} = usesProfileMe();
+  var profile_temp = [
+    {
+      username: 'username1',
+      name: 'user',
+      image: '',
+      created_at: '2022-11-15 23:22',
+    }
+  ];
+  // setProfile(profile_temp);
   // let [tabs, setTabs] = useState([]);
   const tabs = [
     ["Main", "صفحه اصلی"],
     ["Tweets", "پست ها"],
-    ["Likes", "Likes"],
-    ["Comments", "Comments"]
+    ["Likes", "پسندیده ها"],
+    ["Comments", "نظرات"]
   ];
   // setTabs(tempTab);
   console.log("Tabs: " + tabs[0][0]);
-  if(loading){
-    return <></>
-  }
+  // if(loading){
+  //   return <></>
+  // }
   return (
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
-        <ProfileHeader profile={profile}/>
+        <ProfileHeader profile={profile_temp}/>
         <div className={styles.rightBottom}>
           <Instructorall />
         </div>

@@ -177,10 +177,12 @@ function SignUp() {
 
       body: JSON.stringify({
         email: formData.email,
+        username: formData.username,
+        name: formData.profileName,
         password1: formData.password,
         password2: formData.passwordConfirm,
-        department: subject,
         gender: gender,
+        department: subject,
       }),
     });
     const data = await response.json();

@@ -10,14 +10,15 @@ export const usesProfileMe = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     showLoading();
-    fetch(apis["profiles"]["me"], {
+    fetch(apis["profiles"]["my-username"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
         setProfile(data);
+        console.log("User profile data: " + data);
         closeLoading();
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
