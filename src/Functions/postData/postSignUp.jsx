@@ -88,6 +88,6 @@ export async function postSignUp(formData, subject, gender) {
 
         return response;
     } catch (error) {
-        زonsole.error(error);
+        console.error(error);
     }
 }
