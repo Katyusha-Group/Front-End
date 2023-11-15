@@ -40,12 +40,12 @@ export const apis = {
   orders: `${domain}/orders/`,
   notification: `${domain}/notification/`,
   profiles: {
-    me: `${domain}/profiles/me/`,
+    myprofile: `${domain}/profiles/`,
+    myusername: `${domain}/profiles/my-username/`,
     following: `${domain}/profiles//following`,
     followers: `${domain}/profiles//followers`,
-    followersyoufollow: `${domain}/profiles//followers-you-follow`
+    followersyoufollow: `${domain}/profiles//followers-you-follow`,
   }
-
 };
 
 

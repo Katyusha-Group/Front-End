@@ -25,7 +25,7 @@ let tabsList = [
 ];
 
 function Timeline({tabsList}) {
-  console.log("Tabs are: " + tabsList);
+  // console.log("Tabs are: " + tabsList);
   const [activeTab, setActiveTab] = useState('tweets');
 
   const handleTabClick = (tab) => {

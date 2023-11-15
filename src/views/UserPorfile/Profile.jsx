@@ -10,15 +10,15 @@ import Timeline from "../../views/TimeLine/Timeline.jsx";
 import { useState } from 'react';
 
 export default function Profile() {
-  // const {profile, setProfile, loading} = usesProfileMe();
-  var profile_temp = [
-    {
-      username: 'username1',
-      name: 'user',
-      image: '',
-      created_at: '2022-11-15 23:22',
-    }
-  ];
+  const {profile, setProfile, loading} = usesProfileMe();
+  // var profile_temp = [
+  //   {
+  //     username: 'username1',
+  //     name: 'user',
+  //     image: '',
+  //     created_at: '2022-11-15 23:22',
+  //   }
+  // ];
   // setProfile(profile_temp);
   // let [tabs, setTabs] = useState([]);
   const tabs = [
@@ -29,14 +29,15 @@ export default function Profile() {
   ];
   // setTabs(tempTab);
   console.log("Tabs: " + tabs[0][0]);
-  // if(loading){
-  //   return <></>
-  // }
+  if(loading){
+    return <></>
+  }
   return (
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
-        <ProfileHeader profile={profile_temp}/>
+        {/* {console.log("Profile checking in profile page: " + profile.name)} */}
+        <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
           <Instructorall />
         </div>
