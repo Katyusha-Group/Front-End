@@ -3,7 +3,8 @@ import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline.module.css";
 import { useState } from "react";
 import { Card } from "reactstrap";
-
+import SendMessage from "../../components/Tweet/SendMessage";
+import { useTweets } from "../../hooks/Twitter/useTweets";
 const tweets = [
   {
     id: 1,
@@ -15,10 +16,15 @@ const tweets = [
 
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
+  const {data: tweets, loading} = useTweets("get", true)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  if(loading){
+    return <></>
+  }
 
   return (
     <>
@@ -49,6 +55,9 @@ function Timeline() {
             <div className={styles.tweetsContainer}>
             </div>
           )}
+        </div>
+        <div className={styles.sendMessage}>
+          <SendMessage/>
         </div>
       </Card>
     </>

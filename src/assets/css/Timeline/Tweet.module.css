@@ -19,7 +19,7 @@
 .avatar {
   width: 50px;
   height: 50px;
-  background-color: var(--yellow);
+  background-color: var(--gray-dark);
   border-radius: 50%;
   margin-right: 10px;
   margin-left: 10px;
@@ -88,7 +88,7 @@
 .reply:hover{
   cursor: pointer;
   background-color: var(--gray-dark);
-  transition: 1s;
+  transition: 0.1s;
 }
 
 /* Add more styles as needed */

@@ -10,7 +10,7 @@ export const useMyClass = (getapi,showLoading,closeLoading) => {
   React.useEffect(() => {
     if (getapi == true) {
       showLoading();
-      axios(apis["courses"]["my_courses"], {
+      fetch(apis["courses"]["my_courses"], {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((response) => response.json())
