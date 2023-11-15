@@ -8,17 +8,14 @@ import {
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 
-export const useTweets = (request, effect=false, input={}) => {
+export const useTweets = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const sendData = new FormData();
-  sendData.append("content",input.content)
-  sendData.append("parent", "")
   const fetchData = () => {
-      showLoading();
+    showLoading();
     let config = {
-      method: request,
+      method: "get",
       maxBodyLength: Infinity,
       url: apis["tweets"]["tweets"],
       headers: {
@@ -36,8 +33,5 @@ export const useTweets = (request, effect=false, input={}) => {
       .catch();
   };
   useEffect(()=>{fetchData()}, []);
-  if(effect === false){
-    fetchData()
-  }
-  return { data ,loading};
+  return { data, setData ,loading};
 };

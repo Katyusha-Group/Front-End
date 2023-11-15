@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
 function Tweet({ tweet }) {
-  console.log("🚀 ~ file: Tweet.jsx:5 ~ Tweet ~ tweet:", tweet)
   return (
     <Card className={styles.tweet}>
       <div className={styles.header}>

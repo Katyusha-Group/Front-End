@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { apis } from "../../assets/apis";
-import { useState } from "react";
 
 export const useSendTweets = async (content, setData,parent="") => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;

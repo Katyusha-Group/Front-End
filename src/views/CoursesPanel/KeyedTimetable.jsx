@@ -43,7 +43,7 @@ const GenerateKeyedTimetable = (timetable) => {                             // M
             lessonsKeyedByDayAndPeriod[day][TimeIndex][count] = currentPeriod;
           }
           catch (error) {
-            console.log("ERROR is: " + error);
+            console.error("ERROR is: " + error);
           }  
         }
         );
