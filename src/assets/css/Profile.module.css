@@ -1,10 +1,12 @@
+@import "./black-dashboard-react.css";
+
 .main{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:center;
     width: 100%;
-    background-color: #1e1e1e;
+    background-color: var(--dark);
 }
 .rightpart{
     display: flex;
@@ -20,13 +22,13 @@
 .rightUpper{
     width: 360px;
     height: 360px;
-    background-color:#272A3D;
+    background-color:var(--dark);
     border-radius: 15px;
 }
 .rightBottom{
     width: 360px;
     height: 420px;
-    background-color:#272A3D;
+    background-color:var(--dark);
     border-radius: 15px;
 }
 .leftpart{
@@ -37,7 +39,7 @@ margin-bottom: 30px;
 padding: 30px, 31px, 30px, 31px;
 border-radius: 15px;
 gap: 30px;
-background-color:#272A3D;
+background-color:var(--dark);
 margin-left: 30px;
 }
 .ProfileImage{
@@ -73,19 +75,19 @@ margin-left: 30px;
     width: 100px;
     height: 30px;
     border-radius: 5px;
-    background-color: #67539E;
-    color: white;
-    border: 1px solid #67539E;
+    background-color: var(--purple);
+    color: var(--white);
+    border: 1px solid var(--purple);
 }
 .followbutton:hover{
-    background-color: #67539E;
-    color: white;
-    border: 1px solid white;
+    background-color: var(--purple);
+    color: var(--white);
+    border: 1px solid var(--white);
 }
 .followbutton:active{
-    background-color: #67539E;
-    color: white;
-    border: 1px solid white;
+    background-color: var(--purple);
+    color: var(--white);
+    border: 1px solid var(--white);
 }
 .table{
     width: 776px;
@@ -93,21 +95,22 @@ margin-left: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #373C57;
+    background-color: var(--gray-dark);
     margin: 30px auto;
     border-radius: 15px;
     text-align: center;
-    color: white;
+    color: var(--white);
 }
 .div{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #373C57;
+    background-color: var(--gray-dark);
     margin: 30px auto;
     border-radius: 15px;
     text-align: center;
-    color: white;width: 776px;
+    color: var(--white);
+    width: 776px;
     height: 91px;   
 }
 /* .timeline{
