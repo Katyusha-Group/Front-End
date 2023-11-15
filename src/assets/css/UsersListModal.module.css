@@ -1,0 +1,13 @@
+@import "./black-dashboard-react.css";
+
+.ModalHeader {
+    justify-content: center;
+}
+
+.ModalTitle {
+    color: var(--white) !important;
+}
+
+.ModalBody {
+    margin-top: -40px;
+}

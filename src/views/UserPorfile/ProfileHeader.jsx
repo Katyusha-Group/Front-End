@@ -33,11 +33,13 @@ export default function ProfileHeader({profile}) {
           <p className={styles.p_name}>{profile.name}</p>
           <p className={styles.myusername}> @{profile.username} </p>
           <div className={styles.Follow}>
+            {/* Followings */}
             <p
               onClick={handleOpenModal}
             >
-               دنبال میشود:{a}
+               دنبال میشود:{a} 
             </p>
+            {/* Followers */}
             <p> دنبال کننده:{a}</p>
             <UsersListModal showModal={showModal} handleClose={handleCloseModal}/>
           </div>

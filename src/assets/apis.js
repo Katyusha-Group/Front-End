@@ -41,6 +41,9 @@ export const apis = {
   notification: `${domain}/notification/`,
   profiles: {
     me: `${domain}/profiles/me/`,
+    following: `${domain}/profiles//following`,
+    followers: `${domain}/profiles//followers`,
+    followersyoufollow: `${domain}/profiles//followers-you-follow`
   }
 
 };

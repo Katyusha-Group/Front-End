@@ -2,7 +2,8 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
-
+import Instructorall from "./Instructorall";
+import * as styles from '../../assets/css/UsersListModal.module.css'
 const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
     const [show, setShow] = React.useState(showModal);
     
@@ -17,11 +18,11 @@ const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
 
     return (
     <Modal show={show} onHide={handleCloseModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Hello</Modal.Title>
+      <Modal.Header closeButton className={styles.ModalHeader}>
+        <h2 className={styles.ModalTitle}>دنبال کننده</h2>
       </Modal.Header>
-      <Modal.Body>
-        <p>Modal content goes here...</p>
+      <Modal.Body className={styles.ModalBody}>
+        <Instructorall/>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseModal}>

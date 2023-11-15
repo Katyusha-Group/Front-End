@@ -1,3 +1,5 @@
+@import "./black-dashboard-react.css";
+
 .eachProfile{
     width: 58px;
     height: 58px;
@@ -14,6 +16,8 @@
 .p_name{
     margin-top: 10px;
     margin-left: 50px;
+    color: var(--white) !important;
+
 }
 .delButton{
     line-height: 2.3;
