@@ -17,7 +17,7 @@ export function TextFormGroup({ label, name, value, onChange, error, placeHolder
                 value={value}
             />
             {error && (
-                <div className={style.error} >
+                <div className={style.textError} >
                     {error}
                 </div>
             )}

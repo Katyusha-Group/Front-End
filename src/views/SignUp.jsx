@@ -168,7 +168,7 @@ function SignUp() {
                   <CardBody>
                     <Form >
                       <Row>
-                        <Col md="12">
+                        <Col xl="6">
                           <TextFormGroup
                             label={"نام پروفایل"}
                             placeHolder={"نام پروفایل خود را وارد کنید"}
@@ -178,9 +178,9 @@ function SignUp() {
                             error={errorMessage.profileNameError}>
                           </TextFormGroup>
                         </Col>
-                      </Row>
-                      <Row>
-                        <Col md="12">
+                        {/* </Row>
+                      <Row> */}
+                        <Col xl="6">
                           <TextFormGroup
                             label={"نام کاربری"}
                             placeHolder={"نام کاربری خود را وارد کنید"}
@@ -223,7 +223,7 @@ function SignUp() {
                       </Row>
 
                       <Row>
-                        <Col lg="6">
+                        <Col xl="6">
                           <SelectBoxFormGroup
                             label={"رشته"}
                             options={subjectOptions}
@@ -233,7 +233,7 @@ function SignUp() {
                           >
                           </SelectBoxFormGroup>
                         </Col>
-                        <Col lg="5" className="offset-lg-1">
+                        <Col xl="5" className="offset-lg-1">
                           <SelectBoxFormGroup
                             label={"جنسیت"}
                             options={genderOptions}
