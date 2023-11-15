@@ -1,4 +1,4 @@
-export const domain = "http://37.32.13.62";
+export const domain = "https://www.katyushaiust.ir";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
