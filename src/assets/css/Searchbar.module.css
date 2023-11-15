@@ -1,10 +1,10 @@
+@import "./black-dashboard-react.css";
+
 .main{
     border-radius: 15px;
     width: 21vw;
-    /* margin-right: 79vw; */
     margin-right: 2.5vw;
     position: sticky;
-    background-color:#272a3d ;
     margin-top: 5vh;
     height: 90vh;
     margin-left: 1.5vw;
@@ -14,17 +14,14 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
-    /* background-color: red; */
     border-radius: 15px;
-    /* background-color:rgba(39, 42, 61,0.2); */
     margin-top: 50px;
     width: 18px;
     margin-bottom: 30px;
 }
 .field{
     display: flex;
-    background-color:#444862;
+    background-color:var(--box);
     border: none;
     border-radius: 15px; 
     width: 16vw;

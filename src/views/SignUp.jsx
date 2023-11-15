@@ -1,27 +1,24 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Select from "react-select";
 import * as style from "../assets/css/SignUp.module.css";
-import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
 import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
 import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
+import { SelectBoxFormGroup } from "../assets/FormGroups/SelectBoxFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
+import { postSignUp } from "../Functions/postData/postSignUp";
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  FormGroup,
   Form,
-  Input,
   Row,
   Col,
   Container,
@@ -29,7 +26,6 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     profileName: "",
     username: "",
@@ -81,6 +77,12 @@ function SignUp() {
     subjectError: "",
     backError: "",
   });
+
+  const Navigate = useNavigate();
+  const handleSignUp = async (formData, subject, gender) => {
+    await postSignUp(formData, subject, gender, Navigate);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -207,7 +209,6 @@ function SignUp() {
         ...errorMessage,
         backError: errors.backError,
       });
-    }
   }
   return (
     <>
@@ -226,19 +227,7 @@ function SignUp() {
                   <CardBody>
                     <Form >
                       <Row>
-                        <Col md="12">
-                          <TextFormGroup
-                            label={"نام پروفایل"}
-                            placeHolder={"نام پروفایل خود را وارد کنید"}
-                            value={formData.profileName}
-                            name={"profileName"}
-                            onChange={handleChange}
-                            error={errorMessage.profileNameError}>
-                          </TextFormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md="12">
+                        <Col xl="6">
                           <TextFormGroup
                             label={"نام کاربری"}
                             placeHolder={"نام کاربری خود را وارد کنید"}
@@ -246,6 +235,16 @@ function SignUp() {
                             name={"username"}
                             onChange={handleChange}
                             error={errorMessage.usernameError}>
+                          </TextFormGroup>
+                        </Col>
+                        <Col xl="6">
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
                           </TextFormGroup>
                         </Col>
                       </Row>
@@ -281,47 +280,25 @@ function SignUp() {
                       </Row>
 
                       <Row>
-                        <Col lg="6">
-                          <FormGroup className="text-right">
-                            <label>رشته</label>
-                            <br />
-
-                            <Select
-                              options={subjectOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="subject"
-                              onChange={handleSubject}
-                            />
-
-                            {errorMessage.subjectError && (
-                              <div className={style.selectError}>
-                                {errorMessage.subjectError}
-                              </div>
-                            )}
-                          </FormGroup>
+                        <Col xl="6">
+                          <SelectBoxFormGroup
+                            label={"رشته"}
+                            options={subjectOptions}
+                            name={subject}
+                            onChange={handleSubject}
+                            error={errorMessage.subjectError}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
-                        <Col lg="5" className="offset-lg-1">
-                          <FormGroup className="text-right">
-                            <label>جنسیت</label>
-                            <br />
-
-                            <Select
-                              options={genderOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="gender"
-                              onChange={handleGender}
-                            />
-
-                            {errorMessage.genderError && (
-                              <div className={style.selectError}>
-                                {errorMessage.genderError}
-                              </div>
-                            )}
-                          </FormGroup>
+                        <Col xl="5" className="offset-lg-1">
+                          <SelectBoxFormGroup
+                            label={"جنسیت"}
+                            options={genderOptions}
+                            name={gender}
+                            onChange={handleGender}
+                            error={errorMessage.genderError}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
                       </Row>
                     </Form>
@@ -354,5 +331,5 @@ function SignUp() {
     </>
   );
 }
-
+}
 export default SignUp;

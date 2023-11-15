@@ -81,7 +81,7 @@ function Login(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: formData.email,
+        email_or_username: formData.email,
         password: formData.password,
       }),
     });

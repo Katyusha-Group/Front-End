@@ -60,7 +60,6 @@ const Timeline = (props) => {
         setData(data);
         closeLoading();
       })
-
       .catch((error) => console.error(error));
       
    
