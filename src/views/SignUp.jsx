@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import * as style from "../assets/css/SignUp.module.css";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
 import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
@@ -149,65 +148,8 @@ function SignUp() {
     ) {
       return;
     }
-    Swal.fire({
-      title: 'کمی صبر کنید',
-      html: 'در حال بررسی درخواست ثبت نام',
-      allowOutsideClick: false,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      background: '#3c3e5d',
-      color: '#ceccc0',
-      width: '25rem',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    })
 
-    const response =
-      // postSignUp(formData, subject, gender);
-      await fetch(apis["accounts"]["signup"], {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          email: formData.email,
-          username: formData.username,
-          name: formData.profileName,
-          password1: formData.password,
-          password2: formData.passwordConfirm,
-          department: subject,
-          gender: gender,
-        }),
-      });
-    const data = await response.json();
-    Swal.close()
-    if (response.status === 201) {
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("verificationLink", data.url)
-      Swal.fire({
-        icon: 'success',
-        title: ' کد تایید ارسال شد',
-        html: 'لطفا ایمیلتان را چک کنید',
-        background: '#3c3e5d',
-        color: '#ceccc0',
-        width: '25rem',
-        confirmButtonText: "باشه"
-      })
-      Navigate("/verification");
-    } else {
-      if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
-      if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
-      setErrorMessage({
-        ...errorMessage,
-        backError: errors.backError,
-      });
-    }
+    postSignUp(formData, subject, gender);
   }
   return (
     <>

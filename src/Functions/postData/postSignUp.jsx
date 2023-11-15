@@ -36,7 +36,7 @@ export async function postSignUp(formData, subject, gender) {
 
         const data = await response.json();
         Swal.close();
-
+        console.log(data);
         if (response.status === 201) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("verificationLink", data.url);
@@ -51,6 +51,17 @@ export async function postSignUp(formData, subject, gender) {
             });
             Navigate("/verification");
         } else {
+            if (data.username) {
+                Swal.fire({
+                    icon: "error",
+                    title: "نام کاربری تکراری و یا قالب آن غیر قابل قبول است",
+                    background: "#3c3e5d",
+                    color: "#ceccc0",
+                    width: "25rem",
+                    direction: "rtl",
+                    confirmButtonText: "باشه",
+                });
+            }
             if (data.email) {
                 Swal.fire({
                     icon: "error",
@@ -62,7 +73,7 @@ export async function postSignUp(formData, subject, gender) {
                     confirmButtonText: "باشه",
                 });
             }
-            if (data.password) {
+            if (data.password1) {
                 Swal.fire({
                     icon: "error",
                     title: "رمز عبور قابل قبول نیست",
@@ -77,6 +88,6 @@ export async function postSignUp(formData, subject, gender) {
 
         return response;
     } catch (error) {
-        console.error(error);
+        زonsole.error(error);
     }
 }
