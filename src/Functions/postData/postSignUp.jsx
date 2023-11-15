@@ -1,7 +1,6 @@
 import { apis } from '../../assets/apis';
 import Swal from 'sweetalert2';
-
-export async function postSignUp(formData, subject, gender) {
+export async function postSignUp(formData, subject, gender, Navigate) {
     try {
         Swal.fire({
             title: 'کمی صبر کنید',
@@ -36,7 +35,6 @@ export async function postSignUp(formData, subject, gender) {
 
         const data = await response.json();
         Swal.close();
-        console.log(data);
         if (response.status === 201) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("verificationLink", data.url);

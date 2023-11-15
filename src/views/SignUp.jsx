@@ -26,7 +26,6 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     profileName: "",
     username: "",
@@ -78,6 +77,12 @@ function SignUp() {
     subjectError: "",
     backError: "",
   });
+
+  const Navigate = useNavigate();
+  const handleSignUp = async (formData, subject, gender) => {
+    await postSignUp(formData, subject, gender, Navigate);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -148,8 +153,9 @@ function SignUp() {
     ) {
       return;
     }
-
-    postSignUp(formData, subject, gender);
+    else {
+      handleSignUp(formData, subject, gender);
+    }
   }
   return (
     <>
@@ -170,24 +176,22 @@ function SignUp() {
                       <Row>
                         <Col xl="6">
                           <TextFormGroup
-                            label={"نام پروفایل"}
-                            placeHolder={"نام پروفایل خود را وارد کنید"}
-                            value={formData.profileName}
-                            name={"profileName"}
-                            onChange={handleChange}
-                            error={errorMessage.profileNameError}>
-                          </TextFormGroup>
-                        </Col>
-                        {/* </Row>
-                      <Row> */}
-                        <Col xl="6">
-                          <TextFormGroup
                             label={"نام کاربری"}
                             placeHolder={"نام کاربری خود را وارد کنید"}
                             value={formData.username}
                             name={"username"}
                             onChange={handleChange}
                             error={errorMessage.usernameError}>
+                          </TextFormGroup>
+                        </Col>
+                        <Col xl="6">
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
                           </TextFormGroup>
                         </Col>
                       </Row>
