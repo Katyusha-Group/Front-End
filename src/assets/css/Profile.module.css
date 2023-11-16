@@ -29,13 +29,15 @@
 .rightUpper{
     flex-grow: 1;
     width: 360px;
-    background-color:var(--gray-dark);
+    /* background-color:var(--gray-dark); */
+    background-color: #373C57;
     border-radius: 15px;
 }
 .rightBottom{
     flex-grow: 1;
     width: 360px;
-    background-color:var(--gray-dark);
+    /* background-color:var(--gray-dark); */
+    background-color: #373C57;
     border-radius: 15px;
 }
 .leftpart{
@@ -46,8 +48,8 @@
     padding: 10px;
     border-radius: 15px;
     gap: 30px;
-    /* background-color:#272A3D; */
-    background-color:var(--gray-dark);
+    background-color:#272A3D;
+    /* background-color:var(--gray-dark); */
     margin-left: 30px;
 }
 .ProfileImage{
