@@ -2,9 +2,9 @@ import React from 'react';
 import Tweet from './Tweet';
 import styles from '../../assets/css/Timeline/Timeline.module.css';
 import { useState } from 'react';
+import { GETTweets } from '../../hooks/GETTweets';
 
-
-const tweets = [
+const Tweets = [
   { id: 1, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
   { id: 2, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
   // Add more tweets as needed
@@ -27,7 +27,8 @@ let tabsList = [
 function Timeline({tabsList}) {
   // console.log("Tabs are: " + tabsList);
   const [activeTab, setActiveTab] = useState('tweets');
-
+  // const {Tweets, setTweets, loading} = GETTweets();
+  // setTweets(tweets);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -87,19 +88,23 @@ function Timeline({tabsList}) {
         )}
         {activeTab === 'Tweets' && (
           <div className={styles.tweetsContainer}>
-            {tweets.map((tweet) => (
+            {Tweets.map((tweet) => (
               <Tweet key={tweet.id} tweet={tweet} />
             ))}
           </div>
         )}
         {activeTab === 'Likes' && (
           <div className={styles.tweetsContainer}>
-            {/* Render media content here */}
+            {Tweets.map((tweet) => (
+              <Tweet key={tweet.id} tweet={tweet} />
+            ))}
           </div>
         )}
         {activeTab === 'Comments' && (
           <div className={styles.tweetsContainer}>
-            {/* Render media content here */}
+            {Tweets.map((tweet) => (
+              <Tweet key={tweet.id} tweet={tweet} />
+            ))}
           </div>
         )}
       </div>

@@ -50,8 +50,8 @@ export const apis = {
     me: `${domain}/profiles/me/`,
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
-    
-  }
+  },
+  twittes: `${domain}/twittes`
 };
 
 
