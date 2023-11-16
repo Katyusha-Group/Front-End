@@ -1,5 +1,5 @@
 .courseProfileModal {
-   max-width: 60% !important;
+   max-width: 75% !important;
 }
 
 .ModalLessonCourse .modal-dialog {
@@ -11,10 +11,18 @@
    overflow: auto;
 }
 
+.modalBack {
+   background: linear-gradient(180deg, rgba(30, 30, 47, 1) 0%,
+         rgba(39, 41, 61, 1) 75%,
+         rgba(65, 36, 79, 1) 98%,
+         rgba(255, 32, 172, 1) 100%) !important;
+}
+
 .ModalLessonCourseCard {
-   background-color: #382e53 !important;
-   border-color: #ab69b1 !important;
-   color: #dddddd !important;
+   background-color: transparent !important;
+   /* border-color: #ab69b1 !important; */
+   /* color: #dddddd !important; */
+   box-shadow: none !important;
    height: 420px;
    margin-top: 15px;
 }
@@ -52,7 +60,9 @@
 .ModalLessonDataCard1 {
    padding-top: 5px;
    margin-top: 10px;
-   background-color: #8f7ebe !important;
+   background-color: transparent !important;
+
+   box-shadow: none !important;
    width: 100% !important;
    margin-right: 0px !important;
    height: 130px;
@@ -60,7 +70,9 @@
 
 .ModalLessonDataCard2 {
    margin-top: 10px;
-   background-color: #8f7ebe !important;
+   background-color: transparent !important;
+
+   box-shadow: none !important;
    width: 100% !important;
    margin-right: 0px !important;
    height: 130px;
@@ -68,7 +80,8 @@
 
 .ModalLessonDataCard3 {
    margin-top: -5px;
-   background-color: #8f7ebe !important;
+   background-color: transparent !important;
+   box-shadow: none !important;
    width: 100% !important;
    margin-right: 0px !important;
 }

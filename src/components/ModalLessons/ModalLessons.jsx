@@ -41,7 +41,7 @@ const ModalLessons = (props) => {
         onHide={props.close}
         className={`${style.ModalLessonCourse} ModalLessonCourse`}
       >
-        <div>
+        <div className={style.modalBack}>
           <Modal.Header>
             <button
               type="button"
@@ -280,7 +280,7 @@ const ModalLessons = (props) => {
                   style={{
                     overflow: "auto",
                     height: "60vh",
-                    background: "rgb(46, 49, 72)",
+                    // background: "rgb(46, 49, 72)",
                     paddingLeft: "30px",
                     paddingRight: "10px",
                   }}
