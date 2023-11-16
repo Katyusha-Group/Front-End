@@ -21,6 +21,7 @@ import {
   CardBody,
   Row,
   Col,
+  Label,
 } from "reactstrap";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
@@ -60,24 +61,86 @@ const ModalLessons = (props) => {
                 className={style.ModalLessonCourseCard}
               >
                 <CardBody className={style.ModalCourseCardBody}>
-                  <img
+                  {/* <img
                     className={style.ModalProfessorImage}
                     src={x.teachers[0].teacher_image}
                     alt="professorImage"
-                  />
+                  /> */}
                   <div className={style.ModalLessonInfoPart}>
-                    <CardHeader className="modalHeader">
-                      <p
-                        md="12"
-                        style={{
-                          fontWeight: "bold",
-                          textAlign: "center",
-                          fontSize: "20px",
-                          color: "#c7c1c1",
-                        }}
-                      >
-                        {x.name} (گروه {x.group_number})
-                      </p>
+                    <CardHeader className={style.modalHeader}>
+                      <Col md="6">
+                        <p
+                          style={{
+                            fontWeight: "bold",
+                            textAlign: "right",
+                            fontSize: "20px",
+                            color: "#c7c1c1",
+                          }}
+                        >
+                          {x.name} {x.group_number}
+                        </p>
+                      </Col>
+                      <Col md="6">
+                        <ButtonGroup
+                          className={`${style.btnGroup} btn-group-toggle`}
+                          data-toggle="buttons"
+                        >
+                          <Button
+                            tag="label"
+                            className={classNames("btn-simple", "week_chart-btn", {
+                              active: timelineData === "data1",
+                            })}
+                            id="0"
+                            size="sm"
+                            onClick={() => setTimeData("data0")}
+                          >
+                            <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              اطلاعات درس
+                              {/* {"  "}
+                            {x.name} */}
+                            </span>
+                            <span className="d-block d-sm-block d-md-none">
+                              <i className="tim-icons icon-badge" />
+                            </span>
+                          </Button>
+                          <Button
+                            tag="label"
+                            className={classNames("btn-simple", "week_chart-btn", {
+                              active: timelineData === "data1",
+                            })}
+                            id="1"
+                            size="sm"
+                            onClick={() => setTimeData("data1")}
+                          >
+                            <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              تایم‌لاین درس
+                              {/* {"  "}
+                            {x.name} */}
+                            </span>
+                            <span className="d-block d-sm-block d-md-none">
+                              <i className="tim-icons icon-book-bookmark" />
+                            </span>
+                          </Button>
+                          <Button
+                            tag="label"
+                            id="2"
+                            size="sm"
+                            className={classNames("btn-simple", "week_chart-btn", {
+                              active: timelineData === "data2",
+                            })}
+                            onClick={() => setTimeData("data2")}
+                          >
+                            <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              تایم‌لاین استاد
+                              {"  "}
+                              {x.teachers.map((y) => y.name).join(" , ")}
+                            </span>
+                            <span className="d-block d-sm-block d-md-none">
+                              <i className="tim-icons icon-single-02" />
+                            </span>
+                          </Button>
+                        </ButtonGroup>
+                      </Col>
                     </CardHeader>
                     <Row>
                       <Col md="6">
@@ -229,7 +292,7 @@ const ModalLessons = (props) => {
                   </div>
                 </CardBody>
               </Card>
-              <Row>
+              {/* <Row>
                 <Col sm="12">
                   <ButtonGroup
                     className="btn-group-toggle"
@@ -272,7 +335,7 @@ const ModalLessons = (props) => {
                     </Button>
                   </ButtonGroup>
                 </Col>
-              </Row>
+              </Row> */}
               <Row>
                 <Col
                   md="12"
