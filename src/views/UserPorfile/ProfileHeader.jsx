@@ -4,11 +4,25 @@ import * as styles from "../../assets/css/Profile.module.css"
 import moment from 'jalali-moment'
 import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
-
+import { followProfile } from '../../hooks/POSTFollow';
+// import { POSTFollow } from '../../hooks/POSTFollow';
 export default function ProfileHeader({profile}) {
   const [showModal, setShowModal] = React.useState(false);
   const handleOpenModal = () => {
     // console.log("Modal is clicked!");
+    // let response = POSTFollow("username1");
+    // console.log("response is: " + response);
+    // const followProfile = async () => {
+    //   try {
+    //     const response = await POSTFollow("username1");
+    //     console.log("Response data:", response);
+    //   } catch (error) {
+    //     console.error("An error occurred:", error);
+    //   }
+    // };
+    
+    // followProfile();
+    followProfile("username1");
     setShowModal(true);
   };
   const handleCloseModal = () => {

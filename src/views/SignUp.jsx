@@ -153,62 +153,9 @@ function SignUp() {
     ) {
       return;
     }
-    Swal.fire({
-      title: 'کمی صبر کنید',
-      html: 'در حال بررسی درخواست ثبت نام',
-      allowOutsideClick: false,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      background: '#3c3e5d',
-      color: '#ceccc0',
-      width: '25rem',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    })
-
-    const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        email: formData.email,
-        username: formData.username,
-        name: formData.profileName,
-        password1: formData.password,
-        password2: formData.passwordConfirm,
-        gender: gender,
-        department: subject,
-      }),
-    });
-    const data = await response.json();
-    Swal.close()
-    if (response.status === 201) {
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("verificationLink", data.url)
-      Swal.fire({
-        icon: 'success',
-        title: ' کد تایید ارسال شد',
-        html: 'لطفا ایمیلتان را چک کنید',
-        background: '#3c3e5d',
-        color: '#ceccc0',
-        width: '25rem',
-        confirmButtonText: "باشه"
-      })
-      Navigate("/verification");
-    } else {
-      if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
-      if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
-      setErrorMessage({
-        ...errorMessage,
-        backError: errors.backError,
-      });
+    else {
+      handleSignUp(formData, subject, gender);
+    }
   }
   return (
     <>
@@ -331,5 +278,5 @@ function SignUp() {
     </>
   );
 }
-}
+
 export default SignUp;
