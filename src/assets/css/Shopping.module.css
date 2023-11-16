@@ -1,0 +1,37 @@
+.shopping_label {
+  margin: 0.5rem 1rem;
+}
+
+.shopping_form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.shop_card {
+  height: 80vh;
+  overflow: auto;
+}
+
+.places_buttons {
+  padding: 10px 0;
+}
+
+.shop_row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price {
+  height: 60%;
+}
+
+.loginLmsModal {
+  background: #27293d;
+  border-radius: 1rem;
+}
+
+
+.loginLmsModalBody {
+  padding: 0 !important;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { useInfo } from "../../contexts/InfoContext";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import {
   Button,
   Card,
@@ -13,74 +14,54 @@ import {
   Form,
   CardFooter,
 } from "reactstrap";
-
-import "./Shopping.css";
+import NotificationAlert from "react-notification-alert";
+import * as style from "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
   showLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
-
+import { apis } from "../../assets/apis";
+import * as UserPageStyle from "../../assets/css/UserPage.module.css";
+import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
+import { saveWallet } from "../../hooks/Shopping/getWallet";
 function Shopping() {
-  const { info, changeInfo } = useInfo();
-  const [state, setState] = React.useState([]);
-  const [totalPrice, setTotalPrice] = React.useState(0);
-  const [amount, setAmount] = React.useState(0);
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-  const [wallet, setWallet] = React.useState(0);
-  React.useEffect(() => {
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    showLoading();
-    fetch(`https://katyushaiust.ir/carts/${shopId.id}/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("shop data", data);
-        setState(data.items);
-        setTotalPrice(data.total_price);
-        setAmount(data.total_number);
-      })
-      .catch((error) => console.error(error));
-    fetch(`https://katyushaiust.ir/accounts/wallet/see_wallet`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setWallet(data.balance);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+
+
+  const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
+    getCartInfo();
+  const {wallet,setWallet} = saveWallet();
 
   closeLoading();
-  function delete_item(num, index) {
+  const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(
-      `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          complete_course_number: num,
-          contain_telegram: true,
-          contain_sms: true,
-          contain_email: true,
-        }),
-      }
-    );
-  }
+    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: true,
+        contain_sms: true,
+        contain_email: true,
+      }),
+    }).then((response) => {
+      getCartInfo();
+    });
+  };
 
   function order() {
+    showLoading();
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(`https://katyushaiust.ir/orders/`, {
+    fetch(apis["orders"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -92,13 +73,26 @@ function Shopping() {
         payment_method: "W",
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+      .then((response) => {
+        if (response.status == 400) {
+          return response.json().then((data) => {
+            alert(
+              data.telegram +
+                "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
+            );
+          });
+        } else
+          return response.json().then((data) => {
+            notify("tl");
+            saveWallet();
+            let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+          });
       })
+
       .catch((error) => {
         console.error(error);
       });
+    closeLoading();
   }
 
   const notify = (place) => {
@@ -128,14 +122,10 @@ function Shopping() {
       place: place,
       message: (
         <div>
-          <div>
-            Welcome to <b>Black Dashboard React</b> - a beautiful freebie for
-            every web developer.
-          </div>
+          <div>خرید شما با موفقیت انجام شد</div>
         </div>
       ),
       type: type,
-      icon: "tim-icons icon-bell-55",
       autoDismiss: 7,
     };
     notificationAlertRef.current.notificationAlert(options);
@@ -143,8 +133,8 @@ function Shopping() {
 
   /**
    * Change the checkbox
-   * @param {int} num 1 is email 2 is sms 3 is telegram
-   * @param {int} index index of list of state you need to change
+   * @param {number} num 1 is email 2 is sms 3 is telegram
+   * @param {number} index index of list of state you need to change
    */
   function changeChecked(num, index) {
     const tokenJson = localStorage.getItem("authTokens");
@@ -167,22 +157,19 @@ function Shopping() {
         break;
     }
     setState(u);
-    fetch(
-      `https://katyushaiust.ir/carts/${shopId.id}/items/${state[index].id}/`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          complete_course_number: num,
-          contain_telegram: u[index].contain_telegram,
-          contain_sms: u[index].contain_sms,
-          contain_email: u[index].contain_email,
-        }),
-      }
-    )
+    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        complete_course_number: num,
+        contain_telegram: u[index].contain_telegram,
+        contain_sms: u[index].contain_sms,
+        contain_email: u[index].contain_email,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         let newData = state[index];
@@ -205,16 +192,21 @@ function Shopping() {
   function deleteItem(index) {}
   return (
     <>
+      <div>
+        <NotificationAlert ref={notificationAlertRef} />
+      </div>
       <div className="wrapper" style={{ direction: "ltr" }}>
-        <div className="mt-5">
+        <div className="main-panel">
+          <AdminNavbar></AdminNavbar>
           <div className="content_without_sidebar">
-            <div className="react-notification-alert-container">
-              {/* <NotificationAlert ref={notificationAlertRef} /> */}
-            </div>
+            <div className="react-notification-alert-container"></div>
 
-            <Row>
+            <Row style={{ height: "80vh" }}>
               <Col md="3">
-                <Card className="">
+                <Card
+                  className=""
+                  style={{ height: "100%", marginBottom: "0" }}
+                >
                   <CardHeader
                     className="shop_row m-1"
                     style={{
@@ -228,7 +220,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         قیمت {totalPrice} تومان
@@ -238,7 +230,7 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         کیف پول شما: {wallet} تومان
@@ -248,13 +240,18 @@ function Shopping() {
                       md="1"
                       sm="2"
                       xs="1"
-                      className="places-buttons shop_row"
+                      className={`${style.places_buttons} ${style.shop_row}`}
                     >
                       <Col className="m-auto text-center category">
                         تعداد {amount}
                       </Col>
                     </Row>
-                    <div className="d-flex justify-content-center align-items-center price">
+                    <div
+                      className={
+                        "d-flex justify-content-center align-items-center " +
+                        style.price
+                      }
+                    >
                       <h2>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
@@ -276,9 +273,14 @@ function Shopping() {
                 </Card>
               </Col>
               <Col md="9">
-                {/* <CardHeader>
-                </CardHeader> */}
-                <Card className="shop_card">
+                <Card
+                  className={style.shop_card}
+                  style={{
+                    height: "100%",
+                    marginBottom: "0",
+                    justifyContent: `${state.length == 0 ? "center" : ""}`,
+                  }}
+                >
                   {state.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
@@ -290,12 +292,12 @@ function Shopping() {
                         md="6"
                         sm="2"
                         xs="1"
-                        className="places-buttons shop_row"
+                        className={`${style.places_buttons} ${style.shop_row}`}
                         key={index}
                       >
                         <Col className="m-auto">
                           <img
-                            className="professorImage"
+                            className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
                                 ? x.course.teachers[0].teacher_image
@@ -311,20 +313,18 @@ function Shopping() {
                           {x.course.name}
                         </Col>
                         <Col className="m-auto text-center category">
-                          {x.price}
+                          {x.price} تومان
                         </Col>
                         <Col className="m-auto text-center category">
                           <Form>
-                            <FormGroup className="shopping_form" check disabled>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   onChange={() => {
                                     ss1(() => !s1);
                                     changeChecked(1, index);
                                   }}
-                                  // checked={state[index].contain_email}
-                                  checked={false}
-                                  // checked={s}
+                                  checked={state[index].contain_email}
                                   type="checkbox"
                                 />
                                 <span className="form-check-sign">
@@ -333,10 +333,13 @@ function Shopping() {
                                 ایمیل
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check disabled>
-                              <Label check className="shoping_label">
+                            <FormGroup
+                              className={style.shopping_form}
+                              check
+                              disabled
+                            >
+                              <Label check className={style.shopping_label}>
                                 <Input
-                                  // checked={x.contain_sms}
                                   checked={false}
                                   type="checkbox"
                                   valid={false}
@@ -351,8 +354,8 @@ function Shopping() {
                                 sms
                               </Label>
                             </FormGroup>
-                            <FormGroup className="shopping_form" check>
-                              <Label check className="shoping_label">
+                            <FormGroup className={style.shopping_form} check>
+                              <Label check className={style.shopping_label}>
                                 <Input
                                   checked={x.contain_telegram}
                                   key={x.contain_telegram}

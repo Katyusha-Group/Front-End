@@ -1,8 +1,8 @@
 .custom-scrollbars__content {
 
-    height: 200px;
-  }
-  
-  .custom-scrollbars__content::-webkit-scrollbar {
-    display: none;
-  }
+  height: 200px;
+}
+
+.custom-scrollbars__content::-webkit-scrollbar {
+  display: none;
+}

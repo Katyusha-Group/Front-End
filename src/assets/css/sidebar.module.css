@@ -1,0 +1,42 @@
+.bg{
+    width: 22vw;
+    margin-top: 5vh;
+    margin-right: 20px;
+    border-radius: 15px;
+    height: 90vh;
+    position: sticky;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    margin-right: 2vw;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 2.5vw;
+}
+.headertext{
+    margin-top: 40px;
+    font-size: 20px;
+}
+.sidebarmenuItems{
+    display: flex;
+    flex-direction: row;
+    margin: 1.5vw;
+    margin-right: 2.5vw;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 4vw;
+    cursor: pointer;
+}
+.sidebarmenuItems :hover{
+   scale: 1.1;
+}
+.click{
+    cursor: pointer;
+}
+.itemtext{
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

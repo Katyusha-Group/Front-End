@@ -1,0 +1,38 @@
+.navbar .navbar-nav{
+    width: 80%;
+    direction: rtl;
+}
+.navbar-nav li{
+    width: 100%;
+    margin: 2px;
+    padding: 0;
+}
+.navbar-nav li :hover{
+    color: rgb(230, 63, 154);
+}
+
+.rtl .navbar .navbar-nav a.nav-link{
+    
+    margin: 0;
+
+}
+.dropdown nav-item{
+    width: 30%;
+}
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+    color: rgb(230, 63, 154);
+
+}
+.logoutLink{
+    cursor: pointer;
+}
+.wideNavbar{
+    margin-left: auto;
+}
+.navbar .wideNavbar .nav-item .nav-link.selected {
+    color: rgb(230, 63, 154);
+    /* background-color: #17a2b8;
+    border-radius: 0.25rem; */
+  }
+
+

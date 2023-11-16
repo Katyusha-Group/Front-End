@@ -1,0 +1,36 @@
+@import "./black-dashboard-react.css";
+
+.main{
+    border-radius: 15px;
+    width: 21vw;
+    margin-right: 2.5vw;
+    position: sticky;
+    margin-top: 5vh;
+    height: 90vh;
+    margin-left: 1.5vw;
+    overflow: auto;
+}
+.searchbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 15px;
+    margin-top: 50px;
+    width: 18px;
+    color: white;
+    margin-bottom: 30px;
+}
+.field{
+    display: flex;
+    background-color:var(--box);
+    border: none;
+    color: white;
+    border-radius: 15px; 
+    width: 16vw;
+    height: 4vh;
+    padding-right: 30px;
+    margin-right: 20px;
+}
+.field ::placeholder{
+    margin-right: 20px;
+}

@@ -1,17 +1,9 @@
-/*eslint-disable*/
 import React from "react";
-import { useState ,useEffect} from "react";
 import { NavLink, Link } from "react-router-dom";
-
-// nodejs library to set properties for components
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
-// javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
-
-// reactstrap components
+import logo1 from "../../assets/img/Logo1.png";
 import {
-  Button,
   Col,
   Nav,
   NavLink as ReactstrapNavLink,
@@ -21,130 +13,82 @@ import {
   DropdownItem,
   UncontrolledDropdown,
 } from "reactstrap";
-
+import { apis } from "../../assets/apis";
 import {
   BackgroundColorContext,
-  backgroundColors,
 } from "../../contexts/BackgroundColorContext";
-
-import "./LessonSidebar.css";
-
-import * as log from "../../assets/img/react-logo.png";
-
-// import * as log from "../../assets/img/react-logo.png";
-
-import classData from "../../assets/data/data.json";
-
+import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
 
-import CoursesPanel from "../../views/CoursesPanel/CoursesPanel";
-
-import Spinner from 'react-bootstrap/Spinner';
-import { useInfo } from "../../contexts/InfoContext";
+import Spinner from "react-bootstrap/Spinner";
 var ps;
-const fetchRequest = 'FETC_REQUEST';
-const fetchSuccess = 'FETCH_SUCCESS';
-const fetchFail = 'FETCH_FAIL';
-const reducer= (state, action) => {
+const fetchRequest = "FETCH_REQUEST";
+const fetchSuccess = "FETCH_SUCCESS";
+const fetchFail = "FETCH_FAIL";
+const reducer = (state, action) => {
   switch (action.type) {
     case fetchRequest:
-      // changeInfo("loading", true)
-      return {...state,loading: true}
+      return { ...state, loading: true };
     case fetchSuccess:
-      // changeInfo("loading", false)
-      return {...state,loading: false,props: action.payload}
+      return { ...state, loading: false, props: action.payload };
     case fetchFail:
-      // changeInfo("loading", false)
-      return {...state,loading: false,error: action.payload}
-      default:
-        return state;
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
   }
 };
 
-
 function LessonSidebar(props) {
-  // const {info, changeInfo} = useInfo();
   const getError = (error) => {
-    // console.log(error.data.message)
-    return error.responst && error.response.data
-    ? error.response.data
-    :error.message;
-  }
+    return error.response && error.response.data
+      ? error.response.data
+      : error.message;
+  };
   const sidebarRef = React.useRef(null);
   let [lessonState, setLessonState] = React.useState([]);
-  const [departeman, setDeparteman] = React.useState([]);
+  const [department, setDepartment] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
+  const [selectedDep, setSelectedDep] = React.useState([]);
   const Navigate = useNavigate();
-  // const [allColleges, setAllColleges] = React.useState([]);
-  const [{loading,props: input,error},propsSetter] = React.useReducer(reducer,{loading: true,props:{},error: ''});
-  // changeInfo("loading", true)
-  // verifies if routeName is the one active (in browser input)
-  // const myHeaders = new Headers();
-//   const [authTokens, setAuthTokens] = useState(() =>
-//   localStorage.getItem("authTokens")
-//     // ? JSON.parse(localStorage.getItem("authTokens"))
-//     // : null
-// );
+  const [{ loading, props: input, error }, propsSetter] = React.useReducer(
+    reducer,
+    { loading: true, props: {}, error: "" }
+  );
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
-  // console.log(tokenClass);
-
   const token = tokenClass.token.access;
-  // myHeaders.append("Authorization", `Bearer ${token}` );
-  // console.log(myHeaders)
   React.useEffect(() => {
-    propsSetter({type:fetchRequest})
-    fetch("https://www.katyushaiust.ir/departments/", {
+    propsSetter({ type: fetchRequest });
+    fetch(apis["departments"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
-      propsSetter({type:fetchSuccess, payload:data.data}) 
-
-        // console.log("data all",data);
-        setDeparteman(data);
+        propsSetter({ type: fetchSuccess, payload: data.data });
+        setDepartment(data);
       })
       .catch((error) => {
-      propsSetter({type:fetchFail, payload:getError(error)})
-        
-        console.error(error)});
-    // console.log(data);
+        propsSetter({ type: fetchFail, payload: getError(error) });
+
+        console.error(error);
+      });
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
   }, []);
   React.useEffect(() => {
-    fetch("https://www.katyushaiust.ir/departments/all", {
+    fetch(apis["departments"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((all_colleges_data) => {
-        // changeInfoState("courseChoosed", all_colleges_data);
-        // console.log("all Colleges", all_colleges_data);
-        // console.log("all Colleges type", typeof(all_colleges_data));
         setAllColleges(all_colleges_data);
       })
       .catch((error) => console.error(error));
-      const activeRoute = (routeName) => {
-        return location.pathname === routeName ? "active" : "";
-      };
-    // console.log("all Colleges state", allColleges);
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
   }, []);
-
-  // React.useEffect(() => {
-  //   if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-  //     ps = new PerfectScrollbar(sidebarRef.current, {
-  //       suppressScrollX: true,
-  //       suppressScrollY: false,
-  //     });
-  //   }
-  //   // Specify how to clean up after this effect:
-  //   return function cleanup() {
-  //     if (navigator.userAgentData.platform.indexOf("Win") > -1) {
-  //       //ps.destroy();
-  //     }
-  //   };
-  // });
 
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
@@ -152,7 +96,6 @@ function LessonSidebar(props) {
   const { routes, rtlActive, logo } = props;
   let logoImg = null;
   let logoText = null;
-  //   rtlActive = true;
   if (logo !== undefined) {
     if (logo.outterLink !== undefined) {
       logoImg = (
@@ -205,33 +148,33 @@ function LessonSidebar(props) {
       {({ color }) => (
         <div className="sidebar" data={"normal"}>
           <div className="sidebar-wrapper" ref={sidebarRef}>
-            {/* {logoImg !== null || logoText !== null ? (
-              <div className="logo">
-                {logoImg}
-                {logoText}
-              </div>
-            ) : null} */}
             <Nav>
               <Row className="nav-lessonSidebar">
-                <Col md="5" xs="5" style={{margin:"auto"}}>
-                  <NavLink to="/admin/page" className="nav-header nav-link-icon">
-                    <img src="../../public/Logo1.png" alt=""  style={{height:"34px"}}/>
-                    {/* <i className="tim-icons icon-atom ml-0" /> */}
+                <Col md="5" xs="5" style={{ margin: "auto" }}>
+                  <NavLink to="/home/page" className="nav-header nav-link-icon">
+                    <img src={logo1} alt="" style={{ height: "34px" }} />
+                    <p
+                      className="mr-2 small"
+                      style={{ alignSelf: "center", fontSize: ".99rem" }}
+                    >
+                      کاتیوشا
+                    </p>
                   </NavLink>
                 </Col>
-                <Col md="4" xs="4" style={{margin:"auto"}}>
+                <Col md="4" xs="4" style={{ margin: "auto" }}>
                   <NavLink
                     to="..\CoursesPanel"
                     className="nav-header nav-link-course"
+                    style={{ minWidth: "67px" }}
                   >
                     پنل دروس
                   </NavLink>
                 </Col>
-                <Col md="3" xs="3" style={{margin:"auto"}}>
+                <Col md="3" xs="3" style={{ margin: "auto" }}>
                   <div className="nav-link-profile">
-                    <UncontrolledDropdown>
+                    <UncontrolledDropdown className="backCol">
                       <DropdownToggle
-                        className="m-0 p-10"
+                        className="m-0 pp-4"
                         color="link"
                         data-toggle="dropdown"
                       >
@@ -245,54 +188,70 @@ function LessonSidebar(props) {
                         <DropdownItem
                           className="navbarDropDownItem"
                           href="http://localhost:5173/shopping"
-                          onClick={(e) => {e.preventDefault()
-                            Navigate("/shopping")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/shopping");
                           }}
                         >
-                          <span className="tim-icons icon-basket-simple" 
-                          
-                          />
+                          <span className="tim-icons icon-basket-simple" />
                           {"  "}
                           سبد خرید
-                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/order");
+                          }}
+                        >
+                          <span className="tim-icons icon-bag-16" />
+                          {"  "}
+                          سفارش ها
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/notification");
+                          }}
                         >
                           <span className="tim-icons icon-email-85" />
                           {"  "}
                           اعلان ها
-                          
                         </DropdownItem>
                         <DropdownItem
                           href="#pablo"
-                          onClick={(e) => {e.preventDefault()
-                            Navigate("/admin/change")
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("/user");
                           }}
                         >
-                          <span className="tim-icons icon-lock-circle" />
-                          تغییر رمز عبور
-                        </DropdownItem>
-                        
-                        <DropdownItem
-                          href="#pablo"
-                          // onClick={()=>{
-                          //   setAuthTokens(null);
-                          //   console.log("clicked")
-                          //   Navigate("/login");
-                          // }}
-                        >
-                          <span className="tim-icons icon-simple-remove" />
-                          <Link to="/login"
-                           onClick={()=>{
-                            localStorage.setItem('authTokens', "");
-                            // setAuthTokens(null);
-                            // console.log("clicked")
-                          }}
-                          >
+                          <span className="tim-icons icon-badge" />
                           {"  "}
-                          خروج
+                          پروفایل
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("../aboutUs");
+                          }}
+                        >
+                          <span className="tim-icons icon-send" />
+                          {"  "}
+                          درباره ما
+                        </DropdownItem>
+
+                        <DropdownItem>
+                          <span className="tim-icons icon-simple-remove" />
+                          <Link
+                            to="/landingPage"
+                            onClick={() => {
+                              localStorage.removeItem("authTokens");
+                            }}
+                          >
+                            {"  "}
+                            خروج
                           </Link>
                         </DropdownItem>
                       </DropdownMenu>
@@ -300,54 +259,56 @@ function LessonSidebar(props) {
                   </div>
                 </Col>
               </Row>
-              <div className="lessonSidebar_component">
-                {loading ? <Spinner/> : error? "error" :
-                departeman.map((prop, index) => {
-                  if (prop.base_courses.length > 0) {
-                    return (
-                      <NavLink
-                        className="nav-link nav-link-lessonSidebar"
-                        // activeClassName="active"
-                        onClick={() => setLessonState([prop])}
-                        key={index}
-                      >
-                        <i className="tim-icons icon-chart-bar-32" />
-                        <p>{prop.name}</p>
-                      </NavLink>
-                    );
-                  }
-                })}
-                {loading ? "" : error? "" :
-                <NavLink
-                  className="nav-link nav-link-lessonSidebar"
-                  // activeClassName="active"
-                  onClick={() => {
-                    setLessonState(allColleges);
-                    // console.log("all colleges in onclick",allColleges);
-                    // console.log("lesson state in onclick",lessonState);
-                  }}
-                  // key={index}
-                >
-                  <i className="tim-icons icon-chart-bar-32" />
-                  <p>همه دانشکده ها</p>
-                </NavLink>
-
-                }
-              </div>
-              <div className="lessonSidebar_component-lessons">
-                {lessonState ? <SearchBox data={lessonState} /> : null}
-                {/* {console.log("props", lessonState.base_courses)} */}
-                {/* {console.log(lessonState)} */}
-                {/* {console.log(window.location.pathname)} */}
-                {/* {lessonState?.base_course.map((prop) => (
+              <div className={style.lessonSidebar_component}>
+                {loading ? (
+                  <Spinner />
+                ) : error ? (
+                  "error"
+                ) : (
+                  department.map((prop, index) => {
+                    if (prop.base_courses.length > 0) {
+                      return (
+                        <NavLink
+                          className={
+                            prop === selectedDep
+                              ? "nav-link nav-link-lessonSidebar "+style.selectedItem
+                              : "nav-link nav-link-lessonSidebar"
+                          }
+                          onClick={() => {
+                            setLessonState([prop]), setSelectedDep(prop);
+                          }}
+                          key={index}
+                        >
+                          <i className="tim-icons icon-chart-bar-32" />
+                          <p>{prop.name}</p>
+                        </NavLink>
+                      );
+                    }
+                  })
+                )}
+                {loading ? (
+                  ""
+                ) : error ? (
+                  ""
+                ) : (
                   <NavLink
-                    className="nav-link"
-                    activeClassName="active"
+                    className={
+                      allColleges === selectedDep
+                        ? "nav-link nav-link-lessonSidebar selecteddItem"
+                        : "nav-link nav-link-lessonSidebar"
+                    }
+                    onClick={() => {
+                      setLessonState(allColleges);
+                      setSelectedDep(allColleges);
+                    }}
                   >
-                    <i />
-                    <p>{prop.course_name}</p>
+                    <i className="tim-icons icon-chart-bar-32" />
+                    <p>همه دانشکده ها</p>
                   </NavLink>
-                ))} */}
+                )}
+              </div>
+              <div className={style.lessonSidebar_component_lessons}>
+                {lessonState ? <SearchBox data={lessonState} /> : null}
               </div>
             </Nav>
           </div>

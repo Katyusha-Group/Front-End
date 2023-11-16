@@ -1,6 +1,11 @@
+import React from "react";
+import { Navigate } from "react-router-dom";
+
+export const PrivatRoute = ({ children }) =>{
+  return localStorage.getItem("authTokens")? children : <Navigate to = "/landingPage" />;
+};
 
 export function convertPercentagetoLigtness(num){
-    // console.log(`percentage is ${num}`)
     return( 30+ num*55/100) ///frist was  60 - num*55/100)
 }
 
@@ -34,6 +39,15 @@ export function timeStringToFloat(time) {
   var hours = parseInt(hoursMinutes[0], 10);
   var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
   return hours + minutes / 60;
+}
+export function convertTime(time) {
+  const [hours, minutes, seconds] = time.split(':');
+
+  const hoursNum = parseInt(hours);
+
+  const finalTime = `${hoursNum}:${minutes}`;
+
+  return finalTime;
 }
 export function sexTostring(s){
   switch (s) {
