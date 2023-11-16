@@ -18,22 +18,17 @@ export const useAllProfiles = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
+      
       .then((data) => {
+        console.log("give all",data);
         setAllProfiles(data);
-        setFilteredProfiles(data); // Initialize filteredProfiles with all profiles initially
         closeLoading();
         setLoading(false);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  const searchProfiles = (searchTerm) => {
-    // Filter profiles based on the input value
-    const filtered = allProfiles.filter((profile) =>
-      profile.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProfiles(filtered);
-  };
+  
 
-  return { allProfiles, filteredProfiles, loading, searchProfiles };
+  return { allProfiles, loading };
 };
