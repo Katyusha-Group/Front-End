@@ -41,7 +41,7 @@ export const apis = {
   notification: `${domain}/notification/`,
   profiles: {
     me: `${domain}/profiles/me/`,
-    all: `${domain}/profiles/`,
+    all: `${domain}/profiles/?search=`,
   }
 
 };
