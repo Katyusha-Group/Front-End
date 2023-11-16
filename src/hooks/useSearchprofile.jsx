@@ -5,30 +5,29 @@ import {
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
 
-export const useAllProfiles = () => {
+export const useAllProfiles = (searchQuery) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [allProfiles, setAllProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  console.log("searchQuery",searchQuery);
   useEffect(() => {
-    showLoading();
+    // showLoading();
 
-    fetch(apis["profiles"]["all"], {
+    fetch(apis["profiles"]["all"]+searchQuery, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       
       .then((data) => {
         console.log("give all",data);
-        setAllProfiles(data);
-        closeLoading();
+        setFilteredProfiles(data);
         setLoading(false);
       })
-      .catch((error) => console.error(error));
-  }, []);
+      .catch((error) => console.log("error"));
+  }, [searchQuery]);
 
   
 
-  return { allProfiles, loading };
+  return { filteredProfiles, loading };
 };
