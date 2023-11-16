@@ -42,10 +42,12 @@ export const apis = {
   profiles: {
     myprofile: `${domain}/profiles/`,
     myusername: `${domain}/profiles/my-username/`,
+    all: `${domain}/profiles/`,
     following: `${domain}/profiles//following/`,
     followers: `${domain}/profiles//followers/`,
     followersyoufollow: `${domain}/profiles//followers-you-follow/`,
     follow: `${domain}/profiles/follow/`,
+    me: `${domain}/profiles/me/`,
   }
 };
 
