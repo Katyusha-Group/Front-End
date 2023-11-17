@@ -69,7 +69,7 @@ const ModalLessons = (props) => {
                   <div className={style.ModalLessonInfoPart}>
                     <CardHeader className={style.modalHeader}>
                       <Row>
-                        <Col md="6">
+                        <Col md="5">
                           <p
                             style={{
                               fontWeight: "bold",
@@ -81,16 +81,17 @@ const ModalLessons = (props) => {
                             {x.name} {x.group_number}
                           </p>
                         </Col>
-                        <Col md="6">
+                        <Col md="7">
                           <ButtonGroup
                             className={`${style.btnGroup} btn-group-toggle`}
                             data-toggle="buttons"
                           >
                             <Button
                               tag="label"
-                              className={classNames("btn-simple", "week_chart-btn", {
+                              className={classNames(style.modalLessonBtn, "btn-simple", {
                                 active: timelineData === "data0",
                               })}
+
                               id="0"
                               size="sm"
                               onClick={() => setTimeData("data0")}
@@ -106,7 +107,7 @@ const ModalLessons = (props) => {
                             </Button>
                             <Button
                               tag="label"
-                              className={classNames("btn-simple", "week_chart-btn", {
+                              className={classNames(style.modalLessonBtn, "btn-simple", {
                                 active: timelineData === "data1",
                               })}
                               id="1"
@@ -126,7 +127,7 @@ const ModalLessons = (props) => {
                               tag="label"
                               id="2"
                               size="sm"
-                              className={classNames("btn-simple", "week_chart-btn", {
+                              className={classNames(style.modalLessonBtn, "btn-simple", {
                                 active: timelineData === "data2",
                               })}
                               onClick={() => setTimeData("data2")}
@@ -181,7 +182,7 @@ const ModalLessons = (props) => {
                             >
                               <p className={style.courseTitle}>
                                 {" "}
-                                جنسیت&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                                جنسیت&nbsp;&nbsp;{" "}
                               </p>
                               {"  "}
                               {sexTostring(x.sex)}
