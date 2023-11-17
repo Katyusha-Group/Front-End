@@ -8,6 +8,7 @@ import {
 } from "../components/LoadingAlert/LoadingAlert";
 export const POSTFollow = (ToFollowUsername, IsFollow) => {
     console.log("The user to be followed is: " + ToFollowUsername);
+    // let [FollowChange, setFollowChange] = useState(false);
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
     showLoading();
     const url_follow = apis["profiles"]["follow"]+`${ToFollowUsername}/`;
@@ -25,6 +26,7 @@ export const POSTFollow = (ToFollowUsername, IsFollow) => {
         }),
     })
         .then((response) => {
+            // setFollowChange(prev => !prev);
             closeLoading();
             return response.json();
         })
@@ -32,4 +34,5 @@ export const POSTFollow = (ToFollowUsername, IsFollow) => {
         .catch((error) => {
         console.error(error);
         });
+      // return (FollowChange);
 }
