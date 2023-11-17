@@ -4,8 +4,8 @@ import * as styles from "../../assets/css/Profile.module.css"
 import moment from 'jalali-moment'
 import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
-import { followProfile } from '../../hooks/POSTFollow';
-// import { POSTFollow } from '../../hooks/POSTFollow';
+// import { followProfile } from '../../hooks/POSTFollow';
+import { POSTFollow } from '../../hooks/POSTFollow';
 export default function ProfileHeader({profile}) {
   const [showModal, setShowModal] = React.useState(false);
   const handleOpenModal = () => {
@@ -22,7 +22,8 @@ export default function ProfileHeader({profile}) {
     // };
     
     // followProfile();
-    followProfile("username1");
+    // followProfile("username1");
+    POSTFollow("username2");
     setShowModal(true);
   };
   const handleCloseModal = () => {
