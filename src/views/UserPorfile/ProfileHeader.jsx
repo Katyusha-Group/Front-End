@@ -28,7 +28,7 @@ export default function ProfileHeader({profile, username}) {
     
     // followProfile();
     // followProfile("username1");
-    // POSTFollow("username2");
+    POSTFollow("username2");
     setIsFollowing(true);
     setShowModal(true);
   };

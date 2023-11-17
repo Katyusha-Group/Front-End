@@ -10,7 +10,7 @@ export const POSTFollow = (ToFollowUsername) => {
     console.log("The user to be followed is: " + ToFollowUsername);
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
     showLoading();
-    const url = apis["profiles"]["follow"]+`${ToFollowUsername}`;
+    const url = apis["profiles"]["follow"]+`${ToFollowUsername}/`;
     console.log("url is: " + url);
     fetch(url , {
         method: "POST",
