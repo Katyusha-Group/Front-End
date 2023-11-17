@@ -26,5 +26,5 @@
 
 p {
     color: var(--white) !important;
-    margin-top: 20px !important;
+    /* margin-top: 20px !important; */
 }

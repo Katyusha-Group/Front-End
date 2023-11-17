@@ -2,7 +2,7 @@
 
 :root{
     overflow-y: hidden ;
-    background-color: var(--dark);
+    /* background-color: var(--dark); */
 }
 
 .main{
