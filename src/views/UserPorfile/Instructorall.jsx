@@ -1,11 +1,11 @@
 import React from 'react';
 import Instructor from './Instructor';
-// import { userFollowings } from '../../hooks/userFollowings';
-// import { userFollowers } from '../../hooks/userFollowers';
-function Instructorall({ username, IsFollowing, IsModal, Followings, Followers }) {
+import { userFollowings } from '../../hooks/userFollowings';
+import { userFollowers } from '../../hooks/userFollowers';
+function Instructorall({ username, IsFollowing, IsModal }) {
     // console.log("My username is: " + username);
-    // const {Followings, setFollowings} = userFollowings(username);
-    // const {Followers, setFollowers} = userFollowers(username);
+    const {Followings, setFollowings} = userFollowings(username);
+    const {Followers, setFollowers} = userFollowers(username);
     // var Following = [
     //     {
     //       username: 'username1',
@@ -28,7 +28,7 @@ function Instructorall({ username, IsFollowing, IsModal, Followings, Followers }
     // ];
     // console.log("Fetched followings: " + Followings);
     const Following_Follower = !IsFollowing ? "دنبال شونده"  : "دنبال کننده";
-    console.log("Followers in InstructorAll: " , Followers);
+
     return (
         <div>
             {/* <p>{IsModal}</p> */}

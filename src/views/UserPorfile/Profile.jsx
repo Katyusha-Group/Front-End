@@ -38,7 +38,7 @@ export default function Profile() {
       <Sidebar />
       <div className={styles.rightpart}>
         {/* {console.log("Profile checking in profile page: " + profile.name)} */}
-        <ProfileHeader username={username} profile={profile}/>
+        <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
         </div>
