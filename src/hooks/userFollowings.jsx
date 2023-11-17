@@ -4,39 +4,21 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-export const userFollowings = () => {
+export const userFollowings = (myUsername) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [Followings, setFollowing] = useState(null);
+  const [Followings, setFollowings] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         showLoading();
-        const response = await fetch(apis["profiles"]["myusername"], {
+        const response = await fetch((apis["profiles"]["following"]).replace("//following", `/${myUsername}/following`), {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const myUsername = await response.json();
-        // console.log("My username is: " + myUsername.username);
-
-        // const FollowingsResponse = await fetch(
-        //   (apis["profiles"]["following"]).replace("//", `/${myUsername.username}/`),
-        //   {
-        //     headers: { Authorization: `Bearer ${token}` },
-        //   }
-        // );
-        // const data = await FollowingsResponse.json();
-        // console.log("Data fetched is: " + data);
-        // setFollowing(data);
-        // console.log("User is following: " + Followings);
-        fetch((apis["profiles"]["following"]).replace("//", `/${myUsername.username}/`), {
-          headers: { Authorization: `Bearer ${token}` },
-          "Content-Type": "application/json",
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          setFollowing(data);
-        })
-        .catch((error) => console.error(error));
+        console.log("Response is: " , response);
+        const getfollowings = await response.json();
+        console.log("Followings are: " + getfollowings);
+        setFollowings(getfollowings);
         closeLoading();
         setLoading(false);
       } catch (error) {
@@ -46,6 +28,6 @@ export const userFollowings = () => {
 
     fetchData();
   }, []);
-  return {Followings, setFollowing, loading};
+  return {Followings, setFollowings};
 };
 

@@ -3,9 +3,9 @@ import Instructor from './Instructor';
 import { userFollowings } from '../../hooks/userFollowings';
 import { GETUsername } from '../../hooks/GETUsername';
 function Instructorall() {
-    // const {Followings, setFollowings, loading} = userFollowings();
-    const {username, setUsername, loading} = GETUsername();
-    console.log("My username is: " + username);
+    const {username, setUsername} = GETUsername();
+    // console.log("My username is: " + username);
+    const {Followings, setFollowings} = userFollowings(username);
     // var Following = [
     //     {
     //       username: 'username1',
@@ -29,12 +29,12 @@ function Instructorall() {
     // console.log("Fetched followings: " + Followings);
     return (
         <div>
-            {/* {
+            {
                 Followings && 
                 Followings.map ( (entry, index) => (
                     <Instructor key={index} User={entry}/>
                 ))
-            } */}
+            }
         </div>
     );
 }

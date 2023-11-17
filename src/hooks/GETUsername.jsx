@@ -26,6 +26,6 @@ export const GETUsername = () => {
 
     fetchData();
   }, []);
-  return {username, setUsername, loading};
+  return {username, setUsername};
 };
 
