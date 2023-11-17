@@ -8,17 +8,18 @@
     margin-top: 5vh;
     height: 90vh;
     margin-left: 1.5vw;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .searchbar{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     border-radius: 15px;
-    margin-top: 50px;
-    width: 18px;
+    margin-top: 3vh;
+    width: 100%;
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 2vh;
 }
 .field{
     display: flex;
@@ -26,11 +27,17 @@
     border: none;
     color: white;
     border-radius: 15px; 
-    width: 16vw;
-    height: 4vh;
+    width: 17vw;
+    height: 5vh;
     padding-right: 30px;
     margin-right: 20px;
+    margin: auto;
 }
 .field ::placeholder{
     margin-right: 20px;
+}
+
+.searchBox{
+    height: inherit;
+    overflow: auto;
 }
