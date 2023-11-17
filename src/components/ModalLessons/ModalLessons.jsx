@@ -179,20 +179,21 @@ const ModalLessons = (props) => {
                                     {sexTostring(x.sex)}
                                   </span>
                                 </p>
-
                               </Col>
                             </Row>
                           </Card>
-                        </Col>
-                        <Col md="7">
+
                           <Card className={style.ModalLessonDataCard2}>
                             <Col className="text-right">
                               <p className={style.courseTitleNotInline}>زمان برگزاری</p>
-                              {"  "}
-                              {x.course_times.map((t) => (
-                                <text>{dayOfWeek(t.course_day)} </text>
-                              ))}
-                              <text>
+                              <span className={style.courseText}>
+                                {x.course_times.map((t) => (
+                                  <text>{dayOfWeek(t.course_day)} </text>
+                                ))}
+
+                                {" / "}
+                              </span>
+                              <text className={style.courseText}>
                                 {convertTime(x.course_times[0].course_start_time)}{" "}
                                 تا{" "}
                                 {convertTime(x.course_times[0].course_end_time)}
@@ -204,12 +205,15 @@ const ModalLessons = (props) => {
                                   زمان آزمون پایانی
                                 </p>
 
-                                <text dir="ltr">
-                                  {"تاریخ :"}
+                                <text dir="ltr" className={style.courseText}>
+                                  {"تاریخ"}
+                                </text>{" "}
+                                <text className={style.courseText}
+                                  style={{ direction: "ltr" }}>
                                   {x.exam_times[0].date}
                                 </text>
-                                <text>
-                                  &nbsp; ساعت&nbsp;
+                                <text className={style.courseText}>
+                                  {" / "}
                                   {convertTime(
                                     x.exam_times[0].exam_start_time
                                   )}{" "}
@@ -219,8 +223,11 @@ const ModalLessons = (props) => {
                             )}
                           </Card>
                         </Col>
+                        <Col md="7">
+
+                        </Col>
                         <Row>
-                          <Card className={style.ModalLessonDataCard3}>
+                          {/* <Card className={style.ModalLessonDataCard3}>
                             <Row>
                               <Col
                                 className="text-right"
@@ -274,7 +281,7 @@ const ModalLessons = (props) => {
                                 {x.is_allowed ? "بله" : "خیر"}
                               </Col>
                             </Row>
-                          </Card>
+                          </Card> */}
                           {x.description === "nan" ? null : (
                             <Card className={style.ModalLessonDataCard3}>
                               <Row>
