@@ -5,15 +5,16 @@ import { useState } from "react";
 import { Card } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage";
 import { useTweets } from "../../hooks/Twitter/useTweets";
-
+import CommentModal from "../../components/Modal/Comments";
+import { useEffect } from "react";
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
-  console.log("🚀 ~ file: Timeline.jsx:12 ~ Timeline ~ tweets:", tweets)
-
+  const [open, setOpen] = useState(false);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
 
   return (
     <>
@@ -38,7 +39,13 @@ function Timeline() {
               {loading ? (
                 <></>
               ) : (
-                tweets.map((tweet) => <Tweet key={tweet.id} tweet={tweet} />)
+                tweets.map((tweet) => (
+                  <Tweet
+                    key={tweet.id}
+                    tweet={tweet}
+                    setOpenComment={setOpen}
+                  />
+                ))
               )}
             </div>
           )}
@@ -50,6 +57,12 @@ function Timeline() {
           <SendMessage setData={setTweets} />
         </div>
       </Card>
+      {/* <CommentModal
+        open={open}
+        setOpen={() => {
+          setOpen((x) => !x);
+        }}
+      ></CommentModal> */}
     </>
   );
 }
