@@ -59,12 +59,35 @@
 
 .courseTitle {
    display: inline-block;
-   color: #333752 !important;
+   color: #525f7f !important;
    font-weight: 300;
 }
 
+.modalLessonBtn {
+   border: none !important;
+   color: #C7C1c1 !important;
+   border-bottom: 1.5px solid #c7c1c1 !important;
+   background: transparent !important;
+   margin: 0 3px !important;
+   border-radius: .2857rem !important;
+}
+
+
+
+.modalLessonBtn:hover {
+   border-bottom: 1.5px solid #344675 !important;
+}
+
+.modalLessonBtn:active {
+   background: transparent !important;
+   background-color: transparent !important;
+   color: #ff20ac !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   background-image: none !important;
+}
+
 .courseTitleNotInline {
-   color: #333752 !important;
+   color: #525f7f !important;
    font-weight: 300;
 }
 
