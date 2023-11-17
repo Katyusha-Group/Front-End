@@ -23,7 +23,8 @@ export default function ProfileHeader({profile}) {
     
     // followProfile();
     // followProfile("username1");
-    POSTFollow("username2");
+    // POSTFollow("username2");
+    
     setShowModal(true);
   };
   const handleCloseModal = () => {

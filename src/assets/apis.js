@@ -48,7 +48,6 @@ export const apis = {
     followersyoufollow: `${domain}/profiles//followers-you-follow/`,
     follow: `${domain}/profiles/follow/`,
     me: `${domain}/profiles/me/`,
-    me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
   },
   twittes: `${domain}/twittes`

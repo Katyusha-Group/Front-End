@@ -4,25 +4,48 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-export const userFollowings = (username) => {
+export const userFollowings = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [Following, setFollowing] = useState(null);
+  const [Followings, setFollowing] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    showLoading();
-    fetch((apis["profiles"]["following"]).replace("//", `/${username}/`), {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setFollowing(data);
+    const fetchData = async () => {
+      try {
+        showLoading();
+        const response = await fetch(apis["profiles"]["myusername"], {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const myUsername = await response.json();
+        // console.log("My username is: " + myUsername.username);
+
+        // const FollowingsResponse = await fetch(
+        //   (apis["profiles"]["following"]).replace("//", `/${myUsername.username}/`),
+        //   {
+        //     headers: { Authorization: `Bearer ${token}` },
+        //   }
+        // );
+        // const data = await FollowingsResponse.json();
+        // console.log("Data fetched is: " + data);
+        // setFollowing(data);
+        // console.log("User is following: " + Followings);
+        fetch((apis["profiles"]["following"]).replace("//", `/${myUsername.username}/`), {
+          headers: { Authorization: `Bearer ${token}` },
+          "Content-Type": "application/json",
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setFollowing(data);
+        })
+        .catch((error) => console.error(error));
         closeLoading();
         setLoading(false);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
+      } catch (error) {
+        console.error("Err is " + error);
+      }
     };
+
+    fetchData();
   }, []);
-  return {Following, setFollowing, loading};
+  return {Followings, setFollowing, loading};
 };
+
