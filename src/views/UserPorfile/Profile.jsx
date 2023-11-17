@@ -9,13 +9,9 @@ import Sidebar from "../Sidebar/Sidebar.jsx";
 import Timeline from "../../views/TimeLine/Timeline.jsx";
 import { useState } from 'react';
 import { GETUsername } from '../../hooks/GETUsername';
-import { userFollowings } from '../../hooks/userFollowings';
-import { userFollowers } from '../../hooks/userFollowers';
 export default function Profile() {
   const {profile, setProfile, loading} = usesProfileMe();
   const {username, setUsername} = GETUsername();
-  const {Followings, setFollowings} = userFollowings(username);
-  const {Followers, setFollowers} = userFollowers(username);
   // var profile_temp = [
   //   {
   //     username: 'username1',
@@ -44,13 +40,7 @@ export default function Profile() {
         {/* {console.log("Profile checking in profile page: " + profile.name)} */}
         <ProfileHeader username={username} profile={profile}/>
         <div className={styles.rightBottom}>
-          <Instructorall 
-            username={username} 
-            IsModal={false}
-            IsFollowing={false}
-            Followings={Followings} 
-            Followers={Followers}
-          />
+          <Instructorall username={username} IsModal={false}/>
         </div>
       </div>
       <div className={styles.leftpart}>

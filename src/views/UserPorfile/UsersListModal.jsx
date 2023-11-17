@@ -19,29 +19,24 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Follo
     const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
     // console.log("Followers in UserslistModal: " , Followers);
     return (
-    <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
-      <div className={styles.ModalContents}>
-        <Modal.Header closeButton className={styles.ModalHeader}>
-          <h2 className={styles.ModalTitle}>{Title}</h2>
-          <button className="close" onClick={handleCloseModal}>
-            <span>&times;</span>
-          </button>
-        </Modal.Header>
-        <Modal.Body className={styles.ModalBody}>
-          <Instructorall 
-            username={username} 
-            IsFollowing={IsFollowing} 
-            IsModal={true}
-            Followings={Followings} 
-            Followers={Followers}
-          />
-        </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal} >
-            بستن
-          </Button>
-        </Modal.Footer> */}
-      </div>
+    <Modal show={show} onHide={handleCloseModal}>
+      <Modal.Header closeButton className={styles.ModalHeader}>
+        <h2 className={styles.ModalTitle}>{Title}</h2>
+      </Modal.Header>
+      <Modal.Body className={styles.ModalBody}>
+        <Instructorall 
+          username={username} 
+          IsFollowing={IsFollowing} 
+          IsModal={true}
+          Followings={Followings} 
+          Followers={Followers}
+        />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseModal}>
+          Close
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };
