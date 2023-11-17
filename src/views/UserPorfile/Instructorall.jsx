@@ -1,11 +1,11 @@
 import React from 'react';
 import Instructor from './Instructor';
-import { userFollowings } from '../../hooks/userFollowings';
-import { userFollowers } from '../../hooks/userFollowers';
-function Instructorall({ username, IsFollowing, IsModal }) {
+// import { userFollowings } from '../../hooks/userFollowings';
+// import { userFollowers } from '../../hooks/userFollowers';
+function Instructorall({ username, IsFollowing, IsModal, Followings, Followers }) {
     // console.log("My username is: " + username);
-    const {Followings, setFollowings} = userFollowings(username);
-    const {Followers, setFollowers} = userFollowers(username);
+    // const {Followings, setFollowings} = userFollowings(username);
+    // const {Followers, setFollowers} = userFollowers(username);
     // var Following = [
     //     {
     //       username: 'username1',
@@ -27,31 +27,37 @@ function Instructorall({ username, IsFollowing, IsModal }) {
     //     },  
     // ];
     // console.log("Fetched followings: " + Followings);
-    const Following_Follower = !IsFollowing ? "دنبال شونده"  : "دنبال کننده";
-
+    // const Following_Follower = !IsFollowing ? "دنبال شونده"  : "دنبال کننده";
+    const Title = IsFollowing ? "دنبال شونده"  : "دنبال کننده";
+    console.log("Followers in InstructorAll: " , Followers);
     return (
         <div>
-            {/* <p>{IsModal}</p> */}
-            {
-
-                IsFollowing || !IsModal ?
-
-                    Followings && Followings.length > 0 ? 
-                    Followings.map ( (entry, index) => (
-                        <Instructor key={index} User={entry}/>
-                    )) :
-                    <p>هیچ {Following_Follower} ای یافت نشد</p>
-
-                    :
-
-                    Followers && Followers.length > 0 ? 
-                    Followers.map ( (entry, index) => (
-                        <Instructor key={index} User={entry}/>
-                    )) :
-                    <p>هیچ {Following_Follower} ای یافت نشد</p>
-            }
+            {IsModal ? (
+                Following_Component(Followings, Title)
+            ) : (
+                IsFollowing ? Following_Component(Followings, Title) : Follower_Component(Followers, Title)
+            )}
         </div>
     );
 }
 
 export default Instructorall;
+
+function Following_Component (Followings, Title) {
+    return (
+        Followings && Followings.length > 0 ? 
+        Followings.map ( (entry, index) => (
+            <Instructor key={index} User={entry}/>
+        )) :
+        <p>هیج {Title} ای یافت نشد</p>
+    )
+}
+function Follower_Component (Followers, Title) {
+    return (
+        Followers && Followers.length > 0 ? 
+        Followers.map ( (entry, index) => (
+            <Instructor key={index} User={entry}/>
+        )) :
+        <p>هیج {Title} ای یافت نشد</p>   
+    )
+}

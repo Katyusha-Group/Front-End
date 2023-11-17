@@ -6,9 +6,13 @@ import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
 // import { followProfile } from '../../hooks/POSTFollow';
 import { POSTFollow } from '../../hooks/POSTFollow';
-export default function ProfileHeader({profile}) {
+import { userFollowings } from '../../hooks/userFollowings';
+import { userFollowers } from '../../hooks/userFollowers';
+export default function ProfileHeader({profile, username}) {
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false);
+  const {Followings, setFollowings} = userFollowings(username);
+  const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
     // console.log("Modal is clicked!");
     // let response = POSTFollow("username1");
@@ -60,15 +64,31 @@ export default function ProfileHeader({profile}) {
             <p
               onClick={handleOpenModal_Following}
             >
-               دنبال میشود:{a} 
+               دنبال میشود:&nbsp;
+               {
+                  !(Followings ===  null) ?
+                  Object.values(Followings).length :
+                  0
+               }  
             </p>
             {/* Followers */}
             <p
               onClick={handleOpenModal_Followers}
             > 
-              دنبال کننده:{a}
+                دنبال کننده:&nbsp;
+               {
+                  !(Followers ===  null) ?
+                  Object.values(Followers).length :
+                  0
+               }             
             </p>
-            <UsersListModal showModal={showModal} handleClose={handleCloseModal} IsFollowing={IsFollowing}/>
+            <UsersListModal 
+              showModal={showModal} 
+              handleClose={handleCloseModal} 
+              IsFollowing={IsFollowing} 
+              Followings={Followings} 
+              Followers={Followers}
+            />
           </div>
           <p className={styles.DateStart}> تاریخ شروع فعالیت {date}</p>
           <button className={styles.followbutton}> دنبال کردن</button>
