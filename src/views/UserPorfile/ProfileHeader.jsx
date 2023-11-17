@@ -56,7 +56,10 @@ export default function ProfileHeader({profile, username}) {
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
   return (
         <div className={styles.rightUpper}>
-          <img className={styles.ProfileImage} src={profile.image} alt="" />
+          <img className={styles.ProfileImage} 
+            // src={profile.image} 
+            src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
+            alt="" />
           <p className={styles.p_name}>{profile.name}</p>
           <p className={styles.myusername}> @{profile.username} </p>
           <div className={styles.Follow}>

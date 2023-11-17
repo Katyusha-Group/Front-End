@@ -32,7 +32,7 @@ function Instructorall({ username, IsFollowing, IsModal, Followings, Followers }
     console.log("Followers in InstructorAll: " , Followers);
     return (
         <div>
-            {IsModal ? (
+            {!IsModal ? (
                 Following_Component(Followings, Title)
             ) : (
                 IsFollowing ? Following_Component(Followings, Title) : Follower_Component(Followers, Title)
