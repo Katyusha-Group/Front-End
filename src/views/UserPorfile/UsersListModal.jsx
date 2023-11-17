@@ -4,10 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
 import Instructorall from "./Instructorall";
 import * as styles from '../../assets/css/UsersListModal.module.css';
-// import { GETUsername } from '../../hooks/GETUsername';
 const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Followers, username }) => {
     const [show, setShow] = React.useState(showModal);
-    // const {username, setUsername} = GETUsername();
     React.useEffect(() => {
         setShow(showModal);
       }, [showModal]);
@@ -17,7 +15,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Follo
         handleClose();
     };
     const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
-    console.log("Username in userlist modal is: " , username);
+    // console.log("Username in userlist modal is: " , username);
     return (
       <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
       <div className={styles.ModalContents}>

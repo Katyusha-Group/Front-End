@@ -6,14 +6,19 @@ import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
 import { userFollowings } from '../../hooks/userFollowings';
 import { userFollowers } from '../../hooks/userFollowers';
+import { GETProfileData } from '../../hooks/GETProfileData';
+
 export default function ProfileHeader({profile, username}) {
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false);
   const {Followings, setFollowings} = userFollowings(username);
   const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
+    
     setIsFollowing(true);
     setShowModal(true);
+    // console.log("Heloooooooooooooooooooooo");
+    // GETProfileData("username3");
   };
 
   const handleOpenModal_Followers = () => {
@@ -40,8 +45,8 @@ export default function ProfileHeader({profile, username}) {
   return (
         <div className={styles.rightUpper}>
           <img className={styles.ProfileImage} 
-            // src={profile.image} 
-            src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
+            src={profile.image} 
+            // src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
             alt="" />
           <p className={styles.p_name}>{profile.name}</p>
           <p className={styles.myusername}> @{profile.username} </p>

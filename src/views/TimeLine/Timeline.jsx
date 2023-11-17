@@ -1,30 +1,92 @@
 import React from 'react';
 import Tweet from './Tweet';
 import styles from '../../assets/css/Timeline/Timeline.module.css';
+import * as style from "../../components/ModalLessons/ModalLesson.module.css";
 import { useState } from 'react';
 import { GETTweets } from '../../hooks/GETTweets';
-
+import {
+  dayOfWeek,
+  timeStringToFloat,
+  sexTostring,
+  convertTime,
+} from "../../global/functions";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardHeader,
+  CardBody,
+  Row,
+  Col,
+  Label,
+} from "reactstrap";
 const Tweets = [
-  { id: 1, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
-  { id: 2, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
+  { id: 1, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White', name: 'جت وایت' },
+  { id: 2, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett', name: 'وایت جت' },
   // Add more tweets as needed
-  { id: 3, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
-  { id: 4, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
+  { id: 3, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White', name: 'جت وایت' },
+  { id: 4, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett', name: 'وایت جت' },
   // Add more tweets as needed
-  { id: 5, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
-  { id: 6, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
+  { id: 5, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White', name: 'جت وایت' },
+  { id: 6, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett', name: 'وایت جت' },
   // Add more tweets as needed
-  { id: 7, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White',name: 'جت وایت' },
-  { id: 8, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett',name: 'وایت جت' },
+  { id: 7, text: 'عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.', username: 'jett White', name: 'جت وایت' },
+  { id: 8, text: 'من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی', username: 'white Jett', name: 'وایت جت' },
   // Add more tweets as needed
 ];
-
+const x = {
+  "complete_course_number": "2211299_03",
+  "name": "ریز پردازنده و زبان اسمبلی",
+  "group_number": "03",
+  "total_unit": 3,
+  "practical_unit": 0,
+  "capacity": 50,
+  "registered_count": 36,
+  "waiting_count": 0,
+  "sex": "B",
+  "emergency_deletion": true,
+  "registration_limit": "مجاز برای مقطع کارشناسی، دانشکده مهندسی کامپیوتر، گروه آموزشی واحد آموزش کارشناسی، رشته مهندسی کامپیوتر،",
+  "description": "nan",
+  "presentation_type": "N",
+  "teachers": [
+    {
+      "id": 3609,
+      "name": "هاشم مشحون",
+      "teacher_image": "http://37.32.13.62/var/www/media/images/teachers_image/13_Y6rbyvu.png"
+    }
+  ],
+  "exam_times": [
+    {
+      "date": "1402-11-04",
+      "exam_start_time": "14:00:00",
+      "exam_end_time": "16:00:00"
+    }
+  ],
+  "course_times": [
+    {
+      "course_day": "1",
+      "course_start_time": "14:30:00",
+      "course_end_time": "16:00:00",
+      "place": "دانشکده کامپیوتر کلاس شماره 116",
+      "course_time_representation": 7
+    },
+    {
+      "course_day": "3",
+      "course_start_time": "14:30:00",
+      "course_end_time": "16:00:00",
+      "place": "دانشکده کامپیوتر کلاس شماره 116",
+      "course_time_representation": 7
+    }
+  ],
+  "is_allowed": true,
+  "added_to_calendar_count": 1
+}
 let tabsList = [
   ["tweets", "دنبال کننده ها"],
   ["media", "برای شما"]
 ];
 
-function Timeline({tabsList}) {
+function Timeline({ tabsList }) {
   // console.log("Tabs are: " + tabsList);
   const [activeTab, setActiveTab] = useState('Main');
   // const {Tweets, setTweets, loading} = GETTweets();
@@ -33,8 +95,7 @@ function Timeline({tabsList}) {
     setActiveTab(tab);
   };
 
-  if (tabsList == undefined)
-  {
+  if (tabsList == undefined) {
     tabsList = [
       ["Tweets", "دنبال کننده ها"],
       ["media", "برای شما"]
@@ -43,9 +104,9 @@ function Timeline({tabsList}) {
 
   return (
     <>
-    <div className={styles.timeline}>
-      <div className={styles.tabs}>
-        {/* <button
+      <div className={styles.timeline}>
+        <div className={styles.tabs}>
+          {/* <button
           className={activeTab === 'Main' ? styles.activeTab : styles.tab}
           onClick={() => handleTabClick('Main')}
         >
@@ -69,7 +130,7 @@ function Timeline({tabsList}) {
         >
           Comments
         </button> */}
-        {tabsList.map ( (entry, index) => (
+          {tabsList.map((entry, index) => (
             <button
               key={index}
               className={activeTab === entry[0] ? styles.activeTab : styles.tab}
@@ -78,16 +139,21 @@ function Timeline({tabsList}) {
               {entry[1]}
             </button>
           ))
-        }
-      </div>
-      <div className={styles.content}>
-        {activeTab === 'Main' && (
+          }
+        </div>
+
+        {activeTab === 'Tweets' && (
           <div className={styles.tweetsContainer}>
-            {/* Render media content here */}
-            <div
-                style={{
-                  display: timelineData == "data0" ? "block" : "none",
-                }}>
+            {Tweets.map((tweet) => (
+              <Tweet key={tweet.id} tweet={tweet} />
+            ))}
+          </div>
+        )}
+        <div className={styles.content}>
+          {activeTab === 'Main' && (
+            <div className={styles.tweetsContainer}>
+              {/* Render media content here */}
+              <div>
                 <Row>
                   <Col md="5">
                     <Card className={style.ModalLessonDataCard1}>
@@ -223,33 +289,33 @@ function Timeline({tabsList}) {
                   </Col>
                 </Row>
               </div>
-          </div>
-        )}
-        {activeTab === 'Tweets' && (
-          <div className={styles.tweetsContainer}>
-            {Tweets.map((tweet) => (
-              <Tweet key={tweet.id} tweet={tweet} />
-            ))}
-          </div>
-        )}
-        {activeTab === 'Likes' && (
-          <div className={styles.tweetsContainer}>
-            {Tweets.map((tweet) => (
-              <Tweet key={tweet.id} tweet={tweet} />
-            ))}
-          </div>
-        )}
-        {activeTab === 'Comments' && (
-          <div className={styles.tweetsContainer}>
-            {Tweets.map((tweet) => (
-              <Tweet key={tweet.id} tweet={tweet} />
-            ))}
-          </div>
-        )}
+            </div>
+          )}
+          {activeTab === 'Tweets' && (
+            <div className={styles.tweetsContainer}>
+              {Tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} />
+              ))}
+            </div>
+          )}
+          {activeTab === 'Likes' && (
+            <div className={styles.tweetsContainer}>
+              {Tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} />
+              ))}
+            </div>
+          )}
+          {activeTab === 'Comments' && (
+            <div className={styles.tweetsContainer}>
+              {Tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
-  }
+}
 
 export default Timeline;

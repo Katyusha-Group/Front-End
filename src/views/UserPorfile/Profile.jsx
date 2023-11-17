@@ -8,10 +8,17 @@ import Sidebar from "../Sidebar/Sidebar.jsx";
 import Timeline from "../../views/TimeLine/Timeline.jsx";
 import { useState } from 'react';
 import { GETUsername } from '../../hooks/GETUsername';
+import { Navigate, useParams } from "react-router-dom";
+import { GETProfileData } from "../../hooks/GETProfileData.jsx";
 export default function Profile() {
+  const { chart, id } = useParams();
+  // console.log("ID is: " , id);
   const {profile, setProfile, loading} = usesProfileMe();
-  const {username, setUsername} = GETUsername();
-  
+  // const {profile, setProfile, loading} = GETProfileData("username3");
+  // console.log("PFSFDSFSDF" , profile);
+  // const {username, setUsername} = GETUsername();
+  // setUsername(id);
+  const username = id;
   const tabs = [
     ["Main", "صفحه اصلی"],
     ["Tweets", "پست ها"],
@@ -19,7 +26,7 @@ export default function Profile() {
     ["Comments", "نظرات"]
   ];
 
-  console.log("Tabs: " + tabs[0][0]);
+  // console.log("Tabs: " + tabs[0][0]);
   if(loading){
     return <></>
   }
@@ -28,9 +35,9 @@ export default function Profile() {
       <Sidebar />
       <div className={styles.rightpart}>
         <ProfileHeader username={username} profile={profile}/>
-        <div className={styles.rightBottom}>
+        {/* <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
-        </div>
+        </div> */}
       </div>
       <div className={styles.leftpart}>
         <div><Timeline tabsList={tabs}/></div>
