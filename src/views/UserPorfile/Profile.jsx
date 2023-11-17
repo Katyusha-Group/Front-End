@@ -5,7 +5,7 @@ import Instructorall from "./Instructorall";
 import { apis } from "../../assets/apis";
 import { usesProfileMe } from "../../hooks/useProfileMe";
 import Sidebar from "../Sidebar/Sidebar.jsx";
-import Timeline from "../../views/TimeLine/Timeline.jsx";
+import Timeline from "../TimeLine/Timeline_Profile.jsx";
 import { useState } from 'react';
 import { GETUsername } from '../../hooks/GETUsername';
 import { Navigate, useParams } from "react-router-dom";

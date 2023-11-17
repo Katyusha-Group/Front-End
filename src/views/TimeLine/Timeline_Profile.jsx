@@ -291,13 +291,6 @@ function Timeline({ tabsList }) {
               </div>
             </div>
           )}
-          {activeTab === 'Tweets' && (
-            <div className={styles.tweetsContainer}>
-              {Tweets.map((tweet) => (
-                <Tweet key={tweet.id} tweet={tweet} />
-              ))}
-            </div>
-          )}
           {activeTab === 'Likes' && (
             <div className={styles.tweetsContainer}>
               {Tweets.map((tweet) => (
