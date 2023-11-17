@@ -17,6 +17,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Follo
         handleClose();
     };
     const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
+    console.log("Username in userlist modal is: " , username);
     return (
       <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
       <div className={styles.ModalContents}>
@@ -31,8 +32,8 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Follo
             username={username} 
             IsFollowing={IsFollowing} 
             IsModal={true}
-            Followings={Followings} 
-            Followers={Followers}
+            // Followings={Followings} 
+            // Followers={Followers}
           />
         </Modal.Body>
         {/* <Modal.Footer>

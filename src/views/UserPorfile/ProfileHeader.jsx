@@ -4,8 +4,6 @@ import * as styles from "../../assets/css/Profile.module.css"
 import moment from 'jalali-moment'
 import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
-// import { followProfile } from '../../hooks/POSTFollow';
-import { POSTFollow } from '../../hooks/POSTFollow';
 import { userFollowings } from '../../hooks/userFollowings';
 import { userFollowers } from '../../hooks/userFollowers';
 export default function ProfileHeader({profile, username}) {
@@ -14,21 +12,6 @@ export default function ProfileHeader({profile, username}) {
   const {Followings, setFollowings} = userFollowings(username);
   const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
-    // console.log("Modal is clicked!");
-    // let response = POSTFollow("username1");
-    // console.log("response is: " + response);
-    // const followProfile = async () => {
-    //   try {
-    //     const response = await POSTFollow("username1");
-    //     console.log("Response data:", response);
-    //   } catch (error) {
-    //     console.error("An error occurred:", error);
-    //   }
-    // };
-    
-    // followProfile();
-    // followProfile("username1");
-    POSTFollow("username2");
     setIsFollowing(true);
     setShowModal(true);
   };
@@ -91,6 +74,7 @@ export default function ProfileHeader({profile, username}) {
               IsFollowing={IsFollowing} 
               Followings={Followings} 
               Followers={Followers}
+              username={username}
             />
           </div>
           <p className={styles.DateStart}> تاریخ شروع فعالیت {date}</p>
