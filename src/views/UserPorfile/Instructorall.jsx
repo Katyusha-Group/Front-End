@@ -1,10 +1,11 @@
 import React from 'react';
 import Instructor from './Instructor';
 import { userFollowings } from '../../hooks/userFollowings';
-
-function Instructorall({username}) {
+import { userFollowers } from '../../hooks/userFollowers';
+function Instructorall({ username, IsFollowing, IsModal }) {
     // console.log("My username is: " + username);
     const {Followings, setFollowings} = userFollowings(username);
+    const {Followers, setFollowers} = userFollowers(username);
     // var Following = [
     //     {
     //       username: 'username1',
@@ -26,14 +27,28 @@ function Instructorall({username}) {
     //     },  
     // ];
     // console.log("Fetched followings: " + Followings);
+    const Following_Follower = !IsFollowing ? "دنبال شونده"  : "دنبال کننده";
+
     return (
         <div>
+            {/* <p>{IsModal}</p> */}
             {
-                Followings && Followings.length > 0 ? 
-                Followings.map ( (entry, index) => (
-                    <Instructor key={index} User={entry}/>
-                )) :
-                <p>No Following Found</p>
+
+                IsFollowing || !IsModal ?
+
+                    Followings && Followings.length > 0 ? 
+                    Followings.map ( (entry, index) => (
+                        <Instructor key={index} User={entry}/>
+                    )) :
+                    <p>هیچ {Following_Follower} ای یافت نشد</p>
+
+                    :
+
+                    Followers && Followers.length > 0 ? 
+                    Followers.map ( (entry, index) => (
+                        <Instructor key={index} User={entry}/>
+                    )) :
+                    <p>هیچ {Following_Follower} ای یافت نشد</p>
             }
         </div>
     );

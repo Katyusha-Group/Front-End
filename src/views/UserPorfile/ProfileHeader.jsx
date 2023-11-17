@@ -8,7 +8,8 @@ import UsersListModal from './UsersListModal';
 import { POSTFollow } from '../../hooks/POSTFollow';
 export default function ProfileHeader({profile}) {
   const [showModal, setShowModal] = React.useState(false);
-  const handleOpenModal = () => {
+  const [IsFollowing, setIsFollowing] = React.useState(false);
+  const handleOpenModal_Following = () => {
     // console.log("Modal is clicked!");
     // let response = POSTFollow("username1");
     // console.log("response is: " + response);
@@ -24,9 +25,15 @@ export default function ProfileHeader({profile}) {
     // followProfile();
     // followProfile("username1");
     // POSTFollow("username2");
-    
+    setIsFollowing(true);
     setShowModal(true);
   };
+
+  const handleOpenModal_Followers = () => {
+    setIsFollowing(false);
+    setShowModal(true);
+  };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -51,13 +58,17 @@ export default function ProfileHeader({profile}) {
           <div className={styles.Follow}>
             {/* Followings */}
             <p
-              onClick={handleOpenModal}
+              onClick={handleOpenModal_Following}
             >
                دنبال میشود:{a} 
             </p>
             {/* Followers */}
-            <p> دنبال کننده:{a}</p>
-            <UsersListModal showModal={showModal} handleClose={handleCloseModal}/>
+            <p
+              onClick={handleOpenModal_Followers}
+            > 
+              دنبال کننده:{a}
+            </p>
+            <UsersListModal showModal={showModal} handleClose={handleCloseModal} IsFollowing={IsFollowing}/>
           </div>
           <p className={styles.DateStart}> تاریخ شروع فعالیت {date}</p>
           <button className={styles.followbutton}> دنبال کردن</button>

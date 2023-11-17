@@ -40,7 +40,7 @@ export default function Profile() {
         {/* {console.log("Profile checking in profile page: " + profile.name)} */}
         <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
-          <Instructorall username={username}/>
+          <Instructorall username={username} IsModal={false}/>
         </div>
       </div>
       <div className={styles.leftpart}>

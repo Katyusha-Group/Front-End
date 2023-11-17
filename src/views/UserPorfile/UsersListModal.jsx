@@ -5,7 +5,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import Instructorall from "./Instructorall";
 import * as styles from '../../assets/css/UsersListModal.module.css';
 import { GETUsername } from '../../hooks/GETUsername';
-const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
+const UsersListModal = ({ showModal, handleClose, IsFollowing }) => {
     const [show, setShow] = React.useState(showModal);
     const {username, setUsername} = GETUsername();
     React.useEffect(() => {
@@ -16,14 +16,14 @@ const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
         setShow(false);
         handleClose();
     };
-
+    const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
     return (
     <Modal show={show} onHide={handleCloseModal}>
       <Modal.Header closeButton className={styles.ModalHeader}>
-        <h2 className={styles.ModalTitle}>دنبال کننده</h2>
+        <h2 className={styles.ModalTitle}>{Title}</h2>
       </Modal.Header>
       <Modal.Body className={styles.ModalBody}>
-        <Instructorall username={username}/>
+        <Instructorall username={username} IsFollowing={IsFollowing} IsModal={true}/>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseModal}>
