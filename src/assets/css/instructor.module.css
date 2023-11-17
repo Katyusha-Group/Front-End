@@ -39,3 +39,25 @@
     color: white;
     border: 1px solid white;
 }
+
+/* .followButton {
+    line-height: 2.3;
+    margin-top: 5px;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #67539E;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  .followButton:hover {
+    background-color: white;
+    color: #67539E;
+  }
+  
+  .followButton:active {
+    background-color: white;
+    color: #67539E;
+    border: 1px solid #67539E;
+  } */

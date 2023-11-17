@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from "../../assets/css/instructor.module.css"
-
+import { POSTFollow } from '../../hooks/POSTFollow';
 function Instructor(
         {User}
     ) {
@@ -11,8 +11,13 @@ function Instructor(
             <button className={styles.delButton}>حذف</button> */}
             {/* <img className={styles.eachProfile} src={User.image} alt="" /> */}
             <p className={styles.p_name}>{User.username}</p>
-            {/* <button className={User.is_followed ? styles.delButton : styles.FollowButton}>حذف</button> */}
-            <button className={styles.delButton}>حذف</button>
+            <button 
+                className={User.is_followed ? styles.delButton : styles.delButton}
+                onClick={POSTFollow(User.username)}
+            >
+                    {User.is_followed ? "حذف" : "دنبال کردن"}
+            </button>
+            {/* <button className={styles.delButton}>حذف</button> */}
         </div>
     );
 }
