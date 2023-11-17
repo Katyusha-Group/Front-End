@@ -8,9 +8,10 @@ import { usesProfileMe } from "../../hooks/useProfileMe";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import Timeline from "../../views/TimeLine/Timeline.jsx";
 import { useState } from 'react';
-
+import { GETUsername } from '../../hooks/GETUsername';
 export default function Profile() {
   const {profile, setProfile, loading} = usesProfileMe();
+  const {username, setUsername} = GETUsername();
   // var profile_temp = [
   //   {
   //     username: 'username1',
@@ -39,7 +40,7 @@ export default function Profile() {
         {/* {console.log("Profile checking in profile page: " + profile.name)} */}
         <ProfileHeader profile={profile}/>
         <div className={styles.rightBottom}>
-          <Instructorall />
+          <Instructorall username={username}/>
         </div>
       </div>
       <div className={styles.leftpart}>

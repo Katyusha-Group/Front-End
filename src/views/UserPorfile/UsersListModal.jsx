@@ -3,10 +3,11 @@ import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
 import Instructorall from "./Instructorall";
-import * as styles from '../../assets/css/UsersListModal.module.css'
+import * as styles from '../../assets/css/UsersListModal.module.css';
+import { GETUsername } from '../../hooks/GETUsername';
 const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
     const [show, setShow] = React.useState(showModal);
-    
+    const {username, setUsername} = GETUsername();
     React.useEffect(() => {
         setShow(showModal);
       }, [showModal]);
@@ -22,7 +23,7 @@ const UsersListModal = ({ showModal, handleClose, ModalTitle }) => {
         <h2 className={styles.ModalTitle}>دنبال کننده</h2>
       </Modal.Header>
       <Modal.Body className={styles.ModalBody}>
-        <Instructorall/>
+        <Instructorall username={username}/>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseModal}>

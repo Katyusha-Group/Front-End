@@ -1,9 +1,8 @@
 import React from 'react';
 import Instructor from './Instructor';
 import { userFollowings } from '../../hooks/userFollowings';
-import { GETUsername } from '../../hooks/GETUsername';
-function Instructorall() {
-    const {username, setUsername} = GETUsername();
+
+function Instructorall({username}) {
     // console.log("My username is: " + username);
     const {Followings, setFollowings} = userFollowings(username);
     // var Following = [
@@ -30,10 +29,11 @@ function Instructorall() {
     return (
         <div>
             {
-                Followings && 
+                Followings && Followings.length > 0 ? 
                 Followings.map ( (entry, index) => (
                     <Instructor key={index} User={entry}/>
-                ))
+                )) :
+                <p>No Following Found</p>
             }
         </div>
     );

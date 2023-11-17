@@ -15,9 +15,8 @@ export const userFollowings = (myUsername) => {
         const response = await fetch((apis["profiles"]["following"]).replace("//following", `/${myUsername}/following`), {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("Response is: " , response);
         const getfollowings = await response.json();
-        console.log("Followings are: " + getfollowings);
+        // console.log("Followings are: " + JSON.stringify(getfollowings));
         setFollowings(getfollowings);
         closeLoading();
         setLoading(false);
