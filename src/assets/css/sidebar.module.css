@@ -27,6 +27,10 @@
     justify-content: flex-start;
     align-items: flex-end;
     gap: 4vw;
+    cursor: pointer;
+}
+.sidebarmenuItems :hover{
+   scale: 1.1;
 }
 .click{
     cursor: pointer;
