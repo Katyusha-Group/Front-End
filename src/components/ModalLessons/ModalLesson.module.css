@@ -118,11 +118,11 @@
 }
 
 .ModalLessonDataCard3 {
-   margin-top: -5px;
+   margin-top: 15px;
+   margin-right: 10px !important;
    background-color: transparent !important;
    box-shadow: none !important;
    width: 100% !important;
-   margin-right: 0px !important;
 }
 
 .ModalLessonInfoPart {

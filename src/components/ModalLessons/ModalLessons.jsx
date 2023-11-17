@@ -76,9 +76,9 @@ const ModalLessons = (props) => {
                             {x.name} {x.group_number}
                           </p>
                         </Col>
-                        <Col md="7">
+                        <Col md="7" className="text-right">
                           <ButtonGroup
-                            className={`${style.btnGroup} btn-group-toggle`}
+                            className={`${style.btnGroup} btn-group-toggle `}
                             data-toggle="buttons"
                           >
                             <Button
@@ -93,8 +93,6 @@ const ModalLessons = (props) => {
                             >
                               <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                                 اطلاعات درس
-                                {/* {"  "}
-                            {x.name} */}
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-badge" />
@@ -111,8 +109,6 @@ const ModalLessons = (props) => {
                             >
                               <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                                 تایم‌لاین درس
-                                {/* {"  "}
-                            {x.name} */}
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-book-bookmark" />
@@ -129,8 +125,6 @@ const ModalLessons = (props) => {
                             >
                               <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                                 تایم‌لاین استاد
-                                {/* {"  "}
-                                {x.teachers.map((y) => y.name).join(" , ")} */}
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-single-02" />
@@ -204,7 +198,6 @@ const ModalLessons = (props) => {
                                 <p className={style.courseTitleNotInline}>
                                   زمان آزمون پایانی
                                 </p>
-
                                 <text dir="ltr" className={style.courseText}>
                                   {"تاریخ"}
                                 </text>{" "}
@@ -224,78 +217,60 @@ const ModalLessons = (props) => {
                           </Card>
                         </Col>
                         <Col md="7">
-
-                        </Col>
-                        <Row>
-                          {/* <Card className={style.ModalLessonDataCard3}>
-                            <Row>
-                              <Col
-                                className="text-right"
-                                md="7"
-                                style={{ marginRight: "0px !important" }}
-                              >
-                                <p className={style.courseTitle}>
-                                  ثبت نام
-                                  شده&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </p>
+                          <Card className={`${style.ModalLessonDataCard3} text-right`}>
+                            <p className={style.courseTitle}>
+                              ثبت نام
+                              شده&nbsp;
+                              <text className={style.courseText}>
                                 {x.registered_count} از {x.capacity}
-                              </Col>
-                              <Col className="text-right" md="5">
-                                <p className={style.courseTitle}>
-                                  تعداد واحد های عملی &nbsp;&nbsp;&nbsp;&nbsp;
-                                </p>
-                                &nbsp;{x.practical_unit}&nbsp;{"واحد"}
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col className="text-right" md="7">
-                                <p className={style.courseTitle}>
-                                  تعداد در صف
-                                  انتظار&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                                </p>
+                              </text>
+                            </p>
+                            <p className={style.courseTitle}>
+                              تعداد در صف
+                              انتظار&nbsp;
+                              <text className={style.courseText}>
                                 {x.waiting_count} {"نفر"}
-                              </Col>
-
-                              <Col className="text-right" md="5">
-                                <p className={style.courseTitle}>
-                                  تعداد کل واحد ها&nbsp;&nbsp;&nbsp;{" "}
-                                </p>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {x.total_unit} {"واحد"}
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col className="text-right" md="12">
-                                <p className={style.courseTitle}>
-                                  {" "}
-                                  تعداد اخذ شده در کاتیوشا&nbsp;&nbsp;{" "}
-                                </p>
+                              </text>
+                            </p>
+                            <p className={style.courseTitle}>
+                              تعداد اخذ شده در کاتیوشا&nbsp;
+                              <text className={style.courseText}>
                                 {x.added_to_calendar_count} {"نفر"}
-                              </Col>
-                              <Col className="text-right" md="6">
-                                <p className={style.courseTitle}>
-                                  {" "}
-                                  قابل اخذ بودن این درس برای
-                                  شما&nbsp;&nbsp;&nbsp;&nbsp;
-                                </p>
+                              </text>
+                            </p>
+                            <p className={style.courseTitle}>
+                              تعداد کل واحد ها&nbsp;
+                              <text className={style.courseText}>
+                                {x.total_unit} {"واحد"}</text>
+                            </p>
+                            <p className={style.courseTitle}>
+                              تعداد واحد های عملی&nbsp;
+                              <text className={style.courseText}>
+                                {x.practical_unit}&nbsp;{"واحد"}
+                              </text>
+                            </p>
+                            <p className={style.courseTitle}>
+                              قابل اخذ بودن این درس برای
+                              شما&nbsp;
+                              <text className={style.courseText}>
                                 {x.is_allowed ? "بله" : "خیر"}
-                              </Col>
-                            </Row>
-                          </Card> */}
-                          {x.description === "nan" ? null : (
-                            <Card className={style.ModalLessonDataCard3}>
+                              </text>
+                            </p>
+
+                            {x.description === "nan" ? null : (
                               <Row>
-                                <Col className="text-right" md="12">
+                                <Col className="text-right" md="10">
                                   <p className={style.courseTitle}>
-                                    {" "}
-                                    توضیحات&nbsp;&nbsp;{" "}
+                                    توضیحات&nbsp;
+                                    <text className={style.courseText}>
+                                      {x.description}
+                                    </text>
                                   </p>
-                                  {x.description}
                                 </Col>
                               </Row>
-                            </Card>
-                          )}
-                        </Row>
+                            )}
+                          </Card>
+                        </Col>
                       </Row>
                     </div>
                     <div
@@ -320,50 +295,6 @@ const ModalLessons = (props) => {
                   </div>
                 </CardBody>
               </Card>
-              {/* <Row>
-                <Col sm="12">
-                  <ButtonGroup
-                    className="btn-group-toggle"
-                    data-toggle="buttons"
-                  >
-                    <Button
-                      tag="label"
-                      className={classNames("btn-simple", "week_chart-btn", {
-                        active: timelineData === "data1",
-                      })}
-                      id="0"
-                      size="sm"
-                      onClick={() => setTimeData("data1")}
-                    >
-                      <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-                        تایم‌لاین درس
-                        {"  "}
-                        {x.name}
-                      </span>
-                      <span className="d-block d-sm-block d-md-none">
-                        <i className="tim-icons icon-single-02" />
-                      </span>
-                    </Button>
-                    <Button
-                      id="1"
-                      size="sm"
-                      className={classNames("btn-simple", "week_chart-btn", {
-                        active: timelineData === "data2",
-                      })}
-                      onClick={() => setTimeData("data2")}
-                    >
-                      <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
-                        تایم‌لاین استاد
-                        {"  "}
-                        {x.teachers.map((y) => y.name).join(" , ")}
-                      </span>
-                      <span className="d-block d-sm-block d-md-none">
-                        <i className="tim-icons icon-gift-2" />
-                      </span>
-                    </Button>
-                  </ButtonGroup>
-                </Col>
-              </Row> */}
               {/* <Row>
                 <Col
                   md="12"
