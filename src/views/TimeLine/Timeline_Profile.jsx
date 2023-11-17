@@ -1,6 +1,6 @@
 import React from 'react';
 import Tweet from './Tweet';
-import styles from '../../assets/css/Timeline/Timeline.module.css';
+import styles from '../../assets/css/Timeline/Timeline_Profile.module.css';
 import * as style from "../../components/ModalLessons/ModalLesson.module.css";
 import { useState } from 'react';
 import { GETTweets } from '../../hooks/GETTweets';
