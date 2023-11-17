@@ -71,23 +71,46 @@
    font-weight: 300;
 }
 
+.btnSpan {
+   padding: 0;
+   margin: 0;
+}
+
 .modalLessonBtn {
    border: none !important;
    color: #C7C1c1 !important;
    border-bottom: 1.5px solid #c7c1c1 !important;
    background: transparent !important;
    margin: 0 3px !important;
-   border-radius: .2857rem !important;
+   padding: 4px 14px !important;
+   font-size: 12px !important;
+   line-height: 1.35em !important;
+   font-weight: 600 !important;
 }
 
 .modalLessonBtn:hover {
-   border-bottom: 1.5px solid #344675 !important;
+   border-bottom: 1.5px solid #a0227e !important;
 }
 
 .modalLessonBtn:active {
    background: transparent !important;
    background-color: transparent !important;
-   color: #ff20ac !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   background-image: none !important;
+}
+
+.modalLessonBtnActive {
+   background: transparent !important;
+   background-color: transparent !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   border: none !important;
+   color: #C7C1c1 !important;
+   background: transparent !important;
+   margin: 0 3px !important;
+   padding: 4px 14px !important;
+   font-size: 12px !important;
+   line-height: 1.35em !important;
+   font-weight: 600 !important;
    border-bottom: 1.5px solid #a0227e !important;
    background-image: none !important;
 }

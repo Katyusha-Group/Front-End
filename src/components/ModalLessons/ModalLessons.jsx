@@ -73,7 +73,7 @@ const ModalLessons = (props) => {
                               color: "#c7c1c1",
                             }}
                           >
-                            {x.name} {x.group_number}
+                            {x.name} ({x.group_number})
                           </p>
                         </Col>
                         <Col md="7" className="text-right">
@@ -81,55 +81,54 @@ const ModalLessons = (props) => {
                             className={`${style.btnGroup} btn-group-toggle `}
                             data-toggle="buttons"
                           >
-                            <Button
+                            <button
                               tag="label"
-                              className={classNames(style.modalLessonBtn, "btn-simple", {
-                                active: timelineData === "data0",
-                              })}
-
+                              className={
+                                timelineData === "data0" ? style.modalLessonBtnActive : style.modalLessonBtn
+                              }
                               id="0"
                               size="sm"
                               onClick={() => setTimeData("data0")}
                             >
-                              <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
                                 اطلاعات درس
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-badge" />
                               </span>
-                            </Button>
-                            <Button
+                            </button>
+                            <button
                               tag="label"
-                              className={classNames(style.modalLessonBtn, "btn-simple", {
-                                active: timelineData === "data1",
-                              })}
+                              className={
+                                timelineData === "data1" ? style.modalLessonBtnActive : style.modalLessonBtn
+                              }
                               id="1"
                               size="sm"
                               onClick={() => setTimeData("data1")}
                             >
-                              <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
                                 تایم‌لاین درس
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-book-bookmark" />
                               </span>
-                            </Button>
-                            <Button
+                            </button>
+                            <button
                               tag="label"
                               id="2"
                               size="sm"
-                              className={classNames(style.modalLessonBtn, "btn-simple", {
-                                active: timelineData === "data2",
-                              })}
+                              className={
+                                timelineData === "data2" ? style.modalLessonBtnActive : style.modalLessonBtn
+                              }
                               onClick={() => setTimeData("data2")}
                             >
-                              <span className="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                              <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
                                 تایم‌لاین استاد
                               </span>
                               <span className="d-block d-sm-block d-md-none">
                                 <i className="tim-icons icon-single-02" />
                               </span>
-                            </Button>
+                            </button>
                           </ButtonGroup>
                         </Col>
                       </Row>
