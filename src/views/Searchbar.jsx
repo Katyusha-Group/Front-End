@@ -13,7 +13,6 @@ const Searchbar = () => {
 
   const { filteredProfiles, loading } = useAllProfiles(searchQuery);
   useEffect(() => {
-    console.log('searchQuery', searchQuery);
   }, [searchQuery]);
 
   
@@ -26,7 +25,6 @@ const Searchbar = () => {
             <div></div>
           ) : (
             filteredProfiles.map((item, index) => {
-              console.log('item', item);
               return <UserSearchResponce res={item} />;
             })
           )         

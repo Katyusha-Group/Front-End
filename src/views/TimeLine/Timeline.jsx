@@ -57,12 +57,6 @@ function Timeline() {
           <SendMessage setData={setTweets} />
         </div>
       </Card>
-      {/* <CommentModal
-        open={open}
-        setOpen={() => {
-          setOpen((x) => !x);
-        }}
-      ></CommentModal> */}
     </>
   );
 }

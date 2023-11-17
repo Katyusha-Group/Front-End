@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { apis } from "../../assets/apis";
-import { useState } from "react";
 
 export const useSendTweets = async (content, setData=(x)=>{}, parent = "") => {
-  console.log("🚀 ~ file: sendTweets.jsx:7 ~ useSendTweets ~ content:", content,setData,parent)
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   let data = "";
   const sendData = new FormData();
