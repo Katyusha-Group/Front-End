@@ -13,7 +13,7 @@ function Instructor(
             <p className={styles.p_name}>{User.username}</p>
             <button 
                 className={User.is_followed ? styles.delButton : styles.delButton}
-                onClick={POSTFollow(User.username)}
+                onClick={POSTFollow(User.username, !User.is_followed)}
             >
                     {User.is_followed ? "حذف" : "دنبال کردن"}
             </button>
