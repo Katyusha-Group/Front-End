@@ -5,8 +5,6 @@ import { useState } from "react";
 import { Card } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage";
 import { useTweets } from "../../hooks/Twitter/useTweets";
-import CommentModal from "../../components/Modal/Comments";
-import { useEffect } from "react";
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
@@ -44,6 +42,7 @@ function Timeline() {
                     key={tweet.id}
                     tweet={tweet}
                     setOpenComment={setOpen}
+                    setTweets={setTweets}
                   />
                 ))
               )}

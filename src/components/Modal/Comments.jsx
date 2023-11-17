@@ -1,23 +1,17 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useInfo } from "../../contexts/InfoContext";
 import {
   Button,
-  Card,
   CardHeader,
   CardBody,
   CardFooter,
   Input,
 } from "reactstrap";
-import NotificationAlert from "react-notification-alert";
-import { apis } from "../../assets/apis";
-import { Link, NavLink, useSearchParams } from "react-router-dom";
-import * as style from "../../assets/css/UserPage.module.css";
 import * as shopStyle from "../../assets/css/Shopping.module.css";
 import { useSendTweets } from "../../hooks/Twitter/sendTweets";
 import { useState } from "react";
-const CommentModal = ({open,setOpen,data}) => {
+const CommentModal = ({open,setOpen,data,setTweets}) => {
     const [comment, setComment] = useState("")
   return (
     <>
@@ -54,7 +48,8 @@ const CommentModal = ({open,setOpen,data}) => {
                 color="primary"
                 type="submit"
                 onClick={() => {
-                  useSendTweets(comment, (x)=>{} ,data.id)
+                  useSendTweets(comment, setTweets ,data.id)
+                  setOpen()
                 }}
               >
                 ارسال

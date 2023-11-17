@@ -3,7 +3,7 @@ import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
 import CommentModal from "../../components/Modal/Comments"
 import { useState } from "react";
-function Tweet({ tweet, setOpenComment }) {
+function Tweet({ tweet, setOpenComment,setTweets }) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -46,6 +46,7 @@ function Tweet({ tweet, setOpenComment }) {
           setOpen((x) => !x);
         }}
         data = {tweet}
+        setTweets={setTweets}
       ></CommentModal>
     </>
   );
