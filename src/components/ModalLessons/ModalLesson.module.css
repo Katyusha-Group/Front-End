@@ -47,14 +47,22 @@
 }
 
 .ModalProfessorImage {
-   margin-top: 70px;
-   margin-right: 5px;
-   width: 120px;
-   height: 120px;
-   margin-left: 0.625rem;
+   margin-top: 0px;
+   /* margin-right: 5px; */
+   width: 90px;
+   height: 90px;
+   margin-left: 0.5rem;
    overflow: "hidden";
    border-width: 0.1875rem;
-   border-radius: 4.6875rem;
+   /* border-radius: 4.6875rem; */
+}
+
+.dirLeft {
+   direction: ltr !important;
+}
+
+.courseText {
+   color: #C7C1c1;
 }
 
 .courseTitle {
@@ -71,8 +79,6 @@
    margin: 0 3px !important;
    border-radius: .2857rem !important;
 }
-
-
 
 .modalLessonBtn:hover {
    border-bottom: 1.5px solid #344675 !important;

@@ -61,11 +61,6 @@ const ModalLessons = (props) => {
                 className={style.ModalLessonCourseCard}
               >
                 <CardBody className={style.ModalCourseCardBody}>
-                  {/* <img
-                    className={style.ModalProfessorImage}
-                    src={x.teachers[0].teacher_image}
-                    alt="professorImage"
-                  /> */}
                   <div className={style.ModalLessonInfoPart}>
                     <CardHeader className={style.modalHeader}>
                       <Row>
@@ -150,46 +145,46 @@ const ModalLessons = (props) => {
                         display: timelineData == "data0" ? "block" : "none",
                       }}>
                       <Row>
-                        <Col md="6">
+                        <Col md="5">
                           <Card className={style.ModalLessonDataCard1}>
-                            <Col
-                              className="text-right"
-                              style={{ marginRight: "0px !important" }}
-                            >
-                              <p className={style.courseTitle}>استاد&nbsp;&nbsp;</p>
-                              {"  "}
-                              {x.teachers.map((y) => y.name).join(" , ")}
-                            </Col>
-                            <Col
-                              className="text-right"
-                              style={{ display: "flex" }}
-                            >
-                              <p className={style.courseTitle}>کد درس&nbsp;&nbsp;</p>
-                              <p
-                                style={{
-                                  direction: "ltr",
-                                  color: "#dddddd",
-                                }}
+                            <Row>
+                              <Col md="4"
+                                className="p-0">
+                                <img
+                                  className={style.ModalProfessorImage}
+                                  src={x.teachers[0].teacher_image}
+                                  alt="professorImage"
+                                />
+                              </Col>
+                              <Col md="8"
+                                className="text-right p-0 mr-0"
                               >
-                                {x.complete_course_number}
-                              </p>
+                                <p className={style.courseTitle}>استاد&nbsp;
+                                  <span className={style.courseText}>
+                                    {x.teachers.map((y) => y.name).join(" , ")}</span>
+                                </p>
 
-                              {"  "}
-                            </Col>
-                            <Col
-                              className="text-right"
-                              style={{ marginRight: "0px !important" }}
-                            >
-                              <p className={style.courseTitle}>
-                                {" "}
-                                جنسیت&nbsp;&nbsp;{" "}
-                              </p>
-                              {"  "}
-                              {sexTostring(x.sex)}
-                            </Col>
+                                <p className={`${style.courseTitle}`}
+                                  style={{ display: "flex" }}>کد درس&nbsp;
+                                  <span
+                                    className={style.courseText}
+                                    style={{ direction: "ltr" }}
+                                  >
+                                    {x.complete_course_number}
+                                  </span>
+                                </p>
+                                <p className={style.courseTitle}>
+                                  جنسیت&nbsp;
+                                  <span className={style.courseText}>
+                                    {sexTostring(x.sex)}
+                                  </span>
+                                </p>
+
+                              </Col>
+                            </Row>
                           </Card>
                         </Col>
-                        <Col md="6">
+                        <Col md="7">
                           <Card className={style.ModalLessonDataCard2}>
                             <Col className="text-right">
                               <p className={style.courseTitleNotInline}>زمان برگزاری</p>
