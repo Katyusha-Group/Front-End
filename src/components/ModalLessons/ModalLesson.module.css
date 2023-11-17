@@ -1,5 +1,5 @@
 .courseProfileModal {
-   max-width: 60% !important;
+   max-width: 75% !important;
 }
 
 .ModalLessonCourse .modal-dialog {
@@ -11,10 +11,29 @@
    overflow: auto;
 }
 
+.modalBack {
+   background: linear-gradient(180deg, rgba(30, 30, 47, 1) 0%,
+         rgba(39, 41, 61, 1) 75%,
+         rgba(65, 36, 79, 1) 98%,
+         rgba(255, 32, 172, 1) 100%) !important;
+}
+
+.modalHeader {
+   padding-top: 0px !important;
+   direction: rtl !important;
+   /* display: contents; */
+}
+
+.btnGroup {
+   display: inline-block !important;
+}
+
+
 .ModalLessonCourseCard {
-   background-color: #382e53 !important;
-   border-color: #ab69b1 !important;
-   color: #dddddd !important;
+   background-color: transparent !important;
+   /* border-color: #ab69b1 !important; */
+   /* color: #dddddd !important; */
+   box-shadow: none !important;
    height: 420px;
    margin-top: 15px;
 }
@@ -28,54 +47,110 @@
 }
 
 .ModalProfessorImage {
-   margin-top: 70px;
-   margin-right: 5px;
-   width: 120px;
-   height: 120px;
-   margin-left: 0.625rem;
+   margin-top: 0px;
+   /* margin-right: 5px; */
+   width: 85px;
+   height: 85px;
+   margin-left: 0.5rem;
    overflow: "hidden";
    border-width: 0.1875rem;
-   border-radius: 4.6875rem;
+   /* border-radius: 4.6875rem; */
+}
+
+.dirLeft {
+   direction: ltr !important;
+}
+
+.courseText {
+   color: #C7C1c1;
 }
 
 .courseTitle {
    display: inline-block;
-   color: #333752 !important;
+   color: #525f7f !important;
    font-weight: 300;
 }
 
+.btnSpan {
+   padding: 0;
+   margin: 0;
+}
+
+.modalLessonBtn {
+   border: none !important;
+   color: #C7C1c1 !important;
+   border-bottom: 1.5px solid #c7c1c1 !important;
+   background: transparent !important;
+   margin: 0 3px !important;
+   padding: 4px 14px !important;
+   font-size: 12px !important;
+   line-height: 1.35em !important;
+   font-weight: 600 !important;
+}
+
+.modalLessonBtn:hover {
+   border-bottom: 1.5px solid #a0227e !important;
+}
+
+.modalLessonBtn:active {
+   background: transparent !important;
+   background-color: transparent !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   background-image: none !important;
+}
+
+.modalLessonBtnActive {
+   background: transparent !important;
+   background-color: transparent !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   border: none !important;
+   color: #C7C1c1 !important;
+   background: transparent !important;
+   margin: 0 3px !important;
+   padding: 4px 14px !important;
+   font-size: 12px !important;
+   line-height: 1.35em !important;
+   font-weight: 600 !important;
+   border-bottom: 1.5px solid #a0227e !important;
+   background-image: none !important;
+}
+
 .courseTitleNotInline {
-   color: #333752 !important;
+   color: #525f7f !important;
    font-weight: 300;
 }
 
 .ModalLessonDataCard1 {
    padding-top: 5px;
    margin-top: 10px;
-   background-color: #8f7ebe !important;
+   background-color: transparent !important;
+   box-shadow: none !important;
    width: 100% !important;
    margin-right: 0px !important;
-   height: 130px;
+   /* height: 130px; */
 }
 
 .ModalLessonDataCard2 {
    margin-top: 10px;
-   background-color: #8f7ebe !important;
+   background-color: transparent !important;
+
+   box-shadow: none !important;
    width: 100% !important;
    margin-right: 0px !important;
-   height: 130px;
+   /* height: 130px; */
 }
 
 .ModalLessonDataCard3 {
-   margin-top: -5px;
-   background-color: #8f7ebe !important;
+   margin-top: 15px;
+   margin-right: 10px !important;
+   background-color: transparent !important;
+   box-shadow: none !important;
    width: 100% !important;
-   margin-right: 0px !important;
 }
 
 .ModalLessonInfoPart {
    width: 90%;
-   justify-content: right;
+   justify-content: center;
    padding-right: 0px;
 }
 
