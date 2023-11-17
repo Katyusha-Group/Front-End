@@ -26,21 +26,5 @@ export function SelectBoxFormGroup({ onChange, error, label, name, options }) {
                 </div>
             )}
         </FormGroup>
-        // <FormGroup className="text-right">
-        //     <label htmlFor="exampleInputEmail1">ایمیل</label>
-        //     <Input
-        //         className="text-right"
-        //         placeholder={placeHolder}
-        //         type="email"
-        //         name="email"
-        //         onChange={onChange}
-        //         value={value}
-        //     />
-        //     {error && (
-        //         <div className={style.error} >
-        //             {error}
-        //         </div>
-        //     )}
-        // </FormGroup>
     );
 }

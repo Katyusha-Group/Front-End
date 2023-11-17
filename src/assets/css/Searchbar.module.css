@@ -8,7 +8,7 @@
     margin-top: 5vh;
     height: 90vh;
     margin-left: 1.5vw;
-    
+    overflow: auto;
 }
 .searchbar{
     display: flex;
@@ -17,12 +17,14 @@
     border-radius: 15px;
     margin-top: 50px;
     width: 18px;
+    color: white;
     margin-bottom: 30px;
 }
 .field{
     display: flex;
     background-color:var(--box);
     border: none;
+    color: white;
     border-radius: 15px; 
     width: 16vw;
     height: 4vh;

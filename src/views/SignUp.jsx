@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import * as style from "../assets/css/SignUp.module.css";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
 import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
@@ -27,7 +26,6 @@ import {
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     profileName: "",
     username: "",
@@ -79,6 +77,12 @@ function SignUp() {
     subjectError: "",
     backError: "",
   });
+
+  const Navigate = useNavigate();
+  const handleSignUp = async (formData, subject, gender) => {
+    await postSignUp(formData, subject, gender, Navigate);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -149,64 +153,8 @@ function SignUp() {
     ) {
       return;
     }
-    Swal.fire({
-      title: 'کمی صبر کنید',
-      html: 'در حال بررسی درخواست ثبت نام',
-      allowOutsideClick: false,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      background: '#3c3e5d',
-      color: '#ceccc0',
-      width: '25rem',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    })
-
-    const response =
-      // postSignUp(formData, subject, gender);
-      await fetch(apis["accounts"]["signup"], {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          email: formData.email,
-          username: formData.username,
-          name: formData.profileName,
-          password1: formData.password,
-          password2: formData.passwordConfirm,
-          department: subject,
-          gender: gender,
-        }),
-      });
-    const data = await response.json();
-    Swal.close()
-    if (response.status === 201) {
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("verificationLink", data.url)
-      Swal.fire({
-        icon: 'success',
-        title: ' کد تایید ارسال شد',
-        html: 'لطفا ایمیلتان را چک کنید',
-        background: '#3c3e5d',
-        color: '#ceccc0',
-        width: '25rem',
-        confirmButtonText: "باشه"
-      })
-      Navigate("/verification");
-    } else {
-      if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
-      if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
-      setErrorMessage({
-        ...errorMessage,
-        backError: errors.backError,
-      });
+    else {
+      handleSignUp(formData, subject, gender);
     }
   }
   return (
@@ -226,19 +174,7 @@ function SignUp() {
                   <CardBody>
                     <Form >
                       <Row>
-                        <Col md="12">
-                          <TextFormGroup
-                            label={"نام پروفایل"}
-                            placeHolder={"نام پروفایل خود را وارد کنید"}
-                            value={formData.profileName}
-                            name={"profileName"}
-                            onChange={handleChange}
-                            error={errorMessage.profileNameError}>
-                          </TextFormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col md="12">
+                        <Col xl="6">
                           <TextFormGroup
                             label={"نام کاربری"}
                             placeHolder={"نام کاربری خود را وارد کنید"}
@@ -246,6 +182,16 @@ function SignUp() {
                             name={"username"}
                             onChange={handleChange}
                             error={errorMessage.usernameError}>
+                          </TextFormGroup>
+                        </Col>
+                        <Col xl="6">
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
                           </TextFormGroup>
                         </Col>
                       </Row>
@@ -281,7 +227,7 @@ function SignUp() {
                       </Row>
 
                       <Row>
-                        <Col lg="6">
+                        <Col xl="6">
                           <SelectBoxFormGroup
                             label={"رشته"}
                             options={subjectOptions}
@@ -291,7 +237,7 @@ function SignUp() {
                           >
                           </SelectBoxFormGroup>
                         </Col>
-                        <Col lg="5" className="offset-lg-1">
+                        <Col xl="5" className="offset-lg-1">
                           <SelectBoxFormGroup
                             label={"جنسیت"}
                             options={genderOptions}

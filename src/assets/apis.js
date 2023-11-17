@@ -41,9 +41,6 @@ export const apis = {
   notification: `${domain}/notification/`,
   profiles: {
     me: `${domain}/profiles/me/`,
-  },
-  tweets:{
-    tweets: `${domain}/twittes/`,
   }
 };
 
