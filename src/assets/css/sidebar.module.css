@@ -1,3 +1,5 @@
+@import "../css/black-dashboard-react.css";
+
 .bg{
     width: 22vw;
     margin-top: 5vh;
@@ -9,7 +11,7 @@
 .header{
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: 20px;
     margin-right: 2vw;
     justify-content: flex-start;
     align-items: flex-end;
@@ -22,19 +24,21 @@
 .sidebarmenuItems{
     display: flex;
     flex-direction: row;
-    margin: 1.5vw;
-    margin-right: 2.5vw;
+    padding: 2vh 2.5vw;
     justify-content: flex-start;
     align-items: flex-end;
     gap: 4vw;
     cursor: pointer;
 }
-.sidebarmenuItems :hover{
-   scale: 1.1;
+
+.sidebarmenuItems:hover{
+    background-color: var(--box);
 }
+
 .click{
     cursor: pointer;
 }
+
 .itemtext{
     margin-top: 20px;
     font-size: 16px;

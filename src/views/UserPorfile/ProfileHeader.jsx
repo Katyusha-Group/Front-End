@@ -14,11 +14,8 @@ export default function ProfileHeader({profile, username}) {
   const {Followings, setFollowings} = userFollowings(username);
   const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
-    
     setIsFollowing(true);
     setShowModal(true);
-    // console.log("Heloooooooooooooooooooooo");
-    // GETProfileData("username3");
   };
 
   const handleOpenModal_Followers = () => {
@@ -30,14 +27,8 @@ export default function ProfileHeader({profile, username}) {
     setShowModal(false);
   };
   // console.log("Profile checking in profile header: " + profile.name);
-  const DateStart="18 فروردبن1402"
-  const a=28;
-  // const gregorianDate = moment(profile.created_at, 'YYYY-MM-DD');
-  // console.log("mmd2:",gregorianDate)
-  // const persianDate = gregorianDate.locale('fa').format('YYYY/MM/DD');
-  // console.log("mmd",persianDate)
-  // const mmd =moment(profile.created_at, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
-  // console.log("date", profile)
+  const DateStart="18 فروردبن1402";
+  const a=28
   const dateObj = new Date(profile.created_at);
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
   // console.log("mmd", formattedDate )

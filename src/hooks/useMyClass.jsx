@@ -1,6 +1,7 @@
 import React from "react";
 import { apis } from "../assets/apis";
 import { useInfo } from "../contexts/InfoContext";
+import axios from "axios";
 export const useMyClass = (getapi,showLoading,closeLoading) => {
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);

@@ -10,21 +10,17 @@ export const useAllProfiles = (searchQuery) => {
   const [allProfiles, setAllProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log("searchQuery",searchQuery);
   useEffect(() => {
-    // showLoading();
-
     fetch(apis["profiles"]["all"]+searchQuery, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       
       .then((data) => {
-        console.log("give all",data);
         setFilteredProfiles(data);
         setLoading(false);
       })
-      .catch((error) => console.log("error"));
+      .catch((error) => console.error("error"));
   }, [searchQuery]);
 
   

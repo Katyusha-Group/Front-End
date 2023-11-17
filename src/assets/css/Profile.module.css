@@ -21,8 +21,9 @@
     justify-content: space-between;
     gap: 30px; 
     border-radius: 10px;
+
     height: 93vh;
-    margin-top: 20px;  
+    margin-top: 20px;
     margin-left: 33px;
     margin-right: 30px;
 }

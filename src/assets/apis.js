@@ -51,7 +51,10 @@ export const apis = {
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
   },
-  twittes: `${domain}/twittes`
+
+  tweets:{
+    tweets: `${domain}/twittes/`,
+  }
 };
 
 
