@@ -4,26 +4,25 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-
-export const useAllProfiles = (searchQuery) => {
+export const GETTweets = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [allProfiles, setAllProfiles] = useState([]);
-  const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const [Tweets, setTweets] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(apis["profiles"]["all"]+searchQuery, {
+    showLoading();
+    fetch((apis["twittes"]), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
-      
       .then((data) => {
-        setFilteredProfiles(data);
+        setTweets(data);
+        closeLoading();
         setLoading(false);
       })
-      .catch((error) => console.error("error"));
-  }, [searchQuery]);
-
-  
-
-  return { filteredProfiles, loading };
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, []);
+  return {Tweets, setTweets, loading};
 };

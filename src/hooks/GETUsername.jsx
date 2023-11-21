@@ -4,42 +4,28 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-
-export const usesProfileMe = () => {
+export const GETUsername = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [profile, setProfile] = useState(null);
+  const [username, setUsername] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         showLoading();
-
         const response = await fetch(apis["profiles"]["myusername"], {
           headers: { Authorization: `Bearer ${token}` },
         });
         const myUsername = await response.json();
-        // console.log("My username is: " + myUsername.username);
-
-        const profileResponse = await fetch(
-          apis["profiles"]["myprofile"] + `${myUsername.username}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        const data = await profileResponse.json();
-        setProfile(data);
-        // console.log("User profile data: " + data.name);
-
+        setUsername(myUsername.username);
         closeLoading();
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        console.error("Err is " + error);
       }
     };
 
     fetchData();
   }, []);
-
-  return { profile, setProfile, loading };
+  return {username, setUsername};
 };
+

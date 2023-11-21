@@ -3,22 +3,16 @@ import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline.module.css";
 import { useState } from "react";
 import { Card } from "reactstrap";
-
-const tweets = [
-  {
-    id: 1,
-    text: "عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.عرفان بهترین صاحبیه که تو زندگیم داشتم. بهترین غذا هارو بهم می ده. دلم می خواد لیسش بزنم.",
-    username: "jett White",
-    name: "جت وایت",
-  },
-];
-
+import SendMessage from "../../components/Tweet/SendMessage";
+import { useTweets } from "../../hooks/Twitter/useTweets";
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
-
+  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  const [open, setOpen] = useState(false);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
 
   return (
     <>
@@ -40,15 +34,26 @@ function Timeline() {
         <div className={styles.content}>
           {activeTab === "tweets" && (
             <div className={styles.tweetsContainer}>
-              {tweets.map((tweet) => (
-                <Tweet key={tweet.id} tweet={tweet} />
-              ))}
+              {loading ? (
+                <></>
+              ) : (
+                tweets.map((tweet) => (
+                  <Tweet
+                    key={tweet.id}
+                    tweet={tweet}
+                    setOpenComment={setOpen}
+                    setTweets={setTweets}
+                  />
+                ))
+              )}
             </div>
           )}
           {activeTab === "media" && (
-            <div className={styles.tweetsContainer}>
-            </div>
+            <div className={styles.tweetsContainer}></div>
           )}
+        </div>
+        <div className={styles.sendMessage}>
+          <SendMessage setData={setTweets} />
         </div>
       </Card>
     </>

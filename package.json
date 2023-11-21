@@ -26,6 +26,7 @@
     "react-advance-jalaali-datepicker": "^1.4.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
+    "react-loading-skeleton": "^3.3.1",
     "react-modal": "^3.16.1",
     "react-native-elements": "^3.4.3",
     "react-native-linear-gradient": "^2.7.3",

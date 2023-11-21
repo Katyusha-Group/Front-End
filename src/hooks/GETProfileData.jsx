@@ -4,26 +4,25 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-
-export const useAllProfiles = (searchQuery) => {
+export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [allProfiles, setAllProfiles] = useState([]);
-  const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(apis["profiles"]["all"]+searchQuery, {
+    showLoading();
+    fetch((apis["profiles"]["myprofile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
-      
       .then((data) => {
-        setFilteredProfiles(data);
+        setProfile(data);
+        closeLoading();
         setLoading(false);
       })
-      .catch((error) => console.error("error"));
-  }, [searchQuery]);
-
-  
-
-  return { filteredProfiles, loading };
+      .catch((error) => console.error(error));
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }, []);
+  return {profile, setProfile, loading};
 };

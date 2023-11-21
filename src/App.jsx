@@ -106,7 +106,7 @@ function App() {
                     <Notification />
                   </PrivatRoute>
                 }></Router.Route>
-                <Router.Route path="/profile" element={
+                <Router.Route path="/profile/:id" element={
                   <Profile />
                 }></Router.Route>
                 <Router.Route path="/timeline" element={
