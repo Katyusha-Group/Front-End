@@ -2,9 +2,12 @@ import React from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
 import CommentModal from "../../components/Modal/Comments"
+import { likes } from "../../hooks/Twitter/likes";
 import { useState } from "react";
 function Tweet({ tweet, setOpenComment,setTweets }) {
+  console.log("🚀 ~ file: Tweet.jsx:8 ~ Tweet ~ tweet:", tweet)
   const [open, setOpen] = useState(false);
+  const [like, setLike] = useState(false)
   return (
     <>
       <Card className={styles.tweet}>
@@ -26,8 +29,10 @@ function Tweet({ tweet, setOpenComment,setTweets }) {
             aria-label=""
             className={styles.buttonContainer}
           >
-            <button className={styles.button}>
-              <span className={styles.icon_text}>{tweet.likes_count}</span>
+            <button className={styles.button} onClick={()=>{
+              setLike(true)
+              likes(tweet.id)}}>
+              <span className={styles.icon_text}>{tweet.likes_count+like}</span>
               <i className={`tim-icons icon-heart-2 ${styles.icon}`}></i>
             </button>
             <button
