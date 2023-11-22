@@ -31,7 +31,6 @@ import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import NotFound from "./views/404.jsx";
 import InternalServerError from "./views/500.jsx";
-import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -39,9 +38,29 @@ function App() {
   );
 
   useEffect(() => {
-    setIsLoggedIn(true);
+    const checkTokenExpiration = () => {
+      const token = localStorage.getItem("authTokens");
+      if (token) {
+        const decodedToken = decodeToken(token);
+        const currentTime = Date.now() / 1000;
+        if (decodedToken.exp < currentTime) {
+          setIsLoggedIn(false);
+          window.location.href = "/login";
+        }
+      }
+    };
+
+    checkTokenExpiration();
   }, [isLoggedIn]);
 
+  const decodeToken = (token) => {
+    // Decode JWT token, you may use a library like jsonwebtoken
+    // For simplicity, this example assumes a simple base64-encoded payload
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const decoded = JSON.parse(atob(base64));
+    return decoded;
+  };
   const logIn = () => setIsLoggedIn(true);
 
   const logOut = () => setIsLoggedIn(false);
@@ -53,7 +72,6 @@ function App() {
           <ContextInfo>
             <Router.BrowserRouter>
               <Router.Routes>
-                <Router.Route path="/Error" element={<ErrorBoundrypage/>}/>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
                 <Router.Route
                   path="/signup"
