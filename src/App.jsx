@@ -29,7 +29,9 @@ import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
-
+import NotFound from "./views/404.jsx";
+import InternalServerError from "./views/500.jsx";
+import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -51,6 +53,7 @@ function App() {
           <ContextInfo>
             <Router.BrowserRouter>
               <Router.Routes>
+                <Router.Route path="/Error" element={<ErrorBoundrypage/>}/>
                 <Router.Route path="/" element={<LandingPage />}></Router.Route>
                 <Router.Route
                   path="/signup"
@@ -112,6 +115,8 @@ function App() {
                 <Router.Route path="/timeline" element={
                   <Timelinepage />
                 }></Router.Route>
+                <Router.Route path="/500" element={<InternalServerError/>}/>
+                <Router.Route path='*' element={<NotFound/>} />
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
