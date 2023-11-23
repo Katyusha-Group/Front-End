@@ -26,6 +26,7 @@
     "react-advance-jalaali-datepicker": "^1.4.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.11",
     "react-loading-skeleton": "^3.3.1",
     "react-lottie": "^1.2.3",
     "react-modal": "^3.16.1",

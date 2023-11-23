@@ -29,8 +29,8 @@ import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
-import NotFound from "./views/404.jsx";
-import InternalServerError from "./views/500.jsx";
+import { ErrorBoundary } from "react-error-boundary";
+
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -38,29 +38,9 @@ function App() {
   );
 
   useEffect(() => {
-    const checkTokenExpiration = () => {
-      const token = localStorage.getItem("authTokens");
-      if (token) {
-        const decodedToken = decodeToken(token);
-        const currentTime = Date.now() / 1000;
-        if (decodedToken.exp < currentTime) {
-          setIsLoggedIn(false);
-          window.location.href = "/login";
-        }
-      }
-    };
-
-    checkTokenExpiration();
+    setIsLoggedIn(true);
   }, [isLoggedIn]);
 
-  const decodeToken = (token) => {
-    // Decode JWT token, you may use a library like jsonwebtoken
-    // For simplicity, this example assumes a simple base64-encoded payload
-    const base64Url = token.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const decoded = JSON.parse(atob(base64));
-    return decoded;
-  };
   const logIn = () => setIsLoggedIn(true);
 
   const logOut = () => setIsLoggedIn(false);
@@ -68,6 +48,7 @@ function App() {
   return (
     <>
       <ThemeContextWrapper>
+      <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
         <BackgroundColorWrapper>
           <ContextInfo>
             <Router.BrowserRouter>
@@ -133,12 +114,11 @@ function App() {
                 <Router.Route path="/timeline" element={
                   <Timelinepage />
                 }></Router.Route>
-                <Router.Route path="/500" element={<InternalServerError/>}/>
-                <Router.Route path='*' element={<NotFound/>} />
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
         </BackgroundColorWrapper>
+        </ErrorBoundary>
       </ThemeContextWrapper>
     </>
   );
