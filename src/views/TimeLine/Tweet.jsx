@@ -42,7 +42,11 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </svg>
           </DropdownToggle>
           <DropdownMenu {...args}>
-            <DropdownItem className={styles.dropDown} onClick={()=>console.log("hello")}>حذف</DropdownItem>
+            <DropdownItem className={styles.dropDown} onClick={()=>{
+              setTweets(x=>{
+                return x.filter(y=>y.id!==tweet.id)
+              })
+              deleteTweet(tweet.id)}}>حذف</DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <div className={styles.header}>
