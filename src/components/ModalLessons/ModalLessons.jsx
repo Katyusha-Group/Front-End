@@ -141,7 +141,7 @@ const ModalLessons = (props) => {
                         <Card className={style.ModalLessonDataCard1}>
                           <Row>
                             <Col md="4"
-                              className="p-0">
+                              className={`${style.profImg} p-0 mt-1`}>
                               <img
                                 className={style.ModalProfessorImage}
                                 src={x.teachers[0].teacher_image}
@@ -149,7 +149,7 @@ const ModalLessons = (props) => {
                               />
                             </Col>
                             <Col md="8"
-                              className="text-right p-0 mr-0"
+                              className={`text-right p-0 mr-0`}
                             >
                               <p className={style.courseTitle}>استاد&nbsp;
                                 <span className={style.courseText}>
@@ -157,7 +157,7 @@ const ModalLessons = (props) => {
                               </p>
 
                               <p className={`${style.courseTitle}`}
-                                style={{ display: "flex" }}>کد درس&nbsp;
+                                style={{ display: "flex", whiteSpace: "nowrap" }}>کد درس&nbsp;
                                 <span
                                   className={style.courseText}
                                   style={{ direction: "ltr" }}

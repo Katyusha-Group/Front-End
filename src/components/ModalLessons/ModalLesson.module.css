@@ -25,6 +25,10 @@
    margin: -15rem auto !important;
 }
 
+.profImg {
+   justify-content: center !important;
+   display: flex !important;
+}
 
 .btnGroup {
    display: inline-block !important;
@@ -129,6 +133,7 @@
    box-shadow: none !important;
    width: 100% !important;
 }
+
 
 .ModalLessonInfoPart {
    width: 90%;
