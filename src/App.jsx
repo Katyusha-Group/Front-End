@@ -30,7 +30,7 @@ import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
-
+import AdminPanel from "./views/admin/Admin.jsx"
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -114,6 +114,7 @@ function App() {
                 <Router.Route path="/timeline" element={
                   <Timelinepage />
                 }></Router.Route>
+                <Router.Route path="/admin" element={<AdminPanel/>}></Router.Route>
               </Router.Routes>
             </Router.BrowserRouter>
           </ContextInfo>
