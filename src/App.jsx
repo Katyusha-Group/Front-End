@@ -30,6 +30,8 @@ import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
+import NotFound from "./views/404.jsx";
+import InternalServerError from "./views/500.jsx";
 import NewLandingpage from "./views/NewLandingpage.jsx";
 
 function App() {
@@ -150,7 +152,15 @@ function App() {
                     path="/newLanding"
                     element={<NewLandingpage />}
                   ></Router.Route>
-                  
+                  <Router.Route
+                    path="/500"
+                    element={<InternalServerError />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="*"
+                    element={<NotFound />}
+                  ></Router.Route>
+
                 </Router.Routes>
               </Router.BrowserRouter>
             </ContextInfo>

@@ -28,7 +28,7 @@ export const apis = {
     }
   },
   departments: `${domain}/departments/`,
-  carts: `${domain}/carts/`,
+  carts: `${domain}/shop/carts/`,
   timeline: {
     teachers: `${domain}/timeline/teachers/`,
     courses: `${domain}/timeline/courses/`,
