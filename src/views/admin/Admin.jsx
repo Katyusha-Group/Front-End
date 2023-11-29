@@ -1,16 +1,8 @@
 import React from "react";
 import {
-  Button,
   Card,
-  CardHeader,
-  CardBody,
   Row,
   Col,
-  Label,
-  Input,
-  FormGroup,
-  Form,
-  CardFooter,
 } from "reactstrap";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import styles from "../../assets/css/admin/Admin.module.css";
