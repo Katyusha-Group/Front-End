@@ -29,6 +29,7 @@ import News from "./views/News/Orders.jsx";
 import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
   document.documentElement.dir = "rtl";
@@ -47,6 +48,7 @@ function App() {
   return (
     <>
       <ThemeContextWrapper>
+      <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
         <BackgroundColorWrapper>
           <ContextInfo>
             <Router.BrowserRouter>
@@ -116,6 +118,7 @@ function App() {
             </Router.BrowserRouter>
           </ContextInfo>
         </BackgroundColorWrapper>
+        </ErrorBoundary>
       </ThemeContextWrapper>
     </>
   );

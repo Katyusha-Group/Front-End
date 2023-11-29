@@ -2,13 +2,13 @@ import React from "react";
 import axios from "axios";
 import { apis } from "../../assets/apis";
 
-export const likes = async (id) => {
+export const deleteTweet = async (id) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   let data = "";
   let config = {
-    method: "get",
+    method: "delete",
     maxBodyLength: Infinity,
-    url: apis["tweets"]["tweets"]+id+"/like/",
+    url: apis["tweets"]["tweets"]+id,
     headers: {
       Authorization: `Bearer ${token}`,
     },
