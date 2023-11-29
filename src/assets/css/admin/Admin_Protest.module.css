@@ -1,0 +1,16 @@
+@import "../black-dashboard-react.css";
+.title {
+    color: var(--white);
+    font-size: large;
+}
+
+/* .styles.ProtestTable_Main {
+    overflow-y: scroll;
+} */
+
+.protest_Main {
+    border-bottom: 3px solid rgb(54,56,77);
+    margin: 10px;
+    text-align: right;
+}
+
