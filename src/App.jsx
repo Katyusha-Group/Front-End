@@ -30,6 +30,8 @@ import Notification from "./views/Notification/Notification.jsx";
 import Profile from "./views/UserPorfile/Profile.jsx";
 import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
+import NotFound from "./views/404.jsx";
+import InternalServerError from "./views/500.jsx";
 
 function App() {
   document.documentElement.dir = "rtl";
@@ -48,76 +50,84 @@ function App() {
   return (
     <>
       <ThemeContextWrapper>
-      <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
-        <BackgroundColorWrapper>
-          <ContextInfo>
-            <Router.BrowserRouter>
-              <Router.Routes>
-                <Router.Route path="/" element={<LandingPage />}></Router.Route>
-                <Router.Route
-                  path="/signup"
-                  element={<SignUp />}
-                ></Router.Route>
-                <Router.Route
-                  path="/verification"
-                  element={<Verification />}
-                ></Router.Route>
-                <Router.Route
-                  path="/verificationForgetPassword"
-                  element={<VerificationForgetPassword />}
-                ></Router.Route>
-                <Router.Route
-                  path="/setNewPassword"
-                  element={<SetNewPassword />}
-                ></Router.Route>
+        <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
+          <BackgroundColorWrapper>
+            <ContextInfo>
+              <Router.BrowserRouter>
+                <Router.Routes>
+                  <Router.Route path="/" element={<LandingPage />}></Router.Route>
+                  <Router.Route
+                    path="/signup"
+                    element={<SignUp />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/verification"
+                    element={<Verification />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/verificationForgetPassword"
+                    element={<VerificationForgetPassword />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/setNewPassword"
+                    element={<SetNewPassword />}
+                  ></Router.Route>
 
-                <Router.Route
-                  path="/home/*"
-                  element={
+                  <Router.Route
+                    path="/home/*"
+                    element={
+                      <PrivatRoute>
+                        <Admin />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route path="/login" element={<Login />}></Router.Route>
+                  <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
+                  <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
+                  <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
+                  <Router.Route path="/CoursesPanel" element={
                     <PrivatRoute>
-                      <Admin />
+                      <CoursesPanel />
                     </PrivatRoute>
-                  }
-                ></Router.Route>
-                <Router.Route path="/login" element={<Login />}></Router.Route>
-                <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
-                <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
-                <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
-                <Router.Route path="/CoursesPanel" element={
-                  <PrivatRoute>
-                    <CoursesPanel />
-                  </PrivatRoute>
-                }></Router.Route>
-                <Router.Route path="/shopping" element={
-                  <PrivatRoute>
-                    <Shopping />
-                  </PrivatRoute>
-                }></Router.Route>
-                <Router.Route path="/user" element={
-                  <PrivatRoute>
-                    <UserProfile />
-                  </PrivatRoute>
-                }></Router.Route>
-                <Router.Route path="/order" element={
-                  <PrivatRoute>
-                    <News />
-                  </PrivatRoute>
-                }></Router.Route>
-                <Router.Route path="/notification" element={
-                  <PrivatRoute>
-                    <Notification />
-                  </PrivatRoute>
-                }></Router.Route>
-                <Router.Route path="/profile/:id" element={
-                  <Profile />
-                }></Router.Route>
-                <Router.Route path="/timeline" element={
-                  <Timelinepage />
-                }></Router.Route>
-              </Router.Routes>
-            </Router.BrowserRouter>
-          </ContextInfo>
-        </BackgroundColorWrapper>
+                  }></Router.Route>
+                  <Router.Route path="/shopping" element={
+                    <PrivatRoute>
+                      <Shopping />
+                    </PrivatRoute>
+                  }></Router.Route>
+                  <Router.Route path="/user" element={
+                    <PrivatRoute>
+                      <UserProfile />
+                    </PrivatRoute>
+                  }></Router.Route>
+                  <Router.Route path="/order" element={
+                    <PrivatRoute>
+                      <News />
+                    </PrivatRoute>
+                  }></Router.Route>
+                  <Router.Route path="/notification" element={
+                    <PrivatRoute>
+                      <Notification />
+                    </PrivatRoute>
+                  }></Router.Route>
+                  <Router.Route path="/profile/:id" element={
+                    <Profile />
+                  }></Router.Route>
+                  <Router.Route path="/timeline" element={
+                    <Timelinepage />
+                  }></Router.Route>
+                  <Router.Route
+                    path="/500"
+                    element={<InternalServerError />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="*"
+                    element={<NotFound />}
+                  ></Router.Route>
+                </Router.Routes>
+              </Router.BrowserRouter>
+            </ContextInfo>
+          </BackgroundColorWrapper>
         </ErrorBoundary>
       </ThemeContextWrapper>
     </>
