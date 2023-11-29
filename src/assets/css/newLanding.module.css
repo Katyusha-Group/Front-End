@@ -1,0 +1,10 @@
+.bg{
+    width: 70vw;
+    height: 80vh;
+    margin: 10vh auto;
+    background-color: #262645;
+    border-radius: 10px;
+    box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.5);
+
+    
+}
