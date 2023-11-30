@@ -13,7 +13,7 @@ export const useUserChart = () => {
   
   React.useEffect(() => {
     setLoading(true);
-    axios(apis["tweetChart"]["lastWeekTweets"], {
+    axios(apis["tweetChart"]["lastWeekUsers"], {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
