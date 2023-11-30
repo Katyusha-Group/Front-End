@@ -39,4 +39,23 @@
   margin: 20px 10px;
 }
 
-/* Add more styles as needed */
+
+.Person_img{
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+}
+.Person_Container{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.Person_name{
+    margin-top: 10px;
+    margin-left: 50px;
+    color: var(--white) !important;
+
+}
