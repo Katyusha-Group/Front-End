@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Input } from "reactstrap";
 import * as styles from "../../assets/css/admin/People_Table.module.css";
 import User from './User';
-
+import { useTweets } from "../../hooks/Twitter/useTweets";
+import Tweet from '../../views/TimeLine/Tweet';
 let tabsList = [
   ["Users", "کاربرها"],
   ["Posts", "پست ها"],
@@ -15,6 +16,8 @@ export default function PeopleTable() {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  const [open, setOpen] = useState(false);
   return (
     // <div>PeopleTable</div>
     <>
@@ -52,15 +55,17 @@ export default function PeopleTable() {
           </div>
         )}
         {activeTab === "Posts" && (
-          <div className={styles.tweetsContainer}>
-            {/* {tweets.map((tweet) => (
+          <div className={styles.Users_Container}>
+            {tweets.map((tweet) => (
               <Tweet
+                // className={styles.Tweets_Admin}
                 key={tweet.id}
                 tweet={tweet}
                 setOpenComment={setOpen}
-                setTweets={setTweets}
+                // setTweets={setTweets}
+                // style={{ color: 'red', fontSize: '16px' }}
               />
-            ))} */}
+            ))}
           </div>
         )}
       </div>

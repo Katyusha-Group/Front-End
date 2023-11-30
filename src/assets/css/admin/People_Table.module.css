@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  /* width: 60vh; */
 }
 
 .activeTab {
@@ -67,3 +68,7 @@
     margin-left: 0px;
     color: var(--white) !important;
 }
+
+/* .Users_Container .tweet {
+  background-color: red;
+} */
