@@ -59,79 +59,81 @@ const ModalLessons = (props) => {
             <Card
               className={style.ModalLessonCourseCard}
             >
+              <CardHeader className={style.modalHeader}>
+                <Row>
+                  <Col md="5">
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        textAlign: "right",
+                        fontSize: "20px",
+                        color: "#c7c1c1",
+                        paddingRight: "30px",
+                      }}
+                    >
+                      {x.name} ({x.group_number})
+                    </p>
+                  </Col>
+                  <Col md="7" className="text-right">
+                    <ButtonGroup
+                      className={`${style.btnGroup} btn-group-toggle `}
+                      data-toggle="buttons"
+                    >
+                      <button
+                        tag="label"
+                        className={
+                          timelineData === "data0" ? style.modalLessonBtnActive : style.modalLessonBtn
+                        }
+                        id="0"
+                        size="sm"
+                        onClick={() => setTimeData("data0")}
+                      >
+                        <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
+                          اطلاعات درس
+                        </span>
+                        <span className="d-block d-sm-block d-md-none">
+                          <i className="tim-icons icon-badge" />
+                        </span>
+                      </button>
+                      <button
+                        tag="label"
+                        className={
+                          timelineData === "data1" ? style.modalLessonBtnActive : style.modalLessonBtn
+                        }
+                        id="1"
+                        size="sm"
+                        onClick={() => setTimeData("data1")}
+                      >
+                        <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
+                          تایم‌لاین درس
+                        </span>
+                        <span className="d-block d-sm-block d-md-none">
+                          <i className="tim-icons icon-book-bookmark" />
+                        </span>
+                      </button>
+                      <button
+                        tag="label"
+                        id="2"
+                        size="sm"
+                        className={
+                          timelineData === "data2" ? style.modalLessonBtnActive : style.modalLessonBtn
+                        }
+                        onClick={() => setTimeData("data2")}
+                      >
+                        <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
+                          تایم‌لاین استاد
+                        </span>
+                        <span className="d-block d-sm-block d-md-none">
+                          <i className="tim-icons icon-single-02" />
+                        </span>
+                      </button>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+              </CardHeader>
               <CardBody className={style.ModalCourseCardBody}>
                 <div className={style.ModalLessonInfoPart}>
-                  <CardHeader className={style.modalHeader}>
-                    <Row>
-                      <Col md="5">
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            textAlign: "right",
-                            fontSize: "20px",
-                            color: "#c7c1c1",
-                          }}
-                        >
-                          {x.name} ({x.group_number})
-                        </p>
-                      </Col>
-                      <Col md="7" className="text-right">
-                        <ButtonGroup
-                          className={`${style.btnGroup} btn-group-toggle `}
-                          data-toggle="buttons"
-                        >
-                          <button
-                            tag="label"
-                            className={
-                              timelineData === "data0" ? style.modalLessonBtnActive : style.modalLessonBtn
-                            }
-                            id="0"
-                            size="sm"
-                            onClick={() => setTimeData("data0")}
-                          >
-                            <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
-                              اطلاعات درس
-                            </span>
-                            <span className="d-block d-sm-block d-md-none">
-                              <i className="tim-icons icon-badge" />
-                            </span>
-                          </button>
-                          <button
-                            tag="label"
-                            className={
-                              timelineData === "data1" ? style.modalLessonBtnActive : style.modalLessonBtn
-                            }
-                            id="1"
-                            size="sm"
-                            onClick={() => setTimeData("data1")}
-                          >
-                            <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
-                              تایم‌لاین درس
-                            </span>
-                            <span className="d-block d-sm-block d-md-none">
-                              <i className="tim-icons icon-book-bookmark" />
-                            </span>
-                          </button>
-                          <button
-                            tag="label"
-                            id="2"
-                            size="sm"
-                            className={
-                              timelineData === "data2" ? style.modalLessonBtnActive : style.modalLessonBtn
-                            }
-                            onClick={() => setTimeData("data2")}
-                          >
-                            <span className={`${style.btnSpan}d-none d-sm-none d-md-block d-lg-block d-xl-block`}>
-                              تایم‌لاین استاد
-                            </span>
-                            <span className="d-block d-sm-block d-md-none">
-                              <i className="tim-icons icon-single-02" />
-                            </span>
-                          </button>
-                        </ButtonGroup>
-                      </Col>
-                    </Row>
-                  </CardHeader>
+
                   <div
                     style={{
                       display: timelineData == "data0" ? "block" : "none",
@@ -273,11 +275,6 @@ const ModalLessons = (props) => {
                   </div>
                   <div
                     style={{
-                      overflow: "auto",
-                      height: "60vh",
-                      // background: "rgb(46, 49, 72)",
-                      paddingLeft: "30px",
-                      paddingRight: "10px",
                       display: timelineData == "data1" ? "block" : "none",
                     }}
                   >
@@ -293,34 +290,6 @@ const ModalLessons = (props) => {
                 </div>
               </CardBody>
             </Card>
-            {/* <Row>
-                <Col
-                  md="12"
-                  className="mt-3"
-                  style={{
-                    overflow: "auto",
-                    height: "60vh",
-                    // background: "rgb(46, 49, 72)",
-                    paddingLeft: "30px",
-                    paddingRight: "10px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: timelineData == "data1" ? "block" : "none",
-                    }}
-                  >
-                    <Timeline show={props} />
-                  </div>
-                  <div
-                    style={{
-                      display: timelineData == "data2" ? "block" : "none",
-                    }}
-                  >
-                    <TeacherTimeline show={props} />
-                  </div>
-                </Col>
-              </Row> */}
           </Modal.Body>
         </div >
       </Modal >

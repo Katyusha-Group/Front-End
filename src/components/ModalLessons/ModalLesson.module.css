@@ -19,6 +19,7 @@
    box-shadow: none !important;
    height: 60vh;
    margin-top: 15px;
+   justify-content: center !important;
 }
 
 .ModalLessonCourse .modal-dialog {
@@ -136,7 +137,7 @@
 
 
 .ModalLessonInfoPart {
-   width: 90%;
+   width: 97%;
    justify-content: center;
    padding-right: 0px;
 }

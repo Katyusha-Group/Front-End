@@ -1,4 +1,4 @@
-$color: (dark: #3f444c, light: #ffd402, gray: #eef4f7)
+$color: (dark: #3f444c, light: #522457 , gray: #eef4f7)
 
 =square($w, $h)
 	width: $w
@@ -25,7 +25,7 @@ ul
 
 		direction: ltr
 		> li
-			width: calc( 100% / 6 )
+			width: calc(100% / 6)
 			// &::before
 			// 	content: ''
 			// 	display: block
@@ -37,22 +37,30 @@ ul
 			&:nth-of-type(even)
 				> .content
 	.year
-		color: map-get($color, light)
-		background: map-get($color, dark)
+		color: rgba(39, 41, 61, 1)
+		background: rgb(182 174 246)
 		display: block
 		position: relative
-		padding-right: 10px
+		padding-right: 3px
+		//margin-right: 3px
 		line-height: 24px
 		font-weight: bold
-		font-size: 14px
+		font-size: 12px
+		border-radius: 30%
 		&::before
 			content: ''
-			+square(30px, 30px)
+			width: 12px
+			height: 12px
+			//+square(15px, 15px)
+			
 			position: absolute
-			background: map-get($color, light)
+			background: rgb(182 174 246)
+			border: 2px solid rgba(39, 41, 61, 1)
+			box-shadow:0px 0px 5px rgba(39, 41, 61, 1)//, #ff20ac 0px 0px 5px inset
 			border-radius: 50%
-			left: -19px
-			top: calc( (30 - 19) / 2 * -1px )
+			left: -6px
+			top: 5px//calc( (30 - 19) / 2 * -1px )
+			
 		&.new
 			border-radius: 0 24px 24px 0
 			&::after
@@ -68,33 +76,37 @@ ul
 				right: -30px
 				top: -9.5px
 	.content
-		border-left: 8px solid map-get($color, light)
-		margin-left: -8px
+		border-left: 0px solid map-get($color, light)
+		margin-left: 0px
 		//padding: 15px 0
 		//padding-right: 24px
 		> li
 			//padding-left: 10px
-			padding: 5px 0px 5px 10px
-			border-bottom: 1px solid map-get($color, light)
+			//width: max-content
+			padding: 5px 0px 5px 0px
+			border-bottom: 1px solid rgb(182 174 246)
 			//padding-bottom: 8px
 			position: relative
-			margin-left: -8px
+			margin-left: 2px
 			font-size: 0.75rem
 			&:last-of-type
 				border-bottom: 0
 				//padding-bottom: 0
 			&::before
-				content: ''
+				cotent: ''
 				display: block
 				position: absolute
-				+square(3px, 3px)
-				border-radius: 50%
-				background: map-get($color, gray)
+				width: 0px
+				height: 0px
+				//border: 2px solid rgb(182 174 246) 
+				box-shadow:0px 0px 3px #ff20ac, #ff20ac 0px 0px 3px inset
+				border-radius: 0%
+				background: transparent
 				left: 2px
 				top: 8px
 
 .timeline
-	margin-top: 300px !important
+	margin-top: 200px !important
 	width:100%
 
 @media screen and (max-width: 1140px)
