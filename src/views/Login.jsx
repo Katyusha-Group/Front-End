@@ -88,19 +88,20 @@ function Login(props) {
     const data = await response.json();
     closeLoading();
     if (response.status === 200) {
-      setAuthTokens(data.token);
+      setAuthTokens(data);
       setShop_caller(true);
-      localStorage.setItem("authTokens", JSON.stringify(data));
-      const tokenClass = JSON.parse(JSON.stringify(data));
+      localStorage.setItem("authTokens", JSON.stringify({token:data}));
+      const tokenClass = JSON.parse(JSON.stringify({token:data}));
       const token = tokenClass.token.access;
       const shopId = await fetch(apis["carts"], {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
       idShop = await shopId.json();
+      console.log("🚀 ~ file: Login.jsx:105 ~ handleSubmit ~ idShop:", idShop)
       if (shopId.status == 201 || shopId.status == 200) {
         localStorage.setItem("shopId", JSON.stringify(idShop))
         let test = localStorage.getItem("shopId")

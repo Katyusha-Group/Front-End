@@ -25,7 +25,6 @@ export const useSendTweets = async (
   try {
     const response = await axios.request(config);
     if (parent === "") {
-      console.log(" file: sendTweets.jsx:24 ~ setData ~ x:1");
       setData((x) => {
         return [response.data, ...x];
       });
