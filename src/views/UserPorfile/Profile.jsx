@@ -34,14 +34,27 @@ export default function Profile() {
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
+        <div><Timeline tabsList={tabs}/></div>
+      </div>
+      <div className={styles.leftpart}>
         <ProfileHeader username={username} profile={profile}/>
         {/* <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
         </div> */}
       </div>
-      <div className={styles.leftpart}>
-        <div><Timeline tabsList={tabs}/></div>
-      </div>
     </div>
   );
 }
+
+
+// .rightUpper::before {
+//   content: "";
+//   position: absolute;
+//   top: -50px; /* Adjust the value to position the ribbon */
+//   left: -50px; /* Adjust the value to position the ribbon */
+//   width: calc(100% + 100px); /* Make the ribbon wider or narrower by adjusting the value */
+//   height: 200%; /* Increase or decrease the value to adjust the height of the ribbon */
+//   transform: rotate(-45deg) translateY(-50%); /* Adjust the rotation and vertical position */
+//   background-color: rgba(143, 62, 140, 0.5);
+//   z-index: -1; /* Set the z-index to -1 to ensure the ribbon stays behind other components */
+// }

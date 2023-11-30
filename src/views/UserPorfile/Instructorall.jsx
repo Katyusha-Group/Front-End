@@ -1,8 +1,8 @@
 import React from 'react';
 import Instructor from './Instructor';
-import { userFollowings } from '../../hooks/userFollowings';
-import { userFollowers } from '../../hooks/userFollowers';
-import { render } from '@testing-library/react';
+// import { userFollowings } from '../../hooks/userFollowings';
+// import { userFollowers } from '../../hooks/userFollowers';
+// import { render } from '@testing-library/react';
 
 function Instructorall({ username, IsFollowing, IsModal
     , Followings, Followers 
@@ -11,7 +11,7 @@ function Instructorall({ username, IsFollowing, IsModal
     // const {Followers, setFollowers} = userFollowers(username);
     const Title = IsFollowing ? "دنبال شونده"  : "دنبال کننده";
     // console.log("Followers in InstructorAll: " , Followers);
-    const [rerender, setRerender] = React.useState(false); // State variable to trigger rerender
+    // const [rerender, setRerender] = React.useState(false); // State variable to trigger rerender
     // Callback function to be triggered when the button is clicked
     const handleButtonClick = () => {
         // Update the state variable to trigger rerender
@@ -27,7 +27,8 @@ function Instructorall({ username, IsFollowing, IsModal
             {!IsModal ? (
                 Following_Component(Followings, Title)
             ) : (
-                IsFollowing ? Following_Component(Followings, Title, handleButtonClick) : Follower_Component(Followers, Title, handleButtonClick)
+                IsFollowing ?   Following_Component(Followings, Title, handleButtonClick) : 
+                                Follower_Component(Followers, Title, handleButtonClick)
             )}
         </div>
     );

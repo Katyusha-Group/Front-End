@@ -14,6 +14,7 @@ export default function ProfileHeader({profile, username}) {
   // const {Followings, setFollowings} = userFollowings(username);
   // const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
+    console.log("Modal Clicked!")
     setIsFollowing(true);
     setShowModal(true);
   };
@@ -35,48 +36,49 @@ export default function ProfileHeader({profile, username}) {
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
   return (
         <div className={styles.rightUpper}>
-          <img className={styles.ProfileImage} 
-            src={profile.image} 
-            // src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
-            alt="" />
-          <p className={styles.p_name}>{profile.name}</p>
-          <p className={styles.myusername}> @{profile.username} </p>
-          <div className={styles.Follow}>
-            {/* Followings */}
-            <p
-              onClick={handleOpenModal_Following}
-            >
-               دنبال میشود:&nbsp;
-               {
-                  // !(Followings ===  null) ?
-                  // Object.values(Followings).length :
-                  // 0
-                  profile.following_count
-               }  
-            </p>
-            {/* Followers */}
-            <p
-              onClick={handleOpenModal_Followers}
-            > 
-                دنبال کننده:&nbsp;
-               {
-                  // !(Followers ===  null) ?
-                  // Object.values(Followers).length :
-                  // 0
-                  profile.followers_count
-               }             
-            </p>
-            <UsersListModal 
-              showModal={showModal} 
-              handleClose={handleCloseModal} 
-              IsFollowing={IsFollowing} 
-              // Followings={Followings} 
-              // Followers={Followers}
-              username={username}
-            />
+          <div className={styles.ProfileHeader_Content}>
+            <img className={styles.ProfileImage} 
+              src={profile.image} 
+              // src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
+              alt="" />
+            <p className={styles.myusername}> @{profile.username} </p>
+            <div className={styles.Followes}>
+              <div onClick={handleOpenModal_Following} className={styles.Following_Follower}>
+                <i className='tim-icons icon-single-02'></i>
+                <span className={styles.Followes_Count}>{profile.following_count}</span> 
+                <p>دنبال میشود</p>
+              </div>
+              <div onClick={handleOpenModal_Followers} className={styles.Following_Follower}>
+                <i className='tim-icons icon-single-02'></i>
+                <span className={styles.Followes_Count}>{profile.followers_count}</span> 
+                <p>دنبال کننده</p>
+              </div>
+              <UsersListModal 
+                showModal={showModal} 
+                handleClose={handleCloseModal} 
+                IsFollowing={IsFollowing} 
+                // Followings={Followings} 
+                // Followers={Followers}
+                username={username}
+              />
+            </div>
+            <button className={styles.followbutton}> دنبال کردن</button>
           </div>
-          <p className={styles.DateStart}> تاریخ شروع فعالیت {date}</p>
-          <button className={styles.followbutton}> دنبال کردن</button>
+          
+          <div className={styles.ProfileHeader_Other}>
+              <div className={styles.ProfileHeader_Other_Item}>
+                <p>نام</p>
+                <p>{profile.name}</p> 
+              </div>
+              <div className={styles.ProfileHeader_Other_Item}>
+                <p>نام کاربری</p>
+                <p>{profile.username}@</p>  
+              </div>
+              <div className={styles.ProfileHeader_Other_Item}>
+                <p>تاریخ شروع فعالیت</p>
+                <p>{date}</p>  
+              </div>
+          </div>
         </div>
     )
 }
