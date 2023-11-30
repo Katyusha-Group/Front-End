@@ -25,7 +25,6 @@ ul::after {
 
 ul.timeline {
   display: flex;
-  /* flex-wrap: nowrap !important; */
   padding: 50px 30px;
 }
 

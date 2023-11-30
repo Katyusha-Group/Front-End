@@ -2,32 +2,24 @@ import React from "react";
 import * as style from "./ModalLesson.module.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useInfo } from "../../contexts/InfoContext";
 import Timeline from "../Timeline/Timeline";
 import TeacherTimeline from "../TeacherTimeline/TeacherTimeline";
 
-import classNames from "classnames";
 import {
   dayOfWeek,
-  timeStringToFloat,
   sexTostring,
   convertTime,
 } from "../../global/functions";
 import {
-  Button,
   ButtonGroup,
   Card,
   CardHeader,
   CardBody,
   Row,
   Col,
-  Label,
 } from "reactstrap";
-import { Link, NavLink, useSearchParams } from "react-router-dom";
 const ModalLessons = (props) => {
-  const { info, changeInfo } = useInfo();
   const x = props.show.data;
-
   const [timelineData, setTimelineData] = React.useState("data0");
   const setTimeData = (name) => {
     setTimelineData(name);
