@@ -22,10 +22,11 @@ ul
 		clear: both
 	&.timeline
 		display: flex
-
+		justify-content: center
 		direction: ltr
 		> li
-			width: calc(100% / 6)
+			min-width: calc(100% / 10)
+			width: calc(100% / 8)
 			// &::before
 			// 	content: ''
 			// 	display: block
@@ -76,19 +77,22 @@ ul
 				right: -30px
 				top: -9.5px
 	.content
-		border-left: 0px solid map-get($color, light)
-		margin-left: 0px
+		border-left: none
+		margin-left: -8px
+		justify-content: center
+		display: grid
 		//padding: 15px 0
 		//padding-right: 24px
 		> li
+			white-space: nowrap
 			//padding-left: 10px
-			//width: max-content
+			//width: 20vh
 			padding: 5px 0px 5px 0px
 			border-bottom: 1px solid rgb(182 174 246)
 			//padding-bottom: 8px
 			position: relative
 			margin-left: 2px
-			font-size: 0.75rem
+			font-size: 10px
 			&:last-of-type
 				border-bottom: 0
 				//padding-bottom: 0
@@ -106,7 +110,7 @@ ul
 				top: 8px
 
 .timeline
-	margin-top: 200px !important
+	margin-top: 170px !important
 	width:100%
 
 @media screen and (max-width: 1140px)

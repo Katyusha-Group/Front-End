@@ -19,7 +19,7 @@
    box-shadow: none !important;
    height: 60vh;
    margin-top: 15px;
-   justify-content: center !important;
+
 }
 
 .ModalLessonCourse .modal-dialog {
@@ -41,6 +41,8 @@
    display: flex;
    flex-direction: row;
    font-size: 15px;
+
+   justify-content: center !important;
 }
 
 .ModalProfessorImage {
@@ -137,7 +139,7 @@
 
 
 .ModalLessonInfoPart {
-   width: 97%;
+   width: 95%;
    justify-content: center;
    padding-right: 0px;
 }
@@ -145,4 +147,5 @@
 
 .loginLmsModalBody {
    padding: 0 !important;
+
 }
