@@ -101,6 +101,7 @@ function Login(props) {
         },
       })
       idShop = await shopId.json();
+      console.log("🚀 ~ file: Login.jsx:105 ~ handleSubmit ~ idShop:", idShop)
       if (shopId.status == 201 || shopId.status == 200) {
         localStorage.setItem("shopId", JSON.stringify(idShop))
         let test = localStorage.getItem("shopId")

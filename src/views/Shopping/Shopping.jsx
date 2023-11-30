@@ -23,8 +23,11 @@ import {
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
-import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
-import { saveWallet } from "../../hooks/Shopping/getWallet";
+import { useGetCartInfo } from "../../hooks/Shopping/getCartInfo";
+import { useSaveWallet } from "../../hooks/Shopping/getWallet";
+import axios from "axios";
+import { saveWallet } from "../../Functions/Shopping/saveWallet";
+import { getCartInfo } from "../../Functions/Shopping/getCartInfo";
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -32,16 +35,14 @@ function Shopping() {
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-
-
   const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
-    getCartInfo();
-  const {wallet,setWallet} = saveWallet();
+  useGetCartInfo();
+  const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
   const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+    fetch(apis["carts"] + `${shopId.id}/${state[index].id}/`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,43 +55,42 @@ function Shopping() {
         contain_email: true,
       }),
     }).then((response) => {
-      getCartInfo();
+      getCartInfo(setState, setTotalPrice, setAmount);
     });
   };
 
   function order() {
     showLoading();
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["orders"], {
+    let shopId = JSON.parse(localStorage.getItem("shopId"));
+    console.log("🚀 ~ file: Shopping.jsx:65 ~ order ~ shopId:", shopId)
+    axios(apis["orders"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: {
         cart_id: shopId.id,
         payment_method: "W",
-      }),
+      },
     })
       .then((response) => {
-        if (response.status == 400) {
-          return response.json().then((data) => {
+
+          notify("tl");
+          saveWallet(setWallet);
+          shopId = CartCreator({ setState, setTotalPrice, setAmount });
+      })
+
+      .catch((error) => {
+        if (error.status == 400) {
+          return response.then((data) => {
             alert(
               data.telegram +
                 "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
             );
           });
-        } else
-          return response.json().then((data) => {
-            notify("tl");
-            saveWallet();
-            let newCart = CartCreator({ setState, setTotalPrice, setAmount });
-          });
-      })
-
-      .catch((error) => {
-        console.error(error);
+        } else console.error(error);
       });
     closeLoading();
   }

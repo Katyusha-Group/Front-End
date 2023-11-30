@@ -8,6 +8,7 @@ import { useTweets } from "../../hooks/Twitter/useTweets";
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  console.log("🚀 ~ file: Timeline.jsx:11 ~ Timeline ~ tweets:", tweets)
   const [open, setOpen] = useState(false);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -36,7 +37,7 @@ function Timeline() {
               {loading ? (
                 <></>
               ) : (
-                tweets.map((tweet) => (
+                tweets.results.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     tweet={tweet}
