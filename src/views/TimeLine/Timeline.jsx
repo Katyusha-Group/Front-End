@@ -13,7 +13,6 @@ function Timeline() {
     setActiveTab(tab);
   };
 
-
   return (
     <>
       <Card className={styles.timeline}>
