@@ -28,6 +28,7 @@ import { useSaveWallet } from "../../hooks/Shopping/getWallet";
 import axios from "axios";
 import { saveWallet } from "../../Functions/Shopping/saveWallet";
 import { getCartInfo } from "../../Functions/Shopping/getCartInfo";
+import { useEffect } from "react";
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -35,14 +36,14 @@ function Shopping() {
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-  const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
+  const { state: info, setState, amount, setAmount, totalPrice, setTotalPrice, loading, setLoading } =
   useGetCartInfo();
   const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
   const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/${state[index].id}/`, {
+    fetch(apis["shop"]["carts"]["removeItem"] + `${info[index].id}/`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -55,7 +56,7 @@ function Shopping() {
         contain_email: true,
       }),
     }).then((response) => {
-      getCartInfo(setState, setTotalPrice, setAmount);
+      getCartInfo(setState, setTotalPrice, setAmount, setLoading);
     });
   };
 
@@ -141,7 +142,7 @@ function Shopping() {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    let u = state;
+    let u = info;
     switch (num) {
       case 1:
         u[index].contain_email = !u[index].contain_email;
@@ -157,7 +158,7 @@ function Shopping() {
         break;
     }
     setState(u);
-    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+    fetch(apis["shop"]["carts"]["updateCart"] + `${info[index].id}/`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -172,11 +173,11 @@ function Shopping() {
     })
       .then((response) => response.json())
       .then((data) => {
-        let newData = state[index];
+        let newData = info[index];
         if (data.total_price !== undefined) {
           newData.price = data.total_price;
         }
-        let newList = state.map((item) => {
+        let newList = info.map((item) => {
           if (item.id === newData.id) {
             return newData;
           }
@@ -188,8 +189,9 @@ function Shopping() {
         console.error(error);
       });
   }
-
-  function deleteItem(index) {}
+  if(loading){
+    return <></>
+  }
   return (
     <>
       <div>
@@ -258,7 +260,8 @@ function Shopping() {
                     </div>
                   </CardBody>
                   <CardFooter>
-                    {state.length == 0 ? (
+                    
+                    {info.length === 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
                       <Button
@@ -278,15 +281,15 @@ function Shopping() {
                   style={{
                     height: "100%",
                     marginBottom: "0",
-                    justifyContent: `${state.length == 0 ? "center" : ""}`,
+                    justifyContent: `${loading &&info.length == 0 ? "center" : ""}`,
                   }}
                 >
-                  {state.length == 0 ? (
+                  {info.length == 0 ? (
                     <h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
                     ""
                   )}
-                  {state.map((x, index) => {
+                  { info.map((x, index) => {
                     return (
                       <Row
                         md="6"
@@ -324,7 +327,7 @@ function Shopping() {
                                     ss1(() => !s1);
                                     changeChecked(1, index);
                                   }}
-                                  checked={state[index].contain_email}
+                                  checked={info[index].contain_email}
                                   type="checkbox"
                                 />
                                 <span className="form-check-sign">
@@ -383,7 +386,7 @@ function Shopping() {
                                 index
                               );
                               setState(
-                                state.filter(
+                                info.filter(
                                   (y) =>
                                     y.course.complete_course_number !==
                                     x.course.complete_course_number
