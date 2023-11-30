@@ -11,7 +11,7 @@ export const apis = {
     my_courses: `${domain}/courses/my_courses/`,
   },
   courseCartOrderInfo: `${domain}/course-cart-order-info/`,
-  getPrice: `${domain}/get-prices/`,
+  getPrice: `${domain}/shop/get-prices/`,
   coursegroups: `${domain}/coursegroups/`,
   accounts: {
     activationConfirm: `${domain}/accounts/activation-confirm/`,
@@ -37,7 +37,7 @@ export const apis = {
     names: `${domain}/departments/names`,
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
-  orders: `${domain}/orders/`,
+  orders: `${domain}/shop/orders/`,
   notification: `${domain}/notification/`,
   profiles: {
     myprofile: `${domain}/profiles/`,
@@ -59,6 +59,11 @@ export const apis = {
   tweetChart:{
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
+  },
+  shop:{
+    carts: {
+      addToCart: `${domain}/shop/carts/add-to-cart/`,
+    },
   }
 };
 

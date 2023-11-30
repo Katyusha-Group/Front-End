@@ -24,7 +24,9 @@ import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
 import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
-import { saveWallet } from "../../hooks/Shopping/getWallet";
+import { useSaveWallet } from "../../hooks/Shopping/getWallet";
+import axios from "axios";
+import { saveWallet } from "../../Functions/Shopping/saveWallet";
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -32,11 +34,9 @@ function Shopping() {
   const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-
-
   const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
     getCartInfo();
-  const {wallet,setWallet} = saveWallet();
+  const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
   const delete_item = (num, index) => {
@@ -61,7 +61,7 @@ function Shopping() {
   function order() {
     showLoading();
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["orders"], {
+    axios(apis["orders"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -74,23 +74,22 @@ function Shopping() {
       }),
     })
       .then((response) => {
-        if (response.status == 400) {
-          return response.json().then((data) => {
+        return response.then((data) => {
+          notify("tl");
+          saveWallet(setWallet);
+          let newCart = CartCreator({ setState, setTotalPrice, setAmount });
+        });
+      })
+
+      .catch((error) => {
+        if (error.status == 400) {
+          return response.then((data) => {
             alert(
               data.telegram +
                 "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
             );
           });
-        } else
-          return response.json().then((data) => {
-            notify("tl");
-            saveWallet();
-            let newCart = CartCreator({ setState, setTotalPrice, setAmount });
-          });
-      })
-
-      .catch((error) => {
-        console.error(error);
+        } else console.error(error);
       });
     closeLoading();
   }
