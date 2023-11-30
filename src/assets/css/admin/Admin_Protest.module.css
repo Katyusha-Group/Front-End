@@ -2,15 +2,23 @@
 .title {
     color: var(--white);
     font-size: large;
+    text-align: right;
+    padding-right: 25px;
+    padding-top: 10px;
 }
 
 /* .styles.ProtestTable_Main {
     overflow-y: scroll;
 } */
 
-.protest_Main {
-    border-bottom: 3px solid rgb(54,56,77);
-    margin: 10px;
-    text-align: right;
+.protestContainer {
+  overflow: auto;
+  height: 45vh;
+  padding-right: 20px;
 }
 
+.protest_Main {
+    border-bottom: 3px solid rgb(54,56,77);
+    margin: 20px;
+    text-align: right;
+}
