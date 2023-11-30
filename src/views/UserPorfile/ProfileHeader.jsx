@@ -4,15 +4,15 @@ import * as styles from "../../assets/css/Profile.module.css"
 import moment from 'jalali-moment'
 import { ModalHeader } from 'react-bootstrap';
 import UsersListModal from './UsersListModal';
-import { userFollowings } from '../../hooks/userFollowings';
-import { userFollowers } from '../../hooks/userFollowers';
+// import { userFollowings } from '../../hooks/userFollowings';
+// import { userFollowers } from '../../hooks/userFollowers';
 import { GETProfileData } from '../../hooks/GETProfileData';
 
 export default function ProfileHeader({profile, username}) {
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false);
-  const {Followings, setFollowings} = userFollowings(username);
-  const {Followers, setFollowers} = userFollowers(username);
+  // const {Followings, setFollowings} = userFollowings(username);
+  // const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
     setIsFollowing(true);
     setShowModal(true);
@@ -48,9 +48,10 @@ export default function ProfileHeader({profile, username}) {
             >
                دنبال میشود:&nbsp;
                {
-                  !(Followings ===  null) ?
-                  Object.values(Followings).length :
-                  0
+                  // !(Followings ===  null) ?
+                  // Object.values(Followings).length :
+                  // 0
+                  profile.following_count
                }  
             </p>
             {/* Followers */}
@@ -59,17 +60,18 @@ export default function ProfileHeader({profile, username}) {
             > 
                 دنبال کننده:&nbsp;
                {
-                  !(Followers ===  null) ?
-                  Object.values(Followers).length :
-                  0
+                  // !(Followers ===  null) ?
+                  // Object.values(Followers).length :
+                  // 0
+                  profile.followers_count
                }             
             </p>
             <UsersListModal 
               showModal={showModal} 
               handleClose={handleCloseModal} 
               IsFollowing={IsFollowing} 
-              Followings={Followings} 
-              Followers={Followers}
+              // Followings={Followings} 
+              // Followers={Followers}
               username={username}
             />
           </div>

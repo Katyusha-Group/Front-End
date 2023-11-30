@@ -5,10 +5,10 @@ import { userFollowers } from '../../hooks/userFollowers';
 import { render } from '@testing-library/react';
 
 function Instructorall({ username, IsFollowing, IsModal
-    // , Followings, Followers 
+    , Followings, Followers 
 }) {
-    const {Followings, setFollowings} = userFollowings(username);
-    const {Followers, setFollowers} = userFollowers(username);
+    // const {Followings, setFollowings} = userFollowings(username);
+    // const {Followers, setFollowers} = userFollowers(username);
     const Title = IsFollowing ? "دنبال شونده"  : "دنبال کننده";
     // console.log("Followers in InstructorAll: " , Followers);
     const [rerender, setRerender] = React.useState(false); // State variable to trigger rerender
