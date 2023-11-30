@@ -6,30 +6,15 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-export const getCartInfo = () => {
+import { getCartInfo } from "../../Functions/Shopping/getCartInfo";
+export const useGetCartInfo = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [state, setState] = useState([]);
   const [amount, setAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  function getCartInfo() {
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setState(data.items);
-        setTotalPrice(data.total_price);
-        setAmount(data.total_number);
-        closeLoading();
-      })
-      .catch((error) => console.error(error));
-    closeLoading();
-
-  }
+  
   useEffect(() => {
-    showLoading();
-    getCartInfo()
+    getCartInfo(setState, setTotalPrice, setAmount)
   }, []);
   return {state,setState, amount, setAmount, totalPrice, setTotalPrice};
 };

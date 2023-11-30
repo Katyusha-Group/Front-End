@@ -94,7 +94,7 @@ function Login(props) {
       const tokenClass = JSON.parse(JSON.stringify({token:data}));
       const token = tokenClass.token.access;
       const shopId = await fetch(apis["carts"], {
-        method: "POST",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

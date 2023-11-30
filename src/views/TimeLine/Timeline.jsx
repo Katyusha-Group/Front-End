@@ -37,7 +37,7 @@ function Timeline() {
               {loading ? (
                 <></>
               ) : (
-                tweets.map((tweet) => (
+                tweets.results.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     tweet={tweet}

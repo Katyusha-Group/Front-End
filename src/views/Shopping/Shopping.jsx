@@ -23,10 +23,11 @@ import {
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
-import { getCartInfo } from "../../hooks/Shopping/getCartInfo";
+import { useGetCartInfo } from "../../hooks/Shopping/getCartInfo";
 import { useSaveWallet } from "../../hooks/Shopping/getWallet";
 import axios from "axios";
 import { saveWallet } from "../../Functions/Shopping/saveWallet";
+import { getCartInfo } from "../../Functions/Shopping/getCartInfo";
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -35,13 +36,13 @@ function Shopping() {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
   const { state, setState, amount, setAmount, totalPrice, setTotalPrice } =
-    getCartInfo();
+  useGetCartInfo();
   const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
   const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    fetch(apis["carts"] + `${shopId.id}/items/${state[index].id}/`, {
+    fetch(apis["carts"] + `${shopId.id}/${state[index].id}/`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,13 +55,14 @@ function Shopping() {
         contain_email: true,
       }),
     }).then((response) => {
-      getCartInfo();
+      getCartInfo(setState, setTotalPrice, setAmount);
     });
   };
 
   function order() {
     showLoading();
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
+    let shopId = JSON.parse(localStorage.getItem("shopId"));
+    console.log("🚀 ~ file: Shopping.jsx:65 ~ order ~ shopId:", shopId)
     axios(apis["orders"], {
       method: "POST",
       headers: {
@@ -68,17 +70,16 @@ function Shopping() {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: {
         cart_id: shopId.id,
         payment_method: "W",
-      }),
+      },
     })
       .then((response) => {
-        return response.then((data) => {
+
           notify("tl");
           saveWallet(setWallet);
-          let newCart = CartCreator({ setState, setTotalPrice, setAmount });
-        });
+          shopId = CartCreator({ setState, setTotalPrice, setAmount });
       })
 
       .catch((error) => {
