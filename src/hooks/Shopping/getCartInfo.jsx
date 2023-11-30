@@ -12,9 +12,9 @@ export const useGetCartInfo = () => {
   const [state, setState] = useState([]);
   const [amount, setAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getCartInfo(setState, setTotalPrice, setAmount)
+    getCartInfo(setState, setTotalPrice, setAmount,setLoading)
   }, []);
-  return {state,setState, amount, setAmount, totalPrice, setTotalPrice};
+  return {state,setState, amount, setAmount, totalPrice, setTotalPrice,loading,setLoading};
 };
