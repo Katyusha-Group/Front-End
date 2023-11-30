@@ -13,12 +13,20 @@
 
 .protestContainer {
   overflow: auto;
-  height: 45vh;
+  max-height: 45vh;
   padding-right: 20px;
 }
 
 .protest_Main {
-    border-bottom: 3px solid rgb(54,56,77);
+    /* border-bottom: 3px solid rgb(54,56,77); */
+    border-bottom: 3px solid var(--box);
     margin: 20px;
     text-align: right;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.protest_Main:hover {
+    background-color: var(--box);
+    border-radius: 15px;
 }

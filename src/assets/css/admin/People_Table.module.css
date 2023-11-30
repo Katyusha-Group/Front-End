@@ -1,25 +1,26 @@
 @import './../../css/black-dashboard-react.css';
 
-.timeline {
+.Users_List {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  width: 50vw;
-  /* margin-right: 4vw; */
+  width: 30vw;
   height: 90vh;
   border-radius: 15px;
   position: sticky;
+  max-height: 45vh;
+  padding: 0px 20px;
 }
 .tabs {
   border-radius: 15px;
+  margin-top: 0px;
 }
 
-.tweetsContainer{
+.Users_Container{
   display: flex;
   flex-direction: column;
-  max-height: 75vh;
   overflow-y: scroll;
 }
+
 .activeTab {
   width: 10vw;
   height: 40px;
@@ -40,22 +41,29 @@
 }
 
 
-.Person_img{
+.User_img{
     width: 58px;
     height: 58px;
     border-radius: 50%;
 }
-.Person_Container{
-    margin-top: 20px;
+.User_Container{
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-
+    justify-content: space-between;
+    border-radius: 15px;
+    padding-left: 15px;
+    /* background-color: inherit; */
+    transition: background-color 0.3s;
 }
-.Person_name{
-    margin-top: 10px;
-    margin-left: 50px;
-    color: var(--white) !important;
 
+.User_Container:hover {
+    background-color: var(--box);
+}
+
+.User_name{
+    margin-top: 10px;
+    margin-left: 0px;
+    color: var(--white) !important;
 }

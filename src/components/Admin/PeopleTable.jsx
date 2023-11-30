@@ -18,8 +18,8 @@ export default function PeopleTable() {
   return (
     // <div>PeopleTable</div>
     <>
+      <div className={styles.Users_List}>
       <Input/>
-      <div className={styles.timeline}>
         <div className={styles.tabs}>
           {tabsList.map((entry, index) => (
             <button
@@ -33,13 +33,19 @@ export default function PeopleTable() {
         </div>
 
         {activeTab === "Users" && (
-          <div className={styles.tweetsContainer}>
+          <div className={styles.Users_Container}>
             {/* {tweets.map((tweet) => (
               <Tweet key={tweet.id}
               tweet={tweet}
               setOpenComment={setOpen}
               setTweets={setTweets}/>
             ))} */}
+            <User/>
+            <User/>
+            <User/>
+            <User/>
+            <User/>
+            <User/>
             <User/>
             <User/>
             <User/>
