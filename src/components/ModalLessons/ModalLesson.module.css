@@ -1,14 +1,5 @@
 .courseProfileModal {
-   max-width: 75% !important;
-}
-
-.ModalLessonCourse .modal-dialog {
-   margin: -15rem auto !important;
-}
-
-.ModalLessonCourse .card-body {
-   height: 80vh;
-   overflow: auto;
+   max-width: 55% !important;
 }
 
 .modalBack {
@@ -21,21 +12,27 @@
 .modalHeader {
    padding-top: 0px !important;
    direction: rtl !important;
-   /* display: contents; */
+}
+
+.ModalLessonCourseCard {
+   background-color: transparent !important;
+   box-shadow: none !important;
+   height: 60vh;
+   margin-top: 15px;
+
+}
+
+.ModalLessonCourse .modal-dialog {
+   margin: -15rem auto !important;
+}
+
+.profImg {
+   justify-content: center !important;
+   display: flex !important;
 }
 
 .btnGroup {
    display: inline-block !important;
-}
-
-
-.ModalLessonCourseCard {
-   background-color: transparent !important;
-   /* border-color: #ab69b1 !important; */
-   /* color: #dddddd !important; */
-   box-shadow: none !important;
-   height: 420px;
-   margin-top: 15px;
 }
 
 .ModalCourseCardBody {
@@ -44,6 +41,8 @@
    display: flex;
    flex-direction: row;
    font-size: 15px;
+
+   justify-content: center !important;
 }
 
 .ModalProfessorImage {
@@ -83,7 +82,7 @@
    background: transparent !important;
    margin: 0 3px !important;
    padding: 4px 14px !important;
-   font-size: 12px !important;
+   font-size: 13px !important;
    line-height: 1.35em !important;
    font-weight: 600 !important;
 }
@@ -92,27 +91,17 @@
    border-bottom: 1.5px solid #a0227e !important;
 }
 
-.modalLessonBtn:active {
-   background: transparent !important;
-   background-color: transparent !important;
-   border-bottom: 1.5px solid #a0227e !important;
-   background-image: none !important;
-}
-
 .modalLessonBtnActive {
    background: transparent !important;
    background-color: transparent !important;
-   border-bottom: 1.5px solid #a0227e !important;
-   border: none !important;
-   color: #C7C1c1 !important;
-   background: transparent !important;
+   color: #FFF !important;
    margin: 0 3px !important;
    padding: 4px 14px !important;
-   font-size: 12px !important;
+   font-size: 14px !important;
    line-height: 1.35em !important;
    font-weight: 600 !important;
-   border-bottom: 1.5px solid #a0227e !important;
-   background-image: none !important;
+   border: none !important;
+   border-bottom: 2px solid #ff20ac !important;
 }
 
 .courseTitleNotInline {
@@ -148,8 +137,9 @@
    width: 100% !important;
 }
 
+
 .ModalLessonInfoPart {
-   width: 90%;
+   width: 95%;
    justify-content: center;
    padding-right: 0px;
 }
@@ -157,4 +147,5 @@
 
 .loginLmsModalBody {
    padding: 0 !important;
+
 }
