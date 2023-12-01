@@ -6,7 +6,7 @@ import * as styles from "../../assets/css/admin/People_Table.module.css";
 import User from './User';
 import { useTweets } from "../../hooks/Twitter/useTweets";
 import Tweet from '../../views/TimeLine/Tweet';
-import  Searchbar from "../../views/Searchbar.jsx"
+import Admin_Searchbar from './Admin_SearchBar.jsx';
 import { useAllProfiles } from '../../hooks/useSearchprofile.jsx';
 let tabsList = [
   ["Users", "کاربرها"],
@@ -16,17 +16,25 @@ let tabsList = [
 export default function PeopleTable() {
   const [activeTab, setActiveTab] = useState("Users");
   const { filteredProfiles, loading2 } = useAllProfiles("");
+  // let IsUser = true;
+  const [IsUser, setIsUser] = useState(true);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+    if (tab == "Users") {
+      setIsUser(true);
+    }
+    else {
+      setIsUser(false);
+    }
   };
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   const [open, setOpen] = useState(false);
+  
   return (
     // <div>PeopleTable</div>
     <>
-    {/* <Searchbar/> */}
       <div className={styles.Users_List}>
-      <Input className={styles.Search}/>
+      {/* <Input className={styles.Search}/> */}
         <div className={styles.tabs}>
           {tabsList.map((entry, index) => (
             <button
@@ -39,21 +47,12 @@ export default function PeopleTable() {
           ))}
         </div>
         
-        {activeTab === "Users" && (
+        {/* {activeTab === "Users" && (
           <div className={styles.Users_Container}>
             {filteredProfiles.map((prof) => (
               <User key={prof.id}
               User_data={prof}/>
             ))}
-            {/* <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/>
-            <User/> */}
           </div>
         )}
         {activeTab === "Posts" && (
@@ -69,7 +68,8 @@ export default function PeopleTable() {
               />
             ))}
           </div>
-        )}
+        )} */}
+        <Admin_Searchbar IsUser={IsUser}/>
       </div>
     </>
   )
