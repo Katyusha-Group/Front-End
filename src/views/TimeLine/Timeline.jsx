@@ -48,7 +48,20 @@ function Timeline() {
             </div>
           )}
           {activeTab === "media" && (
-            <div className={styles.tweetsContainer}></div>
+            <div className={styles.tweetsContainer}>
+              {loading ? (
+                <></>
+              ) : (
+                tweets.results.map((tweet) => (
+                  <Tweet
+                    key={tweet.id}
+                    tweet={tweet}
+                    setOpenComment={setOpen}
+                    setTweets={setTweets}
+                  />
+                ))
+              )}
+            </div>
           )}
         </div>
         <div className={styles.sendMessage}>

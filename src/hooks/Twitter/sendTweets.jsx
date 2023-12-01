@@ -26,7 +26,9 @@ export const useSendTweets = async (
     const response = await axios.request(config);
     if (parent === "") {
       setData((x) => {
-        return [response.data, ...x];
+        
+        let temp = [response.data, ...x.results];
+        return { ...x, results: temp}
       });
     } else {
       setData((listOfData) => {
