@@ -100,6 +100,7 @@ const Sidebar = () => {
           </svg>{" "}
           <p className={styles.itemtext}> پروفایل</p>
         </div>
+
         <div
           className={styles.sidebarmenuItems}
           onClick={(e) => {
@@ -120,6 +121,35 @@ const Sidebar = () => {
             />
           </svg>
           <p className={styles.itemtext}> سفارش ها</p>
+        </div>
+        <div
+          className={styles.sidebarmenuItems}
+          onClick={(e) => {
+            e.preventDefault();
+            Navigate("/timeline");
+          }}
+        >
+          <svg
+            fill="#fff"
+            height="40px"
+            width="30px"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 67.429 67.429"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M33.468,67.184C15.014,67.184,0,52.17,0,33.715S15.014,0.246,33.468,0.246c18.455,0,33.469,15.014,33.469,33.469
+		c0,5.621-1.421,11.161-4.116,16.076l4.608,17.2L50.58,62.475C45.408,65.559,39.511,67.184,33.468,67.184z M33.468,4.246
+		C17.219,4.246,4,17.466,4,33.715s13.219,29.469,29.468,29.469c5.582,0,11.021-1.574,15.729-4.554l0.74-0.468l11.835,3.171
+		l-3.243-12.1l0.419-0.72c2.609-4.484,3.988-9.602,3.988-14.799C62.936,17.466,49.717,4.246,33.468,4.246z"
+              />
+            </g>
+          </svg>
+          <p className={styles.itemtext}>صفحه اصلی</p>
         </div>
       </div>
     </Card>
