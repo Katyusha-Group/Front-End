@@ -2,7 +2,18 @@ import React from "react";
 import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline_Profile.module.css";
 import * as style from "../../components/ModalLessons/ModalLesson.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { apis } from "../../assets/apis";
+
+// import { useInfo } from "../../contexts/InfoContext";
+import CourseTimeline from "../../components/Timeline/Timeline";
+import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
+import {
+  showLoading,
+  closeLoading,
+} from "../../components/LoadingAlert/LoadingAlert.jsx";
+// src\views\UserPage\Lessons.jsx
+import { lessons } from "../UserPage/Lessons";
 import { GETTweets } from "../../hooks/GETTweets";
 import {
   dayOfWeek,
@@ -21,16 +32,14 @@ import {
   Label,
 } from "reactstrap";
 import { useTweets } from "../../hooks/Twitter/useTweets";
-const Tweets = [
-  // Add more tweets as needed
-  {
-    id: 8,
-    text: "من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی",
-    username: "white Jett",
-    profile: { name: "وایت جت" },
-  },
-  // Add more tweets as needed
-];
+import { useGetChartData } from "../../hooks/GetChartData.jsx";
+
+// const { info, changeInfo } = useInfo();
+
+const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+// const [Tweets, setTweets] = useState(null);
+// const [loading, setLoading] = useState(true);
+
 const x = {
   complete_course_number: "2211299_03",
   name: "ریز پردازنده و زبان اسمبلی",
@@ -85,7 +94,24 @@ let tabsList = [
   ["media", "برای شما"],
 ];
 
-function Timeline({ tabsList }) {
+function Timeline({ tabsList, profileData }) {
+  const info = useGetChartData();
+  console.log("inja:", info)
+  // const us = "yazdan_mastery";
+  // useEffect(() => {
+  //   showLoading();
+  //   fetch((apis["profiles"] + `${us}` + `/calendar`), {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       // setTweets(data);
+  //       closeLoading();
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
   const [activeTab, setActiveTab] = useState("Main");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -97,11 +123,11 @@ function Timeline({ tabsList }) {
       ["media", "برای شما"],
     ];
   }
-
+  const [mainData] = (profileData.profile_type);
+  const username = profileData.username.split("_")[1];
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   // console.log("Tweets are: " , tweets);
   const [open, setOpen] = useState(false);
-
   return (
     <>
       <div className={styles.timeline}>
@@ -121,156 +147,74 @@ function Timeline({ tabsList }) {
           <div className={styles.tweetsContainer}>
             {tweets.results.map((tweet) => (
               <Tweet key={tweet.id}
-              tweet={tweet}
-              setOpenComment={setOpen}
-              setTweets={setTweets}/>
+                tweet={tweet}
+                setOpenComment={setOpen}
+                setTweets={setTweets} />
             ))}
           </div>
         )}
         <div className={styles.content}>
           {activeTab === "Main" && (
-            <div className={styles.tweetsContainer}>
-              {/* Render media content here */}
-              <div>
-                <Row>
-                  <Col md="5">
-                    <Card className={style.ModalLessonDataCard1}>
-                      <Row>
-                        <Col md="4" className="p-0">
-                          <img
-                            className={style.ModalProfessorImage}
-                            src={x.teachers[0].teacher_image}
-                            alt="professorImage"
-                          />
-                        </Col>
-                        <Col md="8" className="text-right p-0 mr-0">
-                          <p className={style.courseTitle}>
-                            استاد&nbsp;
-                            <span className={style.courseText}>
-                              {x.teachers.map((y) => y.name).join(" , ")}
-                            </span>
-                          </p>
-
-                          <p
-                            className={`${style.courseTitle}`}
-                            style={{ display: "flex" }}
-                          >
-                            کد درس&nbsp;
-                            <span
-                              className={style.courseText}
-                              style={{ direction: "ltr" }}
-                            >
-                              {x.complete_course_number}
-                            </span>
-                          </p>
-                          <p className={style.courseTitle}>
-                            جنسیت&nbsp;
-                            <span className={style.courseText}>
-                              {sexTostring(x.sex)}
-                            </span>
-                          </p>
-                        </Col>
-                      </Row>
-                    </Card>
-
-                    <Card className={style.ModalLessonDataCard2}>
-                      <Col className="text-right">
-                        <p className={style.courseTitleNotInline}>
-                          زمان برگزاری
-                        </p>
-                        <span className={style.courseText}>
-                          {x.course_times.map((t) => (
-                            <text>{dayOfWeek(t.course_day)} </text>
-                          ))}
-
-                          {" / "}
-                        </span>
-                        <text className={style.courseText}>
-                          {convertTime(x.course_times[0].course_start_time)} تا{" "}
-                          {convertTime(x.course_times[0].course_end_time)}
-                        </text>
-                      </Col>
-                      {x.exam_times.length === 0 ? null : (
-                        <Col className="text-right">
-                          <p className={style.courseTitleNotInline}>
-                            زمان آزمون پایانی
-                          </p>
-                          <text dir="ltr" className={style.courseText}>
-                            {"تاریخ"}
-                          </text>{" "}
-                          <text
-                            className={style.courseText}
-                            style={{ direction: "ltr" }}
-                          >
-                            {x.exam_times[0].date}
-                          </text>
-                          <text className={style.courseText}>
-                            {" / "}
-                            {convertTime(
-                              x.exam_times[0].exam_start_time
-                            )} تا {convertTime(x.exam_times[0].exam_end_time)}
-                          </text>
-                        </Col>
-                      )}
-                    </Card>
-                  </Col>
-                  <Col md="7">
-                    <Card
-                      className={`${style.ModalLessonDataCard3} text-right`}
-                    >
-                      <p className={style.courseTitle}>
-                        ثبت نام شده&nbsp;
-                        <text className={style.courseText}>
-                          {x.registered_count} از {x.capacity}
-                        </text>
+            <div className={styles.mainContainer}>
+              {mainData == "C" && (
+                <div
+                  style={{
+                    display: mainData == "C" ? "block" : "none",
+                  }}
+                >
+                  {/* <Row>
+                    <Col md="12"
+                      className={`${style.profImg} p-0 mt-1`}>
+                      <img
+                        className={style.ModalProfessorImage}
+                        src={profileData.image}
+                        alt="professorImage"
+                      />
+                      <p
+                        style={{
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          fontSize: "20px",
+                          color: "#c7c1c1",
+                          paddingRight: "30px",
+                        }}
+                      >
+                        {x.name} ({x.group_number})
                       </p>
-                      <p className={style.courseTitle}>
-                        تعداد در صف انتظار&nbsp;
-                        <text className={style.courseText}>
-                          {x.waiting_count} {"نفر"}
-                        </text>
-                      </p>
-                      <p className={style.courseTitle}>
-                        تعداد اخذ شده در کاتیوشا&nbsp;
-                        <text className={style.courseText}>
-                          {x.added_to_calendar_count} {"نفر"}
-                        </text>
-                      </p>
-                      <p className={style.courseTitle}>
-                        تعداد کل واحد ها&nbsp;
-                        <text className={style.courseText}>
-                          {x.total_unit} {"واحد"}
-                        </text>
-                      </p>
-                      <p className={style.courseTitle}>
-                        تعداد واحد های عملی&nbsp;
-                        <text className={style.courseText}>
-                          {x.practical_unit}&nbsp;{"واحد"}
-                        </text>
-                      </p>
-                      <p className={style.courseTitle}>
-                        قابل اخذ بودن این درس برای شما&nbsp;
-                        <text className={style.courseText}>
-                          {x.is_allowed ? "بله" : "خیر"}
-                        </text>
-                      </p>
-
-                      {x.description === "nan" ? null : (
-                        <Row>
-                          <Col className="text-right" md="10">
-                            <p className={style.courseTitle}>
-                              توضیحات&nbsp;
-                              <text className={style.courseText}>
-                                {x.description}
-                              </text>
-                            </p>
-                          </Col>
-                        </Row>
-                      )}
-                    </Card>
-                  </Col>
-                </Row>
-              </div>
+                    </Col>
+                  </Row> */}
+                  <CourseTimeline show={username} />
+                </div>
+              )}
+              {mainData == "T" && (
+                <div
+                  style={{
+                    display: mainData == "T" ? "block" : "none",
+                  }}
+                >
+                  <TeacherTimeline show={username} />
+                </div>)}
+              {mainData == "U" || mainData == "V" && (
+                <div
+                  style={{
+                    display: mainData == "U" ? "block" : "none",
+                  }}
+                >
+                  <div
+                    className={style.chart}>
+                    {lessons(
+                      info.Chart,
+                      changeInfo,
+                      true,
+                      null,
+                      showLoading,
+                      closeLoading,
+                      setModalData,
+                      setShowLesson
+                    )}
+                  </div>
+                  {/* <TeacherTimeline show={username} /> */}
+                </div>)}
             </div>
           )}
           {activeTab === "Likes" && (

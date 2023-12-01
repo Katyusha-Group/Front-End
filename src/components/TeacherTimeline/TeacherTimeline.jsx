@@ -5,7 +5,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 import { apis } from "../../assets/apis";
 const TeacherTimeline = (props) => {
-  let teacher_id = props.show.show.data.teachers[0].id;
+  let teacher_id = props.show;
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -50,7 +50,7 @@ const TeacherTimeline = (props) => {
   ];
   const token = tokenClass.token.access;
   React.useEffect(() => {
-    fetch(apis["timeline"]["teachers"]+`${teacher_id}`, {
+    fetch(apis["timeline"]["teachers"] + `${teacher_id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
