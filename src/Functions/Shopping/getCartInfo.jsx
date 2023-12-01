@@ -13,7 +13,6 @@ export function getCartInfo(setState, setTotalPrice, setAmount,setLoading) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("🚀 ~ file: getCartInfo.jsx:16 ~ .then ~ data:", data.items)
       setState(data.items);
       setTotalPrice(data.total_price);
       setAmount(data.total_number);

@@ -14,10 +14,7 @@ export const CartCreator = (props) => {
     let idShop = await shopId.data;
     if (shopId.status == 201 || shopId.status == 200) {
       localStorage.removeItem("shopId");
-      console.log("shopId deleted")
       localStorage.setItem("shopId", JSON.stringify(idShop));
-      console.log("new shopId added")
-      console.log("🚀 ~ file: CartCreator.jsx:22 ~ getCart ~ idShop:", idShop)
       props.setState(idShop.items);
       props.setTotalPrice(idShop.total_price)
       props.setAmount(idShop.total_number)

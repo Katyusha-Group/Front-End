@@ -25,7 +25,7 @@ export const apis = {
     },
     wallet: {
       seeWallet: `${domain}/accounts/wallet/see_wallet`,
-    }
+    },
   },
   departments: `${domain}/departments/`,
   carts: `${domain}/shop/carts/`,
@@ -54,8 +54,7 @@ export const apis = {
 
   tweets: {
     tweets: `${domain}/twittes/`,
-  }
-  ,
+  },
   tweetChart: {
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
@@ -66,7 +65,8 @@ export const apis = {
       removeItem: `${domain}/shop/carts/remove-item/`,
       updateCart: `${domain}/shop/carts/update-cart/`,
     },
-  }
+  },
+  reportTwitte: {
+    reportTwitte: `${domain}/report-twitte/`,
+  },
 };
-
-

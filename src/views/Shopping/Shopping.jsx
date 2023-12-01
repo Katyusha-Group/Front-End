@@ -63,7 +63,6 @@ function Shopping() {
   function order() {
     showLoading();
     let shopId = JSON.parse(localStorage.getItem("shopId"));
-    console.log("🚀 ~ file: Shopping.jsx:65 ~ order ~ shopId:", shopId)
     axios(apis["orders"], {
       method: "POST",
       headers: {
