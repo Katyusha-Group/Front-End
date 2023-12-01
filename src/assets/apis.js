@@ -1,4 +1,4 @@
-export const domain = "http://37.32.13.62";
+export const domain = "http://84.32.10.112";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
@@ -52,15 +52,15 @@ export const apis = {
     all: `${domain}/profiles/?search=`,
   },
 
-  tweets:{
+  tweets: {
     tweets: `${domain}/twittes/`,
   }
   ,
-  tweetChart:{
+  tweetChart: {
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
   },
-  shop:{
+  shop: {
     carts: {
       addToCart: `${domain}/shop/carts/add-to-cart/`,
       removeItem: `${domain}/shop/carts/remove-item/`,
