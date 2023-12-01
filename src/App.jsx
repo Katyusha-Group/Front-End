@@ -35,6 +35,7 @@ import InternalServerError from "./views/500.jsx";
 import NewLandingpage from "./views/NewLandingpage.jsx";
 import AdminPanel from "./views/admin/Admin.jsx"
 import Replies from "./views/TimeLine/Replies.jsx";
+import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -52,15 +53,15 @@ function App() {
   return (
     <>
       <ThemeContextWrapper>
-        <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
+        <ErrorBoundary fallback={<ErrorBoundrypage/>}>
           <BackgroundColorWrapper>
             <ContextInfo>
               <Router.BrowserRouter>
                 <Router.Routes>
-                  {/* <Router.Route
-                    path="/"
-                    element={<LandingPage />}
-                  ></Router.Route> */}
+                  <Router.Route
+                    path="/err"
+                    element={<ErrorBoundrypage />}
+                  ></Router.Route>
                   <Router.Route
                     path="/signup"
                     element={<SignUp />}
