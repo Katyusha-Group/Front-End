@@ -270,7 +270,7 @@ const ModalLessons = (props) => {
                       display: timelineData == "data1" ? "block" : "none",
                     }}
                   >
-                    <Timeline show={props} />
+                    <Timeline show={props.show.data.complete_course_number.split("_")[0]} />
                   </div>
                   <div
                     style={{

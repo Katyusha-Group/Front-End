@@ -141,13 +141,13 @@ function Timeline({ tabsList, profileData }) {
               >
                 <CourseTimeline show={username} />
               </div>
-              {/* <div
+              <div
                 style={{
                   display: mainData == "T" ? "block" : "none",
                 }}
               >
-                <TeacherTimeline show={props} />
-              </div> */}
+                <TeacherTimeline show={username} />
+              </div>
             </div>
           )}
           {activeTab === "Likes" && (
