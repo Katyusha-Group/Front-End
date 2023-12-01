@@ -85,7 +85,7 @@ let tabsList = [
   ["media", "برای شما"],
 ];
 
-function Timeline({ tabsList }) {
+function Timeline({ tabsList, profileData }) {
   const [activeTab, setActiveTab] = useState("Main");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -101,7 +101,7 @@ function Timeline({ tabsList }) {
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   // console.log("Tweets are: " , tweets);
   const [open, setOpen] = useState(false);
-
+  console.log("profile: ", profileData);
   return (
     <>
       <div className={styles.timeline}>

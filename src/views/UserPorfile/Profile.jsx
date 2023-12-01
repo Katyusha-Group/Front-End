@@ -13,9 +13,11 @@ import { GETProfileData } from "../../hooks/GETProfileData.jsx";
 export default function Profile() {
   const { chart, id } = useParams();
   // console.log("ID is: " , id);
+  
   const {profile, setProfile, loading} = usesProfileMe();
+  const {profileData, setProfileData, loading2} = GETProfileData(id);
   // const {profile, setProfile, loading} = GETProfileData("username3");
-  // console.log("PFSFDSFSDF" , profile);
+  // console.log("PFSFDSFSDF" , profileData);
   // const {username, setUsername} = GETUsername();
   // setUsername(id);
   const username = id;
@@ -34,7 +36,7 @@ export default function Profile() {
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
-        <div><Timeline tabsList={tabs}/></div>
+        <div><Timeline tabsList={tabs} profileData={profileData}/></div>
       </div>
       <div className={styles.leftpart}>
         <ProfileHeader username={username} profile={profile}/>
