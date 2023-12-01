@@ -19,8 +19,14 @@
 }
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 30px;
+  align-items: center;
   margin-top: 40px;
+}
+.buttons :hover{
+  scale: 1.1;
+  color: white;
 }
 .registerButton {
   background-color: #27293d;
@@ -34,6 +40,7 @@
   border: none;
   color: #dcbaff;
 }
+
 .signinBut {
   color: #8d3cde;
   outline: none;
@@ -41,6 +48,7 @@
   background-color: #27293d;
   padding-left: 5vw;
 }
+
 .MainButtomPart {
   margin-top: 80px;
   text-align: right;
@@ -127,6 +135,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  text-align: right;
   
 }
 .timelineImage{

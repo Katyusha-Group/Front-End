@@ -1,10 +1,15 @@
 import React from 'react'
 import styles from "../../assets/css/Landing/mainpart.module.css";
 import image from "../../assets/img/Dark_olive1_cropped.jpg";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 
 const Mainpart = () => {
+  const navigate =useNavigate()
+
   return (
     <div className={styles.bg}>
       <div className={styles.main}>
@@ -15,8 +20,8 @@ const Mainpart = () => {
           ویژه دانشجویان دانشگاه علم و صنعت
         </h4>
         <div className={styles.buttons}>
-          <button className={styles.registerButton}>ثبت نام</button>
-          <button className={styles.signinBut}>ورود</button>
+          <button onClick={e=>navigate("/signup")} className={styles.registerButton}>ثبت نام</button>
+          <button onClick={e=>navigate("/login")} className={styles.signinBut}>ورود</button>
         </div>
         <div className={styles.MainButtomPart}>
           <p>کاری از دانشجویان ورودی 99 دانشکده کامپیوتر</p>
