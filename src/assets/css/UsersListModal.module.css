@@ -6,6 +6,9 @@
 .ModalContents {
     border-radius: 10px;
     background-color: rgb(50, 55, 80);
+    /* background-color: rgba(143, 62, 140, 0.5); */
+    background: rgb(50, 55, 80);
+    background: linear-gradient(180deg, rgba(50, 55, 80,1) 17%, rgba(109,54,114,1) 90%, rgba(143,62,140,1) 100%);
     color: var(--white) !important;
 }
 

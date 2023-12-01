@@ -45,16 +45,3 @@ export default function Profile() {
     </div>
   );
 }
-
-
-// .rightUpper::before {
-//   content: "";
-//   position: absolute;
-//   top: -50px; /* Adjust the value to position the ribbon */
-//   left: -50px; /* Adjust the value to position the ribbon */
-//   width: calc(100% + 100px); /* Make the ribbon wider or narrower by adjusting the value */
-//   height: 200%; /* Increase or decrease the value to adjust the height of the ribbon */
-//   transform: rotate(-45deg) translateY(-50%); /* Adjust the rotation and vertical position */
-//   background-color: rgba(143, 62, 140, 0.5);
-//   z-index: -1; /* Set the z-index to -1 to ensure the ribbon stays behind other components */
-// }

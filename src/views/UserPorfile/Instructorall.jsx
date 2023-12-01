@@ -9,7 +9,9 @@ function Instructorall({ username, IsFollowing, IsModal
 }) {
     // const {Followings, setFollowings} = userFollowings(username);
     // const {Followers, setFollowers} = userFollowers(username);
+    
     const Title = IsFollowing ? "دنبال شونده"  : "دنبال کننده";
+
     // console.log("Followers in InstructorAll: " , Followers);
     // const [rerender, setRerender] = React.useState(false); // State variable to trigger rerender
     // Callback function to be triggered when the button is clicked
@@ -24,12 +26,10 @@ function Instructorall({ username, IsFollowing, IsModal
 
     return (
         <div>
-            {!IsModal ? (
-                Following_Component(Followings, Title)
-            ) : (
+            {
                 IsFollowing ?   Following_Component(Followings, Title, handleButtonClick) : 
                                 Follower_Component(Followers, Title, handleButtonClick)
-            )}
+            }
         </div>
     );
 }

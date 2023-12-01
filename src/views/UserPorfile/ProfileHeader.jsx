@@ -14,7 +14,7 @@ export default function ProfileHeader({profile, username}) {
   // const {Followings, setFollowings} = userFollowings(username);
   // const {Followers, setFollowers} = userFollowers(username);
   const handleOpenModal_Following = () => {
-    console.log("Modal Clicked!")
+    // console.log("Modal Clicked!")
     setIsFollowing(true);
     setShowModal(true);
   };

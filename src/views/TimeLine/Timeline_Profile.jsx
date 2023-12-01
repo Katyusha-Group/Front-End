@@ -99,6 +99,7 @@ function Timeline({ tabsList }) {
   }
 
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  // console.log("Tweets are: " , tweets);
   const [open, setOpen] = useState(false);
 
   return (
@@ -118,7 +119,7 @@ function Timeline({ tabsList }) {
 
         {activeTab === "Tweets" && (
           <div className={styles.tweetsContainer}>
-            {tweets.map((tweet) => (
+            {tweets.results.map((tweet) => (
               <Tweet key={tweet.id}
               tweet={tweet}
               setOpenComment={setOpen}
@@ -274,7 +275,7 @@ function Timeline({ tabsList }) {
           )}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {tweets.map((tweet) => (
+              {tweets.results.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
@@ -286,7 +287,7 @@ function Timeline({ tabsList }) {
           )}
           {activeTab === "Comments" && (
             <div className={styles.tweetsContainer}>
-              {tweets.map((tweet) => (
+              {tweets.results.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}

@@ -103,8 +103,9 @@
     margin-right: 10px;
 }
 
-.Following_Follower {
+.Following_Follower:hover {
     cursor: pointer;
+    scale: 1.2;
 }
 
 .myusername{
