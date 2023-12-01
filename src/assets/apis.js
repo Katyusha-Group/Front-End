@@ -63,6 +63,8 @@ export const apis = {
   shop:{
     carts: {
       addToCart: `${domain}/shop/carts/add-to-cart/`,
+      removeItem: `${domain}/shop/carts/remove-item/`,
+      updateCart: `${domain}/shop/carts/update-cart/`,
     },
   }
 };
