@@ -2,7 +2,10 @@ import React from "react";
 import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline_Profile.module.css";
 import * as style from "../../components/ModalLessons/ModalLesson.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { apis } from "../../assets/apis";
+
+// import { useInfo } from "../../contexts/InfoContext";
 import CourseTimeline from "../../components/Timeline/Timeline";
 import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
 import {
@@ -29,16 +32,14 @@ import {
   Label,
 } from "reactstrap";
 import { useTweets } from "../../hooks/Twitter/useTweets";
-const Tweets = [
-  // Add more tweets as needed
-  {
-    id: 8,
-    text: "من یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشیمن یه پرندم آرزو دارم ت .یارم باشی",
-    username: "white Jett",
-    profile: { name: "وایت جت" },
-  },
-  // Add more tweets as needed
-];
+import { useGetChartData } from "../../hooks/GetChartData.jsx";
+
+// const { info, changeInfo } = useInfo();
+
+const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+// const [Tweets, setTweets] = useState(null);
+// const [loading, setLoading] = useState(true);
+
 const x = {
   complete_course_number: "2211299_03",
   name: "ریز پردازنده و زبان اسمبلی",
@@ -94,6 +95,23 @@ let tabsList = [
 ];
 
 function Timeline({ tabsList, profileData }) {
+  const info = useGetChartData();
+  console.log("inja:", info)
+  // const us = "yazdan_mastery";
+  // useEffect(() => {
+  //   showLoading();
+  //   fetch((apis["profiles"] + `${us}` + `/calendar`), {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       // setTweets(data);
+  //       closeLoading();
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => console.error(error));
+  // }, []);
   const [activeTab, setActiveTab] = useState("Main");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -179,26 +197,16 @@ function Timeline({ tabsList, profileData }) {
               {mainData == "U" || mainData == "V" && (
                 <div
                   style={{
-                    display: mainData == "T" ? "block" : "none",
+                    display: mainData == "U" ? "block" : "none",
                   }}
                 >
                   <div
                     className={style.chart}>
                     {lessons(
-                      info,
+                      info.Chart,
                       changeInfo,
                       true,
                       null,
-                      showLoading,
-                      closeLoading,
-                      setModalData,
-                      setShowLesson
-                    )}
-                    {lessons(
-                      showCourseHover,
-                      setShowCourseHoverFunc,
-                      false,
-                      style.classNameHover,
                       showLoading,
                       closeLoading,
                       setModalData,
