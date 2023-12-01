@@ -32,6 +32,7 @@ import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./views/404.jsx";
 import InternalServerError from "./views/500.jsx";
+import NewLandingpage from "./views/NewLandingpage.jsx";
 import AdminPanel from "./views/admin/Admin.jsx"
 import Replies from "./views/TimeLine/Replies.jsx";
 function App() {
@@ -56,7 +57,10 @@ function App() {
             <ContextInfo>
               <Router.BrowserRouter>
                 <Router.Routes>
-                  <Router.Route path="/" element={<LandingPage />}></Router.Route>
+                  {/* <Router.Route
+                    path="/"
+                    element={<LandingPage />}
+                  ></Router.Route> */}
                   <Router.Route
                     path="/signup"
                     element={<SignUp />}
@@ -73,7 +77,6 @@ function App() {
                     path="/setNewPassword"
                     element={<SetNewPassword />}
                   ></Router.Route>
-
                   <Router.Route
                     path="/home/*"
                     element={
@@ -82,42 +85,75 @@ function App() {
                       </PrivatRoute>
                     }
                   ></Router.Route>
-                  <Router.Route path="/login" element={<Login />}></Router.Route>
-                  <Router.Route path="/forgetPassword" element={<ForgetPassword />}></Router.Route>
-                  <Router.Route path="/aboutUs" element={<AboutUs />}></Router.Route>
-                  <Router.Route path="/landingPage" element={<LandingPage />}></Router.Route>
+                  <Router.Route
+                    path="/login"
+                    element={<Login />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/forgetPassword"
+                    element={<ForgetPassword />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/aboutUs"
+                    element={<AboutUs />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/landingPage"
+                    element={<LandingPage />}
+                  ></Router.Route>
                   <Router.Route path="/replies/:id" element={<Replies></Replies>}></Router.Route>
-                  <Router.Route path="/CoursesPanel" element={
-                    <PrivatRoute>
-                      <CoursesPanel />
-                    </PrivatRoute>
-                  }></Router.Route>
-                  <Router.Route path="/shopping" element={
-                    <PrivatRoute>
-                      <Shopping />
-                    </PrivatRoute>
-                  }></Router.Route>
-                  <Router.Route path="/user" element={
-                    <PrivatRoute>
-                      <UserProfile />
-                    </PrivatRoute>
-                  }></Router.Route>
-                  <Router.Route path="/order" element={
-                    <PrivatRoute>
-                      <News />
-                    </PrivatRoute>
-                  }></Router.Route>
-                  <Router.Route path="/notification" element={
-                    <PrivatRoute>
-                      <Notification />
-                    </PrivatRoute>
-                  }></Router.Route>
-                  <Router.Route path="/profile/:id" element={
-                    <Profile />
-                  }></Router.Route>
-                  <Router.Route path="/timeline" element={
-                    <Timelinepage />
-                  }></Router.Route>
+                  <Router.Route
+                    path="/CoursesPanel"
+                    element={
+                      <PrivatRoute>
+                        <CoursesPanel />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/shopping"
+                    element={
+                      <PrivatRoute>
+                        <Shopping />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/user"
+                    element={
+                      <PrivatRoute>
+                        <UserProfile />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/order"
+                    element={
+                      <PrivatRoute>
+                        <News />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/notification"
+                    element={
+                      <PrivatRoute>
+                        <Notification />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/profile/:id"
+                    element={<Profile />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/timeline"
+                    element={<Timelinepage />}
+                  ></Router.Route>
+                  <Router.Route
+                    path="/"
+                    element={<NewLandingpage />}
+                  ></Router.Route>
                 <Router.Route path="/admin" element={<AdminPanel/>}></Router.Route>
                   <Router.Route
                     path="/500"
@@ -127,6 +163,7 @@ function App() {
                     path="*"
                     element={<NotFound />}
                   ></Router.Route>
+
                 </Router.Routes>
               </Router.BrowserRouter>
             </ContextInfo>

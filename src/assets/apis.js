@@ -1,4 +1,4 @@
-export const domain = "http://84.32.10.112";
+export const domain = "http://37.32.13.62";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
@@ -64,6 +64,8 @@ export const apis = {
   shop:{
     carts: {
       addToCart: `${domain}/shop/carts/add-to-cart/`,
+      removeItem: `${domain}/shop/carts/remove-item/`,
+      updateCart: `${domain}/shop/carts/update-cart/`,
     },
   }
 };

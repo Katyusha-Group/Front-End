@@ -34,13 +34,13 @@ export default function Profile() {
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
+        <div><Timeline tabsList={tabs}/></div>
+      </div>
+      <div className={styles.leftpart}>
         <ProfileHeader username={username} profile={profile}/>
         {/* <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
         </div> */}
-      </div>
-      <div className={styles.leftpart}>
-        <div><Timeline tabsList={tabs}/></div>
       </div>
     </div>
   );

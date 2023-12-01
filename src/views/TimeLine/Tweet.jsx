@@ -18,9 +18,15 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [like, setLike] = useState(false);
   return (
     <>
-      <Card className={styles.tweet} >
-        <Dropdown isOpen={dropdownOpen} className={styles.moreInfo} toggle={toggle} direction={direction} size="sm">
-          <DropdownToggle style={{background:"initial",}} caret>
+      <Card className={styles.tweet}>
+        <Dropdown
+          isOpen={dropdownOpen}
+          className={styles.moreInfo}
+          toggle={toggle}
+          direction={direction}
+          size="sm"
+        >
+          <DropdownToggle style={{ background: "initial" }} caret>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -42,11 +48,28 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </svg>
           </DropdownToggle>
           <DropdownMenu {...args}>
-            <DropdownItem className={styles.dropDown} onClick={()=>{
-              setTweets(x=>{
-                return x.filter(y=>y.id!==tweet.id)
-              })
-              deleteTweet(tweet.id)}}>حذف</DropdownItem>
+          <DropdownItem
+              className={styles.dropDown}
+              onClick={() => {
+                setTweets((x) => {
+                  return x.filter((y) => y.id !== tweet.id);
+                });
+                deleteTweet(tweet.id);
+              }}
+            >
+              بلاک
+            </DropdownItem>
+            <DropdownItem
+              className={styles.dropDown}
+              onClick={() => {
+                setTweets((x) => {
+                  return x.filter((y) => y.id !== tweet.id);
+                });
+                deleteTweet(tweet.id);
+              }}
+            >
+              حذف
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <div className={styles.header}>

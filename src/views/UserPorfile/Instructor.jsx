@@ -6,7 +6,21 @@ function Instructor(
     ) {
     return (
         <div className={styles.eachcard}>
-            <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" />
+            {/* <div className="author">
+                <div className="block block-one" />
+                <div className="block block-two" />
+                <div className="block block-three" />
+                <div className="block block-four" />
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <img
+                    alt="..."
+                    className="avatar"
+                    src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
+                />
+                </a>
+            </div> */}
+            {/* <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
+            <img className={styles.eachProfile} src={User.image} alt="" />
             <p className={styles.p_name}>{User.username}</p>
             <button 
                 className={User.is_followed ? styles.delButton : styles.delButton}
