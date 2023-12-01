@@ -8,8 +8,9 @@ import {
 
 export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [profile, setProfile] = useState(null);
+  const [profileData, setprofileData] = useState(null);
   const [loading, setLoading] = useState(true);
+  // console.log("id is: " , username);
   useEffect(() => {
     showLoading();
     
@@ -19,7 +20,7 @@ export const GETProfileData = (username) => {
       .then(response => {
         if (response.status === 200) {
           return response.json().then((data) => {
-            setProfile(data);
+            setprofileData(data);
             closeLoading();
             setLoading(false);
           });
@@ -60,5 +61,5 @@ export const GETProfileData = (username) => {
         });
       });
   }, [username, token]);
-  return { profile, setProfile, loading };
+  return { profileData, setprofileData, loading };
 };
