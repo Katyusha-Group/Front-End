@@ -6,7 +6,6 @@ import { createContext, useState, useEffect } from "react";
 import { apis } from "../../assets/apis";
 const TeacherTimeline = (props) => {
   let teacher_id = props.show;
-  console.log(teacher_id)
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);

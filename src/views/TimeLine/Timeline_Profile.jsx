@@ -5,6 +5,12 @@ import * as style from "../../components/ModalLessons/ModalLesson.module.css";
 import { useState } from "react";
 import CourseTimeline from "../../components/Timeline/Timeline";
 import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
+import {
+  showLoading,
+  closeLoading,
+} from "../../components/LoadingAlert/LoadingAlert.jsx";
+// src\views\UserPage\Lessons.jsx
+import { lessons } from "../UserPage/Lessons";
 import { GETTweets } from "../../hooks/GETTweets";
 import {
   dayOfWeek,
@@ -99,10 +105,8 @@ function Timeline({ tabsList, profileData }) {
       ["media", "برای شما"],
     ];
   }
-  console.log(profileData)
-  const [mainData] = (profileData.username[0]);
+  const [mainData] = (profileData.profile_type);
   const username = profileData.username.split("_")[1];
-  console.log("profile: ", username);
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   // console.log("Tweets are: " , tweets);
   const [open, setOpen] = useState(false);
@@ -133,14 +137,37 @@ function Timeline({ tabsList, profileData }) {
         )}
         <div className={styles.content}>
           {activeTab === "Main" && (
-            <div className={styles.tweetsContainer}>
-              {mainData == "C" && (<div
-                style={{
-                  display: mainData == "C" ? "block" : "none",
-                }}
-              >
-                <CourseTimeline show={username} />
-              </div>)}
+            <div className={styles.mainContainer}>
+              {mainData == "C" && (
+                <div
+                  style={{
+                    display: mainData == "C" ? "block" : "none",
+                  }}
+                >
+                  {/* <Row>
+                    <Col md="12"
+                      className={`${style.profImg} p-0 mt-1`}>
+                      <img
+                        className={style.ModalProfessorImage}
+                        src={profileData.image}
+                        alt="professorImage"
+                      />
+                      <p
+                        style={{
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          fontSize: "20px",
+                          color: "#c7c1c1",
+                          paddingRight: "30px",
+                        }}
+                      >
+                        {x.name} ({x.group_number})
+                      </p>
+                    </Col>
+                  </Row> */}
+                  <CourseTimeline show={username} />
+                </div>
+              )}
               {mainData == "T" && (
                 <div
                   style={{
@@ -148,6 +175,37 @@ function Timeline({ tabsList, profileData }) {
                   }}
                 >
                   <TeacherTimeline show={username} />
+                </div>)}
+              {mainData == "U" || mainData == "V" && (
+                <div
+                  style={{
+                    display: mainData == "T" ? "block" : "none",
+                  }}
+                >
+                  <div
+                    className={style.chart}>
+                    {lessons(
+                      info,
+                      changeInfo,
+                      true,
+                      null,
+                      showLoading,
+                      closeLoading,
+                      setModalData,
+                      setShowLesson
+                    )}
+                    {lessons(
+                      showCourseHover,
+                      setShowCourseHoverFunc,
+                      false,
+                      style.classNameHover,
+                      showLoading,
+                      closeLoading,
+                      setModalData,
+                      setShowLesson
+                    )}
+                  </div>
+                  {/* <TeacherTimeline show={username} /> */}
                 </div>)}
             </div>
           )}
