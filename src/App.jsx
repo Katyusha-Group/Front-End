@@ -33,7 +33,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./views/404.jsx";
 import InternalServerError from "./views/500.jsx";
 import NewLandingpage from "./views/NewLandingpage.jsx";
-
+import AdminPanel from "./views/admin/Admin.jsx"
+import Replies from "./views/TimeLine/Replies.jsx";
 function App() {
   document.documentElement.dir = "rtl";
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -100,6 +101,7 @@ function App() {
                     path="/landingPage"
                     element={<LandingPage />}
                   ></Router.Route>
+                  <Router.Route path="/replies/:id" element={<Replies></Replies>}></Router.Route>
                   <Router.Route
                     path="/CoursesPanel"
                     element={
@@ -152,6 +154,7 @@ function App() {
                     path="/"
                     element={<NewLandingpage />}
                   ></Router.Route>
+                <Router.Route path="/admin" element={<AdminPanel/>}></Router.Route>
                   <Router.Route
                     path="/500"
                     element={<InternalServerError />}

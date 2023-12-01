@@ -123,7 +123,7 @@
 }
 .SecondType {
   display: flex;
-  height: 100vh;
+  height: 70vh;
   flex-direction: row-reverse;
   justify-content: space-around;
   align-items: center;
