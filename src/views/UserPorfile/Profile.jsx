@@ -39,7 +39,7 @@ export default function Profile() {
         <div><Timeline tabsList={tabs} profileData={profileData}/></div>
       </div>
       <div className={styles.leftpart}>
-        <ProfileHeader username={username} profile={profile}/>
+        <ProfileHeader username={username} profile={profileData}/>
         {/* <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
         </div> */}
