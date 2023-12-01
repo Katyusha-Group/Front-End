@@ -12,9 +12,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
-.tweet:hover{
-  cursor: pointer;
-}
+
 
 .header {
   display: flex;
@@ -115,6 +113,10 @@
 .dropDown{
   direction: rtl;
   text-align: right;
+}
+
+.content:hover{
+  cursor: pointer;
 }
 
 /* Add more styles as needed */
