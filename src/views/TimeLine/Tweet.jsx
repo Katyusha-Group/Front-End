@@ -11,11 +11,15 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
+import Replies from "../../components/Timeline/ReplyModal";
+import { Report } from "../../hooks/Twitter/Report";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [open, setOpen] = useState(false);
+  const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(false);
+  const [link, setLink] = useState("");
   return (
     <>
       <Card className={styles.tweet}>
@@ -48,13 +52,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </svg>
           </DropdownToggle>
           <DropdownMenu {...args}>
-          <DropdownItem
+            <DropdownItem
+              disabled={tweet.reported_by_me}
               className={styles.dropDown}
               onClick={() => {
-                setTweets((x) => {
-                  return x.filter((y) => y.id !== tweet.id);
-                });
-                deleteTweet(tweet.id);
+
+                Report(tweet.id, setTweets);
               }}
             >
               بلاک
@@ -79,7 +82,13 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
         {/* <div className={styles.reply}>
         سلام
       </div> */}
-        <div className={styles.content}>
+        <div
+          className={styles.content}
+          onClick={() => {
+            setLink(tweet.children_link);
+            setOpenReplies(true);
+          }}
+        >
           <div className={styles.text}>{tweet.content}</div>
         </div>
         <div>
@@ -122,6 +131,13 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
         data={tweet}
         setTweets={setTweets}
       ></CommentModal>
+      <Replies
+        open={openReplies}
+        setOpen={() => {
+          setOpenReplies((x) => !x);
+        }}
+        link={link}
+      />
     </>
   );
 }

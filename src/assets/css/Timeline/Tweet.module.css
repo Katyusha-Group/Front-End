@@ -13,9 +13,7 @@
   position: relative;
   width: 90%;
 }
-.tweet:hover{
-  cursor: pointer;
-}
+
 
 .header {
   display: flex;
@@ -116,6 +114,10 @@
 .dropDown{
   direction: rtl;
   text-align: right;
+}
+
+.content:hover{
+  cursor: pointer;
 }
 
 /* Add more styles as needed */
