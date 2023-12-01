@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../assets/css/landing/mainpart.module.css";
-import image from "../../assets/img/Dark_olive1_cropped.jpg";
+import image from "../../assets/img/imgdarkolive.jpg";
 
 const PlanningInLanding = () => {
   return (
