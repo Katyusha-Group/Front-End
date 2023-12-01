@@ -56,6 +56,10 @@ export const apis = {
     tweets: `${domain}/twittes/`,
   }
   ,
+  reports: {
+    tweets: `${domain}/report-twitte/`
+  },
+  
   tweetChart:{
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,

@@ -22,6 +22,7 @@ export default function PeopleTable() {
     // <div>PeopleTable</div>
     <>
       <div className={styles.Users_List}>
+      <Input className={styles.Search}/>
         <div className={styles.tabs}>
           {tabsList.map((entry, index) => (
             <button
@@ -33,7 +34,7 @@ export default function PeopleTable() {
             </button>
           ))}
         </div>
-        <Input/>
+        
         {activeTab === "Users" && (
           <div className={styles.Users_Container}>
             {/* {tweets.map((tweet) => (
@@ -55,7 +56,7 @@ export default function PeopleTable() {
         )}
         {activeTab === "Posts" && (
           <div className={styles.Users_Container}>
-            {tweets.map((tweet) => (
+            {tweets.results.map((tweet) => (
               <Tweet
                 // className={styles.Tweets_Admin}
                 key={tweet.id}

@@ -29,7 +29,7 @@
   border-bottom: 3px solid var(--purple) ;
   background-color: initial;
   color: white;
-  margin: 20px 10px;
+  margin: 0px 10px;
 }
 
 .tab {
@@ -71,4 +71,8 @@
 
 /* .Users_Container .tweet {
   background-color: red;
+} */
+
+/* .Search {
+  margin: 20px;
 } */
