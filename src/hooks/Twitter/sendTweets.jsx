@@ -29,11 +29,13 @@ export const useSendTweets = async (
         return [response.data, ...x];
       });
     } else {
-      setData((listOfData) =>
-        listOfData.map((x) =>
+      setData((listOfData) => {
+        
+        let temp = listOfData.results.map((x) =>
           x.id == parent ? { ...x, replies_count: x.replies_count + 1 } : x
-        )
-      );
+        );
+        return { ...listOfData, results: temp };
+      });
     }
   } catch (error) {
     console.error(error);
