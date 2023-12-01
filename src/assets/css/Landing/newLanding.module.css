@@ -10,7 +10,7 @@
   }
   
   .page {
-    height: 100vh;
-    scroll-snap-align: start;
+    height: 80vh;
+    /* scroll-snap-align: start; */
   }
   

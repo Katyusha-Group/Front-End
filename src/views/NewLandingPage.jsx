@@ -8,84 +8,79 @@ import ThirdLanding from "./Landing/ThirdLanding";
 import Fourthlanding from "./Landing/Fourthlanding";
 import FivethLanding from "./Landing/FivethLanding";
 
-const cardVariants  = {
+const cardVariants = {
   offscreen: {
-    opacity:0,
+    opacity: 0,
   },
   onscreen: {
-    opacity:1,
+    opacity: 1,
     y: 50,
     rotate: 0,
     transition: {
       type: "spring",
       bounce: 0,
-      duration: 0.8
-    }
-  }
+      duration: 2,
+      delay: 0.5,
+    },
+  },
 };
 
 const NewLandingpage = () => {
-  const { scrollY } = useScroll();
   const controls = useAnimation();
-
-  useEffect(() => {
-    controls.start({
-      y: scrollY,
-      transition: { duration: 0.5 },
-    });
-  }, [controls, scrollY]);
 
   return (
     <div className={styles.scrollContainer}>
-      <motion.div
-        animate={controls}
-        className={styles.page}
-
-      >
+      <motion.div  className={styles.page}>
         <Mainpart />
       </motion.div>
 
       <motion.div
-        animate={controls}
         className={styles.page}
         variants={cardVariants}
         initial="offscreen"
         whileInView="onscreen"
-
-
+        viewport={{ once: true, amount: 0.1 }}
       >
         <PlanningInLanding />
       </motion.div>
 
       <motion.div
         variants={cardVariants}
-        animate={controls}
         className={styles.page}
         initial="offscreen"
         whileInView="onscreen"
-
-
+        viewport={{ once: true, amount: 0.1 }}
       >
         <TimeLinelanding />
       </motion.div>
 
       <motion.div
-        animate={controls}
         className={styles.page}
         variants={cardVariants}
         initial="offscreen"
         whileInView="onscreen"
-
-
+        viewport={{ once: true, amount: 0.1 }}
       >
         <ThirdLanding />
       </motion.div>
 
-      <motion.div animate={controls} className={styles.page}>
+      <motion.div
+        className={styles.page}
+        variants={cardVariants}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <Fourthlanding />
       </motion.div>
 
-      <motion.div animate={controls} className={styles.page}>
+      <motion.div
+        className={styles.page}
+        variants={cardVariants}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <FivethLanding />
       </motion.div>
     </div>
