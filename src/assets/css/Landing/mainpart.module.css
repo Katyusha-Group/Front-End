@@ -1,5 +1,5 @@
 .bg {
-  width: 72%;
+  width: 90%;
   height: 80vh;
   margin: 10vh auto;
   background-color: #27293d;
@@ -70,25 +70,26 @@
   display: flex;
 }
 .mainimg {
-  margin: auto;
-  width: 70%;
-  height: 70%;
+  margin: 5vh auto;
+  width: 80%;
+  height: 80%;
   background-image: url("../../img/bgpattern.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
 .mainimg2 {
-  margin: 20vh auto;
-  width: 90%;
-  height: 90%;
+  margin: 0px auto;
+  width: 80%;
+  height: 80%;
   background-image: url("../../img/bgpattern3.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
 .image1 {
   border-radius: 40%;
-  width: 70%;
-  margin-left: 30px;
+  width: 60%;
+  /* margin-left: 10px; */
+  margin-right: 4vw;
   border-right: 3px solid #000;
   border-bottom: 5px solid #000;
   border-left: 3px solid #000;
@@ -97,17 +98,37 @@
 }
 .FirstType {
   display: flex;
+  height: 100vh;
+  align-items: center;
   flex-direction: row;
-  margin: 10vh auto;
+  margin: auto;
   justify-content: space-around;
   gap: 20px;
 }
 .FirstTypeText{
-  margin: 0 auto;
-  height: 100vh;
-  width: 100vw;
+  margin: 10vh auto;
+  width: auto;
   justify-content: center;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+}
+.SecondType {
+  display: flex;
+  height: 100vh;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 10vw;
+  gap: 40px;
+}
+.SecondTypeText{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  
+}
+.timelineImage{
+  width: 50vw;
 }
