@@ -56,10 +56,10 @@ function App() {
             <ContextInfo>
               <Router.BrowserRouter>
                 <Router.Routes>
-                  <Router.Route
+                  {/* <Router.Route
                     path="/"
                     element={<LandingPage />}
-                  ></Router.Route>
+                  ></Router.Route> */}
                   <Router.Route
                     path="/signup"
                     element={<SignUp />}
@@ -149,7 +149,7 @@ function App() {
                     element={<Timelinepage />}
                   ></Router.Route>
                   <Router.Route
-                    path="/newLanding"
+                    path="/"
                     element={<NewLandingpage />}
                   ></Router.Route>
                   <Router.Route
