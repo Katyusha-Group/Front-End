@@ -19,7 +19,8 @@ function Instructor(
                 />
                 </a>
             </div> */}
-            <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" />
+            {/* <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
+            <img className={styles.eachProfile} src={User.image} alt="" />
             <p className={styles.p_name}>{User.username}</p>
             <button 
                 className={User.is_followed ? styles.delButton : styles.delButton}
