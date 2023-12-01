@@ -277,7 +277,7 @@ const ModalLessons = (props) => {
                       display: timelineData == "data2" ? "block" : "none",
                     }}
                   >
-                    <TeacherTimeline show={props} />
+                    <TeacherTimeline show={props.show.data.teachers[0].id} />
                   </div>
                 </div>
               </CardBody>

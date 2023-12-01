@@ -99,6 +99,7 @@ function Timeline({ tabsList, profileData }) {
       ["media", "برای شما"],
     ];
   }
+  console.log(profileData)
   const [mainData] = (profileData.username[0]);
   const username = profileData.username.split("_")[1];
   console.log("profile: ", username);
@@ -133,21 +134,21 @@ function Timeline({ tabsList, profileData }) {
         <div className={styles.content}>
           {activeTab === "Main" && (
             <div className={styles.tweetsContainer}>
-              {/* Render media content here */}
-              <div
+              {mainData == "C" && (<div
                 style={{
                   display: mainData == "C" ? "block" : "none",
                 }}
               >
                 <CourseTimeline show={username} />
-              </div>
-              <div
-                style={{
-                  display: mainData == "T" ? "block" : "none",
-                }}
-              >
-                <TeacherTimeline show={username} />
-              </div>
+              </div>)}
+              {mainData == "T" && (
+                <div
+                  style={{
+                    display: mainData == "T" ? "block" : "none",
+                  }}
+                >
+                  <TeacherTimeline show={username} />
+                </div>)}
             </div>
           )}
           {activeTab === "Likes" && (
