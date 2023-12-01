@@ -103,13 +103,6 @@ const ModalShopping = (props) => {
       notificationAlertRef.current.notificationAlert(options);
   };
   function addItemShop(num) {
-    console.log("🚀 ~ file: ModalShopping.jsx:106 ~ addItemShop ~ num:", {
-      id: shopId.id,
-      complete_course_number: num,
-      contain_telegram: telegram,
-      contain_sms: sms,
-      contain_email: email,
-    },)
 
     axios(apis["shop"]["carts"]["addToCart"], {
       method: "POST",
