@@ -6,6 +6,8 @@ import * as styles from "../../assets/css/admin/People_Table.module.css";
 import User from './User';
 import { useTweets } from "../../hooks/Twitter/useTweets";
 import Tweet from '../../views/TimeLine/Tweet';
+import  Searchbar from "../../views/Searchbar.jsx"
+import { useAllProfiles } from '../../hooks/useSearchprofile.jsx';
 let tabsList = [
   ["Users", "کاربرها"],
   ["Posts", "پست ها"],
@@ -13,6 +15,7 @@ let tabsList = [
 
 export default function PeopleTable() {
   const [activeTab, setActiveTab] = useState("Users");
+  const { filteredProfiles, loading2 } = useAllProfiles("");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -21,6 +24,7 @@ export default function PeopleTable() {
   return (
     // <div>PeopleTable</div>
     <>
+    {/* <Searchbar/> */}
       <div className={styles.Users_List}>
       <Input className={styles.Search}/>
         <div className={styles.tabs}>
@@ -37,12 +41,11 @@ export default function PeopleTable() {
         
         {activeTab === "Users" && (
           <div className={styles.Users_Container}>
-            {/* {tweets.map((tweet) => (
-              <Tweet key={tweet.id}
-              tweet={tweet}
-              setOpenComment={setOpen}
-              setTweets={setTweets}/>
-            ))} */}
+            {filteredProfiles.map((prof) => (
+              <User key={prof.id}
+              User_data={prof}/>
+            ))}
+            {/* <User/>
             <User/>
             <User/>
             <User/>
@@ -50,8 +53,7 @@ export default function PeopleTable() {
             <User/>
             <User/>
             <User/>
-            <User/>
-            <User/>
+            <User/> */}
           </div>
         )}
         {activeTab === "Posts" && (
