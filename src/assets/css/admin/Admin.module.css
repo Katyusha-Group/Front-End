@@ -21,7 +21,7 @@
 .adminBox{
     height: 53vh;
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     flex-grow: 1;
 }
 

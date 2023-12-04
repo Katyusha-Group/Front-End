@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../assets/css/Admin/Admin_Searchbar.module.css";
-import Searchfield from "../../views/Searchfield"
+import Admin_SearchField from "../../components/Admin/Admin_SearchField"
 import UserSearchResponce from "../../views/UserSearchResponce";
 import { Card } from "reactstrap";
 import { useAllProfiles } from "../../hooks/useSearchprofile";
@@ -21,7 +21,7 @@ const Admin_Searchbar = ({IsUser}) => {
   return (
     <>
     {/* <Card className={styles.main}> */}
-      <Searchfield setSearchQuery={setSearchQuery} />
+      <Admin_SearchField setSearchQuery={setSearchQuery} />
 
       <div className={styles.searchBox}>
         {loading ? (

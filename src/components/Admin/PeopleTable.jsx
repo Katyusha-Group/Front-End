@@ -16,7 +16,7 @@ let tabsList = [
 export default function PeopleTable() {
   const [activeTab, setActiveTab] = useState("Users");
   const { filteredProfiles, loading2 } = useAllProfiles("");
-  // let IsUser = true;
+  
   const [IsUser, setIsUser] = useState(true);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -68,8 +68,8 @@ export default function PeopleTable() {
               />
             ))}
           </div>
-        )} */}
-        <Admin_Searchbar IsUser={IsUser}/>
+        )}*/}
+        <Admin_Searchbar IsUser={IsUser}/> 
       </div>
     </>
   )
