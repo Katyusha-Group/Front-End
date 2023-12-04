@@ -16,8 +16,9 @@ const Admin_Searchbar = ({IsUser}) => {
 
   const { filteredProfiles, loading } = useAllProfiles(searchQuery);
   const { filteredTweets, loading2 } = useSearchTweet(searchQuery);
+  console.log("Filtered Tweets are: ", filteredTweets);
   useEffect(() => {}, [searchQuery]);
-  console.log("Filtered Profiles: ", filteredProfiles);
+  // console.log("Filtered Profiles: ", filteredProfiles);
   return (
     <>
     {/* <Card className={styles.main}> */}
@@ -33,23 +34,25 @@ const Admin_Searchbar = ({IsUser}) => {
         //   filteredProfiles.map((item, index) => {
         //     return <UserSearchResponce res={item} key={index} />;
         //   })
+            filteredProfiles.length != 0 &&
             filteredProfiles.map((prof) => (
                 <User key={prof.id}
                 User_data={prof}/>
             ))
         ):
         (
-            // filteredTweets.results.map((tweet) => (
-            //   <Tweet
-            //     // className={styles.Tweets_Admin}
-            //     key={tweet.id}
-            //     tweet={tweet}
-            //     setOpenComment={setOpen}
-            //     // setTweets={setTweets}
-            //     // style={{ color: 'red', fontSize: '16px' }}
-            //   />
-            // ))
-            <div></div>
+            filteredTweets.length != 0 &&
+            filteredTweets.results.map((tweet) => (
+              <Tweet
+                // className={styles.Tweets_Admin}
+                key={tweet.id}
+                tweet={tweet}
+                setOpenComment={setOpen}
+                // setTweets={setTweets}
+                // style={{ color: 'red', fontSize: '16px' }}
+              />
+            ))
+            // <div></div>
         )}
       </div>
     {/* </Card> */}
