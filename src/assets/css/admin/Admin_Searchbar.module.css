@@ -19,7 +19,7 @@
     /* margin-top: 3vh; */
     width: 100%;
     color: white;
-    /* margin-bottom: 2vh; */
+    margin-bottom: 2vh;
 }
 .field{
     display: flex;
@@ -40,4 +40,9 @@
 .searchBox{
     height: inherit;
     overflow: auto;
+    padding: 10px 20px;
 }
+
+.Nothing_Found {
+    padding-top: 20%;
+  }

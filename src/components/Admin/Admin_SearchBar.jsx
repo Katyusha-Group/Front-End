@@ -34,15 +34,37 @@ const Admin_Searchbar = ({IsUser}) => {
         //   filteredProfiles.map((item, index) => {
         //     return <UserSearchResponce res={item} key={index} />;
         //   })
-            filteredProfiles.length != 0 &&
-            filteredProfiles.map((prof) => (
-                <User key={prof.id}
-                User_data={prof}/>
-            ))
+            // filteredProfiles.length != 0 &&
+            // filteredProfiles.map((prof) => (
+            //     <User key={prof.id}
+            //     User_data={prof}/>
+            // ))
+            filteredProfiles.length != 0 ?
+            (
+              filteredProfiles.map((prof) => (
+              <User key={prof.id}
+              User_data={prof}/>
+              ))
+            ):
+            (
+              <p className={styles.Nothing_Found}>کاربری یافت نشد</p>
+            )
         ):
         (
-            filteredTweets.length != 0 &&
-            filteredTweets.results.map((tweet) => (
+            // filteredTweets.length != 0 &&
+            // filteredTweets.results.map((tweet) => (
+            //   <Tweet
+            //     // className={styles.Tweets_Admin}
+            //     key={tweet.id}
+            //     tweet={tweet}
+            //     setOpenComment={setOpen}
+            //     // setTweets={setTweets}
+            //     // style={{ color: 'red', fontSize: '16px' }}
+            //   />
+            // ))
+            // <div></div>
+            filteredTweets.length != 0 ?
+            (filteredTweets.results.map((tweet) => (
               <Tweet
                 // className={styles.Tweets_Admin}
                 key={tweet.id}
@@ -51,8 +73,10 @@ const Admin_Searchbar = ({IsUser}) => {
                 // setTweets={setTweets}
                 // style={{ color: 'red', fontSize: '16px' }}
               />
-            ))
-            // <div></div>
+            ))):
+            (
+              <p className={styles.Nothing_Found}>پستی یافت نشد</p>
+            )
         )}
       </div>
     {/* </Card> */}
