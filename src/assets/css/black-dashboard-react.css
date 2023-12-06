@@ -13361,6 +13361,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .btn.dropdown-toggle:after,
 .navbar .navbar-nav>a.btn.dropdown-toggle:after {
   margin-left: 30px !important;
+  display: none;
 }
 
 .btn-primary {
