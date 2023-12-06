@@ -264,7 +264,7 @@ function Timeline({ tabsList, profileData }) {
                   }}
                 >
                   <div
-                    className={style.chart}>
+                    className={styles.chart}>
                     {lessons(
                       info,
                       changeInfo,
