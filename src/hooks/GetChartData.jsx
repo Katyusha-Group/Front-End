@@ -16,7 +16,7 @@ export const useGetChartData = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                setChart({ courseChoosed: data.Chart });
+                setChart(data);
                 closeLoading();
                 console.log(data.Chart);
                 setLoading(false);
