@@ -1,0 +1,143 @@
+.bg {
+  width: 90%;
+  height: 80vh;
+  margin: 10vh auto;
+  background-color: #27293d;
+  border-radius: 2px;
+  box-shadow: 1px 8px 8px 1px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: row;
+}
+.main {
+  padding-right: 10vh;
+  padding-top: 10vh;
+  width: 50%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  align-items: center;
+  margin-top: 40px;
+}
+.buttons :hover{
+  scale: 1.1;
+  color: white;
+}
+.registerButton {
+  background-color: #27293d;
+  background-image: url("../../img/LandingButton.svg");
+  background-repeat: no-repeat;
+  width: 230px;
+  height: 90px;
+  font-weight: 200;
+  font-size: large;
+  outline: none;
+  border: none;
+  color: #dcbaff;
+}
+
+.signinBut {
+  color: #8d3cde;
+  outline: none;
+  border: none;
+  background-color: #27293d;
+  padding-left: 5vw;
+}
+
+.MainButtomPart {
+  margin-top: 80px;
+  text-align: right;
+  margin-right: 20px;
+}
+.header {
+  margin-right: 50px;
+}
+.callUs {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+.email {
+  /* color: #fff; */
+  text-align: right;
+  text-transform: uppercase;
+  stroke: black;
+  stroke-opacity: 100%;
+  width: auto;
+  margin-right: 10px;
+  stroke-linejoin: miter;
+}
+.image {
+  position: relative;
+  width: 50%;
+  display: flex;
+}
+.mainimg {
+  margin: 5vh auto;
+  width: 80%;
+  height: 80%;
+  background-image: url("../../img/bgpattern.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mainimg2 {
+  margin: 0px auto;
+  width: 80%;
+  height: 80%;
+  background-image: url("../../img/bgpattern3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.image1 {
+  border-radius: 40%;
+  width: 60%;
+  /* margin-left: 10px; */
+  margin-right: 4vw;
+  border-right: 3px solid #000;
+  border-bottom: 5px solid #000;
+  border-left: 3px solid #000;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px);
+}
+.FirstType {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  justify-content: space-around;
+  gap: 20px;
+}
+.FirstTypeText{
+  margin: 10vh auto;
+  width: auto;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+.SecondType {
+  display: flex;
+  height: 70vh;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 10vw;
+  gap: 40px;
+}
+.SecondTypeText{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  
+}
+.timelineImage{
+  width: 50vw;
+}

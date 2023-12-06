@@ -1,4 +1,4 @@
-export const domain = "http://37.32.13.62";
+export const domain = "http://84.32.10.112";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
@@ -11,7 +11,7 @@ export const apis = {
     my_courses: `${domain}/courses/my_courses/`,
   },
   courseCartOrderInfo: `${domain}/course-cart-order-info/`,
-  getPrice: `${domain}/get-prices/`,
+  getPrice: `${domain}/shop/get-prices/`,
   coursegroups: `${domain}/coursegroups/`,
   accounts: {
     activationConfirm: `${domain}/accounts/activation-confirm/`,
@@ -25,10 +25,10 @@ export const apis = {
     },
     wallet: {
       seeWallet: `${domain}/accounts/wallet/see_wallet`,
-    }
+    },
   },
   departments: `${domain}/departments/`,
-  carts: `${domain}/carts/`,
+  carts: `${domain}/shop/carts/`,
   timeline: {
     teachers: `${domain}/timeline/teachers/`,
     courses: `${domain}/timeline/courses/`,
@@ -37,7 +37,7 @@ export const apis = {
     names: `${domain}/departments/names`,
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
-  orders: `${domain}/orders/`,
+  orders: `${domain}/shop/orders/`,
   notification: `${domain}/notification/`,
   profiles: {
     myprofile: `${domain}/profiles/`,
@@ -52,9 +52,27 @@ export const apis = {
     all: `${domain}/profiles/?search=`,
   },
 
-  tweets:{
+  tweets: {
     tweets: `${domain}/twittes/`,
-  }
+  },
+  reports: {
+    tweets: `${domain}/report-twitte/`,
+    manage: `${domain}/manage-reported-twittes/`
+  },
+  
+  tweetChart: {
+    tweetChart: `${domain}/twitte-charts/`,
+    lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
+    lastWeekUsers: `${domain}/twitte-charts/last-week-users/`,
+  },
+  shop: {
+    carts: {
+      addToCart: `${domain}/shop/carts/add-to-cart/`,
+      removeItem: `${domain}/shop/carts/remove-item/`,
+      updateCart: `${domain}/shop/carts/update-cart/`,
+    },
+  },
+  reportTwitte: {
+    reportTwitte: `${domain}/report-twitte/`,
+  },
 };
-
-

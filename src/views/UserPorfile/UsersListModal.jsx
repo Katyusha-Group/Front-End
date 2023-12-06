@@ -4,7 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useInfo } from "../../contexts/InfoContext";
 import Instructorall from "./Instructorall";
 import * as styles from '../../assets/css/UsersListModal.module.css';
-const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Followers, username }) => {
+import { userFollowings } from '../../hooks/userFollowings';
+import { userFollowers } from '../../hooks/userFollowers';
+const UsersListModal = ({ showModal, handleClose, IsFollowing, 
+  // Followings, Followers, 
+  username }) => {
+    const {Followings, setFollowings} = userFollowings(username);
+    const {Followers, setFollowers} = userFollowers(username);
     const [show, setShow] = React.useState(showModal);
     React.useEffect(() => {
         setShow(showModal);
@@ -30,8 +36,8 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing, Followings, Follo
             username={username} 
             IsFollowing={IsFollowing} 
             IsModal={true}
-            // Followings={Followings} 
-            // Followers={Followers}
+            Followings={Followings} 
+            Followers={Followers}
           />
         </Modal.Body>
         {/* <Modal.Footer>

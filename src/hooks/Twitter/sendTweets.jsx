@@ -25,16 +25,19 @@ export const useSendTweets = async (
   try {
     const response = await axios.request(config);
     if (parent === "") {
-      console.log(" file: sendTweets.jsx:24 ~ setData ~ x:1");
       setData((x) => {
-        return [response.data, ...x];
+        
+        let temp = [response.data, ...x.results];
+        return { ...x, results: temp}
       });
     } else {
-      setData((listOfData) =>
-        listOfData.map((x) =>
+      setData((listOfData) => {
+        
+        let temp = listOfData.results.map((x) =>
           x.id == parent ? { ...x, replies_count: x.replies_count + 1 } : x
-        )
-      );
+        );
+        return { ...listOfData, results: temp };
+      });
     }
   } catch (error) {
     console.error(error);

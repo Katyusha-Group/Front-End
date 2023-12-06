@@ -28,8 +28,7 @@ export function lessons(
   const tokenClass = JSON.parse(tokenJson);
   const token = tokenClass.token.access;
   const { info, changeInfo } = useInfo();
-  useMyClass(getapi, showLoading,closeLoading)
-
+  useMyClass(getapi, showLoading, closeLoading)
   return infoState.courseChoosed.map((lessons) => {
     return lessons.course_times.map((lesson, index) => {
       let lessonBoxId = `${lessons.complete_course_number}, ${index}`;
@@ -44,21 +43,20 @@ export function lessons(
             style={{
               top: `${defu + length * lesson.course_day}%`,
               right: `${top_defu + top_right * time}%`,
-              width: `${
-                timeStringToFloat(lesson.course_end_time) -
-                  timeStringToFloat(lesson.course_start_time) ==
+              width: `${timeStringToFloat(lesson.course_end_time) -
+                timeStringToFloat(lesson.course_start_time) ==
                 1.5
-                  ? 9.5
-                  : 13
-              }%`,
+                ? 9.5
+                : 13
+                }%`,
             }}
             onMouseOver={() =>
-              (document.getElementById(lessonBoxId + "x").style.display =
-                "block")
+            (document.getElementById(lessonBoxId + "x").style.display =
+              "block")
             }
             onMouseOut={() =>
-              (document.getElementById(lessonBoxId + "x").style.display =
-                "none")
+            (document.getElementById(lessonBoxId + "x").style.display =
+              "none")
             }
           >
             <button

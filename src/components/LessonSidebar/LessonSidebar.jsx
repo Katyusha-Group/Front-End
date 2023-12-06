@@ -241,6 +241,19 @@ function LessonSidebar(props) {
                           {"  "}
                           درباره ما
                         </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("../timeline");
+                          }}
+                        >
+                          <span className="tim-icons icon-chat-33
+
+" />
+                          {"  "}
+                           صفحه اصلی
+                        </DropdownItem>
 
                         <DropdownItem>
                           <span className="tim-icons icon-simple-remove" />
