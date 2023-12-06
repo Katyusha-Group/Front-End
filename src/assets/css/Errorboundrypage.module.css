@@ -18,7 +18,7 @@
 }
 
 
-img{
+.img{
     width: 30vw;
     border-radius: 10px;
     animation: fadeIn 5s ease-in-out; /* Use an animation to control the initial fade-in effect */
