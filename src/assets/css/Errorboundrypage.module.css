@@ -11,17 +11,14 @@
     box-shadow:9px 18px 18px 9px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(17px);
     margin: 10vh auto;
-    animation: fadeIn 2s ease-in-out; /* Use an animation to control the initial fade-in effect */
-
-   
-
+    animation: fadeIn 2s ease-in-out; 
 }
 
 
 .img{
     width: 30vw;
     border-radius: 10px;
-    animation: fadeIn 5s ease-in-out; /* Use an animation to control the initial fade-in effect */
+    animation: fadeIn 5s ease-in-out; 
 
     
 }
@@ -30,7 +27,7 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-20px); /* You can adjust this value for a slight upward motion */
+        transform: translateY(-20px); 
     }
     to {
         opacity: 1;
@@ -38,9 +35,36 @@
     }
 }
 .texts {
-    font-size: 30px;
+    font-size: 3vw;
     text-align: right;
-    white-space: pre-line; /* Preserve newlines and spaces */
-    animation: fadeIn 6s ease-in-out; /* Use an animation to control the initial fade-in effect */
+    white-space: pre-line; 
+    animation: fadeIn 6s ease-in-out; 
+  }
+  @media only screen and (max-width: 840px) {
+
+    .box{
+        flex-direction: column-reverse;
+    }
+    .img{
+        width: 300px;
+        background-color: red;
+    }
+    .texts{
+        font-size: 20px;
+    }
+  }
+ 
+  @media only screen and (max-width: 450px) {
+
+    .box{
+        flex-direction: column-reverse;
+    }
+    .img{
+        width: 200px;
+        background-color: red;
+    }
+    .texts{
+        font-size: 16px;
+    }
   }
  

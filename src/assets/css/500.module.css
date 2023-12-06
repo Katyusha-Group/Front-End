@@ -1,13 +1,15 @@
 .svg {
-  width: 30%;
+  /* width: 30%;
   height: 30%;
   margin-top: 30px;
   margin-right: 20%;
-  margin-bottom: 10px;
+  margin-bottom: 10px; */
+  width: 400px;
+  margin: auto;
 }
 .text500 {
   width: fit-content;
-  margin-top: 200px;
+  margin-top: 150px;
   margin-right: 10%;
   margin-bottom: 50px;
   font-size: 55px;
@@ -18,11 +20,24 @@
   font-size: 20px;
 }
 .main{
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .main2{
   width: 50%;
+}
+@media only screen and (max-width: 800px) {
+  .main{
+    flex-direction: column;
+  }
+  .text500{
+    margin: 10px auto;
+  }
+  .main2{
+    margin: 0 auto;
+  }
+
 }
