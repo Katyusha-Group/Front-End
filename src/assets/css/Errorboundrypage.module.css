@@ -58,13 +58,14 @@
 
     .box{
         flex-direction: column-reverse;
+        width: 350px;
     }
     .img{
-        width: 200px;
+        width: 300px;
         background-color: red;
     }
     .texts{
-        font-size: 16px;
+        font-size: 20px;
     }
   }
  
