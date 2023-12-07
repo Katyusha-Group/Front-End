@@ -6,7 +6,7 @@ import {
 } from "../components/LoadingAlert/LoadingAlert";
 export const useGetChartData = () => {
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-    const [Chart, setChart] = useState(null);
+    const [courseChoosed, setCourseChoosed] = useState(null);
     const [loading, setLoading] = useState(true);
     const username = "yazdan_mastery";
     useEffect(() => {
@@ -16,12 +16,11 @@ export const useGetChartData = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                setChart(data);
+                setCourseChoosed({ courseChoosed: data });
                 closeLoading();
-                console.log(data.Chart);
                 setLoading(false);
             })
             .catch((error) => console.error(error));
     }, []);
-    return { Chart, setChart, loading };
+    return { courseChoosed, setCourseChoosed, loading };
 };

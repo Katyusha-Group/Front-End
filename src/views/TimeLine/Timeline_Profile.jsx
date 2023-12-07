@@ -97,9 +97,8 @@ let tabsList = [
 ];
 
 function Timeline({ tabsList, profileData }) {
-  const infoy = useGetChartData();
-  const { infox, changeInfo } = useInfo();
-  const info = {
+  const { courseChoosed } = useGetChartData();
+  const infio = {
     "name": "John Doe",
     "age": 30,
     "email": "JohnDeo@gmail.com",
@@ -193,8 +192,7 @@ function Timeline({ tabsList, profileData }) {
     "shop": [],
     "loading": 0
   }
-  console.log("inja:", info)
-
+  console.log("inja:", courseChoosed)
   const [activeTab, setActiveTab] = useState("Main");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -207,7 +205,6 @@ function Timeline({ tabsList, profileData }) {
     ];
   }
   const [mainData] = (profileData.profile_type);
-  console.log(profileData)
   const username = profileData.username.split("_")[1];
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   // console.log("Tweets are: " , tweets);
@@ -266,8 +263,7 @@ function Timeline({ tabsList, profileData }) {
                   <div
                     className={styles.chart}>
                     {lessons(
-                      info,
-                      changeInfo,
+                      courseChoosed,
                       true,
                       null,
                       showLoading,
