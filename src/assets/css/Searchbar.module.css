@@ -41,3 +41,9 @@
     height: inherit;
     overflow: auto;
 }
+
+@media only screen and (max-width: 1100px) {
+    .main{
+        display: none;
+    }
+}
