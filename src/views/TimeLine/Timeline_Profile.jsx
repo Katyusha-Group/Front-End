@@ -36,11 +36,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
-// const { info, changeInfo } = useInfo();
 
-const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-// const [Tweets, setTweets] = useState(null);
-// const [loading, setLoading] = useState(true);
 
 const x = {
   complete_course_number: "2211299_03",
