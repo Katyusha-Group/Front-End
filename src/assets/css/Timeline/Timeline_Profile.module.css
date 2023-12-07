@@ -52,7 +52,7 @@
 .chart {
   background: url(../../../assets/img/WeekChart5.png);
   background-size: 100% 100%;
-  min-width: 60rem;
+  /* min-width: 100vh; */
   height: 28em;
   position: relative;
   background-repeat: no-repeat;
