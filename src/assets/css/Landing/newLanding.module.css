@@ -13,4 +13,12 @@
     height: 80vh;
     /* scroll-snap-align: start; */
   }
+
+  @media only screen and (max-width: 600px) {
+    
+    .page {
+      height: 60vh;
+      /* scroll-snap-align: start; */
+    }
+  }
   

@@ -13,7 +13,7 @@ const Mainpart = () => {
   return (
     <div className={styles.bg}>
       <div className={styles.main}>
-        <h1 className={styles.header}>کاتیوشا</h1>
+        <h1 className={styles.header1}>کاتیوشا</h1>
         <h4 className={styles.header}>
           بهترین دستیار انتخاب واحد
           <br />
@@ -24,7 +24,7 @@ const Mainpart = () => {
           <button onClick={e=>navigate("/login")} className={styles.signinBut}>ورود</button>
         </div>
         <div className={styles.MainButtomPart}>
-          <p>کاری از دانشجویان ورودی 99 دانشکده کامپیوتر</p>
+          <p className={styles.Authorsgroup}>کاری از دانشجویان ورودی 99 دانشکده کامپیوتر</p>
           <div className={styles.callUs}>
             <p>پیشنهادات و انتقادات : </p>
             <p className={styles.email}> katyushaiust@gmail.com</p>

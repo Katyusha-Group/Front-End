@@ -1,6 +1,6 @@
 .bg {
   width: 90%;
-  height: 80vh;
+  height: auto;
   margin: 10vh auto;
   background-color: #27293d;
   border-radius: 2px;
@@ -9,7 +9,7 @@
   flex-direction: row;
 }
 .main {
-  padding-right: 10vh;
+  padding-right: 5vw;
   padding-top: 10vh;
   width: 50%;
   text-align: right;
@@ -22,7 +22,8 @@
   justify-content: flex-start;
   gap: 30px;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 2vh;
+  margin-right: 2vw;
 }
 .buttons :hover{
   scale: 1.1;
@@ -32,10 +33,12 @@
   background-color: #27293d;
   background-image: url("../../img/LandingButton.svg");
   background-repeat: no-repeat;
-  width: 230px;
+  background-size: contain;
+  background-position: center;
+  width: 17vw;
   height: 90px;
   font-weight: 200;
-  font-size: large;
+  font-size: 1.4vw;
   outline: none;
   border: none;
   color: #dcbaff;
@@ -47,20 +50,29 @@
   border: none;
   background-color: #27293d;
   padding-left: 5vw;
+  font-size: 1.2vw;
 }
 
 .MainButtomPart {
-  margin-top: 80px;
+  margin-top: 3vw;
   text-align: right;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 .header {
+  margin-right: 2vw;
+  font-size: 1.8vw;
+}
+.header1 {
   margin-right: 50px;
+  font-size: 2.2vw;
 }
 .callUs {
   display: flex;
+  width: auto;
   flex-direction: row;
   margin-top: 15px;
+  font-size: 1vw;
 }
 .email {
   /* color: #fff; */
@@ -71,6 +83,7 @@
   width: auto;
   margin-right: 10px;
   stroke-linejoin: miter;
+  font-size: 1vw;
 }
 .image {
   position: relative;
@@ -84,6 +97,11 @@
   background-image: url("../../img/bgpattern.png");
   background-size: contain;
   background-repeat: no-repeat;
+  padding: 0 auto;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .mainimg2 {
   margin: 0px auto;
@@ -92,12 +110,17 @@
   background-image: url("../../img/bgpattern3.png");
   background-size: contain;
   background-repeat: no-repeat;
+ 
+}
+.Authorsgroup{
+  font-size: 1.4vw;
+  margin-top: 1vw;
 }
 .image1 {
   border-radius: 40%;
   width: 60%;
   /* margin-left: 10px; */
-  margin-right: 4vw;
+  margin:0 auto;
   border-right: 3px solid #000;
   border-bottom: 5px solid #000;
   border-left: 3px solid #000;
@@ -151,4 +174,25 @@
 }
 .timelineImage{
   width: 50vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .header{
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+  .header1{
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
+  .buttons{
+    margin: 0px;
+  }
+  .MainButtomPart{
+    margin-right: 0px;
+  }
+  .FirstType{
+    height: auto;
+  }
+  
 }
