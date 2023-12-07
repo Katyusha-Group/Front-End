@@ -200,14 +200,35 @@
     .bg{
       flex-direction: column;
       align-items: center;
-      height: 90vh;
-      margin-bottom: 10vh;
+      height: auto;
+      
+      margin-bottom: 4vh;
       margin-top: 20px;
     }
     .FirstType{
-      margin-top: 30vh;
+      margin-top: 2vh;
+    }
+    .SecondType{
+      height: auto;
     }
     .main{
       padding-top: 30px;
+    }
+    .header{
+      font-size: 8px;
+    }
+    
+    .header1{
+      font-size: 15px;
+    }
+    .registerButton{
+      width: 260px;
+      font-size: 12px;
+    }
+    .signinBut{
+      font-size: 10px;
+    }
+    .mainimg{
+      width: 80vw;
     }
 }
