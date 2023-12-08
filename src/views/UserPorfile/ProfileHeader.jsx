@@ -7,7 +7,8 @@ import UsersListModal from './UsersListModal';
 // import { userFollowings } from '../../hooks/userFollowings';
 // import { userFollowers } from '../../hooks/userFollowers';
 import { GETProfileData } from '../../hooks/GETProfileData';
-
+import { POSTFollow } from '../../hooks/POSTFollow';
+import { useNavigate } from 'react-router-dom';
 export default function ProfileHeader({profile, username, IsThisMe}) {
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false);
@@ -34,9 +35,20 @@ export default function ProfileHeader({profile, username, IsThisMe}) {
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
   // console.log("mmd", formattedDate )
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
-  console.log("Is this me in profile header: ", IsThisMe);
+  // console.log("Is this me in profile header: ", IsThisMe);
   let Button_Data = IsThisMe ? "ویرایش پروفایل" : "دنبال کردن";
-  console.log("Button Data is: ", Button_Data);
+  // console.log("Button Data is: ", Button_Data);
+  const navigate = useNavigate();
+  function Profile_Button () {
+    if (IsThisMe)
+    {
+      navigate('/user');
+    }
+    else 
+    {
+      POSTFollow(username, !profile.is_followed);
+    }
+  }
   return (
         <div className={styles.rightUpper}>
           <div className={styles.ProfileHeader_Content}>
@@ -65,7 +77,7 @@ export default function ProfileHeader({profile, username, IsThisMe}) {
                 username={username}
               />
             </div>
-            <button className={styles.followbutton}> {Button_Data}</button>
+            <button className={styles.followbutton} onClick={Profile_Button}> {Button_Data}</button>
           </div>
           
           <div className={styles.ProfileHeader_Other}>

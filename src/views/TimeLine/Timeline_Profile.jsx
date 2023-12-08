@@ -220,16 +220,6 @@ function Timeline({ tabsList, profileData }) {
           ))}
         </div>
 
-        {activeTab === "Tweets" && (
-          <div className={styles.tweetsContainer}>
-            {tweets.results.map((tweet) => (
-              <Tweet key={tweet.id}
-                tweet={tweet}
-                setOpenComment={setOpen}
-                setTweets={setTweets} />
-            ))}
-          </div>
-        )}
         <div className={styles.content}>
           {activeTab === "Main" && (
             <div className={styles.mainContainer}>
@@ -268,6 +258,16 @@ function Timeline({ tabsList, profileData }) {
                   </div>
                   {/* <TeacherTimeline show={username} /> */}
                 </div>)}
+            </div>
+          )}
+          {activeTab === "Tweets" && (
+            <div className={styles.tweetsContainer}>
+              {tweets.results.map((tweet) => (
+                <Tweet key={tweet.id}
+                  tweet={tweet}
+                  setOpenComment={setOpen}
+                  setTweets={setTweets} />
+              ))}
             </div>
           )}
           {activeTab === "Likes" && (
