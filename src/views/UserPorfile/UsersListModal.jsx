@@ -12,6 +12,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
     const {Followings, setFollowings} = userFollowings(username);
     const {Followers, setFollowers} = userFollowers(username);
     const [show, setShow] = React.useState(showModal);
+    const [buttonClicked, setbuttonClicked] = React.useState(false);
     React.useEffect(() => {
         setShow(showModal);
       }, [showModal]);
@@ -20,6 +21,10 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
         setShow(false);
         handleClose();
     };
+
+    React.useEffect (() => {
+      
+    }, [buttonClicked]);
     const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
     // console.log("Username in userlist modal is: " , username);
     return (

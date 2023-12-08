@@ -2,7 +2,7 @@ import React from 'react';
 import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
 function Instructor(
-        { User, handleButtonClick }
+        { User, handleButtonClick, setbuttonClicked }
     ) {
     return (
         <div className={styles.eachcard}>
@@ -26,6 +26,7 @@ function Instructor(
                 className={User.is_followed ? styles.delButton : styles.delButton}
                 onClick={() => {
                     POSTFollow(User.username, !User.is_followed);
+                    setbuttonClicked(prev => !prev);
                     handleButtonClick();
                 }}
             >
