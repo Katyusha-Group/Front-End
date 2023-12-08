@@ -8,7 +8,7 @@ import UsersListModal from './UsersListModal';
 // import { userFollowers } from '../../hooks/userFollowers';
 import { GETProfileData } from '../../hooks/GETProfileData';
 
-export default function ProfileHeader({profile, username}) {
+export default function ProfileHeader({profile, username, IsThisMe}) {
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false);
   // const {Followings, setFollowings} = userFollowings(username);
@@ -34,6 +34,9 @@ export default function ProfileHeader({profile, username}) {
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
   // console.log("mmd", formattedDate )
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
+  console.log("Is this me in profile header: ", IsThisMe);
+  let Button_Data = IsThisMe ? "ویرایش پروفایل" : "دنبال کردن";
+  console.log("Button Data is: ", Button_Data);
   return (
         <div className={styles.rightUpper}>
           <div className={styles.ProfileHeader_Content}>
@@ -62,7 +65,7 @@ export default function ProfileHeader({profile, username}) {
                 username={username}
               />
             </div>
-            <button className={styles.followbutton}> دنبال کردن</button>
+            <button className={styles.followbutton}> {Button_Data}</button>
           </div>
           
           <div className={styles.ProfileHeader_Other}>
