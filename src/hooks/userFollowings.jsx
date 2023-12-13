@@ -18,6 +18,7 @@ export const userFollowings = (myUsername) => {
         const getfollowings = await response.json();
         // console.log("Followings are: " + JSON.stringify(getfollowings));
         setFollowings(getfollowings);
+        // console.log("Followings Updated: ", Followings);
         closeLoading();
         setLoading(false);
       } catch (error) {
