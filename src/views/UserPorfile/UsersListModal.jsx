@@ -11,33 +11,34 @@ import { apis } from '../../assets/apis';
 const UsersListModal = ({ showModal, handleClose, IsFollowing, 
   // Followings, Followers, 
   username }) => {
-    // let {Followings, setFollowings} = userFollowings(username);
+    const [show, setShow] = React.useState(showModal);
+    let {Followings, setFollowings} = userFollowings(username, showModal);
     // let {Followers, setFollowers} = userFollowers(username);
 
 
-    const [Followings, setFollowings] = React.useState([]);
+    // const [Followings, setFollowings] = React.useState([]);
     const [Followers, setFollowers] = React.useState([]);
 
-    const [show, setShow] = React.useState(showModal);
+    
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
     React.useEffect(() => {
-        setShow(showModal);
+      setShow(showModal);
 
 
       showLoading();
       // Fetch Followings
-      fetch((apis["profiles"]["following"]).replace("//following", `/${username}/following`), {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(response => {
-        return response.json().then((data) => {
-          setFollowings(data);
-          closeLoading();
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      // fetch((apis["profiles"]["following"]).replace("//following", `/${username}/following`), {
+      //   headers: { Authorization: `Bearer ${token}` },
+      // })
+      // .then(response => {
+      //   return response.json().then((data) => {
+      //     setFollowings(data);
+      //     closeLoading();
+      //   });
+      // })
+      // .catch((error) => {
+      //   console.error(error);
+      // });
   
   
       // Fetch Followers

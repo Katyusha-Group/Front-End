@@ -4,11 +4,13 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-export const userFollowings = (myUsername) => {
+export const userFollowings = (myUsername, showModal) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [Followings, setFollowings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(showModal);
   useEffect(() => {
+    setShow(showModal);
     const fetchData = async () => {
       try {
         showLoading();
@@ -27,7 +29,7 @@ export const userFollowings = (myUsername) => {
     };
 
     fetchData();
-  }, []);
+  }, [showModal]);
   return {Followings, setFollowings};
 };
 
