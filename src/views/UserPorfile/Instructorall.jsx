@@ -5,23 +5,21 @@ import Instructor from './Instructor';
 // import { render } from '@testing-library/react';
 
 function Instructorall({ username, IsFollowing, IsModal
-    , Followings, Followers 
+    , Followings, Followers
+    , handleButtonClick
 }) {
     // const {Followings, setFollowings} = userFollowings(username);
     // const {Followers, setFollowers} = userFollowers(username);
-    const [buttonClicked, setbuttonClicked] = React.useState(false);
     const Title = IsFollowing ? "دنبال شونده"  : "دنبال کننده";
-    React.useEffect (() => {
-      console.log("Changed!");
-    }, [buttonClicked]);
+    
     // console.log("Followers in InstructorAll: " , Followers);
     // const [rerender, setRerender] = React.useState(false); // State variable to trigger rerender
     // Callback function to be triggered when the button is clicked
-    const handleButtonClick = () => {
-        // Update the state variable to trigger rerender
-        // setRerender(!rerender);
-        console.log("Button clicked!");
-    };
+    // const handleButtonClick = () => {
+    //     // Update the state variable to trigger rerender
+    //     // setRerender(!rerender);
+    //     console.log("Button clicked!");
+    // };
 
     // React.useEffect (() => {
         
@@ -30,8 +28,8 @@ function Instructorall({ username, IsFollowing, IsModal
     return (
         <div>
             {
-                IsFollowing ?   Following_Component(Followings, Title, handleButtonClick, setbuttonClicked) : 
-                                Follower_Component(Followers, Title, handleButtonClick, setbuttonClicked)
+                IsFollowing ?   Following_Component(Followings, Title, handleButtonClick) : 
+                                Follower_Component(Followers, Title, handleButtonClick)
             }
         </div>
     );
@@ -39,20 +37,20 @@ function Instructorall({ username, IsFollowing, IsModal
 
 export default Instructorall;
 
-function Following_Component (Followings, Title, handleButtonClick, setbuttonClicked) {
+function Following_Component (Followings, Title, handleButtonClick) {
     return (
         Followings && Followings.length > 0 ? 
         Followings.map ( (entry, index) => (
-            <Instructor key={index} User={entry} handleButtonClick={handleButtonClick} setbuttonClicked={setbuttonClicked}/>
+            <Instructor key={index} User={entry} handleButtonClick={handleButtonClick}/>
         )) :
         <p>هیج {Title} ای یافت نشد</p>
     )
 }
-function Follower_Component (Followers, Title, handleButtonClick, setbuttonClicked) {
+function Follower_Component (Followers, Title, handleButtonClick) {
     return (
         Followers && Followers.length > 0 ? 
         Followers.map ( (entry, index) => (
-                <Instructor key={index} User={entry} handleButtonClick={handleButtonClick} setbuttonClicked={setbuttonClicked}/>
+                <Instructor key={index} User={entry} handleButtonClick={handleButtonClick}/>
         )) :
         <p>هیج {Title} ای یافت نشد</p>   
     )

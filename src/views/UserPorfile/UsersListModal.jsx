@@ -9,10 +9,9 @@ import { userFollowers } from '../../hooks/userFollowers';
 const UsersListModal = ({ showModal, handleClose, IsFollowing, 
   // Followings, Followers, 
   username }) => {
-    const {Followings, setFollowings} = userFollowings(username);
-    const {Followers, setFollowers} = userFollowers(username);
+    let {Followings, setFollowings} = userFollowings(username);
+    let {Followers, setFollowers} = userFollowers(username);
     const [show, setShow] = React.useState(showModal);
-    const [buttonClicked, setbuttonClicked] = React.useState(false);
     React.useEffect(() => {
         setShow(showModal);
       }, [showModal]);
@@ -22,9 +21,12 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
         handleClose();
     };
 
-    React.useEffect (() => {
-      
-    }, [buttonClicked]);
+    const handleButtonClick = () => {
+      // Update the state variable to trigger rerender
+      // setRerender(!rerender);
+      console.log("Button clicked!");
+    };
+
     const Title = IsFollowing ? "دنبال میشود"  : "دنبال کننده";
     // console.log("Username in userlist modal is: " , username);
     return (
@@ -43,6 +45,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
             IsModal={true}
             Followings={Followings} 
             Followers={Followers}
+            handleButtonClick={handleButtonClick}
           />
         </Modal.Body>
         {/* <Modal.Footer>

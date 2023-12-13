@@ -20,13 +20,13 @@ export default function Profile() {
   // const [IsThisMe, setIsThisMe] = useState(false);
   let IsThisMe = false;
   if (profileData != null && profile != null) {
-    console.log("PFSFDSFSDF" , profileData.username);
-    console.log("profilePFSFDSFSDF" , profile.username);
-    console.log("This is me: ", profile.username == profileData.username);
+    // console.log("PFSFDSFSDF" , profileData.username);
+    // console.log("profilePFSFDSFSDF" , profile.username);
+    // console.log("This is me: ", profile.username == profileData.username);
     // setIsThisMe(profile.username == profileData.username);
     IsThisMe = (profile.username == profileData.username);
   }
-  console.log("Is this me: " , IsThisMe);
+  // console.log("Is this me: " , IsThisMe);
   // const {username, setUsername} = GETUsername();
   // setUsername(id);
   const username = id;
@@ -48,7 +48,7 @@ export default function Profile() {
         <div><Timeline tabsList={tabs} profileData={profileData}/></div>
       </div>
       <div className={styles.leftpart}>
-        <ProfileHeader username={username} profile={profileData} IsThisMe={IsThisMe}/>
+        <ProfileHeader username={username} profile={profileData} setProfile={setProfileData} IsThisMe={IsThisMe}/>
         {/* <div className={styles.rightBottom}>
           <Instructorall username={username} IsModal={false}/>
         </div> */}
