@@ -11,7 +11,7 @@ const PlanningInLanding = () => {
         </div>
       </div>
       <div className={styles.FirstTypeText}>
-        <h3>حاجی با این راحت تره انتخاب واحد </h3>
+        <h3 className={styles.textlanding1} >حاجی با این راحت تره انتخاب واحد </h3>
         <h5>برنامه ریزی درس هاتو ببین، تداخل هارو ببین، استادارو بشناس</h5>
       </div>
     </div>

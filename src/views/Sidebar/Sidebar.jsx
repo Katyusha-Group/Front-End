@@ -8,7 +8,7 @@ const Sidebar = () => {
   const Navigate = useNavigate();
   return (
     <Card className={styles.bg}>
-      <div>
+      <div className={styles.bg1}>
         <div className={styles.header}>
           <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
           <p className={styles.headertext}>کاتیوشا</p>
