@@ -14,3 +14,16 @@
         margin: 0 auto;
     }
 }
+
+@media only screen and (max-width: 620px) {
+    .bg{
+        justify-content: flex-start;
+        margin: 0 auto;
+        flex-direction: column-reverse;
+        align-items: center;
+        /* margin-top: 3vh; */
+    }
+    .items{
+        margin: 2vh 0 0 0;
+    }
+}
