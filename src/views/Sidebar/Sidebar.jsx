@@ -3,7 +3,7 @@ import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { Card } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import UsersListModal from '../UserPorfile/UsersListModal';
+import Notification from './Notification';
 
 const Sidebar = () => {
   const Navigate = useNavigate();
@@ -30,7 +30,7 @@ const Sidebar = () => {
               id="toggleConfirmPassword"
             ></i>
           </p>
-          <UsersListModal
+          <Notification
             showModal={showModal}
             handleClose={handleCloseModal}
           />
