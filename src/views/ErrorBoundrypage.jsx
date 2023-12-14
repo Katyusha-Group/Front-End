@@ -9,7 +9,7 @@ const ErrorBoundrypage = () => {
         <img className={styles.img} src={image} alt="" />
         
           <p className={styles.texts}>اوه اوه مشکل فنی پیش آمده
-        <br/>با پشتیبانی تماس بگیرید
+        <br />با پشتیبانی تماس بگیرید
         </p>
        
       </div>

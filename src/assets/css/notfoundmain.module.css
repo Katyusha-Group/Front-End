@@ -1,5 +1,9 @@
 .main{
-width: 70vw;
-width: 40%;
+width: 600px;
 margin: 60px auto;
+}
+@media only screen and (max-width: 800px) {
+    .main{
+        width: 100% ;
+    }
 }

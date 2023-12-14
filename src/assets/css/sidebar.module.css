@@ -1,21 +1,23 @@
 @import "../css/black-dashboard-react.css";
 
 .bg{
-    width: 22vw;
+    width: 250px;
     margin-top: 5vh;
     margin-right: 20px;
     border-radius: 15px;
     height: 90vh;
-    position: sticky;
+}
+.bg1{
+    width: 250px;
 }
 .header{
     display: flex;
     flex-direction: row;
     margin: 20px;
-    margin-right: 2vw;
+    margin-right: 35px;
     justify-content: flex-start;
     align-items: flex-end;
-    gap: 2.5vw;
+    gap: 40px;
 }
 .headertext{
     margin-top: 40px;
@@ -24,7 +26,7 @@
 .sidebarmenuItems{
     display: flex;
     flex-direction: row;
-    padding: 2vh 2.5vw;
+    padding: 10px 20px;
     justify-content: flex-start;
     align-items: flex-end;
     gap: 4vw;
@@ -41,6 +43,29 @@
 
 .itemtext{
     margin-top: 20px;
-    font-size: 16px;
+    font-size: 13px;
     cursor: pointer;
 }
+@media only screen and (max-width: 1300px) {
+    .bg{
+        width: 80px;
+        margin-top: 5vh;
+
+    }
+    .bg1{
+        width: 80px;
+
+    }
+    .itemtext{
+        display: none;
+    }
+    .headertext{
+        display: none;
+    }
+    .header{        
+        margin-top: 80px;
+        margin-right: 20px;
+    }
+  }
+
+  

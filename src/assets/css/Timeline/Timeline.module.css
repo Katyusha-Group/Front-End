@@ -3,14 +3,15 @@
 .timeline {
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  margin: 0 4vw 0 0;
+  width: 700px;
+  margin: 0 3vw 0 0;
   height: 90vh;
   border-radius: 15px;
   position: sticky;
 }
 .tabs {
   border-radius: 15px;
+  /* width: 250px; */
 }
 
 .tweetsContainer{
@@ -19,19 +20,21 @@
   max-height: 74vh;
   overflow-y: hidden;
   overflow: auto;
+  overflow-x: hidden;
   max-height: 66vh;
 }
 .activeTab {
-  width: 20vw;
+  width: 300px;
   height: 40px;
   border: none;
+  margin: 30px 20px;
   border-bottom: 3px solid var(--purple) ;
   background-color: initial;
   color: white;
 }
 
 .tab {
-  width: 20vw;
+  width: 300px;
   height: 40px;
   border: none;
   background-color: initial;
@@ -56,4 +59,17 @@
   animation: pulse 1s infinite;
 }
 
-/* Add more styles as needed */
+@media only screen and (max-width: 840px) {
+  .timeline{
+    width: 80vw;
+  }
+  .activeTab{
+    width: 30vw;
+    margin: 0 5vw;
+  }
+  .tab{
+    width: 30vw;
+    margin: 3vh 5vw;
+
+  }
+}

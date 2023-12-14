@@ -1,6 +1,6 @@
 .bg {
   width: 90%;
-  height: 80vh;
+  height: auto;
   margin: 10vh auto;
   background-color: #27293d;
   border-radius: 2px;
@@ -9,7 +9,7 @@
   flex-direction: row;
 }
 .main {
-  padding-right: 10vh;
+  padding-right: 5vw;
   padding-top: 10vh;
   width: 50%;
   text-align: right;
@@ -22,9 +22,10 @@
   justify-content: flex-start;
   gap: 30px;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 2vh;
+  margin-right: 2vw;
 }
-.buttons :hover{
+.buttons :hover {
   scale: 1.1;
   color: white;
 }
@@ -32,10 +33,12 @@
   background-color: #27293d;
   background-image: url("../../img/LandingButton.svg");
   background-repeat: no-repeat;
-  width: 230px;
+  background-size: contain;
+  background-position: center;
+  width: 17vw;
   height: 90px;
   font-weight: 200;
-  font-size: large;
+  font-size: 1.4vw;
   outline: none;
   border: none;
   color: #dcbaff;
@@ -47,20 +50,29 @@
   border: none;
   background-color: #27293d;
   padding-left: 5vw;
+  font-size: 1.2vw;
 }
 
 .MainButtomPart {
-  margin-top: 80px;
+  margin-top: 3vw;
   text-align: right;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 .header {
+  margin-right: 2vw;
+  font-size: 1.8vw;
+}
+.header1 {
   margin-right: 50px;
+  font-size: 2.2vw;
 }
 .callUs {
   display: flex;
+  width: auto;
   flex-direction: row;
   margin-top: 15px;
+  font-size: 1vw;
 }
 .email {
   /* color: #fff; */
@@ -71,6 +83,7 @@
   width: auto;
   margin-right: 10px;
   stroke-linejoin: miter;
+  font-size: 1vw;
 }
 .image {
   position: relative;
@@ -84,6 +97,11 @@
   background-image: url("../../img/bgpattern.png");
   background-size: contain;
   background-repeat: no-repeat;
+  padding: 0 auto;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .mainimg2 {
   margin: 0px auto;
@@ -93,16 +111,31 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+.Authorsgroup {
+  font-size: 1.4vw;
+  margin-top: 1vw;
+}
 .image1 {
   border-radius: 40%;
   width: 60%;
   /* margin-left: 10px; */
-  margin-right: 4vw;
+  margin: 0 auto;
   border-right: 3px solid #000;
   border-bottom: 5px solid #000;
   border-left: 3px solid #000;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(5px);
+  animation: fadeIn 0.8s ease-in-out; /* Use an animation to control the initial fade-in effect */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.7) rotate(1.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .FirstType {
   display: flex;
@@ -113,7 +146,7 @@
   justify-content: space-around;
   gap: 20px;
 }
-.FirstTypeText{
+.FirstTypeText {
   margin: 10vh auto;
   width: auto;
   justify-content: center;
@@ -130,14 +163,150 @@
   margin: 0 10vw;
   gap: 40px;
 }
-.SecondTypeText{
+.SecondTypeText {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: right;
-  
 }
-.timelineImage{
+.SecondType_1 {
+  display: flex;
+  height: 70vh;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 10vw;
+  gap: 40px;
+}
+.SecondTypeText_1 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+.timelineImage {
   width: 50vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+  .header1 {
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
+  .buttons {
+    margin: 0px;
+  }
+  .MainButtomPart {
+    margin-right: 0px;
+  }
+  .FirstType {
+    height: auto;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .bg {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin-bottom: 4vh;
+    margin-top: 20px;
+  }
+  .FirstType {
+    margin-top: 2vh;
+    flex-direction: column-reverse;
+    height: auto;
+    margin-bottom: 20vw;
+  }
+  .FirstTypeText {
+    margin: 10vw;
+  }
+  .SecondType {
+    width: 80%;
+    flex-direction: column;
+    height: auto;
+  }
+  .SecondTypeText {
+    width: 80%;
+  }
+  .SecondType_1 {
+    width: 80%;
+    flex-direction: column-reverse;
+    height: auto;
+  }
+  .timelineImage {
+    width: 350px;
+    margin-bottom: 30px;
+  }
+  .SecondTypeText_1 {
+    width: 80%;
+  }
+  .main {
+    padding-top: 30px;
+    padding-right: 0px;
+    width: 80%;
+  }
+  .header {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .header1 {
+    font-size: 30px;
+  }
+  .registerButton {
+    width: 260px;
+    font-size: 12px;
+  }
+  .signinBut {
+    font-size: 10px;
+  }
+  .mainimg {
+    width: 80vw;
+  }
+  .FirstTypeText {
+    align-items: center;
+  }
+  .textlanding1 {
+    font-size: 14px;
+    text-decoration: double;
+  }
+
+  .textlanding2 {
+    font-size: 10px;
+    text-decoration: double;
+  }
+  .image {
+    width: 300px;
+  }
+  .Authorsgroup {
+    font-size: 14px;
+  }
+  .callUs {
+    font-size: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .email {
+    font-size: 9px;
+  }
+}
+@media only screen and (max-width: 1100px) and (min-width: 600px)  {
+  .FirstType {
+    height: auto;
+    margin: 10vh 2vw;
+  }
+  .SecondType {
+    height: auto;
+    margin: 10vh 2vw;
+  }
+  .SecondType_1 {
+    height: auto;
+    margin: 10vh 2vw;
+  }
 }
