@@ -3,15 +3,37 @@ import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { Card } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import UsersListModal from '../UserPorfile/UsersListModal';
 
 const Sidebar = () => {
   const Navigate = useNavigate();
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleOpenModal_Notification = () => {
+    setShowModal(true);
+  };
+
+  function handleCloseModal() {
+    setShowModal(false);
+  };
   return (
     <Card className={styles.bg}>
       <div className={styles.bg1}>
         <div className={styles.header}>
           <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
-          <p className={styles.headertext}>کاتیوشا</p>
+          <p className={styles.headertext}>
+            کاتیوشا
+            <i
+              style={{ fontSize: "14px", cursor: "pointer" }}
+              className={`tim-icons icon-bell-55 text-muted pr-2`}
+              onClick={handleOpenModal_Notification}
+              id="toggleConfirmPassword"
+            ></i>
+          </p>
+          <UsersListModal
+            showModal={showModal}
+            handleClose={handleCloseModal}
+          />
         </div>
 
         <div
@@ -136,9 +158,9 @@ const Sidebar = () => {
             version="1.1"
             id="Capa_1"
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns: xlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 67.429 67.429"
-            xml:space="preserve"
+            xml: space="preserve"
           >
             <g>
               <path
@@ -152,7 +174,7 @@ const Sidebar = () => {
           <p className={styles.itemtext}>صفحه اصلی</p>
         </div>
       </div>
-    </Card>
+    </Card >
   );
 };
 

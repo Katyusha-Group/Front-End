@@ -188,7 +188,6 @@ function Timeline({ tabsList, profileData }) {
     "shop": [],
     "loading": 0
   }
-  console.log("inja:", courseChoosed)
   const [activeTab, setActiveTab] = useState("Main");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
