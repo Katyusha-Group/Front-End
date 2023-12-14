@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Card } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage";
 import { useTweets } from "../../hooks/Twitter/useTweets";
+import { useSendTweets } from "../../hooks/Twitter/sendTweets";
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
@@ -65,7 +66,7 @@ function Timeline() {
           )}
         </div>
         <div className={styles.sendMessage}>
-          <SendMessage setData={setTweets} />
+          <SendMessage setData={setTweets} fetchData={useSendTweets}/>
         </div>
       </Card>
     </>

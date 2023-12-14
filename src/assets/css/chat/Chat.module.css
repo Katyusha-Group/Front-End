@@ -1,0 +1,97 @@
+@import "./../../css/black-dashboard-react.css";
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 90vh;
+  border-radius: 15px;
+  /* position: sticky; */
+  overflow-y: auto;
+  justify-content: space-between;
+}
+
+.items {
+  margin: 5vh 0 0 0;
+}
+
+.tabs {
+  border-radius: 15px;
+}
+
+.bg {
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sendMessage {
+  margin: 0 0 10px 0;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.chatList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: auto;
+  height: 100px;
+}
+
+.chatBox {
+  background-color: var(--purple);
+  max-width: 100px;
+  width: min-content;
+  padding: 10px;
+  text-align: right;
+}
+
+.chatBoxRight {
+  margin: 1rem 2rem 1rem 1rem;
+  text-align: right;
+}
+
+.chatBoxLeft {
+  margin: 1rem 1rem 1rem 2rem;
+}
+
+.chatBox::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-image: url("../../img/chat.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.chatBoxRight::after {
+  top: 0;
+  right: -7px;
+}
+
+.chatBoxLeft::after {
+  top: 0;
+  left: -7px;
+  transform: scaleX(-1);
+}
+
+.rowLeft {
+  flex-direction: row-reverse;
+}
+
+@media only screen and (max-width: 1100px) {
+  .bg {
+    justify-content: flex-start;
+    margin: 0 auto;
+  }
+}
