@@ -11,17 +11,26 @@ const ChatPage = () => {
   return (
     <Card className={styles.timeline}>
       <div className={styles.chat}>
-        {chats.map((chat) => (
-          <Card className={` ${styles.chatBox} ${styles.chatBoxRight}`}>
-            {chat.text}
-          </Card>
+        {chats.map((chat, index) => (
+          <div  className={`${styles.chatBoxContainerRight}`} key={index}>
+            <Card
+              className={` ${styles.chatBox} ${styles.chatBoxRight}`}
+            >
+              {chat.text}
+            </Card>
+          </div>
         ))}
+        <div className={`${styles.chatBoxContainerLeft}`}>
+          <Card className={` ${styles.chatBox} ${styles.chatBoxLeft}`}>
+            سلام
+          </Card>
+        </div>
       </div>
       <div className={styles.sendMessage}>
         <SendMessage
           setData={setChats}
           fetchData={(myInput, setValue) => {
-            setValue((prev) => [{ text: myInput, id: Math.random() },...prev]);
+            setValue((prev) => [{ text: myInput, id: Math.random() }, ...prev]);
           }}
         />
       </div>
@@ -31,11 +40,11 @@ const ChatPage = () => {
 const Chat = () => {
   return (
     <div className={styles.bg}>
-      {/* <Sidebar /> */}
+      <Sidebar />
       <div className={styles.items}>
         <ChatPage />
       </div>
-      {/* <Searchbar /> */}
+      <Searchbar />
     </div>
   );
 };

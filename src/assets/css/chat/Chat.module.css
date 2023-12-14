@@ -12,7 +12,7 @@
 }
 
 .items {
-  margin: 5vh 0 0 0;
+  margin: 5vh 3vw 0 0;
 }
 
 .tabs {
@@ -44,6 +44,16 @@
   justify-content: flex-end;
   overflow: auto;
   height: 100px;
+}
+
+.chatBoxContainerLeft {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.chatBoxContainerRight {
+  display: flex;
+  flex-direction: row;
 }
 
 .chatBox {
