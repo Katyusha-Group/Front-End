@@ -66,6 +66,17 @@
   }
 }
 
+.dropDownToggle{
+  /* background-color: red !important; */
+  padding: 10px 20px !important;
+  align-items: center !important;
+}
+
+.dropDownToggle:hover{
+  background: initial !important;
+  box-shadow: none !important;
+}
+
 @media only screen and (max-width: 620px) {
   .bg {
     width: 80vw;
