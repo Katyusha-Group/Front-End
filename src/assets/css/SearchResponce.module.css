@@ -1,0 +1,33 @@
+@import "./black-dashboard-react.css";
+
+.main{
+    width: 50vw;
+    height: auto;
+    margin-right: 1.5vw;
+    margin-left: 1.5vw;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10vw;
+    
+    
+}
+
+.main:hover{
+    background-color: var(--box);
+    cursor: pointer;
+
+}
+
+.img{
+    width:90px;
+    height: 90px;
+    margin: 10px;
+    border-radius: 50%;
+}
+.text{
+    margin-right: 0.3vw;
+    margin-top: 8px;
+}
