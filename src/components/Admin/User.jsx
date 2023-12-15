@@ -1,17 +1,19 @@
 import React from 'react'
 import * as styles from "../../assets/css/admin/People_Table.module.css";
 export default function User({User_data}) {
-  console.log("User_data: ", User_data.followers_count);
+  // console.log("User_data: ", User_data.followers_count);
   return (
     <div className={styles.User_Container}>
         {/* <img className={styles.User_img} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
         <img className={styles.User_img} src={User_data.image} alt="" />
         <p className={styles.User_name}>{User_data.username}@{User_data.id}</p>
         <div className={styles.User_Follows}>
-            دنبال کننده: 
+            دنبال کننده:
+            &nbsp;
             {User_data.followers_count}
             <br/>
             دنبال شونده:
+            &nbsp;
             {User_data.following_count}
         </div>
         <p className={styles.User_Date}>{User_data.Date}</p>
