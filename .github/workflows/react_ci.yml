@@ -1,25 +1,29 @@
-name: React CI
+# This is a basic workflow to help you get started with Actions
+name: CI-CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
 
 jobs:
-  build:
+  build_test:
     runs-on: ubuntu-latest
 
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Build and run services with Docker Compose
-        run: 
-          docker-compose -f docker-compose.yml up -d --build
+      - name: setup node
+        uses: actions/setup-node@master
 
-      - name: Run tests
-        run: 
-          docker exec docker-react-c npm test
+      # install applicaion dependencies
+      - name: Install dependencies
+        run: |
+          npm install --force
 
-      - name: Stop services
-        run: docker-compose -f docker-compose.yml down
+      # build and test the apps
+      - name: build
+        run: |
+          npm run build
+          npm test
