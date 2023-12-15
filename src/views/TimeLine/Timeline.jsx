@@ -17,16 +17,16 @@ function Timeline() {
     setInfo
   } = useTweets("get", true);
   const [open, setOpen] = useState(false);
-  const [page, setPage] = useState(1); // Track the current page for pagination
+  const [page, setPage] = useState(0); // Track the current page for pagination
   const containerRef = useRef(null); // Reference to the tweets container div
-
+var number = 1
   useEffect(() => {
     // Add scroll event listener on mount
     containerRef.current.addEventListener("scroll", handleScroll);
 
     return () => {
       // Remove scroll event listener on unmount
-      containerRef.current.removeEventListener("scroll", handleScroll);
+      // containerRef.current.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -44,7 +44,10 @@ function Timeline() {
 
   const loadMoreTweets = async () => {
     if (loading) return; // Prevent duplicate requests while loading
-    fetchData(setLoading, setTweets, 1, false,info, setInfo);
+
+    fetchData(setLoading, setTweets, number, false,info, setInfo);
+    number+=1
+    setPage(x=>x+1)
   };
 
   const handleTabClick = (tab) => {
@@ -71,7 +74,7 @@ function Timeline() {
         <div className={styles.content}>
           {activeTab === "tweets" && (
             <div className={styles.tweetsContainer} ref={containerRef}>
-              {tweets.map((tweet,index) => (
+              {tweets.results.map((tweet,index) => (
                 <Tweet
                   key={index}
                   tweet={tweet}
@@ -88,7 +91,7 @@ function Timeline() {
           )}
           {activeTab === "media" && (
             <div className={styles.tweetsContainer} ref={containerRef}>
-              {tweets.map((tweet,index) => (
+              {tweets.results.map((tweet,index) => (
                 <Tweet
                   key={index}
                   tweet={tweet}
