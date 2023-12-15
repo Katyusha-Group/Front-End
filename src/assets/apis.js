@@ -38,7 +38,7 @@ export const apis = {
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
   orders: `${domain}/shop/orders/`,
-  notification: `${domain}/notification/`,
+  notification: `${domain}/notifications/`,
   profiles: {
     myprofile: `${domain}/profiles/`,
     myusername: `${domain}/profiles/my-username/`,
@@ -59,7 +59,7 @@ export const apis = {
     tweets: `${domain}/report-twitte/`,
     manage: `${domain}/manage-reported-twittes/`
   },
-  
+
   tweetChart: {
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,

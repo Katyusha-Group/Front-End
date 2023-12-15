@@ -3,6 +3,7 @@ import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import Notification from './Notification';
+import { useGetNotification } from "../../hooks/useGetNotification";
 import {
   Col,
   Nav,
@@ -20,12 +21,110 @@ const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
 
+  const { notification, setNotification, loading } = useGetNotification();
   const handleOpenModal_Notification = () => {
     setShowModal(true);
   };
   function handleCloseModal() {
     setShowModal(false);
   };
+  const notificationData = [
+    {
+      "actor": {
+        "name": "1آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+    }, {
+      "actor": {
+        "name": "1آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+    }, {
+      "actor": {
+        "name": "1آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+    }, {
+      "actor": {
+        "name": "1آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+    },
+    {
+      "actor": {
+        "name": "2آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7468/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 01 در ستون تعداد لیست انتظار به مقدار 2 تغییر کرد."
+    },
+    {
+      "actor": {
+        "name": "3آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7467/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 01 در ستون تعداد ثبت نام شده به مقدار 13 تغییر کرد."
+    },
+    {
+      "actor": {
+        "name": "4آزمایشگاه مدارهای منطقی",
+        "username": "C_1211012",
+        "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+        "profile_type": "C",
+        "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+      },
+      "notification_type": "P",
+      "read": true,
+      "delta_time": "17 روز پیش",
+      "tweet_link": "http://127.0.0.1:8000/twittes/7466/",
+      "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 01 در ستون ظر فیت به مقدار 13 تغییر کرد."
+    }
+  ]
   return (
     <>
       <Card className={styles.bg}>
@@ -44,6 +143,7 @@ const Sidebar = () => {
             <Notification
               showModal={showModal}
               handleClose={handleCloseModal}
+              notificationData={notification.data}
             />
 
           </div>
@@ -170,9 +270,9 @@ const Sidebar = () => {
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns: xlink="http://www.w3.org/1999/xlink"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 67.429 67.429"
-              xml: space="preserve"
+              xml:space="preserve"
             >
               <g>
                 <path

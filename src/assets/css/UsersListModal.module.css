@@ -61,6 +61,6 @@ p {
 .bodyContent {
     height: 37vh;
     overflow-y: auto;
-    padding-left: 15px;
+    padding-left: 0px;
     margin-top: 20px;
 }
