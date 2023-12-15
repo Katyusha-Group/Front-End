@@ -50,6 +50,9 @@ p {
 .eachTime {
     font-size: 10px;
     opacity: 0.7;
+    /* vertical-align: middle; */
 }
 
-.eachText {}
+.eachText {
+    margin-bottom: 10px;
+}
