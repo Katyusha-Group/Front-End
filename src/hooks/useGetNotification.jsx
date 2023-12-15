@@ -17,7 +17,6 @@ export const useGetNotification = () => {
             .then((response) => response.json())
             .then((data) => {
                 setNotification({ data });
-                console.log(data);
                 closeLoading();
                 setLoading(false);
             })

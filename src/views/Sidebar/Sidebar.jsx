@@ -3,6 +3,7 @@ import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import { useGetNotification } from "../../hooks/useGetNotification";
+import Notification from "./Notification";
 import {
   Col,
   Nav,
@@ -21,6 +22,7 @@ const Sidebar = () => {
   const [showModal, setShowModal] = React.useState(false);
 
   const { notification, setNotification, loading } = useGetNotification();
+  console.log(notification)
   const handleOpenModal_Notification = () => {
     setShowModal(true);
   };
@@ -139,11 +141,13 @@ const Sidebar = () => {
                 id="toggleConfirmPassword"
               ></i>
             </p>
-            <Notification
-              showModal={showModal}
-              handleClose={handleCloseModal}
-              notificationData={notification}
-            />
+            {notification &&
+              <Notification
+                showModal={showModal}
+                handleClose={handleCloseModal}
+                notificationData={notification.data}
+              />
+            }
 
           </div>
 

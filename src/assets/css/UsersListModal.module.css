@@ -48,6 +48,13 @@ p {
     justify-content: space-around;
 }
 
+.eachnotif {
+    margin-bottom: 20px;
+    display: block;
+    padding: 0px 10px;
+}
+
+
 .eachTime {
     font-size: 10px;
     opacity: 0.7;

@@ -32,10 +32,10 @@ const Notification = ({ showModal, handleClose, notificationData }) => {
                 <Modal.Body className={styles.ModalBody}>
                     <div className={styles.bodyContent}>
                         {notificationData && notificationData.length > 0 ?
-                            notificationData.data.map((notification, index) => (
-                                <div key={index} className={styles.eachcard}>
+                            notificationData.map((notification, index) => (
+                                <div key={index} className={styles.eachnotif}>
                                     <img className={styles.eachProfile} src={notification.actor.image} alt="" />
-                                    <p className={styles.eachText}>{notification.message}. </p>
+                                    <p className={styles.eachText}>{notification.message}</p>
                                     <span className={styles.eachTime}>
                                         {notification.delta_time}
                                     </span>
