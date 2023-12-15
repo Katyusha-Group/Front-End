@@ -76,3 +76,7 @@
 /* .Search {
   margin: 20px;
 } */
+
+.User_Follows {
+  color: var(--gray);
+}

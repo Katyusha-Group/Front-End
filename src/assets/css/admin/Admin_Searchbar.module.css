@@ -25,13 +25,13 @@
     display: flex;
     background-color:var(--box);
     border: none;
-    color: white;
-    border-radius: 15px; 
+    border-radius: 5px; 
     width: 17vw;
     height: 5vh;
     padding-right: 30px;
     margin-right: 20px;
     margin: auto;
+    color: var(--white);
 }
 .field ::placeholder{
     margin-right: 20px;

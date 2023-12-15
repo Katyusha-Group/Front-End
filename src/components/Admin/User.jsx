@@ -8,10 +8,12 @@ export default function User({User_data}) {
         <img className={styles.User_img} src={User_data.image} alt="" />
         <p className={styles.User_name}>{User_data.username}@{User_data.id}</p>
         <div className={styles.User_Follows}>
-            دنبال کننده: 
+            دنبال کننده:
+            &nbsp;
             {User_data.followers_count}
             <br/>
             دنبال شونده:
+            &nbsp;
             {User_data.following_count}
         </div>
         <p className={styles.User_Date}>{User_data.Date}</p>
