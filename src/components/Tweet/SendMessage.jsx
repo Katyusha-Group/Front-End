@@ -4,7 +4,10 @@ import styles from "../../assets/css/Tweet/SendMessage.module.css";
 import { useSendTweets } from "../../hooks/Twitter/sendTweets";
 import { useTweets } from "../../hooks/Twitter/useTweets";
 
-export default function SendMessage({ fetchData = () => {}, setData = () => {} }) {
+export default function SendMessage({
+  fetchData = () => {},
+  setData = () => {},
+}) {
   const [state, setState] = useState("");
 
   const handleKeyPress = (event) => {
@@ -14,7 +17,7 @@ export default function SendMessage({ fetchData = () => {}, setData = () => {} }
   };
 
   const handleClick = () => {
-    fetchData(state, setData);
+    if (state !== "") fetchData(state, setData);
     setState("");
   };
 

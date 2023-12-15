@@ -3,12 +3,11 @@
 .timeline {
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 700px;
+  margin: 0 3vw 0 0;
   height: 90vh;
   border-radius: 15px;
-  /* position: sticky; */
-  overflow-y: auto;
-  justify-content: space-between;
+  position: sticky;
 }
 
 .items {
@@ -100,8 +99,43 @@
 }
 
 @media only screen and (max-width: 1100px) {
-  .bg {
-    justify-content: flex-start;
-    margin: 0 auto;
+  .bg{
+      justify-content: flex-start;
+      margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .bg{
+      justify-content: flex-start;
+      margin: 0 auto;
+      flex-direction: column-reverse;
+      align-items: center;
+      /* margin-top: 3vh; */
+  }
+  .items{
+      margin: 2vh 0 0 0;
+  }
+}
+
+@media only screen and (max-width: 840px) {
+  .timeline{
+    width: 80vw;
+  }
+  .activeTab{
+    width: 30vw;
+    margin: 0 5vw;
+  }
+  .tab{
+    width: 30vw;
+    margin: 3vh 5vw;
+
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .timeline{
+    margin-right: 0;
+    height: 85vh;
   }
 }
