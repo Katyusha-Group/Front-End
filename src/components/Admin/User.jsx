@@ -1,7 +1,7 @@
 import React from 'react'
 import * as styles from "../../assets/css/admin/People_Table.module.css";
 export default function User({User_data}) {
-  console.log("User_data: ", User_data.followers_count);
+  // console.log("User_data: ", User_data.followers_count);
   return (
     <div className={styles.User_Container}>
         {/* <img className={styles.User_img} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
