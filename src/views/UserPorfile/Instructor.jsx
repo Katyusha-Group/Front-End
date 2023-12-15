@@ -2,12 +2,11 @@ import React from 'react';
 import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
 function Instructor(
-        { User, handleButtonClick }
-    ) {
+    { User, handleButtonClick }
+) {
     // let Is_Followed = User.is_followed;
     const [IsFollowed, setIsFollowed] = React.useState(User.is_followed);
-    function Follow_Button_Clicked () 
-    {
+    function Follow_Button_Clicked() {
         setIsFollowed(prev => !prev);
     }
     return (
@@ -28,7 +27,7 @@ function Instructor(
             {/* <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
             <img className={styles.eachProfile} src={User.image} alt="" />
             <p className={styles.p_name}>{User.username}</p>
-            <button 
+            <button
                 className={IsFollowed ? styles.delButton : styles.delButton}
                 onClick={() => {
                     POSTFollow(User.username, !IsFollowed);
@@ -36,7 +35,7 @@ function Instructor(
                     Follow_Button_Clicked();
                 }}
             >
-                    {IsFollowed ? "حذف" : "دنبال کردن"}
+                {IsFollowed ? "حذف" : "دنبال کردن"}
             </button>
         </div>
     );
