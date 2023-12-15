@@ -79,6 +79,6 @@ export const apis = {
     reportTwitte: `${domain}/report-twitte/`,
   },
   forYouTwittes: {
-    forYouTwittes: `${domain}/for-you-twitte/`,
+    forYouTwittes: `${domain}/for-you-twittes/`,
   },
 };

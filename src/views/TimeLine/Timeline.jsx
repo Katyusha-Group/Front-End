@@ -5,6 +5,7 @@ import { Card } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage";
 import { fetchData, useTweets } from "../../hooks/Twitter/useTweets";
 import Spinner from "react-bootstrap/Spinner";
+import { useTweetsForYou } from "../../hooks/Twitter/useTweetsForYou";
 
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
@@ -16,6 +17,12 @@ function Timeline() {
     info,
     setInfo
   } = useTweets("get", true);
+  const {
+    data: tweetsForYou,
+    setData: setTweetsForYou,
+    loading: loadingForYou,
+    setLoading: setLoadingForYou,
+  } = useTweetsForYou("get", true);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0); // Track the current page for pagination
   const containerRef = useRef(null); // Reference to the tweets container div
@@ -91,7 +98,7 @@ var number = 1
           )}
           {activeTab === "media" && (
             <div className={styles.tweetsContainer} ref={containerRef}>
-              {tweets.results.map((tweet,index) => (
+              {tweetsForYou.results.map((tweet,index) => (
                 <Tweet
                   key={index}
                   tweet={tweet}
