@@ -45,5 +45,11 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-
 }
+
+.eachTime {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+.eachText {}
