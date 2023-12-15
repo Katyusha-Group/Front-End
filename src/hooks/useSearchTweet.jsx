@@ -11,7 +11,7 @@ export const useSearchTweet = (searchQuery) => {
   const [filteredTweets, setFilteredTweets] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(apis["reports"]["manage"]+searchQuery, {
+    fetch( apis["reports"]["manage"]+"?search="+searchQuery, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
