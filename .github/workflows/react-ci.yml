@@ -1,4 +1,4 @@
-name: React CI with Docker
+name: React CI with Docker Compose
 
 on:
   push:
@@ -9,12 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:20.10.7
+        options: --privileged
+        ports:
+          - 8081:80
+        env:
+          DOCKER_DRIVER: overlay2
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: docker build -t react .
+    - name: Build and run services with Docker Compose
+      run: 
+        docker-compose -f docker-compose.yml up -d --build
 
-    - name: Run Docker container
-      run: docker run -d -p 3000:3000 react
+    - name: Run tests
+      run: 
+        docker exec -it docker-react-c npm test
+
+    - name: Stop services
+      run: docker-compose -f docker-compose.yml down
