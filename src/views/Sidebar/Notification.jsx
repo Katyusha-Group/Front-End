@@ -19,6 +19,45 @@ const Notification = ({ showModal, handleClose }) => {
             "delta_time": "17 روز پیش",
             "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
             "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+        }, {
+            "actor": {
+                "name": "1آزمایشگاه مدارهای منطقی",
+                "username": "C_1211012",
+                "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+                "profile_type": "C",
+                "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+            },
+            "notification_type": "P",
+            "read": true,
+            "delta_time": "17 روز پیش",
+            "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+            "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+        }, {
+            "actor": {
+                "name": "1آزمایشگاه مدارهای منطقی",
+                "username": "C_1211012",
+                "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+                "profile_type": "C",
+                "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+            },
+            "notification_type": "P",
+            "read": true,
+            "delta_time": "17 روز پیش",
+            "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+            "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
+        }, {
+            "actor": {
+                "name": "1آزمایشگاه مدارهای منطقی",
+                "username": "C_1211012",
+                "image": "http://84.32.10.112/var/www/media/images/profile_pics/course_default.png",
+                "profile_type": "C",
+                "profile_link": "http://127.0.0.1:8000/profiles/C_1211012/"
+            },
+            "notification_type": "P",
+            "read": true,
+            "delta_time": "17 روز پیش",
+            "tweet_link": "http://127.0.0.1:8000/twittes/7469/",
+            "message": "آزمایشگاه مدارهای منطقی پست جدیدی ارسال کرد. پست او:\nگروه درسی با شماره کلاس 06 در ستون ظر فیت به مقدار 13 تغییر کرد."
         },
         {
             "actor": {
@@ -85,15 +124,17 @@ const Notification = ({ showModal, handleClose }) => {
                     </button>
                 </Modal.Header>
                 <Modal.Body className={styles.ModalBody}>
-                    {notificationData.map((notification, index) => (
-                        <div key={index} className={styles.eachcard}>
-                            <img className={styles.eachProfile} src={notification.actor.image} alt="" />
-                            <p className={styles.eachText}>{notification.message.split(".")[0]}. </p>
-                            <span className={styles.eachTime}>
-                                {notification.delta_time}
-                            </span>
-                        </div>
-                    ))}
+                    <div className={styles.bodyContent}>
+                        {notificationData.map((notification, index) => (
+                            <div key={index} className={styles.eachcard}>
+                                <img className={styles.eachProfile} src={notification.actor.image} alt="" />
+                                <p className={styles.eachText}>{notification.message.split(".")[0]}. </p>
+                                <span className={styles.eachTime}>
+                                    {notification.delta_time}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </Modal.Body>
             </div>
         </Modal>
