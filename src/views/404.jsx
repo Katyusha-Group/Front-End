@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from './Sidebar/Sidebar'
-import styles from '../assets/css/Notfound.module.css'
+import styles from './../assets/css/NotFound.module.css'
 import Notfoundmain from '../components/notfoundmain'
 const NotFound = () => {
   return (

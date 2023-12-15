@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { motion, useScroll, useAnimation } from "framer-motion";
-import styles from "../assets/css/landing/newLanding.module.css";
-import Mainpart from "./Landing/Mainpart";
+import styles from "./../assets/css/Landing/newLanding.module.css";
 import PlanningInLanding from "./Landing/PlanningInLanding";
 import TimeLinelanding from "./Landing/TimeLinelanding";
 import ThirdLanding from "./Landing/ThirdLanding";
 import Fourthlanding from "./Landing/Fourthlanding";
 import FivethLanding from "./Landing/FivethLanding";
-
+import Mainpart from "./Landing/mainpart"
 const cardVariants = {
   offscreen: {
     opacity: 0,
