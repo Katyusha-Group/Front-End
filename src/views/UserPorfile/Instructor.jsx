@@ -18,8 +18,13 @@ function Instructor(
         IsFollowed ?
             "حذف" :
             "دنبال کردن";
+    function RedirectToUserPage()
+    {
+        navigate(`/profile/${User.username}`);
+        handleButtonClick();
+    }
     return (
-        <div className={styles.eachcard} style={{ margin: "0px", paddingLeft: "20px" }}>
+        <div className={styles.eachcard} style={{ margin: "0px", paddingLeft: "20px" }} onClick={RedirectToUserPage}>
             {/* <div className="author">
                 <div className="block block-one" />
                 <div className="block block-two" />
