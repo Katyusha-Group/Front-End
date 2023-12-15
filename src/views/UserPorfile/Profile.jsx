@@ -16,19 +16,12 @@ export default function Profile() {
   
   const {profile, setProfile, loading} = usesProfileMe();
   const {profileData, setProfileData, loading2} = GETProfileData(id);
-  // const {profile, setProfile, loading} = GETProfileData("username3");
-  // const [IsThisMe, setIsThisMe] = useState(false);
+
   let IsThisMe = false;
   if (profileData != null && profile != null) {
-    // console.log("PFSFDSFSDF" , profileData.username);
-    // console.log("profilePFSFDSFSDF" , profile.username);
-    // console.log("This is me: ", profile.username == profileData.username);
-    // setIsThisMe(profile.username == profileData.username);
     IsThisMe = (profile.username == profileData.username);
   }
-  // console.log("Is this me: " , IsThisMe);
-  // const {username, setUsername} = GETUsername();
-  // setUsername(id);
+  
   const username = id;
   const tabs = [
     ["Main", "صفحه اصلی"],
@@ -37,7 +30,6 @@ export default function Profile() {
     ["Comments", "نظرات"]
   ];
 
-  // console.log("Tabs: " + tabs[0][0]);
   if(loading){
     return <></>
   }
@@ -49,9 +41,6 @@ export default function Profile() {
       </div>
       <div className={styles.leftpart}>
         <ProfileHeader username={username} profile={profileData} setProfile={setProfileData} IsThisMe={IsThisMe}/>
-        {/* <div className={styles.rightBottom}>
-          <Instructorall username={username} IsModal={false}/>
-        </div> */}
       </div>
     </div>
   );

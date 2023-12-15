@@ -69,38 +69,6 @@ export default function ProfileHeader({profile, username, IsThisMe, setProfile})
     .catch((error) => {
       console.error(error);
     });
-    // console.log("Profile updated: " , profileData_Here);
-
-
-
-    // Fetch Followings
-    // fetch((apis["profiles"]["following"]).replace("//following", `/${username}/following`), {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    // .then(response => {
-    //   return response.json().then((data) => {
-    //     setFollowings(data);
-    //     closeLoading();
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
-
-
-    // // Fetch Followers
-    // fetch((apis["profiles"]["followers"]).replace("//followers", `/${username}/followers`), {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    // .then(response => {
-    //   return response.json().then((data) => {
-    //     setFollowers(data);
-    //     closeLoading();
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
 
 
   }, [showModal]);

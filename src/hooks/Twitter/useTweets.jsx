@@ -26,12 +26,12 @@ export const useTweets = () => {
     axios
       .request(config)
       .then((response) => {
-        setLoading(false)
+        setLoading(false);
         setData(response.data);
         closeLoading();
       })
       .catch();
   };
   useEffect(()=>{fetchData()}, []);
-  return { data, setData ,loading};
+  return { data, setData, loading};
 };
