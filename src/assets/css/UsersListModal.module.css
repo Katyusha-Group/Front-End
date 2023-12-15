@@ -60,6 +60,6 @@ p {
 
 .bodyContent {
     height: 40vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-left: 15px;
 }

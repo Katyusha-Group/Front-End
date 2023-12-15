@@ -1,10 +1,12 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Swal from 'sweetalert2';
 import * as styles from '../../assets/css/UsersListModal.module.css';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
 const Notification = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
+    const notificationData1 = []
     const notificationData = [
         {
             "actor": {
@@ -125,15 +127,18 @@ const Notification = ({ showModal, handleClose }) => {
                 </Modal.Header>
                 <Modal.Body className={styles.ModalBody}>
                     <div className={styles.bodyContent}>
-                        {notificationData.map((notification, index) => (
-                            <div key={index} className={styles.eachcard}>
-                                <img className={styles.eachProfile} src={notification.actor.image} alt="" />
-                                <p className={styles.eachText}>{notification.message.split(".")[0]}. </p>
-                                <span className={styles.eachTime}>
-                                    {notification.delta_time}
-                                </span>
-                            </div>
-                        ))}
+                        {notificationData && notificationData.length > 0 ?
+                            notificationData.map((notification, index) => (
+                                <div key={index} className={styles.eachcard}>
+                                    <img className={styles.eachProfile} src={notification.actor.image} alt="" />
+                                    <p className={styles.eachText}>{notification.message.split(".")[0]}. </p>
+                                    <span className={styles.eachTime}>
+                                        {notification.delta_time}
+                                    </span>
+                                </div>
+                            )) :
+                            <p>پیامی برای نمایش موجود نمی‌باشد</p>
+                        }
                     </div>
                 </Modal.Body>
             </div>
