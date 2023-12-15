@@ -18,8 +18,8 @@ jobs:
     
       - name: Build and run tests
         run: |
-          docker-compose  up --build
-          docker-compose exec docker-react-c "npm test"
+          docker compose  up --build
+          docker compose exec docker-react-c  npm test
   
       - name: Stop Docker Compose services
-        run: docker-compose down
+        run: docker compose down
