@@ -18,6 +18,6 @@ jobs:
     
       - name: Build and run tests
         run: |
-          docker-compose  up -d
-          docker exec docker-react-c  npm test
+          docker-compose  up --build
+          docker exec docker-react-c  "npm test"
   
