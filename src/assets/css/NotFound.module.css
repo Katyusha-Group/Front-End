@@ -1,7 +1,16 @@
 .main{
     display: flex;
     flex-direction: row;
+    gap: 50px;
     justify-content: flex-start;
     height: 100vh;
     
+}
+@media only screen and (max-width: 620px) {
+    .main{
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 10px;
+    }
 }
