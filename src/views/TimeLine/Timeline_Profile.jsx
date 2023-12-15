@@ -23,10 +23,10 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
 function Timeline({ tabsList, profileData }) {
-
+  const username = profileData.username.split("_")[1];
   const [mainData] = (profileData.profile_type);
-  const username = profileData.username;
-  const { courseChoosed } = useGetChartData(username);
+  const username1 = profileData.username;
+  const { courseChoosed } = useGetChartData(username1);
   const [activeTab, setActiveTab] = useState("Main");
 
   const handleTabClick = (tab) => {
