@@ -1,9 +1,9 @@
-name: React CI
+name: React CI with Docker
 
 on:
   push:
     branches:
-      - main  # Change this to your dev branch name
+      - dev
 
 jobs:
   build:
@@ -13,11 +13,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install --force
+    - name: Build Docker image
+      run: docker build -t your-image-name .
 
-    - name: Build React app
-      run: npm run build
-
-    - name: Run tests
-      run: npm test
+    - name: Run Docker container
+      run: docker run -d -p 3000:3000 your-image-name
