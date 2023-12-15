@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install
+      - name: Build and run services with Docker Compose
+        run: 
+          docker-compose -f docker-compose.yml up -d --build
 
-    - name: Build React app
-      run: npm run build
+      - name: Run tests
+        run: 
+          docker exec docker-react-c npm test
 
-    - name: Run tests
-      run: npm test
+      - name: Stop services
+        run: docker-compose -f docker-compose.yml down
