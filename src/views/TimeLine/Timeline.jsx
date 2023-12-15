@@ -3,11 +3,17 @@ import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline.module.css";
 import { Card } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage";
-import { useTweets } from "../../hooks/Twitter/useTweets";
+import { fetchData, useTweets } from "../../hooks/Twitter/useTweets";
+import Spinner from "react-bootstrap/Spinner";
 
 function Timeline() {
   const [activeTab, setActiveTab] = useState("tweets");
-  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  const {
+    data: tweets,
+    setData: setTweets,
+    loading,
+    setLoading,
+  } = useTweets("get", true);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1); // Track the current page for pagination
   const containerRef = useRef(null); // Reference to the tweets container div
@@ -22,33 +28,30 @@ function Timeline() {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("🚀 ~ file: Timeline.jsx:28 ~ Timeline ~ loading:", loading);
+  }, [loading]);
+
   const handleScroll = () => {
     const container = containerRef.current;
     const scrollTop = container.scrollTop;
     const scrollHeight = container.scrollHeight;
     const containerHeight = container.clientHeight;
 
-    if (scrollTop + containerHeight === scrollHeight) {
-      // When scrolled to the end, load more tweets
+    console.log("🚀 ~ file: Timeline.jsx:42 ~ handleScroll ~ scrollTop + containerHeight === scrollHeight:", scrollTop + containerHeight)
+    console.log("🚀 ~ file: Timeline.jsx:42 ~ handleScroll ~ scrollHeigh:", scrollHeight)
+    if (scrollTop + containerHeight > scrollHeight-1) {
       loadMoreTweets();
     }
   };
 
   const loadMoreTweets = async () => {
+    console.log(
+      "🚀 ~ file: Timeline.jsx:45 ~ loadMoreTweets ~ loading:",
+      loading
+    );
     if (loading) return; // Prevent duplicate requests while loading
-
-    try {
-      const nextPage = page + 1;
-      const { data } = await useTweets("get", true, nextPage);
-
-      setPage(nextPage);
-      setTweets((prevData) => ({
-        ...prevData,
-        results: [...prevData.results, ...data.results],
-      }));
-    } catch (error) {
-      console.log("Error loading more tweets:", error);
-    }
+    fetchData(setLoading, setTweets, 1, false);
   };
 
   const handleTabClick = (tab) => {
@@ -75,34 +78,31 @@ function Timeline() {
         <div className={styles.content}>
           {activeTab === "tweets" && (
             <div className={styles.tweetsContainer} ref={containerRef}>
-              {loading ? (
-                <></>
-              ) : (
-                tweets.results.map((tweet) => (
-                  <Tweet
-                    key={tweet.id}
-                    tweet={tweet}
-                    setOpenComment={setOpen}
-                    setTweets={setTweets}
-                  />
-                ))
+              {tweets.map((tweet,index) => (
+                <Tweet
+                  key={index}
+                  tweet={tweet}
+                  setOpenComment={setOpen}
+                  setTweets={setTweets}
+                />
+              ))}
+              {loading && (
+                <div>
+                  <Spinner animation="border" variant="primary" />
+                </div>
               )}
             </div>
           )}
           {activeTab === "media" && (
             <div className={styles.tweetsContainer} ref={containerRef}>
-              {loading ? (
-                <></>
-              ) : (
-                tweets.results.map((tweet) => (
-                  <Tweet
-                    key={tweet.id}
-                    tweet={tweet}
-                    setOpenComment={setOpen}
-                    setTweets={setTweets}
-                  />
-                ))
-              )}
+              {tweets.map((tweet,index) => (
+                <Tweet
+                  key={index}
+                  tweet={tweet}
+                  setOpenComment={setOpen}
+                  setTweets={setTweets}
+                />
+              ))}
             </div>
           )}
         </div>

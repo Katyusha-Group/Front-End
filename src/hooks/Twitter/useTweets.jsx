@@ -7,9 +7,9 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-export const fetchData = (setLoading,setData,num) => {
+export const fetchData = (setLoading, setData, num,initial) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  showLoading();
+  setLoading(true);
   let config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -23,17 +23,23 @@ export const fetchData = (setLoading,setData,num) => {
   axios
     .request(config)
     .then((response) => {
-      setLoading(false)
-      setData(response.data);
-      closeLoading();
+      setLoading(false);
+      setData((x) => {
+        if (!initial)
+          return [...x, ...response.data.results] ;
+        return response.data.results
+      });
+      return response.data;
     })
     .catch();
 };
 export const useTweets = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  
-  useEffect(()=>{fetchData(setLoading,setData,1)}, []);
-  return { data, setData ,loading};
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchData(setLoading, setData, 1,true);
+  }, []);
+  return { data, setData, loading, setLoading };
 };
