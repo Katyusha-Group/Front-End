@@ -29,7 +29,6 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
     // Update the state variable to trigger rerender
     // setRerender(!rerender);
     console.log("Button clicked!");
-    handleCloseModal();
   };
 
   const Title = IsFollowing ? "دنبال میشود" : "دنبال کننده";
