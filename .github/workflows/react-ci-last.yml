@@ -1,4 +1,3 @@
-# This is a basic workflow to help you get started with Actions
 name: CI-CD
 
 on:
@@ -7,30 +6,35 @@ on:
   pull_request:
     branches: [main]
 
-    
-
-
 jobs:
   build_test:
     runs-on: ubuntu-latest
 
-
     steps:
       - uses: actions/checkout@v2
-    
+
+      # Set up Node.js environment
       - name: setup node
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Change to your desired Node.js version
 
-      - name : docker-compose up
-        run: docker compose up --bupld
-        
-      # install applicaion dependencies
+      # Start Docker Compose
+      - name: Start Docker Compose
+        run: docker-compose up --build -d
+
+      # Install application dependencies
       - name: Install dependencies
-        run: |
-          docker exec -it docker-react-c bash "npm install --force"
+        run: docker exec docker-react-c npm install --force
 
-      # build and test the apps
-      - name: build
-        run: |
-          docker exec -it docker-react-c bash "npm run build"
-          docker exec -it docker-react-c bash "npm test"
+      # Build the application
+      - name: Build
+        run: docker exec docker-react-c npm run build
+
+      # Run tests
+      - name: Run tests
+        run: docker exec docker-react-c npm test
+
+      # Stop Docker Compose after tests
+      - name: Stop Docker Compose
+        run: docker-compose down
