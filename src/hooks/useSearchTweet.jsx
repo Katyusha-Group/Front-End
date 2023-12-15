@@ -17,13 +17,11 @@ export const useSearchTweet = (searchQuery) => {
       .then((response) => response.json())
       
       .then((data) => {
-        setFilteredProfiles(data);
+        setFilteredTweets(data);
         setLoading(false);
       })
       .catch((error) => console.error("error"));
   }, [searchQuery]);
-
-  
 
   return { filteredTweets, loading };
 };

@@ -11,7 +11,7 @@ const Admin_Searchbar = ({IsUser}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { filteredProfiles, loading } = useAllProfiles(searchQuery);
   const { filteredTweets, loading2 } = useSearchTweet(searchQuery);
-
+  const [open, setOpen] = useState(false);
   useEffect(() => {}, [searchQuery]);
 
   return (
