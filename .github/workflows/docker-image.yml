@@ -3,7 +3,7 @@ name: React CI with Docker Compose
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   build:
