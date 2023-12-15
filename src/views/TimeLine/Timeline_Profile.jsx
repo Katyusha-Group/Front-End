@@ -39,7 +39,6 @@ function Timeline({ tabsList, profileData }) {
   const [mainData] = (profileData.profile_type);
   const username = profileData.username.split("_")[1];
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
-  console.log("Tweets are: " , tweets);
   const [open, setOpen] = useState(false);
   return (
     <>

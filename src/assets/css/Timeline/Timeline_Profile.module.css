@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
-  width: 50vw;
+  width: 100%;
   /* margin-right: 4vw; */
   height: 90vh;
   border-radius: 15px;
@@ -63,12 +63,8 @@
   min-height: 390px;
 }
 
-/* 
-.timeline {
-  width: 95%;
-  display: inline;
-  justify-content: center;
+/* @media only screen and (max-width: 1064px) {
+  .content {
+    width: 50%;
+  }
 } */
-
-
-/* Add more styles as needed */

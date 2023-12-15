@@ -1,28 +1,19 @@
 import React from "react";
 import * as styles from "../../assets/css/Profile.module.css";
 import ProfileHeader from "./ProfileHeader";
-import Instructorall from "./Instructorall";
-import { apis } from "../../assets/apis";
 import { usesProfileMe } from "../../hooks/useProfileMe";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import Timeline from "../TimeLine/Timeline_Profile.jsx";
-import { useState } from 'react';
-import { GETUsername } from '../../hooks/GETUsername';
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GETProfileData } from "../../hooks/GETProfileData.jsx";
 import IsThisMe_Function from "./IsThisMe_Function.jsx";
 export default function Profile() {
   const { chart, id } = useParams();
-  // console.log("ID is: " , id);
   
   const {profile, setProfile, loading} = usesProfileMe();
   const {profileData, setProfileData, loading2} = GETProfileData(id);
-
-  // let IsThisMe = false;
-  // if (profileData != null && profile != null) {
-  //   IsThisMe = (profile.username == profileData.username);
-  // }
   let IsThisMe = IsThisMe_Function(id);
+
   const username = id;
   const tabs = [
     ["Main", "صفحه اصلی"],
@@ -38,7 +29,7 @@ export default function Profile() {
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
-        <div><Timeline tabsList={tabs} profileData={profileData}/></div>
+        <Timeline tabsList={tabs} profileData={profileData}/>
       </div>
       <div className={styles.leftpart}>
         <ProfileHeader username={username} profile={profileData} setProfile={setProfileData} IsThisMe={IsThisMe}/>
