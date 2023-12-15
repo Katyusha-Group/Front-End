@@ -5,7 +5,7 @@ import styles from "../../assets/css/Timeline/Timeline_Profile.module.css";
 function StudentTimeline({ courseChoosed, showLoading, closeLoading }) {
   return (
     <div className={styles.chart}>
-      {lessons(courseChoosed, true, null, showLoading, closeLoading)}
+      { lessons(courseChoosed, true, null, showLoading, closeLoading)}
     </div>
   );
 }
