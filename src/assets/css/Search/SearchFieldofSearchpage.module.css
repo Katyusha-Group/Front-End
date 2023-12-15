@@ -1,0 +1,30 @@
+.searchbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 15px;
+    margin-top: 3vh;
+    width: 100%;
+    color: white;
+    margin-bottom: 2vh;
+}
+.field{
+    display: flex;
+    background-color:var(--box);
+    border: none;
+    color: white;
+    border-radius: 15px; 
+    width: 60vw;
+    height: 5vh;
+    padding-right: 30px;
+    margin-right: 20px;
+    margin: auto;
+}
+.field ::placeholder{
+    margin-right: 20px;
+}
+
+.searchBox{
+    height: inherit;
+    overflow: auto;
+}

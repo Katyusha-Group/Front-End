@@ -258,7 +258,7 @@ function LessonSidebar(props) {
                         <DropdownItem>
                           <span className="tim-icons icon-simple-remove" />
                           <Link
-                            to="/landingPage"
+                            to="/"
                             onClick={() => {
                               localStorage.removeItem("authTokens");
                             }}

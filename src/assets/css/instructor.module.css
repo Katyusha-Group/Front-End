@@ -1,25 +1,28 @@
 @import "./black-dashboard-react.css";
 
-.eachProfile{
+.eachProfile {
     width: 58px;
     height: 58px;
     border-radius: 50%;
 }
-.eachcard{
-    margin-top: 20px;
+
+.eachcard {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
 
 }
-.p_name{
+
+.p_name {
     margin-top: 10px;
     margin-left: 50px;
     color: var(--white) !important;
 
 }
-.delButton{
+
+.delButton {
     line-height: 2.3;
     margin-top: 5px;
     width: 70px;
@@ -29,12 +32,14 @@
     color: white;
     border: 1px solid #67539E;
 }
-.delButton:hover{
+
+.delButton:hover {
     background-color: #67539E;
     color: white;
     border: 1px solid white;
 }
-.delButton:active{
+
+.delButton:active {
     background-color: #67539E;
     color: white;
     border: 1px solid white;

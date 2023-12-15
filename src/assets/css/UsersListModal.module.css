@@ -3,12 +3,14 @@
 .Modal {
     backdrop-filter: blur(2px);
 }
+
 .ModalContents {
     border-radius: 10px;
     background-color: rgb(50, 55, 80);
     /* background-color: rgba(143, 62, 140, 0.5); */
     background: rgb(50, 55, 80);
-    background: linear-gradient(180deg, rgba(39, 41, 61, 1) 20%, rgba(50, 55, 80,1) 85%, rgba(109,54,114,1) 95%, rgba(143,62,140,1) 100%);
+    background: linear-gradient(180deg, rgba(39, 41, 61, 1) 20%,
+            rgba(50, 55, 80, 1) 88%, rgba(109, 54, 114, 1) 95%, rgba(143, 62, 140, 1) 100%);
     color: var(--white) !important;
 }
 
@@ -30,4 +32,35 @@
 p {
     color: var(--white) !important;
     /* margin-top: 20px !important; */
+}
+
+.eachProfile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.eachcard {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.eachTime {
+    font-size: 10px;
+    opacity: 0.7;
+    /* vertical-align: middle; */
+}
+
+.eachText {
+    margin-bottom: 0px;
+}
+
+.bodyContent {
+    height: 37vh;
+    overflow-y: auto;
+    padding-left: 15px;
+    margin-top: 15px;
 }

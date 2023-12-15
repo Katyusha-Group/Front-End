@@ -47,7 +47,8 @@
     left: 20;
     /* width: calc(55% + 10px); */
     width: 180px;
-    height: 150%;
+    /* height: 150%; */
+    height: 1000px;
     transform: rotate(85deg);
     background-color: rgba(143, 62, 140, 0.5);
     /* background-color: rgba(137, 101, 224, 0.5); */

@@ -1,71 +1,118 @@
 @import "../css/black-dashboard-react.css";
 
-.bg{
-    width: 250px;
-    margin-top: 5vh;
-    margin-right: 20px;
-    border-radius: 15px;
-    height: 90vh;
+.bg {
+  width: 250px;
+  margin-top: 5vh;
+  margin-right: 20px;
+  border-radius: 15px;
+  height: 90vh;
 }
-.bg1{
-    width: 250px;
+.bg1 {
+  width: 250px;
 }
-.header{
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    margin-right: 35px;
-    justify-content: flex-start;
-    align-items: flex-end;
-    gap: 40px;
+.header {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  margin-right: 35px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 40px;
 }
-.headertext{
-    margin-top: 40px;
-    font-size: 20px;
+.headertext {
+  margin-top: 40px;
+  font-size: 20px;
 }
-.sidebarmenuItems{
-    display: flex;
-    flex-direction: row;
-    padding: 10px 20px;
-    justify-content: flex-start;
-    align-items: flex-end;
-    gap: 4vw;
-    cursor: pointer;
-}
-
-.sidebarmenuItems:hover{
-    background-color: var(--box);
+.sidebarmenuItems {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 20px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 4vw;
+  cursor: pointer;
 }
 
-.click{
-    cursor: pointer;
+.sidebarmenuItems:hover {
+  background-color: var(--box);
 }
 
-.itemtext{
-    margin-top: 20px;
-    font-size: 13px;
-    cursor: pointer;
+.click {
+  cursor: pointer;
+}
+
+.itemtext {
+  margin-top: 20px;
+  font-size: 13px;
+  cursor: pointer;
 }
 @media only screen and (max-width: 1300px) {
-    .bg{
-        width: 80px;
-        margin-top: 5vh;
+  .bg {
+    width: 80px;
+    margin-top: 5vh;
+  }
+  .bg1 {
+    width: 80px;
+  }
+  .itemtext {
+    display: none;
+  }
+  .headertext {
+    display: none;
+  }
+  .header {
+    margin-top: 80px;
+    margin-right: 20px;
+  }
+}
 
-    }
-    .bg1{
-        width: 80px;
+.dropDownToggle{
+  /* background-color: red !important; */
+  padding: 10px 20px !important;
+  align-items: center !important;
+}
 
-    }
-    .itemtext{
-        display: none;
-    }
-    .headertext{
-        display: none;
-    }
-    .header{        
-        margin-top: 80px;
-        margin-right: 20px;
-    }
+.dropDownToggle:hover{
+  background: initial !important;
+  box-shadow: none !important;
+}
+
+@media only screen and (max-width: 620px) {
+  .bg {
+    width: 80vw;
+    height: 4rem;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 1vh;
+  }
+  .bg1 {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    height: inherit;
+    justify-content: space-around;
   }
 
-  
+  .sidebarmenuItems {
+    align-items: center;
+  }
+
+  .sidebarmenuItems {
+    height: inherit;
+  }
+  .header {
+    margin: auto 0;
+  }
+  .sidebarmenuItemsMobileBlock {
+    display: none;
+  }
+  .moreInfo {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 620px) {
+  .moreInfo {
+    display: none;
+  }
+}
