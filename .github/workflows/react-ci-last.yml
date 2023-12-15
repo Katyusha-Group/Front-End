@@ -1,40 +1,32 @@
-name: CI-CD
+name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # Replace 'main' with your primary branch name
   pull_request:
-    branches: [main]
+    branches:
+      - main  # Replace 'main' with your primary branch name
 
 jobs:
-  build_test:
+  build:
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:latest
+        options: --privileged  # Necessary for Docker to run within Docker
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Set up Node.js environment
-      - name: setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14' # Change to your desired Node.js version
 
-      # Start Docker Compose
-      - name: Start Docker Compose
-        run: docker-compose up --build -d
 
-      # Install application dependencies
-      - name: Install dependencies
-        run: docker exec docker-react-c npm install --force
+      - name: Build and run tests
+        run: |
+          docker-compose  up -d --build
+          docker-compose -T docker-react-c npm test  
 
-      # Build the application
-      - name: Build
-        run: docker exec docker-react-c npm run build
-
-      # Run tests
-      - name: Run tests
-        run: docker exec docker-react-c npm test
-
-      # Stop Docker Compose after tests
-      - name: Stop Docker Compose
+      - name: Stop Docker Compose services
         run: docker-compose down
