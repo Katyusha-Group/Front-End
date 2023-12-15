@@ -38,7 +38,10 @@ export const apis = {
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
   orders: `${domain}/shop/orders/`,
-  notification: `${domain}/notification/`,
+  notification: {
+    notifications: `${domain}/notifications/`,
+    count: `${domain}/notifications/unread-count`,
+  },
   profiles: {
     myprofile: `${domain}/profiles/`,
     myusername: `${domain}/profiles/my-username/`,
@@ -57,9 +60,9 @@ export const apis = {
   },
   reports: {
     tweets: `${domain}/report-twitte/`,
-    manage: `${domain}/manage-reported-twittes/`
+    manage: `${domain}/manage-reported-twittes/`,
   },
-  
+
   tweetChart: {
     tweetChart: `${domain}/twitte-charts/`,
     lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
@@ -74,5 +77,8 @@ export const apis = {
   },
   reportTwitte: {
     reportTwitte: `${domain}/report-twitte/`,
+  },
+  forYouTwittes: {
+    forYouTwittes: `${domain}/for-you-twittes/`,
   },
 };

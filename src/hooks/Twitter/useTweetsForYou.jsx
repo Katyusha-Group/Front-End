@@ -7,14 +7,14 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
+export const fetchData = (setLoading, setData, num, initial) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   setLoading(true);
   
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: apis["tweets"]["tweets"]+"?page="+num,
+    url: apis["forYouTwittes"]["forYouTwittes"],
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -23,8 +23,8 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
   axios
     .request(config)
     .then((response) => {
+      console.log("🚀 ~ file: useTweetsForYou.jsx:26 ~ .then ~ response:", response)
       setLoading(false);
-      setInfo(response.data)
       setData((x) => {
         if (!initial) return( {...x,results:[...x.results, ...response.data.results]});
         return response.data;
@@ -33,14 +33,14 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
     })
     .catch();
 };
-export const useTweets = () => {
+export const useTweetsForYou = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState({results:[]});
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
   useEffect(() => {
-    fetchData(setLoading, setData, 1, true, info, setInfo);
+    fetchData(setLoading, setData, 1, true);
   }, []);
 
-  return { data, setData, loading, setLoading, info , setInfo};
+  return { data, setData, loading, setLoading};
 };

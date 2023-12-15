@@ -32,7 +32,7 @@ import Timelinepage from "./views/TimeLine/Timelinepage.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./views/404.jsx";
 import InternalServerError from "./views/500.jsx";
-import NewLandingpage from "./views/NewLandingpage.jsx";
+import NewLandingpage from "./views/NewLandingPage.jsx";
 import AdminPanel from "./views/admin/Admin.jsx"
 import Replies from "./views/TimeLine/Replies.jsx";
 import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";

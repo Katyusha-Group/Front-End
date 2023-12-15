@@ -33,5 +33,5 @@ export const useReports = () => {
       .catch();
   };
   useEffect(()=>{fetchData()}, []);
-  return { data, setData ,loading};
+  return { data, setData ,loading };
 };
