@@ -22,17 +22,11 @@ import { NavLink, Link } from "react-router-dom";
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
-  const [onClick, setOnClick] = React.useState(false);
-  // const { notification, setNotification } = useGetNotification();
-  const [notif, setNotif] = React.useState(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [loading, setLoading] = useState(true);
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
     setShowModal(true);
-    setOnClick(prev => !prev)
-    // setNotif(notification);
   };
   function handleCloseModal() {
     setNotificationCount({ ...notificationCount, count: 0 })
@@ -50,7 +44,6 @@ const Sidebar = () => {
                 style={{ fontSize: "14px", cursor: "pointer" }}
                 className={`tim-icons icon-bell-55 text-muted pr-2`}
                 onClick={handleOpenModal_Notification}
-                id="toggleConfirmPassword"
               >
                 {notificationCount &&
                   <span className={styles.notifCount}>{notificationCount.count}</span>
@@ -60,7 +53,6 @@ const Sidebar = () => {
             <Notification
               showModal={showModal}
               handleClose={handleCloseModal}
-            // notificationData={notif}
             />
 
           </div>

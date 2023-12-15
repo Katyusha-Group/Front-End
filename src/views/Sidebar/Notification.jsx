@@ -24,23 +24,6 @@ const Notification = ({ showModal, handleClose }) => {
     const { notificationData, setNotificationData } = useGetNotification(showModal);
     const [loading, setLoading] = useState(null);
 
-    // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-    // React.useEffect(() => {
-    //     if (showModal) {
-    //         console.log("mamad");
-    //         showLoading();
-    //         fetch((apis["notification"]["notifications"]), {
-    //             headers: { Authorization: `Bearer ${token}` },
-    //         })
-    //             .then((response) => response.json())
-    //             .then((data) => {
-    //                 setNotificationData(data);
-    //                 closeLoading();
-    //                 setLoading(false);
-    //             })
-    //             .catch((error) => console.error(error))
-    //     };
-    // }, [showModal]);
     const handleCloseModal = () => {
         setShow(false);
         handleClose();
@@ -62,7 +45,13 @@ const Notification = ({ showModal, handleClose }) => {
                             notificationData.map((notification, index) => (
                                 <div key={index} className={styles.eachnotif}>
                                     <img className={styles.eachProfile} src={notification.actor.image} alt="" />
-                                    <p className={styles.eachText}>{notification.message}</p>
+                                    < p className={styles.eachText} >
+                                        {!notification.read && <i
+                                            style={{ fontSize: "14px", fontWeight: "bold" }}
+                                            className={`${styles.unreadNotifs} tim-icons icon-bell-55 text-muted pl-1`}
+                                        >
+                                        </i>}
+                                        {notification.message}</p>
                                     <span className={styles.eachTime}>
                                         {notification.delta_time}
                                     </span>
@@ -71,9 +60,9 @@ const Notification = ({ showModal, handleClose }) => {
                             <p>پیامی برای نمایش موجود نمی‌باشد</p>
                         }
                     </div>
-                </Modal.Body>
-            </div>
-        </Modal>
+                </Modal.Body >
+            </div >
+        </Modal >
     );
 };
 

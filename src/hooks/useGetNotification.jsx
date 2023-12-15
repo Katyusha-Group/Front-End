@@ -10,7 +10,6 @@ export const useGetNotification = (showModal) => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         if (showModal) {
-            console.log("mamad");
             showLoading();
             fetch((apis["notification"]["notifications"]), {
                 headers: { Authorization: `Bearer ${token}` },

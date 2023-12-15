@@ -71,3 +71,12 @@ p {
     padding-left: 0px;
     margin-top: 20px;
 }
+
+.unreadNotifs {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unreadNotifs::before {
+    color: hotpink;
+}
