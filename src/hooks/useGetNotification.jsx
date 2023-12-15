@@ -4,23 +4,25 @@ import {
     showLoading,
     closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-export const useGetNotification = () => {
+export const useGetNotification = (showModal) => {
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-    const [notification, setNotification] = useState(null);
+    const [notificationData, setNotificationData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const username = "yazdan_mastery";
     useEffect(() => {
-        showLoading();
-        fetch((apis["notification"]["notifications"]), {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setNotification(data);
-                closeLoading();
-                setLoading(false);
+        if (showModal) {
+            console.log("mamad");
+            showLoading();
+            fetch((apis["notification"]["notifications"]), {
+                headers: { Authorization: `Bearer ${token}` },
             })
-            .catch((error) => console.error(error));
-    }, []);
-    return { notification, setNotification, loading };
+                .then((response) => response.json())
+                .then((data) => {
+                    setNotificationData(data);
+                    closeLoading();
+                    setLoading(false);
+                })
+                .catch((error) => console.error(error))
+        };
+    }, [showModal]);
+    return { notificationData, setNotificationData, loading };
 };

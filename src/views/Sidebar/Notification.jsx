@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
 import * as styles from '../../assets/css/UsersListModal.module.css';
-import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
+import { useGetNotification } from "../../hooks/useGetNotification";
+import { apis } from "../../assets/apis";
 
-const Notification = ({ showModal, handleClose, notificationData }) => {
+import {
+    showLoading,
+    closeLoading,
+} from "../../components/LoadingAlert/LoadingAlert";
+
+const Notification = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
     // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
@@ -15,10 +21,31 @@ const Notification = ({ showModal, handleClose, notificationData }) => {
         closeLoading();
     }, [showModal]);
 
+    const { notificationData, setNotificationData } = useGetNotification(showModal);
+    const [loading, setLoading] = useState(null);
+
+    // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+    // React.useEffect(() => {
+    //     if (showModal) {
+    //         console.log("mamad");
+    //         showLoading();
+    //         fetch((apis["notification"]["notifications"]), {
+    //             headers: { Authorization: `Bearer ${token}` },
+    //         })
+    //             .then((response) => response.json())
+    //             .then((data) => {
+    //                 setNotificationData(data);
+    //                 closeLoading();
+    //                 setLoading(false);
+    //             })
+    //             .catch((error) => console.error(error))
+    //     };
+    // }, [showModal]);
     const handleCloseModal = () => {
         setShow(false);
         handleClose();
     };
+
     // console.log("Username in userlist modal is: " , username);
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
