@@ -7,31 +7,40 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-
+export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  setLoading(true);
+  
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: apis["tweets"]["tweets"]+"?page="+num,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  axios
+    .request(config)
+    .then((response) => {
+      setLoading(false);
+      setInfo(response.data)
+      setData((x) => {
+        if (!initial) return( {...x,results:[...x.results, ...response.data.results]});
+        return response.data;
+      });
+      return response.data;
+    })
+    .catch();
+};
 export const useTweets = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const fetchData = () => {
-    showLoading();
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: apis["tweets"]["tweets"],
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .request(config)
-      .then((response) => {
-        setLoading(false)
-        setData(response.data);
-        closeLoading();
-      })
-      .catch();
-  };
-  useEffect(()=>{fetchData()}, []);
-  return { data, setData ,loading};
+  const [data, setData] = useState({results:[]});
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState(null);
+  useEffect(() => {
+    fetchData(setLoading, setData, 1, true, info, setInfo);
+  }, []);
+
+  return { data, setData, loading, setLoading, info , setInfo};
 };
