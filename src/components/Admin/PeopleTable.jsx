@@ -3,9 +3,7 @@ import { useState } from "react";
 // import SearchBox from '../SearchBox/SearchBox'
 import { Input } from "reactstrap";
 import * as styles from "../../assets/css/admin/People_Table.module.css";
-import User from './User';
 import { useTweets } from "../../hooks/Twitter/useTweets";
-import Tweet from '../../views/TimeLine/Tweet';
 import Admin_Searchbar from './Admin_SearchBar.jsx';
 import { useAllProfiles } from '../../hooks/useSearchprofile.jsx';
 let tabsList = [
@@ -16,7 +14,7 @@ let tabsList = [
 export default function PeopleTable() {
   const [activeTab, setActiveTab] = useState("Users");
   const { filteredProfiles, loading2 } = useAllProfiles("");
-  // let IsUser = true;
+  
   const [IsUser, setIsUser] = useState(true);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -31,10 +29,8 @@ export default function PeopleTable() {
   const [open, setOpen] = useState(false);
   
   return (
-    // <div>PeopleTable</div>
     <>
       <div className={styles.Users_List}>
-      {/* <Input className={styles.Search}/> */}
         <div className={styles.tabs}>
           {tabsList.map((entry, index) => (
             <button
@@ -46,30 +42,7 @@ export default function PeopleTable() {
             </button>
           ))}
         </div>
-        
-        {/* {activeTab === "Users" && (
-          <div className={styles.Users_Container}>
-            {filteredProfiles.map((prof) => (
-              <User key={prof.id}
-              User_data={prof}/>
-            ))}
-          </div>
-        )}
-        {activeTab === "Posts" && (
-          <div className={styles.Users_Container}>
-            {tweets.results.map((tweet) => (
-              <Tweet
-                // className={styles.Tweets_Admin}
-                key={tweet.id}
-                tweet={tweet}
-                setOpenComment={setOpen}
-                // setTweets={setTweets}
-                // style={{ color: 'red', fontSize: '16px' }}
-              />
-            ))}
-          </div>
-        )} */}
-        <Admin_Searchbar IsUser={IsUser}/>
+        <Admin_Searchbar IsUser={IsUser}/> 
       </div>
     </>
   )
