@@ -23,7 +23,10 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
 function Timeline({ tabsList, profileData }) {
-  const { courseChoosed } = useGetChartData();
+
+  const [mainData] = (profileData.profile_type);
+  const username = profileData.username;
+  const { courseChoosed } = useGetChartData(username);
   const [activeTab, setActiveTab] = useState("Main");
 
   const handleTabClick = (tab) => {
@@ -36,8 +39,6 @@ function Timeline({ tabsList, profileData }) {
       ["media", "برای شما"],
     ];
   }
-  const [mainData] = (profileData.profile_type);
-  const username = profileData.username.split("_")[1];
   const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   const [open, setOpen] = useState(false);
   return (
