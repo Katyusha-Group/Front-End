@@ -4,6 +4,9 @@ name: CI-CD
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+
     
 
 
@@ -14,17 +17,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+    
       - name: setup node
         uses: actions/setup-node@master
 
+      - name : docker-compose up
+        run: docker compose up --bupld
+        
       # install applicaion dependencies
       - name: Install dependencies
         run: |
-          npm install --force
+          docker exec -it docker-react-c bash "npm install --force"
 
       # build and test the apps
       - name: build
         run: |
-          npm run build
-          npm test
+          docker exec -it docker-react-c bash "npm run build"
+          docker exec -it docker-react-c bash "npm test"
