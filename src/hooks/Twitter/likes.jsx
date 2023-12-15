@@ -6,7 +6,7 @@ export const likes = async (id) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   let data = "";
   let config = {
-    method: "get",
+    method: "post",
     maxBodyLength: Infinity,
     url: apis["tweets"]["tweets"]+id+"/like/",
     headers: {

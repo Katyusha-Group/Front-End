@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "../../assets/css/landing/mainpart.module.css";
+import styles from "../../assets/css/Landing/mainpart.module.css";
 import image from "../../assets/img/timelineeg.png";
 
 const TimeLinelanding = () => {

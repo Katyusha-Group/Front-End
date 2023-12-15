@@ -1,7 +1,6 @@
 import React from "react";
-import styles from "../../assets/css/landing/mainpart.module.css";
-import image from "../../assets/img/imgdarkolive.jpg";
-
+import styles from "./../../assets/css/Landing/mainpart.module.css";
+import image from "./../../assets/img/imgdarkolive.jpg";
 const PlanningInLanding = () => {
   return (
     <div className={styles.FirstType}>

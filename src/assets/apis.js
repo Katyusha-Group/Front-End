@@ -57,7 +57,7 @@ export const apis = {
   },
   reports: {
     tweets: `${domain}/report-twitte/`,
-    manage: `${domain}/manage-reported-twittes/`
+    manage: `${domain}/manage-reported-twittes/`,
   },
 
   tweetChart: {
@@ -74,5 +74,8 @@ export const apis = {
   },
   reportTwitte: {
     reportTwitte: `${domain}/report-twitte/`,
+  },
+  forYouTwittes: {
+    forYouTwittes: `${domain}/for-you-twitte/`,
   },
 };
