@@ -143,7 +143,7 @@ const Sidebar = () => {
             <Notification
               showModal={showModal}
               handleClose={handleCloseModal}
-              notificationData={notification.data}
+              notificationData={notification}
             />
 
           </div>

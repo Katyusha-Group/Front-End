@@ -32,7 +32,7 @@ const Notification = ({ showModal, handleClose, notificationData }) => {
                 <Modal.Body className={styles.ModalBody}>
                     <div className={styles.bodyContent}>
                         {notificationData && notificationData.length > 0 ?
-                            notificationData.map((notification, index) => (
+                            notificationData.data.map((notification, index) => (
                                 <div key={index} className={styles.eachcard}>
                                     <img className={styles.eachProfile} src={notification.actor.image} alt="" />
                                     <p className={styles.eachText}>{notification.message}. </p>
