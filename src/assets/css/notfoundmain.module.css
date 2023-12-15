@@ -4,6 +4,7 @@ margin: 60px auto;
 }
 @media only screen and (max-width: 800px) {
     .main{
-        width: 100% ;
+        margin-top: 20px ;
+        width: 80% ;
     }
 }
