@@ -11,13 +11,13 @@ function Instructor(
         setIsFollowed(prev => !prev);
     }
     let IsThisMe = IsThisMe_Function(User.username);
-    let Button_Data = IsThisMe ? 
-                    "پروفایل" :
-                    IsFollowed ?
-                      "حذف" :
-                      "دنبال کردن";
+    let Button_Data = IsThisMe ?
+        "پروفایل" :
+        IsFollowed ?
+            "حذف" :
+            "دنبال کردن";
     return (
-        <div className={styles.eachcard}>
+        <div className={styles.eachcard} style={{ margin: "0px", paddingLeft: "20px" }}>
             {/* <div className="author">
                 <div className="block block-one" />
                 <div className="block block-two" />
