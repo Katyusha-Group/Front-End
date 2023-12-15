@@ -17,7 +17,6 @@ export const useGetNotificationCount = () => {
             .then((response) => response.json())
             .then((data) => {
                 setNotificationCount(data);
-                console.log(data);
                 closeLoading();
                 setLoading(false);
             })
