@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { GETUsername } from '../../hooks/GETUsername';
 import { Navigate, useParams } from "react-router-dom";
 import { GETProfileData } from "../../hooks/GETProfileData.jsx";
+import IsThisMe_Function from "./IsThisMe_Function.jsx";
 export default function Profile() {
   const { chart, id } = useParams();
   // console.log("ID is: " , id);
@@ -17,11 +18,11 @@ export default function Profile() {
   const {profile, setProfile, loading} = usesProfileMe();
   const {profileData, setProfileData, loading2} = GETProfileData(id);
 
-  let IsThisMe = false;
-  if (profileData != null && profile != null) {
-    IsThisMe = (profile.username == profileData.username);
-  }
-  
+  // let IsThisMe = false;
+  // if (profileData != null && profile != null) {
+  //   IsThisMe = (profile.username == profileData.username);
+  // }
+  let IsThisMe = IsThisMe_Function(id);
   const username = id;
   const tabs = [
     ["Main", "صفحه اصلی"],

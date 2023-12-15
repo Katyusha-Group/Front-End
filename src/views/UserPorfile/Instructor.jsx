@@ -1,6 +1,7 @@
 import React from 'react';
 import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
+import IsThisMe_Function from './IsThisMe_Function';
 function Instructor(
     { User, handleButtonClick }
 ) {
@@ -9,6 +10,12 @@ function Instructor(
     function Follow_Button_Clicked() {
         setIsFollowed(prev => !prev);
     }
+    let IsThisMe = IsThisMe_Function(User.username);
+    let Button_Data = IsThisMe ? 
+                    "پروفایل" :
+                    IsFollowed ?
+                      "حذف" :
+                      "دنبال کردن";
     return (
         <div className={styles.eachcard}>
             {/* <div className="author">
@@ -35,7 +42,7 @@ function Instructor(
                     Follow_Button_Clicked();
                 }}
             >
-                {IsFollowed ? "حذف" : "دنبال کردن"}
+                {Button_Data}
             </button>
         </div>
     );
