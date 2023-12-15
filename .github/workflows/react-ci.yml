@@ -3,7 +3,7 @@ name: React CI
 on:
   push:
     branches:
-      - dev  # Change this to your dev branch name
+      - main  # Change this to your dev branch name
 
 jobs:
   build:
