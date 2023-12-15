@@ -3,6 +3,7 @@ import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import { useGetNotification } from "../../hooks/useGetNotification";
+import { useGetNotificationCount } from "../../hooks/useGetNotificationCount";
 import Notification from "./Notification";
 import {
   Col,
@@ -21,8 +22,8 @@ const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
 
-  const { notification, setNotification, loading } = useGetNotification();
-  console.log(notification)
+  const { notification, setNotification } = useGetNotification();
+  const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
     setShowModal(true);
   };
@@ -139,13 +140,17 @@ const Sidebar = () => {
                 className={`tim-icons icon-bell-55 text-muted pr-2`}
                 onClick={handleOpenModal_Notification}
                 id="toggleConfirmPassword"
-              ></i>
+              >
+                {notificationCount &&
+                  <span className={styles.notifCount}>{notificationCount.count}</span>
+                }
+              </i>
             </p>
             {notification &&
               <Notification
                 showModal={showModal}
                 handleClose={handleCloseModal}
-                notificationData={notification.data}
+                notificationData={notification}
               />
             }
 
