@@ -12,21 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:latest
-        options: --privileged  # Necessary for Docker to run within Docker
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-
-
+    
       - name: Build and run tests
         run: |
           docker-compose  up -d --build
           docker-compose -T docker-react-c npm test  
-
+  
       - name: Stop Docker Compose services
         run: docker-compose down
