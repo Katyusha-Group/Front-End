@@ -13,6 +13,8 @@ function Timeline() {
     setData: setTweets,
     loading,
     setLoading,
+    info,
+    setInfo
   } = useTweets("get", true);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1); // Track the current page for pagination
@@ -28,9 +30,6 @@ function Timeline() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("🚀 ~ file: Timeline.jsx:28 ~ Timeline ~ loading:", loading);
-  }, [loading]);
 
   const handleScroll = () => {
     const container = containerRef.current;
@@ -38,20 +37,14 @@ function Timeline() {
     const scrollHeight = container.scrollHeight;
     const containerHeight = container.clientHeight;
 
-    console.log("🚀 ~ file: Timeline.jsx:42 ~ handleScroll ~ scrollTop + containerHeight === scrollHeight:", scrollTop + containerHeight)
-    console.log("🚀 ~ file: Timeline.jsx:42 ~ handleScroll ~ scrollHeigh:", scrollHeight)
     if (scrollTop + containerHeight > scrollHeight-1) {
       loadMoreTweets();
     }
   };
 
   const loadMoreTweets = async () => {
-    console.log(
-      "🚀 ~ file: Timeline.jsx:45 ~ loadMoreTweets ~ loading:",
-      loading
-    );
     if (loading) return; // Prevent duplicate requests while loading
-    fetchData(setLoading, setTweets, 1, false);
+    fetchData(setLoading, setTweets, 1, false,info, setInfo);
   };
 
   const handleTabClick = (tab) => {
