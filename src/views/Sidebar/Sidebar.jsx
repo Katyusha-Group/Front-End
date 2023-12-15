@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../assets/css/sidebar.module.css";
 import logo from "../../assets/img/Logo1.png";
 import { useNavigate } from "react-router-dom";
+import { useGetNotification } from "../../hooks/useGetNotification";
+import { useGetNotificationCount } from "../../hooks/useGetNotificationCount";
+
+import Notification from "./Notification";
 import {
   Col,
   Nav,
@@ -17,13 +21,40 @@ import { NavLink, Link } from "react-router-dom";
 
 const Sidebar = () => {
   const Navigate = useNavigate();
+  const [showModal, setShowModal] = React.useState(false);
+  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+
+  const { notificationCount, setNotificationCount } = useGetNotificationCount();
+  const handleOpenModal_Notification = () => {
+    setShowModal(true);
+  };
+  function handleCloseModal() {
+    setNotificationCount({ ...notificationCount, count: 0 })
+    setShowModal(false);
+  };
   return (
     <>
       <Card className={styles.bg}>
         <div className={styles.bg1}>
           <div className={styles.header}>
             <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
-            <p className={styles.headertext}>کاتیوشا</p>
+            <p className={styles.headertext}>
+              کاتیوشا
+              <i
+                style={{ fontSize: "14px", cursor: "pointer" }}
+                className={`tim-icons icon-bell-55 text-muted pr-2`}
+                onClick={handleOpenModal_Notification}
+              >
+                {notificationCount &&
+                  <span className={styles.notifCount}>{notificationCount.count}</span>
+                }
+              </i>
+            </p>
+            <Notification
+              showModal={showModal}
+              handleClose={handleCloseModal}
+            />
+
           </div>
 
           <div
@@ -135,9 +166,9 @@ const Sidebar = () => {
             <p className={styles.itemtext}> سفارش ها</p>
           </div>
 
-          <UncontrolledDropdown className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`} direction="up" style={{margin:"auto 0"}
-        
-        }>
+          <UncontrolledDropdown className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`} direction="up" style={{ margin: "auto 0" }
+
+          }>
             <DropdownToggle
               className={"m-0 pp-4 " + styles.dropDownToggle}
               color="initial"

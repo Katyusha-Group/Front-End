@@ -48,6 +48,13 @@ p {
     justify-content: space-around;
 }
 
+.eachnotif {
+    margin-bottom: 20px;
+    display: block;
+    padding: 0px 10px;
+}
+
+
 .eachTime {
     font-size: 10px;
     opacity: 0.7;
@@ -61,6 +68,15 @@ p {
 .bodyContent {
     height: 37vh;
     overflow-y: auto;
-    padding-left: 15px;
-    margin-top: 15px;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+
+.unreadNotifs {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unreadNotifs::before {
+    color: hotpink;
 }
