@@ -41,7 +41,7 @@ p {
 }
 
 .eachcard {
-    margin-top: 18px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -59,7 +59,8 @@ p {
 }
 
 .bodyContent {
-    height: 40vh;
+    height: 37vh;
     overflow-y: auto;
     padding-left: 15px;
+    margin-top: 20px;
 }
