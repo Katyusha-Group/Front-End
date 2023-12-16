@@ -1,33 +1,19 @@
 import React from 'react'
 // import { useState } from 'react'
 import * as styles from "../../assets/css/Profile.module.css"
-import moment from 'jalali-moment'
-import { ModalHeader } from 'react-bootstrap';
+import moment from 'jalali-moment';
 import UsersListModal from './UsersListModal';
-import { userFollowings } from '../../hooks/userFollowings';
-import { userFollowers } from '../../hooks/userFollowers';
-import { GETProfileData } from '../../hooks/GETProfileData';
 import { POSTFollow } from '../../hooks/POSTFollow';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
 export default function ProfileHeader({profile, username, IsThisMe, setProfile}) {
   const [showModal, setShowModal] = React.useState(false);
-  const [IsFollowing, setIsFollowing] = React.useState(false);
-  // const {Followings, setFollowings} = userFollowings(username);
-  // const {Followers, setFollowers} = userFollowers(username);
-  // const [Followings, setFollowings] = React.useState([]);
-  // const [Followers, setFollowers] = React.useState([]);
+  const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
   const [profileData_Here, setProfileData_Here] = React.useState(profile);
-
-  // const fetchData = () => {
-  //   const { profileData, setProfileData, loading2 } = GETProfileData(username);
-  //   setProfileData_Here(profileData);
-  //   console.log("Profile updated: " , profile);
-  // };
+  const [IsFollowed, setIsFollowed] = React.useState(profileData_Here.is_followed);
 
   const handleOpenModal_Following = () => {
-    // console.log("Modal Clicked!")
     setIsFollowing(true);
     setShowModal(true);
   };
@@ -39,24 +25,11 @@ export default function ProfileHeader({profile, username, IsThisMe, setProfile})
 
   function handleCloseModal() {
     setShowModal(false);
-    // UpdateData();
-    // fetchData();
   };
-  // function UpdateData () {
-  //   setProfile();
-  //   console.log("Profile updated: " , profile);
-  // }
-  // console.log("Profile checking in profile header: " + profile.name);
-
-
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
-    // const { profileData, setProfileData, loading2 } = GETProfileData(username);
-    // setProfileData_Here(profileData);
-    
     showLoading();
-    
     fetch((apis["profiles"]["myprofile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -69,60 +42,34 @@ export default function ProfileHeader({profile, username, IsThisMe, setProfile})
     .catch((error) => {
       console.error(error);
     });
-    // console.log("Profile updated: " , profileData_Here);
+  }, [showModal, IsFollowed]);
 
 
-
-    // Fetch Followings
-    // fetch((apis["profiles"]["following"]).replace("//following", `/${username}/following`), {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    // .then(response => {
-    //   return response.json().then((data) => {
-    //     setFollowings(data);
-    //     closeLoading();
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
-
-
-    // // Fetch Followers
-    // fetch((apis["profiles"]["followers"]).replace("//followers", `/${username}/followers`), {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // })
-    // .then(response => {
-    //   return response.json().then((data) => {
-    //     setFollowers(data);
-    //     closeLoading();
-    //   });
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // });
-
-
-  }, [showModal]);
-
-  const DateStart="18 فروردبن1402";
-  const a=28
   const dateObj = new Date(profileData_Here.created_at);
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
-  // console.log("mmd", formattedDate )
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
-  // console.log("Is this me in profile header: ", IsThisMe);
-  let Button_Data = IsThisMe ? "ویرایش پروفایل" : "دنبال کردن";
-  // console.log("Button Data is: ", Button_Data);
+
+  let Button_Data = IsThisMe ? 
+                    "ویرایش پروفایل" :
+                    IsFollowed ?
+                      "حذف" :
+                      "دنبال کردن";
+
   const navigate = useNavigate();
   function Profile_Button () {
     if (IsThisMe)
     {
       navigate('/user');
     }
+    else if (IsFollowed)
+    {
+      setIsFollowed(prev => !prev);
+      POSTFollow(username, !IsFollowed); // unfollow
+    }
     else 
     {
-      POSTFollow(username, !profileData_Here.is_followed);
+      setIsFollowed(prev => !prev);
+      POSTFollow(username, !IsFollowed); // follow
     }
   }
   return (

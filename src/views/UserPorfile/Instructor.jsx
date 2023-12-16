@@ -1,6 +1,8 @@
 import React from 'react';
 import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
+import IsThisMe_Function from './IsThisMe_Function';
+import { useNavigate } from 'react-router-dom';
 function Instructor(
     { User, handleButtonClick }
 ) {
@@ -9,8 +11,15 @@ function Instructor(
     function Follow_Button_Clicked() {
         setIsFollowed(prev => !prev);
     }
+    const navigate = useNavigate();
+    let IsThisMe = IsThisMe_Function(User.username);
+    let Button_Data = IsThisMe ?
+        "پروفایل" :
+        IsFollowed ?
+            "حذف" :
+            "دنبال کردن";
     return (
-        <div className={styles.eachcard}>
+        <div className={styles.eachcard} style={{ margin: "0px", paddingLeft: "20px" }}>
             {/* <div className="author">
                 <div className="block block-one" />
                 <div className="block block-two" />
@@ -30,12 +39,29 @@ function Instructor(
             <button
                 className={IsFollowed ? styles.delButton : styles.delButton}
                 onClick={() => {
-                    POSTFollow(User.username, !IsFollowed);
-                    handleButtonClick();
-                    Follow_Button_Clicked();
+                    if (IsThisMe)
+                    {
+                        navigate('/user');
+                    }
+                    else if (IsFollowed)
+                    {
+                        // setIsFollowed(prev => !prev);
+                        // POSTFollow(username, !IsFollowed); // unfollow
+                        POSTFollow(User.username, !IsFollowed);
+                        handleButtonClick();
+                        Follow_Button_Clicked();
+                    }
+                    else 
+                    {
+                        // setIsFollowed(prev => !prev);
+                        // POSTFollow(username, !IsFollowed); // follow
+                        POSTFollow(User.username, !IsFollowed);
+                        handleButtonClick();
+                        Follow_Button_Clicked();
+                    }
                 }}
             >
-                {IsFollowed ? "حذف" : "دنبال کردن"}
+                {Button_Data}
             </button>
         </div>
     );

@@ -12,7 +12,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
   username }) => {
   const [show, setShow] = React.useState(showModal);
   let { Followings, setFollowings } = userFollowings(username, showModal);
-  let { Followers, setFollowers } = userFollowers(username);
+  let { Followers, setFollowers } = userFollowers(username, showModal);
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {

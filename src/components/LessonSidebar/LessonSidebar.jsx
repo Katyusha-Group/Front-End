@@ -19,7 +19,7 @@ import {
 } from "../../contexts/BackgroundColorContext";
 import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
-
+import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 import Spinner from "react-bootstrap/Spinner";
 var ps;
 const fetchRequest = "FETCH_REQUEST";
@@ -49,6 +49,7 @@ function LessonSidebar(props) {
   const [department, setDepartment] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
   const [selectedDep, setSelectedDep] = React.useState([]);
+  const {profile, setProfile, loading2} = usesProfileMe();
   const Navigate = useNavigate();
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
     reducer,
@@ -223,7 +224,7 @@ function LessonSidebar(props) {
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
-                            Navigate("/user");
+                            Navigate(`/profile/${profile.username}`);
                           }}
                         >
                           <span className="tim-icons icon-badge" />

@@ -4,22 +4,24 @@ import {
     showLoading,
     closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-export const useGetChartData = (username) => {
+export const useGetNotificationCount = () => {
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-    const [courseChoosed, setCourseChoosed] = useState(null);
+    const [notificationCount, setNotificationCount] = useState(null);
     const [loading, setLoading] = useState(true);
+    const username = "yazdan_mastery";
     useEffect(() => {
         showLoading();
-        fetch((apis["profiles"]["myprofile"] + `${username}` + `/student-calendar`), {
+        fetch((apis["notification"]["count"]), {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
             .then((data) => {
-                setCourseChoosed({ courseChoosed: data });
+                setNotificationCount(data);
                 closeLoading();
                 setLoading(false);
             })
             .catch((error) => console.error(error));
     }, []);
-    return { courseChoosed, setCourseChoosed, loading };
+    { console.log(notificationCount) }
+    return { notificationCount, setNotificationCount, loading };
 };

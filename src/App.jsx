@@ -36,6 +36,7 @@ import NewLandingpage from "./views/NewLandingPage.jsx";
 import AdminPanel from "./views/admin/Admin.jsx"
 import Replies from "./views/TimeLine/Replies.jsx";
 import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";
+import Chat from "./views/TimeLine/Chat.jsx";
 import Searchpage from "./views/Searchpage.jsx";
 function App() {
   document.documentElement.dir = "rtl";
@@ -141,6 +142,14 @@ function App() {
                     element={
                       <PrivatRoute>
                         <Notification />
+                      </PrivatRoute>
+                    }
+                  ></Router.Route>
+                  <Router.Route
+                    path="/chat/:id"
+                    element={
+                      <PrivatRoute>
+                        <Chat />
                       </PrivatRoute>
                     }
                   ></Router.Route>
