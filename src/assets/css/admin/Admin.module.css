@@ -8,25 +8,53 @@
 
 .admin{
     flex-grow: 1;
-    margin-top: 5vh;
+    margin: 5vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    /* justify-content: space-between; */
+    max-width: 90%;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* margin-left: 10px; */
+}
 
+.adminRow {
+    display: flex;
+    justify-content: space-between;
 }
 
 .adminBox{
-    height: 53vh;
+    height: 43vh;
     display: flex;
     /* justify-content: space-evenly; */
     flex-grow: 1;
+    margin: 10px;
+    /* width: 90%; */
 }
 
 .adminChart{
-    height: 33vh;
+    height: 43vh;
     display: flex;
     justify-content: center;
+    flex-grow: 1;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 376px) {
+    .contain {
+        flex-direction: column;
+        overflow-y: scroll;
+        max-height: 667px;
+    }
+    .adminRow {
+        flex-direction: column;
+        width: 90%;
+    }
+    .admin {
+        margin-top: 0;
+        margin-left: 0;
+    }
+    /* .admin {
+        overflow: scroll;
+    } */
 }

@@ -35,7 +35,6 @@
   align-items: flex-end;
   gap: 4vw;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 .sidebarmenuItems:hover {
@@ -54,8 +53,7 @@
 
 @media only screen and (max-width: 1300px) {
   .bg {
-    /* width: 10vw; */
-    width: 70px;
+    width: 10vw;
     margin-top: 5vh;
   }
 
@@ -75,17 +73,7 @@
     margin-top: 80px;
     margin-right: 20px;
   }
-  .sidebarmenuItems{
-    scale: 0.85;
-    justify-content: flex-end;
-    /* margin: 0;
-    padding: 0; */
-    margin-left: 25px;
-  }
-  .sidebarmenuItemsMobileBlock {
-    /* margin: 0; */
-    /* padding-left: -5px; */
-  }
+  
 }
 
 .dropDownToggle {
@@ -111,18 +99,13 @@
   opacity: 0.9;
 }
 
-@media only screen and (max-width: 670px) {
-  .bg1 {
-    width: 60px;
-  }
-}
+
 
 @media only screen and (max-width: 620px) {
   .bg {
     width: 80vw;
     height: 4rem;
     margin-bottom: 0;
-    margin-right: 20px;
     margin-top: 1vh;
   }
 
@@ -132,6 +115,7 @@
     width: 80vw;
     height: inherit;
     justify-content: space-around;
+    z-index: 1;
   }
 
   .sidebarmenuItems {

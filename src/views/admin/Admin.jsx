@@ -15,11 +15,13 @@ export default function Admin() {
   return (
     <>
       <div className={styles.contain} >
-        <Sidebar />
+        <div className={styles.adminSidebar}>
+          <Sidebar />
+        </div>
         <div
         className={styles.admin}
         >
-          <Row>
+          {/* <Row>
             <Col >
               <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
             </Col>
@@ -34,7 +36,15 @@ export default function Admin() {
             <Col >
               <Card className={`${styles.adminBox}`}><PeopleTable></PeopleTable></Card>
             </Col>
-          </Row>
+          </Row> */}
+          <div className={styles.adminRow}>
+            <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
+            <Card className={`${styles.adminChart}`}><ActivityChart></ActivityChart></Card>
+          </div>
+          <div className={styles.adminRow}>
+            <Card className={`${styles.adminBox}`}><ProtestTable></ProtestTable></Card>
+            <Card className={`${styles.adminBox}`}><PeopleTable></PeopleTable></Card>
+          </div>
         </div>
       </div>
     </>
