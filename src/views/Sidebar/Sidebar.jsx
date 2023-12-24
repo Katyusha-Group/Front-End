@@ -34,7 +34,7 @@ const Sidebar = () => {
   };
   return (
     <>
-      <Card className={styles.bg}>
+      <div className={styles.bg}>
         <div className={styles.bg1}>
           <div className={styles.header}>
             <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
@@ -316,7 +316,7 @@ const Sidebar = () => {
             <p className={styles.itemtext}>صفحه اصلی</p>
           </div>
         </div>
-      </Card>
+      </div>
     </>
   );
 };
