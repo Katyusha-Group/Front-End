@@ -38,60 +38,6 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
 
-const x = {
-  complete_course_number: "2211299_03",
-  name: "ریز پردازنده و زبان اسمبلی",
-  group_number: "03",
-  total_unit: 3,
-  practical_unit: 0,
-  capacity: 50,
-  registered_count: 36,
-  waiting_count: 0,
-  sex: "B",
-  emergency_deletion: true,
-  registration_limit:
-    "مجاز برای مقطع کارشناسی، دانشکده مهندسی کامپیوتر، گروه آموزشی واحد آموزش کارشناسی، رشته مهندسی کامپیوتر،",
-  description: "nan",
-  presentation_type: "N",
-  teachers: [
-    {
-      id: 3609,
-      name: "هاشم مشحون",
-      teacher_image:
-        "http://37.32.13.62/var/www/media/images/teachers_image/13_Y6rbyvu.png",
-    },
-  ],
-  exam_times: [
-    {
-      date: "1402-11-04",
-      exam_start_time: "14:00:00",
-      exam_end_time: "16:00:00",
-    },
-  ],
-  course_times: [
-    {
-      course_day: "1",
-      course_start_time: "14:30:00",
-      course_end_time: "16:00:00",
-      place: "دانشکده کامپیوتر کلاس شماره 116",
-      course_time_representation: 7,
-    },
-    {
-      course_day: "3",
-      course_start_time: "14:30:00",
-      course_end_time: "16:00:00",
-      place: "دانشکده کامپیوتر کلاس شماره 116",
-      course_time_representation: 7,
-    },
-  ],
-  is_allowed: true,
-  added_to_calendar_count: 1,
-};
-let tabsList = [
-  ["tweets", "دنبال کننده ها"],
-  ["media", "برای شما"],
-];
-
 function Timeline({ tabsList, profileData }) {
   const { courseChoosed } = useGetChartData();
   const infio = {
