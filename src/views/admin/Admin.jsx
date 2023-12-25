@@ -21,22 +21,6 @@ export default function Admin() {
         <div
         className={styles.admin}
         >
-          {/* <Row>
-            <Col >
-              <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
-            </Col>
-            <Col >
-              <Card className={`${styles.adminChart}`}><ActivityChart></ActivityChart></Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col >
-              <Card className={`${styles.adminBox}`}><ProtestTable></ProtestTable></Card>
-            </Col>
-            <Col >
-              <Card className={`${styles.adminBox}`}><PeopleTable></PeopleTable></Card>
-            </Col>
-          </Row> */}
           <div className={styles.adminRow}>
             <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
             <Card className={`${styles.adminChart}`}><ActivityChart></ActivityChart></Card>
