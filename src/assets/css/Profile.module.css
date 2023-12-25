@@ -29,7 +29,7 @@
 }
 .rightUpper{
     flex-grow: 1;
-    width: 360px;
+    width: 25vw;
     /* background-color:var(--gray-dark); */
     /* background-color: #373C57; */
     background: rgb(39,42,61,1);
@@ -212,3 +212,9 @@
     border-bottom: 2px solid var(--purple);
 }
 
+
+@media only screen and (max-width: 1064px) {
+    .rightUpper {
+      display: none;
+    }
+}

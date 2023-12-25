@@ -38,7 +38,10 @@ export const apis = {
   },
   allcoursesBasedDepartment: `${domain}/allcourses-based-department/`,
   orders: `${domain}/shop/orders/`,
-  notification: `${domain}/notification/`,
+  notification: {
+    notifications: `${domain}/notifications/`,
+    count: `${domain}/notifications/unread-count`,
+  },
   profiles: {
     myprofile: `${domain}/profiles/`,
     myusername: `${domain}/profiles/my-username/`,
@@ -76,6 +79,6 @@ export const apis = {
     reportTwitte: `${domain}/report-twitte/`,
   },
   forYouTwittes: {
-    forYouTwittes: `${domain}/for-you-twitte/`,
+    forYouTwittes: `${domain}/for-you-twittes/`,
   },
 };
