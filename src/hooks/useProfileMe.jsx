@@ -19,7 +19,7 @@ export const usesProfileMe = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const myUsername = await response.json();
-        console.log("My username is: " + myUsername.username);
+        // console.log("My username is: " + myUsername.username);
 
         const profileResponse = await fetch(
           apis["profiles"]["myprofile"] + `${myUsername.username}`,

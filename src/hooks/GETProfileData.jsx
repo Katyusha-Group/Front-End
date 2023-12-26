@@ -10,7 +10,7 @@ export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profileData, setprofileData] = useState(null);
   const [loading, setLoading] = useState(true);
-  // console.log("id is: " , username);
+  console.log("id is: " , username);
   useEffect(() => {
     showLoading();
     
