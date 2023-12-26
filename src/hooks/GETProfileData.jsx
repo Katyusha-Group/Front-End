@@ -23,6 +23,7 @@ export const GETProfileData = (username) => {
             setprofileData(data);
             closeLoading();
             setLoading(false);
+            console.log("User profile data: " ,data);
           });
         } else if (response.status === 404) {
           Swal.fire({
@@ -34,7 +35,7 @@ export const GETProfileData = (username) => {
             width: '25rem',
             confirmButtonText: 'باشه'
           }).then(() => {
-            window.history.back();
+            // window.history.back();
           });
         } else {
           Swal.fire({

@@ -11,8 +11,12 @@ export default function Profile() {
   const { chart, id } = useParams();
   
   const {profile, setProfile, loading} = usesProfileMe();
+  if(loading2){
+    return <></>
+  }
   const {profileData, setProfileData, loading2} = GETProfileData(id);
   let IsThisMe = IsThisMe_Function(id);
+  console.log("id", id);
 
   const username = id;
   const tabs = [

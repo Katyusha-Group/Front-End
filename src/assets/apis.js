@@ -53,6 +53,7 @@ export const apis = {
     unfollow: `${domain}/profiles/unfollow/`,
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
+    updateProfile: `${domain}/profiles/update-profile/`,
   },
 
   tweets: {
