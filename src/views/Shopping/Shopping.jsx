@@ -14,7 +14,7 @@ import {
   Form,
   CardFooter,
 } from "reactstrap";
-import NotificationAlert from "react-notification-alert";
+// import NotificationAlert from "react-notification-alert";
 import * as style from "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
@@ -33,7 +33,7 @@ function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
-  const notificationAlertRef = React.useRef(null);
+  // const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
   const { state: info, setState, amount, setAmount, totalPrice, setTotalPrice, loading, setLoading } =
@@ -77,7 +77,7 @@ function Shopping() {
     })
       .then((response) => {
 
-          notify("tl");
+          // notify("tl");
           saveWallet(setWallet);
           shopId = CartCreator({ setState, setTotalPrice, setAmount });
       })
@@ -95,41 +95,41 @@ function Shopping() {
     closeLoading();
   }
 
-  const notify = (place) => {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>خرید شما با موفقیت انجام شد</div>
-        </div>
-      ),
-      type: type,
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notify = (place) => {
+  //   var color = Math.floor(Math.random() * 5 + 1);
+  //   var type;
+  //   switch (color) {
+  //     case 1:
+  //       type = "primary";
+  //       break;
+  //     case 2:
+  //       type = "success";
+  //       break;
+  //     case 3:
+  //       type = "danger";
+  //       break;
+  //     case 4:
+  //       type = "warning";
+  //       break;
+  //     case 5:
+  //       type = "info";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   var options = {};
+  //   options = {
+  //     place: place,
+  //     message: (
+  //       <div>
+  //         <div>خرید شما با موفقیت انجام شد</div>
+  //       </div>
+  //     ),
+  //     type: type,
+  //     autoDismiss: 7,
+  //   };
+  //   notificationAlertRef.current.notificationAlert(options);
+  // };
 
   /**
    * Change the checkbox
@@ -194,7 +194,7 @@ function Shopping() {
   return (
     <>
       <div>
-        <NotificationAlert ref={notificationAlertRef} />
+        {/* <NotificationAlert ref={notificationAlertRef} /> */}
       </div>
       <div className="wrapper" style={{ direction: "ltr" }}>
         <div className="main-panel">

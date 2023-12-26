@@ -19,7 +19,7 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-import NotificationAlert from "react-notification-alert";
+// import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
@@ -76,45 +76,45 @@ function UserProfile() {
   const startTelegramBot = () => {
     window.location.href = info.telegram_link;
   };
-  const notificationAlertRef = React.useRef(null);
-  const notify = (place) => {
-    var color = 2;
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>
-            <b>با موفقیت به سبد خرید اضافه شد</b>
-          </div>
-        </div>
-      ),
-      type: type,
-      color: "white",
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notificationAlertRef = React.useRef(null);
+  // const notify = (place) => {
+  //   var color = 2;
+  //   var type;
+  //   switch (color) {
+  //     case 1:
+  //       type = "primary";
+  //       break;
+  //     case 2:
+  //       type = "success";
+  //       break;
+  //     case 3:
+  //       type = "danger";
+  //       break;
+  //     case 4:
+  //       type = "warning";
+  //       break;
+  //     case 5:
+  //       type = "info";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   var options = {};
+  //   options = {
+  //     place: place,
+  //     message: (
+  //       <div>
+  //         <div>
+  //           <b>با موفقیت به سبد خرید اضافه شد</b>
+  //         </div>
+  //       </div>
+  //     ),
+  //     type: type,
+  //     color: "white",
+  //     autoDismiss: 7,
+  //   };
+  //   notificationAlertRef.current.notificationAlert(options);
+  // };
   function save() {
     var formData = new FormData();
     // formData.append("first_name", info.first_name);
@@ -134,7 +134,7 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        notify("tl");
+        // notify("tl");
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -160,7 +160,7 @@ function UserProfile() {
     
     return (
       <div>
-        <NotificationAlert ref={notificationAlertRef} />
+        {/* <NotificationAlert ref={notificationAlertRef} /> */}
 
         <input
           className="btn"

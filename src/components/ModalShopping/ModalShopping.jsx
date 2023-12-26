@@ -16,7 +16,7 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import NotificationAlert from "react-notification-alert";
+// import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
 import * as style from "../../assets/css/UserPage.module.css";
@@ -64,44 +64,44 @@ const ModalShopping = (props) => {
 
   const notificationAlertRef = React.useRef(null);
 
-  const notify = (place, succeed) => {
-    var color = 2;
-    var type;
-    var options = {};
-    if (succeed){
-      type = "success";
-      options = {
-        place: place,
-        message: (
-          <div>
-            <div>
-              <b>با موفقیت به سبد خرید اضافه شد</b>
-            </div>
-          </div>
-        ),
-        type: type,
-        color: "white",
-        autoDismiss: 7,
-      };
-    }
-      else{
-        type = "danger";
-        options = {
-          place: place,
-          message: (
-          <div>
-            <div>
-              <b>متاسفانه ثبت نشد</b>
-            </div>
-          </div>
-        ),
-        type: type,
-        color: "white",
-        autoDismiss: 7,
-      };
-    }
-      notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notify = (place, succeed) => {
+  //   var color = 2;
+  //   var type;
+  //   var options = {};
+  //   if (succeed){
+  //     type = "success";
+  //     options = {
+  //       place: place,
+  //       message: (
+  //         <div>
+  //           <div>
+  //             <b>با موفقیت به سبد خرید اضافه شد</b>
+  //           </div>
+  //         </div>
+  //       ),
+  //       type: type,
+  //       color: "white",
+  //       autoDismiss: 7,
+  //     };
+  //   }
+  //     else{
+  //       type = "danger";
+  //       options = {
+  //         place: place,
+  //         message: (
+  //         <div>
+  //           <div>
+  //             <b>متاسفانه ثبت نشد</b>
+  //           </div>
+  //         </div>
+  //       ),
+  //       type: type,
+  //       color: "white",
+  //       autoDismiss: 7,
+  //     };
+  //   }
+  //     notificationAlertRef.current.notificationAlert(options);
+  // };
   function addItemShop(num) {
 
     axios(apis["shop"]["carts"]["addToCart"], {
@@ -119,17 +119,17 @@ const ModalShopping = (props) => {
       },
     })
       .then((data) => {
-        notify("tl", true);
+        // notify("tl", true);
       })
       .catch((error) => {
-        notify("tl", false);
+        // notify("tl", false);
         console.error(error);
       });
   }
   return (
     <>
       <div className="react-notification-alert-container">
-        <NotificationAlert ref={notificationAlertRef} />
+        {/* <NotificationAlert ref={notificationAlertRef} /> */}
       </div>
       <Modal
         show={props.show.flag}
