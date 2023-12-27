@@ -30,7 +30,8 @@ function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
-  // const {profile, setProfile, loading2} = usesProfileMe();
+  const {profile, setProfile, loading2} = usesProfileMe();
+  // setInfo(profile);
   // const {username, setUsername,loading4} = GETUsername();
   // if (loading4){
   //   return <></>
@@ -47,22 +48,22 @@ function UserProfile() {
 
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  useEffect(() => {
-    showLoading();
-    fetch(apis["accounts"]["justProfile"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-    closeLoading();
-  }, []);
+  // useEffect(() => {
+  //   showLoading();
+  //   fetch(apis["accounts"]["justProfile"], {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //     "Content-Type": "application/json",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setInfo(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  //   const activeRoute = (routeName) => {
+  //     return location.pathname === routeName ? "active" : "";
+  //   };
+  //   closeLoading();
+  // }, []);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -298,7 +299,7 @@ function UserProfile() {
                         <img
                           alt="..."
                           className="avatar"
-                          src={imageURLs != "" ? imageURLs : info.image}
+                          src={imageURLs != "" ? imageURLs : profile.image}
                         />
                       </a>
                     </div>

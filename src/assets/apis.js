@@ -43,7 +43,7 @@ export const apis = {
     count: `${domain}/notifications/unread-count`,
   },
   profiles: {
-    myprofile: `${domain}/profiles/`,
+    myprofile: `${domain}/profiles/my-profile/`,
     myusername: `${domain}/profiles/my-username/`,
     all: `${domain}/profiles/`,
     following: `${domain}/profiles//following/`,
@@ -54,6 +54,7 @@ export const apis = {
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
     updateProfile: `${domain}/profiles/update-profile/`,
+
   },
 
   tweets: {

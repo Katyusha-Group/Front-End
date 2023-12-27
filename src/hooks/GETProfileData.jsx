@@ -10,7 +10,7 @@ export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profileData, setprofileData] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log("id is: " , username);
+  // console.log("id is: " , username);
   useEffect(() => {
     showLoading();
     
@@ -23,7 +23,6 @@ export const GETProfileData = (username) => {
             setprofileData(data);
             closeLoading();
             setLoading(false);
-            console.log("User profile data: " ,data);
           });
         } else if (response.status === 404) {
           Swal.fire({
@@ -35,7 +34,7 @@ export const GETProfileData = (username) => {
             width: '25rem',
             confirmButtonText: 'باشه'
           }).then(() => {
-            // window.history.back();
+            window.history.back();
           });
         } else {
           Swal.fire({
