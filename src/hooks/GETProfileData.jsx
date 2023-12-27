@@ -5,6 +5,7 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
+import axios from "axios";
 
 export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
@@ -14,17 +15,21 @@ export const GETProfileData = (username) => {
   useEffect(() => {
     showLoading();
     
-    fetch((apis["profiles"]["myprofile"] + `${username}`), {
+    axios((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
         if (response.status === 200) {
-          return response.json().then((data) => {
-            setprofileData(data);
-            closeLoading();
-            setLoading(false);
-          });
-        } else if (response.status === 404) {
+          // return response((data) => {
+          //   setprofileData(data);
+          //   closeLoading();
+          //   setLoading(false);
+          // });
+          setprofileData(response.data);
+          closeLoading();
+          setLoading(false);
+        } 
+        else if (response.status === 404) {
           Swal.fire({
             icon: 'error',
             title: 'کاربر یافت نشد',
@@ -34,7 +39,7 @@ export const GETProfileData = (username) => {
             width: '25rem',
             confirmButtonText: 'باشه'
           }).then(() => {
-            window.history.back();
+            // window.history.back();
           });
         } else {
           Swal.fire({

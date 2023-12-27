@@ -16,9 +16,8 @@
 
 .p_name {
     margin-top: 10px;
-    margin-left: 50px;
     color: var(--white) !important;
-
+    margin-right: 100px;
 }
 
 .delButton {
@@ -42,6 +41,17 @@
     background-color: #67539E;
     color: white;
     border: 1px solid white;
+}
+
+.NameImage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NameImage:hover {
+    cursor: pointer;
 }
 
 /* .followButton {

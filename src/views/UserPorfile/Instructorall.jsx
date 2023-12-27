@@ -6,7 +6,8 @@ import Instructor from './Instructor';
 
 function Instructorall({ username, IsFollowing, IsModal
     , Followings, Followers
-    , handleButtonClick
+    , handleButtonClick,
+    handleCloseModal
 }) {
     // const {Followings, setFollowings} = userFollowings(username);
     // const {Followers, setFollowers} = userFollowers(username);
@@ -28,8 +29,8 @@ function Instructorall({ username, IsFollowing, IsModal
     return (
         <div>
             {
-                IsFollowing ?   Following_Component(Followings, Title, handleButtonClick) : 
-                                Follower_Component(Followers, Title, handleButtonClick)
+                IsFollowing ?   Following_Component(Followings, Title, handleButtonClick, handleCloseModal) : 
+                                Follower_Component(Followers, Title, handleButtonClick, handleCloseModal)
             }
         </div>
     );
@@ -37,20 +38,20 @@ function Instructorall({ username, IsFollowing, IsModal
 
 export default Instructorall;
 
-function Following_Component (Followings, Title, handleButtonClick) {
+function Following_Component (Followings, Title, handleButtonClick, handleCloseModal) {
     return (
         Followings && Followings.length > 0 ? 
         Followings.map ( (entry, index) => (
-            <Instructor key={index} User={entry} handleButtonClick={handleButtonClick}/>
+            <Instructor key={index} User={entry} handleButtonClick={handleButtonClick} handleCloseModal={handleCloseModal}/>
         )) :
         <p>هیج {Title} ای یافت نشد</p>
     )
 }
-function Follower_Component (Followers, Title, handleButtonClick) {
+function Follower_Component (Followers, Title, handleButtonClick, handleCloseModal) {
     return (
         Followers && Followers.length > 0 ? 
         Followers.map ( (entry, index) => (
-                <Instructor key={index} User={entry} handleButtonClick={handleButtonClick}/>
+                <Instructor key={index} User={entry} handleButtonClick={handleButtonClick} handleCloseModal={handleCloseModal}/>
         )) :
         <p>هیج {Title} ای یافت نشد</p>   
     )

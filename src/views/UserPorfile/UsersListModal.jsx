@@ -51,6 +51,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
               Followings={Followings}
               Followers={Followers}
               handleButtonClick={handleButtonClick}
+              handleCloseModal={handleCloseModal}
             />
           </div>
         </Modal.Body>
