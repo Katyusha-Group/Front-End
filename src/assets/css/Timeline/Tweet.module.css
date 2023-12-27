@@ -27,6 +27,13 @@
   border-radius: 50%;
   margin-right: 10px;
   margin-left: 10px;
+  border: 2px solid #32325d;
+}
+.avatarimg{
+  width: 50px;
+  padding: 2px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .username {
@@ -59,9 +66,25 @@
   border: none;
   align-items: center;
 }
+.button2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 20px;
+  color: red;
+  background-color: initial;
+  border: none;
+  align-items: center;
+}
 
 .button:hover{
   color: red;
+  background-color: initial;
+  border: none;
+  transition: 0.5s;
+}
+.button2:hover{
+  color: var(--white);
   background-color: initial;
   border: none;
   transition: 0.5s;
