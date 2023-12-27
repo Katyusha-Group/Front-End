@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import img from "../../assets/img/DefaultAvatar.jpg";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import {
   Button,
@@ -14,7 +15,10 @@ import {
   Input,
   Row,
   Col,
+
 } from "reactstrap";
+import Spinner from "react-bootstrap/Spinner";
+
 import {
   showLoading,
   closeLoading,
@@ -30,40 +34,9 @@ function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
-  const {profile, setProfile, loading2} = usesProfileMe();
-  // setInfo(profile);
-  // const {username, setUsername,loading4} = GETUsername();
-  // if (loading4){
-  //   return <></>
-  // }
-  // const {profileData, setProfileData, loading3} = GETProfileData(username);
-
-
-  // if(loading2){
-  //   return <></>
-  // }
-  // console.log("profile", profile);
-
-  
-
+  const { profile, setProfile, loading: loading2 } = usesProfileMe();
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  // useEffect(() => {
-  //   showLoading();
-  //   fetch(apis["accounts"]["justProfile"], {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //     "Content-Type": "application/json",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setInfo(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  //   const activeRoute = (routeName) => {
-  //     return location.pathname === routeName ? "active" : "";
-  //   };
-  //   closeLoading();
-  // }, []);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -123,7 +96,6 @@ function UserProfile() {
     formData.append("name", info.first_name + " " + info.last_name);
     if (images.length > 0) {
       formData.append("image", images[0]);
-
     } else {
     }
     fetch(apis["profiles"]["updateProfile"], {
@@ -158,7 +130,9 @@ function UserProfile() {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
-    
+    if (loading2) {
+      return <></>;
+    }
     return (
       <div>
         {/* <NotificationAlert ref={notificationAlertRef} /> */}
@@ -184,6 +158,7 @@ function UserProfile() {
       </div>
     );
   };
+  console.log("loading2", loading2);
 
   return (
     <>
@@ -296,11 +271,16 @@ function UserProfile() {
                       <div className="block block-three" />
                       <div className="block block-four" />
                       <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <img
-                          alt="..."
-                          className="avatar"
-                          src={imageURLs != "" ? imageURLs : profile.image}
-                        />
+                        {loading2 ? (
+                          <Spinner animation="border" variant="primary"/>
+                        ) : (
+                          <img
+                            alt="..."
+                            className="avatar"
+                            src={profile !== null ? profile.image : img}
+                          />
+                        )}
+                        {console.log("profile", profile)}
                       </a>
                     </div>
                     <div className="card-description">
