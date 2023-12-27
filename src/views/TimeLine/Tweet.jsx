@@ -74,10 +74,6 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             >
               ریپورت
             </DropdownItem>
-            <ModalReport
-              showModal={showModal}
-            // handleClose={handleCloseModal}
-            />
             <DropdownItem
               className={styles.dropDown}
               onClick={() => {
@@ -90,6 +86,10 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               حذف
             </DropdownItem>
           </DropdownMenu>
+          <ModalReport
+            showModal={showModal}
+            handleClose={handleCloseModal}
+          />
         </Dropdown>
         <div className={styles.header}>
           <div className={styles.avatar}>{tweet.image}</div>
