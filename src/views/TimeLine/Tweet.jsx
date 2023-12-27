@@ -13,6 +13,7 @@ import {
 import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
 import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
+import ModalReport from "../../components/ModalReport/ModalReport";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -20,6 +21,16 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(false);
   const [link, setLink] = useState("");
+
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleOpenModal_Report = () => {
+    setShowModal(true);
+  };
+  function handleCloseModal() {
+    setShowModal(false);
+  };
   return (
     <>
       <Card className={styles.tweet}>
@@ -55,13 +66,18 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             <DropdownItem
               disabled={tweet.reported_by_me}
               className={styles.dropDown}
-              onClick={() => {
-
-                Report(tweet.id, setTweets);
-              }}
+              onClick={handleOpenModal_Report}
+            // onClick={() => {
+            //   handleOpenModal_Report
+            //   // Report(tweet.id, setTweets);
+            // }}
             >
-              بلاک
+              ریپورت
             </DropdownItem>
+            <ModalReport
+              showModal={showModal}
+            // handleClose={handleCloseModal}
+            />
             <DropdownItem
               className={styles.dropDown}
               onClick={() => {
@@ -122,7 +138,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </button>
           </ButtonGroup>
         </div>
-      </Card>
+      </Card >
       <CommentModal
         open={open}
         setOpen={() => {
