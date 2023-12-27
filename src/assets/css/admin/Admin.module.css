@@ -41,10 +41,21 @@
 }
 
 @media only screen and (max-width: 541px) {
-    .contain {
-        flex-direction: column;
-        overflow-y: scroll;
+    .ParentContain {
+        display: flex;
         max-height: 100vh;
+        flex-direction: column-reverse;
+    }
+    .adminSidebar {
+        flex-shrink: 0;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .contain {
+        flex: 1;
+        margin-bottom: 5px;
+        overflow-y: scroll;
     }
     .adminRow {
         flex-direction: column;

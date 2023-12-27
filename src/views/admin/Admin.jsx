@@ -14,20 +14,22 @@ import PeopleTable from "../../components/Admin/PeopleTable.jsx";
 export default function Admin() {
   return (
     <>
-      <div className={styles.contain} >
+      <div className={styles.ParentContain}>
         <div className={styles.adminSidebar}>
           <Sidebar />
         </div>
-        <div
-        className={styles.admin}
-        >
-          <div className={styles.adminRow}>
-            <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
-            <Card className={`${styles.adminChart}`}><ActivityChart></ActivityChart></Card>
-          </div>
-          <div className={styles.adminRow}>
-            <Card className={`${styles.adminBox}`}><ProtestTable></ProtestTable></Card>
-            <Card className={`${styles.adminBox}`}><PeopleTable></PeopleTable></Card>
+        <div className={styles.contain} >
+          <div
+          className={styles.admin}
+          >
+            <div className={styles.adminRow}>
+              <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
+              <Card className={`${styles.adminChart}`}><ActivityChart></ActivityChart></Card>
+            </div>
+            <div className={styles.adminRow}>
+              <Card className={`${styles.adminBox}`}><ProtestTable></ProtestTable></Card>
+              <Card className={`${styles.adminBox}`}><PeopleTable></PeopleTable></Card>
+            </div>
           </div>
         </div>
       </div>
