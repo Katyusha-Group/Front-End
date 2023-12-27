@@ -23,28 +23,47 @@ import {
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
+import { usesProfileMe } from "../../hooks/useProfileMe";
+import { GETProfileData } from "../../hooks/GETProfileData";
+import { GETUsername } from "../../hooks/GETUsername";
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
+  const {profile, setProfile, loading2} = usesProfileMe();
+  // setInfo(profile);
+  // const {username, setUsername,loading4} = GETUsername();
+  // if (loading4){
+  //   return <></>
+  // }
+  // const {profileData, setProfileData, loading3} = GETProfileData(username);
+
+
+  // if(loading2){
+  //   return <></>
+  // }
+  // console.log("profile", profile);
+
+  
+
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  useEffect(() => {
-    showLoading();
-    fetch(apis["accounts"]["justProfile"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-    closeLoading();
-  }, []);
+  // useEffect(() => {
+  //   showLoading();
+  //   fetch(apis["accounts"]["justProfile"], {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //     "Content-Type": "application/json",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setInfo(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  //   const activeRoute = (routeName) => {
+  //     return location.pathname === routeName ? "active" : "";
+  //   };
+  //   closeLoading();
+  // }, []);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -99,14 +118,15 @@ function UserProfile() {
   // };
   function save() {
     var formData = new FormData();
-    formData.append("first_name", info.first_name);
-    formData.append("last_name", info.last_name);
+    // formData.append("first_name", info.first_name);
+    // formData.append("last_name", info.last_name);
+    formData.append("name", info.first_name + " " + info.last_name);
     if (images.length > 0) {
       formData.append("image", images[0]);
 
     } else {
     }
-    fetch(apis["accounts"]["profile"]["updateProfile"], {
+    fetch(apis["profiles"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
@@ -138,6 +158,7 @@ function UserProfile() {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
+    
     return (
       <div>
         {/* <NotificationAlert ref={notificationAlertRef} /> */}
@@ -278,7 +299,7 @@ function UserProfile() {
                         <img
                           alt="..."
                           className="avatar"
-                          src={imageURLs != "" ? imageURLs : info.image}
+                          src={imageURLs != "" ? imageURLs : profile.image}
                         />
                       </a>
                     </div>
