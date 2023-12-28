@@ -15,6 +15,7 @@ import {
     Row,
     Col,
     Label,
+    ModalFooter,
 } from "reactstrap";
 import * as styles from '../../assets/css/ModalReport.module.css';
 import { apis } from "../../assets/apis";
@@ -58,7 +59,7 @@ const ModalReport = ({ showModal, handleClose }) => {
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
-                    <h3 className={styles.ModalTitle}>به چه دلیل می‌خواهید ریپورت کنید؟</h3>
+                    <h3 className={styles.ModalTitle}>دلیل ریپورت؟</h3>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
@@ -93,75 +94,29 @@ const ModalReport = ({ showModal, handleClose }) => {
                             </div>
                         </Col>
                         <Col md="6">
-                            <div
-                                className={styles.eachItem}
+
+                            {/* <label className={styles.eachLabel}>غیره</label> */}
+                            <Input
+                                className={styles.eachInput}
+                                value="سایر موارد"
+                                type="button"
                             >
-                                <p className={styles.eachItemText}>غیره</p>
-                            </div>
+                            </Input>
                         </Col>
                     </Row>
-                    {/* <Form className={styles.d_grid}>
-                        <FormGroup
-                            className={styles.fgroup}
-                        >
-                            <Input type="checkbox" />
-                            <span className="form-check-sign">
-                                <span className="check" />
-                            </span>
-                            <Label check className={styles.fgroup}>اهانت و فحاشی</Label>
-                        </FormGroup>
-                        <FormGroup
-                            className={styles.fgroup}
-                        >
-                            <Input type="checkbox" />
-                            <span className="form-check-sign">
-                                <span className="check" />
-                            </span>
-                            <Label check className={styles.fgroup}>کلمات مستهجن</Label>
-                        </FormGroup>
-                        <FormGroup className={styles.fgroup}>
-
-                            <Input type="checkbox" />
-                            <span className="form-check-sign">
-                                <span className="check" />
-                            </span>
-                            <Label check className={styles.fgroup}>نامرتبط</Label>
-                        </FormGroup>
-                        <FormGroup className={styles.fgroup}>
-
-                            <Input type="checkbox" />
-                            <span className="form-check-sign">
-                                <span className="check" />
-                            </span>
-                            <Label check className={styles.fgroup}>غیره</Label>
-                        </FormGroup>
-                    </Form> */}
-                    {/* <div className={styles.bodyContent}>
-
-                        <div className={styles.eachnotif}>
-                            <img className={styles.eachProfile} alt="" />
-                            < p className={styles.eachText} >
-                                <i
-                                    style={{ fontSize: "14px", fontWeight: "bold" }}
-                                    className={`${styles.unreadNotifs} tim-icons icon-bell-55 text-muted pl-1`}
-                                >
-                                </i></p>
-                            <span className={styles.eachTime}>
-                            </span>
-                        </div>
-                        <p>پیامی برای نمایش موجود نمی‌باشد</p>
-                    </div> */}
+                    <Row className={styles.reportFooter}>
+                        <Col md="12">
+                            <Button
+                                onClick={handleSubmit}
+                                className="btn-fill"
+                                color="primary"
+                                type="submit"
+                            >
+                                ثبت
+                            </Button>
+                        </Col>
+                    </Row>
                 </Modal.Body >
-                <Modal.Footer className={styles.footer}>
-                    <Button
-                        onClick={handleSubmit}
-                        className="btn-fill"
-                        color="primary"
-                        type="submit"
-                    >
-                        ثبت
-                    </Button>
-                </Modal.Footer>
             </div >
         </Modal >
     );

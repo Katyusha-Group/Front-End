@@ -14,6 +14,7 @@
 }
 
 .ModalHeader {
+    margin-top: 20px;
     justify-content: center;
     color: var(--white);
 }
@@ -23,15 +24,15 @@
 }
 
 .ModalBody {
-    margin-top: -40px;
-    height: 50vh;
+    margin-top: -20px;
+    height: 30vh;
     color: var(--white) !important;
 }
 
 .d_grid {
     display: grid;
-    justify-content: right;
-    text-align: right;
+    justify-content: center;
+    text-align: center;
 }
 
 p {
@@ -44,7 +45,7 @@ p {
 }
 
 .bodyContent {
-    height: 37vh;
+    height: 30vh;
     overflow-y: auto;
     padding-left: 0px;
     margin-top: 20px;
@@ -59,12 +60,16 @@ p {
     color: hotpink;
 }
 
-.eachItem {
+.eachInput {
     text-align: center;
     border: white 1px solid;
+    border-radius: 10px;
     opacity: 0.6;
     margin: 10px 0px;
     padding: 10px 0px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
 }
 
 
@@ -78,6 +83,14 @@ p {
     padding: 0 !important;
 }
 
-.eachItemText {
+.eachInput {
     margin: 0 !important;
+    position: relative;
+    float: left;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.reportFooter {
+    margin-top: 35px !important;
 }
