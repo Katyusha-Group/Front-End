@@ -70,6 +70,20 @@ p {
     background-color: transparent;
     cursor: pointer;
     position: relative;
+    font-size: small;
+}
+
+.eachInput:focus {
+    text-align: center;
+    border: white 1px solid;
+    border-radius: 10px;
+    opacity: 0.6;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    font-size: small;
 }
 
 
@@ -83,14 +97,7 @@ p {
     padding: 0 !important;
 }
 
-.eachInput {
-    margin: 0 !important;
-    position: relative;
-    float: left;
-    color: #FFF;
-    cursor: pointer;
-}
 
 .reportFooter {
-    margin-top: 35px !important;
+    margin: 15px 0px !important;
 }

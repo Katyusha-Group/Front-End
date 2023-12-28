@@ -59,7 +59,7 @@ const ModalReport = ({ showModal, handleClose }) => {
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
-                    <h3 className={styles.ModalTitle}>دلیل ریپورت؟</h3>
+                    <h4 className={styles.ModalTitle}>دلیل ریپورت؟</h4>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
@@ -67,31 +67,33 @@ const ModalReport = ({ showModal, handleClose }) => {
                 <Modal.Body className={styles.ModalBody}>
                     <Row>
                         <Col md="6">
-                            <div
-                                className={styles.eachItem}
+                            <Input
+                                className={styles.eachInput}
+                                value="مطالب نامرتبط"
+                                type="button"
+                                style={{ opacity: report === "O" ? "1" : "0.6" }}
                             >
-                                <p
-                                    value={"S"}
-                                    name={"spam"}
-                                    onClick={handleClickReport}
-                                    className={styles.eachItemText}>مطالب نامرتبط</p>
-                            </div>
+                            </Input>
                         </Col>
                         <Col md="6">
-                            <div
-                                className={styles.eachItem}
+                            <Input
+                                className={styles.eachInput}
+                                value="اهانت و فحاشی"
+                                type="button"
+                                style={{ opacity: report === "O" ? "1" : "0.6" }}
                             >
-                                <p className={styles.eachItemText}>اهانت و فحاشی</p>
-                            </div>
+                            </Input>
                         </Col>
                     </Row>
                     <Row>
                         <Col md="6">
-                            <div
-                                className={styles.eachItem}
+                            <Input
+                                className={styles.eachInput}
+                                value="پورنوگرافی"
+                                type="button"
+                                style={{ opacity: report === "O" ? "1" : "0.6" }}
                             >
-                                <p className={styles.eachItemText}>پورنوگرافی</p>
-                            </div>
+                            </Input>
                         </Col>
                         <Col md="6">
 
@@ -100,6 +102,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="سایر موارد"
                                 type="button"
+                                style={{ opacity: report === "O" ? "1" : "0.6" }}
                             >
                             </Input>
                         </Col>
