@@ -28,6 +28,7 @@ import {
 const ModalReport = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
     const [report, setReport] = React.useState("");
+
     const handleClickReport = (value) => {
         setReport(value);
     };
@@ -44,6 +45,7 @@ const ModalReport = ({ showModal, handleClose }) => {
 
     const handleCloseModal = () => {
         setShow(false);
+        setReport("");
         handleClose();
     };
     async function handleSubmit(event) {
@@ -67,6 +69,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="مطالب نامرتبط"
                                 type="button"
+                                onClick={() => handleClickReport("S")}
                                 style={{ opacity: report === "S" ? "1" : "0.6" }}
                             >
                             </Input>
@@ -76,6 +79,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="اهانت و فحاشی"
                                 type="button"
+                                onClick={() => handleClickReport("V")}
                                 style={{ opacity: report === "V" ? "1" : "0.6" }}
                             >
                             </Input>
@@ -87,6 +91,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="پورنوگرافی"
                                 type="button"
+                                onClick={() => handleClickReport("P")}
                                 style={{ opacity: report === "P" ? "1" : "0.6" }}
                             >
                             </Input>
@@ -96,6 +101,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="سایر موارد"
                                 type="button"
+                                onClick={() => handleClickReport("O")}
                                 style={{ opacity: report === "O" ? "1" : "0.6" }}
                             >
                             </Input>
