@@ -4,6 +4,7 @@ import logo from "../../assets/img/Logo1.png";
 import { useNavigate } from "react-router-dom";
 import { useGetNotification } from "../../hooks/useGetNotification";
 import { useGetNotificationCount } from "../../hooks/useGetNotificationCount";
+import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 
 import Notification from "./Notification";
 import {
@@ -23,6 +24,7 @@ const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const {profile, setProfile, loading2} = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
@@ -126,7 +128,7 @@ const Sidebar = () => {
             className={`${styles.sidebarmenuItems}`}
             onClick={(e) => {
               e.preventDefault();
-              Navigate("/profile");
+              Navigate(`/profile/${profile.username}`);
             }}
           >
             <svg
@@ -238,7 +240,7 @@ const Sidebar = () => {
                 href="#pablo"
                 onClick={(e) => {
                   e.preventDefault();
-                  Navigate("/user");
+                  Navigate(`/profile/${profile.username}`);
                 }}
               >
                 <span className="tim-icons icon-badge" />

@@ -20,13 +20,11 @@ import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
-const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-function Timeline({ tabsList, profileData }) {
-  const username = profileData.username.split("_")[1];
+function Timeline({ tabsList, profileData, profileData_loading }) {
+  // const username = profileData.username.split("_")[1];
   const [mainData] = (profileData.profile_type);
-  const username1 = profileData.username;
-  const { courseChoosed } = useGetChartData(username1);
+  const { courseChoosed } = useGetChartData(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
 
   const handleTabClick = (tab) => {
@@ -75,7 +73,7 @@ function Timeline({ tabsList, profileData }) {
                     display: mainData == "C" ? "block" : "none",
                   }}
                 >
-                  <CourseTimeline show={username} />
+                  <CourseTimeline show={profileData.username.split("_")[1]} />
                 </div>
               )}
               {mainData == "T" && (
@@ -84,7 +82,7 @@ function Timeline({ tabsList, profileData }) {
                     display: mainData == "T" ? "block" : "none",
                   }}
                 >
-                  <TeacherTimeline show={username} />
+                  <TeacherTimeline show={profileData.username.split("_")[1]} />
                 </div>)}
               {mainData == "U" && (
                 <div
