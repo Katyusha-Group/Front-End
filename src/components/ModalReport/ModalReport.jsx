@@ -27,7 +27,7 @@ import {
 
 const ModalReport = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
-    const [report, setReport] = React.useState();
+    const [report, setReport] = React.useState("");
     const handleClickReport = (value) => {
         setReport(value);
     };
@@ -48,12 +48,8 @@ const ModalReport = ({ showModal, handleClose }) => {
     };
     async function handleSubmit(event) {
         event.preventDefault();
-        if (report.trim().length === 0) {
-            // errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
-        }
-        else {
-            // handleSignUp(formData, subject, gender);
-        }
+        console.log(report);
+        // handleSignUp(formData, subject, gender);
     }
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
@@ -71,7 +67,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="مطالب نامرتبط"
                                 type="button"
-                                style={{ opacity: report === "O" ? "1" : "0.6" }}
+                                style={{ opacity: report === "S" ? "1" : "0.6" }}
                             >
                             </Input>
                         </Col>
@@ -80,7 +76,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="اهانت و فحاشی"
                                 type="button"
-                                style={{ opacity: report === "O" ? "1" : "0.6" }}
+                                style={{ opacity: report === "V" ? "1" : "0.6" }}
                             >
                             </Input>
                         </Col>
@@ -91,13 +87,11 @@ const ModalReport = ({ showModal, handleClose }) => {
                                 className={styles.eachInput}
                                 value="پورنوگرافی"
                                 type="button"
-                                style={{ opacity: report === "O" ? "1" : "0.6" }}
+                                style={{ opacity: report === "P" ? "1" : "0.6" }}
                             >
                             </Input>
                         </Col>
                         <Col md="6">
-
-                            {/* <label className={styles.eachLabel}>غیره</label> */}
                             <Input
                                 className={styles.eachInput}
                                 value="سایر موارد"
@@ -110,6 +104,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                     <Row className={styles.reportFooter}>
                         <Col md="12">
                             <Button
+                                disabled={report !== "S" && report !== "O" && report !== "P" && report !== "V"}
                                 onClick={handleSubmit}
                                 className="btn-fill"
                                 color="primary"
