@@ -76,11 +76,11 @@
     margin-right: 20px;
   }
   .sidebarmenuItems{
-    scale: 0.85;
+    /* scale: 0.85; */
     justify-content: flex-end;
-    /* margin: 0;
-    padding: 0; */
-    margin-left: 25px;
+    /* margin: 0; */
+    padding: 10px auto;
+    /* margin-left: 25px; */
   }
   .sidebarmenuItemsMobileBlock {
     /* margin: 0; */
