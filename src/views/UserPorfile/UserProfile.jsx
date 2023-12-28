@@ -15,21 +15,17 @@ import {
   Input,
   Row,
   Col,
-
 } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
-
 import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-// import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
 import { usesProfileMe } from "../../hooks/useProfileMe";
-import { GETProfileData } from "../../hooks/GETProfileData";
-import { GETUsername } from "../../hooks/GETUsername";
+
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
@@ -180,47 +176,52 @@ function UserProfile() {
                           <FormGroup>
                             <label>رشته</label>
                             {loading2 ? (
-                          <Spinner animation="border" variant="primary"/>
-                        ) : (
-                            <Input
-                              defaultValue={profile.department}
-                              placeholder="رشته"
-                              name="department"
-                              type="text"
-                              onChange={handleChange}
-                              disabled
-                            />)}
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                defaultValue={profile.department}
+                                placeholder="رشته"
+                                name="department"
+                                type="text"
+                                onChange={handleChange}
+                                disabled
+                              />
+                            )}
                           </FormGroup>
                         </Col>
                         <Col className="px-md-1" md="3">
                           <FormGroup>
                             <label>جنسیت</label>
                             {loading2 ? (
-                          <Spinner animation="border" variant="primary"/>
-                        ) : (
-                            <Input
-                              defaultValue={profile.gender === "M" ? "مرد" : "زن"}
-                              placeholder="جنسیت"
-                              type="text"
-                              name="gender"
-                              disabled
-                              onChange={handleChange}
-                            />)}
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                defaultValue={
+                                  profile.gender === "M" ? "مرد" : "زن"
+                                }
+                                placeholder="جنسیت"
+                                type="text"
+                                name="gender"
+                                disabled
+                                onChange={handleChange}
+                              />
+                            )}
                           </FormGroup>
                         </Col>
                         <Col className="pl-md-1" md="4">
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             {loading2 ? (
-                          <Spinner animation="border" variant="primary"/>
-                        ) : (
-                            <Input
-                              placeholder={profile.email}
-                              type="email"
-                              disabled
-                              name="email"
-                              onChange={handleChange}
-                            />)}
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                placeholder={profile.email}
+                                type="email"
+                                disabled
+                                name="email"
+                                onChange={handleChange}
+                              />
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -281,7 +282,7 @@ function UserProfile() {
                       <div className="block block-four" />
                       <a href="#pablo" onClick={(e) => e.preventDefault()}>
                         {loading2 ? (
-                          <Spinner animation="border" variant="primary"/>
+                          <Spinner animation="border" variant="primary" />
                         ) : (
                           <img
                             alt="..."
