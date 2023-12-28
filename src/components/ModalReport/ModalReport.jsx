@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { FormText, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
 import {
@@ -26,6 +26,11 @@ import {
 
 const ModalReport = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
+    const [report, setReport] = React.useState();
+    const handleReport = (value) => {
+        setReport(value);
+    };
+
     // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
     React.useEffect(() => {
@@ -51,61 +56,74 @@ const ModalReport = ({ showModal, handleClose }) => {
                     </button>
                 </Modal.Header>
                 <Modal.Body className={styles.ModalBody}>
-                    <Form className="d-flex justify-content-center">
-                        <FormGroup className={styles.shopping_label} check>
-                            <Label check className={styles.shopping_label}>
-                                <Input
-                                    // onChange={() => {
-                                    //     if (props.order.contain_email != "O") {
-                                    //         setEmail(!email);
-                                    //     }
-                                    // }}
-                                    // checked={
-                                    //     props.order.contain_email == "O" ? true : email
-                                    // }
-                                    type="checkbox"
-                                />
-                                <span className="form-check-sign">
-                                    <span className="check" />
-                                </span>
-                                ایمیل
-                            </Label>
+                    <Row>
+                        <Col md="6">
+                            <FormGroup
+                                className={styles.fgroup}
+                            >
+                                <Label>اهانت و فحاشی</Label>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup
+                                className={styles.fgroup}
+                            >
+                                <Label>اهانت و فحاشی</Label>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="6">
+                            <FormGroup
+                                className={styles.fgroup}
+                            >
+                                <Label>اهانت و فحاشی</Label>
+                            </FormGroup>
+                        </Col>
+                        <Col md="6">
+                            <FormGroup
+                                className={styles.fgroup}
+                            >
+                                <Label>اهانت و فحاشی</Label>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    {/* <Form className={styles.d_grid}>
+                        <FormGroup
+                            className={styles.fgroup}
+                        >
+                            <Input type="checkbox" />
+                            <span className="form-check-sign">
+                                <span className="check" />
+                            </span>
+                            <Label check className={styles.fgroup}>اهانت و فحاشی</Label>
                         </FormGroup>
                         <FormGroup
-                            className={styles.shopping_label}
-                            check
-                            disabled
+                            className={styles.fgroup}
                         >
-                            <Label check className={styles.shopping_label}>
-                                <Input checked={false} type="checkbox" />
-                                <span className="form-check-sign">
-                                    <span className="check" />
-                                </span>
-                                sms
-                            </Label>
+                            <Input type="checkbox" />
+                            <span className="form-check-sign">
+                                <span className="check" />
+                            </span>
+                            <Label check className={styles.fgroup}>کلمات مستهجن</Label>
                         </FormGroup>
-                        <FormGroup className={styles.shopping_label} check>
-                            <Label check className={styles.shopping_label}>
-                                <Input
-                                    // checked={
-                                    //     props.order.contain_telegram == "O"
-                                    //         ? true
-                                    //         : telegram
-                                    // }
-                                    type="checkbox"
-                                // onChange={() => {
-                                //     if (props.order.contain_telegram != "O") {
-                                //         setTelegram(!telegram);
-                                //     }
-                                // }}
-                                />
-                                <span className="form-check-sign">
-                                    <span className="check" />
-                                </span>
-                                تلگرام
-                            </Label>
+                        <FormGroup className={styles.fgroup}>
+
+                            <Input type="checkbox" />
+                            <span className="form-check-sign">
+                                <span className="check" />
+                            </span>
+                            <Label check className={styles.fgroup}>نامرتبط</Label>
                         </FormGroup>
-                    </Form>
+                        <FormGroup className={styles.fgroup}>
+
+                            <Input type="checkbox" />
+                            <span className="form-check-sign">
+                                <span className="check" />
+                            </span>
+                            <Label check className={styles.fgroup}>غیره</Label>
+                        </FormGroup>
+                    </Form> */}
                     {/* <div className={styles.bodyContent}>
 
                         <div className={styles.eachnotif}>

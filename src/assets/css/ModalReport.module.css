@@ -29,35 +29,15 @@
     color: var(--white) !important;
 }
 
+.d_grid {
+    display: grid;
+    justify-content: right;
+    text-align: right;
+}
+
 p {
     color: var(--white) !important;
     /* margin-top: 20px !important; */
-}
-
-.eachProfile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.eachcard {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.eachnotif {
-    margin-bottom: 20px;
-    display: block;
-    padding: 0px 10px;
-}
-
-
-.eachTime {
-    font-size: 10px;
-    opacity: 0.7;
-    /* vertical-align: middle; */
 }
 
 .eachText {
@@ -80,33 +60,12 @@ p {
     color: hotpink;
 }
 
-.shopping_label {
-    margin: 0.5rem 1rem;
+.fgroup {
+    text-align: center;
+    border: white 1px solid;
+    opacity: 0.8;
 }
 
-.shopping_form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    min-width: 100px;
-}
-
-.shop_card {
-    height: 80vh;
-    overflow: auto;
-}
-
-.places_buttons {
-    padding: 10px 0;
-}
-
-.shop_row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.price {
-    height: 60%;
-}
 
 .loginLmsModal {
     background: #27293d;
@@ -116,4 +75,9 @@ p {
 
 .loginLmsModalBody {
     padding: 0 !important;
+}
+
+.form-check .form-check-sign::before,
+.form-check .form-check-sign::after {
+    position: relative !important;
 }
