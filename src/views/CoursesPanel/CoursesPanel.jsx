@@ -58,10 +58,10 @@ export default function CoursesPanel() {
     axios(apis["courses"]["my_courses"], {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
+      // .then((response) => response.json())
       .then((data) => {
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
+        changeInfo("courseChoosed", data.data);
+        const courses = data.data.map(course => new Course(course, true));
         setChosenCourses(courses);
         if (SwitchChecked)
         {
