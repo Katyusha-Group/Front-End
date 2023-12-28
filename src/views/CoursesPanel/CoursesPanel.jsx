@@ -44,9 +44,9 @@ export default function CoursesPanel() {
 
   useEffect(() => {
     axios(apis["departmentsAll"]["names"])
-      .then((response) => response.json())
+      // .then((response) => response.json())
       .then((DepartmentOptions) => {
-      setDepartmentOptions(DepartmentOptions);
+        setDepartmentOptions(DepartmentOptions.data);
     });
     changeInfo("courseChoosed", info.courseChoosed);
       const courses = info.courseChoosed.map(course => new Course(course, true));
