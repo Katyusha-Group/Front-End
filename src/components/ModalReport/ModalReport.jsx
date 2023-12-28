@@ -1,8 +1,22 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
-import * as styles from '../../assets/css/UsersListModal.module.css';
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    CardText,
+    FormGroup,
+    Form,
+    Input,
+    Row,
+    Col,
+    Label,
+} from "reactstrap";
+import * as styles from '../../assets/css/ModalReport.module.css';
 import { apis } from "../../assets/apis";
 
 import {
@@ -31,32 +45,82 @@ const ModalReport = ({ showModal, handleClose }) => {
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
-                    <h2 className={styles.ModalTitle}>چه اتفاقی افتاده؟</h2>
+                    <h3 className={styles.ModalTitle}>به چه دلیل می‌خواهید ریپورت کنید؟</h3>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
                 </Modal.Header>
                 <Modal.Body className={styles.ModalBody}>
-                    <div className={styles.bodyContent}>
-                        {/* {notificationData && notificationData.length > 0 ?
-                            notificationData.map((notification, index) => (
-                                <div key={index} className={styles.eachnotif}>
-                                    <img className={styles.eachProfile} src={notification.actor.image} alt="" />
-                                    < p className={styles.eachText} >
-                                        {!notification.read && <i
-                                            style={{ fontSize: "14px", fontWeight: "bold" }}
-                                            className={`${styles.unreadNotifs} tim-icons icon-bell-55 text-muted pl-1`}
-                                        >
-                                        </i>}
-                                        {notification.message}</p>
-                                    <span className={styles.eachTime}>
-                                        {notification.delta_time}
-                                    </span>
-                                </div>
-                            )) : */}
+                    <Form className="d-flex justify-content-center">
+                        <FormGroup className={styles.shopping_label} check>
+                            <Label check className={styles.shopping_label}>
+                                <Input
+                                    // onChange={() => {
+                                    //     if (props.order.contain_email != "O") {
+                                    //         setEmail(!email);
+                                    //     }
+                                    // }}
+                                    // checked={
+                                    //     props.order.contain_email == "O" ? true : email
+                                    // }
+                                    type="checkbox"
+                                />
+                                <span className="form-check-sign">
+                                    <span className="check" />
+                                </span>
+                                ایمیل
+                            </Label>
+                        </FormGroup>
+                        <FormGroup
+                            className={styles.shopping_label}
+                            check
+                            disabled
+                        >
+                            <Label check className={styles.shopping_label}>
+                                <Input checked={false} type="checkbox" />
+                                <span className="form-check-sign">
+                                    <span className="check" />
+                                </span>
+                                sms
+                            </Label>
+                        </FormGroup>
+                        <FormGroup className={styles.shopping_label} check>
+                            <Label check className={styles.shopping_label}>
+                                <Input
+                                    // checked={
+                                    //     props.order.contain_telegram == "O"
+                                    //         ? true
+                                    //         : telegram
+                                    // }
+                                    type="checkbox"
+                                // onChange={() => {
+                                //     if (props.order.contain_telegram != "O") {
+                                //         setTelegram(!telegram);
+                                //     }
+                                // }}
+                                />
+                                <span className="form-check-sign">
+                                    <span className="check" />
+                                </span>
+                                تلگرام
+                            </Label>
+                        </FormGroup>
+                    </Form>
+                    {/* <div className={styles.bodyContent}>
+
+                        <div className={styles.eachnotif}>
+                            <img className={styles.eachProfile} alt="" />
+                            < p className={styles.eachText} >
+                                <i
+                                    style={{ fontSize: "14px", fontWeight: "bold" }}
+                                    className={`${styles.unreadNotifs} tim-icons icon-bell-55 text-muted pl-1`}
+                                >
+                                </i></p>
+                            <span className={styles.eachTime}>
+                            </span>
+                        </div>
                         <p>پیامی برای نمایش موجود نمی‌باشد</p>
-                        {/* } */}
-                    </div>
+                    </div> */}
                 </Modal.Body >
             </div >
         </Modal >
