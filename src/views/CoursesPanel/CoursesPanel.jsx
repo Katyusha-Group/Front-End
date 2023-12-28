@@ -185,74 +185,55 @@ export default function CoursesPanel() {
   return (
     <>
     <AdminNavbar></AdminNavbar>
-      <Row >
-        <Col>
-          <Card className={style.TableCard}>
-            <CardBody>
-              <Row className={style.CardBodyRow}>
-                <Col className={style.SelectCol} md="4">
-                  <Select
-                    options={DepartmentOptions}
-                    styles={SelectStyles}
-                    isRtl
-                    placeholder="دانشکده مورد نظر را انتخاب کنید"
-                    name="SelectDepartment"
-                    value={SelectedDepartment.name}
-                    onChange={handleDepartment}
-                  />
-                </Col>
-                <Col className={style.SwitchCol} md="1">
-                  <Row className={style.SwitchCard}>
-                    <Col className={style.SwitchCardCol}>
-                      <ReactSwitch className={style.Switch}
-                        checked={SwitchChecked}
-                        onChange={handleSwitchChange}
-                      />
-                    </Col>
-                    <Col className={style.SwitchCardCol}>
-                      <p>
-                        فقط دروس قابل اخذ
-                      </p>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-              <Table className={style.ClassesTable} id ="CoursesPanelTable">
-                {/* <thead className={`${style.text-primary} TableHead`}> */}
-                <thead className="text-primary TableHead">
-                  <tr>
-                    {/* <th className={`${style.table-head} text-center`}></th>
-                    <th className={`${style.table-head} text-center`}>۷:۳۰ تا ۹</th>
-                    <th className={`${style.table-head} text-center`}>۹ تا ۱۰:۳۰</th>
-                    <th className={`${style.table-head} text-center`}>۱۰:۳۰ تا ۱۲</th>
-                    <th className={`${style.table-head} text-center`}>1 تا 2:30</th>
-                    <th className={`${style.table-head} text-center`}>2:30 تا 4</th>
-                    <th className={`${style.table-head} text-center`}>4 تا 5:30</th>
-                    <th className={`${style.table-head} text-center`}>5:30 تا 7  </th>
-                    <th className={`${style.table-head} text-center`}>7 تا 8:30 </th> */}
-                    <th className="table-head text-center "></th>
-                    <th className="table-head text-center ">۷:۳۰ تا ۹</th>
-                    <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
-                    <th className="table-head text-center ">۱۰:۳۰ تا ۱۲</th>
-                    <th className="table-head text-center ">1 تا 2:30</th>
-                    <th className="table-head text-center ">2:30 تا 4</th>
-                    <th className="table-head text-center ">4 تا 5:30</th>
-                    <th className="table-head text-center ">5:30 تا 7  </th>
-                    <th className="table-head text-center ">7 تا 8:30 </th>
-                  </tr>
-                </thead>
-                <tbody className={style.CoursesTableBody}>
-                  <DayRow dayName="شنبه" periods={keyedTimetable[0]} id="CoursesPanelDayRow"/>
-                  <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
-                  <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
-                  <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
-                  <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
-                </tbody>
-              </Table>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+    <Card className={style.TableCard}>
+      <CardBody>
+        <div className={style.CardBodyRow}>
+          <div className={style.SelectCol}>
+            <Select
+              options={DepartmentOptions}
+              styles={SelectStyles}
+              isRtl
+              placeholder="دانشکده مورد نظر را انتخاب کنید"
+              name="SelectDepartment"
+              value={SelectedDepartment.name}
+              onChange={handleDepartment}
+            />
+          </div>
+          <div className={style.SwitchCol}>
+            <ReactSwitch className={style.Switch}
+              checked={SwitchChecked}
+              onChange={handleSwitchChange}
+            />
+            <p>
+              فقط دروس قابل اخذ
+            </p>
+          </div>
+        </div>
+        <Table className={style.ClassesTable} id ="CoursesPanelTable">
+          {/* <thead className={`${style.text-primary} TableHead`}> */}
+          <thead className="text-primary TableHead">
+            <tr>
+              <th className="table-head text-center "></th>
+              <th className="table-head text-center ">۷:۳۰ تا ۹</th>
+              <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
+              <th className="table-head text-center ">۱۰:۳۰ تا ۱۲</th>
+              <th className="table-head text-center ">1 تا 2:30</th>
+              <th className="table-head text-center ">2:30 تا 4</th>
+              <th className="table-head text-center ">4 تا 5:30</th>
+              <th className="table-head text-center ">5:30 تا 7  </th>
+              <th className="table-head text-center ">7 تا 8:30 </th>
+            </tr>
+          </thead>
+          <tbody className={style.CoursesTableBody}>
+            <DayRow dayName="شنبه" periods={keyedTimetable[0]} id="CoursesPanelDayRow"/>
+            <DayRow dayName="یکشنبه" periods={keyedTimetable[1]} />
+            <DayRow dayName="دوشنبه" periods={keyedTimetable[2]} />
+            <DayRow dayName="سه شنبه" periods={keyedTimetable[3]} />
+            <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
+          </tbody>
+        </Table>
+      </CardBody>
+    </Card>
     </>
   );
 }
