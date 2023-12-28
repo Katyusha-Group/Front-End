@@ -179,39 +179,48 @@ function UserProfile() {
                         <Col className="pr-md-1" md="5">
                           <FormGroup>
                             <label>رشته</label>
+                            {loading2 ? (
+                          <Spinner animation="border" variant="primary"/>
+                        ) : (
                             <Input
-                              defaultValue={info.department}
+                              defaultValue={profile.department}
                               placeholder="رشته"
                               name="department"
                               type="text"
                               onChange={handleChange}
                               disabled
-                            />
+                            />)}
                           </FormGroup>
                         </Col>
                         <Col className="px-md-1" md="3">
                           <FormGroup>
                             <label>جنسیت</label>
+                            {loading2 ? (
+                          <Spinner animation="border" variant="primary"/>
+                        ) : (
                             <Input
-                              defaultValue={info.gender === "M" ? "مرد" : "زن"}
+                              defaultValue={profile.gender === "M" ? "مرد" : "زن"}
                               placeholder="جنسیت"
                               type="text"
                               name="gender"
                               disabled
                               onChange={handleChange}
-                            />
+                            />)}
                           </FormGroup>
                         </Col>
                         <Col className="pl-md-1" md="4">
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
+                            {loading2 ? (
+                          <Spinner animation="border" variant="primary"/>
+                        ) : (
                             <Input
-                              placeholder={info.email}
+                              placeholder={profile.email}
                               type="email"
                               disabled
                               name="email"
                               onChange={handleChange}
-                            />
+                            />)}
                           </FormGroup>
                         </Col>
                       </Row>
