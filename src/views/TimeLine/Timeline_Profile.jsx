@@ -20,7 +20,6 @@ import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
-const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
 function Timeline({ tabsList, profileData }) {
   const username = profileData.username.split("_")[1];

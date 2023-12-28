@@ -15,21 +15,21 @@ export const usesProfileMe = () => {
       try {
         showLoading();
 
-        const response = await fetch(apis["profiles"]["myusername"], {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const myUsername = await response.json();
+        // const response = await fetch(apis["profiles"]["myusername"], {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+        // const myUsername = await response.json();
         // console.log("My username is: " + myUsername.username);
 
         const profileResponse = await fetch(
-          apis["profiles"]["myprofile"] + `${myUsername.username}`,
+          apis["profiles"]["myprofile"],
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
         const data = await profileResponse.json();
         setProfile(data);
-        // console.log("User profile data: " + data.name);
+        console.log("User profile data: " , data);
 
         closeLoading();
         setLoading(false);

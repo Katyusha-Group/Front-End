@@ -36,6 +36,7 @@ export const fetchData = (setLoading, setData, num, initial) => {
 export const useTweetsForYou = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState({results:[]});
+  console.log(data);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
   useEffect(() => {

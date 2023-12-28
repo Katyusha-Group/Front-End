@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
 import CommentModal from "../../components/Modal/Comments";
@@ -19,7 +19,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(tweet.liked_by_me);
+  // if (tweet.liked_by_me != null) {
+  // setLike(tweet.liked_by_me);
+  // // }
+  // console.log(tweet.liked_by_me)
+
   const [link, setLink] = useState("");
 
 
@@ -68,8 +73,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               className={styles.dropDown}
               onClick={handleOpenModal_Report}
             // onClick={() => {
-            //   handleOpenModal_Report
-            //   // Report(tweet.id, setTweets);
+            //   handleOpenModal_Report            //   // Report(tweet.id, setTweets);
             // }}
             >
               ریپورت
@@ -92,7 +96,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           />
         </Dropdown>
         <div className={styles.header}>
-          <div className={styles.avatar}>{tweet.image}</div>
+          <div className={styles.avatar}><img className={styles.avatarimg} src={tweet.profile.image} alt="" /></div>
           <div className={styles.name}>{tweet.profile.name}</div>
         </div>
         {/* <div className={styles.reply}>
@@ -116,9 +120,10 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             className={styles.buttonContainer}
           >
             <button
-              className={styles.button}
+              // className={styles.button}
+              className={like ? styles.button2 : styles.button}
               onClick={() => {
-                setLike(true);
+                setLike(!like);
                 likes(tweet.id);
               }}
             >

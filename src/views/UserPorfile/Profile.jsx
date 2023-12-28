@@ -12,6 +12,7 @@ export default function Profile() {
   
   const {profile, setProfile, loading} = usesProfileMe();
   const {profileData, setProfileData, loading2} = GETProfileData(id);
+  console.log("Profile in Profile page: ", profileData);
   let IsThisMe = IsThisMe_Function(id);
 
   const username = id;
