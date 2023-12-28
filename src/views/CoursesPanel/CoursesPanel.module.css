@@ -1,6 +1,7 @@
 .TableCard {                        /* Main card of the page */
     margin-top: 60px;
     overflow-x: auto;
+    /* --bs-table-bg: var(--bs-card-cap-bg) !important; */
 }
 
 .CourseListContainer {           /* List of all courses */
@@ -185,4 +186,9 @@ input {
   
   select::-ms-expand {
     display: none;
+  }
+
+
+  .ClassesTable {
+    --bs-table-bg: var(--bs-card-cap-bg);
   }
