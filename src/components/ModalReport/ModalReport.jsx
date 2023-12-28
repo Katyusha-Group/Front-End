@@ -51,6 +51,76 @@ const ModalReport = ({ showModal, handleClose }) => {
     async function handleSubmit(event) {
         event.preventDefault();
         console.log(report);
+        try {
+            Swal.fire({
+                title: 'کمی صبر کنید',
+                html: 'در حال بررسی درخواست ثبت نام',
+                allowOutsideClick: false,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                background: 'rgb(50, 55, 80);',
+                color: '#ceccc0',
+                width: '25rem',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+
+            const response = await fetch(apis["reports"]["tweets"], {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    twitte: 7539,
+                    reason: report,
+                }),
+            });
+
+            const data = await response.json();
+            Swal.close();
+            if (response.status === 201) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("verificationLink", data.url);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'پست مورد نظر با موفقیت ریپورت شد',
+                    background: 'rgb(50, 55, 80);',
+                    color: '#ceccc0',
+                    width: '25rem',
+                    confirmButtonText: "باشه"
+                });
+                Navigate("/verification");
+            } else {
+                if (data.detail == "you can not report your own twitte.") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "شما نمی‌توانید پست خودتان را ریپورت کنید!",
+                        background: "rgb(50, 55, 80);",
+                        color: "#ceccc0",
+                        width: "25rem",
+                        direction: "rtl",
+                        confirmButtonText: "باشه",
+                    });
+                }
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "دوباره تلاش کنید!",
+                        background: "rgb(50, 55, 80);",
+                        color: "#ceccc0",
+                        width: "25rem",
+                        direction: "rtl",
+                        confirmButtonText: "باشه",
+                    });
+                }
+            }
+
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
         // handleSignUp(formData, subject, gender);
     }
     return (
