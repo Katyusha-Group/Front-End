@@ -172,7 +172,7 @@ function UserProfile() {
                   <CardBody>
                     <Form>
                       <Row>
-                        <Col className="pr-md-1" md="5">
+                        <Col className="pr-md-1" md="4">
                           <FormGroup>
                             <label>رشته</label>
                             {loading2 ? (
@@ -189,7 +189,7 @@ function UserProfile() {
                             )}
                           </FormGroup>
                         </Col>
-                        <Col className="px-md-1" md="3">
+                        <Col className="px-md-1" md="2">
                           <FormGroup>
                             <label>جنسیت</label>
                             {loading2 ? (
@@ -208,18 +208,21 @@ function UserProfile() {
                             )}
                           </FormGroup>
                         </Col>
-                        <Col className="pl-md-1" md="4">
+                        <Col className="pl-md-1" md="6" >
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             {loading2 ? (
                               <Spinner animation="border" variant="primary" />
                             ) : (
                               <Input
+                                
                                 placeholder={profile.email}
                                 type="email"
                                 disabled
                                 name="email"
                                 onChange={handleChange}
+                                dir="ltr"
+                                style={{ paddingLeft: '15px' }}
                               />
                             )}
                           </FormGroup>
