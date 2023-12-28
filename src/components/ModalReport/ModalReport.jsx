@@ -27,7 +27,7 @@ import {
 const ModalReport = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
     const [report, setReport] = React.useState();
-    const handleReport = (value) => {
+    const handleClickReport = (value) => {
         setReport(value);
     };
 
@@ -45,7 +45,15 @@ const ModalReport = ({ showModal, handleClose }) => {
         setShow(false);
         handleClose();
     };
-
+    async function handleSubmit(event) {
+        event.preventDefault();
+        if (report.trim().length === 0) {
+            // errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
+        }
+        else {
+            // handleSignUp(formData, subject, gender);
+        }
+    }
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
@@ -58,34 +66,38 @@ const ModalReport = ({ showModal, handleClose }) => {
                 <Modal.Body className={styles.ModalBody}>
                     <Row>
                         <Col md="6">
-                            <FormGroup
-                                className={styles.fgroup}
+                            <div
+                                className={styles.eachItem}
                             >
-                                <Label>اهانت و فحاشی</Label>
-                            </FormGroup>
+                                <p
+                                    value={"S"}
+                                    name={"spam"}
+                                    onClick={handleClickReport}
+                                    className={styles.eachItemText}>مطالب نامرتبط</p>
+                            </div>
                         </Col>
                         <Col md="6">
-                            <FormGroup
-                                className={styles.fgroup}
+                            <div
+                                className={styles.eachItem}
                             >
-                                <Label>اهانت و فحاشی</Label>
-                            </FormGroup>
+                                <p className={styles.eachItemText}>اهانت و فحاشی</p>
+                            </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col md="6">
-                            <FormGroup
-                                className={styles.fgroup}
+                            <div
+                                className={styles.eachItem}
                             >
-                                <Label>اهانت و فحاشی</Label>
-                            </FormGroup>
+                                <p className={styles.eachItemText}>پورنوگرافی</p>
+                            </div>
                         </Col>
                         <Col md="6">
-                            <FormGroup
-                                className={styles.fgroup}
+                            <div
+                                className={styles.eachItem}
                             >
-                                <Label>اهانت و فحاشی</Label>
-                            </FormGroup>
+                                <p className={styles.eachItemText}>غیره</p>
+                            </div>
                         </Col>
                     </Row>
                     {/* <Form className={styles.d_grid}>
@@ -140,6 +152,16 @@ const ModalReport = ({ showModal, handleClose }) => {
                         <p>پیامی برای نمایش موجود نمی‌باشد</p>
                     </div> */}
                 </Modal.Body >
+                <Modal.Footer className={styles.footer}>
+                    <Button
+                        onClick={handleSubmit}
+                        className="btn-fill"
+                        color="primary"
+                        type="submit"
+                    >
+                        ثبت
+                    </Button>
+                </Modal.Footer>
             </div >
         </Modal >
     );
