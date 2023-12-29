@@ -6,11 +6,17 @@
   margin-right: 20px;
   border-radius: 15px;
   height: 90vh;
+  
 }
 
 .bg1 {
-  width: 250px;
+  width: 100%;
+  background-color: #3a3c5b;
+  border-radius: 15px;
+  height: 90vh;
+  padding: 5px;
 }
+
 
 .header {
   display: flex;
@@ -32,10 +38,9 @@
   flex-direction: row;
   padding: 10px 20px;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
   gap: 4vw;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 .sidebarmenuItems:hover {
@@ -54,13 +59,13 @@
 
 @media only screen and (max-width: 1300px) {
   .bg {
-    /* width: 10vw; */
-    width: 70px;
+    width: 10vw;
     margin-top: 5vh;
+    margin-right: 5vw;
   }
 
   .bg1 {
-    width: 80px;
+    /* width: 80px; */
   }
 
   .itemtext {
@@ -73,14 +78,14 @@
 
   .header {
     margin-top: 80px;
-    margin-right: 20px;
+    margin-right: 15px;
   }
   .sidebarmenuItems{
-    scale: 0.85;
+    /* scale: 0.85; */
     justify-content: flex-end;
-    /* margin: 0;
-    padding: 0; */
-    margin-left: 25px;
+    /* margin: 0; */
+    padding: 10px auto;
+    /* margin-left: 25px; */
   }
   .sidebarmenuItemsMobileBlock {
     /* margin: 0; */
@@ -111,27 +116,26 @@
   opacity: 0.9;
 }
 
-@media only screen and (max-width: 670px) {
-  .bg1 {
-    width: 60px;
-  }
-}
-
 @media only screen and (max-width: 620px) {
   .bg {
     width: 80vw;
     height: 4rem;
-    margin-bottom: 0;
-    margin-right: 20px;
-    margin-top: 1vh;
+    /* margin-bottom: 0;
+    margin-top: 1vh; */
+    margin-right: 10px;
+    margin: 10px auto;
   }
 
+  .logoimg{
+    margin-right: 10px;
+  }
   .bg1 {
     display: flex;
     flex-direction: row;
-    width: 80vw;
+    /* width: 80vw; */
     height: inherit;
     justify-content: space-around;
+    z-index: 1;
   }
 
   .sidebarmenuItems {
