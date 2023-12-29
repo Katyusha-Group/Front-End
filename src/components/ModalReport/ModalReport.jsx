@@ -26,7 +26,6 @@ import {
 } from "../../components/LoadingAlert/LoadingAlert";
 
 const ModalReport = ({ showModal, handleClose, id }) => {
-    console.log(id);
     const [show, setShow] = React.useState(showModal);
     const [report, setReport] = React.useState("");
 
@@ -49,7 +48,6 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     };
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(report);
         try {
             Swal.fire({
                 title: 'کمی صبر کنید',
@@ -67,7 +65,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
             });
             const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
             let formdata = new FormData()
-            formdata.append("twitte", 7535)
+            formdata.append("twitte", id)
             formdata.append("reason", report)
             const response = await fetch(apis["reportTwitte"]["reportTwitte"], {
                 method: "POST",
@@ -78,6 +76,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
             });
 
             const data = await response.json();
+            console.log(data)
             Swal.close();
             if (response.status === 201) {
                 localStorage.setItem("token", data.token);
@@ -92,10 +91,11 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                 });
             }
             else {
+                // console.log(data.detail)
                 if (data.detail == "you can not report your own twitte.") {
                     Swal.fire({
                         icon: "error",
-                        title: "شما نمی‌توانید پست خودتان را ریپورت کنید!",
+                        title: "شما قبلا این توییت را ریپورت کرده اید!",
                         background: "rgb(50, 55, 80)",
                         color: "#ceccc0",
                         width: "25rem",
