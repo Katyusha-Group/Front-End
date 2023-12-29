@@ -10,7 +10,7 @@ export const useGetChartData = (username) => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         showLoading();
-        fetch((apis["profiles"]["myprofile"] + `${username}` + `/student-calendar`), {
+        fetch((apis["profiles"]["view_profile"] + `${username}` + `/student-calendar`), {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())

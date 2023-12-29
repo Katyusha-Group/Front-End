@@ -7,13 +7,23 @@ import { POSTFollow } from '../../hooks/POSTFollow';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
-export default function ProfileHeader({profile, username, IsThisMe, profileData_loading}) {
-  console.log("Profile in profile header: ", profile);
+import Spinner from "react-bootstrap/Spinner";
+export default function ProfileHeader({profile, setProfileData, username, IsThisMe, profileData_loading}) {
+  // console.log("Profile in profile header: ", profile);
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
-  const [profileData_Here, setProfileData_Here] = React.useState(profile);
-  const [IsFollowed, setIsFollowed] = React.useState(profileData_Here.is_followed);
+  // const [profileData_Here, setProfileData_Here] = React.useState(profile);
+  const [IsFollowed, setIsFollowed] = React.useState(profile.is_followed);
 
+  if (profileData_loading)
+  {
+    return (
+      <div>
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+  
   const handleOpenModal_Following = () => {
     setIsFollowing(true);
     setShowModal(true);
@@ -30,32 +40,50 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
-    console.log("Fetching profile in profile header");
+    // console.log("Fetching profile in profile header");
     showLoading();
     fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then(response => {
       return response.json().then((data) => {
-        setProfileData_Here(data);
+        setProfileData(data);
         closeLoading();
       });
     })
     .catch((error) => {
       console.error(error);
     });
-  }, [showModal, IsFollowed]);
+  }, [showModal, IsFollowed, username]);
 
+  React.useEffect(() => {
+    // console.log("Fetching profile in profile header");
+    showLoading();
+    fetch((apis["profiles"]["view_profile"] + `${username}`), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(response => {
+      return response.json().then((data) => {
+        setProfileData(data);
+        closeLoading();
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }, []);
 
-  const dateObj = new Date(profileData_Here.created_at);
+  
+
+  const dateObj = new Date(profile.created_at);
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
   const date =moment(formattedDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
 
-  let Button_Data = IsThisMe ? 
-                    "ویرایش پروفایل" :
-                    IsFollowed ?
-                      "حذف" :
-                      "دنبال کردن";
+  // let Button_Data = IsThisMe ? 
+  //                   "ویرایش پروفایل" :
+  //                   IsFollowed ?
+  //                     "حذف" :
+  //                     "دنبال کردن";
 
   const navigate = useNavigate();
   function Profile_Button () {
@@ -78,19 +106,19 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
         <div className={styles.rightUpper}>
           <div className={styles.ProfileHeader_Content}>
             <img className={styles.ProfileImage} 
-              src={profileData_Here.image} 
+              src={profile.image} 
               // src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png"
               alt="" />
-            <p className={styles.myusername}> @{profileData_Here.username} </p>
+            <p className={styles.myusername}> @{profile.username} </p>
             <div className={styles.Followes}>
               <div onClick={handleOpenModal_Following} className={styles.Following_Follower}>
                 <i className='tim-icons icon-single-02'></i>
-                <span className={styles.Followes_Count}>{profileData_Here.following_count}</span> 
+                <span className={styles.Followes_Count}>{profile.following_count}</span> 
                 <p>دنبال میشود</p>
               </div>
               <div onClick={handleOpenModal_Followers} className={styles.Following_Follower}>
                 <i className='tim-icons icon-single-02'></i>
-                <span className={styles.Followes_Count}>{profileData_Here.followers_count}</span> 
+                <span className={styles.Followes_Count}>{profile.followers_count}</span> 
                 <p>دنبال کننده</p>
               </div>
               <UsersListModal 
@@ -100,19 +128,26 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
                 // Followings={Followings} 
                 // Followers={Followers}
                 username={username}
+                IsThisMe = {IsThisMe}
               />
             </div>
-            <button className={styles.followbutton} onClick={Profile_Button}> {Button_Data}</button>
+            <button className={styles.followbutton} onClick={Profile_Button}> 
+                  {IsThisMe ? 
+                    "ویرایش پروفایل" :
+                    profile.is_followed ?
+                      "حذف" :
+                      "دنبال کردن"}
+              </button>
           </div>
           
           <div className={styles.ProfileHeader_Other}>
               <div className={styles.ProfileHeader_Other_Item}>
                 <p>نام</p>
-                <p>{profileData_Here.name}</p> 
+                <p>{profile.name}</p> 
               </div>
               <div className={styles.ProfileHeader_Other_Item}>
                 <p>نام کاربری</p>
-                <p>{profileData_Here.username}@</p>  
+                <p>{profile.username}@</p>  
               </div>
               <div className={styles.ProfileHeader_Other_Item}>
                 <p>تاریخ شروع فعالیت</p>

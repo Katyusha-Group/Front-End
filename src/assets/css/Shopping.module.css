@@ -1,6 +1,21 @@
 .shopping_label {
   margin: 0.5rem 1rem;
 }
+.bg{
+  overflow: auto!important;
+  /* margin-top: 1rem; */
+  margin-bottom: 80px;
+  /* padding-top: 30px!important ; */
+}
+.main{
+  padding-top: 30px!important ;
+  overflow: auto!important;
+}
+.bg1{
+  /* margin-bottom: 400px; */
+  padding-top: 10px!important ;
+  overflow: auto!important;
+}
 
 .shopping_form {
   display: flex;
@@ -34,4 +49,17 @@
 
 .loginLmsModalBody {
   padding: 0 !important;
+}
+@media  only  screen and (max-width: 1000px){
+  .h2custom{
+    font-size: 1.3rem;
+  } 
+   
+  
+}
+@media  only  screen and (min-width: 1200px){
+  .box{
+    height: 700%;
+  }
+  
 }

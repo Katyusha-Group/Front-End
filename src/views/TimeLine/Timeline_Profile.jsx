@@ -23,6 +23,10 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 function Timeline({ tabsList, profileData, profileData_loading }) {
   // const username = profileData.username.split("_")[1];
+  if (profileData_loading)
+  {
+    return <></>
+  }
   const [mainData] = (profileData.profile_type);
   const { courseChoosed } = useGetChartData(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
@@ -61,7 +65,8 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
-                  setTweets={setTweets} />
+                  setTweets={setTweets} 
+                />
               ))}
             </div>
           )}
