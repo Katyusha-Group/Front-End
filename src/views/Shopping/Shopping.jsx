@@ -36,8 +36,16 @@ function Shopping() {
   // const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-  const { state: info, setState, amount, setAmount, totalPrice, setTotalPrice, loading, setLoading } =
-  useGetCartInfo();
+  const {
+    state: info,
+    setState,
+    amount,
+    setAmount,
+    totalPrice,
+    setTotalPrice,
+    loading,
+    setLoading,
+  } = useGetCartInfo();
   const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
@@ -76,10 +84,9 @@ function Shopping() {
       },
     })
       .then((response) => {
-
-          // notify("tl");
-          saveWallet(setWallet);
-          shopId = CartCreator({ setState, setTotalPrice, setAmount });
+        // notify("tl");
+        saveWallet(setWallet);
+        shopId = CartCreator({ setState, setTotalPrice, setAmount });
       })
 
       .catch((error) => {
@@ -188,21 +195,19 @@ function Shopping() {
         console.error(error);
       });
   }
-  if(loading){
-    return <></>
+  if (loading) {
+    return <></>;
   }
   return (
     <>
-      <div>
-        {/* <NotificationAlert ref={notificationAlertRef} /> */}
-      </div>
-      <div className="wrapper" style={{ direction: "ltr" }}>
-        <div className="main-panel">
+      <div>{/* <NotificationAlert ref={notificationAlertRef} /> */}</div>
+      <div className={style.bg} style={{ direction: "ltr",overflow:"auto" }}>
+        <div className={`main-panel ${style.bg1}`} >
           <AdminNavbar></AdminNavbar>
-          <div className="content_without_sidebar">
+          <div className={`content_without_sidebar ${style.main}`}>
             <div className="react-notification-alert-container"></div>
 
-            <Row style={{ height: "80vh" }}>
+            <Row className={style.box} style={{ height: "80vh" }}>
               <Col md="3">
                 <Card
                   className=""
@@ -214,7 +219,7 @@ function Shopping() {
                       borderBottom: " 1px solid rgba(255, 255, 255, 0.1)",
                     }}
                   >
-                    <h2>خلاصه سفارش</h2>
+                    <h2 className={style.h2custom}>خلاصه سفارش</h2>
                   </CardHeader>
                   <CardBody className="week-card-body ">
                     <Row
@@ -253,13 +258,12 @@ function Shopping() {
                         style.price
                       }
                     >
-                      <h2>
+                      <h2 className={style.h2custom}>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
                     </div>
                   </CardBody>
                   <CardFooter>
-                    
                     {info.length === 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
@@ -280,7 +284,9 @@ function Shopping() {
                   style={{
                     height: "100%",
                     marginBottom: "0",
-                    justifyContent: `${loading &&info.length == 0 ? "center" : ""}`,
+                    justifyContent: `${
+                      loading && info.length == 0 ? "center" : ""
+                    }`,
                   }}
                 >
                   {info.length == 0 ? (
@@ -288,7 +294,7 @@ function Shopping() {
                   ) : (
                     ""
                   )}
-                  { info.map((x, index) => {
+                  {info.map((x, index) => {
                     return (
                       <Row
                         md="6"
