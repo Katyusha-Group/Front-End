@@ -1,0 +1,103 @@
+@import "./black-dashboard-react.css";
+
+.Modal {
+    backdrop-filter: blur(2px);
+}
+
+.ModalContents {
+    border-radius: 10px;
+    background-color: rgb(50, 55, 80);
+    /* background: rgb(50, 55, 80);
+    background: linear-gradient(180deg, rgba(39, 41, 61, 1) 20%,
+            rgba(50, 55, 80, 1) 88%, rgba(109, 54, 114, 1) 95%, rgba(143, 62, 140, 1) 100%); */
+    color: var(--white) !important;
+}
+
+.ModalHeader {
+    margin-top: 20px;
+    justify-content: center;
+    color: var(--white);
+}
+
+.ModalTitle {
+    color: var(--white) !important;
+}
+
+.ModalBody {
+    margin-top: -20px;
+    height: 30vh;
+    color: var(--white) !important;
+}
+
+.d_grid {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    color: var(--white) !important;
+    /* margin-top: 20px !important; */
+}
+
+.eachText {
+    margin-bottom: 0px;
+}
+
+.bodyContent {
+    height: 30vh;
+    overflow-y: auto;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+
+.unreadNotifs {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unreadNotifs::before {
+    color: hotpink;
+}
+
+.eachInput {
+    text-align: center;
+    border: white 1px solid;
+    border-radius: 10px;
+    opacity: 0.6;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    font-size: small;
+}
+
+.eachInput:focus {
+    text-align: center;
+    border: white 1px solid;
+    border-radius: 10px;
+    opacity: 0.6;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    font-size: small;
+}
+
+
+.loginLmsModal {
+    background: #27293d;
+    border-radius: 1rem;
+}
+
+
+.loginLmsModalBody {
+    padding: 0 !important;
+}
+
+
+.reportFooter {
+    margin: 15px 0px !important;
+}
