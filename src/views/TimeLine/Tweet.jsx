@@ -153,7 +153,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               className={styles.button}
             >
               <span className={styles.icon_text}>
-                {tweet.replies_count - 1}
+                {tweet.children_count}
               </span>
               <i className={`far fa-comment ${styles.icon}`}></i>
             </button>
