@@ -208,21 +208,20 @@ function UserProfile() {
                             )}
                           </FormGroup>
                         </Col>
-                        <Col className="pl-md-1" md="6" >
+                        <Col className="pl-md-1" md="6">
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
                             {loading2 ? (
                               <Spinner animation="border" variant="primary" />
                             ) : (
                               <Input
-                                
                                 placeholder={profile.email}
                                 type="email"
                                 disabled
                                 name="email"
                                 onChange={handleChange}
                                 dir="ltr"
-                                style={{ paddingLeft: '15px' }}
+                                style={{ paddingLeft: "15px" }}
                               />
                             )}
                           </FormGroup>
@@ -290,7 +289,8 @@ function UserProfile() {
                           <img
                             alt="..."
                             className="avatar"
-                            src={profile !== null ? profile.image : img}
+                            // src={profile !== null ? profile.image : img}
+                            src={imageURLs != "" ? imageURLs : profile.image}
                           />
                         )}
                         {console.log("profile", profile)}
