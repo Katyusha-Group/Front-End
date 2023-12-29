@@ -32,4 +32,8 @@ jobs:
         password: ${{ secrets.PASSWORD }}  
         host: ${{ secrets.HOST }}  
         port: ${{ secrets.PORT }}  
-        script: ls
+        script: |
+          cd ${{ secrets.PATH }}
+          docker compose stop
+          git pull
+          docker compose restart
