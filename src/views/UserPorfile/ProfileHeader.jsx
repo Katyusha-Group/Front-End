@@ -7,6 +7,7 @@ import { POSTFollow } from '../../hooks/POSTFollow';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
+import Spinner from "react-bootstrap/Spinner";
 export default function ProfileHeader({profile, username, IsThisMe, profileData_loading}) {
   // console.log("Profile in profile header: ", profile);
   const [showModal, setShowModal] = React.useState(false);
@@ -14,6 +15,15 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
   const [profileData_Here, setProfileData_Here] = React.useState(profile);
   const [IsFollowed, setIsFollowed] = React.useState(profileData_Here.is_followed);
 
+  if (profileData_loading)
+  {
+    return (
+      <div>
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+  
   const handleOpenModal_Following = () => {
     setIsFollowing(true);
     setShowModal(true);
@@ -30,7 +40,7 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
-    console.log("Fetching profile in profile header");
+    // console.log("Fetching profile in profile header");
     showLoading();
     fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
@@ -44,12 +54,26 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
     .catch((error) => {
       console.error(error);
     });
-  }, [showModal, IsFollowed]);
+  }, [showModal, IsFollowed, username]);
 
-  if (profileData_loading)
-  {
-    return <></>
-  }
+  React.useEffect(() => {
+    // console.log("Fetching profile in profile header");
+    showLoading();
+    fetch((apis["profiles"]["view_profile"] + `${username}`), {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(response => {
+      return response.json().then((data) => {
+        setProfileData_Here(data);
+        closeLoading();
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }, []);
+
+  
 
   const dateObj = new Date(profileData_Here.created_at);
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
