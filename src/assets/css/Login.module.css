@@ -1,3 +1,4 @@
+@import "./black-dashboard-react.css";
 .viewpass {
   float: left;
   margin-left: 18px;
@@ -61,4 +62,8 @@
   margin-top: 120px !important;
   direction: rtl;
   padding: 0px;
+}
+
+.LoginText {
+  color: rgba(255, 255, 255, 0.8);
 }

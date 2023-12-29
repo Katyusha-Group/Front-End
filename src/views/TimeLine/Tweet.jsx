@@ -84,17 +84,19 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             >
               ریپورت
             </DropdownItem>
-            <DropdownItem
-              className={styles.dropDown}
-              onClick={() => {
-                setTweets((x) => {
-                  return x.filter((y) => y.id !== tweet.id);
-                });
-                deleteTweet(tweet.id);
-              }}
-            >
-              حذف
-            </DropdownItem>
+            { 
+              <DropdownItem
+                className={styles.dropDown}
+                onClick={() => {
+                  setTweets((x) => {
+                    let temp = x.results.filter((y) => y.id !== tweet.id);
+                    return {results: temp}
+                  });
+                  deleteTweet(tweet.id);
+                }}
+              >
+                حذف
+              </DropdownItem>}
           </DropdownMenu>
           <ModalReport
             id={tweet.id}

@@ -54,7 +54,7 @@ export const apis = {
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
     updateProfile: `${domain}/profiles/update-profile/`,
-
+    view_profile: `${domain}/profiles/`
   },
 
   tweets: {

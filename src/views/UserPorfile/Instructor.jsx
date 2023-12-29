@@ -3,8 +3,9 @@ import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
 import IsThisMe_Function from './IsThisMe_Function';
 import { useNavigate } from 'react-router-dom';
+
 function Instructor(
-    { User, handleButtonClick }
+    { User, handleButtonClick, handleCloseModal }
 ) {
     // let Is_Followed = User.is_followed;
     const [IsFollowed, setIsFollowed] = React.useState(User.is_followed);
@@ -12,6 +13,10 @@ function Instructor(
         setIsFollowed(prev => !prev);
     }
     const navigate = useNavigate();
+    const ProfileOnClick = () => {
+        navigate(`/profile/${User.username}`);
+        handleCloseModal();
+    }
     let IsThisMe = IsThisMe_Function(User.username);
     let Button_Data = IsThisMe ?
         "پروفایل" :
@@ -34,8 +39,10 @@ function Instructor(
                 </a>
             </div> */}
             {/* <img className={styles.eachProfile} src="https://www.katyushaiust.ir/media/images/profile_pics/male_default.png" alt="" /> */}
-            <img className={styles.eachProfile} src={User.image} alt="" />
-            <p className={styles.p_name}>{User.username}</p>
+            <div className={styles.NameImage} onClick={ProfileOnClick}>
+                <img className={styles.eachProfile} src={User.image} alt="" />
+                <p className={styles.p_name}>{User.username}</p>
+            </div>
             <button
                 className={IsFollowed ? styles.delButton : styles.delButton}
                 onClick={() => {
