@@ -86,5 +86,6 @@ export const apis = {
   },
   chat:{
     chat: `${chatDomain}/ws/chat/`,
+    chatWith: `${domain}/chat/chat-with/`,
   }
 };

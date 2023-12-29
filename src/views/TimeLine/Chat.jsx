@@ -9,11 +9,13 @@ import SendMessage from "../../components/Tweet/SendMessage.jsx";
 import WebSocketInstance from "../../components/chat/chatWebSocket.jsx";
 import { useParams } from "react-router-dom";
 import { useInfo } from "../../contexts/InfoContext.jsx";
+import { getChat } from "../../Functions/Chat/getChat.jsx";
 const ChatPage = (props) => {
   const { id } = useParams();
   const { info, changeInfo } = useInfo();
   const [chats, setChats] = React.useState([]);
   const [message, setMessage] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
   function waitForSocketConnection(callback) {
     const component = this;
     setTimeout(function () {
@@ -28,6 +30,7 @@ const ChatPage = (props) => {
   }
 
   useEffect(() => {
+    getChat( setChats,id,setLoading)
     waitForSocketConnection(() => {
       WebSocketInstance.fetchMessages(
         // props.username,
