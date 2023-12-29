@@ -3,7 +3,6 @@ import { apis } from "../../assets/apis";
 
 class WebSocketService {
   static instance = null;
-  callbacks = {};
 
   static getInstance() {
     if (!WebSocketService.instance) {
@@ -16,22 +15,29 @@ class WebSocketService {
     this.socketRef = null;
   }
 
-  connect(chatUrl) {
+  connect(chatId, setChats) {
+    console.log(
+      "🚀 ~ file: chatWebSocket.jsx:20 ~ WebSocketService ~ connect ~ chatId:",
+      chatId
+    );
     // const path = `${apis["chat"]["chat"]}${chatUrl}/`;
-    const path = `${apis["chat"]["chat"]}${1}/`;
-    this.socketRef = new WebSocket(path);
+
+    const path = `${apis["chat"]["chat"]}${chatId}/`;
+    this.socketRef = new WebSocket(path, [], {
+      withCredentials: true,
+    });
     this.socketRef.onopen = () => {
       console.log("WebSocket open");
     };
-    this.socketRef.onmessage = e => {
-      this.socketNewMessage(e.data);
+    this.socketRef.onmessage = (e) => {
+      this.socketNewMessage(e.data, setChats);
     };
-    this.socketRef.onerror = e => {
-      console.log("websocket error",e.message);
+    this.socketRef.onerror = (e) => {
+      console.log("websocket error", e);
     };
     this.socketRef.onclose = () => {
       console.log("WebSocket closed let's reopen");
-      this.connect();
+      this.connect(chatId, setChats);
     };
   }
 
@@ -39,17 +45,45 @@ class WebSocketService {
     this.socketRef.close();
   }
 
-  socketNewMessage(data) {
+  socketNewMessage(data, setChats) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
-    if (Object.keys(this.callbacks).length === 0) {
-      return;
-    }
     if (command === "messages") {
-      this.callbacks[command](parsedData.messages);
+      console.log(
+        "🚀 ~ file: chatWebSocket.jsx:47 ~ WebSocketService ~ socketNewMessage ~ data:",
+        parsedData
+      );
+
+      setChats((prev) => {
+        if (prev.find((chat) => chat.messageId === parsedData.message.id))
+          return prev;
+        return [
+          {
+            text: parsedData.message.content,
+            id: parsedData.message.author,
+            messageId: parsedData.message.id,
+          },
+          ...prev,
+        ];
+      });
     }
     if (command === "new_message") {
-      this.callbacks[command](parsedData.message);
+      console.log(
+        "🚀 ~ file: chatWebSocket.jsx:47 ~ WebSocketService ~ socketNewMessage ~ data:",
+        parsedData
+      );
+      setChats((prev) => {
+        if (prev.find((chat) => chat.messageId === parsedData.message.id))
+          return prev;
+        return [
+          {
+            text: parsedData.message.content,
+            id: parsedData.message.author,
+            messageId: parsedData.message.id,
+          },
+          ...prev,
+        ];
+      });
     }
   }
 
@@ -57,22 +91,21 @@ class WebSocketService {
     this.sendMessage({
       command: "fetch_messages",
       username: username,
-      chatId: chatId
+      chatId: chatId,
     });
   }
 
   newChatMessage(message) {
+    console.log(
+      "🚀 ~ file: chatWebSocket.jsx:69 ~ WebSocketService ~ newChatMessage ~ message:",
+      message
+    );
     this.sendMessage({
       command: "new_message",
       from: message.from,
       message: message.content,
-      chatId: message.chatId
+      chatId: message.chatId,
     });
-  }
-
-  addCallbacks(messagesCallback, newMessageCallback) {
-    this.callbacks["messages"] = messagesCallback;
-    this.callbacks["new_message"] = newMessageCallback;
   }
 
   sendMessage(data) {

@@ -85,6 +85,6 @@ export const apis = {
     forYouTwittes: `${domain}/for-you-twittes/`,
   },
   chat:{
-    chat: `${chatDomain}/chat/`,
+    chat: `${chatDomain}/ws/chat/`,
   }
 };
