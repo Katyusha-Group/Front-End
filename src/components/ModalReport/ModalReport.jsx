@@ -26,7 +26,7 @@ import {
 } from "../../components/LoadingAlert/LoadingAlert";
 
 const ModalReport = ({ showModal, handleClose, id }) => {
-    // console.log(id);
+    console.log(id);
     const [show, setShow] = React.useState(showModal);
     const [report, setReport] = React.useState("");
 

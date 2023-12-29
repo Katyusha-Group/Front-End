@@ -20,6 +20,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
+  const [thisTweet, setThisTweet] = useState(tweet.id);
   // if (tweet.liked_by_me != null) {
   // setLike(tweet.liked_by_me);
   // // }
@@ -32,9 +33,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
 
   const handleOpenModal_Report = () => {
     setShowModal(true);
-    setTweets((x) => {
-      return x.filter((y) => y.id !== tweet.id);
-    });
+    console.log("Modal is opened");
   }
   function handleCloseModal() {
     setShowModal(false);
@@ -74,13 +73,14 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             <DropdownItem
               disabled={tweet.reported_by_me}
               className={styles.dropDown}
-            // onClick={handleOpenModal_Report}
-            // onClick={() => {
-            //   setTweets((x) => {
-            //     return x.filter((y) => y.id !== tweet.id);
-            //   });
-            //   deleteTweet(tweet.id);
-            // }}
+              onClick={handleOpenModal_Report}
+              // onClick={() => {
+              //   // setThisTweet((x) => {
+              //   //   let temp = x.results.filter((y) => y.id !== tweet.id);
+              //   //   return {results: temp}
+              //   // });
+              //   handleOpenModal_Report
+              // }}
             >
               ریپورت
             </DropdownItem>
@@ -98,11 +98,14 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
                 حذف
               </DropdownItem>}
           </DropdownMenu>
-          <ModalReport
-            id={tweet.id}
-            showModal={showModal}
-            handleClose={handleCloseModal}
-          />
+          {
+            showModal && 
+            <ModalReport
+              id={tweet.id}
+              showModal={showModal}
+              handleClose={handleCloseModal}
+            />
+          }
         </Dropdown>
         <div className={styles.header}>
           <div className={styles.avatar}><img className={styles.avatarimg} src={tweet.profile.image} alt="" /></div>
