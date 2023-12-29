@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useGetNotification } from "../../hooks/useGetNotification";
 import { useGetNotificationCount } from "../../hooks/useGetNotificationCount";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
+import homeicon from "../../assets/img/home.svg";
+import { ReactSVG } from "react-svg";
 
 import Notification from "./Notification";
 import {
@@ -24,22 +26,22 @@ const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const {profile, setProfile, loading2} = usesProfileMe();
+  const { profile, setProfile, loading2 } = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
     setShowModal(true);
   };
   function handleCloseModal() {
-    setNotificationCount({ ...notificationCount, count: 0 })
+    setNotificationCount({ ...notificationCount, count: 0 });
     setShowModal(false);
-  };
+  }
   return (
     <>
       <div className={styles.bg}>
         <div className={styles.bg1}>
           <div className={styles.header}>
-            <img src={logo} alt="" style={{ height: "40px", width: "40px" }} />
+            <img className={styles.logoimg} src={logo} alt="" style={{ height: "40px", width: "40px" }} />
             <p className={styles.headertext}>
               کاتیوشا
               <i
@@ -47,16 +49,17 @@ const Sidebar = () => {
                 className={`tim-icons icon-bell-55 text-muted pr-2`}
                 onClick={handleOpenModal_Notification}
               >
-                {notificationCount &&
-                  <span className={styles.notifCount}>{notificationCount.count}</span>
-                }
+                {notificationCount && (
+                  <span className={styles.notifCount}>
+                    {notificationCount.count}
+                  </span>
+                )}
               </i>
             </p>
             <Notification
               showModal={showModal}
               handleClose={handleCloseModal}
             />
-
           </div>
 
           <div
@@ -66,26 +69,8 @@ const Sidebar = () => {
               Navigate("/home/page");
             }}
           >
-            <svg
-              className={styles.click}
-              xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
-              viewBox="0 0 30 50"
-              fill="none"
-            >
-              <g clip-path="url(#clip0_44_212)">
-                <path
-                  d="M16.6666 33.3333V23.3333H23.3333V33.3333H31.6666V20H36.6666L19.9999 5L3.33325 20H8.33325V33.3333H16.6666Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_44_212">
-                  <rect width="40" height="40" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
+            <ReactSVG className={styles.click} src={homeicon}/>
+            {/* {homeicon} */}
             <p className={styles.itemtext}> خانه</p>
           </div>
 
@@ -168,9 +153,11 @@ const Sidebar = () => {
             <p className={styles.itemtext}> سفارش ها</p>
           </div>
 
-          <UncontrolledDropdown className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`} direction="up" style={{ margin: "auto 0" }
-
-          }>
+          <UncontrolledDropdown
+            className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`}
+            direction="up"
+            style={{ margin: "auto 0" }}
+          >
             <DropdownToggle
               className={"m-0 pp-4 " + styles.dropDownToggle}
               color="initial"
