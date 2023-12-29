@@ -18,6 +18,10 @@ export const deleteTweet = async (id) => {
   try {
     const response = await axios.request(config);
   } catch (error) {
+    if (error.response.status == 403)
+    {
+      console.log("Error 403");
+    }
     console.error(error);
   }
 };
