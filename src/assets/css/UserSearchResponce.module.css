@@ -29,3 +29,9 @@
     margin-right: 0.3vw;
     margin-top: 8px;
 }
+.chat{
+    padding: 0.5rem;
+}
+.chat:hover{
+    /* background:"red"; */
+}
