@@ -58,7 +58,7 @@
     /* width: 10vw; */
     width: 70px;
     margin-top: 5vh;
-    margin-right: 40px;
+    margin-right: 5vw;
   }
 
   .bg1 {
@@ -118,8 +118,8 @@
     width: 80vw;
     height: 4rem;
     /* margin-bottom: 0;
-    margin-right: 20px;
     margin-top: 1vh; */
+    margin-right: 10px;
     margin: 10px auto;
   }
 
