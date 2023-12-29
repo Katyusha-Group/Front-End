@@ -22,6 +22,5 @@ export const useGetNotificationCount = () => {
             })
             .catch((error) => console.error(error));
     }, []);
-    { console.log(notificationCount) }
     return { notificationCount, setNotificationCount, loading };
 };
