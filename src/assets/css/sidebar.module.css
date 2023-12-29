@@ -11,7 +11,12 @@
 
 .bg1 {
   width: 100%;
+  background-color: #3a3c5b;
+  border-radius: 15px;
+  height: 90vh;
+  padding: 5px;
 }
+
 
 .header {
   display: flex;
