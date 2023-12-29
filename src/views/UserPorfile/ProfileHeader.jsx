@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
 export default function ProfileHeader({profile, username, IsThisMe, profileData_loading}) {
-  console.log("Profile in profile header: ", profile);
+  // console.log("Profile in profile header: ", profile);
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
   const [profileData_Here, setProfileData_Here] = React.useState(profile);
@@ -46,6 +46,10 @@ export default function ProfileHeader({profile, username, IsThisMe, profileData_
     });
   }, [showModal, IsFollowed]);
 
+  if (profileData_loading)
+  {
+    return <></>
+  }
 
   const dateObj = new Date(profileData_Here.created_at);
   const formattedDate = dateObj.toISOString().split('T')[0].replace(/-/g, '/');
