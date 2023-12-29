@@ -7,7 +7,8 @@ import { POSTFollow } from '../../hooks/POSTFollow';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
 import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
-export default function ProfileHeader({profile, username, IsThisMe, setProfile}) {
+export default function ProfileHeader({profile, username, IsThisMe, profileData_loading}) {
+  console.log("Profile in profile header: ", profile);
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
   const [profileData_Here, setProfileData_Here] = React.useState(profile);
@@ -29,8 +30,9 @@ export default function ProfileHeader({profile, username, IsThisMe, setProfile})
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
+    console.log("Fetching profile in profile header");
     showLoading();
-    fetch((apis["profiles"]["myprofile"] + `${username}`), {
+    fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then(response => {
