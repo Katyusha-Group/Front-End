@@ -32,7 +32,10 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
 
   const handleOpenModal_Report = () => {
     setShowModal(true);
-  };
+    setTweets((x) => {
+      return x.filter((y) => y.id !== tweet.id);
+    });
+  }
   function handleCloseModal() {
     setShowModal(false);
   };
@@ -71,9 +74,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             <DropdownItem
               disabled={tweet.reported_by_me}
               className={styles.dropDown}
-              onClick={handleOpenModal_Report}
+            // onClick={handleOpenModal_Report}
             // onClick={() => {
-            //   handleOpenModal_Report            //   // Report(tweet.id, setTweets);
+            //   setTweets((x) => {
+            //     return x.filter((y) => y.id !== tweet.id);
+            //   });
+            //   deleteTweet(tweet.id);
             // }}
             >
               ریپورت
@@ -91,6 +97,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </DropdownItem>
           </DropdownMenu>
           <ModalReport
+            id={tweet.id}
             showModal={showModal}
             handleClose={handleCloseModal}
           />

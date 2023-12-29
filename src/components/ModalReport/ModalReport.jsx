@@ -25,15 +25,14 @@ import {
     closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 
-const ModalReport = ({ showModal, handleClose }) => {
+const ModalReport = ({ showModal, handleClose, id }) => {
+    // console.log(id);
     const [show, setShow] = React.useState(showModal);
     const [report, setReport] = React.useState("");
 
     const handleClickReport = (value) => {
         setReport(value);
     };
-
-    // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
     React.useEffect(() => {
         showLoading();
@@ -58,7 +57,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                 allowOutsideClick: false,
                 timerProgressBar: true,
                 showConfirmButton: false,
-                background: 'rgb(50, 55, 80);',
+                background: 'rgb(50, 55, 80)',
                 color: '#ceccc0',
                 width: '25rem',
                 timerProgressBar: true,
@@ -66,16 +65,16 @@ const ModalReport = ({ showModal, handleClose }) => {
                     Swal.showLoading()
                 },
             });
-
-            const response = await fetch(apis["reports"]["tweets"], {
+            const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+            let formdata = new FormData()
+            formdata.append("twitte", 7535)
+            formdata.append("reason", report)
+            const response = await fetch(apis["reportTwitte"]["reportTwitte"], {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({
-                    twitte: 7539,
-                    reason: report,
-                }),
+                body: formdata,
             });
 
             const data = await response.json();
@@ -86,18 +85,29 @@ const ModalReport = ({ showModal, handleClose }) => {
                 Swal.fire({
                     icon: 'success',
                     title: 'پست مورد نظر با موفقیت ریپورت شد',
-                    background: 'rgb(50, 55, 80);',
+                    background: 'rgb(50, 55, 80)',
                     color: '#ceccc0',
                     width: '25rem',
                     confirmButtonText: "باشه"
                 });
-                Navigate("/verification");
-            } else {
+            }
+            else {
                 if (data.detail == "you can not report your own twitte.") {
                     Swal.fire({
                         icon: "error",
                         title: "شما نمی‌توانید پست خودتان را ریپورت کنید!",
-                        background: "rgb(50, 55, 80);",
+                        background: "rgb(50, 55, 80)",
+                        color: "#ceccc0",
+                        width: "25rem",
+                        direction: "rtl",
+                        confirmButtonText: "باشه",
+                    });
+                }
+                if (data.detail == "you have already reported this twitte.") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "شما قبلا این توییت را ریپورت کرده اید!",
+                        background: "rgb(50, 55, 80)",
                         color: "#ceccc0",
                         width: "25rem",
                         direction: "rtl",
@@ -108,7 +118,7 @@ const ModalReport = ({ showModal, handleClose }) => {
                     Swal.fire({
                         icon: "error",
                         title: "دوباره تلاش کنید!",
-                        background: "rgb(50, 55, 80);",
+                        background: "rgb(50, 55, 80)",
                         color: "#ceccc0",
                         width: "25rem",
                         direction: "rtl",
@@ -116,7 +126,6 @@ const ModalReport = ({ showModal, handleClose }) => {
                     });
                 }
             }
-
             return response;
         } catch (error) {
             console.error(error);
