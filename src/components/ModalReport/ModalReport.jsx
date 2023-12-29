@@ -95,7 +95,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                 if (data.detail == "you can not report your own twitte.") {
                     Swal.fire({
                         icon: "error",
-                        title: "شما قبلا این توییت را ریپورت کرده اید!",
+                        title: "شما قبلا این توییت را ریپورت کرده‌اید!",
                         background: "rgb(50, 55, 80)",
                         color: "#ceccc0",
                         width: "25rem",
@@ -106,7 +106,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                 if (data.detail == "you have already reported this twitte.") {
                     Swal.fire({
                         icon: "error",
-                        title: "شما قبلا این توییت را ریپورت کرده اید!",
+                        title: "شما قبلا این توییت را ریپورت کرده‌اید!",
                         background: "rgb(50, 55, 80)",
                         color: "#ceccc0",
                         width: "25rem",
