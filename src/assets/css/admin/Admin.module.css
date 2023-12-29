@@ -1,32 +1,76 @@
 @import "../black-dashboard-react.css";
+.ParentContain {
+    display: flex;
+}
 .contain{
     display: flex;
     flex-direction: row;
     justify-content: start;
     margin: 0;
+    /* overflow-y: scroll; */
+    width: 100vw;
 }
 
 .admin{
     flex-grow: 1;
-    margin-top: 5vh;
+    margin: 5vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    /* justify-content: space-between; */
+    max-width: 90%;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* margin-left: 10px; */
+}
 
+.adminRow {
+    display: flex;
+    justify-content: space-between;
 }
 
 .adminBox{
-    height: 53vh;
+    height: 43vh;
     display: flex;
     /* justify-content: space-evenly; */
     flex-grow: 1;
+    margin: 10px;
+    /* width: 90%; */
 }
 
 .adminChart{
-    height: 33vh;
+    height: 43vh;
     display: flex;
     justify-content: center;
+    flex-grow: 1;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 541px) {
+    .ParentContain {
+        display: flex;
+        max-height: 100vh;
+        flex-direction: column-reverse;
+    }
+    .adminSidebar {
+        flex-shrink: 0;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .contain {
+        flex: 1;
+        margin-bottom: 5px;
+        overflow-y: scroll;
+    }
+    .adminRow {
+        flex-direction: column;
+        width: 90%;
+    }
+    .admin {
+        margin-top: 0;
+        margin-left: 0;
+    }
+    /* .admin {
+        overflow: scroll;
+    } */
 }

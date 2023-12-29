@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Card } from "reactstrap";
 import CommentModal from "../../components/Modal/Comments";
 import { likes } from "../../hooks/Twitter/likes";
 import { useState } from "react";
+import IsThisMe_Function from "../UserPorfile/IsThisMe_Function";
 import {
   Dropdown,
   DropdownToggle,
@@ -19,10 +20,6 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
-  // if (tweet.liked_by_me != null) {
-  // setLike(tweet.liked_by_me);
-  // // }
-    // console.log(tweet.liked_by_me)
 
   const [link, setLink] = useState("");
   return (
@@ -66,17 +63,20 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             >
               بلاک
             </DropdownItem>
-            <DropdownItem
-              className={styles.dropDown}
-              onClick={() => {
-                setTweets((x) => {
-                  return x.filter((y) => y.id !== tweet.id);
-                });
-                deleteTweet(tweet.id);
-              }}
-            >
-              حذف
-            </DropdownItem>
+            { 
+              <DropdownItem
+                className={styles.dropDown}
+                disabled={!IsThisMe_Function(tweet.profile.username)}
+                onClick={() => {
+                  setTweets((x) => {
+                    let temp = x.results.filter((y) => y.id !== tweet.id);
+                    return {results: temp}
+                  });
+                  deleteTweet(tweet.id);
+                }}
+              >
+                حذف
+              </DropdownItem>}
           </DropdownMenu>
         </Dropdown>
         <div className={styles.header}>

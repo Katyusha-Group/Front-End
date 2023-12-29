@@ -172,7 +172,7 @@ function Login(props) {
                     </Container>
                     <Container>
                       <Row style={{ justifyContent: 'center' }}>
-                        <Col className="text-center pt-md-2" md="10">
+                        <Col className={`${style.LoginText} text-center pt-md-2`} md="10">
                           در صورت نداشتن حساب کاربری
                           <Link to="../signup" color="primary">
                             &nbsp;ثبت‌نام&nbsp;
