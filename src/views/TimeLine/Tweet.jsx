@@ -14,6 +14,7 @@ import {
 import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
 import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
+import ModalReport from "../../components/ModalReport/ModalReport";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -21,7 +22,25 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
 
+  const [thisTweet, setThisTweet] = useState(tweet.id);
+  // if (tweet.liked_by_me != null) {
+  // setLike(tweet.liked_by_me);
+  // // }
+  // console.log(tweet.liked_by_me)
+
+
   const [link, setLink] = useState("");
+
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleOpenModal_Report = () => {
+    setShowModal(true);
+    console.log("Modal is opened");
+  }
+  function handleCloseModal() {
+    setShowModal(false);
+  };
   return (
     <>
       <Card className={styles.tweet}>
@@ -57,11 +76,16 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             <DropdownItem
               disabled={tweet.reported_by_me}
               className={styles.dropDown}
-              onClick={() => {
-                Report(tweet.id, setTweets);
-              }}
+              onClick={handleOpenModal_Report}
+              // onClick={() => {
+              //   // setThisTweet((x) => {
+              //   //   let temp = x.results.filter((y) => y.id !== tweet.id);
+              //   //   return {results: temp}
+              //   // });
+              //   handleOpenModal_Report
+              // }}
             >
-              بلاک
+              ریپورت
             </DropdownItem>
             { 
               <DropdownItem
@@ -78,6 +102,14 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
                 حذف
               </DropdownItem>}
           </DropdownMenu>
+          {
+            showModal && 
+            <ModalReport
+              id={tweet.id}
+              showModal={showModal}
+              handleClose={handleCloseModal}
+            />
+          }
         </Dropdown>
         <div className={styles.header}>
           <div className={styles.avatar}><img className={styles.avatarimg} src={tweet.profile.image} alt="" /></div>
@@ -127,7 +159,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </button>
           </ButtonGroup>
         </div>
-      </Card>
+      </Card >
       <CommentModal
         open={open}
         setOpen={() => {
