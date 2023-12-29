@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Timeline from "./Timeline.jsx";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.jsx";
 import styles from "../../assets/css/chat/Chat.module.css";
@@ -6,16 +6,43 @@ import Sidebar from "../Sidebar/Sidebar.jsx";
 import Searchbar from "../Searchbar.jsx";
 import { Card, Row } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage.jsx";
-const ChatPage = () => {
+import WebSocketInstance from "../../components/chat/chatWebSocket.jsx";
+
+const ChatPage = (props) => {
   const [chats, setChats] = React.useState([]);
+  function waitForSocketConnection(callback) {
+    const component = this;
+    setTimeout(function () {
+      if (WebSocketInstance.state() === 1) {
+        console.log("Connection is made");
+        callback();
+        return;
+      } else {
+        console.log("wait for connection...");
+        component.waitForSocketConnection(callback);
+      }
+    }, 100);
+  }
+
+  useEffect(() => {
+    waitForSocketConnection(() => {
+      WebSocketInstance.fetchMessages(
+        // props.username,
+        // props.match.params.chatID
+        "erfanebs",
+        1
+      );
+    });
+    WebSocketInstance.connect(1);
+    // WebSocketInstance.connect(props.match.params.chatID);
+  }, []);
+
   return (
     <Card className={styles.timeline}>
       <div className={styles.chat}>
         {chats.map((chat, index) => (
-          <div  className={`${styles.chatBoxContainerRight}`} key={index}>
-            <Card
-              className={` ${styles.chatBox} ${styles.chatBoxRight}`}
-            >
+          <div className={`${styles.chatBoxContainerRight}`} key={index}>
+            <Card className={` ${styles.chatBox} ${styles.chatBoxRight}`}>
               {chat.text}
             </Card>
           </div>

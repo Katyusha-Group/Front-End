@@ -29,8 +29,6 @@ export const usesProfileMe = () => {
         );
         const data = await profileResponse.json();
         setProfile(data);
-        console.log("User profile data: " , data);
-
         closeLoading();
         setLoading(false);
       } catch (error) {

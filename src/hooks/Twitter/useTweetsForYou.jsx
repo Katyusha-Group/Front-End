@@ -23,7 +23,6 @@ export const fetchData = (setLoading, setData, num, initial) => {
   axios
     .request(config)
     .then((response) => {
-      console.log("🚀 ~ file: useTweetsForYou.jsx:26 ~ .then ~ response:", response)
       setLoading(false);
       setData((x) => {
         if (!initial) return( {...x,results:[...x.results, ...response.data.results]});
@@ -36,7 +35,6 @@ export const fetchData = (setLoading, setData, num, initial) => {
 export const useTweetsForYou = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState({results:[]});
-  console.log(data);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
   useEffect(() => {
