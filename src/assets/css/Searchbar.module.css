@@ -1,33 +1,49 @@
+@import "./black-dashboard-react.css";
+
 .main{
     border-radius: 15px;
-    width: 20vw;
-    background-color:#272a3d ;
-    margin-top: 100px;
-    margin-left: 20px;
-    
+    width: 21vw;
+    margin-right: 2.5vw;
+    position: sticky;
+    margin-top: 5vh;
+    height: 90vh;
+    margin-left: 1.5vw;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .searchbar{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
-    /* background-color: red; */
     border-radius: 15px;
-    /* background-color:rgba(39, 42, 61,0.2); */
-    margin-top: 50px;
-    width: 18px;
-    margin-bottom: 30px;
+    margin-top: 3vh;
+    width: 100%;
+    color: white;
+    margin-bottom: 2vh;
 }
 .field{
     display: flex;
-    background-color:#444862;
+    background-color:var(--box);
     border: none;
+    color: white;
     border-radius: 15px; 
-    width: 16vw;
-    height: 4vh;
+    width: 17vw;
+    height: 5vh;
     padding-right: 30px;
     margin-right: 20px;
+    margin: auto;
 }
 .field ::placeholder{
     margin-right: 20px;
+}
+
+.searchBox{
+    height: inherit;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1100px) {
+    .main{
+        display: none;
+    }
 }

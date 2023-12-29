@@ -13,6 +13,11 @@ test('Profile component', () => {
     expect(getByTestId('instructor-all')).toBeInTheDocument();
   });})
 test('Profile component', () => {
+  it('should render the leftpart component', () => {
+    const { getByTestId } = render(<Profile />);
+    expect(getByTestId('leftpart')).toBeInTheDocument();
+  });})
+test('Profile component', () => {
   it('should render the weekly schedule table', () => {
     const { getByText } = render(<Profile />);
     expect(getByText('برنامه هفتگی')).toBeInTheDocument();

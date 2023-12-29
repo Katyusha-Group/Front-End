@@ -1,21 +1,26 @@
-.eachProfile{
+@import "./black-dashboard-react.css";
+
+.eachProfile {
     width: 58px;
     height: 58px;
     border-radius: 50%;
 }
-.eachcard{
-    margin-top: 20px;
+
+.eachcard {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+}
 
-}
-.p_name{
+.p_name {
     margin-top: 10px;
-    margin-left: 50px;
+    color: var(--white) !important;
+    margin-right: 100px;
 }
-.delButton{
+
+.delButton {
     line-height: 2.3;
     margin-top: 5px;
     width: 70px;
@@ -25,13 +30,48 @@
     color: white;
     border: 1px solid #67539E;
 }
-.delButton:hover{
+
+.delButton:hover {
     background-color: #67539E;
     color: white;
     border: 1px solid white;
 }
-.delButton:active{
+
+.delButton:active {
     background-color: #67539E;
     color: white;
     border: 1px solid white;
 }
+
+.NameImage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NameImage:hover {
+    cursor: pointer;
+}
+
+/* .followButton {
+    line-height: 2.3;
+    margin-top: 5px;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #67539E;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  .followButton:hover {
+    background-color: white;
+    color: #67539E;
+  }
+  
+  .followButton:active {
+    background-color: white;
+    color: #67539E;
+    border: 1px solid #67539E;
+  } */

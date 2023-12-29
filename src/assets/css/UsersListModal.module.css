@@ -1,0 +1,81 @@
+@import "./black-dashboard-react.css";
+
+.Modal {
+    backdrop-filter: blur(2px);
+}
+
+.ModalContents {
+    border-radius: 10px;
+    background-color: rgb(50, 55, 80);
+    /* background-color: rgba(143, 62, 140, 0.5); */
+    background: rgb(50, 55, 80);
+    background: linear-gradient(180deg, rgba(39, 41, 61, 1) 20%,
+            rgba(50, 55, 80, 1) 88%, rgba(109, 54, 114, 1) 95%, rgba(143, 62, 140, 1) 100%);
+    color: var(--white) !important;
+}
+
+.ModalHeader {
+    justify-content: center;
+    color: var(--white);
+}
+
+.ModalTitle {
+    color: var(--white) !important;
+}
+
+.ModalBody {
+    margin-top: -40px;
+    height: 50vh;
+    color: var(--white) !important;
+}
+
+p {
+    color: var(--white) !important;
+    /* margin-top: 20px !important; */
+}
+
+.eachProfile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.eachcard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.eachnotif {
+    margin-bottom: 20px;
+    display: block;
+    padding: 0px 10px;
+}
+
+
+.eachTime {
+    font-size: 10px;
+    opacity: 0.7;
+    /* vertical-align: middle; */
+}
+
+.eachText {
+    margin-bottom: 0px;
+}
+
+.bodyContent {
+    height: 37vh;
+    overflow-y: auto;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+
+.unreadNotifs {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unreadNotifs::before {
+    color: hotpink;
+}

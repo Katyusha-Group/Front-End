@@ -1,15 +1,20 @@
+@import "../black-dashboard-react.css";
+
 .tweet {
   display: flex;
   flex-direction: column;
-  background-color: #444862;
+  background-color: var(--box);
   color: white;
-  /* border: 1px solid #e1e8ed; */
   border-radius: 15px;
   padding: 10px;
   width: 40vw;
   margin: 10px auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 90%;
 }
+
+
 .header {
   display: flex;
   flex-direction: row;
@@ -18,10 +23,17 @@
 .avatar {
   width: 50px;
   height: 50px;
-  background-color: #1da1f2;
+  background-color: var(--gray-dark);
   border-radius: 50%;
   margin-right: 10px;
   margin-left: 10px;
+  border: 2px solid #32325d;
+}
+.avatarimg{
+  width: 50px;
+  padding: 2px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .username {
@@ -42,6 +54,93 @@
   line-height: 25px;
   margin-bottom: 10px;
   text-align: right;
+}
+
+.button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 20px;
+  color: var(--white);
+  background-color: initial;
+  border: none;
+  align-items: center;
+}
+.button2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 20px;
+  color: red;
+  background-color: initial;
+  border: none;
+  align-items: center;
+}
+
+.button:hover{
+  color: red;
+  background-color: initial;
+  border: none;
+  transition: 0.5s;
+}
+.button2:hover{
+  color: var(--white);
+  background-color: initial;
+  border: none;
+  transition: 0.5s;
+}
+
+.icon{
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.icon_text{
+  font-size: 0.7rem;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: end;
+}
+
+.reply{
+  background-color: var(--gray);
+  border-radius: 15rem;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: right;
+}
+
+.reply:hover{
+  cursor: pointer;
+  background-color: var(--gray-dark);
+  transition: 0.1s;
+}
+
+.moreInfo{
+  position: absolute;
+  left: 0;
+  width: 30px !important;
+  margin: 0px 30px;
+  border-radius: 5px;
+  background: initial;
+  border: none;
+  color: var(--white);
+  padding: 0px !important;
+}
+
+.moreInfo:hover{
+  transition: 500ms;
+}
+
+.dropDown{
+  direction: rtl;
+  text-align: right;
+}
+
+.content:hover{
+  cursor: pointer;
 }
 
 /* Add more styles as needed */

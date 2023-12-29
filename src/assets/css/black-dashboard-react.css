@@ -33,6 +33,7 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --box: #444862;
 }
 
 *,
@@ -13360,6 +13361,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .btn.dropdown-toggle:after,
 .navbar .navbar-nav>a.btn.dropdown-toggle:after {
   margin-left: 30px !important;
+  display: none;
 }
 
 .btn-primary {
@@ -20622,3 +20624,4 @@ a.nav-link-course:hover {
 .row {
   margin: 0 0px !important;
 }
+

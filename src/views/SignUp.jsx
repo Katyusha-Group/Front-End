@@ -1,36 +1,34 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Select from "react-select";
 import * as style from "../assets/css/SignUp.module.css";
-import SelectStyles from "../assets/styles/SelectStyles";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 import { apis } from "../assets/apis";
+import { TextFormGroup } from "../assets/FormGroups/TextFormGroup";
+import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
+import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
+import { SelectBoxFormGroup } from "../assets/FormGroups/SelectBoxFormGroup";
 import { IsValidEmail } from "../Functions/IsValidEmail"
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { ConfirmPasCloseEyeIcon } from "../Functions/ConfirmPasCloseEyeIcon"
+import { postSignUp } from "../Functions/postData/postSignUp";
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  FormGroup,
   Form,
-  Input,
   Row,
   Col,
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
-import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
-import { ConfirmPasswordFormGroup } from "../assets/FormGroups/ConfirmPasswordFormGroup";
-
 function SignUp() {
-  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
+    profileName: "",
+    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -70,6 +68,8 @@ function SignUp() {
     setGender(selectedOption.value);
   }
   const [errorMessage, setErrorMessage] = useState({
+    profileNameError: "",
+    usernameError: "",
     emailError: "",
     passError: "",
     passErrorRep: "",
@@ -77,11 +77,19 @@ function SignUp() {
     subjectError: "",
     backError: "",
   });
+
+  const Navigate = useNavigate();
+  const handleSignUp = async (formData, subject, gender) => {
+    await postSignUp(formData, subject, gender, Navigate);
+  };
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     const errors = [
       {
+        profileNameError: "",
+        usernameError: "",
         emailError: "",
         passError: "",
         passErrorRep: "",
@@ -90,6 +98,13 @@ function SignUp() {
         backError: "",
       },
     ];
+
+    if (formData.profileName.trim().length === 0) {
+      errors.profileNameError = "!وارد کردن نام پروفایل الزامی است";
+    }
+    if (formData.username.trim().length === 0) {
+      errors.usernameError = "!وارد کردن نام کاربری الزامی است";
+    }
     if (formData.email.trim().length === 0) {
       errors.emailError = "!وارد کردن ایمیل الزامی است";
     }
@@ -119,6 +134,8 @@ function SignUp() {
       errors.subjectError = "!وارد کردن رشته الزامی است";
     }
     setErrorMessage({
+      profileNameError: errors.profileNameError,
+      usernameError: errors.usernameError,
       emailError: errors.emailError,
       passError: errors.passError,
       passErrorRep: errors.passErrorRep,
@@ -126,6 +143,8 @@ function SignUp() {
       subjectError: errors.subjectError,
     });
     if (
+      errors.profileName ||
+      errors.usernameError ||
       errors.emailError ||
       errors.passError ||
       errors.passErrorRep ||
@@ -134,60 +153,8 @@ function SignUp() {
     ) {
       return;
     }
-    Swal.fire({
-      title: 'کمی صبر کنید',
-      html: 'در حال بررسی درخواست ثبت نام',
-      allowOutsideClick: false,
-      timerProgressBar: true,
-      showConfirmButton: false,
-      background: '#3c3e5d',
-      color: '#ceccc0',
-      width: '25rem',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    })
-
-    const response = await fetch("https://katyushaiust.ir/accounts/signup/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        email: formData.email,
-        password1: formData.password,
-        password2: formData.passwordConfirm,
-        department: subject,
-        gender: gender,
-      }),
-    });
-    const data = await response.json();
-    Swal.close()
-    if (response.status === 201) {
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("verificationLink", data.url)
-      Swal.fire({
-        icon: 'success',
-        title: ' کد تایید ارسال شد',
-        html: 'لطفا ایمیلتان را چک کنید',
-        background: '#3c3e5d',
-        color: '#ceccc0',
-        width: '25rem',
-        confirmButtonText: "باشه"
-      })
-      Navigate("/verification");
-    } else {
-      if (data.email) errors.backError = "!این ایمیل پیش از این ثبت شده است";
-      if (data.password) errors.backError = "!رمز عبور قابل قبول نیست";
-      setErrorMessage({
-        ...errorMessage,
-        backError: errors.backError,
-      });
+    else {
+      handleSignUp(formData, subject, gender);
     }
   }
   return (
@@ -206,6 +173,28 @@ function SignUp() {
                   </CardHeader>
                   <CardBody>
                     <Form >
+                      <Row>
+                        <Col xl="6">
+                          <TextFormGroup
+                            label={"نام کاربری"}
+                            placeHolder={"نام کاربری خود را وارد کنید"}
+                            value={formData.username}
+                            name={"username"}
+                            onChange={handleChange}
+                            error={errorMessage.usernameError}>
+                          </TextFormGroup>
+                        </Col>
+                        <Col xl="6">
+                          <TextFormGroup
+                            label={"نام پروفایل"}
+                            placeHolder={"نام پروفایل خود را وارد کنید"}
+                            value={formData.profileName}
+                            name={"profileName"}
+                            onChange={handleChange}
+                            error={errorMessage.profileNameError}>
+                          </TextFormGroup>
+                        </Col>
+                      </Row>
                       <Row>
                         <Col md="12">
                           <EmailFormGroup
@@ -238,47 +227,25 @@ function SignUp() {
                       </Row>
 
                       <Row>
-                        <Col lg="6">
-                          <FormGroup className="text-right">
-                            <label>رشته</label>
-                            <br />
-
-                            <Select
-                              options={subjectOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="subject"
-                              onChange={handleSubject}
-                            />
-
-                            {errorMessage.subjectError && (
-                              <div className={style.selectError}>
-                                {errorMessage.subjectError}
-                              </div>
-                            )}
-                          </FormGroup>
+                        <Col xl="6">
+                          <SelectBoxFormGroup
+                            label={"رشته"}
+                            options={subjectOptions}
+                            name={subject}
+                            onChange={handleSubject}
+                            error={errorMessage.subjectError}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
-                        <Col lg="5" className="offset-lg-1">
-                          <FormGroup className="text-right">
-                            <label>جنسیت</label>
-                            <br />
-
-                            <Select
-                              options={genderOptions}
-                              styles={SelectStyles}
-                              isRtl
-                              placeholder="انتخاب کنید "
-                              name="gender"
-                              onChange={handleGender}
-                            />
-
-                            {errorMessage.genderError && (
-                              <div className={style.selectError}>
-                                {errorMessage.genderError}
-                              </div>
-                            )}
-                          </FormGroup>
+                        <Col xl="5" className="offset-lg-1">
+                          <SelectBoxFormGroup
+                            label={"جنسیت"}
+                            options={genderOptions}
+                            name={gender}
+                            onChange={handleGender}
+                            error={errorMessage.genderError}
+                          >
+                          </SelectBoxFormGroup>
                         </Col>
                       </Row>
                     </Form>

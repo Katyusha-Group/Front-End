@@ -22,6 +22,7 @@ import { mapTimeToIndex } from "../../Functions/mapTimeToIndex";
 import GenerateKeyedTimetable from "./KeyedTimetable";
 import * as style from  "./CoursesPanel.module.css";
 import SelectStyles from "../../assets/styles/SelectStyles";
+import axios from "axios";
 
 export default function CoursesPanel() {
   const tokenJson = localStorage.getItem("authTokens");
@@ -42,10 +43,10 @@ export default function CoursesPanel() {
   }
 
   useEffect(() => {
-    fetch(apis["departmentsAll"]["names"])
-      .then((response) => response.json())
+    axios(apis["departmentsAll"]["names"])
+      // .then((response) => response.json())
       .then((DepartmentOptions) => {
-      setDepartmentOptions(DepartmentOptions);
+        setDepartmentOptions(DepartmentOptions.data);
     });
     changeInfo("courseChoosed", info.courseChoosed);
       const courses = info.courseChoosed.map(course => new Course(course, true));
@@ -54,13 +55,13 @@ export default function CoursesPanel() {
   }, []);
 
   useEffect ( () => {
-    fetch(apis["courses"]["my_courses"], {
+    axios(apis["courses"]["my_courses"], {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
+      // .then((response) => response.json())
       .then((data) => {
-        changeInfo("courseChoosed", data);
-        const courses = data.map(course => new Course(course, true));
+        changeInfo("courseChoosed", data.data);
+        const courses = data.data.map(course => new Course(course, true));
         setChosenCourses(courses);
         if (SwitchChecked)
         {
@@ -183,52 +184,36 @@ export default function CoursesPanel() {
   
   return (
     <>
-    <AdminNavbar></AdminNavbar>
-      <Row >
-        <Col>
-          <Card className={style.TableCard}>
-            <CardBody>
-              <Row className={style.CardBodyRow}>
-                <Col className={style.SelectCol} md="4">
-                  <Select
-                    options={DepartmentOptions}
-                    styles={SelectStyles}
-                    isRtl
-                    placeholder="دانشکده مورد نظر را انتخاب کنید"
-                    name="SelectDepartment"
-                    value={SelectedDepartment.name}
-                    onChange={handleDepartment}
-                  />
-                </Col>
-                <Col className={style.SwitchCol} md="1">
-                  <Row className={style.SwitchCard}>
-                    <Col className={style.SwitchCardCol}>
-                      <ReactSwitch className={style.Switch}
-                        checked={SwitchChecked}
-                        onChange={handleSwitchChange}
-                      />
-                    </Col>
-                    <Col className={style.SwitchCardCol}>
-                      <p>
-                        فقط دروس قابل اخذ
-                      </p>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+      <AdminNavbar></AdminNavbar>
+      <div className={style.TableCard}>
+          <div>
+            <div className={style.CardBodyRow}>
+              <div className={style.SelectCol}>
+                <Select
+                  options={DepartmentOptions}
+                  styles={SelectStyles}
+                  isRtl
+                  placeholder="دانشکده مورد نظر را انتخاب کنید"
+                  name="SelectDepartment"
+                  value={SelectedDepartment.name}
+                  onChange={handleDepartment}
+                />
+              </div>
+              <div className={style.SwitchCol}>
+                <ReactSwitch className={style.Switch}
+                  checked={SwitchChecked}
+                  onChange={handleSwitchChange}
+                />
+                <p>
+                  فقط دروس قابل اخذ
+                </p>
+              </div>
+            </div>
+            <div className={style.ClassesTableDiv}>
               <Table className={style.ClassesTable} id ="CoursesPanelTable">
                 {/* <thead className={`${style.text-primary} TableHead`}> */}
                 <thead className="text-primary TableHead">
                   <tr>
-                    {/* <th className={`${style.table-head} text-center`}></th>
-                    <th className={`${style.table-head} text-center`}>۷:۳۰ تا ۹</th>
-                    <th className={`${style.table-head} text-center`}>۹ تا ۱۰:۳۰</th>
-                    <th className={`${style.table-head} text-center`}>۱۰:۳۰ تا ۱۲</th>
-                    <th className={`${style.table-head} text-center`}>1 تا 2:30</th>
-                    <th className={`${style.table-head} text-center`}>2:30 تا 4</th>
-                    <th className={`${style.table-head} text-center`}>4 تا 5:30</th>
-                    <th className={`${style.table-head} text-center`}>5:30 تا 7  </th>
-                    <th className={`${style.table-head} text-center`}>7 تا 8:30 </th> */}
                     <th className="table-head text-center "></th>
                     <th className="table-head text-center ">۷:۳۰ تا ۹</th>
                     <th className="table-head text-center ">۹ تا ۱۰:۳۰</th>
@@ -248,10 +233,9 @@ export default function CoursesPanel() {
                   <DayRow dayName="چهارشنبه" periods={keyedTimetable[4]} />
                 </tbody>
               </Table>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+            </div>
+          </div>
+      </div>
     </>
   );
 }

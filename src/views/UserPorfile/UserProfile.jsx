@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import img from "../../assets/img/DefaultAvatar.jpg";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import {
   Button,
@@ -15,36 +16,23 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import Spinner from "react-bootstrap/Spinner";
 import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
-import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
+import { usesProfileMe } from "../../hooks/useProfileMe";
+
 function UserProfile() {
   const [info, setInfo] = useState({});
   const [images, setImages] = React.useState([]);
   const [imageURLs, setlmageURLs] = React.useState("");
+  const { profile, setProfile, loading: loading2 } = usesProfileMe();
 
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  useEffect(() => {
-    showLoading();
-    fetch(apis["accounts"]["justProfile"], {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "application/json",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((error) => console.error(error));
-    const activeRoute = (routeName) => {
-      return location.pathname === routeName ? "active" : "";
-    };
-    closeLoading();
-  }, []);
 
   function handleChange(event) {
     // setErrorMessage("");
@@ -58,55 +46,55 @@ function UserProfile() {
   const startTelegramBot = () => {
     window.location.href = info.telegram_link;
   };
-  const notificationAlertRef = React.useRef(null);
-  const notify = (place) => {
-    var color = 2;
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>
-            <b>با موفقیت به سبد خرید اضافه شد</b>
-          </div>
-        </div>
-      ),
-      type: type,
-      color: "white",
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notificationAlertRef = React.useRef(null);
+  // const notify = (place) => {
+  //   var color = 2;
+  //   var type;
+  //   switch (color) {
+  //     case 1:
+  //       type = "primary";
+  //       break;
+  //     case 2:
+  //       type = "success";
+  //       break;
+  //     case 3:
+  //       type = "danger";
+  //       break;
+  //     case 4:
+  //       type = "warning";
+  //       break;
+  //     case 5:
+  //       type = "info";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   var options = {};
+  //   options = {
+  //     place: place,
+  //     message: (
+  //       <div>
+  //         <div>
+  //           <b>با موفقیت به سبد خرید اضافه شد</b>
+  //         </div>
+  //       </div>
+  //     ),
+  //     type: type,
+  //     color: "white",
+  //     autoDismiss: 7,
+  //   };
+  //   notificationAlertRef.current.notificationAlert(options);
+  // };
   function save() {
     var formData = new FormData();
-    formData.append("first_name", info.first_name);
-    formData.append("last_name", info.last_name);
+    // formData.append("first_name", info.first_name);
+    // formData.append("last_name", info.last_name);
+    formData.append("name", info.first_name + " " + info.last_name);
     if (images.length > 0) {
       formData.append("image", images[0]);
-
     } else {
     }
-    fetch(apis["accounts"]["profile"]["updateProfile"], {
+    fetch(apis["profiles"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
       "Content-Type": "application/json",
@@ -115,7 +103,7 @@ function UserProfile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        notify("tl");
+        // notify("tl");
       })
       .catch((error) => console.error(error));
     const activeRoute = (routeName) => {
@@ -138,9 +126,12 @@ function UserProfile() {
     const onChange = (event) => {
       onImageChangeForm(event);
     };
+    if (loading2) {
+      return <></>;
+    }
     return (
       <div>
-        <NotificationAlert ref={notificationAlertRef} />
+        {/* <NotificationAlert ref={notificationAlertRef} /> */}
 
         <input
           className="btn"
@@ -163,6 +154,7 @@ function UserProfile() {
       </div>
     );
   };
+  console.log("loading2", loading2);
 
   return (
     <>
@@ -180,42 +172,59 @@ function UserProfile() {
                   <CardBody>
                     <Form>
                       <Row>
-                        <Col className="pr-md-1" md="5">
+                        <Col className="pr-md-1" md="4">
                           <FormGroup>
                             <label>رشته</label>
-                            <Input
-                              defaultValue={info.department}
-                              placeholder="رشته"
-                              name="department"
-                              type="text"
-                              onChange={handleChange}
-                              disabled
-                            />
+                            {loading2 ? (
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                defaultValue={profile.department}
+                                placeholder="رشته"
+                                name="department"
+                                type="text"
+                                onChange={handleChange}
+                                disabled
+                              />
+                            )}
                           </FormGroup>
                         </Col>
-                        <Col className="px-md-1" md="3">
+                        <Col className="px-md-1" md="2">
                           <FormGroup>
                             <label>جنسیت</label>
-                            <Input
-                              defaultValue={info.gender === "M" ? "مرد" : "زن"}
-                              placeholder="جنسیت"
-                              type="text"
-                              name="gender"
-                              disabled
-                              onChange={handleChange}
-                            />
+                            {loading2 ? (
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                defaultValue={
+                                  profile.gender === "M" ? "مرد" : "زن"
+                                }
+                                placeholder="جنسیت"
+                                type="text"
+                                name="gender"
+                                disabled
+                                onChange={handleChange}
+                              />
+                            )}
                           </FormGroup>
                         </Col>
-                        <Col className="pl-md-1" md="4">
+                        <Col className="pl-md-1" md="6" >
                           <FormGroup>
                             <label htmlFor="exampleInputEmail1">ایمیل</label>
-                            <Input
-                              placeholder={info.email}
-                              type="email"
-                              disabled
-                              name="email"
-                              onChange={handleChange}
-                            />
+                            {loading2 ? (
+                              <Spinner animation="border" variant="primary" />
+                            ) : (
+                              <Input
+                                
+                                placeholder={profile.email}
+                                type="email"
+                                disabled
+                                name="email"
+                                onChange={handleChange}
+                                dir="ltr"
+                                style={{ paddingLeft: '15px' }}
+                              />
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -275,11 +284,16 @@ function UserProfile() {
                       <div className="block block-three" />
                       <div className="block block-four" />
                       <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <img
-                          alt="..."
-                          className="avatar"
-                          src={imageURLs != "" ? imageURLs : info.image}
-                        />
+                        {loading2 ? (
+                          <Spinner animation="border" variant="primary" />
+                        ) : (
+                          <img
+                            alt="..."
+                            className="avatar"
+                            src={profile !== null ? profile.image : img}
+                          />
+                        )}
+                        {console.log("profile", profile)}
                       </a>
                     </div>
                     <div className="card-description">

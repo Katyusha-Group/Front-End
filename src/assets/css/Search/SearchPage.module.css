@@ -1,0 +1,12 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5vw;
+}
+@media only screen and (max-width: 620px) {
+    .main{
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+}

@@ -1,18 +1,34 @@
-import React from 'react'
-import styles from '../assets/css/Searchbar.module.css'
-import Searchfield from './Searchfield'
-import UserSearchResponce from './UserSearchResponce'
+import React, { useState, useEffect } from "react";
+import styles from "../assets/css/Searchbar.module.css";
+import Searchfield from "./Searchfield";
+import UserSearchResponce from "./UserSearchResponce";
+import { Card } from "reactstrap";
+import { useAllProfiles } from "../hooks/useSearchprofile";
+import axios from "axios";
+import { set } from "lodash";
+import { use } from "chai";
 
 const Searchbar = () => {
-  return (
-    <div className={styles.main}>
-      <Searchfield/>
-      <UserSearchResponce/>
-      <UserSearchResponce/>
-      <UserSearchResponce/>
-        
-    </div>
-  )
-}
+  const [searchQuery, setSearchQuery] = useState("");
 
-export default Searchbar
+  const { filteredProfiles, loading } = useAllProfiles(searchQuery);
+  useEffect(() => {}, [searchQuery]);
+
+  return (
+    <Card className={styles.main}>
+      <Searchfield setSearchQuery={setSearchQuery} />
+
+      <div className={styles.searchBox}>
+        {loading ? (
+          <div></div>
+        ) : (
+          filteredProfiles.map((item, index) => {
+            return <UserSearchResponce res={item} key={index} />;
+          })
+        )}
+      </div>
+    </Card>
+  );
+};
+
+export default Searchbar;

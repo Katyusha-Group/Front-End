@@ -1,6 +1,17 @@
 .TableCard {                        /* Main card of the page */
+    padding: 10px;
     margin-top: 60px;
     overflow-x: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color:#27293d;
+    border-radius: 10px;
+}
+
+@media only screen and (min-width: 1200px ) {
+  .TableCard{
+      margin-top: -5px;
+  }
 }
 
 .CourseListContainer {           /* List of all courses */
@@ -79,11 +90,12 @@
 
 .SwitchCol
 {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 2;
-    padding-right: 100px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  padding-right: 100px !important;
 }
 
 .SelectCol
@@ -186,3 +198,14 @@ input {
   select::-ms-expand {
     display: none;
   }
+
+
+  .ClassesTable {
+    --bs-table-bg: var(--bs-card-cap-bg);
+  }
+
+.ClassesTableDiv {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  height: 70vh;
+}

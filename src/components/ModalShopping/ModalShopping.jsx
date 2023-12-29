@@ -16,12 +16,12 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import NotificationAlert from "react-notification-alert";
+// import NotificationAlert from "react-notification-alert";
 import { apis } from "../../assets/apis";
 import { Link, NavLink, useSearchParams } from "react-router-dom";
-import * as style from "../../assets/css/UserPage.module.css"
-import * as shopStyle from "../../assets/css/Shopping.module.css"
-
+import * as style from "../../assets/css/UserPage.module.css";
+import * as shopStyle from "../../assets/css/Shopping.module.css";
+import axios from "axios";
 const ModalShopping = (props) => {
   const { info, changeInfo } = useInfo();
   const [email, setEmail] = React.useState(
@@ -64,70 +64,72 @@ const ModalShopping = (props) => {
 
   const notificationAlertRef = React.useRef(null);
 
-  const notify = (place) => {
-    var color = 2;
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>
-            <b>با موفقیت به سبد خرید اضافه شد</b>
-          </div>
-        </div>
-      ),
-      type: type,
-      color: "white",
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notify = (place, succeed) => {
+  //   var color = 2;
+  //   var type;
+  //   var options = {};
+  //   if (succeed){
+  //     type = "success";
+  //     options = {
+  //       place: place,
+  //       message: (
+  //         <div>
+  //           <div>
+  //             <b>با موفقیت به سبد خرید اضافه شد</b>
+  //           </div>
+  //         </div>
+  //       ),
+  //       type: type,
+  //       color: "white",
+  //       autoDismiss: 7,
+  //     };
+  //   }
+  //     else{
+  //       type = "danger";
+  //       options = {
+  //         place: place,
+  //         message: (
+  //         <div>
+  //           <div>
+  //             <b>متاسفانه ثبت نشد</b>
+  //           </div>
+  //         </div>
+  //       ),
+  //       type: type,
+  //       color: "white",
+  //       autoDismiss: 7,
+  //     };
+  //   }
+  //     notificationAlertRef.current.notificationAlert(options);
+  // };
   function addItemShop(num) {
-    fetch(apis["carts"] + `${shopId.id}/items/`, {
+
+    axios(apis["shop"]["carts"]["addToCart"], {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: {
+        id: shopId.id,
         complete_course_number: num,
         contain_telegram: telegram,
         contain_sms: sms,
         contain_email: email,
-      }),
+      },
     })
-      .then((response) => {
-        return response.json();
+      .then((data) => {
+        // notify("tl", true);
       })
-      .then((data) => { })
       .catch((error) => {
+        // notify("tl", false);
         console.error(error);
       });
   }
   return (
     <>
       <div className="react-notification-alert-container">
-        <NotificationAlert ref={notificationAlertRef} />
+        {/* <NotificationAlert ref={notificationAlertRef} /> */}
       </div>
       <Modal
         show={props.show.flag}
@@ -229,7 +231,7 @@ const ModalShopping = (props) => {
                 disabled={!sms && !email && !telegram}
                 onClick={() => {
                   addItemShop(props.show.data.complete_course_number);
-                  notify("tl");
+                  // notify("tl");
                   props.close();
                 }}
               >

@@ -3,10 +3,11 @@ import "./Timeline.module.css";
 import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
-import { showLoading ,closeLoading} from "../LoadingAlert/LoadingAlert";
+import { showLoading, closeLoading } from "../LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
 const Timeline = (props) => {
-  let course_group = props.show.show.data.complete_course_number.split("_")[0];
+  let course_group = props.show;
+  // props.show.show.data.complete_course_number.split("_")[0];
   const { info, changeInfoState } = useInfo();
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -60,10 +61,9 @@ const Timeline = (props) => {
         setData(data);
         closeLoading();
       })
-
       .catch((error) => console.error(error));
-      
-   
+
+
   }, []);
   React.useEffect(() => {
   }, [Data]);

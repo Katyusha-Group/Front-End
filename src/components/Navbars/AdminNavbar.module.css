@@ -1,6 +1,6 @@
 .navbar .navbar-nav{
     width: 80%;
-    direction: rtl;
+    direction: rtl ;
 }
 .navbar-nav li{
     width: 100%;
@@ -12,6 +12,7 @@
 }
 
 .rtl .navbar .navbar-nav a.nav-link{
+    direction: rtl !important;
     
     margin: 0;
 
@@ -35,4 +36,6 @@
     border-radius: 0.25rem; */
   }
 
-
+/* #navbar-absolute {
+    position: relative !important;
+} */

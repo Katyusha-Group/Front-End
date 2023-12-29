@@ -1,0 +1,36 @@
+@import "../black-dashboard-react.css";
+.title {
+    color: var(--white);
+    font-size: large;
+    text-align: right;
+    padding-right: 30px;
+    padding-top: 15px;
+}
+
+/* .styles.ProtestTable_Main {
+    overflow-y: scroll;
+} */
+
+.protestContainer {
+  overflow: auto;
+  max-height: 45vh;
+  padding-right: 20px;
+}
+
+.protest_Main {
+    /* border-bottom: 3px solid rgb(54,56,77); */
+    border-bottom: 3px solid var(--box);
+    margin: 20px;
+    text-align: right;
+    padding: 10px;
+    transition: background-color border-radius 0.3s;
+}
+
+.protest_Main:hover {
+    background-color: var(--box);
+    border-radius: 15px;
+}
+
+.NoProtest_Fount {
+    padding-top: 30%;
+}

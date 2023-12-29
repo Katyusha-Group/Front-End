@@ -25,6 +25,15 @@
   direction: ltr;
 }
 
+.textError {
+  color: red;
+  font-size: smaller;
+  white-space: nowrap !important;
+  position: relative;
+  top: -10px;
+  direction: ltr;
+}
+
 .selectError {
   margin-top: 10px;
   color: red;
@@ -45,5 +54,5 @@
 }
 
 .signUpContainer {
-  margin-top: 120px !important;
+  margin-top: 25px !important;
 }

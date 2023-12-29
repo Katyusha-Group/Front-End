@@ -68,7 +68,7 @@ function AdminNavbar(props) {
 
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color, `${style.rtl}`)} expand="xl">
+      <Navbar className={classNames("navbar-absolute", color, style.rtl)} style={{direction:"rtl", position: "relative"}} expand="xl" id="navbar-absolute">
         <Collapse navbar isOpen={collapseOpen}>
           <Nav className={style.wideNavbar} navbar>
             <NavLink href="/home/page" className="nav-header nav-link-icon">
