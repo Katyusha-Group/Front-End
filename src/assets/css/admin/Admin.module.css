@@ -1,9 +1,14 @@
 @import "../black-dashboard-react.css";
+.ParentContain {
+    display: flex;
+}
 .contain{
     display: flex;
     flex-direction: row;
     justify-content: start;
     margin: 0;
+    /* overflow-y: scroll; */
+    width: 100vw;
 }
 
 .admin{

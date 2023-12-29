@@ -20,7 +20,7 @@ export default function Admin() {
         </div>
         <div className={styles.contain} >
           <div
-          className={styles.admin}
+            className={styles.admin}
           >
             <div className={styles.adminRow}>
               <Card className={`${styles.adminChart}`}><UserChart></UserChart></Card>
