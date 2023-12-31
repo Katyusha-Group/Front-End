@@ -15,15 +15,15 @@ import { useState } from "react";
 import Tweet from "../../views/TimeLine/Tweet";
 import { getReplies } from "../../Functions/Timeline/getReplies";
 import { useGetReplies } from "../../hooks/Twitter/useGetReplies";
-const Replies = ({open,setOpen, link}) => {
-  const {data, setData, loading} = useGetReplies(open,link);
+const Replies = ({ open, setOpen, link }) => {
+  const { data, setData, loading } = useGetReplies(open, link);
   return (
     <>
       <Modal
         show={open}
         cancel={setOpen}
         onHide={setOpen}
-        style={{ background: "rgba(0,0,0,0.2)" }}
+        style={{ background: "rgba(0,0,0,0.2)", margin: "-5rem auto" }}
         aria-labelledby="contained-modal-title-vcenter"
         scrollable={false}
         size="lg"
@@ -58,7 +58,7 @@ const Replies = ({open,setOpen, link}) => {
               )}
             </CardBody>
             <CardFooter>
-              
+
             </CardFooter>
           </Modal.Body>
         </div>
