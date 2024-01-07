@@ -1,4 +1,5 @@
 export const domain = "http://84.32.10.112";
+export const chatDomain = "ws://84.32.10.112";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
@@ -83,4 +84,8 @@ export const apis = {
   forYouTwittes: {
     forYouTwittes: `${domain}/for-you-twittes/`,
   },
+  chat:{
+    chat: `${chatDomain}/ws/chat/`,
+    chatWith: `${domain}/chat/chat-with/`,
+  }
 };

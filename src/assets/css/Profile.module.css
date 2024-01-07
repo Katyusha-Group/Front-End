@@ -218,3 +218,16 @@
       display: none;
     }
 }
+
+@media only screen and (max-width: 541px) {
+    .main {
+        flex-direction: column-reverse;
+    }
+    .rightpart {
+        max-width: 90vw;
+        max-height: 80vh;
+    }
+    .leftpart {
+        display: none;
+    }
+}

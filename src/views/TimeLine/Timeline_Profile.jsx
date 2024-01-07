@@ -9,10 +9,6 @@ import { apis } from "../../assets/apis";
 import CourseTimeline from "../../components/Timeline/Timeline";
 import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
 import StudentTimeline from "./StudentTimeline.jsx";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert.jsx";
 // src\views\UserPage\Lessons.jsx
 import { lessons } from "../UserPage/Lessons";
 import { GETTweets } from "../../hooks/GETTweets";
@@ -23,6 +19,10 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 function Timeline({ tabsList, profileData, profileData_loading }) {
   // const username = profileData.username.split("_")[1];
+  if (profileData_loading)
+  {
+    return <></>
+  }
   const [mainData] = (profileData.profile_type);
   const { courseChoosed } = useGetChartData(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
@@ -61,7 +61,8 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
-                  setTweets={setTweets} />
+                  setTweets={setTweets} 
+                />
               ))}
             </div>
           )}
@@ -92,8 +93,7 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 >
                   <StudentTimeline
                     courseChoosed={courseChoosed}
-                    showLoading={showLoading}
-                    closeLoading={closeLoading}
+                    
                   />
                   {/* <TeacherTimeline show={username} /> */}
                 </div>)}

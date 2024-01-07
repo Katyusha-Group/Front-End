@@ -4,12 +4,12 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-
+import { useInfo } from "../contexts/InfoContext";
 export const usesProfileMe = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { info, changeInfo } = useInfo();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,10 +23,9 @@ export const usesProfileMe = () => {
         );
         const data = await profileResponse.json();
         setProfile(data);
-        console.log("User profile data: " , data);
-
         closeLoading();
         setLoading(false);
+        changeInfo("userName", data.username);
       } catch (error) {
         console.error(error);
       }
