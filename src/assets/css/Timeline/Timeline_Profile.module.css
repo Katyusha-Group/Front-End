@@ -64,12 +64,40 @@
 }
 
 .content {
-  
+
   overflow-x: scroll;
 }
 
 @media only screen and (max-width: 1064px) {
   .mainContainer {
     scale: 0.9;
+  }
+}
+
+@media only screen and (max-width: 541px) {
+  .main {
+    flex-direction: column-reverse;
+  }
+
+  .rightpart {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+
+  .leftpart {
+    display: none;
+  }
+}
+
+.profileIcon {
+  display: none;
+}
+
+@media only screen and (max-width: 1064px) {
+  .profileIcon {
+    /* color: white; */
+    display: flex;
+    margin: 10px 10px -20px 15px;
+    justify-content: left;
   }
 }

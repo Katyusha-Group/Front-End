@@ -23,8 +23,7 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 function Timeline({ tabsList, profileData, profileData_loading }) {
   // const username = profileData.username.split("_")[1];
-  if (profileData_loading)
-  {
+  if (profileData_loading) {
     return <></>
   }
   const [mainData] = (profileData.profile_type);
@@ -46,6 +45,7 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
   return (
     <>
       <div className={styles.timeline}>
+        <span className={`tim-icons icon-badge ${styles.profileIcon}`} />
         <div className={styles.tabs}>
           {tabsList.map((entry, index) => (
             <button
@@ -65,7 +65,7 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
-                  setTweets={setTweets} 
+                  setTweets={setTweets}
                 />
               ))}
             </div>
