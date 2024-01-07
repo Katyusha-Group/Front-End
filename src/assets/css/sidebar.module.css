@@ -6,28 +6,32 @@
   margin-right: 20px;
   border-radius: 15px;
   height: 90vh;
-  
 }
 
 .bg1 {
   width: 100%;
-  background-color: #3a3c5b;
+  background-color: #27293d;
   border-radius: 15px;
   height: 90vh;
   padding: 5px;
 }
-
+.icon{
+  font-size: 30px;
+  color: white;
+}
 
 .header {
   display: flex;
   flex-direction: row;
-  margin: 20px;
-  margin-right: 35px;
+  margin: 20px auto;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 40px;
 }
-
+.logoimg{
+  width: 40px;
+  margin-right: 1.5vw;
+}
 .headertext {
   margin-top: 40px;
   font-size: 20px;
@@ -36,11 +40,19 @@
 .sidebarmenuItems {
   display: flex;
   flex-direction: row;
-  padding: 10px 20px;
   justify-content: flex-start;
+  height: 60px;
   align-items: center;
   gap: 4vw;
+  padding-right: 2vw;
+  border-radius: 15px;
   cursor: pointer;
+}
+.items{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2vh;
 }
 
 .sidebarmenuItems:hover {
@@ -51,11 +63,11 @@
   cursor: pointer;
 }
 
-.itemtext {
+/* .itemtext {
   margin-top: 20px;
   font-size: 13px;
   cursor: pointer;
-}
+} */
 
 @media only screen and (max-width: 1300px) {
   .bg {
@@ -71,26 +83,24 @@
   .itemtext {
     display: none;
   }
-
+  
   .headertext {
     display: none;
   }
 
   .header {
+    display: flex;
+    justify-content: center;
     margin-top: 80px;
-    margin-right: 15px;
+  }
+  .logoimg{
+    margin: 0;
   }
   .sidebarmenuItems{
-    /* scale: 0.85; */
-    justify-content: flex-end;
-    /* margin: 0; */
-    padding: 10px auto;
-    margin-left: 23px;
+    padding: 0px;
+    justify-content: space-around;
   }
-  .sidebarmenuItemsMobileBlock {
-    /* margin: 0; */
-    /* padding-left: -5px; */
-  }
+  
 }
 
 .dropDownToggle {
@@ -134,7 +144,7 @@
     flex-direction: row;
     /* width: 80vw; */
     height: inherit;
-    justify-content: space-around;
+    justify-content: space-between;
     z-index: 1;
   }
 
@@ -157,6 +167,12 @@
   .moreInfo {
     display: block;
   }
+  .items{
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-between;
+    
+  }
 
   /* .sidebarmenuItems {
     scale: 2;
@@ -167,4 +183,5 @@
   .moreInfo {
     display: none;
   }
+  
 }
