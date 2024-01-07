@@ -15,6 +15,7 @@ import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
 import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
 import ModalReport from "../../components/ModalReport/ModalReport";
+import RecommendationModal from "./RecommendationModal";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -36,11 +37,22 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
 
   const handleOpenModal_Report = () => {
     setShowModal(true);
-    console.log("Modal is opened");
+    // console.log("Modal is opened");
   }
   function handleCloseModal() {
     setShowModal(false);
   };
+
+  const [showModal_Recommendation, setShowModal_Recommendation] = React.useState(false);
+  function handleOpenModal_Recommendation () {
+    setShowModal_Recommendation(true);
+    // console.log("Recommendation Modal is opened");
+  }
+  function handleCloseModal_Recommendation () {
+    setShowModal_Recommendation(false);
+    // console.log("Recommendation Modal is closed");
+  }
+
   return (
     <>
       <Card className={styles.tweet}>
@@ -73,6 +85,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             </svg>
           </DropdownToggle>
           <DropdownMenu {...args}>
+            <DropdownItem
+              className={styles.dropDown}
+              onClick={handleOpenModal_Recommendation}
+            >
+              توییت های مشابه
+            </DropdownItem>
             <DropdownItem
               disabled={tweet.reported_by_me}
               className={styles.dropDown}
@@ -175,6 +193,15 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
         }}
         link={link}
       />
+      {
+        showModal_Recommendation && 
+        <RecommendationModal
+          showModal={showModal_Recommendation}
+          handleClose={handleCloseModal_Recommendation}
+          TweetID = {tweet.id}
+        />
+      }
+      
     </>
   );
 }
