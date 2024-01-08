@@ -5,9 +5,6 @@
     margin-top: 20px;
 }
 
-
-.ModalHeader {}
-
 .ModalBody {
     height: 30vh;
     color: var(--white) !important;

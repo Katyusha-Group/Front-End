@@ -220,7 +220,7 @@
 
 
 @media only screen and (max-width: 1064px) {
-    .rightUpper {
+    .leftpart {
         display: none;
     }
 }
@@ -233,9 +233,5 @@
     .rightpart {
         max-width: 90vw;
         max-height: 80vh;
-    }
-
-    .leftpart {
-        display: none;
     }
 }
