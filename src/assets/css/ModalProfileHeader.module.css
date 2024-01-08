@@ -2,14 +2,14 @@
 
 .Modal {
     backdrop-filter: blur(2px);
-    transform: translate(0, -25%);
+    transform: translate(0, -20%);
+    height: 120%;
 }
 
 .ModalBody {
-    height: 30vh;
+    height: 50vh;
     color: var(--white) !important;
 }
-
 
 p {
     color: var(--white) !important;
@@ -17,16 +17,13 @@ p {
 }
 
 .bodyContent {
-    height: 30vh;
     overflow-y: auto;
     padding-left: 0px;
-    margin-top: 20px;
 }
 
 .profile {
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    height: 87vh;
     margin-top: -20px;
 }

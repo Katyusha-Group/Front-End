@@ -48,13 +48,13 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
     return (
         <Modal show={show} onHide={handleCloseModal}
             style={{}} className={styles.Modal}>
-            <div className={styles.ModalContents}>
+            <div className={styles.modalContent}>
                 <Modal.Header className={styles.ModalHeader}>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className={styles.modalBody}>
                     <div className={styles.profile}>
                         <ProfileHeader
                             username={username}
