@@ -65,7 +65,6 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
                     </div>
                 </Modal.Body>
             </div >
-
         </Modal >
     );
 };
