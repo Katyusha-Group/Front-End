@@ -46,24 +46,23 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
         handleClose();
     };
     return (
-        <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
+        <Modal show={show} onHide={handleCloseModal}
+            style={{ transform: "translate(0, -20%)" }} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className={styles.leftpart}>
-                        <ProfileHeader
-                            username={username}
-                            profile={profileData}
-                            setProfile={setProfileData}
-                            IsThisMe={IsThisMe}
-                            profileData_loading={profileData_loading}
-                        />
-                    </div>
-                </Modal.Body>
+                <div className={styles.profile}>
+                    <ProfileHeader
+                        username={username}
+                        profile={profileData}
+                        setProfile={setProfileData}
+                        IsThisMe={IsThisMe}
+                        profileData_loading={profileData_loading}
+                    />
+                </div>
             </div >
         </Modal >
     );
