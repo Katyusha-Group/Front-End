@@ -2,7 +2,7 @@
 
 .Modal {
     backdrop-filter: blur(2px);
-    margin-top: 20px;
+    transform: translate(0, -25%);
 }
 
 .ModalBody {
@@ -27,7 +27,6 @@ p {
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-
-    height: 83vh;
+    height: 87vh;
     margin-top: -20px;
 }
