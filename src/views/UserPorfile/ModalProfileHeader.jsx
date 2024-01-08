@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FormText, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProfileHeader from "./ProfileHeader";
+
 import Swal from 'sweetalert2';
 import {
     Button,
@@ -25,9 +27,12 @@ import {
     closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
 
-const ModalReport = ({ showModal, handleClose, id }) => {
+const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_loading, setProfileData, username, IsThisMe }) => {
     const [show, setShow] = React.useState(showModal);
-
+    
+    if (profileData_loading){
+        return <></>
+    }
     React.useEffect(() => {
         showLoading();
         setShow(showModal);
@@ -44,13 +49,25 @@ const ModalReport = ({ showModal, handleClose, id }) => {
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
+                    <h1>دلااااام</h1>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
                 </Modal.Header>
+                <Modal.Body>
+                    <div className={styles.leftpart}>
+                        <ProfileHeader
+                            username={username}
+                            profile={profileData}
+                            setProfile={setProfileData}
+                            IsThisMe={IsThisMe}
+                            profileData_loading={profileData_loading}
+                        />
+                    </div>
+                </Modal.Body>
             </div >
         </Modal >
     );
 };
 
-export default ModalReport;
+export default ModalProfileHeader;

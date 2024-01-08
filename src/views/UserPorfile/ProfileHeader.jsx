@@ -13,6 +13,7 @@ export default function ProfileHeader({profile, setProfileData, username, IsThis
   const [showModal, setShowModal] = React.useState(false);
   const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
   // const [profileData_Here, setProfileData_Here] = React.useState(profile);
+  console.log("Profile in ProfileHeader is: ", profile);
   const [IsFollowed, setIsFollowed] = React.useState(profile.is_followed);
 
   if (profileData_loading)
@@ -47,6 +48,7 @@ export default function ProfileHeader({profile, setProfileData, username, IsThis
     })
     .then(response => {
       return response.json().then((data) => {
+        console.log("HElloosdafcsfdzdv")
         setProfileData(data);
         closeLoading();
       });
