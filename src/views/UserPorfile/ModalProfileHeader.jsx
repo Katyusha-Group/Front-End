@@ -19,7 +19,7 @@ import {
     Label,
     ModalFooter,
 } from "reactstrap";
-import * as styles from '../../assets/css/ModalReport.module.css';
+import * as styles from '../../assets/css/ModalProfileHeader.module.css';
 import { apis } from "../../assets/apis";
 
 import {
@@ -29,8 +29,8 @@ import {
 
 const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_loading, setProfileData, username, IsThisMe }) => {
     const [show, setShow] = React.useState(showModal);
-    
-    if (profileData_loading){
+
+    if (profileData_loading) {
         return <></>
     }
     React.useEffect(() => {
@@ -49,7 +49,6 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
                 <Modal.Header closeButton className={styles.ModalHeader}>
-                    <h1>دلااااام</h1>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
                     </button>
@@ -66,6 +65,7 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
                     </div>
                 </Modal.Body>
             </div >
+
         </Modal >
     );
 };

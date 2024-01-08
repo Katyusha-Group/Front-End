@@ -143,7 +143,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
             </div>
           )}
           <ModalProfileHeader
-            showModal={showModal}
+            showModal={true}
             handleClose={handleCloseModal}
             username={username}
             profileData={profileData}
