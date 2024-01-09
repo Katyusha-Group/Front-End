@@ -19,7 +19,6 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
 function Timeline({ tabsList, profileData, profileData_loading, setProfileData, username, IsThisMe }) {
-  console.log("profile data timeline", profileData)
   // const username = profileData.username.split("_")[1];
   if (profileData_loading) {
     return <></>
@@ -50,9 +49,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
   return (
     <>
       <div className={styles.timeline}>
-
         <div className={styles.tabs}>
-
           {tabsList.map((entry, index) => (
             <button
               key={index}
@@ -67,7 +64,6 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
             onClick={handleOpenModal_ProfileHeader}
           />
         </div>
-
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
@@ -107,7 +103,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 >
                   <StudentTimeline
                     courseChoosed={courseChoosed}
-                    
+
                   />
                   {/* <TeacherTimeline show={username} /> */}
                 </div>)}
