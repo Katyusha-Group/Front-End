@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormText, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProfileHeader from "./ProfileHeader";
 
@@ -20,7 +20,6 @@ import {
     ModalFooter,
 } from "reactstrap";
 import * as styles from '../../assets/css/ModalProfileHeader.module.css';
-import { apis } from "../../assets/apis";
 
 import {
     showLoading,
