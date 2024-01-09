@@ -135,7 +135,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
-                <Modal.Header className={styles.ModalHeader}>
+                <Modal.Header closeButton className={styles.ModalHeader}>
                     <h4 className={styles.ModalTitle}>دلیل ریپورت؟</h4>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
