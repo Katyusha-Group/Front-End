@@ -74,27 +74,20 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           </DropdownToggle>
           <DropdownMenu {...args}>
             <DropdownItem
-              disabled={tweet.reported_by_me}
+              disabled={tweet.reported_by_me || IsThisMe_Function(tweet.profile.username)}
               className={styles.dropDown}
               onClick={handleOpenModal_Report}
-              // onClick={() => {
-              //   // setThisTweet((x) => {
-              //   //   let temp = x.results.filter((y) => y.id !== tweet.id);
-              //   //   return {results: temp}
-              //   // });
-              //   handleOpenModal_Report
-              // }}
             >
               ریپورت
             </DropdownItem>
-            { 
+            {
               <DropdownItem
                 className={styles.dropDown}
                 disabled={!IsThisMe_Function(tweet.profile.username)}
                 onClick={() => {
                   setTweets((x) => {
                     let temp = x.results.filter((y) => y.id !== tweet.id);
-                    return {results: temp}
+                    return { results: temp }
                   });
                   deleteTweet(tweet.id);
                 }}
@@ -103,7 +96,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               </DropdownItem>}
           </DropdownMenu>
           {
-            showModal && 
+            showModal &&
             <ModalReport
               id={tweet.id}
               showModal={showModal}
