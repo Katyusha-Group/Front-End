@@ -64,7 +64,6 @@
 }
 
 .content {
-
   overflow-x: scroll;
 }
 
@@ -87,6 +86,10 @@
   .leftpart {
     display: none;
   }
+
+  .tweetsContainer {
+    max-height: 61vh;
+  }
 }
 
 .profileIcon {
@@ -102,4 +105,3 @@
     justify-content: left;
   }
 }
-
