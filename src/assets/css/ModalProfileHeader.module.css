@@ -1,0 +1,29 @@
+@import "./black-dashboard-react.css";
+
+.Modal {
+    backdrop-filter: blur(2px);
+    transform: translate(0, -20%);
+    height: 120%;
+}
+
+.ModalBody {
+    height: 50vh;
+    color: var(--white) !important;
+}
+
+p {
+    color: var(--white) !important;
+    /* margin-top: 20px !important; */
+}
+
+.bodyContent {
+    overflow-y: auto;
+    padding-left: 0px;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-top: -20px;
+}
