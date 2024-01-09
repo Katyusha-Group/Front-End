@@ -35,6 +35,9 @@
 
 .shop_row {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
 }
 
 .price {
@@ -54,8 +57,15 @@
   .h2custom{
     font-size: 1.3rem;
   } 
-   
-  
+  .shop_card {
+    margin-top: 20px;
+  }
+  .shop_row {
+    flex-direction: column;
+  } 
+  .professorImage {
+    margin-right: 0px;
+  }
 }
 @media  only  screen and (min-width: 1200px){
   .box{
