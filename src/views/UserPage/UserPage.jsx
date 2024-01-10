@@ -72,7 +72,7 @@ export default function UserPage() {
         <Col className="" sm="12">
           <Card className={`${style.week_card} card-body`}>
             <CardBody className={style.week_card_body}>
-              <div className="">
+              <div className=""> should have hello world
                 <div
                   className={style.chart}
                   style={{
