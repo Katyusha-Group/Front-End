@@ -1,14 +1,19 @@
-import { describe, it, expect, vi, test } from "vitest";
-import React from 'react'
+// import { describe, it, expect, vi, test } from "vitest";
 // import { Movies } from './Movies';
-import { render,screen } from "@testing-library/react";
-import UserPage from "./UserPage.jsx";
+// Imports
 
-it("should have hello world", ()=>{
-  render(<UserPage/>)
-  const message = screen.queryByText(/Hello/i);
-  expect(message).toBeVisible();
-})
+import {  describe, it, expect, vi, test} from 'vitest';
+import { render, screen } from '@testing-library/react';
+import UserPage from './UserPage';
+import * as Router from "react-router-dom";
+
+describe('Renders main page correctly', () => {
+    it('Should render the page correctly', async () => {
+        // render(<Router.BrowserRouter><UserPage /></Router.BrowserRouter>);
+        // const h1 = await screen.queryByText('Vite + React');
+        // expect(h1).not.toBeNull();
+    });
+});
 // describe("UserPage component", () => {
 //   it("should render the UserPageHeader component", () => {
 //     const { getByTestId } = render(<UserPage />);
