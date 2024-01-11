@@ -4,26 +4,24 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
+import { returnToken } from "../Functions/returnToken";
+import axios from "axios";
 
 export const useAllProfiles = (searchQuery) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = returnToken()
   const [allProfiles, setAllProfiles] = useState([]);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(apis["profiles"]["all"]+searchQuery, {
+    axios(apis["profiles"]["all"] + searchQuery, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
-      
       .then((data) => {
-        setFilteredProfiles(data);
+        setFilteredProfiles(data.data);
         setLoading(false);
       })
       .catch((error) => console.error("error"));
   }, [searchQuery]);
-
-  
 
   return { filteredProfiles, loading };
 };

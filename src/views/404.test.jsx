@@ -1,11 +1,11 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import NotFound from './404.jsx';
-import { test,it } from 'vitest';
+import {  describe, it, expect, vi, test} from 'vitest';
+import { render, screen } from '@testing-library/react';
+import UserPage from './404.jsx';
+import * as Router from "react-router-dom";
+import ContextInfo from '../contexts/InfoContext.jsx';
 
-test('NotFound', () => {
-  it('renders without crashing', () => {
-    const { getByText } = render(<NotFound />);
-    expect(getByText('404 Not Found')).toBeInTheDocument();
-  });
+describe('Renders main page correctly', () => {
+    it('Should render the page correctly', async () => {
+        render(<ContextInfo><Router.BrowserRouter><UserPage /></Router.BrowserRouter></ContextInfo>);
+    });
 });

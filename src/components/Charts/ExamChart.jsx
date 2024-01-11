@@ -7,11 +7,9 @@ import { Table } from "reactstrap";
 import * as style from "./ExamChart.module.css"
 import { uniquifyArrayByKey } from "../../Functions/uniquifyArrayByKey";
 import GeneratekeyedExamTable from "./keyedExamTable";
+import { useNavigate } from "react-router-dom";
 
 export default function ExamChart() {
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
   const { info, changeInfo } = useInfo();
 
   let [ExamTable, setExamTable] = React.useState([]);

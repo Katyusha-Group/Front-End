@@ -87,7 +87,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                     background: 'rgb(50, 55, 80)',
                     color: '#ceccc0',
                     width: '25rem',
-                    confirmButtonText: "باشه"
+                    timer: 1700,
+                    showCancelButton: false,
+                    showConfirmButton: false,
                 });
             }
             else {
@@ -100,7 +102,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                         color: "#ceccc0",
                         width: "25rem",
                         direction: "rtl",
-                        confirmButtonText: "باشه",
+                        timer: 1700,
+                        showCancelButton: false,
+                        showConfirmButton: false,
                     });
                 }
                 if (data.detail == "you have already reported this twitte.") {
@@ -111,7 +115,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                         color: "#ceccc0",
                         width: "25rem",
                         direction: "rtl",
-                        confirmButtonText: "باشه",
+                        timer: 1700,
+                        showCancelButton: false,
+                        showConfirmButton: false,
                     });
                 }
                 else {
@@ -122,7 +128,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                         color: "#ceccc0",
                         width: "25rem",
                         direction: "rtl",
-                        confirmButtonText: "باشه",
+                        timer: 1700,
+                        showCancelButton: false,
+                        showConfirmButton: false,
                     });
                 }
             }
@@ -135,7 +143,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
-                <Modal.Header className={styles.ModalHeader}>
+                <Modal.Header closeButton className={styles.ModalHeader}>
                     <h4 className={styles.ModalTitle}>دلیل ریپورت؟</h4>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
