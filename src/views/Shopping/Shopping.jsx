@@ -296,15 +296,15 @@ function Shopping() {
                   )}
                   {info.map((x, index) => {
                     return (
-                      <Row
+                      <div
                         md="6"
                         sm="2"
                         xs="1"
                         className={`${style.places_buttons} ${style.shop_row}`}
                         key={index}
                       >
-                        <Col className="m-auto">
-                          <img
+                        <div className="m-auto">
+                          {/* <img
                             className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
@@ -312,18 +312,24 @@ function Shopping() {
                                 : sampleProfile
                             }
                             alt="professorImage"
+                          /> */}
+                          <img
+                              alt="..."
+                              // className="avatar"
+                              className={UserPageStyle.professorImage}
+                              src="http://84.32.10.112/media/images/profile_pics/male_default.png"
                           />
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.course.complete_course_number}
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.course.name}
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.price} تومان
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           <Form>
                             <FormGroup className={style.shopping_form} check>
                               <Label check className={style.shopping_label}>
@@ -380,8 +386,8 @@ function Shopping() {
                               </Label>
                             </FormGroup>
                           </Form>
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           <Button
                             color="primary"
                             size="sm"
@@ -401,8 +407,8 @@ function Shopping() {
                           >
                             <i className="tim-icons icon-simple-remove" />
                           </Button>
-                        </Col>
-                      </Row>
+                        </div>
+                      </div>
                     );
                   })}
                 </Card>

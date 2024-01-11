@@ -3,16 +3,14 @@ import Tweet from "./Tweet";
 import styles from "../../assets/css/Timeline/Timeline_Profile.module.css";
 import * as style from "../../components/ModalLessons/ModalLesson.module.css";
 import { useState, useEffect } from "react";
+import ModalProfileHeader from "../UserPorfile/ModalProfileHeader.jsx"
+
 import { apis } from "../../assets/apis";
 
 // import { useInfo } from "../../contexts/InfoContext";
 import CourseTimeline from "../../components/Timeline/Timeline";
 import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
 import StudentTimeline from "./StudentTimeline.jsx";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert.jsx";
 // src\views\UserPage\Lessons.jsx
 import { lessons } from "../UserPage/Lessons";
 import { GETTweets } from "../../hooks/GETTweets";
@@ -20,16 +18,21 @@ import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
-
-function Timeline({ tabsList, profileData, profileData_loading }) {
+function Timeline({ tabsList, profileData, profileData_loading, setProfileData, username, IsThisMe }) {
   // const username = profileData.username.split("_")[1];
-  if (profileData_loading)
-  {
+  if (profileData_loading) {
     return <></>
   }
   const [mainData] = (profileData.profile_type);
   const { courseChoosed } = useGetChartData(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
+  const [showModal, setShowModal] = React.useState(false);
+  const handleOpenModal_ProfileHeader = () => {
+    setShowModal(true);
+  };
+  function handleCloseModal() {
+    setShowModal(false);
+  }
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -56,8 +59,11 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
               {entry[1]}
             </button>
           ))}
+          <i
+            className={`tim-icons icon-badge ${styles.profileIcon}`}
+            onClick={handleOpenModal_ProfileHeader}
+          />
         </div>
-
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
@@ -65,7 +71,7 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
-                  setTweets={setTweets} 
+                  setTweets={setTweets}
                 />
               ))}
             </div>
@@ -97,8 +103,7 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
                 >
                   <StudentTimeline
                     courseChoosed={courseChoosed}
-                    showLoading={showLoading}
-                    closeLoading={closeLoading}
+
                   />
                   {/* <TeacherTimeline show={username} /> */}
                 </div>)}
@@ -128,8 +133,17 @@ function Timeline({ tabsList, profileData, profileData_loading }) {
               ))}
             </div>
           )}
+          <ModalProfileHeader
+            showModal={showModal}
+            handleClose={handleCloseModal}
+            username={username}
+            profileData={profileData}
+            setProfileData={setProfileData}
+            IsThisMe={IsThisMe}
+            profileData_loading={profileData_loading}
+          />
         </div>
-      </div>
+      </div >
     </>
   );
 }
