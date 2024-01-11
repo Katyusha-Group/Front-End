@@ -25,7 +25,6 @@ import { NavLink, Link } from "react-router-dom";
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const { profile, setProfile, loading2 } = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
@@ -282,7 +281,7 @@ const Sidebar = () => {
               Navigate("/timeline");
             }}
           >
-            <svg
+            {/* <svg
               fill="#fff"
               height="40px"
               width="30px"
@@ -301,7 +300,7 @@ const Sidebar = () => {
 		l-3.243-12.1l0.419-0.72c2.609-4.484,3.988-9.602,3.988-14.799C62.936,17.466,49.717,4.246,33.468,4.246z"
                 />
               </g>
-            </svg>
+            </svg> */}
             <p className={styles.itemtext}>صفحه اصلی</p>
           </div>
         </div>

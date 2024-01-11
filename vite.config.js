@@ -47,7 +47,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react()],
+  plugins: [react({ fastRefresh: false })],
   test: {
     environment: "jsdom",
     globals: true,

@@ -6,10 +6,10 @@ import {
 } from "../components/LoadingAlert/LoadingAlert";
 import { useInfo } from "../contexts/InfoContext";
 export const usesProfileMe = () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = JSON.parse(localStorage.getItem("authTokens")) === null ? null:JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { info, changeInfo } = useInfo();
+  const { changeInfo } = useInfo();
   useEffect(() => {
     const fetchData = async () => {
       try {

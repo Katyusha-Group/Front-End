@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 
 const InfoContext = React.createContext();
 
+
 export function useInfo() {
   return useContext(InfoContext);
 }
-
 export default function ContextInfo(props) {
   const [info, setInfo] = useState({
     name: "John Doe",
