@@ -1,40 +1,41 @@
-name: CI CD
+name: CI/CD  
 
-on:
-  push:
-    branches:
-      - main  # Replace 'main' with your primary branch name
-  pull_request:
-    branches:
-      - main  # Replace 'main' with your primary branch name
+on:  
+  push:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
+  pull_request:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-    
-      - name: Build and run tests
-        run: |
-          docker compose  up --build
-          docker exec docker-react-i  "npm test"
-          
-  Deploy:
-    name: deploy
-    runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v2
-    - name: Connect
-      uses: appleboy/ssh-action@master
-      with:   
-        username: ${{ secrets.USERNAME }}  
-        password: ${{ secrets.PASSWORD }}  
-        host: ${{ secrets.HOST }}  
-        port: ${{ secrets.PORT }}  
-        script: |
-          cd ${{ secrets.PATH }}
-          docker compose stop
-          git pull
-          docker compose restart
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v2  
+
+      - name: Build and run tests  
+        run: |  
+          docker compose up --build  
+          docker exec <container-name> npm test  # Replace <container-name> with the actual name of the container  
+
+  deploy:  
+    needs: build  # This ensures that deploy job runs only if build job succeeds  
+    runs-on: ubuntu-latest  
+    steps:   
+      - uses: actions/checkout@v2  
+
+      - name: Connect and Deploy  
+        uses: appleboy/ssh-action@master  
+        with:     
+          username: ${{ secrets.USERNAME }}    
+          password: ${{ secrets.PASSWORD }}    
+          host: ${{ secrets.HOST }}    
+          port: ${{ secrets.PORT }}    
+          script: |  
+            cd ${{ secrets.PATH }}  
+            docker compose stop  
+            git pull  
+            docker compose up -d  # Use up -d to run in detached mode
