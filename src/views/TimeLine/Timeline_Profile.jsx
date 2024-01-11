@@ -18,8 +18,7 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 function Timeline({ tabsList, profileData, profileData_loading, setProfileData, username, IsThisMe }) {
   // const username = profileData.username.split("_")[1];
-  if (profileData_loading)
-  {
+  if (profileData_loading) {
     return <></>
   }
   const [mainData] = (profileData.profile_type);
@@ -59,7 +58,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
-                  setTweets={setTweets} 
+                  setTweets={setTweets}
                 />
               ))}
             </div>
@@ -99,7 +98,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           )}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.map((tweet) => (
+              {tweets.results.filter(item => item.liked_by_me).map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
