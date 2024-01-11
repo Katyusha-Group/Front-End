@@ -8,10 +8,8 @@ import { GETProfileData } from "../../hooks/GETProfileData.jsx";
 import IsThisMe_Function from "./IsThisMe_Function.jsx";
 export default function Profile() {
   const { chart, id } = useParams();
-  const {profileData, setProfileData, loading} = GETProfileData(id);
-  // console.log("Profile in Profile page: ", profileData);
+  const { profileData, setProfileData, loading } = GETProfileData(id);
   let IsThisMe = IsThisMe_Function(id);
-  console.log("Is this me: ", IsThisMe);
 
   const username = id;
   const tabs = [
@@ -21,25 +19,25 @@ export default function Profile() {
     ["Comments", "نظرات"]
   ];
 
-  if(loading){
+  if (loading) {
     return <></>
   }
   return (
     <div className={styles.main}>
       <Sidebar />
       <div className={styles.rightpart}>
-        <Timeline 
-          tabsList={tabs} 
-          profileData={profileData} 
+        <Timeline
+          tabsList={tabs}
+          profileData={profileData}
           profileData_loading={loading}
         />
       </div>
       <div className={styles.leftpart}>
-        <ProfileHeader 
-          username={username} 
-          profile={profileData} 
-          setProfile={setProfileData} 
-          IsThisMe={IsThisMe} 
+        <ProfileHeader
+          username={username}
+          profile={profileData}
+          setProfile={setProfileData}
+          IsThisMe={IsThisMe}
           profileData_loading={loading}
         />
       </div>
