@@ -36,7 +36,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
   return (
     <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
       <div className={styles.ModalContents}>
-        <Modal.Header className={styles.ModalHeader}>
+        <Modal.Header closeButton className={styles.ModalHeader}>
           <h2 className={styles.ModalTitle}>{Title}</h2>
           <button className="close" onClick={handleCloseModal}>
             <span>&times;</span>
