@@ -5,12 +5,14 @@ import {
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
 import { useInfo } from "../contexts/InfoContext";
+import { useNavigate } from "react-router-dom";
+import { returnToken } from "../Functions/returnToken";
 export const usesProfileMe = () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")) === null ? null:JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const { changeInfo } = useInfo();
   useEffect(() => {
+    const token = returnToken()
     const fetchData = async () => {
       try {
         showLoading();

@@ -5,12 +5,14 @@ import {
     closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
 import { useNavigate } from "react-router-dom";
+import { returnToken } from "../Functions/returnToken";
 export const useGetNotification = (showModal) => {
-    const Navigate = useNavigate();
-    const token = JSON.parse(localStorage.getItem("authTokens"))=== null ? Navigate('/login'):JSON.parse(localStorage.getItem("authTokens")).token.access;
+
     const [notificationData, setNotificationData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const Navigate = useNavigate();
     useEffect(() => {
+        const token = returnToken()
         if (showModal) {
             showLoading();
             fetch((apis["notification"]["notifications"]), {

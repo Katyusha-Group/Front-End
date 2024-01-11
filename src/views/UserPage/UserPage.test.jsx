@@ -6,13 +6,11 @@ import {  describe, it, expect, vi, test} from 'vitest';
 import { render, screen } from '@testing-library/react';
 import UserPage from './UserPage';
 import * as Router from "react-router-dom";
-
+import ContextInfo from '../../contexts/InfoContext';
 describe('Renders main page correctly', () => {
-    it('Should render the page correctly', async () => {
-        // render(<Router.BrowserRouter><UserPage /></Router.BrowserRouter>);
-        // const h1 = await screen.queryByText('Vite + React');
-        // expect(h1).not.toBeNull();
-    });
+  it('should render the UserPage component without crashing', () => {
+    render(<ContextInfo><Router.BrowserRouter><UserPage /></Router.BrowserRouter></ContextInfo>);
+  });
 });
 // describe("UserPage component", () => {
 //   it("should render the UserPageHeader component", () => {

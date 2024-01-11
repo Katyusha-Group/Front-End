@@ -2,12 +2,13 @@ import React from "react";
 import { apis } from "../assets/apis";
 import { useInfo } from "../contexts/InfoContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export const useMyClass = (getapi, showLoading, closeLoading) => {
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
+
   const { changeInfo } = useInfo();
+  const Navigate = useNavigate();
   React.useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("authTokens"))=== null ? Navigate('/login'):JSON.parse(localStorage.getItem("authTokens")).token.access;
     if (getapi == true) {
       showLoading();
       fetch(apis["courses"]["my_courses"], {

@@ -7,8 +7,9 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
+import { returnToken } from "../../Functions/returnToken";
 export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = returnToken()
   setLoading(true);
   
   let config = {
@@ -34,7 +35,6 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
     .catch();
 };
 export const useTweets = () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState({results:[]});
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
