@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Admin_Searchbar from "./Admin_Searchbar";
+import Admin_Searchbar from "./Admin_SearchBar";
 import { useAllProfiles } from '../../hooks/useSearchprofile';
 import { useSearchTweet } from '../../hooks/useSearchTweet';
 import { test, it } from 'vitest';
