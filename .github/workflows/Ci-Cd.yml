@@ -1,41 +1,47 @@
-name: CI/CD
+name: CI/CD  
 
-on:
-  push:
-    branches:
-      - main  # Replace 'main' with your primary branch name
-  pull_request:
-    branches:
-      - main  # Replace 'main' with your primary branch name
+on:  
+  push:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
+  pull_request:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v2  
 
-      - name: Build and run tests
-        run: |
-          docker compose  up --build
-          docker exec docker-react-i  "npm test"
-          
-  Deploy:
+      - name: Set up Node.js  
+        uses: actions/setup-node@v2  
+        with:  
+          node-version: '14'  # Replace with your desired Node.js version  
+
+      - name: Install dependencies  
+        run: npm install  
+
+      - name: Build and run tests  
+        run: npm test  
+
+  Deploy:  
     needs: build  # This ensures that deploy job runs only if build job succeeds  
-    name: deploy
-    runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v2
-    - name: Connect
-      uses: appleboy/ssh-action@master
-      with:   
-        username: ${{ secrets.USERNAME }}  
-        password: ${{ secrets.PASSWORD }}  
-        host: ${{ secrets.HOST }}  
-        port: ${{ secrets.PORT }}  
-        script: |
-          cd ${{ secrets.PATH }}
-          docker compose stop
-          git pull
-          docker compose restart
+    name: deploy  
+    runs-on: ubuntu-latest  
+    steps:  
+      - uses: actions/checkout@v2  
+      - name: Connect  
+        uses: appleboy/ssh-action@master  
+        with:  
+          username: ${{ secrets.USERNAME }}  
+          password: ${{ secrets.PASSWORD }}  
+          host: ${{ secrets.HOST }}  
+          port: ${{ secrets.PORT }}  
+          script: |  
+            cd ${{ secrets.PATH }}  
+            docker compose stop  
+            git pull  
+            docker compose restart
