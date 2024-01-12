@@ -10,38 +10,29 @@ on:
 
 jobs:  
   build-and-test:  
-    runs-on: ubuntu-latest  
-    steps:  
-    - name: Checkout repository  
-      uses: actions/checkout@v2  
+    runs-on: ubuntu-latest
 
-    - name: Set up Docker Buildx  
-      uses: docker/setup-buildx-action@v1  
+    strategy:
+      matrix:
+        node-version: [12.x]
 
-    - name: Cache Docker layers  
-      uses: actions/cache@v2  
-      with:  
-        path: /tmp/.buildx-cache  
-        key: ${{ runner.os }}-buildx-${{ github.sha }}  
-        restore-keys: |  
-          ${{ runner.os }}-buildx-  
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Build Docker image  
-      run: docker-compose build  
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
 
-    - name: Docker Compose up  
-      run: docker-compose up -d  
+    - name: Install dependencies
+      run: npm install
 
-    # Add your test commands here  
-    - name: Run tests  
-      run: |  
-        # Here you would add the commands to execute your tests  
-        # For example:  
-        docker-compose exec docker-react-c npm test  
-        echo "Running tests..."  
+    - name: Run the tests
+      run: npm test
 
-    - name: Docker Compose down  
-      run: docker-compose down
+    - name: Build
+      run: npm run build
 
   Deploy:  
     needs: build-and-test  # This ensures that deploy job runs only if build job succeeds  
