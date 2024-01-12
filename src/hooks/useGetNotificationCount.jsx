@@ -1,26 +1,29 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
 import {
-    showLoading,
-    closeLoading,
+  showLoading,
+  closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
+import { useNavigate } from "react-router-dom";
+import { returnToken } from "../Functions/returnToken";
+
 export const useGetNotificationCount = () => {
-    const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-    const [notificationCount, setNotificationCount] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const username = "yazdan_mastery";
-    useEffect(() => {
-        showLoading();
-        fetch((apis["notification"]["count"]), {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setNotificationCount(data);
-                closeLoading();
-                setLoading(false);
-            })
-            .catch((error) => console.error(error));
-    }, []);
-    return { notificationCount, setNotificationCount, loading };
+
+  const [notificationCount, setNotificationCount] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const token = returnToken()
+    showLoading();
+    fetch(apis["notification"]["count"], {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNotificationCount(data);
+        closeLoading();
+        setLoading(false);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  return { notificationCount, setNotificationCount, loading };
 };

@@ -45,15 +45,15 @@ export default function ProfileHeader({profile, setProfileData, username, IsThis
     fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then(response => {
-      return response.json().then((data) => {
-        setProfileData(data);
-        closeLoading();
+      .then(response => {
+        return response.json().then((data) => {
+          setProfileData(data);
+          closeLoading();
+        });
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   }, [showModal, IsFollowed, username]);
 
   React.useEffect(() => {

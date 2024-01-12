@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar/Sidebar.jsx";
 import Searchbar from "../Searchbar.jsx";
 import { Card, Row } from "reactstrap";
 import SendMessage from "../../components/Tweet/SendMessage.jsx";
-import WebSocketInstance from "../../components/chat/chatWebSocket.jsx";
+import WebSocketInstance from "../../components/chat/ChatWebSocket.jsx";
 import { useParams } from "react-router-dom";
 import { useInfo } from "../../contexts/InfoContext.jsx";
 import { getChat } from "../../Functions/Chat/getChat.jsx";
