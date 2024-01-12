@@ -68,43 +68,45 @@ function AdminNavbar(props) {
 
   return (
     <>
-      <Navbar className={classNames("navbar-absolute", color, style.rtl)} style={{direction:"rtl", position: "relative"}} expand="xl" id="navbar-absolute">
-        <Collapse navbar isOpen={collapseOpen}>
-          <Nav className={style.wideNavbar} navbar>
-            <NavLink href="/home/page" className="nav-header nav-link-icon">
-              <img src={logo} alt="" style={{ height: "34px", width: "40px" }} />
-            </NavLink>
-            {routes.map(
-              (route) => (
-                <NavItem key={route.rtlName}>
-                  <NavLink
-                    href={route.layout + route.path}
-                    className={classNames({
-                      "selected": selected[route.rtlName],
-                    })}
-                  >
-                    <i className={"tim-icons " + route.icon} />
-                    {" "}
-                    {route.rtlName}
-                  </NavLink>
-                </NavItem>
-              )
-            )}
-            <NavItem className={style.logoutLink}>
-              <NavLink href="/landingPage"
-                onClick={() => {
-                  localStorage.removeItem("authTokens");
+      <div className={style.NavbarRes}>
+        <Navbar className={classNames("navbar-absolute", color, style.rtl)} style={{direction:"rtl", position: "relative"}} expand="xs" id="navbar-absolute">
+          <Collapse navbar isOpen={collapseOpen}>
+            <Nav className={style.wideNavbar} navbar>
+              {/* <NavLink href="/home/page" className="nav-header nav-link-icon">
+                <img src={logo} alt="" style={{ height: "34px", width: "40px" }} />
+              </NavLink> */}
+              {routes.map(
+                (route) => (
+                  <NavItem key={route.rtlName}>
+                    <NavLink
+                      href={route.layout + route.path}
+                      className={classNames({
+                        "selected": selected[route.rtlName],
+                      })}
+                    >
+                      <i className={"tim-icons " + route.icon} />
+                      {" "}
+                      {route.rtlName}
+                    </NavLink>
+                  </NavItem>
+                )
+              )}
+              <NavItem className={style.logoutLink}>
+                <NavLink href="/"
+                  onClick={() => {
+                    localStorage.removeItem("authTokens");
 
-                }}
-              >
-                <i className={"tim-icons icon-button-power"} />
-                {" "}
-                {"خروج"}
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
+                  }}
+                >
+                  <i className={"tim-icons icon-button-power"} />
+                  {" "}
+                  {"خروج"}
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     </>
   );
 }
