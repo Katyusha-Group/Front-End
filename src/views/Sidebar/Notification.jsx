@@ -27,7 +27,7 @@ const Notification = ({ showModal, handleClose }) => {
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
-                <Modal.Header closeButton className={styles.ModalHeader}>
+                <Modal.Header className={styles.ModalHeader}>
                     <h2 className={styles.ModalTitle}>پیام ها</h2>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>
