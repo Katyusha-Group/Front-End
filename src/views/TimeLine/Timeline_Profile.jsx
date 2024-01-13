@@ -114,7 +114,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           )}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.map((tweet) => (
+              {tweets.results.filter(item => item.liked_by_me).map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}

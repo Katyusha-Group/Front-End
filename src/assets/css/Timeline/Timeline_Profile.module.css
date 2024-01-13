@@ -87,6 +87,10 @@
   .leftpart {
     display: none;
   }
+
+  .tweetsContainer {
+    max-height: 61vh;
+  }
 }
 
 .profileIcon {
