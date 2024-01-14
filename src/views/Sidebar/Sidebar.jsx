@@ -202,7 +202,7 @@ const Sidebar = () => {
 "
                   />
                   {"  "}
-                  صفحه اصلی
+                  چتیوشا
                 </DropdownItem>
 
                 <DropdownItem>
