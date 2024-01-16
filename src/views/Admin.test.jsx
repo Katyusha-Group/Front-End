@@ -4,7 +4,7 @@ import Admin from './Admin';
 import * as Router from "react-router-dom";
 import ContextInfo from '../contexts/InfoContext';
 describe('Renders main page correctly', () => {
-  // it('should render the UserPage component without crashing', () => {
-  //   render(<Admin />);
-  // });
+  it('should render the UserPage component without crashing', () => {
+    render(<ContextInfo><Router.BrowserRouter><Admin /></Router.BrowserRouter></ContextInfo>);
+  });
 });

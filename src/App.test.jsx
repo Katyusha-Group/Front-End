@@ -5,7 +5,7 @@ import * as Router from "react-router-dom";
 import ContextInfo from "./contexts/InfoContext.jsx";
 
 describe('Renders main page correctly', () => {
-  it('should render the UserPage component without crashing', () => {
-    render(<ContextInfo><Router.BrowserRouter><UserPage /></Router.BrowserRouter></ContextInfo>);
+  it('should render the App component without crashing', () => {
+    render(<App />);
   });
 });

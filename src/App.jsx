@@ -12,7 +12,7 @@ import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import ContextInfo from "./contexts/InfoContext.jsx";
-import LandingPage from "./views/LandingPage.jsx";
+// import LandingPage from "./views/LandingPage.jsx";
 import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
 import Verification from "./views/Verification/Verification.jsx";
@@ -100,10 +100,10 @@ function App() {
                     path="/aboutUs"
                     element={<AboutUs />}
                   ></Router.Route>
-                  <Router.Route
+                  {/* <Router.Route
                     path="/landingPage"
                     element={<LandingPage />}
-                  ></Router.Route>
+                  ></Router.Route> */}
                   <Router.Route path="/replies/:id" element={<Replies></Replies>}></Router.Route>
                   <Router.Route
                     path="/CoursesPanel"
