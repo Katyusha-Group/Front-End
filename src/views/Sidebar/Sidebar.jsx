@@ -78,7 +78,7 @@ const Sidebar = () => {
               className={`${styles.sidebarmenuItems}`}
               onClick={(e) => {
                 e.preventDefault();
-                Navigate(`/searchp`);
+                Navigate(`/search`);
               }}
             >
               <i
