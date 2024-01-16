@@ -10,7 +10,7 @@ export const showLoading =()=>{
         timerProgressBar: true,
         showConfirmButton: false,
         background: '#3c3e5d',
-          color:'#ceccc0',
+        color:'#ceccc0',
         width:'25rem',
         timerProgressBar: true,
         

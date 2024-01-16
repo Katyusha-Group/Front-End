@@ -30,6 +30,9 @@ export default function Profile() {
           tabsList={tabs}
           profileData={profileData}
           profileData_loading={loading}
+          username={username}
+          setProfile={setProfileData}
+          IsThisMe={IsThisMe}
         />
       </div>
       <div className={styles.leftpart}>
