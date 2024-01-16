@@ -18,8 +18,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { closeLoading } from "../LoadingAlert/LoadingAlert";
 const ModalLessons = (props) => {
+  closeLoading();
   const x = props.show.data;
+  console.log("props: ", props.show);
+  
   const [timelineData, setTimelineData] = React.useState("data0");
   const setTimeData = (name) => {
     setTimelineData(name);

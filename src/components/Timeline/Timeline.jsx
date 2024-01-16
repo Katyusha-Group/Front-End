@@ -4,6 +4,7 @@ import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 import { apis } from "../../assets/apis";
+import { returnToken } from "../../Functions/returnToken";
 const Timeline = (props) => {
   let course_group = props.show;
   // props.show.show.data.complete_course_number.split("_")[0];
@@ -49,7 +50,7 @@ const Timeline = (props) => {
       },
     },
   ];
-  const token = tokenClass.token.access;
+  const token = returnToken();
   React.useEffect(() => {
     
     fetch(apis["timeline"]["courses"] + `${course_group}`, {
