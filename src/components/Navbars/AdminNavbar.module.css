@@ -1,5 +1,5 @@
 @import "../../assets/css/black-dashboard-react.css";
-.navbar .navbar-nav{
+/* .navbar .navbar-nav{
     width: 80%;
     direction: rtl ;
 }
@@ -35,11 +35,11 @@
 }
 .navbar .wideNavbar .nav-item .nav-link.selected {
     color: rgb(230, 63, 154);
-    /* background-color: #17a2b8;
-    border-radius: 0.25rem; */
-  }
+    background-color: #17a2b8;
+    border-radius: 0.25rem;
+  } */
 
-.navbar-absolute {
+/* .navbar-absolute {
     margin:-120px;
 }
 .NavItem {
@@ -54,16 +54,11 @@
 .Dropdown
 {
     display: none;
-    /* position: fixed; */
-}
-
-.Collapse_Main {
-    display: flex;
-    /* flex-direction: column; */
-}
+} */
 
 
-.DropdownMenu {
+
+/* .DropdownMenu {
     z-index: 100;
 }
 
@@ -80,7 +75,7 @@
     .NavbarRes {
         margin-bottom: 5px;
     }
-}
+} */
 
 /* @media  only  screen and (max-width: 1000px){
     .h2custom{
@@ -102,3 +97,7 @@
     }
     
   } */
+
+.NavbarToggler {
+    background: transparent;
+}
