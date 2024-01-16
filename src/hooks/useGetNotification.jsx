@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-    showLoading,
-    closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
+// import {
+//     showLoading,
+//     closeLoading,
+// } from "../components/LoadingAlert/LoadingAlert";
 import { useNavigate } from "react-router-dom";
 import { returnToken } from "../Functions/returnToken";
 export const useGetNotification = (showModal) => {
@@ -14,14 +14,14 @@ export const useGetNotification = (showModal) => {
     useEffect(() => {
         const token = returnToken()
         if (showModal) {
-            showLoading();
+            // showLoading();
             fetch((apis["notification"]["notifications"]), {
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((response) => response.json())
                 .then((data) => {
                     setNotificationData(data);
-                    closeLoading();
+                    // closeLoading();
                     setLoading(false);
                 })
                 .catch((error) => console.error(error))
