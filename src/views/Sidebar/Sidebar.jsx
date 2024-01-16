@@ -25,6 +25,7 @@ import { NavLink, Link } from "react-router-dom";
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
+  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const { profile, setProfile, loading2 } = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
@@ -73,6 +74,41 @@ const Sidebar = () => {
               <i className={`tim-icons icon-bank ${styles.icon}`}></i>
               <p className={styles.itemtext}> خانه</p>
             </div>
+            <div
+              className={`${styles.sidebarmenuItems}`}
+              onClick={(e) => {
+                e.preventDefault();
+                Navigate(`/search`);
+              }}
+            >
+              <i
+                className={`tim-icons icon-zoom-split
+
+${styles.icon}`}
+              ></i>
+              <p className={styles.itemtext}> جست جو</p>
+            </div>
+
+            <div
+              className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
+              onClick={(e) => {
+                e.preventDefault();
+                Navigate("/timeline");
+              }}
+            >
+              <i className={`tim-icons icon-chat-33 ${styles.icon}`}></i>
+              <p className={styles.itemtext}>چتیوشا</p>
+            </div>
+            <div
+              className={`${styles.sidebarmenuItems}`}
+              onClick={(e) => {
+                e.preventDefault();
+                Navigate(`/profile/${profile.username}`);
+              }}
+            >
+              <i className={`tim-icons icon-single-02 ${styles.icon}`}></i>
+              <p className={styles.itemtext}> پروفایل</p>
+            </div>
 
             <div
               className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
@@ -83,17 +119,6 @@ const Sidebar = () => {
             >
               <i className={`tim-icons icon-basket-simple ${styles.icon}`}></i>
               <p className={styles.itemtext}> سبد خرید</p>
-            </div>
-
-            <div
-              className={`${styles.sidebarmenuItems}`}
-              onClick={(e) => {
-                e.preventDefault();
-                Navigate(`/profile/${profile.username}`);
-              }}
-            >
-              <i className={`tim-icons icon-single-02 ${styles.icon}`}></i>
-              <p className={styles.itemtext}> پروفایل</p>
             </div>
 
             <div
@@ -166,6 +191,21 @@ const Sidebar = () => {
                   {"  "}
                   سفارش ها
                 </DropdownItem>
+                <DropdownItem
+                  href="#pablo"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    Navigate("/search");
+                  }}
+                >
+                  <span
+                    className="tim-icons icon-zoom-split
+
+"
+                  />
+                  {"  "}
+                  جست جو{" "}
+                </DropdownItem>
 
                 <DropdownItem
                   href="#pablo"
@@ -219,16 +259,6 @@ const Sidebar = () => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <div
-              className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
-              onClick={(e) => {
-                e.preventDefault();
-                Navigate("/timeline");
-              }}
-            >
-              <i className={`tim-icons icon-chat-33 ${styles.icon}`}></i>
-              <p className={styles.itemtext}>چتیوشا</p>
-            </div>
           </div>
         </div>
       </div>
