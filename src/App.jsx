@@ -163,9 +163,9 @@ function App() {
                   <Router.Route
                     path="/timeline"
                     element={
-                      <PrivatRoute>
+                      <PrivateRoute>
                         <Timelinepage />
-                      </PrivatRoute>
+                      </PrivateRoute>
                     }
                   ></Router.Route>
                   <Router.Route
