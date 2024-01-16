@@ -72,7 +72,7 @@
 @media only screen and (max-width: 1300px) {
   .bg {
     width: 10vw;
-    margin-top: 5vh;
+    /* margin-top: 4vh; */
     margin-right: 5vw;
   }
 
