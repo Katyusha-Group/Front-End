@@ -97,7 +97,25 @@
     }
     
   } */
-
+.AdminNavbar {
+    background: transparent !important;
+}
 .NavbarToggler {
     background: transparent;
+    /* height: 50px; */
+    display: none;
 }
+
+.AdminNavbar_WithoutCollapse {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+}
+
+@media  only  screen and (max-width: 991px){
+    .AdminNavbar_WithoutCollapse {
+        display: none !important;
+    }
+    .NavbarToggler {
+        display: block;
+    }
+  }
