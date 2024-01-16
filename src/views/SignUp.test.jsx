@@ -1,12 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import SignUp from './SignUp.jsx';
-import { test, it } from 'vitest';
-
+import { test, it, describe } from 'vitest';
+import { Router } from 'react-router-dom';
 test("SignUp component", () => {
-    // it("renders SignUp component", () => {
-    //     render(<SignUp />);
-    //     expect(screen.getByText("ثبت نام")).toBeInTheDocument();
-    // });
+    describe("renders SignUp component", () => {
+        render(<Router.BrowserRouter><SignUp /></Router.BrowserRouter>);
+        expect(screen.getByText("ثبت نام")).toBeInTheDocument();
+    });
 
     // it("handles form submission", () => {
     //     render(<SignUp />);
