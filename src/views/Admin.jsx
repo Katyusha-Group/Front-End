@@ -30,7 +30,6 @@ import {
 } from "reactstrap";
 
 export default function Admin() {
-  const { info } = useInfo();
   const [sidebarOpened, setsidebarOpened] = React.useState(
     document.documentElement.className.indexOf("nav-open") !== -1
   );

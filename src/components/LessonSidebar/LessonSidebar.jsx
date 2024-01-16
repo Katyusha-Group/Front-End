@@ -21,6 +21,7 @@ import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 import Spinner from "react-bootstrap/Spinner";
+import { returnToken } from "../../Functions/returnToken.jsx";
 var ps;
 const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
@@ -55,9 +56,7 @@ function LessonSidebar(props) {
     reducer,
     { loading: true, props: {}, error: "" }
   );
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
+  const token = returnToken()
   React.useEffect(() => {
     propsSetter({ type: fetchRequest });
     fetch(apis["departments"], {
