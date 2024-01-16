@@ -25,7 +25,6 @@ import { NavLink, Link } from "react-router-dom";
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const { profile, setProfile, loading2 } = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
