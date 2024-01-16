@@ -153,7 +153,6 @@ function UserProfile() {
         return response.json();
       })
       .then((data) => {
-        console.log("bitch", data);
       })
       .catch((error) => {
         console.error(error);
