@@ -23,6 +23,7 @@ import * as style from "../../assets/css/UserPage.module.css";
 import * as shopStyle from "../../assets/css/Shopping.module.css";
 import axios from "axios";
 const ModalShopping = (props) => {
+  // console.log("Props show: ", props.show);
   const { info, changeInfo } = useInfo();
   const [email, setEmail] = React.useState(
     props.order.contain_email == "C" ? true : false
