@@ -9,14 +9,14 @@ export const GETTweets = () => {
   const [Tweets, setTweets] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    showLoading();
+    
     fetch((apis["twittes"]), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((data) => {
         setTweets(data);
-        closeLoading();
+        
         setLoading(false);
       })
       .catch((error) => console.error(error));

@@ -33,7 +33,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import NotFound from "./views/404.jsx";
 import InternalServerError from "./views/500.jsx";
 import NewLandingpage from "./views/NewLandingPage.jsx";
-import AdminPanel from "./views/admin/Admin.jsx"
+import AdminPanel from "./views/admin/Admin.jsx";
 import Replies from "./views/TimeLine/Replies.jsx";
 import ErrorBoundrypage from "./views/ErrorBoundrypage.jsx";
 import Chat from "./views/TimeLine/Chat.jsx";
@@ -55,7 +55,7 @@ function App() {
   return (
     <>
       <ThemeContextWrapper>
-        <ErrorBoundary fallback={<ErrorBoundrypage/>}>
+        <ErrorBoundary fallback={<ErrorBoundrypage />}>
           <BackgroundColorWrapper>
             <ContextInfo>
               <Router.BrowserRouter>
@@ -104,7 +104,10 @@ function App() {
                     path="/landingPage"
                     element={<LandingPage />}
                   ></Router.Route>
-                  <Router.Route path="/replies/:id" element={<Replies></Replies>}></Router.Route>
+                  <Router.Route
+                    path="/replies/:id"
+                    element={<Replies></Replies>}
+                  ></Router.Route>
                   <Router.Route
                     path="/CoursesPanel"
                     element={
@@ -159,26 +162,29 @@ function App() {
                   ></Router.Route>
                   <Router.Route
                     path="/timeline"
-                    element={<Timelinepage />}
+                    element={
+                      <PrivatRoute>
+                        <Timelinepage />
+                      </PrivatRoute>
+                    }
                   ></Router.Route>
                   <Router.Route
                     path="/"
                     element={<NewLandingpage />}
                   ></Router.Route>
-                <Router.Route path="/admin" element={<AdminPanel/>}></Router.Route>
+                  <Router.Route
+                    path="/admin"
+                    element={<AdminPanel />}
+                  ></Router.Route>
                   <Router.Route
                     path="/500"
                     element={<InternalServerError />}
                   ></Router.Route>
-                  <Router.Route
-                    path="*"
-                    element={<NotFound />}
-                  ></Router.Route>
+                  <Router.Route path="*" element={<NotFound />}></Router.Route>
                   <Router.Route
                     path="/search"
-                    element={<Searchpage />}
+                    element={<PrivatRoute> <Searchpage /></PrivatRoute>}
                   ></Router.Route>
-
                 </Router.Routes>
               </Router.BrowserRouter>
             </ContextInfo>

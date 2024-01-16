@@ -11,13 +11,13 @@ export const GETUsername = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        showLoading();
+        // showLoading();
         const response = await fetch(apis["profiles"]["myusername"], {
           headers: { Authorization: `Bearer ${token}` },
         });
         const myUsername = await response.json();
         setUsername(myUsername.username);
-        closeLoading();
+        // closeLoading();
         setLoading(false);
       } catch (error) {
         console.error("Err is " + error);

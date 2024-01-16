@@ -253,7 +253,7 @@ function LessonSidebar(props) {
 
 " />
                           {"  "}
-                           صفحه اصلی
+                          چتیوشا
                         </DropdownItem>
 
                         <DropdownItem>
