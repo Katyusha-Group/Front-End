@@ -22,7 +22,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
 
-  const [thisTweet, setThisTweet] = useState(tweet.id);
+  // const [thisTweet, setThisTweet] = useState(tweet.id);
   // if (tweet.liked_by_me != null) {
   // setLike(tweet.liked_by_me);
   // // }

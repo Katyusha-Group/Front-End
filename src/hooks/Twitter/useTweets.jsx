@@ -38,6 +38,8 @@ export const useTweets = () => {
   const [data, setData] = useState({ results: [] });
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
+  // console.log("my tweeets",data.results)
+
   useEffect(() => {
     fetchData(setLoading, setData, 1, true, info, setInfo);
   }, []);
