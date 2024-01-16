@@ -14,7 +14,7 @@ function Timeline() {
     data: tweets,
     setData: setTweets,
     loading,
-    setLoading,
+    // setLoading,
     info,
     setInfo
   } = useTweets("get", true);
@@ -22,7 +22,7 @@ function Timeline() {
     data: tweetsForYou,
     setData: setTweetsForYou,
     loading: loadingForYou,
-    setLoading: setLoadingForYou,
+    // setLoading: setLoadingForYou,
   } = useTweetsForYou("get", true);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0); // Track the current page for pagination

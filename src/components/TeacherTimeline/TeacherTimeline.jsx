@@ -4,6 +4,7 @@ import "./style.sass";
 import { useInfo } from "../../contexts/InfoContext";
 import { createContext, useState, useEffect } from "react";
 import { apis } from "../../assets/apis";
+import { returnToken } from "../../Functions/returnToken";
 const TeacherTimeline = (props) => {
   let teacher_id = props.show;
   const { info, changeInfoState } = useInfo();
@@ -48,7 +49,7 @@ const TeacherTimeline = (props) => {
       },
     },
   ];
-  const token = tokenClass.token.access;
+  const token = returnToken();
   React.useEffect(() => {
     fetch(apis["timeline"]["teachers"] + `${teacher_id}`, {
       headers: { Authorization: `Bearer ${token}` },
