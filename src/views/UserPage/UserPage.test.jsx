@@ -12,18 +12,13 @@ describe('Renders main page correctly', () => {
     render(<ContextInfo><Router.BrowserRouter><UserPage /></Router.BrowserRouter></ContextInfo>);
   });
 });
-// describe("UserPage component", () => {
-//   it("should render the UserPageHeader component", () => {
+
+// test("UserPage component", () => {
+//   it("should render the Instructorall component", () => {
 //     const { getByTestId } = render(<UserPage />);
-//     expect(getByTestId("userPage-header")).toBeInTheDocument();
+//     expect(getByTestId("instructor-all")).toBeInTheDocument();
 //   });
 // });
-test("UserPage component", () => {
-  // it("should render the Instructorall component", () => {
-  //   const { getByTestId } = render(<UserPage />);
-  //   expect(getByTestId("instructor-all")).toBeInTheDocument();
-  // });
-});
 test("UserPage component", () => {
   // it("should render the weekly schedule table", () => {
   //   const { getByText } = render(<UserPage />);
