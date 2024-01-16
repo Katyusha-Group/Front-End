@@ -41,7 +41,6 @@ export const useTweets = () => {
   useEffect(() => {
     fetchData(setLoading, setData, 1, true, info, setInfo);
   }, []);
-  console.log(data)
 
   return { data, setData, loading, setLoading, info, setInfo };
 };
