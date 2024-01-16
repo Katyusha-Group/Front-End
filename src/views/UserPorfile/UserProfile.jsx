@@ -220,7 +220,7 @@ function UserProfile() {
 
   return (
     <>
-      <div className="wrapper" style={{ direction: "rtl" }}>
+      <div className="wrapper" style={{ direction: "rtl",overflow:"auto" }}>
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
           <div className="mt-5"></div>
