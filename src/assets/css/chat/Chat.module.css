@@ -58,7 +58,7 @@
 .chatBox {
   background-color: var(--purple);
   max-width: 100px;
-  width: min-content;
+  width: fit-content;
   padding: 10px;
   text-align: right;
 }

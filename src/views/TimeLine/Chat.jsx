@@ -34,7 +34,6 @@ const ChatPage = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("🚀 ~ ChatPage ~ chatsInfo:", chatsInfo)
     if(chatsInfo !== null && !once){
       once = true
       waitForSocketConnection(() => {
@@ -91,16 +90,11 @@ const ChatPage = (props) => {
         <SendMessage
           setData={{ setValue: setChats, WebSocketInstance: WebSocketInstance }}
           fetchData={(myInput, setValue) => {
-            console.log("myInput", myInput);
             const messageObject = {
               from: info.userName,
               content: myInput,
               chatId: 4,
             };
-            console.log(
-              "🚀 ~ file: Chat.jsx:80 ~ ChatPage ~ messageObject:",
-              messageObject
-            );
             setValue.WebSocketInstance.newChatMessage(messageObject);
           }}
         />

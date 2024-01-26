@@ -7,12 +7,11 @@ export async function getChat(setValue, username, setLoading, setInfo) {
     headers: { Authorization: `Bearer ${token}` },
   })
     .then((data) => {
-      console.log("🚀 ~ file: getChat.jsx:9 ~ .then ~ data:", data.data)
       setValue((x) => {
         let val = data.data.messages.map((item,index) => {
           return { id: item.author, messageId: index, text: item.content };
         });
-        return [...val];
+        return [...val.reverse()];
       });
       setLoading(false)
       setInfo({id:data.data.id, participants:data.data.participants})
