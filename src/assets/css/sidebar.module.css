@@ -146,10 +146,15 @@
     height: inherit;
     justify-content: space-between;
     z-index: 1;
+    padding: 0 20px;
   }
 
   .sidebarmenuItems {
+    display: flex;
     align-items: center;
+    /* padding: 0 10px; */
+    min-height: 40px;
+    text-align: center;
   }
 
   .sidebarmenuItems {
@@ -164,9 +169,6 @@
     display: none;
   }
 
-  .moreInfo {
-    display: block;
-  }
   .items{
     flex-direction: row;
     width: 75%;
@@ -182,6 +184,5 @@
 @media only screen and (min-width: 620px) {
   .moreInfo {
     display: none;
-  }
-  
+  } 
 }

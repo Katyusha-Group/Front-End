@@ -7,6 +7,7 @@ import { useGetNotificationCount } from "../../hooks/useGetNotificationCount";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 import homeicon from "../../assets/img/home.svg";
 import { ReactSVG } from "react-svg";
+import Spinner from "react-bootstrap/Spinner";
 
 import Notification from "./Notification";
 import {
@@ -21,11 +22,12 @@ import {
   Card,
 } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
+import PopUp from "../../components/ui/PopUp.jsx";
 
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
-  const { profile, setProfile, loading2 } = usesProfileMe();
+  const { profile, setProfile, loading } = usesProfileMe();
 
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
@@ -130,17 +132,13 @@ ${styles.icon}`}
               <i className={`tim-icons icon-single-copy-04 ${styles.icon}`}></i>
               <p className={styles.itemtext}> سفارش ها</p>
             </div>
-
-            <UncontrolledDropdown
-              className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`}
-              direction="up"
-              style={{ margin: "auto 0" }}
-            >
-              <DropdownToggle
-                className={"m-0 pp-4 " + styles.dropDownToggle}
-                color="initial"
-                data-toggle="dropdown"
-                style={{ background: "initial" }}
+            {loading ? (
+              <Spinner animation="border" variant="primary" style={{margin:'10px 0'}}/>
+            ) : (
+              <PopUp
+                className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`}
+                style={{ margin: "auto 0" }}
+                profile={profile}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -161,103 +159,8 @@ ${styles.icon}`}
                     </clipPath>
                   </defs>
                 </svg>
-              </DropdownToggle>
-              <DropdownMenu
-                className="br-7"
-                aria-labelledby="dropdownMenuLink"
-                end
-              >
-                <DropdownItem
-                  className="navbarDropDownItem"
-                  href="http://localhost:5173/shopping"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate("/shopping");
-                  }}
-                >
-                  <span className="tim-icons icon-basket-simple " />
-                  {"  "}
-                  سبد خرید
-                </DropdownItem>
-                <DropdownItem
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate("/order");
-                  }}
-                >
-                  <span className="tim-icons icon-bag-16" />
-                  {"  "}
-                  سفارش ها
-                </DropdownItem>
-                <DropdownItem
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate("/search");
-                  }}
-                >
-                  <span
-                    className="tim-icons icon-zoom-split
-
-"
-                  />
-                  {"  "}
-                  جست جو{" "}
-                </DropdownItem>
-
-                <DropdownItem
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate(`/profile/${profile.username}`);
-                  }}
-                >
-                  <span className="tim-icons icon-badge" />
-                  {"  "}
-                  پروفایل
-                </DropdownItem>
-                <DropdownItem
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate("../aboutUs");
-                  }}
-                >
-                  <span className="tim-icons icon-send" />
-                  {"  "}
-                  درباره ما
-                </DropdownItem>
-                <DropdownItem
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    Navigate("../timeline");
-                  }}
-                >
-                  <span
-                    className="tim-icons icon-chat-33
-
-"
-                  />
-                  {"  "}
-                  چتیوشا
-                </DropdownItem>
-
-                <DropdownItem>
-                  <span className="tim-icons icon-simple-remove" />
-                  <Link
-                    to="/landingPage"
-                    onClick={() => {
-                      localStorage.removeItem("authTokens");
-                    }}
-                  >
-                    {"  "}
-                    خروج
-                  </Link>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+              </PopUp>
+            )}
           </div>
         </div>
       </div>
