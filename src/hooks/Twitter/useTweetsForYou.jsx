@@ -4,10 +4,10 @@ import { apis } from "../../assets/apis";
 import { useState } from "react";
 import { useEffect } from "react";
 import { returnToken } from "../../Functions/returnToken";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
+// import {
+//   showLoading,
+//   closeLoading,
+// } from "../../components/LoadingAlert/LoadingAlert";
 export const fetchData = (setLoading, setData, num, initial) => {
   const token = returnToken()
   setLoading(true);

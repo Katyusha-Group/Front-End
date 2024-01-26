@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormText, Modal } from "react-bootstrap";
+import { FormText, Modal, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from 'sweetalert2';
 import {
@@ -34,9 +34,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     };
 
     React.useEffect(() => {
-        showLoading();
+        // showLoading();
         setShow(showModal);
-        closeLoading();
+        // closeLoading();
     }, [showModal]);
 
     const [loading, setLoading] = useState(null);
@@ -49,9 +49,10 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
+            setShow(false);
             Swal.fire({
                 title: 'کمی صبر کنید',
-                html: 'در حال بررسی درخواست ثبت نام',
+                html: 'در حال بررسی درخواست',
                 allowOutsideClick: false,
                 timerProgressBar: true,
                 showConfirmButton: false,
@@ -60,9 +61,13 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                 width: '25rem',
                 timerProgressBar: true,
                 didOpen: () => {
-                    Swal.showLoading()
+                // Swal.showLoading()
+                // <Spinner animation="border" variant="primary" />
                 },
+                
+                
             });
+            // <Spinner animation="border" variant="primary" />
             const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
             let formdata = new FormData()
             formdata.append("twitte", id)
@@ -91,7 +96,9 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                     showCancelButton: false,
                     showConfirmButton: false,
                 });
+                
             }
+            
             else {
                 // console.log(data.detail)
                 if (data.detail == "you can not report your own twitte.") {
@@ -131,19 +138,24 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                         timer: 1700,
                         showCancelButton: false,
                         showConfirmButton: false,
+                        
+
                     });
                 }
+                handleClose();
             }
             return response;
         } catch (error) {
             console.error(error);
         }
+        
+
         // handleSignUp(formData, subject, gender);
     }
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
-                <Modal.Header closeButton className={styles.ModalHeader}>
+                <Modal.Header className={styles.ModalHeader}>
                     <h4 className={styles.ModalTitle}>دلیل ریپورت؟</h4>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>

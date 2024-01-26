@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import img from "../../assets/img/DefaultAvatar.jpg";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import Swal from "sweetalert2";
 import {
   Button,
   Card,
@@ -46,54 +47,36 @@ function UserProfile() {
   const startTelegramBot = () => {
     window.location.href = info.telegram_link;
   };
-  // const notificationAlertRef = React.useRef(null);
-  // const notify = (place) => {
-  //   var color = 2;
-  //   var type;
-  //   switch (color) {
-  //     case 1:
-  //       type = "primary";
-  //       break;
-  //     case 2:
-  //       type = "success";
-  //       break;
-  //     case 3:
-  //       type = "danger";
-  //       break;
-  //     case 4:
-  //       type = "warning";
-  //       break;
-  //     case 5:
-  //       type = "info";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   var options = {};
-  //   options = {
-  //     place: place,
-  //     message: (
-  //       <div>
-  //         <div>
-  //           <b>با موفقیت به سبد خرید اضافه شد</b>
-  //         </div>
-  //       </div>
-  //     ),
-  //     type: type,
-  //     color: "white",
-  //     autoDismiss: 7,
+
+  // function save() {
+  //   var formData = new FormData();
+  //   // formData.append("first_name", info.first_name);
+  //   // formData.append("last_name", info.last_name);
+  //   formData.append("name", info.first_name + " " + info.last_name);
+  //   // if (images.length > 0) {
+  //   //   formData.append("image", images[0]);
+  //   // } else {
+  //   // }
+  //   fetch(apis["profiles"]["updateProfile"], {
+  //     method: "PATCH",
+  //     headers: { Authorization: `Bearer ${token}` },
+  //     "Content-Type": "application/json",
+  //     body: formData,
+  //     redirect: "follow",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // notify("tl");
+  //     })
+  //     .catch((error) => console.error(error));
+  //   const activeRoute = (routeName) => {
+  //     return location.pathname === routeName ? "active" : "";
   //   };
-  //   notificationAlertRef.current.notificationAlert(options);
-  // };
+  // }
   function save() {
     var formData = new FormData();
-    // formData.append("first_name", info.first_name);
-    // formData.append("last_name", info.last_name);
     formData.append("name", info.first_name + " " + info.last_name);
-    if (images.length > 0) {
-      formData.append("image", images[0]);
-    } else {
-    }
+
     fetch(apis["profiles"]["updateProfile"], {
       method: "PATCH",
       headers: { Authorization: `Bearer ${token}` },
@@ -101,15 +84,94 @@ function UserProfile() {
       body: formData,
       redirect: "follow",
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // notify("tl");
+      .then((response) => {
+        if (response.status === 200) {
+          // Display a success message using Swal
+          Swal.fire({
+            icon: "success",
+            title: "اطلاعات با موفقیت تغییر یافت",
+            showConfirmButton: false,
+            timer: 1500, // Automatically close after 1.5 seconds
+            background: "#3c3e5d",
+            color: "#ceccc0",
+            width: "26rem",
+            confirmButtonText: "باشه",
+          });
+        }
+        return response.json();
       })
-      .catch((error) => console.error(error));
+      .then((data) => {
+        // Additional handling if needed
+      })
+      .catch((error) => {
+        console.error(error);
+        // Display an error message using Swal if the request fails
+        Swal.fire({
+          icon: "error",
+          title: "با خطا مواجه شد...",
+          background: "#3c3e5d",
+          color: "#ceccc0",
+          width: "26rem",
+          confirmButtonText: "باشه",
+        });
+      });
+
     const activeRoute = (routeName) => {
       return location.pathname === routeName ? "active" : "";
     };
   }
+  function savePic() {
+    var formData = new FormData();
+  
+    if (images.length > 0) {
+      formData.append("image", images[0]);
+    } else {
+      // Handle case when no image is selected, if needed
+    }
+  
+    fetch(apis["profiles"]["updateProfile"], {
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${token}` },
+      "Content-Type": "application/json",
+      body: formData,
+      redirect: "follow",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // Display a success message using Swal
+          Swal.fire({
+            icon: 'success',
+            title: 'عکس با موفقیت عوض شد',
+            showConfirmButton: false,
+            timer: 1500,
+            background: "#3c3e5d",
+            color: "#ceccc0",
+            width: "26rem",
+            confirmButtonText: "باشه",
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'خطا...',
+          background: "#3c3e5d",
+          color: "#ceccc0",
+          width: "26rem",
+          confirmButtonText: "باشه",
+        });
+      });
+  
+    const activeRoute = (routeName) => {
+      return location.pathname === routeName ? "active" : "";
+    };
+  }
+  
 
   React.useEffect(() => {
     if (images.length < 1) return;
@@ -158,7 +220,7 @@ function UserProfile() {
 
   return (
     <>
-      <div className="wrapper" style={{ direction: "rtl" }}>
+      <div className="wrapper" style={{ direction: "rtl",overflow:"auto" }}>
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
           <div className="mt-5"></div>
@@ -304,19 +366,18 @@ function UserProfile() {
                     <div className="card-description"></div>
                   </CardBody>
                   <div className="card-description mt-2">
-                    برای دیدن اعلان ها به تلگرام بروید
+                    <Button
+                      className="$btn-fill {styles.}"
+                      color="primary"
+                      type="submit"
+                      onClick={savePic}
+                    >
+                      ثبت عکس
+                    </Button>{" "}
                   </div>
-                  <CardFooter>
-                    <div className="button-container">
-                      <Button
-                        onClick={startTelegramBot}
-                        className="btn-icon btn-round"
-                      >
-                        <i className="fab fa-telegram" />
-                      </Button>
-                    </div>
-                    <div className="button-container"></div>
-                  </CardFooter>
+                  <CardFooter></CardFooter>
+
+                  <div className="button-container"></div>
                 </Card>
               </Col>
             </Row>

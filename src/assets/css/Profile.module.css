@@ -1,25 +1,26 @@
 @import "./black-dashboard-react.css";
 
-:root{
-    overflow-y: hidden ;
+:root {
+    overflow-y: hidden;
     /* background-color: var(--dark); */
 }
 
-.main{
+.main {
     display: flex;
     flex-direction: row;
     /* align-items: center; */
-    justify-content:space-between;
+    justify-content: space-between;
     width: 100%;
     /* background-color: #1e1e1e; */
     /* background-color: var(--dark); */
     /* overflow-y: hidden; */
 }
-.leftpart{
+
+.leftpart {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px; 
+    gap: 30px;
     border-radius: 10px;
 
     height: 93vh;
@@ -27,12 +28,13 @@
     margin-left: 30px;
     margin-right: 30px;
 }
-.rightUpper{
+
+.rightUpper {
     flex-grow: 1;
     width: 25vw;
     /* background-color:var(--gray-dark); */
     /* background-color: #373C57; */
-    background: rgb(39,42,61,1);
+    background: rgb(39, 42, 61, 1);
     /* background: linear-gradient(180deg, rgba(39,42,61,1) 54%, rgba(109,54,114,1) 89%, rgba(143,62,140,1) 100%); */
     border-radius: 15px;
     position: relative;
@@ -54,17 +56,17 @@
     /* background-color: rgba(137, 101, 224, 0.5); */
     z-index: 0;
     /* mix-blend-mode: multiply; */
-  }
+}
 
-.rightpart{
-    width:900px;
+.rightpart {
+    width: 900px;
     height: 100%;
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 15px;
     gap: 30px;
-    background-color:#272A3D;
+    background-color: #272A3D;
     /* background-color:var(--gray-dark); */
     /* margin-left: 30px; */
     margin-right: 30px;
@@ -77,19 +79,14 @@
 }
 
 
-.ProfileImage{
+.ProfileImage {
     /* border: 2px solid #272A3D; */
     /* box-sizing: border-box; */
     height: 180px;
     width: 180px;
-    margin-top: 30px;
-    margin-bottom: -20px;
-    border-radius: 50%; 
+    margin-top: 10px;
+    border-radius: 50%;
     /* clip-path: circle(50% at 50% 50%); */
-}
-
-.ProfileImage:hover{
-    scale: 1.1;
 }
 
 
@@ -109,16 +106,19 @@
     scale: 1.2;
 }
 
-.myusername{
+.myusername {
     text-align: center;
     direction: ltr;
     /* cursor: pointer; */
     font-weight: bold;
+    margin-top: 5px;
 }
-.p_name{
+
+.p_name {
     margin-top: 15px;
 }
-.Follow{
+
+.Follow {
     display: flex;
     font-size: 12px;
     flex-direction: row-reverse;
@@ -126,12 +126,13 @@
     gap: 20px;
     /* cursor: pointer; */
 }
-.DateStart{
+
+.DateStart {
     margin-top: 15px;
     font-size: 9px;
 }
-.followbutton{
-    margin-top: 10px;
+
+.followbutton {
     width: 100px;
     height: 30px;
     border-radius: 5px;
@@ -141,9 +142,11 @@
     background-color: var(--purple);
     color: var(--white);
     border: 1px solid var(--purple);
+    font-size: 12px;
     /* margin-right: 30px; */
 }
-.followbutton:hover{
+
+.followbutton:hover {
     /* background-color: #67539E;
     color: white;
     border: 1px solid white; */
@@ -151,7 +154,8 @@
     color: var(--white);
     border: 1px solid var(--white);
 }
-.followbutton:active{
+
+.followbutton:active {
     /* background-color: #67539E;
     color: white;
     border: 1px solid white; */
@@ -159,7 +163,8 @@
     color: var(--white);
     border: 1px solid var(--white);
 }
-.table{
+
+.table {
     width: 776px;
     height: 390px;
     display: flex;
@@ -173,7 +178,8 @@
     /* color: white; */
     color: var(--white);
 }
-.div{
+
+.div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,8 +191,9 @@
     /* color: white; */
     color: var(--white);
     width: 776px;
-    height: 91px;   
+    height: 91px;
 }
+
 /* .timeline{
 
 } */
@@ -203,7 +210,7 @@
     font-size: 12px;
     gap: 20px;
     /* cursor: pointer; */
-    padding: 20px 40px;
+    padding: 20px 25px;
 }
 
 .ProfileHeader_Other_Item {
@@ -214,8 +221,8 @@
 
 
 @media only screen and (max-width: 1064px) {
-    .rightUpper {
-      display: none;
+    .leftpart {
+        display: none;
     }
 }
 
@@ -223,11 +230,9 @@
     .main {
         flex-direction: column-reverse;
     }
+
     .rightpart {
         max-width: 90vw;
         max-height: 80vh;
-    }
-    .leftpart {
-        display: none;
     }
 }

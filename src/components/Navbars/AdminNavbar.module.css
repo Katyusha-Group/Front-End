@@ -1,4 +1,5 @@
-.navbar .navbar-nav{
+@import "../../assets/css/black-dashboard-react.css";
+/* .navbar .navbar-nav{
     width: 80%;
     direction: rtl ;
 }
@@ -29,13 +30,92 @@
 }
 .wideNavbar{
     margin-left: auto;
+    display: flex;
+    flex-direction: row;
 }
 .navbar .wideNavbar .nav-item .nav-link.selected {
     color: rgb(230, 63, 154);
-    /* background-color: #17a2b8;
-    border-radius: 0.25rem; */
-  }
+    background-color: #17a2b8;
+    border-radius: 0.25rem;
+  } */
 
-/* #navbar-absolute {
-    position: relative !important;
+/* .navbar-absolute {
+    margin:-120px;
+}
+.NavItem {
+    max-height: 10%;
+}
+
+.DropdownItem 
+{
+    color: var(--gray) !important;
+}
+
+.Dropdown
+{
+    display: none;
 } */
+
+
+
+/* .DropdownMenu {
+    z-index: 100;
+}
+
+
+@media only screen and (max-width: 541px) {
+    .wideNavbar {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    .Dropdown
+    {
+        display: block;
+    }
+    .NavbarRes {
+        margin-bottom: 5px;
+    }
+} */
+
+/* @media  only  screen and (max-width: 1000px){
+    .h2custom{
+      font-size: 1.3rem;
+    } 
+    .shop_card {
+      margin-top: 20px;
+    }
+    .shop_row {
+      flex-direction: column;
+    } 
+    .professorImage {
+      margin-right: 0px;
+    }
+  }
+  @media  only  screen and (min-width: 1200px){
+    .box{
+      height: 700%;
+    }
+    
+  } */
+.AdminNavbar {
+    background: transparent !important;
+}
+.NavbarToggler {
+    background: transparent;
+    /* height: 50px; */
+    display: none;
+}
+
+.AdminNavbar_WithoutCollapse {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+}
+
+@media  only  screen and (max-width: 991px){
+    .AdminNavbar_WithoutCollapse {
+        display: none !important;
+    }
+    .NavbarToggler {
+        display: block;
+    }
+  }

@@ -22,7 +22,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
 
-  const [thisTweet, setThisTweet] = useState(tweet.id);
+  // const [thisTweet, setThisTweet] = useState(tweet.id);
   // if (tweet.liked_by_me != null) {
   // setLike(tweet.liked_by_me);
   // // }
@@ -30,6 +30,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
 
 
   const [link, setLink] = useState("");
+  const[locallike,setLocallike]=useState(0);
 
 
   const [showModal, setShowModal] = React.useState(false);
@@ -134,10 +135,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               onClick={() => {
                 setLike(!like);
                 likes(tweet.id);
+                like? setLocallike(-1):setLocallike(1)
               }}
             >
               <span className={styles.icon_text}>
-                {tweet.likes_count + like}
+                {tweet.likes_count + locallike}
+                {/* {like? tweet.likes_count+1 : tweet.likes_count} */}
               </span>
               <i className={`tim-icons icon-heart-2 ${styles.icon}`}></i>
             </button>
