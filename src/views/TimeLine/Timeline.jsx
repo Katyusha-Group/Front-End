@@ -16,7 +16,7 @@ function Timeline() {
     loading,
     // setLoading,
     info,
-    setInfo
+    setInfo,
   } = useTweets("get", true);
   const {
     data: tweetsForYou,
@@ -27,7 +27,7 @@ function Timeline() {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0); // Track the current page for pagination
   const containerRef = useRef(null); // Reference to the tweets container div
-var number = 1
+  var number = 1;
   useEffect(() => {
     // Add scroll event listener on mount
     containerRef.current.addEventListener("scroll", handleScroll);
@@ -38,14 +38,13 @@ var number = 1
     };
   }, []);
 
-
   const handleScroll = () => {
     const container = containerRef.current;
     const scrollTop = container.scrollTop;
     const scrollHeight = container.scrollHeight;
     const containerHeight = container.clientHeight;
 
-    if (scrollTop + containerHeight > scrollHeight-1) {
+    if (scrollTop + containerHeight > scrollHeight - 1) {
       loadMoreTweets();
     }
   };
@@ -53,9 +52,9 @@ var number = 1
   const loadMoreTweets = async () => {
     if (loading) return; // Prevent duplicate requests while loading
 
-    fetchData(setLoading, setTweets, number, false,info, setInfo);
-    number+=1
-    setPage(x=>x+1)
+    fetchData(setLoading, setTweets, number, false, info, setInfo);
+    number += 1;
+    setPage((x) => x + 1);
   };
 
   const handleTabClick = (tab) => {
@@ -79,39 +78,41 @@ var number = 1
             برای شما
           </button>
         </div>
-        <div className={styles.content}>
-          {activeTab === "tweets" && (
-            <div className={styles.tweetsContainer} ref={containerRef}>
-              {tweets.results.map((tweet,index) => (
+        {activeTab === "tweets" && (
+          <div
+            className={`${styles.content} ${styles.tweetsContainer}`}
+            ref={containerRef}
+          >
+            {!loading ? (
+              tweets.results.map((tweet, index) => (
                 <Tweet
                   key={index}
                   tweet={tweet}
                   setOpenComment={setOpen}
                   setTweets={setTweets}
                 />
-              ))}
-              {loading && (
-                <div>
-                  <Spinner animation="border" variant="primary" />
-                </div>
-              )}
-            </div>
-          )}
-          {activeTab === "media" && (
-            <div className={styles.tweetsContainer} ref={containerRef}>
-              {tweetsForYou.results.map((tweet,index) => (
-                <Tweet
-                  key={index}
-                  tweet={tweet}
-                  setOpenComment={setOpen}
-                  setTweets={setTweets}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+              ))
+            ) : (
+              <div style={{display:"flex", justifyContent:"center",height:"100%", alignItems:"center"}}>
+                <Spinner animation="border" variant="primary" />
+              </div>
+            )}
+          </div>
+        )}
+        {activeTab === "media" && (
+          <div className={styles.tweetsContainer} ref={containerRef}>
+            {tweetsForYou.results.map((tweet, index) => (
+              <Tweet
+                key={index}
+                tweet={tweet}
+                setOpenComment={setOpen}
+                setTweets={setTweets}
+              />
+            ))}
+          </div>
+        )}
         <div className={styles.sendMessage}>
-          <SendMessage setData={setTweets} fetchData={useSendTweets}/>
+          <SendMessage setData={setTweets} fetchData={useSendTweets} />
         </div>
       </Card>
     </>

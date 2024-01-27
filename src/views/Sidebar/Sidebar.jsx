@@ -133,7 +133,7 @@ ${styles.icon}`}
               <p className={styles.itemtext}> سفارش ها</p>
             </div>
             {loading ? (
-              <Spinner animation="border" variant="primary" style={{margin:'10px 0'}}/>
+              <Spinner animation="border" variant="primary" className={`backCol ${styles.moreInfo}`} style={{margin:"13px 10px"}}/>
             ) : (
               <PopUp
                 className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`}

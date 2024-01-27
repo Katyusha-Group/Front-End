@@ -10,9 +10,7 @@ const UserSearchResponce = (res) => {
         <div className={styles.main2}>
           <img className={styles.img} src={res.res.image} />
           <p className={styles.text}>
-            {res.res.name.length < 14
-              ? res.res.name
-              : res.res.name.slice(0, 14) + "..."}
+            {res.res.name }
           </p>
         </div>
       </Link>
