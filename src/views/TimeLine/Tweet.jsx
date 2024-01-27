@@ -21,17 +21,10 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
-
-  const [thisTweet, setThisTweet] = useState(tweet.id);
-  // if (tweet.liked_by_me != null) {
-  // setLike(tweet.liked_by_me);
-  // // }
-  // console.log(tweet.liked_by_me)
-
-
+  const isThisMeBool = IsThisMe_Function(tweet.profile.username)
   const [link, setLink] = useState("");
 
-
+ 
   const [showModal, setShowModal] = React.useState(false);
 
   const handleOpenModal_Report = () => {
@@ -74,7 +67,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           </DropdownToggle>
           <DropdownMenu {...args}>
             <DropdownItem
-              disabled={tweet.reported_by_me || IsThisMe_Function(tweet.profile.username)}
+              disabled={tweet.reported_by_me || isThisMeBool}
               className={styles.dropDown}
               onClick={handleOpenModal_Report}
             >
@@ -83,7 +76,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             {
               <DropdownItem
                 className={styles.dropDown}
-                disabled={!IsThisMe_Function(tweet.profile.username)}
+                disabled={!isThisMeBool}
                 onClick={() => {
                   setTweets((x) => {
                     let temp = x.results.filter((y) => y.id !== tweet.id);
