@@ -1,7 +1,6 @@
 import React from "react";
 import { apis } from "../../assets/apis";
 import axios from "axios";
-import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 export const useActivity = () => {
   const tokenJson = localStorage.getItem("authTokens");
   const tokenClass = JSON.parse(tokenJson);
@@ -17,6 +16,7 @@ export const useActivity = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response)
         setData(response.data)
         setLoading(false);
       })

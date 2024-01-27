@@ -1,6 +1,4 @@
 import React from "react";
-import { showLoading } from "../../components/LoadingAlert/LoadingAlert";
-import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
 import ModalLessons from "../../components/ModalLessons/ModalLessons";
 import * as style from  "./CoursesPanel.module.css";
@@ -17,7 +15,6 @@ const DayPeriod = (Input) => {
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
     const shopId = JSON.parse(localStorage.getItem("shopId"));
-    showLoading();
     fetch(apis["courses"]["id"]+`${x}`, {
       method: "GET",
       headers: {
@@ -32,7 +29,6 @@ const DayPeriod = (Input) => {
         setShowLesson({ flag: true, data: d })
       }
     });
-    closeLoading();
    }
   return (
     <div>
@@ -53,9 +49,7 @@ const DayPeriod = (Input) => {
                   name="AddOrRemoveCourseButton"
                   style={{ backgroundColor: (entry.IsChosen) ? "rgb(233,87,104)" : "rgb(0, 191, 255)"}}
                   onClick={() => {
-                    showLoading();
                     entry.ButtonClicked();
-                    closeLoading();
                   }}>
                   {entry.IsChosen ? 'x' : '+'}
                 </button>

@@ -31,7 +31,7 @@ export default function Profile() {
           profileData={profileData}
           profileData_loading={loading}
           username={username}
-          setProfile={setProfileData}
+          setProfileData={setProfileData}
           IsThisMe={IsThisMe}
         />
       </div>
@@ -39,7 +39,7 @@ export default function Profile() {
         <ProfileHeader
           username={username}
           profile={profileData}
-          setProfile={setProfileData}
+          setProfileData={setProfileData}
           IsThisMe={IsThisMe}
           profileData_loading={loading}
         />

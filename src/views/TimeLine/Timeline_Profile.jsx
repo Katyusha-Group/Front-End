@@ -7,11 +7,9 @@ import ModalProfileHeader from "../UserPorfile/ModalProfileHeader.jsx"
 
 import { apis } from "../../assets/apis";
 
-// import { useInfo } from "../../contexts/InfoContext";
 import CourseTimeline from "../../components/Timeline/Timeline";
 import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
 import StudentTimeline from "./StudentTimeline.jsx";
-// src\views\UserPage\Lessons.jsx
 import { lessons } from "../UserPage/Lessons";
 import { GETTweets } from "../../hooks/GETTweets";
 import { useTweets } from "../../hooks/Twitter/useTweets";
@@ -19,7 +17,6 @@ import { useGetChartData } from "../../hooks/GetChartData.jsx";
 
 
 function Timeline({ tabsList, profileData, profileData_loading, setProfileData, username, IsThisMe }) {
-  // const username = profileData.username.split("_")[1];
   if (profileData_loading) {
     return <></>
   }
@@ -108,7 +105,6 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                     courseChoosed={courseChoosed}
 
                   />
-                  {/* <TeacherTimeline show={username} /> */}
                 </div>)}
             </div>
           )}

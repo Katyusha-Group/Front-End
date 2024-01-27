@@ -18,9 +18,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { closeLoading } from "../LoadingAlert/LoadingAlert";
 const ModalLessons = (props) => {
-  closeLoading();
   const x = props.show.data;
   // console.log("props: ", props.show);
   

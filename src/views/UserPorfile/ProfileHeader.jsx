@@ -6,7 +6,6 @@ import UsersListModal from './UsersListModal';
 import { POSTFollow } from '../../hooks/POSTFollow';
 import { useNavigate } from 'react-router-dom';
 import { apis } from '../../assets/apis';
-import { showLoading, closeLoading } from '../../components/LoadingAlert/LoadingAlert';
 import Spinner from "react-bootstrap/Spinner";
 export default function ProfileHeader({profile, setProfileData, username, IsThisMe, profileData_loading}) {
   // console.log("Profile in profile header: ", profile);
@@ -41,14 +40,12 @@ export default function ProfileHeader({profile, setProfileData, username, IsThis
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
     // console.log("Fetching profile in profile header");
-    showLoading();
     fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
         return response.json().then((data) => {
           setProfileData(data);
-          closeLoading();
         });
       })
       .catch((error) => {
@@ -58,14 +55,12 @@ export default function ProfileHeader({profile, setProfileData, username, IsThis
 
   React.useEffect(() => {
     // console.log("Fetching profile in profile header");
-    showLoading();
     fetch((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then(response => {
       return response.json().then((data) => {
         setProfileData(data);
-        closeLoading();
       });
     })
     .catch((error) => {

@@ -7,7 +7,6 @@
     flex-direction: row;
     justify-content: start;
     margin: 0;
-    /* overflow-y: scroll; */
     width: 100vw;
 }
 
@@ -16,11 +15,7 @@
     margin: 5vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     max-width: 90%;
-    /* margin-left: auto;
-    margin-right: auto; */
-    /* margin-left: 10px; */
 }
 
 .adminRow {
@@ -31,10 +26,9 @@
 .adminBox{
     height: 43vh;
     display: flex;
-    /* justify-content: space-evenly; */
     flex-grow: 1;
+    border-radius: 15px;
     margin: 10px;
-    /* width: 90%; */
 }
 
 .adminChart{
@@ -42,10 +36,12 @@
     display: flex;
     justify-content: center;
     flex-grow: 1;
-    margin: 10px;
+    margin: 0 10px 20px 10px;
+    padding: 10px;
+    border-radius: 15px;
 }
 
-@media only screen and (max-width: 541px) {
+@media only screen and (max-width: 620px) {
     .ParentContain {
         display: flex;
         max-height: 100vh;
@@ -64,13 +60,18 @@
     }
     .adminRow {
         flex-direction: column;
-        width: 90%;
+        width: 100%;
     }
     .admin {
         margin-top: 0;
         margin-left: 0;
+        margin: 10px auto;
+        width: 80vw;
     }
-    /* .admin {
-        overflow: scroll;
-    } */
+    .adminChart{
+        margin: 0 0 20px 0;
+    }
+    .adminBox{
+        margin: 0 0 20px 0;
+    }
 }

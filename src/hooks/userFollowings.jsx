@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
 import { returnToken } from "../Functions/returnToken";
 export const userFollowings = (myUsername, showModal) => {
   const token = returnToken();
@@ -14,15 +10,11 @@ export const userFollowings = (myUsername, showModal) => {
     setShow(showModal);
     const fetchData = async () => {
       try {
-        showLoading();
         const response = await fetch((apis["profiles"]["following"]).replace("//following", `/${myUsername}/following`), {
           headers: { Authorization: `Bearer ${token}` },
         });
         const getfollowings = await response.json();
-        // console.log("Followings are: " + JSON.stringify(getfollowings));
         setFollowings(getfollowings);
-        // console.log("Followings Updated: ", Followings);
-        closeLoading();
         setLoading(false);
       } catch (error) {
         console.error("Err is " + error);

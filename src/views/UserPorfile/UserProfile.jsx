@@ -18,10 +18,7 @@ import {
   Col,
 } from "reactstrap";
 import Spinner from "react-bootstrap/Spinner";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
+
 import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";

@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
 
 export const useSearchTweet = (searchQuery) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;

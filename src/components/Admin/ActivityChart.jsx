@@ -26,7 +26,7 @@ ChartJS.register(
 
   export const options = {
     responsive: true,
-  
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: { display: false },
@@ -94,15 +94,16 @@ ChartJS.register(
   
   export default function ActivityChart() {
     const dataOfChart = useActivity();
+    console.log("🚀 ~ ActivityChart ~ dataOfChart:", dataOfChart)
     if (dataOfChart.loading) {
       return (
-        <div>
-          <Spinner animation="border" variant="primary" />
-        </div>
+      <div>
+        <Spinner animation="border" variant="primary" />
+      </div>
       );
     }
     const chartData = {
-      labels: Object.keys(dataOfChart.data),
+      labels: Object.keys(dataOfChart),
       datasets: [
         {
           label: "Activity",
