@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
+
 export const GETTweets = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [Tweets, setTweets] = useState(null);
@@ -16,7 +13,6 @@ export const GETTweets = () => {
       .then((response) => response.json())
       .then((data) => {
         setTweets(data);
-        
         setLoading(false);
       })
       .catch((error) => console.error(error));

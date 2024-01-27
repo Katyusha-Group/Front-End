@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
 import { returnToken } from "../Functions/returnToken";
 import axios from "axios";
 

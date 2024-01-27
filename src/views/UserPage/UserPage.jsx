@@ -84,7 +84,6 @@ export default function UserPage() {
                     changeInfo,
                     true,
                     null,
-                    showLoading,
                     closeLoading,
                     setModalData,
                     setShowLesson
@@ -94,7 +93,6 @@ export default function UserPage() {
                     setShowCourseHoverFunc,
                     false,
                     style.classNameHover,
-                    showLoading,
                     closeLoading,
                     setModalData,
                     setShowLesson
@@ -137,7 +135,6 @@ export default function UserPage() {
           setShowCourseHoverFunc={setShowCourseHoverFunc}
           addNewLesson={addNewLesson}
           propsSetter={propsSetter}
-          showLoading={showLoading}
           setModalData={setModalData}
           setShowLesson={setShowLesson}
           SetOrderInfo={SetOrderInfo}

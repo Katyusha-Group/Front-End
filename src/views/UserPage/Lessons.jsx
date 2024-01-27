@@ -16,7 +16,6 @@ export function lessons(
   changeInfoState,
   getapi,
   classNameHover,
-  showLoading,
   closeLoading,
   setModalData,
   setShowLesson
@@ -25,7 +24,7 @@ export function lessons(
     setShowLesson({ flag: flag, data: data });
   }
   const { info, changeInfo } = useInfo();
-  useMyClass(getapi, showLoading, closeLoading)
+  useMyClass(getapi, closeLoading)
   if (infoState !== null && infoState !== undefined) {
     return infoState.courseChoosed.map((lessons) => {
       return lessons.course_times.map((lesson, index) => {
@@ -86,7 +85,6 @@ export function lessons(
                   apiForModalData(
                     lessons.complete_course_number,
                     true,
-                    showLoading,
                     setModalData,
                     setShowLesson
                   )

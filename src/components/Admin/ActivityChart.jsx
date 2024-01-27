@@ -97,9 +97,9 @@ ChartJS.register(
     console.log("🚀 ~ ActivityChart ~ dataOfChart:", dataOfChart)
     if (dataOfChart.loading) {
       return (
-        <div>
-          <Spinner animation="border" variant="primary" />
-        </div>
+      <div>
+        <Spinner animation="border" variant="primary" />
+      </div>
       );
     }
     const chartData = {

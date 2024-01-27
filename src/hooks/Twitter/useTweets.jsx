@@ -3,10 +3,6 @@ import axios from "axios";
 import { apis } from "../../assets/apis";
 import { useState } from "react";
 import { useEffect } from "react";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
 import { returnToken } from "../../Functions/returnToken";
 export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
   const token = returnToken()

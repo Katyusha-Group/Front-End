@@ -58,7 +58,7 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
                         <ProfileHeader
                             username={username}
                             profile={profileData}
-                            setProfile={setProfileData}
+                            setProfileData={setProfileData}
                             IsThisMe={IsThisMe}
                             profileData_loading={profileData_loading}
                         />

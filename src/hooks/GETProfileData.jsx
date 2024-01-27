@@ -1,32 +1,20 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
 import Swal from 'sweetalert2';
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
 import axios from "axios";
 
 export const GETProfileData = (username) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [profileData, setprofileData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
-  // console.log("id is: " , username);
   useEffect(() => {
-    showLoading();
     
     axios((apis["profiles"]["view_profile"] + `${username}`), {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(response => {
         if (response.status === 200) {
-          // return response((data) => {
-          //   setprofileData(data);
-          //   closeLoading();
-          //   setLoading(false);
-          // });
-          setprofileData(response.data);
-          closeLoading();
+          setProfileData(response.data);
           setLoading(false);
         } 
         else if (response.status === 404) {
@@ -66,5 +54,5 @@ export const GETProfileData = (username) => {
         });
       });
   }, [username, token]);
-  return { profileData, setprofileData, loading };
+  return { profileData, setProfileData, loading };
 };
