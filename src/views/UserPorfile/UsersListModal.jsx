@@ -14,7 +14,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
   let { Followings, setFollowings } = userFollowings(username, showModal);
   let { Followers, setFollowers } = userFollowers(username, showModal);
 
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
     setShow(showModal);
     showLoading();

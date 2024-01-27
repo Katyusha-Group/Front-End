@@ -40,6 +40,11 @@
 .searchBox{
     height: inherit;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1100px) {

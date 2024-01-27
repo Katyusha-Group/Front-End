@@ -201,7 +201,7 @@ function Shopping() {
   return (
     <>
       <div>{/* <NotificationAlert ref={notificationAlertRef} /> */}</div>
-      <div className={style.bg} style={{ direction: "ltr",overflow:"auto" }}>
+      <div className={style.bg} style={{ overflow:"auto" }}>
         <div className={`main-panel ${style.bg1}`} >
           <AdminNavbar></AdminNavbar>
           <div className={`content_without_sidebar ${style.main}`}>

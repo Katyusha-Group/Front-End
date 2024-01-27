@@ -5,10 +5,16 @@ import { Button } from "reactstrap";
 
 const UserSearchResponce = (res) => {
   return (
-    <Link to={"/profile/" + res.res.username} className={styles.main}>
-      <img className={styles.img} src={res.res.image} />
-      <p className={styles.text}>{res.res.name}</p>
-      <Link to={"/chat/" + res.res.username} className={styles.chat}>
+    <div className={styles.container}>
+      <Link to={"/profile/" + res.res.username} className={styles.main}>
+        <div className={styles.main2}>
+          <img className={styles.img} src={res.res.image} />
+          <p className={styles.text}>
+            {res.res.name }
+          </p>
+        </div>
+      </Link>
+      <a href={"/chat/" + res.res.username} className={styles.chat}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -31,8 +37,8 @@ const UserSearchResponce = (res) => {
             stroke-linejoin="round"
           />
         </svg>
-      </Link>
-    </Link>
+      </a>
+    </div>
   );
 };
 

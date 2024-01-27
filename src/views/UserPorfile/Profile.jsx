@@ -9,7 +9,6 @@ import IsThisMe_Function from "./IsThisMe_Function.jsx";
 export default function Profile() {
   const { chart, id } = useParams();
   const { profileData, setProfileData, loading } = GETProfileData(id);
-  // console.log("Profile in Profile page: ", profileData);
   let IsThisMe = IsThisMe_Function(id);
 
   const username = id;

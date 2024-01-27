@@ -49,7 +49,9 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
   return (
     <>
       <div className={styles.timeline}>
+
         <div className={styles.tabs}>
+
           {tabsList.map((entry, index) => (
             <button
               key={index}
@@ -64,6 +66,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
             onClick={handleOpenModal_ProfileHeader}
           />
         </div>
+
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
@@ -111,7 +114,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           )}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.map((tweet) => (
+              {tweets.results.filter(item => item.liked_by_me).map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}

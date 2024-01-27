@@ -1,0 +1,35 @@
+
+@import "../../assets/css/black-dashboard-react.css";
+
+.popUpContainer{
+    position: relative;
+}
+
+.popUpBox{
+    position: absolute;
+    width: 120px;
+    background-color: white;
+    z-index: 100;
+    bottom: 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.popUpItem{
+    padding: 10px;
+    color:black;
+    border-radius: 10px;
+    text-align: right;
+
+}
+
+.popUpItem:hover{
+    background-color: var(--light);
+}
+
+.popUpBox ul{
+    margin: 0;
+}

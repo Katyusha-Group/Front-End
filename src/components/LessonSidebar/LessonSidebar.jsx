@@ -21,6 +21,7 @@ import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 import Spinner from "react-bootstrap/Spinner";
+import { returnToken } from "../../Functions/returnToken.jsx";
 var ps;
 const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
@@ -38,7 +39,8 @@ const reducer = (state, action) => {
   }
 };
 
-function LessonSidebar(props) {
+// function LessonSidebar(props) {
+function LessonSidebar({routes, logo, toggleSidebar}) {
   const getError = (error) => {
     return error.response && error.response.data
       ? error.response.data
@@ -55,9 +57,7 @@ function LessonSidebar(props) {
     reducer,
     { loading: true, props: {}, error: "" }
   );
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
+  const token = returnToken()
   React.useEffect(() => {
     propsSetter({ type: fetchRequest });
     fetch(apis["departments"], {
@@ -94,7 +94,7 @@ function LessonSidebar(props) {
   const linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
-  const { routes, rtlActive, logo } = props;
+  // const { routes, rtlActive, logo } = props;
   let logoImg = null;
   let logoText = null;
   if (logo !== undefined) {
@@ -104,7 +104,7 @@ function LessonSidebar(props) {
           href={logo.outterLink}
           className="simple-text logo-mini"
           target="_blank"
-          onClick={props.toggleSidebar}
+          onClick={toggleSidebar}
         >
           <div className="logo-img">
             <img src={logo.imgSrc} alt="react-logo" />
@@ -116,7 +116,7 @@ function LessonSidebar(props) {
           href={logo.outterLink}
           className="simple-text logo-normal"
           target="_blank"
-          onClick={props.toggleSidebar}
+          onClick={toggleSidebar}
         >
           {logo.text}
         </Link>
@@ -126,7 +126,7 @@ function LessonSidebar(props) {
         <Link
           to={logo.innerLink}
           className="simple-text logo-mini"
-          onClick={props.toggleSidebar}
+          onClick={toggleSidebar}
         >
           <div className="logo-img">
             <img src={logo.imgSrc} alt="react-logo" />
@@ -137,7 +137,7 @@ function LessonSidebar(props) {
         <Link
           to={logo.innerLink}
           className="simple-text logo-normal"
-          onClick={props.toggleSidebar}
+          onClick={toggleSidebar}
         >
           {logo.text}
         </Link>
@@ -152,7 +152,7 @@ function LessonSidebar(props) {
             <Nav>
               <Row className="nav-lessonSidebar">
                 <Col md="5" xs="5" style={{ margin: "auto" }}>
-                  <NavLink to="/home/page" className="nav-header nav-link-icon">
+                  <NavLink to="/home/page" className="nav-header nav-link-icon" onClick={toggleSidebar}>
                     <img src={logo1} alt="" style={{ height: "34px" }} />
                     <p
                       className="mr-2 small"
@@ -192,6 +192,7 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate("/shopping");
+                            toggleSidebar();
                           }}
                         >
                           <span className="tim-icons icon-basket-simple" />
@@ -203,6 +204,7 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate("/order");
+                            toggleSidebar();
                           }}
                         >
                           <span className="tim-icons icon-bag-16" />
@@ -214,6 +216,7 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate("/notification");
+                            toggleSidebar();
                           }}
                         >
                           <span className="tim-icons icon-email-85" />
@@ -225,6 +228,7 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate(`/profile/${profile.username}`);
+                            toggleSidebar();
                           }}
                         >
                           <span className="tim-icons icon-badge" />
@@ -236,6 +240,7 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate("../aboutUs");
+                            toggleSidebar();
                           }}
                         >
                           <span className="tim-icons icon-send" />
@@ -247,13 +252,12 @@ function LessonSidebar(props) {
                           onClick={(e) => {
                             e.preventDefault();
                             Navigate("../timeline");
+                            toggleSidebar();
                           }}
                         >
-                          <span className="tim-icons icon-chat-33
-
-" />
+                          <span className="tim-icons icon-chat-33" />
                           {"  "}
-                           صفحه اصلی
+                          چتیوشا
                         </DropdownItem>
 
                         <DropdownItem>
@@ -331,16 +335,5 @@ function LessonSidebar(props) {
     </BackgroundColorContext.Consumer>
   );
 }
-
-LessonSidebar.propTypes = {
-  rtlActive: PropTypes.bool,
-  routes: PropTypes.arrayOf(PropTypes.object),
-  logo: PropTypes.shape({
-    innerLink: PropTypes.string,
-    outterLink: PropTypes.string,
-    text: PropTypes.node,
-    imgSrc: PropTypes.string,
-  }),
-};
 
 export default LessonSidebar;
