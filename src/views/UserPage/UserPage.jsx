@@ -4,10 +4,6 @@ import { Card, CardBody, Row, Col } from "reactstrap";
 import ModalLessons from "../../components/ModalLessons/ModalLessons.jsx";
 import { useInfo } from "../../contexts/InfoContext";
 import { convertPercentagetoLigtness } from "../../global/functions";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert.jsx";
 import SummaryChart from "../../components/SummaryChart/SummaryChart.jsx";
 import ExamChart from "../../components/Charts/ExamChart.jsx";
 import ModalShopping from "../../components/ModalShopping/ModalShopping.jsx";
@@ -84,7 +80,6 @@ export default function UserPage() {
                     changeInfo,
                     true,
                     null,
-                    closeLoading,
                     setModalData,
                     setShowLesson
                   )}
@@ -93,7 +88,6 @@ export default function UserPage() {
                     setShowCourseHoverFunc,
                     false,
                     style.classNameHover,
-                    closeLoading,
                     setModalData,
                     setShowLesson
                   )}

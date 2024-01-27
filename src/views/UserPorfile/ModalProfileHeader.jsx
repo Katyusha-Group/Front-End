@@ -21,11 +21,6 @@ import {
 } from "reactstrap";
 import * as styles from '../../assets/css/ModalProfileHeader.module.css';
 
-import {
-    showLoading,
-    closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
-
 const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_loading, setProfileData, username, IsThisMe }) => {
     const [show, setShow] = React.useState(showModal);
 
@@ -33,9 +28,7 @@ const ModalProfileHeader = ({ showModal, handleClose, profileData, profileData_l
         return <></>
     }
     React.useEffect(() => {
-        showLoading();
         setShow(showModal);
-        closeLoading();
     }, [showModal]);
 
     const [loading, setLoading] = useState(null);
