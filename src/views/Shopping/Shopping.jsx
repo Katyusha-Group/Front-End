@@ -161,7 +161,7 @@ function Shopping() {
             <div className="react-notification-alert-container"></div>
 
             <Row className={style.box} style={{ height: "80vh" }}>
-              <Col md="3">
+              <Col md="3" className={style.RightPart}>
                 <Card
                   className=""
                   style={{ height: "100%", marginBottom: "0" }}
@@ -231,7 +231,7 @@ function Shopping() {
                   </CardFooter>
                 </Card>
               </Col>
-              <Col md="9">
+              <Col md="9" className={style.LeftPart}>
                 <Card
                   className={style.shop_card}
                   style={{

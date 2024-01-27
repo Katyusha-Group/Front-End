@@ -66,14 +66,28 @@
   .professorImage {
     margin-right: 0px;
   }
+  /* .LeftPart {
+    margin-bottom: 100px;
+  } */
 }
 @media  only  screen and (min-width: 1200px){
   .box{
     height: 700%;
   }
-  
 }
 
-.Shopping_CourseName {
-  width: 20%;
+@media  only  screen and (min-width: 1000px){
+  .Shopping_CourseName {
+    width: 20%;
+  }
+  .RightPart {
+    height: 100%;
+  }
+  .LeftPart {
+    height: 100%;
+  }
+  .main{
+    overflow-y: hidden !important;
+  }
 }
+
