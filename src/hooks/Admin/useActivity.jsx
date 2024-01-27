@@ -17,6 +17,7 @@ export const useActivity = () => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response)
         setData(response.data)
         setLoading(false);
       })
