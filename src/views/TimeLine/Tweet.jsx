@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../assets/css/Timeline/Tweet.module.css";
 import { Button, ButtonGroup, Card } from "reactstrap";
 import CommentModal from "../../components/Modal/Comments";
 import { likes } from "../../hooks/Twitter/likes";
 import { useState } from "react";
+import IsThisMe_Function from "../UserPorfile/IsThisMe_Function";
 import {
   Dropdown,
   DropdownToggle,
@@ -13,13 +14,34 @@ import {
 import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
 import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
+import ModalReport from "../../components/ModalReport/ModalReport";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(tweet.liked_by_me);
+
+  // const [thisTweet, setThisTweet] = useState(tweet.id);
+  // if (tweet.liked_by_me != null) {
+  // setLike(tweet.liked_by_me);
+  // // }
+  // console.log(tweet.liked_by_me)
+
+
   const [link, setLink] = useState("");
+  const[locallike,setLocallike]=useState(0);
+
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleOpenModal_Report = () => {
+    setShowModal(true);
+    console.log("Modal is opened");
+  }
+  function handleCloseModal() {
+    setShowModal(false);
+  };
   return (
     <>
       <Card className={styles.tweet}>
@@ -53,30 +75,38 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           </DropdownToggle>
           <DropdownMenu {...args}>
             <DropdownItem
-              disabled={tweet.reported_by_me}
+              disabled={tweet.reported_by_me || IsThisMe_Function(tweet.profile.username)}
               className={styles.dropDown}
-              onClick={() => {
-
-                Report(tweet.id, setTweets);
-              }}
+              onClick={handleOpenModal_Report}
             >
-              بلاک
+              ریپورت
             </DropdownItem>
-            <DropdownItem
-              className={styles.dropDown}
-              onClick={() => {
-                setTweets((x) => {
-                  return x.filter((y) => y.id !== tweet.id);
-                });
-                deleteTweet(tweet.id);
-              }}
-            >
-              حذف
-            </DropdownItem>
+            {
+              <DropdownItem
+                className={styles.dropDown}
+                disabled={!IsThisMe_Function(tweet.profile.username)}
+                onClick={() => {
+                  setTweets((x) => {
+                    let temp = x.results.filter((y) => y.id !== tweet.id);
+                    return { results: temp }
+                  });
+                  deleteTweet(tweet.id);
+                }}
+              >
+                حذف
+              </DropdownItem>}
           </DropdownMenu>
+          {
+            showModal &&
+            <ModalReport
+              id={tweet.id}
+              showModal={showModal}
+              handleClose={handleCloseModal}
+            />
+          }
         </Dropdown>
         <div className={styles.header}>
-          <div className={styles.avatar}>{tweet.image}</div>
+          <div className={styles.avatar}><img className={styles.avatarimg} src={tweet.profile.image} alt="" /></div>
           <div className={styles.name}>{tweet.profile.name}</div>
         </div>
         {/* <div className={styles.reply}>
@@ -100,14 +130,17 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             className={styles.buttonContainer}
           >
             <button
-              className={styles.button}
+              // className={styles.button}
+              className={like ? styles.button2 : styles.button}
               onClick={() => {
-                setLike(true);
+                setLike(!like);
                 likes(tweet.id);
+                like? setLocallike(-1):setLocallike(1)
               }}
             >
               <span className={styles.icon_text}>
-                {tweet.likes_count + like}
+                {tweet.likes_count + locallike}
+                {/* {like? tweet.likes_count+1 : tweet.likes_count} */}
               </span>
               <i className={`tim-icons icon-heart-2 ${styles.icon}`}></i>
             </button>
@@ -116,13 +149,13 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               className={styles.button}
             >
               <span className={styles.icon_text}>
-                {tweet.replies_count - 1}
+                {tweet.children_count}
               </span>
               <i className={`far fa-comment ${styles.icon}`}></i>
             </button>
           </ButtonGroup>
         </div>
-      </Card>
+      </Card >
       <CommentModal
         open={open}
         setOpen={() => {

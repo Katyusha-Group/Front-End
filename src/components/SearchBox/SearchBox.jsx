@@ -5,6 +5,7 @@ import { useInfo } from "../../contexts/InfoContext";
 import * as style from "./SearchBox.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { apis } from "../../assets/apis";
+import { returnToken } from "../../Functions/returnToken";
 const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
 const fetchFail = "FETCH_FAIL";
@@ -31,10 +32,8 @@ const SearchBox = ( data ) => {
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
   };
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
 
-  const token = tokenClass.token.access;
+  const token = returnToken();
 
   function takeLessonsGroups(token, num) {
     changeInfo("loading", 1);

@@ -19,6 +19,7 @@ import { apis } from "../assets/apis";
 import { PasCloseEyeIcon } from "../Functions/PasCloseEyeIcon"
 import { EmailFormGroup } from "../assets/FormGroups/EmailFormGroup";
 import { PasswordFormGroup } from "../assets/FormGroups/PasswordFormGroup";
+import axios from "axios";
 function Login(props) {
   let [shop_caller, setShop_caller] = React.useState()
   let idShop = "ali";
@@ -75,17 +76,20 @@ function Login(props) {
       return;
     }
     showLoading();
-    const response = await fetch(apis["accounts"]["login"], {
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+    const response = await axios(apis["accounts"]["login"], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+      data: {
         email_or_username: formData.email,
         password: formData.password,
-      }),
+      },
     });
-    const data = await response.json();
+    const data = response.data;
+    console.log("🚀 ~ file: Login.jsx:92 ~ handleSubmit ~ response:", document.cookie.split(';'))
     closeLoading();
     if (response.status === 200) {
       setAuthTokens(data);
@@ -93,15 +97,15 @@ function Login(props) {
       localStorage.setItem("authTokens", JSON.stringify({token:data}));
       const tokenClass = JSON.parse(JSON.stringify({token:data}));
       const token = tokenClass.token.access;
-      const shopId = await fetch(apis["carts"], {
+      const shopId = await axios(apis["carts"], {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
-      idShop = await shopId.json();
-      console.log("🚀 ~ file: Login.jsx:105 ~ handleSubmit ~ idShop:", idShop)
+      idShop = await shopId.data;
+      
       if (shopId.status == 201 || shopId.status == 200) {
         localStorage.setItem("shopId", JSON.stringify(idShop))
         let test = localStorage.getItem("shopId")
@@ -168,7 +172,7 @@ function Login(props) {
                     </Container>
                     <Container>
                       <Row style={{ justifyContent: 'center' }}>
-                        <Col className="text-center pt-md-2" md="10">
+                        <Col className={`${style.LoginText} text-center pt-md-2`} md="10">
                           در صورت نداشتن حساب کاربری
                           <Link to="../signup" color="primary">
                             &nbsp;ثبت‌نام&nbsp;

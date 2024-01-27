@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Replace 'main' with your primary branch name
+  pull_request:
+    branches:
+      - main  # Replace 'main' with your primary branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Build and run tests
+        run: |
+          docker-compose  up --build
+          docker exec docker-react-c  "npm test"
+  

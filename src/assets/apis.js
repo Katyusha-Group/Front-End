@@ -1,4 +1,5 @@
 export const domain = "http://84.32.10.112";
+export const chatDomain = "ws://84.32.10.112";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
@@ -43,7 +44,7 @@ export const apis = {
     count: `${domain}/notifications/unread-count`,
   },
   profiles: {
-    myprofile: `${domain}/profiles/`,
+    myprofile: `${domain}/profiles/my-profile/`,
     myusername: `${domain}/profiles/my-username/`,
     all: `${domain}/profiles/`,
     following: `${domain}/profiles//following/`,
@@ -53,6 +54,8 @@ export const apis = {
     unfollow: `${domain}/profiles/unfollow/`,
     me: `${domain}/profiles/me/`,
     all: `${domain}/profiles/?search=`,
+    updateProfile: `${domain}/profiles/update-profile/`,
+    view_profile: `${domain}/profiles/`
   },
 
   tweets: {
@@ -81,4 +84,8 @@ export const apis = {
   forYouTwittes: {
     forYouTwittes: `${domain}/for-you-twittes/`,
   },
+  chat:{
+    chat: `${chatDomain}/ws/chat/`,
+    chatWith: `${domain}/chat/chat-with/`,
+  }
 };

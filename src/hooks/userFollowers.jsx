@@ -4,8 +4,9 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
+import { returnToken } from "../Functions/returnToken";
 export const userFollowers = (myUsername, showModal) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = returnToken();
   const [Followers, setFollowers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(showModal);

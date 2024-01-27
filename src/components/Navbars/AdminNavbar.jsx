@@ -1,100 +1,71 @@
-import React, { useState, useEffect } from "react";
-import classNames from "classnames";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
+import React, { useState } from "react";
 import routes from "../../route.jsx";
 import * as style from "../Navbars/AdminNavbar.module.css";
-// import "../Navbars/AdminNavbar.module.css";
-import logo from "./Logo1.png";
 import { useNavigate, useLocation } from "react-router-dom";
-
-
 
 // reactstrap components
 import {
   Collapse,
   Navbar,
-  NavLink,
+  NavbarToggler,
+  Nav,
   NavItem,
-} from "reactstrap";
+  NavLink,
+} from 'reactstrap';
 
-function AdminNavbar(props) {
-  const [collapseOpen, setcollapseOpen] = React.useState(false);
-  const [modalSearch, setmodalSearch] = React.useState(false);
-  const [color, setcolor] = React.useState("navbar-transparent");
-  const [showLogin, setShowLogin] = useState(false);
-  const [showLoginG, setShowLoginG] = useState(false);
-  const location = useLocation();
-  const [selected, setSelected] = useState({});
-
-  useEffect(() => {
-    const path = location.pathname;
-    const newSelected = {};
-    routes.forEach((route) => {
-      if (route.layout + route.path === path) {
-        newSelected[route.rtlName] = true;
-      } else {
-        newSelected[route.rtlName] = false;
-      }
-    });
-    setSelected(newSelected);
-
-    window.addEventListener("resize", updateColor);
-    return function cleanup() {
-      window.removeEventListener("resize", updateColor);
-    };
-  }, [location]);
-
-  const updateColor = () => {
-    if (window.innerWidth < 993 && collapseOpen) {
-      setcolor("bg-white");
-    } else {
-      setcolor("navbar-transparent");
-    }
-  };
-  const toggleCollapse = () => {
-    if (collapseOpen) {
-      setcolor("navbar-transparent");
-    } else {
-      setcolor("bg-white");
-    }
-    setcollapseOpen(!collapseOpen);
-  };
-  // this function is to open the Search modal
-  const toggleModalSearch = () => {
-    setmodalSearch(!modalSearch);
-  };
-  const r = [1, 2, 3];
-
+function AdminNavbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
   return (
-    <>
-      <Navbar className={classNames("navbar-absolute", color, style.rtl)} style={{direction:"rtl"}} expand="xl">
-        <Collapse navbar isOpen={collapseOpen}>
-          <Nav className={style.wideNavbar} navbar>
-            <NavLink href="/home/page" className="nav-header nav-link-icon">
-              <img src={logo} alt="" style={{ height: "34px", width: "40px" }} />
-            </NavLink>
-            {routes.map(
-              (route) => (
+    <div>
+      <Navbar 
+        // expand="50%"
+        className={style.AdminNavbar}
+      >
+        <NavbarToggler type="button" onClick={toggle} className={style.NavbarToggler}>
+          <span className="navbar-toggler-bar bar1" />
+          <span className="navbar-toggler-bar bar2" />
+          <span className="navbar-toggler-bar bar3" />
+        </NavbarToggler>
+        <Nav className={`${style.AdminNavbar_WithoutCollapse} ml-auto`} navbar>
+          {
+            routes.map((route) =>
+              (
                 <NavItem key={route.rtlName}>
-                  <NavLink
-                    href={route.layout + route.path}
-                    className={classNames({
-                      "selected": selected[route.rtlName],
-                    })}
-                  >
+                  <NavLink href={route.layout + route.path}>
                     <i className={"tim-icons " + route.icon} />
                     {" "}
                     {route.rtlName}
                   </NavLink>
-                </NavItem>
-              )
-            )}
+                </NavItem>     
+          ))}
+          <NavItem className={style.logoutLink}>
+            <NavLink href="/"
+              onClick={() => {
+              }}
+            >
+              <i className={"tim-icons icon-button-power"} />
+              {" "}
+              {"خروج"}
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            {
+              routes.map((route) =>
+                (
+                  <NavItem key={route.rtlName}>
+                    <NavLink href={route.layout + route.path}>
+                      <i className={"tim-icons " + route.icon} />
+                      {" "}
+                      {route.rtlName}
+                    </NavLink>
+                  </NavItem>     
+            ))}
             <NavItem className={style.logoutLink}>
-              <NavLink href="/landingPage"
+              <NavLink href="/"
                 onClick={() => {
-                  localStorage.removeItem("authTokens");
-
                 }}
               >
                 <i className={"tim-icons icon-button-power"} />
@@ -105,7 +76,7 @@ function AdminNavbar(props) {
           </Nav>
         </Collapse>
       </Navbar>
-    </>
+    </div>
   );
 }
 

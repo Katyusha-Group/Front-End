@@ -24,9 +24,6 @@ export function lessons(
   function closeLesson(flag, data) {
     setShowLesson({ flag: flag, data: data });
   }
-  const tokenJson = localStorage.getItem("authTokens");
-  const tokenClass = JSON.parse(tokenJson);
-  const token = tokenClass.token.access;
   const { info, changeInfo } = useInfo();
   useMyClass(getapi, showLoading, closeLoading)
   if (infoState !== null && infoState !== undefined) {

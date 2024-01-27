@@ -12,9 +12,9 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
   username }) => {
   const [show, setShow] = React.useState(showModal);
   let { Followings, setFollowings } = userFollowings(username, showModal);
-  let { Followers, setFollowers } = userFollowers(username);
+  let { Followers, setFollowers } = userFollowers(username, showModal);
 
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   React.useEffect(() => {
     setShow(showModal);
     showLoading();
@@ -36,7 +36,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
   return (
     <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
       <div className={styles.ModalContents}>
-        <Modal.Header closeButton className={styles.ModalHeader}>
+        <Modal.Header className={styles.ModalHeader}>
           <h2 className={styles.ModalTitle}>{Title}</h2>
           <button className="close" onClick={handleCloseModal}>
             <span>&times;</span>
@@ -51,6 +51,7 @@ const UsersListModal = ({ showModal, handleClose, IsFollowing,
               Followings={Followings}
               Followers={Followers}
               handleButtonClick={handleButtonClick}
+              handleCloseModal={handleCloseModal}
             />
           </div>
         </Modal.Body>

@@ -14,7 +14,7 @@ import {
   Form,
   CardFooter,
 } from "reactstrap";
-import NotificationAlert from "react-notification-alert";
+// import NotificationAlert from "react-notification-alert";
 import * as style from "../../assets/css/Shopping.module.css";
 import {
   closeLoading,
@@ -33,11 +33,19 @@ function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
-  const notificationAlertRef = React.useRef(null);
+  // const notificationAlertRef = React.useRef(null);
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
-  const { state: info, setState, amount, setAmount, totalPrice, setTotalPrice, loading, setLoading } =
-  useGetCartInfo();
+  const {
+    state: info,
+    setState,
+    amount,
+    setAmount,
+    totalPrice,
+    setTotalPrice,
+    loading,
+    setLoading,
+  } = useGetCartInfo();
   const { wallet, setWallet } = useSaveWallet();
 
   closeLoading();
@@ -76,10 +84,9 @@ function Shopping() {
       },
     })
       .then((response) => {
-
-          notify("tl");
-          saveWallet(setWallet);
-          shopId = CartCreator({ setState, setTotalPrice, setAmount });
+        // notify("tl");
+        saveWallet(setWallet);
+        shopId = CartCreator({ setState, setTotalPrice, setAmount });
       })
 
       .catch((error) => {
@@ -95,41 +102,41 @@ function Shopping() {
     closeLoading();
   }
 
-  const notify = (place) => {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>خرید شما با موفقیت انجام شد</div>
-        </div>
-      ),
-      type: type,
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
+  // const notify = (place) => {
+  //   var color = Math.floor(Math.random() * 5 + 1);
+  //   var type;
+  //   switch (color) {
+  //     case 1:
+  //       type = "primary";
+  //       break;
+  //     case 2:
+  //       type = "success";
+  //       break;
+  //     case 3:
+  //       type = "danger";
+  //       break;
+  //     case 4:
+  //       type = "warning";
+  //       break;
+  //     case 5:
+  //       type = "info";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   var options = {};
+  //   options = {
+  //     place: place,
+  //     message: (
+  //       <div>
+  //         <div>خرید شما با موفقیت انجام شد</div>
+  //       </div>
+  //     ),
+  //     type: type,
+  //     autoDismiss: 7,
+  //   };
+  //   notificationAlertRef.current.notificationAlert(options);
+  // };
 
   /**
    * Change the checkbox
@@ -188,21 +195,19 @@ function Shopping() {
         console.error(error);
       });
   }
-  if(loading){
-    return <></>
+  if (loading) {
+    return <></>;
   }
   return (
     <>
-      <div>
-        <NotificationAlert ref={notificationAlertRef} />
-      </div>
-      <div className="wrapper" style={{ direction: "ltr" }}>
-        <div className="main-panel">
+      <div>{/* <NotificationAlert ref={notificationAlertRef} /> */}</div>
+      <div className={style.bg} style={{ overflow:"auto" }}>
+        <div className={`main-panel ${style.bg1}`} >
           <AdminNavbar></AdminNavbar>
-          <div className="content_without_sidebar">
+          <div className={`content_without_sidebar ${style.main}`}>
             <div className="react-notification-alert-container"></div>
 
-            <Row style={{ height: "80vh" }}>
+            <Row className={style.box} style={{ height: "80vh" }}>
               <Col md="3">
                 <Card
                   className=""
@@ -214,7 +219,7 @@ function Shopping() {
                       borderBottom: " 1px solid rgba(255, 255, 255, 0.1)",
                     }}
                   >
-                    <h2>خلاصه سفارش</h2>
+                    <h2 className={style.h2custom}>خلاصه سفارش</h2>
                   </CardHeader>
                   <CardBody className="week-card-body ">
                     <Row
@@ -253,13 +258,12 @@ function Shopping() {
                         style.price
                       }
                     >
-                      <h2>
+                      <h2 className={style.h2custom}>
                         قیمت کل <br /> <br /> {totalPrice} تومان
                       </h2>
                     </div>
                   </CardBody>
                   <CardFooter>
-                    
                     {info.length === 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
@@ -280,7 +284,9 @@ function Shopping() {
                   style={{
                     height: "100%",
                     marginBottom: "0",
-                    justifyContent: `${loading &&info.length == 0 ? "center" : ""}`,
+                    justifyContent: `${
+                      loading && info.length == 0 ? "center" : ""
+                    }`,
                   }}
                 >
                   {info.length == 0 ? (
@@ -288,17 +294,17 @@ function Shopping() {
                   ) : (
                     ""
                   )}
-                  { info.map((x, index) => {
+                  {info.map((x, index) => {
                     return (
-                      <Row
+                      <div
                         md="6"
                         sm="2"
                         xs="1"
                         className={`${style.places_buttons} ${style.shop_row}`}
                         key={index}
                       >
-                        <Col className="m-auto">
-                          <img
+                        <div className="m-auto">
+                          {/* <img
                             className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
@@ -306,18 +312,24 @@ function Shopping() {
                                 : sampleProfile
                             }
                             alt="professorImage"
+                          /> */}
+                          <img
+                              alt="..."
+                              // className="avatar"
+                              className={UserPageStyle.professorImage}
+                              src="http://84.32.10.112/media/images/profile_pics/male_default.png"
                           />
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.course.complete_course_number}
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.course.name}
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           {x.price} تومان
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           <Form>
                             <FormGroup className={style.shopping_form} check>
                               <Label check className={style.shopping_label}>
@@ -374,8 +386,8 @@ function Shopping() {
                               </Label>
                             </FormGroup>
                           </Form>
-                        </Col>
-                        <Col className="m-auto text-center category">
+                        </div>
+                        <div className="m-auto text-center category">
                           <Button
                             color="primary"
                             size="sm"
@@ -395,8 +407,8 @@ function Shopping() {
                           >
                             <i className="tim-icons icon-simple-remove" />
                           </Button>
-                        </Col>
-                      </Row>
+                        </div>
+                      </div>
                     );
                   })}
                 </Card>

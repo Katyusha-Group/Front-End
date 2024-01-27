@@ -46,6 +46,14 @@
     height: 58px;
     border-radius: 50%;
 }
+
+.nonUser_img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  scale: 0.75;
+}
+
 .User_Container{
     margin-top: 10px;
     display: flex;

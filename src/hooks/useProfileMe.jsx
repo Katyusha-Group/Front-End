@@ -4,35 +4,30 @@ import {
   showLoading,
   closeLoading,
 } from "../components/LoadingAlert/LoadingAlert";
-
+import { useInfo } from "../contexts/InfoContext";
+import { useNavigate } from "react-router-dom";
+import { returnToken } from "../Functions/returnToken";
 export const usesProfileMe = () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { changeInfo } = useInfo();
   useEffect(() => {
+    const token = returnToken()
     const fetchData = async () => {
       try {
         showLoading();
 
-        const response = await fetch(apis["profiles"]["myusername"], {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const myUsername = await response.json();
-        // console.log("My username is: " + myUsername.username);
-
         const profileResponse = await fetch(
-          apis["profiles"]["myprofile"] + `${myUsername.username}`,
+          apis["profiles"]["myprofile"],
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
         const data = await profileResponse.json();
         setProfile(data);
-        // console.log("User profile data: " + data.name);
-
         closeLoading();
         setLoading(false);
+        changeInfo("userName", data.username);
       } catch (error) {
         console.error(error);
       }

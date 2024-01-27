@@ -17,17 +17,17 @@
 .tweetsContainer{
   display: flex;
   flex-direction: column;
-  max-height: 74vh;
+  /* max-height: 74vh; */
   overflow-y: hidden;
   overflow: auto;
   overflow-x: hidden;
-  max-height: 66vh;
+  /* max-height: 66vh; */
 }
 .activeTab {
   width: 300px;
   height: 40px;
   border: none;
-  margin: 30px 20px;
+  margin: 30px 20px 0 20px;
   border-bottom: 3px solid var(--purple) ;
   background-color: initial;
   color: white;
@@ -39,7 +39,7 @@
   border: none;
   background-color: initial;
   color: white;
-  margin: 30px 20px;
+  margin: 30px 20px 0 20px;
 }
 
 .content{
@@ -70,6 +70,7 @@
   .tab{
     width: 30vw;
     margin: 3vh 5vw;
+    margin-bottom: 0;
 
   }
 }
@@ -77,6 +78,7 @@
 @media only screen and (max-width: 620px) {
   .timeline{
     margin-right: 0;
-    height: 85vh;
+    height: 90vh;
+    width: 80vw;
   }
 }

@@ -9,19 +9,29 @@
 }
 
 .bg1 {
-  width: 250px;
+  width: 100%;
+  background-color: #27293d;
+  border-radius: 15px;
+  height: 90vh;
+  padding: 5px;
+}
+.icon{
+  font-size: 30px;
+  color: white;
 }
 
 .header {
   display: flex;
   flex-direction: row;
-  margin: 20px;
-  margin-right: 35px;
+  margin: 20px auto;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 40px;
 }
-
+.logoimg{
+  width: 40px;
+  margin-right: 1.5vw;
+}
 .headertext {
   margin-top: 40px;
   font-size: 20px;
@@ -30,11 +40,19 @@
 .sidebarmenuItems {
   display: flex;
   flex-direction: row;
-  padding: 10px 20px;
   justify-content: flex-start;
-  align-items: flex-end;
+  height: 60px;
+  align-items: center;
   gap: 4vw;
+  padding-right: 2vw;
+  border-radius: 15px;
   cursor: pointer;
+}
+.items{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2vh;
 }
 
 .sidebarmenuItems:hover {
@@ -45,34 +63,44 @@
   cursor: pointer;
 }
 
-.itemtext {
+/* .itemtext {
   margin-top: 20px;
   font-size: 13px;
   cursor: pointer;
-}
+} */
 
 @media only screen and (max-width: 1300px) {
   .bg {
-    width: 80px;
-    margin-top: 5vh;
+    width: 10vw;
+    /* margin-top: 4vh; */
+    margin-right: 5vw;
   }
 
   .bg1 {
-    width: 80px;
+    /* width: 80px; */
   }
 
   .itemtext {
     display: none;
   }
-
+  
   .headertext {
     display: none;
   }
 
   .header {
+    display: flex;
+    justify-content: center;
     margin-top: 80px;
-    margin-right: 20px;
   }
+  .logoimg{
+    margin: 0;
+  }
+  .sidebarmenuItems{
+    padding: 0px;
+    justify-content: space-around;
+  }
+  
 }
 
 .dropDownToggle {
@@ -102,21 +130,31 @@
   .bg {
     width: 80vw;
     height: 4rem;
-    margin-bottom: 0;
-    margin-right: 0;
-    margin-top: 1vh;
+    /* margin-bottom: 0;
+    margin-top: 1vh; */
+    margin-right: 10px;
+    margin: 10px auto;
   }
 
+  .logoimg{
+    margin-right: 10px;
+  }
   .bg1 {
     display: flex;
     flex-direction: row;
     width: 80vw;
     height: inherit;
-    justify-content: space-around;
+    justify-content: space-between;
+    z-index: 1;
+    padding: 0 20px;
   }
 
   .sidebarmenuItems {
+    display: flex;
     align-items: center;
+    /* padding: 0 10px; */
+    min-height: 40px;
+    text-align: center;
   }
 
   .sidebarmenuItems {
@@ -131,13 +169,20 @@
     display: none;
   }
 
-  .moreInfo {
-    display: block;
+  .items{
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-between;
+    
   }
+
+  /* .sidebarmenuItems {
+    scale: 2;
+  } */
 }
 
 @media only screen and (min-width: 620px) {
   .moreInfo {
     display: none;
-  }
+  } 
 }

@@ -6,19 +6,13 @@ import * as styles from '../../assets/css/UsersListModal.module.css';
 import { useGetNotification } from "../../hooks/useGetNotification";
 import { apis } from "../../assets/apis";
 
-import {
-    showLoading,
-    closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
 
 const Notification = ({ showModal, handleClose }) => {
     const [show, setShow] = React.useState(showModal);
     // const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
 
     React.useEffect(() => {
-        showLoading();
         setShow(showModal);
-        closeLoading();
     }, [showModal]);
 
     const { notificationData, setNotificationData } = useGetNotification(showModal);
@@ -33,7 +27,7 @@ const Notification = ({ showModal, handleClose }) => {
     return (
         <Modal show={show} onHide={handleCloseModal} className={styles.Modal}>
             <div className={styles.ModalContents}>
-                <Modal.Header closeButton className={styles.ModalHeader}>
+                <Modal.Header className={styles.ModalHeader}>
                     <h2 className={styles.ModalTitle}>پیام ها</h2>
                     <button className="close" onClick={handleCloseModal}>
                         <span>&times;</span>

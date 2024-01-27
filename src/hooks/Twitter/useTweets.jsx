@@ -7,14 +7,15 @@ import {
   showLoading,
   closeLoading,
 } from "../../components/LoadingAlert/LoadingAlert";
+import { returnToken } from "../../Functions/returnToken";
 export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = returnToken()
   setLoading(true);
-  
+
   let config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: apis["tweets"]["tweets"]+"?page="+num,
+    url: apis["tweets"]["tweets"] + "?page=" + num,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -26,7 +27,7 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
       setLoading(false);
       setInfo(response.data)
       setData((x) => {
-        if (!initial) return( {...x,results:[...x.results, ...response.data.results]});
+        if (!initial) return ({ ...x, results: [...x.results, ...response.data.results] });
         return response.data;
       });
       return response.data;
@@ -34,13 +35,14 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
     .catch();
 };
 export const useTweets = () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
-  const [data, setData] = useState({results:[]});
+  const [data, setData] = useState({ results: [] });
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
+  // console.log("my tweeets",data.results)
+
   useEffect(() => {
     fetchData(setLoading, setData, 1, true, info, setInfo);
   }, []);
 
-  return { data, setData, loading, setLoading, info , setInfo};
+  return { data, setData, loading, setLoading, info, setInfo };
 };

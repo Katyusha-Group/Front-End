@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 
 const InfoContext = React.createContext();
 
+
 export function useInfo() {
   return useContext(InfoContext);
 }
-
 export default function ContextInfo(props) {
   const [info, setInfo] = useState({
     name: "John Doe",
@@ -18,7 +18,8 @@ export default function ContextInfo(props) {
     courseGroupsListInContext:[],
     courseChoosed:[],
     shop:[],
-    loading:0
+    loading:0,
+    userName:"",
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
