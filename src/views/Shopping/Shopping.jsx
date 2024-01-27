@@ -262,7 +262,7 @@ function Shopping() {
                           key={index}
                         >
                           <div className="m-auto">
-                            {/* <img
+                            <img
                             className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
@@ -270,18 +270,18 @@ function Shopping() {
                                 : sampleProfile
                             }
                             alt="professorImage"
-                          /> */}
-                            <img
+                          />
+                            {/* <img
                               alt="..."
                               // className="avatar"
                               className={UserPageStyle.professorImage}
                               src="http://84.32.10.112/media/images/profile_pics/male_default.png"
-                            />
+                            /> */}
                           </div>
                           <div className="m-auto text-center category">
                             {x.course.complete_course_number}
                           </div>
-                          <div className="m-auto text-center category">
+                          <div className={`m-auto text-center category ${style.Shopping_CourseName}`}>
                             {x.course.name}
                           </div>
                           <div className="m-auto text-center category">
