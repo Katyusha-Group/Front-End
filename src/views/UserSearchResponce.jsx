@@ -10,7 +10,7 @@ const UserSearchResponce = (res) => {
         <div className={styles.main2}>
           <img className={styles.img} src={res.res.image} />
           <p className={styles.text}>
-            {res.res.name }
+            {res.res.name}
           </p>
         </div>
       </Link>
