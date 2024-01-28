@@ -17,6 +17,10 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
   }
   const [mainData] = (profileData.profile_type);
   const { courseChoosed } = useGetChartData(profileData.username);
+  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  const { filteredTweets, tweetLoading } = useTweetBy(profileData.username);
+  const { likedTweets, likedLoading } = useLikedBy(profileData.username);
+  const { repliedTweets, repliedLoading } = useRepliedBy(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
   const [showModal, setShowModal] = React.useState(false);
   const handleOpenModal_ProfileHeader = () => {
@@ -36,10 +40,6 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
       ["media", "برای شما"],
     ];
   }
-  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
-  const { filteredTweets, tweetLoading } = useTweetBy(profileData.username);
-  const { likedTweets, likedLoading } = useLikedBy(profileData.username);
-  const { repliedTweets, repliedLoading } = useRepliedBy(profileData.username);
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -65,7 +65,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
-              {filteredTweets.results.map((tweet) => (
+              {filteredTweets.results?.map((tweet) => (
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
@@ -109,7 +109,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           {/* {console.log(tweets)} */}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {likedTweets.results.map((tweet) => (
+              {likedTweets.results?.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
@@ -119,9 +119,9 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
               ))}
             </div>
           )}
-          {activeTab === "Comments" && (
+          {activeTab === "Comments" && repliedTweets && (
             <div className={styles.tweetsContainer}>
-              {repliedTweets.results.map((tweet) => {
+              {repliedTweets.results?.map((tweet) => {
                 return <Tweet
                   key={tweet.id}
                   tweet={tweet.parent_info}
