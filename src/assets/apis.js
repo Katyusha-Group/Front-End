@@ -60,6 +60,9 @@ export const apis = {
 
   tweets: {
     tweets: `${domain}/twittes/`,
+    twittedBy: `${domain}/twittes/?twitted_by=`,
+    likedBy: `${domain}/twittes/?liked_by=`,
+    repliedBy: `${domain}/twittes/?replied_by=`,
   },
   reports: {
     tweets: `${domain}/report-twitte/`,
@@ -84,7 +87,7 @@ export const apis = {
   forYouTwittes: {
     forYouTwittes: `${domain}/for-you-twittes/`,
   },
-  chat:{
+  chat: {
     chat: `${chatDomain}/ws/chat/`,
     chatWith: `${domain}/chat/chat-with/`,
   }
