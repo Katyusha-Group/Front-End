@@ -5,7 +5,7 @@ import styles from "../../assets/css/chat/Chat.module.css";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import Searchbar from "../Searchbar.jsx";
 import { Card, Row, Spinner } from "reactstrap";
-import SendMessage from "../../components/Tweet/SendMessage.jsx";
+import SendMessageChat from "../../Functions/Chat/SendMessage.jsx";
 import WebSocketInstance from "../../components/chat/ChatWebSocket.jsx";
 import { useParams } from "react-router-dom";
 import { useInfo } from "../../contexts/InfoContext.jsx";
@@ -87,7 +87,7 @@ const ChatPage = (props) => {
         )}
       </div>
       <div className={styles.sendMessage}>
-        <SendMessage
+        <SendMessageChat
           setData={{ setValue: setChats, WebSocketInstance: WebSocketInstance }}
           fetchData={(myInput, setValue) => {
             const messageObject = {
