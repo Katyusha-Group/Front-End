@@ -14,7 +14,7 @@ function Timeline() {
     data: tweets,
     setData: setTweets,
     loading,
-    // setLoading,
+    setLoading,
     info,
     setInfo,
   } = useTweets("get", true);
@@ -22,20 +22,16 @@ function Timeline() {
     data: tweetsForYou,
     setData: setTweetsForYou,
     loading: loadingForYou,
-    // setLoading: setLoadingForYou,
+    setLoading: setLoadingForYou,
   } = useTweetsForYou("get", true);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0); // Track the current page for pagination
   const containerRef = useRef(null); // Reference to the tweets container div
   var number = 1;
   useEffect(() => {
-    // Add scroll event listener on mount
     containerRef.current.addEventListener("scroll", handleScroll);
 
-    return () => {
-      // Remove scroll event listener on unmount
-      // containerRef.current.removeEventListener("scroll", handleScroll);
-    };
+    return () => {};
   }, []);
 
   const handleScroll = () => {
@@ -83,22 +79,29 @@ function Timeline() {
             className={`${styles.content} ${styles.tweetsContainer}`}
             ref={containerRef}
           >
-            {!loading ? (
-              tweets.results.map((tweet, index) => (
-                <Tweet
-                  key={index}
-                  tweet={tweet}
-                  setOpenComment={setOpen}
-                  setTweets={setTweets}
-                />
-              ))
-            ) : (
-              <div style={{display:"flex", justifyContent:"center",height:"100%", alignItems:"center"}}>
+            {tweets.results.map((tweet, index) => (
+              <Tweet
+                key={index}
+                tweet={tweet}
+                setOpenComment={setOpen}
+                setTweets={setTweets}
+              />
+            ))}
+            {loading && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  height: "100%",
+                  alignItems: "center",
+                }}
+              >
                 <Spinner animation="border" variant="primary" />
               </div>
             )}
           </div>
         )}
+
         {activeTab === "media" && (
           <div className={styles.tweetsContainer} ref={containerRef}>
             {tweetsForYou.results.map((tweet, index) => (
