@@ -8,3 +8,5 @@ services:
       context: .
     ports:
       - 8081:80
+    volumes:
+      - ./path/to/your/nginx.conf:/etc/nginx/nginx.conf
