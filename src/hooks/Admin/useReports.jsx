@@ -3,17 +3,12 @@ import axios from "axios";
 import { apis } from "../../assets/apis";
 import { useState } from "react";
 import { useEffect } from "react";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
 
 export const useReports = () => {
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const fetchData = () => {
-    showLoading();
     let config = {
       method: "get",
       maxBodyLength: Infinity,
@@ -28,7 +23,6 @@ export const useReports = () => {
       .then((response) => {
         setLoading(false)
         setData(response.data);
-        closeLoading();
       })
       .catch();
   };

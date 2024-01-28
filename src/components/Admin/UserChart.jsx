@@ -26,7 +26,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-
+  maintainAspectRatio: false,
   scales: {
     x: {
       grid: { display: false },

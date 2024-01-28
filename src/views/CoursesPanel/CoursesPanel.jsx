@@ -4,7 +4,6 @@ import { useInfo } from "../../contexts/InfoContext";
 import { apis } from "../../assets/apis";
 
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-import { showLoading, closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 import Select from "react-select";
 import DayRow from './DayRow';
 import ReactSwitch from "react-switch";
@@ -85,7 +84,6 @@ export default function CoursesPanel() {
 
   function handleDepartment(selectedOption) {                         
     setSelectedDepartment(selectedOption.value);
-    showLoading();
   }
 
   useEffect(() => {                                             
@@ -179,7 +177,6 @@ export default function CoursesPanel() {
   }, [timetable]);
   
   useEffect (() => {
-    closeLoading();
   }, [timetable]);
   
   return (

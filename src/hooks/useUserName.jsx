@@ -3,7 +3,7 @@ import { apis } from "../assets/apis";
 import { useInfo } from "../contexts/InfoContext";
 import { useNavigate } from "react-router-dom";
 import { returnToken } from "../Functions/returnToken";
-export const usesProfileMe = () => {
+export const userUserName = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const { info,changeInfo } = useInfo();
@@ -20,14 +20,14 @@ export const usesProfileMe = () => {
           }
         );
         const data = await profileResponse.json();
-        setProfile(data);
-        setLoading(false);
         changeInfo("userName", data.username);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchData();
+    if(info.userName !== ""){
+      fetchData();
+    }
   }, []);
   return { profile, setProfile, loading };
 

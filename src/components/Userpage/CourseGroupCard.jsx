@@ -19,7 +19,6 @@ export default function CourseGroupCard({
   setShowCourseHoverFunc,
   addNewLesson,
   propsSetter,
-  showLoading,
   setModalData,
   setShowLesson,
   SetOrderInfo,
@@ -147,7 +146,6 @@ export default function CourseGroupCard({
                       apiForModalData(
                         x.complete_course_number,
                         true,
-                        showLoading,
                         setModalData,
                         setShowLesson
                       );

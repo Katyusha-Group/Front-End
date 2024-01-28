@@ -1,14 +1,14 @@
 import React from "react";
 import { usesProfileMe } from "../../hooks/useProfileMe";
 import { GETProfileData } from "../../hooks/GETProfileData.jsx";
+import { userUserName } from "../../hooks/useUserName.jsx";
 
 export default function IsThisMe_Function (id)
 {
-    const {profile, setProfile, loading} = usesProfileMe();
-    const {profileData, setProfileData, loading2} = GETProfileData(id);
+    const {profile, setProfile, loading} = userUserName();
     let IsThisMe = false;
-    if (profileData != null && profile != null) {
-        IsThisMe = (profile.username == profileData.username);
+    if (profile != null) {
+        IsThisMe = (profile.username == id);
     }
     return IsThisMe;
 }

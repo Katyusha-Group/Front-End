@@ -4,7 +4,6 @@ import styles from "../../assets/css/Timeline/Reply.module.css";
 import { useState } from "react";
 import { Card } from "reactstrap";
 import SendMessage from "../Tweet/SendMessage";
-import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useParams } from "react-router-dom";
 function Reply() {
   const [activeTab, setActiveTab] = useState("tweets");

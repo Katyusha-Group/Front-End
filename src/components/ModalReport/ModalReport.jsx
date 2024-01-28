@@ -20,10 +20,7 @@ import {
 import * as styles from '../../assets/css/ModalReport.module.css';
 import { apis } from "../../assets/apis";
 
-import {
-    showLoading,
-    closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
+
 
 const ModalReport = ({ showModal, handleClose, id }) => {
     const [show, setShow] = React.useState(showModal);
@@ -34,9 +31,7 @@ const ModalReport = ({ showModal, handleClose, id }) => {
     };
 
     React.useEffect(() => {
-        // showLoading();
         setShow(showModal);
-        // closeLoading();
     }, [showModal]);
 
     const [loading, setLoading] = useState(null);
@@ -61,8 +56,6 @@ const ModalReport = ({ showModal, handleClose, id }) => {
                 width: '25rem',
                 timerProgressBar: true,
                 didOpen: () => {
-                // Swal.showLoading()
-                // <Spinner animation="border" variant="primary" />
                 },
                 
                 

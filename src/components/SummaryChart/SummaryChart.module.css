@@ -4,6 +4,7 @@
 .summary_table {
   overflow: auto !important;
   max-height: 380px !important;
+  --bs-table-bg: var(--bs-card-cap-bg);
 }
 .table td {
   border-bottom: none;
