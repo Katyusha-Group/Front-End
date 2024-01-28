@@ -4,8 +4,15 @@ import { apis } from "../../assets/apis";
 import { useState } from "react";
 import { useEffect } from "react";
 import { returnToken } from "../../Functions/returnToken";
-export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
-  const token = returnToken()
+export const fetchData = async (
+  setLoading,
+  setData,
+  num,
+  initial,
+  info,
+  setInfo,
+) => {
+  const token = returnToken();
   setLoading(true);
 
   let config = {
@@ -17,24 +24,25 @@ export const fetchData = (setLoading, setData, num, initial, info, setInfo) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  axios
-    .request(config)
-    .then((response) => {
-      setLoading(false);
-      setInfo(response.data)
-      setData((x) => {
-        if (!initial) return ({ ...x, results: [...x.results, ...response.data.results] });
-        return response.data;
-      });
+  try {
+    var response = await axios.request(config);
+    setLoading(false);
+    setInfo(response.data);
+    setData((x) => {
+      if (!initial)
+        return { ...x, results: [...x.results, ...response.data.results] };
       return response.data;
-    })
-    .catch();
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    throw error;
+  }
 };
 export const useTweets = () => {
   const [data, setData] = useState({ results: [] });
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
-  // console.log("my tweeets",data.results)
 
   useEffect(() => {
     fetchData(setLoading, setData, 1, true, info, setInfo);

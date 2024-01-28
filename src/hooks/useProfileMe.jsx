@@ -6,9 +6,10 @@ import { returnToken } from "../Functions/returnToken";
 export const usesProfileMe = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { changeInfo } = useInfo();
+  const { info,changeInfo } = useInfo();
   useEffect(() => {
     const token = returnToken()
+
     const fetchData = async () => {
       try {
 
@@ -26,9 +27,10 @@ export const usesProfileMe = () => {
         console.error(error);
       }
     };
-
-    fetchData();
+    if(info.userName !== ""){
+      fetchData();
+    }
   }, []);
-
   return { profile, setProfile, loading };
+
 };
