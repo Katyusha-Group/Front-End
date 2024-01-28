@@ -1,13 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Input,
-} from "reactstrap";
+import { Button, CardHeader, CardBody, CardFooter, Input } from "reactstrap";
 import * as shopStyle from "../../assets/css/Shopping.module.css";
 import { useSendTweets } from "../../hooks/Twitter/sendTweets";
 import style from "../../assets/css/Timeline/ReplyModal.module.css";
@@ -15,6 +9,7 @@ import { useState } from "react";
 import Tweet from "../../views/TimeLine/Tweet";
 import { getReplies } from "../../Functions/Timeline/getReplies";
 import { useGetReplies } from "../../hooks/Twitter/useGetReplies";
+import Spinner from "react-bootstrap/Spinner";
 const Replies = ({ open, setOpen, link }) => {
   const { data, setData, loading } = useGetReplies(open, link);
   return (
@@ -45,7 +40,9 @@ const Replies = ({ open, setOpen, link }) => {
             <CardHeader>پاسخ ها</CardHeader>
             <CardBody className={style.replyBody}>
               {loading ? (
-                <></>
+                <div style={{display:'flex', justifyContent:"center", alignItems:"center", height:"100%"}}>
+                  <Spinner animation="border" variant="primary" />
+                </div>
               ) : (
                 data.map((tweet) => (
                   <Tweet
@@ -57,13 +54,10 @@ const Replies = ({ open, setOpen, link }) => {
                 ))
               )}
             </CardBody>
-            <CardFooter>
-
-            </CardFooter>
+            <CardFooter></CardFooter>
           </Modal.Body>
         </div>
       </Modal>
-
     </>
   );
 };

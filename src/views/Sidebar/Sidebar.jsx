@@ -125,12 +125,13 @@ ${styles.icon}`}
             <div
               className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
               onClick={(e) => {
+                localStorage.removeItem("authTokens");
                 e.preventDefault();
-                Navigate("/order");
+                Navigate("/");
               }}
             >
-              <i className={`tim-icons icon-single-copy-04 ${styles.icon}`}></i>
-              <p className={styles.itemtext}> سفارش ها</p>
+              <i className={`tim-icons icon-button-power ${styles.icon}`}></i>
+              <p className={styles.itemtext}> خروج</p>
             </div>
             {loading ? (
               <Spinner animation="border" variant="primary" className={`backCol ${styles.moreInfo}`} style={{margin:"13px 10px"}}/>

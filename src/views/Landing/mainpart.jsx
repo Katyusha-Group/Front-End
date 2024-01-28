@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 const Mainpart = () => {
   const navigate =useNavigate()
-
   return (
     <div className={styles.bg}>
       <div className={styles.main}>
@@ -28,6 +27,7 @@ const Mainpart = () => {
           <div className={styles.callUs}>
             <p>پیشنهادات و انتقادات : </p>
             <p className={styles.email}> katyushaiust@gmail.com</p>
+            <p className={styles.email}> v0.1</p>
           </div>
         </div>
       </div>
