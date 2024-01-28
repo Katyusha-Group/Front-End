@@ -218,10 +218,6 @@
     border-bottom: 2px solid var(--purple);
 }
 
-.chatIcon {
-    padding-left: 7px;
-    font-size: large;
-}
 
 @media only screen and (max-width: 1064px) {
     .leftpart {
