@@ -94,7 +94,6 @@ ChartJS.register(
   
   export default function ActivityChart() {
     const dataOfChart = useActivity();
-    console.log("🚀 ~ ActivityChart ~ dataOfChart:", dataOfChart)
     if (dataOfChart.loading) {
       return (
       <div>
@@ -103,11 +102,11 @@ ChartJS.register(
       );
     }
     const chartData = {
-      labels: Object.keys(dataOfChart),
+      labels: dataOfChart.data.map(x=>x.date),
       datasets: [
         {
           label: "Activity",
-          data: Object.values(dataOfChart.data),
+          data: dataOfChart.data.map(x=>x.users_count),
           borderColor: "#775eba",
           backgroundColor: "#775eba",
           lineTension: 0.5,

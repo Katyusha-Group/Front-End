@@ -100,11 +100,11 @@ export default function UserChart() {
     );
   }
   const chartData = {
-    labels: Object.keys(dataOfChart.data),
+    labels: dataOfChart.data.map(x=>x.date),
     datasets: [
       {
         label: "Users",
-        data: Object.values(dataOfChart.data),
+        data: dataOfChart.data.map(x=>x.tweets_count),
         borderColor: "#775eba",
         backgroundColor: "#775eba",
         lineTension: 0.5,

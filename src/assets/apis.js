@@ -68,8 +68,8 @@ export const apis = {
 
   tweetChart: {
     tweetChart: `${domain}/twitte-charts/`,
-    lastWeekTweets: `${domain}/twitte-charts/last-week-tweets/`,
-    lastWeekUsers: `${domain}/twitte-charts/last-week-users/`,
+    lastWeekTweets: `${domain}/accounts/user-charts/last-week-users/`,
+    lastWeekUsers: `${domain}/twitte-charts/last-week-tweets/`,
   },
   shop: {
     carts: {
