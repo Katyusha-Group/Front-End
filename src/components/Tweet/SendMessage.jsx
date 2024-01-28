@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Button, Input } from "reactstrap";
 import styles from "../../assets/css/Tweet/SendMessage.module.css";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function SendMessage({
   fetchData = () => {},
   setData = () => {},
 }) {
   const [state, setState] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -15,8 +17,14 @@ export default function SendMessage({
   };
 
   const handleClick = () => {
-    if (state !== "") fetchData(state, setData);
-    setState("");
+    if (state !== "") {
+      setLoading(true);
+      fetchData(state, (response) => {
+        setData(response);
+        setLoading(false);
+      });
+      setState("");
+    }
   };
 
   return (
@@ -28,7 +36,11 @@ export default function SendMessage({
         onKeyPress={handleKeyPress}
       />
       <Button className={`${styles.button}`} onClick={handleClick}>
-        <i className="tim-icons icon-send"></i>
+        {loading ? (
+              <Spinner animation="border" variant="primary" size="sm" />
+              ) : (
+          <i className="tim-icons icon-send"></i>
+        )}
       </Button>
     </div>
   );
