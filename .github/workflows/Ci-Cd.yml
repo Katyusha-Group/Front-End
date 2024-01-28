@@ -51,4 +51,4 @@ jobs:
             cd /root/Front-End 
             docker compose down  
             git pull  
-            docker compose up --build
+            docker compose up --build -d
