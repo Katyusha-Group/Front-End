@@ -80,6 +80,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 <div
                   style={{
                     display: mainData == "C" ? "block" : "none",
+                    minWidth: "48rem"
                   }}
                 >
                   <CourseTimeline show={profileData.username.split("_")[1]} />
@@ -89,6 +90,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 <div
                   style={{
                     display: mainData == "T" ? "block" : "none",
+                    minWidth: "48rem"
                   }}
                 >
                   <TeacherTimeline show={profileData.username.split("_")[1]} />
