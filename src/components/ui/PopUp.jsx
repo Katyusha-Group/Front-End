@@ -39,24 +39,6 @@ export default function PopUp({ children, className, style, ...props }) {
               سفارش ها
             </li>
           </a>
-          <a href={`http://${hostname}/search`}>
-            <li className={styles.popUpItem}>
-              <span
-                className="tim-icons icon-zoom-split
-
-"
-              />
-              {"  "}
-              جست جو{" "}
-            </li>
-          </a>
-          <a href={`http://${hostname}/profile/${props.profile.username}`}>
-            <li className={styles.popUpItem}>
-              <span className="tim-icons icon-badge" />
-              {"  "}
-              پروفایل
-            </li>
-          </a>
           <a href={`http://${hostname}/aboutUs`}>
             <li className={styles.popUpItem}>
               <span className="tim-icons icon-send" />
