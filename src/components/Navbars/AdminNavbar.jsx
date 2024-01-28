@@ -69,6 +69,7 @@ function AdminNavbar() {
           <NavItem className={style.logoutLink}>
             <NavLink href="/"
               onClick={() => {
+                localStorage.removeItem("authTokens");
               }}
             >
               <i className={"tim-icons icon-button-power"} />
