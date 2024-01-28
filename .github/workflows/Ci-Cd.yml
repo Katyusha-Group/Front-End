@@ -48,7 +48,7 @@ jobs:
           host: ${{ secrets.HOST }}  
           port: ${{ secrets.PORT }}  
           script: |  
-            cd ${{ secrets.PATH }}  
-            docker compose stop  
+            cd /root/Front-End 
+            docker compose down  
             git pull  
-            docker compose restart
+            docker compose up --build
