@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import routes from "../../route.jsx";
 import * as style from "../Navbars/AdminNavbar.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import { userUserName } from "../../hooks/useUserName.jsx";
 // reactstrap components
 import {
   Collapse,
@@ -16,6 +16,11 @@ import {
 function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const routes_FirstPart = routes.slice(0, 5);
+  const routes_SecondPart = routes.slice(6);
+  // console.log("First Part: ", routes_FirstPart);
+  // console.log("Second Part: ", routes_SecondPart);
+  const {profile, setProfile, loading} = userUserName();
   return (
     <div>
       <Navbar 
@@ -29,17 +34,38 @@ function AdminNavbar() {
           <span className="navbar-toggler-bar bar3" />
         </NavbarToggler>
         <Nav className={`${style.AdminNavbar_WithoutCollapse} ml-auto`} navbar>
-          {
-            routes.map((route) =>
-              (
-                <NavItem key={route.rtlName}>
-                  <NavLink href={route.layout + route.path}>
-                    <i className={"tim-icons " + route.icon} />
-                    {" "}
-                    {route.rtlName}
-                  </NavLink>
-                </NavItem>     
-          ))}
+            {
+              routes_FirstPart.map((route) =>
+                (
+                  <NavItem key={route.rtlName}>
+                    <NavLink href={route.layout + route.path}>
+                      <i className={"tim-icons " + route.icon} />
+                      {" "}
+                      {route.rtlName}
+                    </NavLink>
+                  </NavItem>     
+            ))}
+            <NavItem className={style.logoutLink}>
+                <NavLink href={`/profile/${profile}`}
+                  onClick={() => {
+                  }}
+                >
+                  <i className={"tim-icons icon-single-02"} />
+                  {" "}
+                  {"پروفایل"}
+              </NavLink>
+            </NavItem>
+            {
+              routes_SecondPart.map((route) =>
+                (
+                  <NavItem key={route.rtlName}>
+                    <NavLink href={route.layout + route.path}>
+                      <i className={"tim-icons " + route.icon} />
+                      {" "}
+                      {route.rtlName}
+                    </NavLink>
+                  </NavItem>     
+            ))}
           <NavItem className={style.logoutLink}>
             <NavLink href="/"
               onClick={() => {
@@ -54,7 +80,28 @@ function AdminNavbar() {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             {
-              routes.map((route) =>
+              routes_FirstPart.map((route) =>
+                (
+                  <NavItem key={route.rtlName}>
+                    <NavLink href={route.layout + route.path}>
+                      <i className={"tim-icons " + route.icon} />
+                      {" "}
+                      {route.rtlName}
+                    </NavLink>
+                  </NavItem>     
+            ))}
+            <NavItem className={style.logoutLink}>
+                <NavLink href={`/profile/${profile}`}
+                  onClick={() => {
+                  }}
+                >
+                  <i className={"tim-icons icon-single-02"} />
+                  {" "}
+                  {"پروفایل"}
+              </NavLink>
+            </NavItem>
+            {
+              routes_SecondPart.map((route) =>
                 (
                   <NavItem key={route.rtlName}>
                     <NavLink href={route.layout + route.path}>
