@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "../../assets/css/Landing/mainpart.module.css";
-import image from "../../assets/img/timelineeg.png";
+import image from "../../assets/img/Timeline_landing.png";
 
 const TimeLinelanding = () => {
   return (
