@@ -1,11 +1,11 @@
 @import "./black-dashboard-react.css";
 
 .main{
-    width: 50vw;
+    width: 60vw;
     height: auto;
-    margin-right: 1.5vw;
+    margin-right: 0vw;
     margin-left: 1.5vw;
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;

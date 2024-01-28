@@ -21,6 +21,7 @@ function AdminNavbar() {
       <Navbar 
         // expand="50%"
         className={style.AdminNavbar}
+        style={{ direction: "ltr"}}
       >
         <NavbarToggler type="button" onClick={toggle} className={style.NavbarToggler}>
           <span className="navbar-toggler-bar bar1" />
