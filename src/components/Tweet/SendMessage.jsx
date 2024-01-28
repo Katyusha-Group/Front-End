@@ -37,8 +37,8 @@ export default function SendMessage({
       />
       <Button className={`${styles.button}`} onClick={handleClick}>
         {loading ? (
-          <Spinner animation="border" variant="light" size="sm" />
-        ) : (
+              <Spinner animation="border" variant="primary" size="sm" />
+              ) : (
           <i className="tim-icons icon-send"></i>
         )}
       </Button>
