@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Input,
-} from "reactstrap";
+import { Button, CardHeader, CardBody, CardFooter, Input } from "reactstrap";
 import * as shopStyle from "../../assets/css/Shopping.module.css";
 import { useSendTweets } from "../../hooks/Twitter/sendTweets";
 import { useState } from "react";
-const CommentModal = ({open,setOpen,data,setTweets}) => {
-    const [comment, setComment] = useState("")
+const CommentModal = ({ open, setOpen, data, setTweets }) => {
+  const [comment, setComment] = useState("");
   return (
     <>
       <Modal
@@ -40,7 +34,15 @@ const CommentModal = ({open,setOpen,data,setTweets}) => {
             <CardHeader>نظرات</CardHeader>
             <CardBody>
               نظر خود را در این قسمت وارد کنید
-              <Input bsSize="lg" type="textarea" name="text" id="exampleText" onChange={(x)=>{setComment(x.target.value)}} />
+              <Input
+                bsSize="lg"
+                type="textarea"
+                name="text"
+                id="exampleText"
+                onChange={(x) => {
+                  setComment(x.target.value);
+                }}
+              />
             </CardBody>
             <CardFooter>
               <Button
@@ -48,8 +50,8 @@ const CommentModal = ({open,setOpen,data,setTweets}) => {
                 color="primary"
                 type="submit"
                 onClick={() => {
-                  useSendTweets(comment, setTweets ,data.id)
-                  setOpen()
+                  useSendTweets(comment, setTweets, data.id);
+                  setOpen();
                 }}
               >
                 ارسال
@@ -58,7 +60,6 @@ const CommentModal = ({open,setOpen,data,setTweets}) => {
           </Modal.Body>
         </div>
       </Modal>
-
     </>
   );
 };

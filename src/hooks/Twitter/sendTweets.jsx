@@ -7,6 +7,28 @@ export const useSendTweets = async (
   setData = (x) => {},
   parent = ""
 ) => {
+  if (parent !== "") {
+    setData((val) => {
+      if (val.results === undefined) {
+        return val.map((x) => {
+          if (x.id == parent) {
+            return { ...x, children_count: x.children_count + 1 };
+          }
+          return x;
+        });
+      } else
+        return {
+          ...val,
+          results: val.results.map((x) => {
+            if (x.id == parent) {
+              return { ...x, children_count: x.children_count + 1 };
+            }
+            return x;
+          }),
+        };
+    });
+  
+  }
   const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
   let data = "";
   const sendData = new FormData();
@@ -29,7 +51,6 @@ export const useSendTweets = async (
         let temp = [response.data, ...x.results];
         return { ...x, results: temp };
       });
-    } else {
     }
   } catch (error) {
     console.error(error);

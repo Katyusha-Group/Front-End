@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, CardHeader, CardBody, CardFooter, Input } from "reactstrap";
@@ -12,6 +12,10 @@ import { useGetReplies } from "../../hooks/Twitter/useGetReplies";
 import Spinner from "react-bootstrap/Spinner";
 const Replies = ({ open, setOpen, link }) => {
   const { data, setData, loading } = useGetReplies(open, link);
+  useEffect(()=>{
+
+    console.log("🚀 ~ Replies ~ data:", data)
+  },[data])
   return (
     <>
       <Modal

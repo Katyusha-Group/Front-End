@@ -107,9 +107,6 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           </div>
           <div className={styles.name}>{tweet.profile.name}</div>
         </div>
-        {/* <div className={styles.reply}>
-        سلام
-      </div> */}
         <div
           className={styles.content}
           onClick={() => {

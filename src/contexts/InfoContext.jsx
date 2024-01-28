@@ -20,6 +20,7 @@ export default function ContextInfo(props) {
     shop:[],
     loading:0,
     userName:"",
+    oneTimeLoadUserName: false,
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));
