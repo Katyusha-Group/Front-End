@@ -21,12 +21,18 @@ export const userUserName = () => {
         );
         const data = await profileResponse.json();
         changeInfo("userName", data.username);
+        setProfile(data.username)
+        setLoading(false)
       } catch (error) {
         console.error(error);
       }
     };
-    if(info.userName !== ""){
+    if(info.userName === ""){
       fetchData();
+    }
+    else{
+      setProfile(info.userName)
+      setLoading(false)
     }
   }, []);
   return { profile, setProfile, loading };
