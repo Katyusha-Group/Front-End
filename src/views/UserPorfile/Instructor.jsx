@@ -3,10 +3,11 @@ import * as styles from "../../assets/css/instructor.module.css"
 import { POSTFollow } from '../../hooks/POSTFollow';
 import IsThisMe_Function from './IsThisMe_Function';
 import { useNavigate } from 'react-router-dom';
-
+import { Spinner } from 'react-bootstrap';
 function Instructor(
     { User, handleButtonClick, handleCloseModal }
 ) {
+    const [loading, setLoading] = React.useState(false);
     // let Is_Followed = User.is_followed;
     const [IsFollowed, setIsFollowed] = React.useState(User.is_followed);
     function Follow_Button_Clicked() {
@@ -43,33 +44,37 @@ function Instructor(
                 <img className={styles.eachProfile} src={User.image} alt="" />
                 <p className={styles.p_name}>{User.username}</p>
             </div>
-            <button
-                className={IsFollowed ? styles.delButton : styles.delButton}
-                onClick={() => {
-                    if (IsThisMe)
-                    {
-                        navigate('/user');
-                    }
-                    else if (IsFollowed)
-                    {
-                        // setIsFollowed(prev => !prev);
-                        // POSTFollow(username, !IsFollowed); // unfollow
-                        POSTFollow(User.username, !IsFollowed);
-                        handleButtonClick();
-                        Follow_Button_Clicked();
-                    }
-                    else 
-                    {
-                        // setIsFollowed(prev => !prev);
-                        // POSTFollow(username, !IsFollowed); // follow
-                        POSTFollow(User.username, !IsFollowed);
-                        handleButtonClick();
-                        Follow_Button_Clicked();
-                    }
-                }}
-            >
-                {Button_Data}
-            </button>
+            {loading ? (<Spinner animation="border" variant="primary"></Spinner>) : 
+                (<button
+                    className={IsFollowed ? styles.delButton : styles.deleteButton}
+                    onClick={() => {
+                        if (IsThisMe)
+                        {
+                            navigate('/user');
+                        }
+                        else if (IsFollowed)
+                        {
+                            // setIsFollowed(prev => !prev);
+                            // POSTFollow(username, !IsFollowed); // unfollow
+                            setLoading(true);
+                            POSTFollow(User.username, !IsFollowed, setLoading);
+                            handleButtonClick();
+                            Follow_Button_Clicked();
+                        }
+                        else 
+                        {
+                            // setIsFollowed(prev => !prev);
+                            // POSTFollow(username, !IsFollowed); // follow
+                            setLoading(true);
+                            POSTFollow(User.username, !IsFollowed, setLoading);
+                            handleButtonClick();
+                            Follow_Button_Clicked();
+                        }
+                    }}
+                >
+                    {Button_Data}
+                </button>)
+            }
         </div>
     );
 }

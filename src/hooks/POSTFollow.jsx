@@ -2,9 +2,9 @@ import React from "react";
 import { apis } from "../assets/apis";
 import { useEffect } from "react";
 import { useState } from "react";
-
-export const POSTFollow = (ToFollowUsername, IsFollow) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+import { returnToken } from "../Functions/returnToken";
+export const POSTFollow = (ToFollowUsername, IsFollow, setLoading) => {
+  const token = returnToken();
   const url_follow = apis["profiles"]["follow"] + `${ToFollowUsername}/`;
   const url_unfollow = apis["profiles"]["unfollow"] + `${ToFollowUsername}/`;
   const url = IsFollow ? url_follow : url_unfollow;
@@ -20,7 +20,10 @@ export const POSTFollow = (ToFollowUsername, IsFollow) => {
     }),
   })
     .then((response) => {
-      return response.json();
+      // console.log("response is: ", response);
+      setLoading(false);
+      // console.log("Reached a response ", response);
+      return response.ok;
     })
     .then((data) => {})
     .catch((error) => {

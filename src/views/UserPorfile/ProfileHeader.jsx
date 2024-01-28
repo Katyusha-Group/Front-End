@@ -13,7 +13,7 @@ export default function ProfileHeader({ profile, setProfileData, username, IsThi
   const [IsFollowing, setIsFollowing] = React.useState(false); // Which Modal
   // const [profileData_Here, setProfileData_Here] = React.useState(profile);
   const [IsFollowed, setIsFollowed] = React.useState(profile.is_followed);
-
+  const [loading, setLoading] = React.useState(false);
   if (profileData_loading) {
     return (
       <div>
@@ -85,14 +85,27 @@ export default function ProfileHeader({ profile, setProfileData, username, IsThi
       navigate('/user');
     }
     else if (IsFollowed) {
+      // console.log("Is followed & wanting to unfollow!");
+      setLoading(true);
       setIsFollowed(prev => !prev);
-      POSTFollow(username, !IsFollowed); // unfollow
+      POSTFollow(username, !IsFollowed, setLoading); // unfollow
+      // setLoading(false);
+      // console.log("Loading is: " + loading + " Unfollowed!");
     }
     else {
+      // console.log("Is unfollowed & wanting to follow!");
+      setLoading(true);
       setIsFollowed(prev => !prev);
-      POSTFollow(username, !IsFollowed); // follow
+      POSTFollow(username, !IsFollowed, setLoading); // follow
+      // setLoading(false);
+      // console.log("Loading is: " + loading + " Followed!");
     }
   }
+
+  // React.useEffect(() => {
+  //   console.log("Loading has become: ", loading);
+  // }, [loading]);
+
   return (
     <div className={styles.rightUpper}>
       <div className={styles.ProfileHeader_Content}>
@@ -128,13 +141,18 @@ export default function ProfileHeader({ profile, setProfileData, username, IsThi
             IsThisMe={IsThisMe}
           />
         </div>
-        <button className={styles.followbutton} onClick={Profile_Button}>
-          {IsThisMe ?
-            "ویرایش پروفایل" :
-            profile.is_followed ?
-              "حذف" :
-              "دنبال کردن"}
-        </button>
+        {loading ? (
+          <Spinner animation="border" variant="primary"></Spinner>
+        ):
+        (
+          <button className={styles.followbutton} onClick={Profile_Button}>
+            {IsThisMe ?
+              "ویرایش پروفایل" :
+              profile.is_followed ?
+                "حذف" :
+                "دنبال کردن"}
+          </button>
+        )}
       </div>
 
       <div className={styles.ProfileHeader_Other}>
