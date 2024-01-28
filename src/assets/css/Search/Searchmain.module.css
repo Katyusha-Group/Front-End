@@ -1,13 +1,13 @@
 .bg{
     background-color: #27293d;
     width: 70vw;
-    margin-top: 5vh;
-    margin-right: 20px;
-    border-radius: 15px;
     height: 90vh;
-    margin-bottom: 20px;
-    /* overflow-y: auto; */
-    /* overflow-x: hidden; */
+    margin-top: 5vh;
+    border-radius: 15px;
+    padding-top: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
 }
 .Responce{
     width: 65vw;
@@ -15,7 +15,8 @@
     flex-direction: column;
     margin-right: 5vw;
     margin-bottom: 1vw;
-    height: 80vh;
+    margin-top: 3vw;
+    height: 74vh;
     overflow-y: auto;
 
 }

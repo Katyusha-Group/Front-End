@@ -21,27 +21,19 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [open, setOpen] = useState(false);
   const [openReplies, setOpenReplies] = useState(false);
   const [like, setLike] = useState(tweet.liked_by_me);
-
-  // const [thisTweet, setThisTweet] = useState(tweet.id);
-  // if (tweet.liked_by_me != null) {
-  // setLike(tweet.liked_by_me);
-  // // }
-  // console.log(tweet.liked_by_me)
-
-
+  const isThisMeBool = IsThisMe_Function(tweet.profile.username);
   const [link, setLink] = useState("");
-  const[locallike,setLocallike]=useState(0);
-
+  const [locallike, setLocallike] = useState(0);
 
   const [showModal, setShowModal] = React.useState(false);
 
   const handleOpenModal_Report = () => {
     setShowModal(true);
     console.log("Modal is opened");
-  }
+  };
   function handleCloseModal() {
     setShowModal(false);
-  };
+  }
   return (
     <>
       <Card className={styles.tweet}>
@@ -75,7 +67,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
           </DropdownToggle>
           <DropdownMenu {...args}>
             <DropdownItem
-              disabled={tweet.reported_by_me || IsThisMe_Function(tweet.profile.username)}
+              disabled={tweet.reported_by_me || isThisMeBool}
               className={styles.dropDown}
               onClick={handleOpenModal_Report}
             >
@@ -84,29 +76,35 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             {
               <DropdownItem
                 className={styles.dropDown}
-                disabled={!IsThisMe_Function(tweet.profile.username)}
+                disabled={!isThisMeBool}
                 onClick={() => {
                   setTweets((x) => {
                     let temp = x.results.filter((y) => y.id !== tweet.id);
-                    return { results: temp }
+                    return { results: temp };
                   });
                   deleteTweet(tweet.id);
                 }}
               >
                 حذف
-              </DropdownItem>}
+              </DropdownItem>
+            }
           </DropdownMenu>
-          {
-            showModal &&
+          {showModal && (
             <ModalReport
               id={tweet.id}
               showModal={showModal}
               handleClose={handleCloseModal}
             />
-          }
+          )}
         </Dropdown>
         <div className={styles.header}>
-          <div className={styles.avatar}><img className={styles.avatarimg} src={tweet.profile.image} alt="" /></div>
+          <div className={styles.avatar}>
+            <img
+              className={styles.avatarimg}
+              src={tweet.profile.image}
+              alt=""
+            />
+          </div>
           <div className={styles.name}>{tweet.profile.name}</div>
         </div>
         {/* <div className={styles.reply}>
@@ -135,7 +133,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               onClick={() => {
                 setLike(!like);
                 likes(tweet.id);
-                like? setLocallike(-1):setLocallike(1)
+                like ? setLocallike(-1) : setLocallike(1);
               }}
             >
               <span className={styles.icon_text}>
@@ -148,14 +146,12 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               onClick={() => setOpen((x) => !x)}
               className={styles.button}
             >
-              <span className={styles.icon_text}>
-                {tweet.children_count}
-              </span>
+              <span className={styles.icon_text}>{tweet.children_count}</span>
               <i className={`far fa-comment ${styles.icon}`}></i>
             </button>
           </ButtonGroup>
         </div>
-      </Card >
+      </Card>
       <CommentModal
         open={open}
         setOpen={() => {

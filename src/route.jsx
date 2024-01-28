@@ -5,6 +5,8 @@ import CoursesPanel from "./views/CoursesPanel/CoursesPanel.jsx"
 import AboutUs from "./views/aboutUs/AboutUs.jsx";
 import Shopping from "./views/Shopping/Shopping.jsx";
 import UserProfile from "./views/UserPorfile/UserProfile.jsx";
+import Timeline from "./components/Timeline/Timeline.jsx";
+import Searchpage from "./views/Searchpage.jsx";
 var routes = [
     {
         path: '/page',
@@ -23,6 +25,21 @@ var routes = [
         layout: ""
     }
     ,{
+        path: '/timeline',
+        name:"Timeline",
+        component: Timeline,
+        rtlName: "چتیوشا",
+        icon: "icon-chat-33",
+        layout: ""
+    },{
+        path: '/search',
+        name:"Search",
+        component: Searchpage,
+        rtlName: "جست جو",
+        icon: "icon-zoom-split",
+        layout: ""
+    },
+    {
         path: '/shopping',
         name:"Shopping",
         component: Shopping,

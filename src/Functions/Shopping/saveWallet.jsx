@@ -1,7 +1,6 @@
 
 import axios from "axios";
 import { apis } from "../../assets/apis";
-import { closeLoading } from "../../components/LoadingAlert/LoadingAlert";
 export function saveWallet(setWallet) {
     const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
     axios(apis["accounts"]["wallet"]["seeWallet"], {
@@ -9,7 +8,6 @@ export function saveWallet(setWallet) {
     })
       .then((data) => {
         setWallet(data.balance);
-        closeLoading();
       })
       .catch((error) => console.error(error));
   }

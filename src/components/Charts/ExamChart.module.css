@@ -45,3 +45,6 @@
     border: 3px solid;
     vertical-align: top !important;
 }
+.ExamsTable {
+    --bs-table-bg: var(--bs-card-cap-bg);
+}

@@ -16,10 +16,6 @@ import {
 } from "reactstrap";
 // import NotificationAlert from "react-notification-alert";
 import * as style from "../../assets/css/Shopping.module.css";
-import {
-  closeLoading,
-  showLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
 import { CartCreator } from "../../Functions/CartCreator";
 import { apis } from "../../assets/apis";
 import * as UserPageStyle from "../../assets/css/UserPage.module.css";
@@ -29,6 +25,7 @@ import axios from "axios";
 import { saveWallet } from "../../Functions/Shopping/saveWallet";
 import { getCartInfo } from "../../Functions/Shopping/getCartInfo";
 import { useEffect } from "react";
+import Spinner from "react-bootstrap/Spinner";
 function Shopping() {
   const [s1, ss1] = React.useState(false);
   const [s2, ss2] = React.useState(false);
@@ -48,7 +45,6 @@ function Shopping() {
   } = useGetCartInfo();
   const { wallet, setWallet } = useSaveWallet();
 
-  closeLoading();
   const delete_item = (num, index) => {
     const shopId = JSON.parse(localStorage.getItem("shopId"));
     fetch(apis["shop"]["carts"]["removeItem"] + `${info[index].id}/`, {
@@ -69,7 +65,6 @@ function Shopping() {
   };
 
   function order() {
-    showLoading();
     let shopId = JSON.parse(localStorage.getItem("shopId"));
     axios(apis["orders"], {
       method: "POST",
@@ -99,44 +94,7 @@ function Shopping() {
           });
         } else console.error(error);
       });
-    closeLoading();
   }
-
-  // const notify = (place) => {
-  //   var color = Math.floor(Math.random() * 5 + 1);
-  //   var type;
-  //   switch (color) {
-  //     case 1:
-  //       type = "primary";
-  //       break;
-  //     case 2:
-  //       type = "success";
-  //       break;
-  //     case 3:
-  //       type = "danger";
-  //       break;
-  //     case 4:
-  //       type = "warning";
-  //       break;
-  //     case 5:
-  //       type = "info";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   var options = {};
-  //   options = {
-  //     place: place,
-  //     message: (
-  //       <div>
-  //         <div>خرید شما با موفقیت انجام شد</div>
-  //       </div>
-  //     ),
-  //     type: type,
-  //     autoDismiss: 7,
-  //   };
-  //   notificationAlertRef.current.notificationAlert(options);
-  // };
 
   /**
    * Change the checkbox
@@ -147,7 +105,6 @@ function Shopping() {
     const tokenJson = localStorage.getItem("authTokens");
     const tokenClass = JSON.parse(tokenJson);
     const token = tokenClass.token.access;
-    const shopId = JSON.parse(localStorage.getItem("shopId"));
     let u = info;
     switch (num) {
       case 1:
@@ -195,14 +152,10 @@ function Shopping() {
         console.error(error);
       });
   }
-  if (loading) {
-    return <></>;
-  }
   return (
     <>
-      <div>{/* <NotificationAlert ref={notificationAlertRef} /> */}</div>
-      <div className={style.bg} style={{ direction: "ltr",overflow:"auto" }}>
-        <div className={`main-panel ${style.bg1}`} >
+      <div className={style.bg} style={{ overflow: "auto" }}>
+        <div className={`main-panel ${style.bg1}`}>
           <AdminNavbar></AdminNavbar>
           <div className={`content_without_sidebar ${style.main}`}>
             <div className="react-notification-alert-container"></div>
@@ -290,21 +243,26 @@ function Shopping() {
                   }}
                 >
                   {info.length == 0 ? (
-                    <h4 className="mt-4">کالایی انتخاب نشده</h4>
+                    loading?"":<h4 className="mt-4">کالایی انتخاب نشده</h4>
                   ) : (
                     ""
                   )}
-                  {info.map((x, index) => {
-                    return (
-                      <div
-                        md="6"
-                        sm="2"
-                        xs="1"
-                        className={`${style.places_buttons} ${style.shop_row}`}
-                        key={index}
-                      >
-                        <div className="m-auto">
-                          {/* <img
+                  {loading ? (
+                    <div>
+                      <Spinner animation="border" variant="primary" />
+                    </div>
+                  ) : (
+                    info.map((x, index) => {
+                      return (
+                        <div
+                          md="6"
+                          sm="2"
+                          xs="1"
+                          className={`${style.places_buttons} ${style.shop_row}`}
+                          key={index}
+                        >
+                          <div className="m-auto">
+                            {/* <img
                             className={UserPageStyle.professorImage}
                             src={
                               x.course.teachers[0].teacher_image
@@ -313,104 +271,105 @@ function Shopping() {
                             }
                             alt="professorImage"
                           /> */}
-                          <img
+                            <img
                               alt="..."
                               // className="avatar"
                               className={UserPageStyle.professorImage}
                               src="http://84.32.10.112/media/images/profile_pics/male_default.png"
-                          />
-                        </div>
-                        <div className="m-auto text-center category">
-                          {x.course.complete_course_number}
-                        </div>
-                        <div className="m-auto text-center category">
-                          {x.course.name}
-                        </div>
-                        <div className="m-auto text-center category">
-                          {x.price} تومان
-                        </div>
-                        <div className="m-auto text-center category">
-                          <Form>
-                            <FormGroup className={style.shopping_form} check>
-                              <Label check className={style.shopping_label}>
-                                <Input
-                                  onChange={() => {
-                                    ss1(() => !s1);
-                                    changeChecked(1, index);
-                                  }}
-                                  checked={info[index].contain_email}
-                                  type="checkbox"
-                                />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                                ایمیل
-                              </Label>
-                            </FormGroup>
-                            <FormGroup
-                              className={style.shopping_form}
-                              check
-                              disabled
+                            />
+                          </div>
+                          <div className="m-auto text-center category">
+                            {x.course.complete_course_number}
+                          </div>
+                          <div className="m-auto text-center category">
+                            {x.course.name}
+                          </div>
+                          <div className="m-auto text-center category">
+                            {x.price} تومان
+                          </div>
+                          <div className="m-auto text-center category">
+                            <Form>
+                              <FormGroup className={style.shopping_form} check>
+                                <Label check className={style.shopping_label}>
+                                  <Input
+                                    onChange={() => {
+                                      ss1(() => !s1);
+                                      changeChecked(1, index);
+                                    }}
+                                    checked={info[index].contain_email}
+                                    type="checkbox"
+                                  />
+                                  <span className="form-check-sign">
+                                    <span className="check" />
+                                  </span>
+                                  ایمیل
+                                </Label>
+                              </FormGroup>
+                              <FormGroup
+                                className={style.shopping_form}
+                                check
+                                disabled
+                              >
+                                <Label check className={style.shopping_label}>
+                                  <Input
+                                    checked={false}
+                                    type="checkbox"
+                                    valid={false}
+                                    onChange={() => {
+                                      ss2(() => !s2);
+                                      changeChecked(2, index);
+                                    }}
+                                  />
+                                  <span className="form-check-sign">
+                                    <span className="check" />
+                                  </span>
+                                  sms
+                                </Label>
+                              </FormGroup>
+                              <FormGroup className={style.shopping_form} check>
+                                <Label check className={style.shopping_label}>
+                                  <Input
+                                    checked={x.contain_telegram}
+                                    key={x.contain_telegram}
+                                    type="checkbox"
+                                    onChange={() => {
+                                      ss3(() => !s3);
+                                      changeChecked(3, index);
+                                    }}
+                                  />
+                                  <span className="form-check-sign">
+                                    <span className="check" />
+                                  </span>
+                                  تلگرام
+                                </Label>
+                              </FormGroup>
+                            </Form>
+                          </div>
+                          <div className="m-auto text-center category">
+                            <Button
+                              color="primary"
+                              size="sm"
+                              onClick={() => {
+                                delete_item(
+                                  x.course.complete_course_number,
+                                  index
+                                );
+                                setState(
+                                  info.filter(
+                                    (y) =>
+                                      y.course.complete_course_number !==
+                                      x.course.complete_course_number
+                                  )
+                                );
+                              }}
                             >
-                              <Label check className={style.shopping_label}>
-                                <Input
-                                  checked={false}
-                                  type="checkbox"
-                                  valid={false}
-                                  onChange={() => {
-                                    ss2(() => !s2);
-                                    changeChecked(2, index);
-                                  }}
-                                />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                                sms
-                              </Label>
-                            </FormGroup>
-                            <FormGroup className={style.shopping_form} check>
-                              <Label check className={style.shopping_label}>
-                                <Input
-                                  checked={x.contain_telegram}
-                                  key={x.contain_telegram}
-                                  type="checkbox"
-                                  onChange={() => {
-                                    ss3(() => !s3);
-                                    changeChecked(3, index);
-                                  }}
-                                />
-                                <span className="form-check-sign">
-                                  <span className="check" />
-                                </span>
-                                تلگرام
-                              </Label>
-                            </FormGroup>
-                          </Form>
+                              <i className="tim-icons icon-simple-remove" />
+                            </Button>
+                          </div>
                         </div>
-                        <div className="m-auto text-center category">
-                          <Button
-                            color="primary"
-                            size="sm"
-                            onClick={() => {
-                              delete_item(
-                                x.course.complete_course_number,
-                                index
-                              );
-                              setState(
-                                info.filter(
-                                  (y) =>
-                                    y.course.complete_course_number !==
-                                    x.course.complete_course_number
-                                )
-                              );
-                            }}
-                          >
-                            <i className="tim-icons icon-simple-remove" />
-                          </Button>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })
+                  )}
                 </Card>
               </Col>
             </Row>

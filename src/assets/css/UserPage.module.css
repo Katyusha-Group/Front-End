@@ -173,7 +173,6 @@ div {
   border-width: 0.1875rem;
   border-color: "red";
 }
-/* TODO */
 .color {
   width: 23%;
   height: 5rem;
@@ -210,8 +209,6 @@ p {
   justify-content: right;
   padding-right: 5px;
 }
-
-/* TODO fix chart */
 .cart {
   width: 25px;
   height: 25px;

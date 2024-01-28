@@ -16,27 +16,18 @@ class WebSocketService {
   }
 
   connect(chatId, setChats) {
-    console.log(
-      "🚀 ~ file: chatWebSocket.jsx:20 ~ WebSocketService ~ connect ~ chatId:",
-      chatId
-    );
-    // const path = `${apis["chat"]["chat"]}${chatUrl}/`;
-
     const path = `${apis["chat"]["chat"]}${chatId}/`;
     this.socketRef = new WebSocket(path, [], {
       withCredentials: true,
     });
     this.socketRef.onopen = () => {
-      console.log("WebSocket open");
     };
     this.socketRef.onmessage = (e) => {
       this.socketNewMessage(e.data, setChats);
     };
     this.socketRef.onerror = (e) => {
-      console.log("websocket error", e);
     };
     this.socketRef.onclose = () => {
-      console.log("WebSocket closed let's reopen");
       this.connect(chatId, setChats);
     };
   }
@@ -49,11 +40,6 @@ class WebSocketService {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
     if (command === "messages") {
-      console.log(
-        "🚀 ~ file: chatWebSocket.jsx:47 ~ WebSocketService ~ socketNewMessage ~ data:",
-        parsedData
-      );
-
       setChats((prev) => {
         if (prev.find((chat) => chat.messageId === parsedData.message.id))
           return prev;
@@ -68,10 +54,6 @@ class WebSocketService {
       });
     }
     if (command === "new_message") {
-      console.log(
-        "🚀 ~ file: chatWebSocket.jsx:47 ~ WebSocketService ~ socketNewMessage ~ data:",
-        parsedData
-      );
       setChats((prev) => {
         if (prev.find((chat) => chat.messageId === parsedData.message.id))
           return prev;
@@ -96,10 +78,6 @@ class WebSocketService {
   }
 
   newChatMessage(message) {
-    console.log(
-      "🚀 ~ file: chatWebSocket.jsx:69 ~ WebSocketService ~ newChatMessage ~ message:",
-      message
-    );
     this.sendMessage({
       command: "new_message",
       from: message.from,

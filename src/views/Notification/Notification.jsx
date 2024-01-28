@@ -11,10 +11,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import {
-  showLoading,
-  closeLoading,
-} from "../../components/LoadingAlert/LoadingAlert";
 import { apis } from "../../assets/apis";
 import { useNotifications } from "../../hooks/useNotifications";
 

@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
 import { apis } from "../assets/apis";
-import {
-  showLoading,
-  closeLoading,
-} from "../components/LoadingAlert/LoadingAlert";
 import { useInfo } from "../contexts/InfoContext";
 import { useNavigate } from "react-router-dom";
 import { returnToken } from "../Functions/returnToken";
 export const usesProfileMe = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { changeInfo } = useInfo();
+  const { info,changeInfo } = useInfo();
   useEffect(() => {
     const token = returnToken()
+
     const fetchData = async () => {
       try {
-        showLoading();
 
         const profileResponse = await fetch(
           apis["profiles"]["myprofile"],
@@ -25,16 +21,16 @@ export const usesProfileMe = () => {
         );
         const data = await profileResponse.json();
         setProfile(data);
-        closeLoading();
         setLoading(false);
         changeInfo("userName", data.username);
       } catch (error) {
         console.error(error);
       }
     };
-
-    fetchData();
+    if(info.userName !== ""){
+      fetchData();
+    }
   }, []);
-
   return { profile, setProfile, loading };
+
 };
