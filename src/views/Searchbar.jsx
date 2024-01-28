@@ -7,6 +7,7 @@ import { useAllProfiles } from "../hooks/useSearchprofile";
 import axios from "axios";
 import { set } from "lodash";
 import { use } from "chai";
+import Spinner from "react-bootstrap/Spinner";
 
 const Searchbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,8 +21,18 @@ const Searchbar = () => {
 
       <div className={styles.searchBox}>
         {loading ? (
-          <div></div>
-        ) : (
+              <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent:"center",
+                height: "70vh",
+                alignItems: "center",
+              }}
+            >
+              <Spinner animation="border" variant="primary"  />
+            </div>
+              ) : (
           filteredProfiles.map((item, index) => {
             return <UserSearchResponce res={item} key={index} />;
           })
