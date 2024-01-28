@@ -26,6 +26,7 @@ import { apis } from "../../assets/apis";
 import { Link } from "react-router-dom";
 import ChangePassword from "../ChangePass";
 import { usesProfileMe } from "../../hooks/useProfileMe";
+import styles from '../../assets/css/userProfile.module.css'
 
 function UserProfile() {
   const [info, setInfo] = useState({});
@@ -223,8 +224,8 @@ function UserProfile() {
       <div className="wrapper" style={{ direction: "rtl",overflow:"auto" }}>
         <div className="main-panel">
           <AdminNavbar></AdminNavbar>
-          <div className="mt-5"></div>
-          <div className="content_without_sidebar">
+          {/* <div className="mt-5"></div> */}
+          <div className={styles.main}>
             <Row>
               <Col md="8">
                 <Card>
