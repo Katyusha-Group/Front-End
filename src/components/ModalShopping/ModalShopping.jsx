@@ -24,6 +24,7 @@ import * as shopStyle from "../../assets/css/Shopping.module.css";
 import axios from "axios";
 const ModalShopping = (props) => {
   // console.log("Props show: ", props.show);
+  const Navigate = useNavigate();
   const { info, changeInfo } = useInfo();
   const [email, setEmail] = React.useState(
     props.order.contain_email == "C" ? true : false
@@ -63,7 +64,7 @@ const ModalShopping = (props) => {
 
   const notificationAlertRef = React.useRef(null);
   function addItemShop(num) {
-    const Navigate = useNavigate();
+    // const Navigate = useNavigate();
     const token = JSON.parse(localStorage.getItem("authTokens"))=== null ? Navigate('/login'):JSON.parse(localStorage.getItem("authTokens")).token.access;
     axios(apis["shop"]["carts"]["addToCart"], {
       method: "POST",
