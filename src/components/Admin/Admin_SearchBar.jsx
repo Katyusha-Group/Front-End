@@ -7,6 +7,8 @@ import { useSearchTweet } from "../../hooks/useSearchTweet";
 import User from "./User";
 import Tweet from "../../views/TimeLine/Tweet";
 import Spinner from "react-bootstrap/Spinner";
+import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
+import { deleteTweetsManage } from "../../hooks/Twitter/deleteTweetsManager";
 
 const Admin_Searchbar = ({ IsUser }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +56,7 @@ const Admin_Searchbar = ({ IsUser }) => {
           </div>
         ) : filteredTweets.length != 0 ? (
           filteredTweets.results.map((tweet) => (
-            <Tweet key={tweet.id} tweet={tweet} setTweets={setFilteredTweets} setOpenComment={setOpen} />
+            <Tweet key={tweet.id} tweet={tweet} setTweets={setFilteredTweets} setOpenComment={setOpen} deleteFunction={deleteTweetsManage} />
           ))
         ) : (
           <p className={styles.Nothing_Found}>پستی یافت نشد</p>

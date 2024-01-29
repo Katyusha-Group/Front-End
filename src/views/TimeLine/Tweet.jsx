@@ -16,7 +16,7 @@ import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
 import ModalReport from "../../components/ModalReport/ModalReport";
 import { useCheckAdmin } from "../../hooks/useCheckAdmin";
-function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
+function Tweet({ tweet, setOpenComment, setTweets, direction,deleteFunction=deleteTweet, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const [open, setOpen] = useState(false);
@@ -78,7 +78,6 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
               <DropdownItem
                 className={styles.dropDown}
                 style={{display: (isThisMeBool || isAdmin)?"":"none" }}
-                // disabled={!(isThisMeBool || isAdmin)}
                 onClick={() => {
                   setTweets((x) => {
                     let temp;
@@ -91,7 +90,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
                       return { results: temp };
                     }
                   });
-                  deleteTweet(tweet.id);
+                  deleteFunction(tweet.id);
                 }}
               >
                 حذف
