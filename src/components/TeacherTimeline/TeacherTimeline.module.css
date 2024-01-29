@@ -109,7 +109,7 @@ ul .content>li::before {
   top: 8px;
 }
 
-@media screen and (max-width: 1140px) {
+/* @media screen and (max-width: 1140px) {
   ul.timeline>li {
     width: calc(100% / 4);
   }
@@ -133,4 +133,4 @@ ul .content>li::before {
   ul.timeline>li:nth-of-type(odd) .content {
     transform: none;
   }
-}
+} */
