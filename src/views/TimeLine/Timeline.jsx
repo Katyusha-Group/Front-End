@@ -31,9 +31,9 @@ function Timeline() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null); // Reference to the tweets container div
   const containerAboutYou = useRef(null); // Reference to the tweets container div
-  useEffect(()=>{
+  useEffect(() => {
     console.log("🚀 ~ CommentModal ~ data:", tweets)
-  },[tweets])
+  }, [tweets])
   var number = 2;
   var forYouNum = 2;
   var loadingScroll = false;
@@ -46,7 +46,7 @@ function Timeline() {
       handleScroll(fetchForYouTweets, containerAboutYou);
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   const handleScroll = (funcCaller, containerRefIn) => {
