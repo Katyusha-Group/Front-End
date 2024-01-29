@@ -230,7 +230,7 @@
     margin-top: 40vh;
 }
 
-@media only screen and (max-width: 1064px) {
+@media only screen and (max-width: 1164px) {
     .leftpart {
         display: none;
     }
@@ -245,8 +245,8 @@
     }
 
     .rightpart {
-        max-width: 90vw;
+        max-width: 80vw;
         max-height: 80vh;
-        /* margin: 2.5vw; */
+        margin: 4vh auto 1vh auto;
     }
 }

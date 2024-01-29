@@ -16,6 +16,9 @@
 }
 
 .content {
+}
+
+.mainContent{
   overflow: scroll;
   max-width: 75vw;
 }
@@ -49,7 +52,6 @@
   display: flex;
   flex-direction: column;
   max-height: 75vh;
-  overflow-y: scroll;
 }
 
 .activeTab {
@@ -59,7 +61,7 @@
   border-bottom: 3px solid var(--purple);
   background-color: initial;
   color: white;
-  margin: 20px 10px;
+  margin: 20px 10px 0 10px;
 }
 
 .tab {
@@ -68,7 +70,7 @@
   border: none;
   background-color: initial;
   color: white;
-  margin: 20px 10px;
+  margin: 20px 10px 0 10px;
 }
 
 
@@ -88,6 +90,17 @@
 
 .content {
   overflow-x: scroll;
+  height: 100%;
+}
+
+.spinner{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .notFound {
@@ -96,7 +109,7 @@
   margin-top: 25%;
 }
 
-@media only screen and (max-width: 1064px) {
+@media only screen and (max-width: 1164px) {
   .mainContainer {
     scale: 0.9;
   }
@@ -117,7 +130,7 @@
   }
 
   .tweetsContainer {
-    max-height: 61vh;
+    /* max-height: 61vh; */
   }
 }
 
@@ -127,7 +140,7 @@
   font-size: large;
 }
 
-@media only screen and (max-width: 1064px) {
+@media only screen and (max-width: 1164px) {
   .profileIcon {
     /* color: white; */
     display: inline;
