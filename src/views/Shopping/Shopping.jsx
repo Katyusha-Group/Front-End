@@ -1,6 +1,7 @@
 import React from "react";
 import { useInfo } from "../../contexts/InfoContext";
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import { returnToken } from "../../Functions/returnToken";
 import {
   Button,
   Card,
@@ -31,7 +32,7 @@ function Shopping() {
   const [s2, ss2] = React.useState(false);
   const [s3, ss3] = React.useState(false);
   // const notificationAlertRef = React.useRef(null);
-  const token = JSON.parse(localStorage.getItem("authTokens")).token.access;
+  const token = returnToken();
 
   const {
     state: info,
@@ -89,7 +90,7 @@ function Shopping() {
           return response.then((data) => {
             alert(
               data.telegram +
-                "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
+              "\n لطفا به صفحه پروفایل بروید و روی آیکون تلگرام کلیک کنید و ربات تلگرام را فعال کنید"
             );
           });
         } else console.error(error);
@@ -237,9 +238,8 @@ function Shopping() {
                   style={{
                     height: "100%",
                     marginBottom: "0",
-                    justifyContent: `${
-                      loading && info.length == 0 ? "center" : ""
-                    }`,
+                    justifyContent: `${loading && info.length == 0 ? "center" : ""
+                      }`,
                   }}
                 >
                   {info.length == 0 ? (
