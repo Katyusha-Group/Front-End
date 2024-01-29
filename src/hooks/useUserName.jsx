@@ -29,8 +29,8 @@ export const userUserName = () => {
       }
     };
     if(info.userName === "",info.oneTimeLoadUserName){
-      fetchData();
       changeInfo("oneTimeLoadUserName", true)
+      fetchData();
     }
     else{
       setProfile(info.userName)

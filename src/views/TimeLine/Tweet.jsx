@@ -15,6 +15,7 @@ import { deleteTweet } from "../../hooks/Twitter/deleteTweets";
 import Replies from "../../components/Timeline/ReplyModal";
 import { Report } from "../../hooks/Twitter/Report";
 import ModalReport from "../../components/ModalReport/ModalReport";
+import { useCheckAdmin } from "../../hooks/useCheckAdmin";
 function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -24,7 +25,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
   const isThisMeBool = IsThisMe_Function(tweet.profile.username);
   const [link, setLink] = useState("");
   const [locallike, setLocallike] = useState(0);
-
+  const {isAdmin, setIsAdmin} = useCheckAdmin()
   const [showModal, setShowModal] = React.useState(false);
 
   const handleOpenModal_Report = () => {
@@ -76,7 +77,7 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             {
               <DropdownItem
                 className={styles.dropDown}
-                disabled={!isThisMeBool}
+                disabled={!(isThisMeBool || isAdmin)}
                 onClick={() => {
                   setTweets((x) => {
                     let temp;
@@ -142,7 +143,6 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             >
               <span className={styles.icon_text}>
                 {tweet.likes_count + locallike}
-                {/* {like? tweet.likes_count+1 : tweet.likes_count} */}
               </span>
               <i className={`tim-icons icon-heart-2 ${styles.icon}`}></i>
             </button>
