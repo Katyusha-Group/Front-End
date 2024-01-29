@@ -220,10 +220,6 @@
     border-bottom: 2px solid var(--purple);
 }
 
-.chatIcon {
-    padding-left: 7px;
-    font-size: large;
-}
 
 .ProfileSpinner {
     margin: auto;
