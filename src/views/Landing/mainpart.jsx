@@ -27,7 +27,7 @@ const Mainpart = () => {
           <div className={styles.callUs}>
             <p>پیشنهادات و انتقادات : </p>
             <p className={styles.email}> katyushaiust@gmail.com</p>
-            <p className={styles.email2}> v0.2</p>
+            <p className={styles.email2}> v0.3</p>
           </div>
         </div>
       </div>
