@@ -64,6 +64,7 @@ export const apis = {
     twittedBy: `${domain}/twittes/?twitted_by=`,
     likedBy: `${domain}/twittes/?liked_by=`,
     repliedBy: `${domain}/twittes/?replied_by=`,
+    semantic: `${domain}/twittes/?semantic_similar_to=`
   },
   reports: {
     tweets: `${domain}/report-twitte/`,
