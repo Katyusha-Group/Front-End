@@ -72,7 +72,7 @@ function Timeline({
 
         <div className={`${styles.content} ${activeTab === "Main" ? styles.mainContent: ""}`}>
           {activeTab === "Tweets" &&
-            (likedLoading ? (
+            (tweetLoading ? (
               <div className={styles.spinner}>
                 <Spinner animation="border" variant="primary" />
               </div>
