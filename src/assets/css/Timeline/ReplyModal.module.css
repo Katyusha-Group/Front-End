@@ -1,5 +1,10 @@
+@import "../black-dashboard-react.css";
 .replyBody{
     height: 50vh;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.NoResponse {
+    color: var(--default) !important;
 }

@@ -53,14 +53,19 @@ const Replies = ({ open, setOpen, link }) => {
 
 
                 {/* Existing tweets */}
-                {data.map((tweet) => (
+
+                {data.length > 0 ? 
+                (data.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     tweet={tweet}
                     setOpenComment={setOpen}
                     setTweets={setData}
                   />
-                ))}
+                ))):
+                (
+                  <p className={style.NoResponse} >پاسخی وجود ندارد</p>
+                )}
                  {dataS.results.length > 0 && (
                     <>
                       <CardHeader> توییت های پیشنهادی</CardHeader>
