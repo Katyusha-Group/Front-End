@@ -117,7 +117,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
               {likedTweets.results == undefined || likedTweets.results == null || likedTweets.results.length == 0 && (
                 <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
               )}
-              {likedTweets.results ??.map((tweet) => (
+              {likedTweets.results?.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
