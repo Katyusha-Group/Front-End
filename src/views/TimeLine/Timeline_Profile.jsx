@@ -8,14 +8,19 @@ import TeacherTimeline from "../../components/TeacherTimeline/TeacherTimeline";
 import StudentTimeline from "./StudentTimeline.jsx";
 import { useTweets } from "../../hooks/Twitter/useTweets";
 import { useGetChartData } from "../../hooks/GetChartData.jsx";
-
-
+import { useTweetBy } from "../../hooks/useTweetBy.jsx";
+import { useLikedBy } from "../../hooks/useLikedBy.jsx";
+import { useRepliedBy } from "../../hooks/useRepliedBy.jsx";
 function Timeline({ tabsList, profileData, profileData_loading, setProfileData, username, IsThisMe }) {
   if (profileData_loading) {
     return <></>
   }
   const [mainData] = (profileData.profile_type);
   const { courseChoosed } = useGetChartData(profileData.username);
+  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
+  const { filteredTweets, tweetLoading } = useTweetBy(profileData.username);
+  const { likedTweets, likedLoading } = useLikedBy(profileData.username);
+  const { repliedTweets, repliedLoading } = useRepliedBy(profileData.username);
   const [activeTab, setActiveTab] = useState("Main");
   const [showModal, setShowModal] = React.useState(false);
   const handleOpenModal_ProfileHeader = () => {
@@ -35,7 +40,6 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
       ["media", "برای شما"],
     ];
   }
-  const { data: tweets, setData: setTweets, loading } = useTweets("get", true);
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -61,7 +65,10 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.map((tweet) => (
+              {filteredTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
+              {filteredTweets.results?.map((tweet) => (
                 <Tweet key={tweet.id}
                   tweet={tweet}
                   setOpenComment={setOpen}
@@ -76,6 +83,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 <div
                   style={{
                     display: mainData == "C" ? "block" : "none",
+                    minWidth: "48rem"
                   }}
                 >
                   <CourseTimeline show={profileData.username.split("_")[1]} />
@@ -85,6 +93,7 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 <div
                   style={{
                     display: mainData == "T" ? "block" : "none",
+                    minWidth: "48rem"
                   }}
                 >
                   <TeacherTimeline show={profileData.username.split("_")[1]} />
@@ -102,9 +111,13 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
                 </div>)}
             </div>
           )}
+          {/* {console.log(tweets)} */}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.filter(item => item.liked_by_me).map((tweet) => (
+              {likedTweets.results == undefined || likedTweets.results == null || likedTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
+              {likedTweets.results?.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
@@ -114,16 +127,19 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
               ))}
             </div>
           )}
-          {activeTab === "Comments" && (
+          {activeTab === "Comments" && repliedTweets && (
             <div className={styles.tweetsContainer}>
-              {tweets.results.map((tweet) => (
-                <Tweet
+              {repliedTweets.results == undefined || repliedTweets.results == null || repliedTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
+              {repliedTweets.results?.map((tweet) => {
+                return <Tweet
                   key={tweet.id}
-                  tweet={tweet}
+                  tweet={tweet.parent_info}
                   setOpenComment={setOpen}
                   setTweets={setTweets}
                 />
-              ))}
+              })}
             </div>
           )}
           <ModalProfileHeader

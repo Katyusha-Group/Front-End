@@ -15,12 +15,35 @@
   border-radius: 15px;
 }
 
+.content {
+  overflow: scroll;
+  max-width: 75vw;
+}
+
 .mainContainer {
   display: flex;
   flex-direction: column;
   max-height: 75vh;
-  overflow: hidden;
+  /* width: 50vw; */
+  overflow: auto;
 }
+
+.chart {
+  background: url(../../../assets/img/WeekChart5.png);
+  background-size: 100% 100%;
+  min-width: 48rem;
+  height: 28em;
+  position: relative;
+  background-repeat: no-repeat;
+  resize: both;
+  margin-top: 7px;
+  display: block;
+  height: 60vh;
+  overflow: auto;
+  /* width: 40rem; */
+  min-height: 390px;
+}
+
 
 .tweetsContainer {
   display: flex;
@@ -64,8 +87,13 @@
 }
 
 .content {
-
   overflow-x: scroll;
+}
+
+.notFound {
+  opacity: 1;
+  font-size: large;
+  margin-top: 25%;
 }
 
 @media only screen and (max-width: 1064px) {

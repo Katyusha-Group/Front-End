@@ -21,7 +21,7 @@ import {
 const ModalLessons = (props) => {
   const x = props.show.data;
   // console.log("props: ", props.show);
-  
+
   const [timelineData, setTimelineData] = React.useState("data0");
   const setTimeData = (name) => {
     setTimelineData(name);
@@ -270,6 +270,7 @@ const ModalLessons = (props) => {
                   <div
                     style={{
                       display: timelineData == "data1" ? "block" : "none",
+                      minWidth: "45rem",
                     }}
                   >
                     <Timeline show={props.show.data.complete_course_number.split("_")[0]} />
@@ -277,6 +278,7 @@ const ModalLessons = (props) => {
                   <div
                     style={{
                       display: timelineData == "data2" ? "block" : "none",
+                      minWidth: "45rem",
                     }}
                   >
                     <TeacherTimeline show={props.show.data.teachers[0].id} />

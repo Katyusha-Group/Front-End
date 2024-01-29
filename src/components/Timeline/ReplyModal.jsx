@@ -9,9 +9,12 @@ import { useState } from "react";
 import Tweet from "../../views/TimeLine/Tweet";
 import { getReplies } from "../../Functions/Timeline/getReplies";
 import { useGetReplies } from "../../hooks/Twitter/useGetReplies";
+import { useGetsuggestedTweet } from "../../hooks/Twitter/useGetsuggestedTweet";
 import Spinner from "react-bootstrap/Spinner";
 const Replies = ({ open, setOpen, link }) => {
   const { data, setData, loading } = useGetReplies(open, link);
+  const { dataS, setDataS, loading2 } = useGetsuggestedTweet(open, link);
+
   return (
     <>
       <Modal
@@ -39,19 +42,38 @@ const Replies = ({ open, setOpen, link }) => {
           <Modal.Body className={shopStyle.loginLmsModalBody}>
             <CardHeader>پاسخ ها</CardHeader>
             <CardBody className={style.replyBody}>
-              {loading ? (
+              {loading || loading2 ? (
                 <div style={{display:'flex', justifyContent:"center", alignItems:"center", height:"100%"}}>
                   <Spinner animation="border" variant="primary" />
                 </div>
               ) : (
-                data.map((tweet) => (
+                <>
+                {/* Suggested Tweet */}
+
+
+                {/* Existing tweets */}
+                {data.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     tweet={tweet}
                     setOpenComment={setOpen}
                     setTweets={setData}
                   />
-                ))
+                ))}
+                 {dataS.length > 0 && (
+                    <>
+                      <CardHeader> توییت های پیشنهادی</CardHeader>
+                      {dataS.map((tweetS) => (
+                        <Tweet
+                          key={tweetS.id}
+                          tweet={tweetS}
+                          setOpenComment={setOpen}
+                          setTweets={setDataS}
+                        />
+                      ))}
+                    </>
+                  )}
+              </>
               )}
             </CardBody>
             <CardFooter></CardFooter>

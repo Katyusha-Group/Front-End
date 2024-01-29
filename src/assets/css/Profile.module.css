@@ -21,11 +21,13 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 30px;
+    /* width: 10vw; */
     border-radius: 10px;
     height: 90vh;
     margin-top: 5vh;
     margin-left: 30px;
     margin-right: 30px;
+    background-color: #272A3D;
 }
 
 .rightUpper {
@@ -218,6 +220,15 @@
     border-bottom: 2px solid var(--purple);
 }
 
+.chatIcon {
+    padding-left: 7px;
+    font-size: large;
+}
+
+.ProfileSpinner {
+    margin: auto;
+    margin-top: 40vh;
+}
 
 @media only screen and (max-width: 1064px) {
     .leftpart {
