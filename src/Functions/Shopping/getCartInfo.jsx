@@ -9,7 +9,7 @@ export function getCartInfo(setState, setTotalPrice, setAmount,setLoading) {
   })
     .then((response) => response.json())
     .then((data) => {
-      setState(data.items);
+      setState(data.length >= 0? data[0].items:[]);
       setTotalPrice(data.total_price);
       setAmount(data.total_number);
       setLoading(false);
