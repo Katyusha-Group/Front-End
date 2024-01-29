@@ -11,7 +11,9 @@ import {
   Nav,
   NavItem,
   NavLink,
-} from 'reactstrap';
+} from "reactstrap";
+import { Spinner } from "react-bootstrap";
+import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 
 function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,106 +22,89 @@ function AdminNavbar() {
   const routes_SecondPart = routes.slice(6);
   // console.log("First Part: ", routes_FirstPart);
   // console.log("Second Part: ", routes_SecondPart);
-  const {profile, setProfile, loading} = userUserName();
+  // const {profile, setProfile, loading} = userUserName();
+  const { profile, setProfile, loading } = usesProfileMe();
+  console.log("🚀 ~ AdminNavbar ~ profile:", profile);
+
   return (
     <div>
-      <Navbar 
+      <Navbar
         // expand="50%"
         className={style.AdminNavbar}
-        style={{ direction: "ltr"}}
+        style={{ direction: "ltr" }}
       >
-        <NavbarToggler type="button" onClick={toggle} className={style.NavbarToggler}>
+        <NavbarToggler
+          type="button"
+          onClick={toggle}
+          className={style.NavbarToggler}
+        >
           <span className="navbar-toggler-bar bar1" />
           <span className="navbar-toggler-bar bar2" />
           <span className="navbar-toggler-bar bar3" />
         </NavbarToggler>
         <Nav className={`${style.AdminNavbar_WithoutCollapse} ml-auto`} navbar>
-            {
-              routes_FirstPart.map((route) =>
-                (
-                  <NavItem key={route.rtlName}>
-                    <NavLink href={route.layout + route.path}>
-                      <i className={"tim-icons " + route.icon} />
-                      {" "}
-                      {route.rtlName}
-                    </NavLink>
-                  </NavItem>     
-            ))}
-            <NavItem className={style.logoutLink}>
-                <NavLink href={`/profile/${profile}`}
-                  onClick={() => {
-                  }}
-                >
-                  <i className={"tim-icons icon-single-02"} />
-                  {" "}
-                  {"پروفایل"}
+          {routes_FirstPart.map((route) => (
+            <NavItem key={route.rtlName}>
+              <NavLink href={route.layout + route.path}>
+                <i className={"tim-icons " + route.icon} /> {route.rtlName}
               </NavLink>
             </NavItem>
-            {
-              routes_SecondPart.map((route) =>
-                (
-                  <NavItem key={route.rtlName}>
-                    <NavLink href={route.layout + route.path}>
-                      <i className={"tim-icons " + route.icon} />
-                      {" "}
-                      {route.rtlName}
-                    </NavLink>
-                  </NavItem>     
-            ))}
+          ))}
           <NavItem className={style.logoutLink}>
-            <NavLink href="/"
+            {loading ? (
+              <Spinner />
+            ) : (
+              <NavLink href={`/profile/${profile.username}`} onClick={() => {}}>
+                <i className={"tim-icons icon-single-02"} /> {"پروفایل"}
+              </NavLink>
+            )}
+          </NavItem>
+          {routes_SecondPart.map((route) => (
+            <NavItem key={route.rtlName}>
+              <NavLink href={route.layout + route.path}>
+                <i className={"tim-icons " + route.icon} /> {route.rtlName}
+              </NavLink>
+            </NavItem>
+          ))}
+          <NavItem className={style.logoutLink}>
+            <NavLink
+              href="/"
               onClick={() => {
                 localStorage.removeItem("authTokens");
               }}
             >
-              <i className={"tim-icons icon-button-power"} />
-              {" "}
-              {"خروج"}
+              <i className={"tim-icons icon-button-power"} /> {"خروج"}
             </NavLink>
           </NavItem>
         </Nav>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            {
-              routes_FirstPart.map((route) =>
-                (
-                  <NavItem key={route.rtlName}>
-                    <NavLink href={route.layout + route.path}>
-                      <i className={"tim-icons " + route.icon} />
-                      {" "}
-                      {route.rtlName}
-                    </NavLink>
-                  </NavItem>     
+            {routes_FirstPart.map((route) => (
+              <NavItem key={route.rtlName}>
+                <NavLink href={route.layout + route.path}>
+                  <i className={"tim-icons " + route.icon} /> {route.rtlName}
+                </NavLink>
+              </NavItem>
             ))}
             <NavItem className={style.logoutLink}>
-                <NavLink href={`/profile/${profile}`}
-                  onClick={() => {
-                  }}
-                >
-                  <i className={"tim-icons icon-single-02"} />
-                  {" "}
-                  {"پروفایل"}
-              </NavLink>
+              {loading ? (
+                <Spinner />
+              ) : (
+                <NavLink href={`/profile/${profile.username}`} onClick={() => {}}>
+                  <i className={"tim-icons icon-single-02"} /> {"پروفایل"}
+                </NavLink>
+              )}
             </NavItem>
-            {
-              routes_SecondPart.map((route) =>
-                (
-                  <NavItem key={route.rtlName}>
-                    <NavLink href={route.layout + route.path}>
-                      <i className={"tim-icons " + route.icon} />
-                      {" "}
-                      {route.rtlName}
-                    </NavLink>
-                  </NavItem>     
+            {routes_SecondPart.map((route) => (
+              <NavItem key={route.rtlName}>
+                <NavLink href={route.layout + route.path}>
+                  <i className={"tim-icons " + route.icon} /> {route.rtlName}
+                </NavLink>
+              </NavItem>
             ))}
             <NavItem className={style.logoutLink}>
-              <NavLink href="/"
-                onClick={() => {
-                }}
-              >
-                <i className={"tim-icons icon-button-power"} />
-                {" "}
-                {"خروج"}
+              <NavLink href="/" onClick={() => {}}>
+                <i className={"tim-icons icon-button-power"} /> {"خروج"}
               </NavLink>
             </NavItem>
           </Nav>

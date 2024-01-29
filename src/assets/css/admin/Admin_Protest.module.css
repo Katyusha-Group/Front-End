@@ -7,14 +7,16 @@
     padding-top: 15px;
 }
 
-/* .styles.ProtestTable_Main {
-    overflow-y: scroll;
-} */
+.ProtestTable_Main {
+    /* overflow-y: scroll; */
+    height: 100%;
+}
 
 .protestContainer {
   overflow: auto;
   max-height: 36vh;
   padding-right: 20px;
+  height:100%;
 }
 
 .protest_Main {

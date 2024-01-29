@@ -13,8 +13,9 @@ import { useGetsuggestedTweet } from "../../hooks/Twitter/useGetsuggestedTweet";
 import Spinner from "react-bootstrap/Spinner";
 const Replies = ({ open, setOpen, link }) => {
   const { data, setData, loading } = useGetReplies(open, link);
-  const { dataS, setDataS, loading2 } = useGetsuggestedTweet(open, link);
-
+  // console.log("Tweet ID is is: ", link.split('/')[4]);
+  const { dataS, setDataS, loading2 } = useGetsuggestedTweet(open, link.split('/')[4]);
+  // console.log("Data in modal is: ", dataS);
   return (
     <>
       <Modal
@@ -52,18 +53,23 @@ const Replies = ({ open, setOpen, link }) => {
 
 
                 {/* Existing tweets */}
-                {data.map((tweet) => (
+
+                {data.length > 0 ? 
+                (data.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     tweet={tweet}
                     setOpenComment={setOpen}
                     setTweets={setData}
                   />
-                ))}
-                 {dataS.length > 0 && (
+                ))):
+                (
+                  <p className={style.NoResponse} >پاسخی وجود ندارد</p>
+                )}
+                 {dataS.results.length > 0 && (
                     <>
                       <CardHeader> توییت های پیشنهادی</CardHeader>
-                      {dataS.map((tweetS) => (
+                      {dataS.results.map((tweetS) => (
                         <Tweet
                           key={tweetS.id}
                           tweet={tweetS}
