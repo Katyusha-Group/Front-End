@@ -1,40 +1,54 @@
-name: CI CD
+name: CI/CD  
 
-on:
-  push:
-    branches:
-      - main  # Replace 'main' with your primary branch name
-  pull_request:
-    branches:
-      - main  # Replace 'main' with your primary branch name
+on:  
+  push:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
+  pull_request:  
+    branches:  
+      - main  # Replace 'main' with your primary branch name  
 
-jobs:
-  build:
+jobs:  
+  build-and-test:  
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-    
-      - name: Build and run tests
-        run: |
-          docker compose  up --build
-          docker exec docker-react-i  "npm test"
-          
-  Deploy:
-    name: deploy
-    runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v2
-    - name: Connect
-      uses: appleboy/ssh-action@master
-      with:   
-        username: ${{ secrets.USERNAME }}  
-        password: ${{ secrets.PASSWORD }}  
-        host: ${{ secrets.HOST }}  
-        port: ${{ secrets.PORT }}  
-        script: |
-          cd ${{ secrets.PATH }}
-          docker compose stop
-          git pull
-          docker compose restart
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the tests
+      run: npm run test
+
+    - name: Build
+      run: npm run build
+
+  Deploy:  
+    needs: build-and-test  # This ensures that deploy job runs only if build job succeeds  
+    name: deploy  
+    runs-on: ubuntu-latest  
+    steps:  
+      - uses: actions/checkout@v2  
+      - name: Connect  
+        uses: appleboy/ssh-action@master  
+        with:  
+          username: ${{ secrets.USERNAME }}  
+          password: ${{ secrets.PASSWORD }}  
+          host: ${{ secrets.HOST }}  
+          port: ${{ secrets.PORT }}  
+          script: |  
+            cd /root/Front-End 
+            docker compose down  
+            git pull  
+            docker compose up --build -d
