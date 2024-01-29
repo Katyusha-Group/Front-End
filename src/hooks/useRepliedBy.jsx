@@ -17,5 +17,6 @@ export const useRepliedBy = (searchQuery) => {
             })
             .catch((error) => console.error("error"));
     }, [searchQuery]);
+    { console.log(repliedTweets) }
     return { repliedTweets, replyLoading };
 };
