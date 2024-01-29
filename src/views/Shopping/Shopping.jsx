@@ -217,7 +217,7 @@ function Shopping() {
                     </div>
                   </CardBody>
                   <CardFooter>
-                    {info.length === 0 ? (
+                    {loading && info.length === 0 ? (
                       "کالایی انتخاب نشده"
                     ) : (
                       <Button
@@ -243,7 +243,11 @@ function Shopping() {
                   }}
                 >
                   {info.length == 0 ? (
-                    loading?"":<h4 className="mt-4">کالایی انتخاب نشده</h4>
+                    loading ? (
+                      ""
+                    ) : (
+                      <h4 className="mt-4">کالایی انتخاب نشده</h4>
+                    )
                   ) : (
                     ""
                   )}
@@ -263,14 +267,14 @@ function Shopping() {
                         >
                           <div className="m-auto">
                             <img
-                            className={UserPageStyle.professorImage}
-                            src={
-                              x.course.teachers[0].teacher_image
-                                ? x.course.teachers[0].teacher_image
-                                : sampleProfile
-                            }
-                            alt="professorImage"
-                          />
+                              className={UserPageStyle.professorImage}
+                              src={
+                                x.course.teachers[0].teacher_image
+                                  ? x.course.teachers[0].teacher_image
+                                  : sampleProfile
+                              }
+                              alt="professorImage"
+                            />
                             {/* <img
                               alt="..."
                               // className="avatar"
@@ -281,7 +285,9 @@ function Shopping() {
                           <div className="m-auto text-center category">
                             {x.course.complete_course_number}
                           </div>
-                          <div className={`m-auto text-center category ${style.Shopping_CourseName}`}>
+                          <div
+                            className={`m-auto text-center category ${style.Shopping_CourseName}`}
+                          >
                             {x.course.name}
                           </div>
                           <div className="m-auto text-center category">
