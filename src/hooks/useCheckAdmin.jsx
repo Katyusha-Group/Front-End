@@ -17,7 +17,6 @@ export const useCheckAdmin = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await profileResponse.json();
-        console.log("🚀 ~ fetchData ~ data:", data)
         changeInfo("checkAdmin", data.is_admin);
         setIsAdmin(data.is_admin);
         setLoading(false);

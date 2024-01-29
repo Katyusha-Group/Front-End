@@ -79,8 +79,15 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
                 disabled={!isThisMeBool}
                 onClick={() => {
                   setTweets((x) => {
-                    let temp = x.results.filter((y) => y.id !== tweet.id);
-                    return { results: temp };
+                    let temp;
+                    if(x.results === undefined){
+                      temp = x.filter((y) => y.id !== tweet.id);
+                      return temp
+                    }
+                    else{
+                      temp = x.results.filter((y) => y.id !== tweet.id);
+                      return { results: temp };
+                    }
                   });
                   deleteTweet(tweet.id);
                 }}
