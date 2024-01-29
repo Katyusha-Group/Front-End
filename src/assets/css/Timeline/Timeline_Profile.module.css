@@ -71,6 +71,31 @@
   margin: 20px 10px;
 }
 
+
+.chart {
+  background: url(../../../assets/img/WeekChart5.png);
+  background-size: 100% 100%;
+  /* min-width: 100vh; */
+  height: 28em;
+  position: relative;
+  background-repeat: no-repeat;
+  resize: both;
+  margin-top: 7px;
+  display: block;
+  height: 60vh;
+  min-height: 390px;
+}
+
+.content {
+  overflow-x: scroll;
+}
+
+.notFound {
+  opacity: 1;
+  font-size: large;
+  margin-top: 25%;
+}
+
 @media only screen and (max-width: 1064px) {
   .mainContainer {
     scale: 0.9;

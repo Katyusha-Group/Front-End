@@ -42,7 +42,7 @@ const Sidebar = () => {
       <div className={styles.bg}>
         <div className={styles.bg1}>
           <div className={styles.header}>
-            <img className={styles.logoimg} src={logo} alt="" />
+            <img className={styles.logoimg} src={logo} alt="logo" />
             <p className={styles.headertext}>
               کاتیوشا
               <i

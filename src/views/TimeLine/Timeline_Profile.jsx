@@ -65,6 +65,9 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
         <div className={styles.content}>
           {activeTab === "Tweets" && (
             <div className={styles.tweetsContainer}>
+              {filteredTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
               {filteredTweets.results?.map((tweet) => (
                 <Tweet key={tweet.id}
                   tweet={tweet}
@@ -111,7 +114,10 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           {/* {console.log(tweets)} */}
           {activeTab === "Likes" && (
             <div className={styles.tweetsContainer}>
-              {likedTweets.results?.map((tweet) => (
+              {likedTweets.results == undefined || likedTweets.results == null || likedTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
+              {likedTweets.results ??.map((tweet) => (
                 <Tweet
                   key={tweet.id}
                   tweet={tweet}
@@ -123,6 +129,9 @@ function Timeline({ tabsList, profileData, profileData_loading, setProfileData, 
           )}
           {activeTab === "Comments" && repliedTweets && (
             <div className={styles.tweetsContainer}>
+              {repliedTweets.results == undefined || repliedTweets.results == null || repliedTweets.results.length == 0 && (
+                <div className={styles.notFound}>هیچ پستی یافت نشد.</div>
+              )}
               {repliedTweets.results?.map((tweet) => {
                 return <Tweet
                   key={tweet.id}

@@ -85,6 +85,17 @@
   stroke-linejoin: miter;
   font-size: 1vw;
 }
+.email2{
+  color: #c1c1c1 !important;
+  text-align: right;
+  text-transform: uppercase;
+  stroke: black;
+  stroke-opacity: 100%;
+  width: auto;
+  margin-right: 10px;
+  stroke-linejoin: miter;
+  font-size: 0.95vw;
+}
 .image {
   position: relative;
   width: 50%;
