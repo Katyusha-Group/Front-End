@@ -77,7 +77,8 @@ function Tweet({ tweet, setOpenComment, setTweets, direction, ...args }) {
             {
               <DropdownItem
                 className={styles.dropDown}
-                disabled={!(isThisMeBool || isAdmin)}
+                style={{display: (isThisMeBool || isAdmin)?"":"none" }}
+                // disabled={!(isThisMeBool || isAdmin)}
                 onClick={() => {
                   setTweets((x) => {
                     let temp;

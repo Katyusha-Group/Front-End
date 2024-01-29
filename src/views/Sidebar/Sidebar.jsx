@@ -124,7 +124,7 @@ ${styles.icon}`}
               className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
               onClick={(e) => {
                 e.preventDefault();
-                Navigate("/shopping");
+                Navigate("/CoursesPanel");
               }}
             >
               <i className={`tim-icons icon-paper ${styles.icon}`}></i>

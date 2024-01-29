@@ -19,5 +19,5 @@ export const useSearchTweet = (searchQuery) => {
       .catch((error) => console.error("error"));
   }, [searchQuery]);
 
-  return { filteredTweets, loading };
+  return { filteredTweets,setFilteredTweets, loading };
 };
