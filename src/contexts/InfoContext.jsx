@@ -21,6 +21,8 @@ export default function ContextInfo(props) {
     loading:0,
     userName:"",
     oneTimeLoadUserName: false,
+    checkAdmin:false,
+    oneTimeLoadCheckAdmin: false,
   });
   function changeInfo(name, value) {
     setInfo((info) => ({ ...info, [name]: value }));

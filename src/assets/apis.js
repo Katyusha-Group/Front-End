@@ -27,6 +27,7 @@ export const apis = {
     wallet: {
       seeWallet: `${domain}/accounts/wallet/see_wallet`,
     },
+    checkIsAdmin: `${domain}/accounts/check-is-admin/`
   },
   departments: `${domain}/departments/`,
   carts: `${domain}/shop/carts/`,

@@ -23,12 +23,13 @@ import {
 } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 import PopUp from "../../components/ui/PopUp.jsx";
+import { useCheckAdmin } from "../../hooks/useCheckAdmin.jsx";
 
 const Sidebar = () => {
   const Navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
   const { profile, setProfile, loading } = usesProfileMe();
-
+  const { isAdmin, setIsAdmin } = useCheckAdmin();
   const { notificationCount, setNotificationCount } = useGetNotificationCount();
   const handleOpenModal_Notification = () => {
     setShowModal(true);
@@ -70,8 +71,6 @@ const Sidebar = () => {
                 Navigate("/home/page");
               }}
             >
-              {/* <ReactSVG className={styles.click} src={homeicon}/> */}
-              {/* {homeicon} */}
               <i className={`tim-icons icon-bank ${styles.icon}`}></i>
               <p className={styles.itemtext}> خانه</p>
             </div>
@@ -121,7 +120,27 @@ ${styles.icon}`}
               <i className={`tim-icons icon-basket-simple ${styles.icon}`}></i>
               <p className={styles.itemtext}> سبد خرید</p>
             </div>
-
+            <div
+              className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
+              onClick={(e) => {
+                e.preventDefault();
+                Navigate("/shopping");
+              }}
+            >
+              <i className={`tim-icons icon-paper ${styles.icon}`}></i>
+              <p className={styles.itemtext}>پنل دروس</p>
+            </div>
+            <div
+              className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
+              onClick={(e) => {
+                e.preventDefault();
+                Navigate("/admin");
+              }}
+              style={{ display: isAdmin ? "" : "none" }}
+            >
+              <i className={`tim-icons icon-chart-bar-32 ${styles.icon}`}></i>
+              <p className={styles.itemtext}> ادمین</p>
+            </div>
             <div
               className={`${styles.sidebarmenuItems} ${styles.sidebarmenuItemsMobileBlock}`}
               onClick={(e) => {
@@ -134,12 +153,18 @@ ${styles.icon}`}
               <p className={styles.itemtext}> خروج</p>
             </div>
             {loading ? (
-              <Spinner animation="border" variant="primary" className={`backCol ${styles.moreInfo}`} style={{margin:"13px 10px"}}/>
+              <Spinner
+                animation="border"
+                variant="primary"
+                className={`backCol ${styles.moreInfo}`}
+                style={{ margin: "13px 10px" }}
+              />
             ) : (
               <PopUp
                 className={`backCol ${styles.sidebarmenuItems} ${styles.moreInfo}`}
                 style={{ margin: "auto 0" }}
                 profile={profile}
+                isAdmin={isAdmin}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

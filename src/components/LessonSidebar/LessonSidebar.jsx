@@ -22,6 +22,7 @@ import SearchBox from "../SearchBox/SearchBox.jsx";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
 import Spinner from "react-bootstrap/Spinner";
 import { returnToken } from "../../Functions/returnToken.jsx";
+import { useCheckAdmin } from "../../hooks/useCheckAdmin.jsx";
 var ps;
 const fetchRequest = "FETCH_REQUEST";
 const fetchSuccess = "FETCH_SUCCESS";
@@ -50,6 +51,7 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
   let [lessonState, setLessonState] = React.useState([]);
   const [department, setDepartment] = React.useState([]);
   const [allColleges, setAllColleges] = React.useState([]);
+  const { isAdmin, setIsAdmin } = useCheckAdmin();
   const [selectedDep, setSelectedDep] = React.useState([]);
   const {profile, setProfile, loading2} = usesProfileMe();
   const Navigate = useNavigate();
@@ -187,6 +189,18 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                         end
                       >
                         <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            Navigate("../timeline");
+                            toggleSidebar();
+                          }}
+                        >
+                          <span className="tim-icons icon-chat-33" />
+                          {"  "}
+                          چتیوشا
+                        </DropdownItem>
+                        <DropdownItem
                           className="navbarDropDownItem"
                           href="http://localhost:5173/shopping"
                           onClick={(e) => {
@@ -199,30 +213,7 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                           {"  "}
                           سبد خرید
                         </DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            Navigate("/order");
-                            toggleSidebar();
-                          }}
-                        >
-                          <span className="tim-icons icon-bag-16" />
-                          {"  "}
-                          سفارش ها
-                        </DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            Navigate("/notification");
-                            toggleSidebar();
-                          }}
-                        >
-                          <span className="tim-icons icon-email-85" />
-                          {"  "}
-                          اعلان ها
-                        </DropdownItem>
+                        
                         <DropdownItem
                           href="#pablo"
                           onClick={(e) => {
@@ -239,6 +230,19 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                           href="#pablo"
                           onClick={(e) => {
                             e.preventDefault();
+                            Navigate("../admin");
+                            toggleSidebar();
+                          }}
+                          style={{display: isAdmin?"":"none"}}
+                        >
+                          <span className="tim-icons icon-chart-bar-32" />
+                          {"  "}
+                          ادمین
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => {
+                            e.preventDefault();
                             Navigate("../aboutUs");
                             toggleSidebar();
                           }}
@@ -246,18 +250,6 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                           <span className="tim-icons icon-send" />
                           {"  "}
                           درباره ما
-                        </DropdownItem>
-                        <DropdownItem
-                          href="#pablo"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            Navigate("../timeline");
-                            toggleSidebar();
-                          }}
-                        >
-                          <span className="tim-icons icon-chat-33" />
-                          {"  "}
-                          چتیوشا
                         </DropdownItem>
 
                         <DropdownItem>

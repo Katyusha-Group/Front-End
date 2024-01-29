@@ -32,11 +32,11 @@ export default function PopUp({ children, className, style, ...props }) {
               سبد خرید
             </li>
           </a>
-          <a href={`http://${hostname}/order`}>
+          <a href={`http://${hostname}/home/page`}>
             <li className={styles.popUpItem}>
-              <span className="tim-icons icon-bag-16" />
+              <span className="tim-icons  icon-bank" />
               {"  "}
-              سفارش ها
+              خانه
             </li>
           </a>
           <a href={`http://${hostname}/aboutUs`}>
@@ -46,7 +46,13 @@ export default function PopUp({ children, className, style, ...props }) {
               درباره ما
             </li>
           </a>
-
+          <a href={`http://${hostname}/admin`} style={{display: props.isAdmin? "": "none"}}>
+            <li className={styles.popUpItem}>
+              <span className="tim-icons icon-chart-bar-32" />
+              {"  "}
+              ادمین
+            </li>
+          </a>
           <a
             href={`http://${hostname}/`}
             onClick={() => {
