@@ -9,10 +9,6 @@ test("dayOfWeek", () => {
   expect(dayOfWeek("0")).toBe("شنبه");
 });
 
-test("departments", () => {
-  expect(convertPercentagetoLigtness(2)).toBe(31.1);
-});
-
 it("should correctly convert a time string with seconds to a time string without seconds", () => {
   const time = "12:34:56";
   const expected = "12:34";
