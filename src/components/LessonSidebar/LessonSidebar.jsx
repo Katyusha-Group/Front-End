@@ -14,9 +14,7 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import { apis } from "../../assets/apis";
-import {
-  BackgroundColorContext,
-} from "../../contexts/BackgroundColorContext";
+import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
 import * as style from "./LessonSidebar.module.css";
 import SearchBox from "../SearchBox/SearchBox.jsx";
 import { usesProfileMe } from "../../hooks/useProfileMe.jsx";
@@ -41,7 +39,7 @@ const reducer = (state, action) => {
 };
 
 // function LessonSidebar(props) {
-function LessonSidebar({routes, logo, toggleSidebar}) {
+function LessonSidebar({ routes, logo, toggleSidebar }) {
   const getError = (error) => {
     return error.response && error.response.data
       ? error.response.data
@@ -53,13 +51,13 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
   const [allColleges, setAllColleges] = React.useState([]);
   const { isAdmin, setIsAdmin } = useCheckAdmin();
   const [selectedDep, setSelectedDep] = React.useState([]);
-  const {profile, setProfile, loading2} = usesProfileMe();
+  const { profile, setProfile, loading2 } = usesProfileMe();
   const Navigate = useNavigate();
   const [{ loading, props: input, error }, propsSetter] = React.useReducer(
     reducer,
     { loading: true, props: {}, error: "" }
   );
-  const token = returnToken()
+  const token = returnToken();
   React.useEffect(() => {
     propsSetter({ type: fetchRequest });
     fetch(apis["departments"], {
@@ -154,7 +152,11 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
             <Nav>
               <Row className="nav-lessonSidebar">
                 <Col md="5" xs="5" style={{ margin: "auto" }}>
-                  <NavLink to="/home/page" className="nav-header nav-link-icon" onClick={toggleSidebar}>
+                  <NavLink
+                    to="/home/page"
+                    className="nav-header nav-link-icon"
+                    onClick={toggleSidebar}
+                  >
                     <img src={logo1} alt="" style={{ height: "34px" }} />
                     <p
                       className="mr-2 small"
@@ -213,7 +215,7 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                           {"  "}
                           سبد خرید
                         </DropdownItem>
-                        
+
                         <DropdownItem
                           href="#pablo"
                           onClick={(e) => {
@@ -233,7 +235,7 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                             Navigate("../admin");
                             toggleSidebar();
                           }}
-                          style={{display: isAdmin?"":"none"}}
+                          style={{ display: isAdmin ? "" : "none" }}
                         >
                           <span className="tim-icons icon-chart-bar-32" />
                           {"  "}
@@ -271,7 +273,16 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
               </Row>
               <div className={style.lessonSidebar_component}>
                 {loading ? (
-                  <Spinner />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <Spinner />
+                  </div>
                 ) : error ? (
                   "error"
                 ) : (
@@ -281,7 +292,8 @@ function LessonSidebar({routes, logo, toggleSidebar}) {
                         <NavLink
                           className={
                             prop === selectedDep
-                              ? "nav-link nav-link-lessonSidebar "+style.selectedItem
+                              ? "nav-link nav-link-lessonSidebar " +
+                                style.selectedItem
                               : "nav-link nav-link-lessonSidebar"
                           }
                           onClick={() => {

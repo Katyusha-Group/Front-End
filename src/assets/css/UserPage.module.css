@@ -1,3 +1,4 @@
+@import "./black-dashboard-react.css";
 .week_table {
   table-layout: fixed;
   overflow: visible;
@@ -158,6 +159,7 @@ i .course {
   justify-content: center;
   height: 26vh;
   align-items: center;
+  color:var(--gray);
 }
 
 div {

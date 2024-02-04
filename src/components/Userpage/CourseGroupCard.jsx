@@ -7,13 +7,12 @@ import {
   Row,
   Col,
   CardFooter,
-  Spinner,
 } from "reactstrap";
 import fullLogo from "../../assets/img/full.png";
 import { apiForModalData } from "../../Functions/Userpage/apiForModalData";
 import { useInfo } from "../../contexts/InfoContext";
 import * as style from "../../assets/css/UserPage.module.css"
-
+import Spinner from "react-bootstrap/Spinner";
 export default function CourseGroupCard({
   convertPercentagetoLigtness,
   setShowCourseHoverFunc,

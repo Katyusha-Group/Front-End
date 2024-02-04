@@ -6,7 +6,7 @@ export const PrivatRoute = ({ children }) =>{
 };
 
 export function convertPercentagetoLigtness(num){
-    return( 30+ num*55/100) ///frist was  60 - num*55/100)
+    return( 10+ num*55/100) ///frist was  60 - num*55/100)
 }
 
 export function dayOfWeek(num){
