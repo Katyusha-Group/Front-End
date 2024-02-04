@@ -1,5 +1,5 @@
-export const domain = "http://84.32.10.112";
-export const chatDomain = "ws://84.32.10.112";
+export const domain = "http://84.32.10.112:8070";
+export const chatDomain = "ws://84.32.10.112:8070";
 export const apis = {
   login: `${domain}/user/login/`,
   user: {
